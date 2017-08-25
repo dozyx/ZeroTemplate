@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ZeroTemplate</string>
+    <!--view-->
+    <string name="view_custom">View/自定义</string>
+    <string name="view_image_loader">View/高效加载图片</string>
+    <!--material-->
+
+    <!--网络-->
+    <string name="network_basic">网络/基本</string>
+
+    <!--数据存储-->
+
+</resources>
