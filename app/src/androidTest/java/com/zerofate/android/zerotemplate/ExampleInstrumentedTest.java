@@ -1,4 +1,4 @@
-package com.zerofate.andoroid.zerotemplate;
+package com.zerofate.android.zerotemplate;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.zerofate.andoroid.zerotemplate", appContext.getPackageName());
+        assertEquals("com.zerofate.android.zerotemplate", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.zerofate.andoroid.zerotemplate;
+package com.zerofate.android.zerotemplate;
 
 import org.junit.Test;
 

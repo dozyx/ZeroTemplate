@@ -7,7 +7,11 @@
 
     <!--网络-->
     <string name="network_basic">网络/基本</string>
+    <string name="network_socket">网络/socket</string>
 
     <!--数据存储-->
+
+    <!--通讯-->
+    <string name="aidl">通讯/AIDL</string>
 
 </resources>
