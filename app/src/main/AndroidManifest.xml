@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zerofate.android.zerotemplate">
+    package="com.zerofate.template">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -70,8 +70,26 @@
             android:exported="true"
             android:process=":remote" />
 
-        <activity android:name=".aidl.AidlTest"
+        <activity
+            android:name=".aidl.AidlTest"
             android:label="@string/aidl">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.HenCoderPracticeDraw1"
+            android:label="@string/view_hencoder_1_1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.MaterialDesignTestActivity"
+            android:label="@string/view_material_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

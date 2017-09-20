@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical" >
-    <com.zerofate.android.zerotemplate.imageloader.ui.SquareImageView
+    <com.zerofate.template.imageloader.ui.SquareImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

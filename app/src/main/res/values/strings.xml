@@ -3,6 +3,9 @@
     <!--view-->
     <string name="view_custom">View/自定义</string>
     <string name="view_image_loader">View/高效加载图片</string>
+    <string name="view_hencoder_1_1">View/练习 HenCoder UI 1-1 绘制基础</string>
+    <string name="view_material_test">View/MD控件测试</string>
+
     <!--material-->
 
     <!--网络-->
@@ -13,5 +16,17 @@
 
     <!--通讯-->
     <string name="aidl">通讯/AIDL</string>
+
+    <string name="title_draw_color">drawColor()</string>
+    <string name="title_draw_circle">drawCircle()</string>
+    <string name="title_draw_rect">drawRect()</string>
+    <string name="title_draw_point">drawPoint()</string>
+    <string name="title_draw_oval">drawOval()</string>
+    <string name="title_draw_line">drawLine()</string>
+    <string name="title_draw_round_rect">drawRoundRect()</string>
+    <string name="title_draw_arc">drawArc()</string>
+    <string name="title_draw_path">drawPath()</string>
+    <string name="title_draw_histogram">直方图</string>
+    <string name="title_draw_pie_chart">饼图</string>
 
 </resources>
