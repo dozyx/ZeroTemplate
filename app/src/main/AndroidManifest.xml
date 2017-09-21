@@ -88,8 +88,17 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MaterialDesignTestActivity"
+        <activity
+            android:name=".view.MaterialDesignTestActivity"
             android:label="@string/view_material_test">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".practice.ListInsideScrollTest"
+            android:label="@string/practice_list_in_scroll">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

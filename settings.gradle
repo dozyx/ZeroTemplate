@@ -1,1 +1,1 @@
-include ':app', ':zerosdk'
+include ':app', ':zerosdk', ':data'

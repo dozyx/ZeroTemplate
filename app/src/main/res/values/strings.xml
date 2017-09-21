@@ -17,6 +17,9 @@
     <!--通讯-->
     <string name="aidl">通讯/AIDL</string>
 
+    <!--实践-->
+    <string name="practice_list_in_scroll">实践/ScrollView嵌套ListView</string>
+
     <string name="title_draw_color">drawColor()</string>
     <string name="title_draw_circle">drawCircle()</string>
     <string name="title_draw_rect">drawRect()</string>
@@ -28,5 +31,7 @@
     <string name="title_draw_path">drawPath()</string>
     <string name="title_draw_histogram">直方图</string>
     <string name="title_draw_pie_chart">饼图</string>
+
+
 
 </resources>
