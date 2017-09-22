@@ -97,8 +97,18 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".practice.ListInsideScrollTest"
+        <activity
+            android:name=".practice.ListInsideScrollTest"
             android:label="@string/practice_list_in_scroll">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".network.NetworkAPITest"
+            android:label="@string/network_api">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
