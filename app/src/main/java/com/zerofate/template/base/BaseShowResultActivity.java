@@ -22,9 +22,9 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
     Button button1;
     @BindView(R.id.button2)
     Button button2;
-    @BindView(R.id.button4)
-    Button button3;
     @BindView(R.id.button3)
+    Button button3;
+    @BindView(R.id.button4)
     Button button4;
     @BindView(R.id.result)
     TextView resultText;

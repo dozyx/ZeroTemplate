@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -128,7 +129,7 @@ public class NetworkFragment extends Fragment {
                     stream = connection.getInputStream();
                     publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
                     if (stream != null) {
-                        result = readStream(stream, 5000);
+                        result = readStream(stream);
                         publishProgress(DownloadCallback.Progress.PROCESS_INPUT_STREAM_IN_PROGRESS,
                                 0);
                     }
@@ -220,6 +221,17 @@ public class NetworkFragment extends Fragment {
                 callback.updateFromDownload(result.resultValue);
             }
             callback.finishDownloading();
+        }
+
+
+        protected String readStream(InputStream stream) throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+            }
+            return builder.toString();
         }
 
         protected String readStream(InputStream stream, int maxLength) throws IOException {
