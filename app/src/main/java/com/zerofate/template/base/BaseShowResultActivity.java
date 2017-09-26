@@ -1,10 +1,13 @@
 package com.zerofate.template.base;
 
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zerofate.template.R;
@@ -26,8 +29,10 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
     Button button3;
     @BindView(R.id.button4)
     Button button4;
-    @BindView(R.id.result)
+    @BindView(R.id.result_text)
     TextView resultText;
+    @BindView(R.id.result_image)
+    ImageView resultImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +78,20 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
         button.setText(text);
     }
 
-    protected void setResult(String text) {
+    protected void setText(String text) {
         resultText.setText(text);
+    }
+
+    protected void appendText(String text) {
+        resultText.setText(resultText.getText() + "\n" + text);
+    }
+
+    protected void setImage(@DrawableRes int drawable) {
+        resultImage.setImageResource(drawable);
+    }
+
+    protected void setImage(Drawable drawable) {
+        resultImage.setImageDrawable(drawable);
     }
 
     protected abstract String[] getButtonText();

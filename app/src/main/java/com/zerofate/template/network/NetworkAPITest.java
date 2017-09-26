@@ -57,12 +57,12 @@ public class NetworkAPITest extends BaseShowResultActivity implements DownloadCa
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        setResult(s);
+                        setText(s);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                setResult(volleyError.getMessage());
+                setText(volleyError.getMessage());
             }
         }));
 
@@ -81,7 +81,7 @@ public class NetworkAPITest extends BaseShowResultActivity implements DownloadCa
     @Override
     public void updateFromDownload(String result) {
         if (result != null) {
-            setResult(result);
+            setText(result);
         }
     }
 
@@ -94,7 +94,7 @@ public class NetworkAPITest extends BaseShowResultActivity implements DownloadCa
 
     @Override
     public void onProgressUpdate(int progressCode, int percentComplete) {
-        setResult("code: " + progressCode + " & percent: " + percentComplete);
+        setText("code: " + progressCode + " & percent: " + percentComplete);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class NetworkAPITest extends BaseShowResultActivity implements DownloadCa
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setResult(string);
+                        setText(string);
                     }
                 });
             }
@@ -149,7 +149,7 @@ public class NetworkAPITest extends BaseShowResultActivity implements DownloadCa
             public void onResponse(retrofit2.Call<ResponseBody> call,
                     retrofit2.Response<ResponseBody> response) {
                 try {
-                    setResult(response.body().string());
+                    setText(response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
