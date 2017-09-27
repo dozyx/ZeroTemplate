@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ZeroTemplate</string>
+    <!--activity-->
+    <string name="activity_life_cycle">activity/生命周期</string>
+    <string name="activity_launch_mode">activity/启动模式</string>
     <!--view-->
     <string name="view_custom">View/自定义</string>
     <string name="view_image_loader">View/高效加载图片</string>

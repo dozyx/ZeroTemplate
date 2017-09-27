@@ -115,7 +115,8 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".rxjava.RxJavaSimpleExam"
+        <activity
+            android:name=".rxjava.RxJavaSimpleExam"
             android:label="@string/rxjava_simple">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -123,6 +124,41 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.LifeCycleTest"
+            android:label="@string/activity_life_cycle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LaunchModeTest"
+            android:label="@string/activity_launch_mode">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LaunchModeTest$StandardLaunchModeTest"
+            android:exported="true"
+            android:launchMode="standard" />
+        <activity
+            android:name=".activity.LaunchModeTest$SingleTopLaunchModeTest"
+            android:exported="true"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.LaunchModeTest$SingleTaskLaunchModeTest"
+            android:exported="true"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.LaunchModeTest$SingleInstanceLaunchModeTest"
+            android:exported="true"
+            android:launchMode="singleInstance" />
+
     </application>
 
 </manifest>

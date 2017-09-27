@@ -20,6 +20,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -46,7 +47,7 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
     @Override
     public void onButton1() {
         printStrings(new String[]{"你好", "大傻逼", "我不好", "再见"});
-¬¬}
+    }
 
     @Override
     public void onButton2() {
@@ -61,7 +62,8 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
 //        testOperatorTransformBuffer2();
 //        testOperatorTransformBuffer3(); // buffer(Callable<? extends ObservableSource<B>>)
 //        testOperatorTransformBuffer4();
-        testOperatorTransformFlatMap();
+//        testOperatorTransformFlatMap1();
+        testOperatorTransformFlatMap2();
     }
 
     private void printStrings(@NonNull String[] strings) {
@@ -224,21 +226,83 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
     }
 
     //flatMap(Function<? super T, ? extends ObservableSource<? extends R>> mapper)
-    private void testOperatorTransformFlatMap() {
-        String[] strings1 = new String[]{"你好", "大傻逼", "我不好", "再见"};
-        String[] strings2 = new String[]{"你好2", "大傻逼2", "我不好2", "再见2"};
-        Observable.just(strings1, strings2).flatMap(
+    // map 实现的是 1 对 1 的变换，而 flat 实现的是 1 对多的变换
+    private void testOperatorTransformFlatMap1() {
+        String[] strings1 = new String[]{"1你好", "1大傻逼", "1我不好", "1再见"};
+        String[] strings2 = new String[]{"2你好", "2我不好", "2再见"};
+        String[] strings3 = new String[]{"3你好", "3我不好", "3再见", "3再见", "3再见"};
+        Observable.just(strings1, strings2, strings3).flatMap(
                 new Function<String[], ObservableSource<String>>() {
                     @Override
                     public ObservableSource<String> apply(
                             @io.reactivex.annotations.NonNull String[] strings)
                             throws Exception {
+                        if (strings.length == 3) {
+                            return Observable.error(new Throwable("发生了错误!"));
+                        }
                         return Observable.fromArray(strings);
                     }
                 }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 appendText(s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                appendText("onError:" + throwable.getMessage());
+            }
+        });
+
+    }
+
+    //    flatMap(
+//            Function<? super T, ? extends ObservableSource<? extends R>> onNextMapper,
+//            Function<? super Throwable, ? extends ObservableSource<? extends R>> onErrorMapper,
+//            Callable<? extends ObservableSource<? extends R>> onCompleteSupplier)
+//    没有完全理解。。。如果正常完成时，第三个参数函数返回的 Observable 会被当做正常item发送，但第二个参数没看出有什么效果。。。
+    private void testOperatorTransformFlatMap2() {
+        String[] strings1 = new String[]{"1你好", "1大傻逼", "1我不好", "1再见"};
+        String[] strings2 = new String[]{"2你好", "2我不好", "2再见"};
+        String[] strings3 = new String[]{"3你好", "3我不好", "3再见", "3再见", "3再见"};
+        Observable.just(strings1, strings2, strings3).flatMap(
+                new Function<String[], ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(
+                            @io.reactivex.annotations.NonNull String[] strings)
+                            throws Exception {
+
+                        if (strings.length == 3 || strings.length == 5) {
+                            return Observable.error(new Throwable("发生了错误!"));
+                        }
+                        return Observable.fromArray(strings);
+                    }
+                }, new Function<Throwable, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(
+                            @io.reactivex.annotations.NonNull Throwable throwable)
+                            throws Exception {
+                        return Observable.just(throwable.getMessage() + "flapMap 第二个参数");
+                    }
+                }, new Callable<ObservableSource<? extends String>>() {
+                    @Override
+                    public ObservableSource<? extends String> call() throws Exception {
+                        return Observable.just("flatMap 第三个参数");
+                    }
+                }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                appendText("onNext: " + s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                appendText("onError: " + throwable.getMessage());
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                appendText("onComplete");
             }
         });
     }
