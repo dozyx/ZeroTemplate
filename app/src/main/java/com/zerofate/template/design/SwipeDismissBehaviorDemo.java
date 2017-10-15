@@ -22,7 +22,6 @@ public class SwipeDismissBehaviorDemo extends AppCompatActivity {
         setContentView(R.layout.activity_swipe_dismiss_behavior_demo);
         ButterKnife.bind(this);
         SwipeDismissBehavior behavior = new SwipeDismissBehavior();
-        behavior.getScrimOpacity()
         behavior.setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_START_TO_END);
         ((CoordinatorLayout.LayoutParams) textView.getLayoutParams()).setBehavior(new
                 SwipeDismissBehavior<>());

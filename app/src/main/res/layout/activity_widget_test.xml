@@ -5,5 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zerofate.template.view.WidgetTest">
+    <Switch
+        android:background="@android:color/darker_gray"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textOn="打开就哼哼唧唧"/>
 
 </android.support.constraint.ConstraintLayout>
