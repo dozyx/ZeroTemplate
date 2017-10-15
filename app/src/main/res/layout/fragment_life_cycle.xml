@@ -4,12 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zerofate.template.view.CustomViewActivity">
+    tools:context="com.zerofate.template.fragment.FragmentLifeCycleFragment">
 
-    <com.zerofate.template.view.CustomView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:background="@android:color/holo_blue_light"
-        app:myWidth="1"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,9 +18,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 用于基本的按键-显示操作，包含 4 个 Button 和一个 TextView
+ * 用于基本的按键-显示操作
  */
-public abstract class BaseShowResultActivity extends AppCompatActivity {
+public abstract class BaseShowResultActivity extends AppCompatActivity implements IBaseView {
+    private static final String TAG = "BaseShowResultActivity";
 
     @BindView(R.id.button)
     Button button1;
@@ -29,6 +31,10 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
     Button button3;
     @BindView(R.id.button4)
     Button button4;
+    @BindView(R.id.button5)
+    Button button5;
+    @BindView(R.id.button6)
+    Button button6;
     @BindView(R.id.result_text)
     TextView resultText;
     @BindView(R.id.result_image)
@@ -62,12 +68,22 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.button5)
+    public void onButton5() {
+
+    }
+
+    @OnClick(R.id.button6)
+    public void onButton6() {
+
+    }
+
 
     /**
      * 感觉还是矬。。。
      */
     protected void setButtonText(@NonNull String[] texts) {
-        Button[] buttons = new Button[]{button1, button2, button3, button4};
+        Button[] buttons = new Button[]{button1, button2, button3, button4, button5, button6};
         for (int i = 0; i < texts.length; i++) {
             setButtonText(buttons[i], texts[i]);
             buttons[i].setVisibility(View.VISIBLE);
@@ -78,13 +94,22 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
         button.setText(text);
     }
 
-    protected void setText(String text) {
+    public void setText(String text) {
         resultText.setText(text);
     }
 
-    protected void appendText(String text) {
-        resultText.setText(resultText.getText() + "\n" + text);
+
+    @Override
+    public void clearResult() {
+        setText("");
     }
+
+    @Override
+    public void appendResult(String text) {
+        resultText.setText(resultText.getText() + "\n" + text);
+        Log.d(TAG, "appendResult: " + text);
+    }
+
 
     protected void setImage(@DrawableRes int drawable) {
         resultImage.setImageResource(drawable);
@@ -95,4 +120,5 @@ public abstract class BaseShowResultActivity extends AppCompatActivity {
     }
 
     protected abstract String[] getButtonText();
+
 }

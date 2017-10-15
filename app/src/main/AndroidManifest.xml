@@ -158,7 +158,41 @@
             android:name=".activity.LaunchModeTest$SingleInstanceLaunchModeTest"
             android:exported="true"
             android:launchMode="singleInstance" />
+        <activity
+            android:name=".fragment.FragmentLifeCycle"
+            android:label="@string/fragment_life_cycle"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.SimpleService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".service.ServiceLifeCycleActivity"
+            android:label="@string/service_life_cycle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".design.SwipeDismissBehaviorDemo"
+            android:label="@string/design_behavior">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.WidgetTest"></activity>
     </application>
 
 </manifest>

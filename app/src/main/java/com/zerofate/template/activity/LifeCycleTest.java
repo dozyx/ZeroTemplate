@@ -19,43 +19,43 @@ public class LifeCycleTest extends BaseShowResultActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        appendText("onCreate -> savedInstanceState is null ： " + (savedInstanceState
+        appendResult("onCreate -> savedInstanceState is null ： " + (savedInstanceState
                 == null));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        appendText("onStart ->");
+        appendResult("onStart ->");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        appendText("onRestart ->");
+        appendResult("onRestart ->");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        appendText("onResume ->");
+        appendResult("onResume ->");
     }
 
     @Override
     protected void onPause() {
-        appendText("onPause ->");
+        appendResult("onPause ->");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        appendText("onStop ->");
+        appendResult("onStop ->");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        appendText("onDestroy ->");
+        appendResult("onDestroy ->");
         super.onDestroy();
     }
 
@@ -64,7 +64,7 @@ public class LifeCycleTest extends BaseShowResultActivity {
         // onRestoreInstanceState 在 Activity "确实" 被系统销毁时才会调用，所以它与 onSaveInstanceState 并不是成对的
         // 即，onSaveInstanceState 是可能被销毁的一种防范措施，而 onRestoreInstanceState 是事件发生后的补救措施
         super.onRestoreInstanceState(savedInstanceState);
-        appendText("onRestoreInstanceState -> savedInstanceState is null ： " + (savedInstanceState
+        appendResult("onRestoreInstanceState -> savedInstanceState is null ： " + (savedInstanceState
                 == null));// 好像这个 bundle 不可能是 null 吧。。。
     }
 
@@ -80,6 +80,6 @@ public class LifeCycleTest extends BaseShowResultActivity {
         // 经过搜索发现的确会有这种情况，也不知道是不是个别设备或 SDK 问题，如果希望自动保存，可以设置 TextView的属性 android:freezesText="true"
         // TODO: 分析下 TextView 的 onSaveInstanceState 实现
         super.onSaveInstanceState(outState);
-        appendText("onSaveInstanceState ->");
+        appendResult("onSaveInstanceState ->");
     }
 }

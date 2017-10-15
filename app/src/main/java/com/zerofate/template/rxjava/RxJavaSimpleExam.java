@@ -70,7 +70,7 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
         Observable.fromArray(strings).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                appendText(s);
+                appendResult(s);
             }
         });
 
@@ -89,24 +89,24 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
         }).subscribe(new Observer<Drawable>() {
             @Override
             public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-                appendText("onSubscribe ->");
+                appendResult("onSubscribe ->");
             }
 
             @Override
             public void onNext(@io.reactivex.annotations.NonNull Drawable drawable) {
-                appendText("onNext ->");
+                appendResult("onNext ->");
                 setImage(drawable);
             }
 
             @Override
             public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                appendText("onError ->");
+                appendResult("onError ->");
                 Toast.makeText(RxJavaSimpleExam.this, "Error!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onComplete() {
-                appendText("onComplete ->");
+                appendResult("onComplete ->");
             }
         });
     }
@@ -121,7 +121,7 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        appendText(aLong.toString());
+                        appendResult(aLong.toString());
                     }
                 });
             }
@@ -138,7 +138,7 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        appendText(aLong.toString());
+                        appendResult(aLong.toString());
                     }
                 });
             }
@@ -150,9 +150,9 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
         Observable.range(9, 10).buffer(3).subscribe(new Consumer<List<Integer>>() {
             @Override
             public void accept(List<Integer> integers) throws Exception {
-                appendText("List size == " + integers.size());
+                appendResult("List size == " + integers.size());
                 for (Integer integer : integers) {
-                    appendText(integer + "");
+                    appendResult(integer + "");
                 }
             }
         });
@@ -163,9 +163,9 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
         Observable.range(9, 10).buffer(3, 4).subscribe(new Consumer<List<Integer>>() {
             @Override
             public void accept(List<Integer> integers) throws Exception {
-                appendText("List size == " + integers.size());
+                appendResult("List size == " + integers.size());
                 for (Integer integer : integers) {
-                    appendText(integer + "");
+                    appendResult(integer + "");
                 }
             }
         });
@@ -190,11 +190,11 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        appendText("List size == " + longs.size() + " & time == "
+                        appendResult("List size == " + longs.size() + " & time == "
                                 + new SimpleDateFormat("HH:mm:ss").format(
                                 new Date(System.currentTimeMillis())));
                         for (Long i : longs) {
-                            appendText(i.toString());
+                            appendResult(i.toString());
                         }
                     }
                 });
@@ -215,9 +215,9 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                appendText("List size == " + longs.size());
+                                appendResult("List size == " + longs.size());
                                 for (Long i : longs) {
-                                    appendText(i.toString());
+                                    appendResult(i.toString());
                                 }
                             }
                         });
@@ -245,12 +245,12 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
                 }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                appendText(s);
+                appendResult(s);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                appendText("onError:" + throwable.getMessage());
+                appendResult("onError:" + throwable.getMessage());
             }
         });
 
@@ -292,17 +292,17 @@ public class RxJavaSimpleExam extends BaseShowResultActivity {
                 }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                appendText("onNext: " + s);
+                appendResult("onNext: " + s);
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                appendText("onError: " + throwable.getMessage());
+                appendResult("onError: " + throwable.getMessage());
             }
         }, new Action() {
             @Override
             public void run() throws Exception {
-                appendText("onComplete");
+                appendResult("onComplete");
             }
         });
     }

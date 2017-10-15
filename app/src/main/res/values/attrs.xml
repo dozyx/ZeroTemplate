@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="myWidth" format="integer" />
+    <declare-styleable name="CustomView">
+        <attr name="myWidth" />
+    </declare-styleable>
+</resources>

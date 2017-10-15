@@ -3,13 +3,21 @@
     <!--activity-->
     <string name="activity_life_cycle">activity/生命周期</string>
     <string name="activity_launch_mode">activity/启动模式</string>
+
+    <!--fragment-->
+    <string name="fragment_life_cycle">fragment/生命周期</string>
+
+    <!--service-->
+    <string name="service_life_cycle">service/生命周期</string>
+
     <!--view-->
     <string name="view_custom">View/自定义</string>
     <string name="view_image_loader">View/高效加载图片</string>
     <string name="view_hencoder_1_1">View/练习 HenCoder UI 1-1 绘制基础</string>
     <string name="view_material_test">View/MD控件测试</string>
 
-    <!--material-->
+    <!--design-->
+    <string name="design_behavior">design/behavior</string>
 
     <!--网络-->
     <string name="network_basic">网络/基本</string>
@@ -38,6 +46,7 @@
     <string name="title_draw_path">drawPath()</string>
     <string name="title_draw_histogram">直方图</string>
     <string name="title_draw_pie_chart">饼图</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>
