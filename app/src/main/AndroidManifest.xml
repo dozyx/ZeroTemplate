@@ -164,6 +164,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -178,6 +179,7 @@
             android:label="@string/service_life_cycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -186,13 +188,24 @@
             android:label="@string/design_behavior">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.WidgetTest"
+        <activity
+            android:name=".view.WidgetTest"
             android:label="@string/view_widget_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".interaction.EventBusTest"
+            android:label="@string/interaction_event_bus">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>

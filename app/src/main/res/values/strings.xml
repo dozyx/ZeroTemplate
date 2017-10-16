@@ -27,8 +27,9 @@
 
     <!--数据存储-->
 
-    <!--通讯-->
-    <string name="aidl">通讯/AIDL</string>
+    <!--交互-->
+    <string name="aidl">交互/AIDL</string>
+    <string name="interaction_event_bus">交互/EventBus</string>
 
     <!--实践-->
     <string name="practice_list_in_scroll">实践/ScrollView嵌套ListView</string>
