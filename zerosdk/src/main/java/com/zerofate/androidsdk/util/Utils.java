@@ -2,12 +2,17 @@ package com.zerofate.androidsdk.util;
 
 import android.os.Build;
 
+import com.zerofate.androidsdk.BuildConfig;
+
 /**
  * Created by zero on 2017/8/24.
  */
 
 public class Utils {
 
+    public static boolean isDebug(){
+        return BuildConfig.DEBUG;
+    }
     public static boolean hasFroyo() {
         // Can use static final constants like FROYO, declared in later versions
         // of the OS since they are inlined at compile time. This is guaranteed behavior.
