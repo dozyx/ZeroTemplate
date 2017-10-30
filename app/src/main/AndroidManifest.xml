@@ -202,8 +202,18 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".interaction.EventBusTest"
+        <activity
+            android:name=".interaction.EventBusTest"
             android:label="@string/interaction_event_bus">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/view_webview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
