@@ -21,7 +21,6 @@ public class WebViewActivity extends AppCompatActivity {
         WebView webView = new WebView(this);
         WebSettings webSettings = webView.getSettings();
         webSettings.setDomStorageEnabled(true);
-        webView.setWebViewClient();
         setContentView(webView);
         webView.loadUrl("https://www.baidu.com");
     }

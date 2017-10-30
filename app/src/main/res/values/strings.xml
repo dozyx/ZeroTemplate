@@ -34,6 +34,7 @@
 
     <!--实践-->
     <string name="practice_list_in_scroll">实践/ScrollView嵌套ListView</string>
+    <string name="practice_float_window">实践/悬浮窗</string>
 
     <!--RxJava-->
     <string name="rxjava_simple">RxJava/简单例子</string>
