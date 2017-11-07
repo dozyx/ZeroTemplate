@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 悬浮窗-->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- 悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".ZTApplication"
@@ -209,6 +209,7 @@
             android:label="@string/interaction_event_bus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -217,6 +218,7 @@
             android:label="@string/view_webview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -225,10 +227,14 @@
             android:label="@string/practice_float_window">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <service android:name=".practice.FloatWindowActivity$FloatWindowsServices"/>
+
+        <service android:name=".practice.FloatWindowActivity$FloatWindowsServices" />
+
+        <activity android:name=".view.recyclerview.RecyclerViewTestActivity"></activity>
     </application>
 
 </manifest>

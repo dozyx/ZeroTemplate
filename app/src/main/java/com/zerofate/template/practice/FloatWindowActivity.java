@@ -23,44 +23,22 @@ import android.widget.Toast;
 
 import com.zerofate.andoroid.data.Shakespeare;
 import com.zerofate.template.R;
+import com.zerofate.template.activity.LifeCycleTest;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FloatWindowActivity extends AppCompatActivity {
+public class FloatWindowActivity extends LifeCycleTest {
 
-    private boolean isFullScreen = true;
-    Window window;
     WindowManager.LayoutParams params;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_float_window);
-        ButterKnife.bind(this);
-        /*window = getWindow();
-        params = window.getAttributes();
-        params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
-        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        params.format = PixelFormat.RGBA_8888;
-        params.gravity = Gravity.RIGHT;
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(params);*/
+    protected String[] getButtonText() {
+        return new String[]{"开关","占位"};
     }
 
-    @OnClick(R.id.float_button)
-    public void onFloatButton() {
-
-        /*params.gravity = Gravity.RIGHT;
-        if (isFullScreen) {
-            params.width = getResources().getDisplayMetrics().widthPixels / 2;
-        } else {
-            params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        }
-        window.setAttributes(params);
-        isFullScreen = !isFullScreen;*/
-
+    @Override
+    public void onButton1() {
         Intent intent = new Intent(this, FloatWindowsServices.class);
         if (FloatWindowsServices.isServiceRunning) {
             stopService(intent);
@@ -68,6 +46,7 @@ public class FloatWindowActivity extends AppCompatActivity {
         }
         startService(intent);
     }
+
 
     public static class FloatWindowsServices extends Service {
 
