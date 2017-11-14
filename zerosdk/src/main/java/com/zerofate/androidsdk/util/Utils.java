@@ -39,12 +39,17 @@ public class Utils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
+    /**
+     * 21
+     */
     public static boolean hasLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
+    /**
+     * 26
+     */
     public static boolean hasO(){
-        // 26
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
 }

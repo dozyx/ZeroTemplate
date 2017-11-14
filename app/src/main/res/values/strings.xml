@@ -17,6 +17,7 @@
     <string name="view_material_test">View/MD控件测试</string>
     <string name="view_widget_test">View/一般控件测试</string>
     <string name="view_webview">View/WebView测试</string>
+    <string name="view_spinner">View/Spinner测试</string>
 
     <!--design-->
     <string name="design_behavior">design/behavior</string>
