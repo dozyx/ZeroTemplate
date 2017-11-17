@@ -18,8 +18,8 @@ import com.zerofate.androidsdk.R;
 
 public abstract class AdPagerActivity extends AppCompatActivity {
 
-    private ViewPager adPager;
-    private Button jumpBtn;
+    protected ViewPager adPager;
+    protected Button jumpBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

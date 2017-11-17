@@ -1,4 +1,4 @@
-package com.zerofate.template;
+package com.zerofate.template.purejava;
 
 /**
  * Created by zero on 2017/8/15.

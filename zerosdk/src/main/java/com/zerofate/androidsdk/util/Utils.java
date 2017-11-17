@@ -53,6 +53,13 @@ public class Utils {
     }
 
     /**
+     * 24
+     */
+    public static boolean hasN() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
+    }
+
+    /**
      * 26
      */
     public static boolean hasO() {
