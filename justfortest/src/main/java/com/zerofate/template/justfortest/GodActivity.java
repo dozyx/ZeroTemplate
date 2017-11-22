@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.zerofate.template.justfortest.purchase.PurchaseActivity;
 
 /**
+ * 控制启动界面
  * @author Timon
  * @date 2017/11/13
  */

@@ -1,7 +1,11 @@
 package com.zerofate.template.justfortest;
 
+import android.Manifest;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,14 +16,17 @@ import android.widget.ImageView;
 
 import com.zerofate.androidsdk.activity.AdPagerActivity;
 import com.zerofate.androidsdk.adapter.ImagePagerAdapter;
+import com.zerofate.androidsdk.util.PermissionHelper;
+import com.zerofate.androidsdk.util.ToastX;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 没有任何意义的Activity，可能以后会加入很多乱七八糟的东西
  */
-public class MeaninglessActivity extends AdPagerActivity {
+public class MeaninglessActivity extends HelloActivity {
 
     private static final String TAG = "MeaninglessActivity";
     private ViewTreeObserver viewTreeObserver;
@@ -27,81 +34,30 @@ public class MeaninglessActivity extends AdPagerActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewTreeObserver = adPager.getViewTreeObserver();
-//        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-//            @Override
-//            public boolean onPreDraw() {
-//                Log.d(TAG, "onPreDraw: ");
-//                return false;
-//            }
-//        });
-        viewTreeObserver.addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
-            @Override
-            public void onDraw() {
-                Log.d(TAG, "onDraw: ");
-            }
-        });
+    }
 
-        viewTreeObserver.addOnGlobalFocusChangeListener(
-                new ViewTreeObserver.OnGlobalFocusChangeListener() {
-                    @Override
-                    public void onGlobalFocusChanged(View oldFocus, View newFocus) {
-                        Log.d(TAG, "onGlobalFocusChanged: ");
-                    }
-                });
-        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Log.d(TAG, "onGlobalLayout: ");
-            }
-        });
+    @OnClick(R.id.btn_hello)
+    public void onHello() {
+        testPermission();
+    }
 
-        viewTreeObserver.addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                Log.d(TAG, "onScrollChanged: ");
-            }
-        });
-
-        viewTreeObserver.addOnTouchModeChangeListener(
-                new ViewTreeObserver.OnTouchModeChangeListener() {
-                    @Override
-                    public void onTouchModeChanged(boolean isInTouchMode) {
-                        Log.d(TAG, "onTouchModeChanged: ");
-                    }
-                });
-        viewTreeObserver.addOnWindowAttachListener(new ViewTreeObserver.OnWindowAttachListener() {
-            @Override
-            public void onWindowAttached() {
-                Log.d(TAG, "onWindowAttached: ");
-            }
-
-            @Override
-            public void onWindowDetached() {
-                Log.d(TAG, "onWindowDetached: ");
-            }
-        });
-        viewTreeObserver.addOnWindowFocusChangeListener(
-                new ViewTreeObserver.OnWindowFocusChangeListener() {
-                    @Override
-                    public void onWindowFocusChanged(boolean hasFocus) {
-                        Log.d(TAG, "onWindowFocusChanged: ");
-                    }
-                });
+    private void testPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_CONTACTS)){
+            ToastX.showShort(this,"需要显示帮助");
+        }else{
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.WRITE_CONTACTS},
+                    0);
+            ToastX.showShort(this,"开始请求");
+        }
     }
 
     @Override
-    public PagerAdapter getAdapter() {
-        return new ImagePagerAdapter(this) {
-            @Override
-            public void setImage(ImageView imageView, int position) {
-                imageView.setImageResource(R.drawable.bg_0);
-            }
-
-            @Override
-            public int getCount() {
-                return 5;
-            }
-        };
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 }
