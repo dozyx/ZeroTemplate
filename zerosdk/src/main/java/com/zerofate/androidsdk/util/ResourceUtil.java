@@ -4,12 +4,19 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 
 /**
  * Created by zero on 2017/8/14.
  */
 
-public class ResUtil {
+public class ResourceUtil {
+
+    public static int getColor(Context context, @ColorRes int id) {
+        return ContextCompat.getColor(context, id);
+    }
+
     public static String getString(Context context, int resId) {
         return context.getResources().getString(resId);
     }
