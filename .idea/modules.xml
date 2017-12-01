@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app_float/app_float.iml" filepath="$PROJECT_DIR$/app_float/app_float.iml" />
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javasample/javasample.iml" filepath="$PROJECT_DIR$/javasample/javasample.iml" />
       <module fileurl="file://$PROJECT_DIR$/justfortest/justfortest.iml" filepath="$PROJECT_DIR$/justfortest/justfortest.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerosdk/zerosdk.iml" filepath="$PROJECT_DIR$/zerosdk/zerosdk.iml" />
     </modules>

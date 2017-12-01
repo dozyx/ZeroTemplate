@@ -1,1 +1,1 @@
-include ':app', ':zerosdk', ':data', ':app_float', ':justfortest'
+include ':app', ':zerosdk', ':data', ':app_float', ':justfortest', ':javasample'
