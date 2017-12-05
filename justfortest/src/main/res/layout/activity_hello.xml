@@ -5,11 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zerofate.template.justfortest.HelloActivity">
+
     <Button
         android:id="@+id/btn_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello"/>
+        android:text="hello" />
+
+    <EditText
+        android:id="@+id/edit_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:minWidth="100dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_hello" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="180dp"
+        android:text="是跌后覅时候覅偶尔sdafdsdfsffsfa"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/btn_hello" />
 
 
 </android.support.constraint.ConstraintLayout>
