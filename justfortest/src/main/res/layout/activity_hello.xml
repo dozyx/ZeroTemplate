@@ -14,21 +14,23 @@
 
     <EditText
         android:id="@+id/edit_test"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:minWidth="100dp"
+        android:lines="2"
+        android:inputType="textMultiLine|text"
+        android:gravity="top"
         app:layout_constraintTop_toBottomOf="@id/btn_hello" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="180dp"
         android:text="是跌后覅时候覅偶尔sdafdsdfsffsfa"
+        android:maxWidth="180dp"
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@id/btn_hello" />
+        app:layout_constraintLeft_toRightOf="@id/btn_hello"
+        android:background="@android:color/holo_blue_light"/>
 
 
 </android.support.constraint.ConstraintLayout>
