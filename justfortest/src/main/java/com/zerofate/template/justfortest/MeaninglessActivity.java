@@ -29,17 +29,7 @@ public class MeaninglessActivity extends HelloActivity {
 
     @OnClick(R.id.btn_hello)
     public void onHello() {
-        try {
-            String json = "{\n"
-                    + "    \"name\": \"张三\",\n"
-                    + "    \"agea\": \"11\",\n"
-                    + "    \"some\": 1\n"
-                    + "}";
-            Bean bean = new Gson().fromJson(json,Bean.class);
-            ToastX.showLong(this, bean.toString());
-        } catch (Exception e) {
-            ToastX.showLong(this, e.toString());
-        }
+       new DialogFragmentTest().show(getFragmentManager(),null);
     }
 
     @Override
