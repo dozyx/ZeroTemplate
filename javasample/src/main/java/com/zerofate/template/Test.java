@@ -1,26 +1,32 @@
 package com.zerofate.template;
 
-import android.support.annotation.NonNull;
+
+import java.math.BigDecimal;
+import java.util.regex.Pattern;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2017/12/11
  */
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(formatBankCard("6214835190421493"));
+        BigDecimal num = new BigDecimal("1.9315");
+        num = num.setScale(2,BigDecimal.ROUND_HALF_UP);
+        System.out.println(isNumeric("+11.11133E9"));
     }
-    public static String formatBankCard(@NonNull String bankCard) {
-        int len = bankCard.length();
-        if (len < 9) {
-            return bankCard;
-        }
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < len - 9; i++) {
-            builder.append("*");
-        }
-        String starStr = builder.toString();
-        return bankCard.substring(0, 5) + starStr + bankCard.substring(len - 4);
+
+    public static boolean isNumeric(String str) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
+        return pattern.matcher(str).matches();
     }
+
+    public static class Goods {
+        float price;
+
+        public Goods(float price) {
+            this.price = price;
+        }
+    }
+
 }

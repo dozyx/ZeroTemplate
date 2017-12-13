@@ -3,11 +3,13 @@ package com.zerofate.template.justfortest;
 import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.PermissionChecker;
+import android.util.Log;
 import android.view.ViewTreeObserver;
 
 import com.google.gson.Gson;
@@ -29,7 +31,17 @@ public class MeaninglessActivity extends HelloActivity {
 
     @OnClick(R.id.btn_hello)
     public void onHello() {
-       new DialogFragmentTest().show(getFragmentManager(),null);
+       new CountDownTimer(3000,1000){
+           @Override
+           public void onTick(long millisUntilFinished) {
+               Log.d(TAG, "onTick: "+ millisUntilFinished);
+           }
+
+           @Override
+           public void onFinish() {
+               Log.d(TAG, "onFinish: ");
+           }
+       }.start();
     }
 
     @Override
