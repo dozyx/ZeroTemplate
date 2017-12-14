@@ -29,19 +29,8 @@ public class MeaninglessActivity extends HelloActivity {
         super.onCreate(savedInstanceState);
     }
 
-    @OnClick(R.id.btn_hello)
     public void onHello() {
-       new CountDownTimer(3000,1000){
-           @Override
-           public void onTick(long millisUntilFinished) {
-               Log.d(TAG, "onTick: "+ millisUntilFinished);
-           }
-
-           @Override
-           public void onFinish() {
-               Log.d(TAG, "onFinish: ");
-           }
-       }.start();
+       ToastX.showLong(this,"..");
     }
 
     @Override
