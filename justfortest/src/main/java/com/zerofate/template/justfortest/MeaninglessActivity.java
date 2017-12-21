@@ -29,9 +29,6 @@ public class MeaninglessActivity extends HelloActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public void onHello() {
-       ToastX.showLong(this,"..");
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,

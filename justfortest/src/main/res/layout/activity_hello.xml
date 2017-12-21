@@ -10,34 +10,45 @@
         android:id="@+id/btn_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello" />
+        android:text="hello"
+        android:textAllCaps="false" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/edit_test"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:lines="2"
-        android:inputType="textMultiLine|text"
         android:gravity="top"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:lines="2"
+        android:maxLength="10"
         app:layout_constraintTop_toBottomOf="@id/btn_hello" />
 
     <TextView
-        android:layout_width="wrap_content"
+        style="@android:style/Widget.EditText"
+        android:inputType="number"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="是跌后覅时候覅偶尔sdafdsdfsffsfa"
-        android:maxWidth="180dp"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
+        android:maxWidth="180dp"
+        android:singleLine="true"
+        android:text="是&#12288;"
         android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@id/btn_hello"
-        android:background="@android:color/holo_blue_light"/>
+        app:layout_constraintLeft_toRightOf="@id/btn_hello" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <Button
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/edit_test">
+
+        <include layout="@layout/merge_test" />
+
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/inset_test" />
     </LinearLayout>
 
 
