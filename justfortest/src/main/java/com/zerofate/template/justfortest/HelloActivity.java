@@ -35,6 +35,6 @@ public class HelloActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_hello)
     public void onHello() {
-        ToastX.showShort(this, editTest.getInputType() + "");
+        ToastX.showShort(this, "onClick");
     }
 }

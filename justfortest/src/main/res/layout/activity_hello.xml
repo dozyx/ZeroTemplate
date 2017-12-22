@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.zerofate.template.justfortest.HelloActivity">
 
-    <Button
+    <com.zerofate.template.justfortest.CustomButton
         android:id="@+id/btn_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello"
-        android:textAllCaps="false" />
+        android:clickable="false"
+        android:text="hello" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/edit_test"
