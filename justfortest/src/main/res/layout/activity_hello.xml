@@ -30,7 +30,8 @@
             android:fontFamily="sans-serif"
             android:gravity="top"
             android:hint="8~20位密码"
-            android:inputType="textPassword"
+            android:digits="0123456789"
+            android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/btn_hello" />
 
         <TextView
