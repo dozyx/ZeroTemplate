@@ -1,5 +1,8 @@
 package com.zerofate.template.justfortest;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
@@ -40,12 +43,18 @@ public class HelloActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ClipDrawable drawable = (ClipDrawable) imageClip.getDrawable();
         drawable.setLevel(1000);
-//        binding.setUser(new User("大佬", 18));
     }
 
     @OnClick(R.id.btn_hello)
     public void onHello() {
-        ToastX.showShort(this, Color.parseColor("#ffffff") + "");
-        editTest.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        Intent intent = new Intent(this,HelloActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ToastX.showShort(this,"onNewIntent -> ");
     }
 }

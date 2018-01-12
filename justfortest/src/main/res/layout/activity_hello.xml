@@ -23,15 +23,13 @@
             android:clickable="false"
             android:text="hello" />
 
-        <EditText
+        <com.zerofate.template.justfortest.CustomEditText
             android:id="@+id/edit_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
             android:gravity="top"
             android:hint="8~20位密码"
-            android:digits="0123456789"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintTop_toBottomOf="@id/btn_hello" />
 
         <TextView
@@ -59,6 +57,15 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@android:color/transparent">
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
 
             </LinearLayout>
 

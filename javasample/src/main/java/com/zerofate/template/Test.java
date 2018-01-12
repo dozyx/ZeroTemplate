@@ -19,7 +19,10 @@ import java.util.GregorianCalendar;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(Float.valueOf(""));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH,31);
+        calendar.set(Calendar.MONTH,1);
+        System.out.println(calendar.getTime());
     }
 
     public static String removeSecond(String date) {
