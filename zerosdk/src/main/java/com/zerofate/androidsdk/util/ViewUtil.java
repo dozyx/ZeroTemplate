@@ -1,9 +1,12 @@
 package com.zerofate.androidsdk.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -48,6 +51,21 @@ public final class ViewUtil {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    public static void transparentStatusBar(Activity activity) {
+        //注意使用 android:fitsSystemWindows="true" 来避免视图被遮挡
+        if (Utils.hasLollipop()) {
+            View decorView = activity.getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            return;
+        }
+        if (Utils.hasJellyBean()) {
+            // 4.4 模拟器中使用此方式并没有完全透明，而是有种透明渐变的感觉，不过应该也能满足要求
+//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
 
     }
 }

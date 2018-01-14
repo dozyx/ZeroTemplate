@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_0"
     tools:context="com.zerofate.template.justfortest.HelloActivity">
 
-    <com.zerofate.template.justfortest.CustomButton
-        android:id="@+id/btn_hello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        android:text="hello" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/edit_test"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:digits="0123456789"
-        android:inputType="number"
-        android:lines="2"
-        android:maxLength="10"
-        app:layout_constraintTop_toBottomOf="@id/btn_hello" />
-
-    <TextView
-        style="@android:style/Widget.EditText"
-        android:inputType="number"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:maxWidth="180dp"
-        android:singleLine="true"
-        android:text="是&#12288;"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@id/btn_hello" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/edit_test">
-
-        <include layout="@layout/merge_test" />
-
-        <ImageView
+        <Button
+            android:id="@+id/btn_hello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/inset_test" />
-    </LinearLayout>
+            android:clickable="false"
+            android:text="hello" />
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="30dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111" />
+        </FrameLayout>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_test"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:gravity="top"
+            android:inputType="number"
+            android:lines="2"
+            android:maxLength="10"
+            app:layout_constraintTop_toBottomOf="@id/btn_hello" />
+
+        <TextView
+            style="@android:style/Widget.EditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:inputType="number"
+            android:maxLines="1"
+            android:maxWidth="180dp"
+            android:singleLine="true"
+            android:text="是&#12288;"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@id/btn_hello" />
+    </android.support.constraint.ConstraintLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/drawable"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@drawable/bg_1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test" />
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.DrawerLayout>
