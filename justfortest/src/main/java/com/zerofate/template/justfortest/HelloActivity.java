@@ -1,27 +1,16 @@
 package com.zerofate.template.justfortest;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.text.Spanned;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zerofate.androidsdk.util.ToastX;
-import com.zerofate.androidsdk.util.Utils;
-import com.zerofate.androidsdk.util.ViewUtil;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HelloActivity extends Activity {
@@ -31,17 +20,26 @@ public class HelloActivity extends Activity {
     Button btnHello;
     @BindView(R.id.edit_test)
     EditText editTest;
+    @BindView(R.id.text1)
+    TextView text1;
+    @BindView(R.id.image_clip)
+    ImageView imageClip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewUtil.transparentStatusBar(this);
-        setContentView(R.layout.activity_hello);
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.btn_hello)
     public void onHello() {
-        ToastX.showShort(this, "onClick");
+        Intent intent = new Intent(this,HelloActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ToastX.showShort(this,"onNewIntent -> ");
     }
 }

@@ -12,7 +12,9 @@ android {
         }
     }
 
-
+    dataBinding{
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.zerofate.template.justfortest"
         minSdkVersion 19

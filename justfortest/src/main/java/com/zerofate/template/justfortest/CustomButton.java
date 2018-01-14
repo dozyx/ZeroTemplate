@@ -19,7 +19,6 @@ public class CustomButton extends android.support.v7.widget.AppCompatButton {
 
     @Override
     public boolean performClick() {
-        ToastX.showShort(getContext(),"performClick");
         return super.performClick();
     }
 }

@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_0"
-    tools:context="com.zerofate.template.justfortest.HelloActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+        <variable
+            name="user"
+            type="com.zerofate.template.justfortest.User" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="com.zerofate.template.justfortest.HelloActivity">
 
-        <Button
+        <com.zerofate.template.justfortest.CustomButton
             android:id="@+id/btn_hello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:text="hello" />
 
-        <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:padding="30dp">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="111" />
-        </FrameLayout>
-
-        <android.support.v7.widget.AppCompatEditText
+        <com.zerofate.template.justfortest.CustomEditText
             android:id="@+id/edit_test"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="0123456789"
             android:gravity="top"
-            android:inputType="number"
-            android:lines="2"
-            android:maxLength="10"
+            android:hint="8~20位密码"
+            android:inputType="numberDecimal"
             app:layout_constraintTop_toBottomOf="@id/btn_hello" />
 
         <TextView
@@ -49,30 +41,64 @@
             android:maxLines="1"
             android:maxWidth="180dp"
             android:singleLine="true"
-            android:text="是&#12288;"
+            android:text="@{user.name}"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@id/btn_hello" />
-    </android.support.constraint.ConstraintLayout>
-
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/drawable"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="@drawable/bg_1">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/edit_test">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="test" />
+            <include layout="@layout/merge_test" />
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@android:color/transparent">
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="测试中" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/text1"
+                    android:layout_alignRight="@id/text1"
+                    android:layout_below="@+id/text1"
+                    android:background="@color/colorPrimary"
+                    android:text="测试" />
+
+                <ImageView
+                    android:id="@+id/image_clip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/inset_test" />
+
+
+            </RelativeLayout>
         </LinearLayout>
 
-
     </android.support.constraint.ConstraintLayout>
+</layout>
 
-</android.support.v4.widget.DrawerLayout>
