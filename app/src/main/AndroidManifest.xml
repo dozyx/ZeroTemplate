@@ -18,10 +18,10 @@
         android:theme="@style/AppTheme">
 
         <!-- action 为 main，category 为 com.zerofate.intent.category.sample 的activity 将显示在列表中 -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -162,6 +162,11 @@
             android:name=".activity.LaunchModeTest$SingleInstanceLaunchModeTest"
             android:exported="true"
             android:launchMode="singleInstance" />
+        <activity
+            android:name=".activity.LaunchModeTest$SingleTaskLaunchModeTestWithTaskAffinity"
+            android:exported="true"
+            android:taskAffinity=".test"
+            android:launchMode="singleTask" />
         <activity
             android:name=".fragment.FragmentLifeCycle"
             android:label="@string/fragment_life_cycle"

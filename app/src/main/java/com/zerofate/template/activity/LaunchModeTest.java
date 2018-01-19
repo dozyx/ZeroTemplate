@@ -28,7 +28,7 @@ public class LaunchModeTest extends BaseShowResultActivity {
     @Override
     protected String[] getButtonText() {
         return new String[]{
-                "standard", "singleTop", "singleTask", "singleInstance"
+                "standard", "singleTop", "singleTask", "singleInstance","singleTask with taskAffinity"
         };
     }
 
@@ -52,6 +52,14 @@ public class LaunchModeTest extends BaseShowResultActivity {
         callActivity(SingleInstanceLaunchModeTest.class);
     }
 
+    @Override
+    public void onButton5() {
+        Intent intent = new Intent(this,StandardLaunchModeTest.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+        startActivity(intent);
+    }
+
     private void callActivity(Class activity) {
         startActivity(new Intent(this, activity));
     }
@@ -69,6 +77,10 @@ public class LaunchModeTest extends BaseShowResultActivity {
     }
 
     public static final class SingleInstanceLaunchModeTest extends LaunchModeTest {
+
+    }
+
+    public static final class SingleTaskLaunchModeTestWithTaskAffinity extends LaunchModeTest {
 
     }
 

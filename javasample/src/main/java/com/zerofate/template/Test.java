@@ -1,16 +1,10 @@
 package com.zerofate.template;
 
 
-import android.text.TextUtils;
-
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author dozeboy
@@ -19,10 +13,7 @@ import java.util.GregorianCalendar;
 
 public class Test {
     public static void main(String[] args) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH,31);
-        calendar.set(Calendar.MONTH,1);
-        System.out.println(calendar.getTime());
+        System.out.println(BigDecimal.valueOf(0.59).toPlainString());
     }
 
     public static String removeSecond(String date) {
@@ -32,6 +23,12 @@ public class Test {
             return date.substring(0, date.lastIndexOf(":"));
         }
         return date;
+    }
+    public static boolean isLetterOrNumberWithLengthLimit(String text, int min, int max) {
+        String reg = "^[a-zA-Z0-9]{" + min + "," + max + "}$";
+        Pattern pat = Pattern.compile(reg);
+        Matcher mat = pat.matcher(text);
+        return mat.matches();
     }
 
 }
