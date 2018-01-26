@@ -41,6 +41,9 @@
     <!--RxJava-->
     <string name="rxjava_simple">RxJava/简单例子</string>
 
+    <!--data-->
+    <string name="data_parcelable">Data/Parcelable</string>
+
     <string name="title_draw_color">drawColor()</string>
     <string name="title_draw_circle">drawCircle()</string>
     <string name="title_draw_rect">drawRect()</string>

@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.zerofate.androidsdk.util.ToastX;
 import com.zerofate.template.base.BaseShowResultActivity;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ import retrofit2.http.GET;
 
 public class NetworkAPITest extends BaseShowResultActivity implements DownloadCallback {
     private static final String TAG = "NetworkAPITest";
-    private static final String URL_STRING = "https://www.baidu.com";
+    private static final String URL_STRING = "http://www.cnbeta.com/";
 
     private NetworkFragment networkFragment;
     private boolean downloading = false;
@@ -140,30 +141,37 @@ public class NetworkAPITest extends BaseShowResultActivity implements DownloadCa
         });
     }
 
+    int count = 0;
     private void startDownloadWithRetrofit() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL_STRING).build();
         IBaiduHomePage service = retrofit.create(IBaiduHomePage.class);
         retrofit2.Call<ResponseBody> call = service.getData();
-        call.enqueue(new retrofit2.Callback<ResponseBody>() {
+        for (int i = 0;i<10;i++){
+            if (call.isExecuted()){
+                call = call.clone();
+            }
+            call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(retrofit2.Call<ResponseBody> call,
                     retrofit2.Response<ResponseBody> response) {
-                try {
-                    setText(response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    ToastX.showShort(NetworkAPITest.this,count +"");
+//                    setText(response.body().string());
+                    appendResult((++count) + "");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override
             public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
-
+                appendResult("onFailure: " + t.getMessage());
             }
-        });
+        });}
     }
 
     private interface IBaiduHomePage {
-        @GET
+        @GET("\\")
         retrofit2.Call<ResponseBody> getData();
     }
 

@@ -2,7 +2,6 @@ package com.zerofate.template;
 
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,20 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(BigDecimal.valueOf(0.59).toPlainString());
+    }
+
+    private static void testCalculate() {
+        // float 计算
+        BigDecimal bigDecimal1 = new BigDecimal(0.58f);
+        BigDecimal bigDecimal2 = new BigDecimal(0.01f);
+        System.out.println(bigDecimal1 + "\n" + bigDecimal2 + "\n" + bigDecimal1.add(bigDecimal2));
+        System.out.println((int) ((0.58f + 0.01f) * 100));
+
+        // double 计算
+        BigDecimal bigDecimal3 = new BigDecimal(0.58);
+        BigDecimal bigDecimal4 = new BigDecimal(0.01);
+        System.out.println(bigDecimal3 + "\n" + bigDecimal4 + "\n" + bigDecimal3.add(bigDecimal4));
+        System.out.println((int) ((0.58 + 0.01) * 100));
     }
 
     public static String removeSecond(String date) {
