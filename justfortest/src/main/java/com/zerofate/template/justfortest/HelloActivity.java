@@ -3,8 +3,8 @@ package com.zerofate.template.justfortest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.TextViewCompat;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +25,8 @@ public class HelloActivity extends Activity {
     TextView text1;
     @BindView(R.id.image_clip)
     ImageView imageClip;
+    @BindView(R.id.text_auto_size)
+    TextView textAutoSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class HelloActivity extends Activity {
             Person person = getIntent().getParcelableExtra("person");
             ToastX.showShort(this, person + "");
         }
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(textAutoSize,TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
     }
 
     @OnClick(R.id.btn_hello)
@@ -42,10 +45,10 @@ public class HelloActivity extends Activity {
         Person zhangsan = new Person("张三", 18);
         ToastX.showShort(this, zhangsan + "");
         Bundle bundle = new Bundle();
-        bundle.putParcelable("person",zhangsan);
+        bundle.putParcelable("person", zhangsan);
         Person lisi = bundle.getParcelable("person");
         lisi.name = "李四";
-        ToastX.showShort(this,zhangsan.name +"");
+        ToastX.showShort(this, zhangsan.name + "");
     }
 
     @Override
