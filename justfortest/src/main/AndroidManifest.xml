@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <application
         android:name=".MyApplication"
@@ -17,6 +19,7 @@
         <activity android:name=".purchase.PurchaseActivity" />
         <activity
             android:name=".MeaninglessActivity"
+            android:launchMode="singleTop"
             android:exported="true" />
         <activity
             android:name=".GodActivity"
