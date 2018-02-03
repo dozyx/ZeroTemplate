@@ -18,7 +18,11 @@ android {
     defaultConfig {
         applicationId "com.zerofate.template.justfortest"
         minSdkVersion 19
+<<<<<<< HEAD
         targetSdkVersion 24
+=======
+        targetSdkVersion 26
+>>>>>>> a5640605f835d50d404ab491e11572b23aff6ca6
         versionCode 1
         versionName "1.0"
 
@@ -50,7 +54,8 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     implementation project(':zerosdk')
-    compile("com.github.hotchemi:permissionsdispatcher:3.0.1")
+    compile 'com.github.hotchemi:permissionsdispatcher:3.0.1'
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.support:support-v4:26.1.0'
 }

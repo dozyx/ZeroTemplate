@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         tools:context="com.zerofate.template.justfortest.HelloActivity">
 
-        <com.zerofate.template.justfortest.CustomButton
+        <Button
             android:id="@+id/btn_hello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,9 +70,10 @@
                 </RelativeLayout>
             </ScrollView>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp">
+                android:layout_height="500dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text1"
@@ -82,13 +83,26 @@
                     android:text="测试中" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/text_auto_size"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
                     android:layout_alignLeft="@id/text1"
                     android:layout_alignRight="@id/text1"
                     android:layout_below="@+id/text1"
                     android:background="@color/colorPrimary"
-                    android:text="测试" />
+                    app:autoSizeTextType="uniform"
+                    android:text="测ssssssssssss" />
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:autoSizeTextType="uniform"
+                    android:lines="1"
+                    android:text="sssss"/>
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    app:autoSizeTextType="uniform"
+                    android:text="测sfsdfsdfsfdfsfdsff"/>
 
                 <ImageView
                     android:id="@+id/image_clip"
@@ -97,7 +111,7 @@
                     android:src="@drawable/inset_test" />
 
 
-            </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,31 +23,23 @@ public class HelloActivity extends AppCompatActivity {
     TextView text1;
     @BindView(R.id.image_clip)
     ImageView imageClip;
+    @BindView(R.id.text_auto_size)
+    TextView textAutoSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ToastX.showShort(this,"HelloActivity -> onCreate" + " & task == " + getTaskId());
-        setContentView(R.layout.activity_hello);
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.btn_hello)
-    public void onHello() {
-        Intent intent = new Intent(this, HelloActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        ToastX.showShort(this, "onNewIntent -> ");
     }
 
     @Override
     protected void onDestroy() {
-        ToastX.showShort(this,"HelloActivity -> onDestroy" + " & task == " + getTaskId());
-        super.onDestroy();
     }
 }
