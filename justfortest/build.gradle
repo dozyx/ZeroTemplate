@@ -18,11 +18,7 @@ android {
     defaultConfig {
         applicationId "com.zerofate.template.justfortest"
         minSdkVersion 19
-<<<<<<< HEAD
-        targetSdkVersion 24
-=======
         targetSdkVersion 26
->>>>>>> a5640605f835d50d404ab491e11572b23aff6ca6
         versionCode 1
         versionName "1.0"
 
@@ -40,7 +36,23 @@ android {
             signingConfig signingConfigs.config
         }
     }
+    flavorDimensions("default")
+    productFlavors{
+        tencent{
+            dimension "default"
+        }
+        baidu{
+            dimension "default"
+        }
+    }
 
+}
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def date = new Date().format("MMddHH")
+        def productFlavorName = variant.productFlavors[0].name
+        outputFileName = "应用名称" + "-${variant.versionName}-" + productFlavorName + "-" + date + "-${variant.buildType.name}" + ".apk"
+    }
 }
 
 dependencies {
