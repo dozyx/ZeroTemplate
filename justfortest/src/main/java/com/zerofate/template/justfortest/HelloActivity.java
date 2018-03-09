@@ -1,5 +1,6 @@
 package com.zerofate.template.justfortest;
 
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -16,6 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yeahka.factorytools.ILeposService;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +41,7 @@ public class HelloActivity extends AppCompatActivity {
     TextView textAutoSize;
     @BindView(R.id.image_clip)
     ImageView imageClip;
+    public static MyProgressDialog sMyProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,47 +52,26 @@ public class HelloActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_hello)
     void onBtnHello() {
-        Log.d(TAG, "onBtnHello: " + "\nBuild.MODEL == " + Build.MODEL + "\nBuild.PRODUCT == "
-                + Build.PRODUCT + "\nBuild.HARDWARE == " + Build.HARDWARE
-                + "\nBuild.FINGERPRINT == "
-                + Build.FINGERPRINT + "\nBuild.DEVICE == "
-                + Build.DEVICE + "\nBuild.BOOTLOADER == " + Build.BOOTLOADER + "\nBuild.BRAND == "
-                + Build.BRAND + "\nBuild.MANUFACTURER == " + Build.MANUFACTURER
-                + "\nBuild.BOARD == "
-                + Build.BOARD + "\nBuild.DISPLAY == "
-                + Build.DISPLAY + "\nBuild.HOST == " + Build.HOST + "\nBuild.ID == " + Build.ID
-                + "\nBuild.TAGS == " + Build.TAGS + "\nBuild.TYPE == " + Build.TYPE
-                + "\nBuild.USER == " + Build.USER + "\nBuild.SUPPORTED_ABIS == "
-                + Build.SUPPORTED_ABIS + "\nBuild.TIME == " + Build.TIME
-                + "\nBuild.SUPPORTED_32_BIT_ABIS == "
-                + Build.SUPPORTED_32_BIT_ABIS + "\nBuild.SUPPORTED_64_BIT_ABIS == "
-                + Build.SUPPORTED_64_BIT_ABIS);
-        Intent intent = new Intent("com.yeahka.action.leposservice");
-        intent.setPackage("com.yeahka.factorytools");
-        bindService(intent, new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                ILeposService leposService = ILeposService.Stub.asInterface(service);
-                if (leposService != null) {
-                    try {
-                        Toast.makeText(HelloActivity.this, leposService.readSn() + " & " + leposService.readCsn(), Toast
-                                .LENGTH_SHORT).show();
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-
-            }
-        }, Context.BIND_AUTO_CREATE);
+        startService(new Intent(this, MyService.class));
+        DialogUtil.showDialog(this);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
     }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
+    }
+
+    public static class MyProgressDialog extends ProgressDialog{
+        public MyProgressDialog(Context context) {
+            super(context);
+        }
+    }
+
 
 }

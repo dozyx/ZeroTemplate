@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        G2<String> g2 = new G2();
+        System.out.println(Long.valueOf("04JQ7CWR",36));
     }
 
     public static class G2<S> extends GenericTest<S> {
