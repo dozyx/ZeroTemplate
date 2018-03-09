@@ -4,6 +4,9 @@ package com.zerofate.template;
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -16,21 +19,11 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        // 1 digit
-        int number = 1;
-        String numberAsString = String.valueOf(number);
-        String paddedNumberAsString = "0000000000".substring(numberAsString.length()) + numberAsString;
-        System.out.println(paddedNumberAsString);
-        // 2 digits
-        number = 12;
-        numberAsString = String.valueOf(number);
-        paddedNumberAsString = "0000000000".substring(numberAsString.length()) + numberAsString;
-        System.out.println(paddedNumberAsString);
-        // 3 digits
-        number = 125;
-        numberAsString = String.valueOf(number);
-        paddedNumberAsString = "0000000000".substring(numberAsString.length());
-        System.out.println(paddedNumberAsString);
+        G2<String> g2 = new G2();
+    }
+
+    public static class G2<S> extends GenericTest<S> {
+
     }
 
     public static byte[] HexString2bytes(String hexString) {
