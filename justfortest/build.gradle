@@ -18,11 +18,7 @@ android {
     defaultConfig {
         applicationId "com.zerofate.template.justfortest"
         minSdkVersion 19
-<<<<<<< HEAD
-        targetSdkVersion 24
-=======
         targetSdkVersion 26
->>>>>>> a5640605f835d50d404ab491e11572b23aff6ca6
         versionCode 1
         versionName "1.0"
 
