@@ -36,7 +36,23 @@ android {
             signingConfig signingConfigs.config
         }
     }
+    flavorDimensions("default")
+    productFlavors{
+        tencent{
+            dimension "default"
+        }
+        baidu{
+            dimension "default"
+        }
+    }
 
+}
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def date = new Date().format("MMddHH")
+        def productFlavorName = variant.productFlavors[0].name
+        outputFileName = "应用名称" + "-${variant.versionName}-" + productFlavorName + "-" + date + "-${variant.buildType.name}" + ".apk"
+    }
 }
 
 dependencies {

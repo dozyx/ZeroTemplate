@@ -1,7 +1,14 @@
 package com.zerofate.template;
 
 
+import com.google.gson.Gson;
+
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +19,58 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
+        System.out.println(Long.valueOf("04JQ7CWR",36));
+    }
+
+    public static class G2<S> extends GenericTest<S> {
+
+    }
+
+    public static byte[] HexString2bytes(String hexString) {
+        hexString = hexString.toUpperCase();
+        byte[] b = new byte[hexString.length() / 2];
+        char[] hexStringByte = hexString.toCharArray();
+        for (int i = 0; i < hexString.length() / 2; i++) {
+            byte byteTemp = (byte) ((toByte(hexStringByte[i * 2]) << 4) | toByte(hexStringByte[i * 2 + 1]));
+            b[i] = byteTemp;
+        }
+        return b;
+    }
+
+    public static byte toByte(char c) {
+        byte b = (byte) "0123456789ABCDEF".indexOf(c);
+        return b;
+    }
+
+    private static class Person {
+        String name;
+        String age;
+        Phone phone;
+
+        public Person() {
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public static class Phone{
+            String num;
+            String type;
+        }
+
     }
 
     private static void testCalculate() {

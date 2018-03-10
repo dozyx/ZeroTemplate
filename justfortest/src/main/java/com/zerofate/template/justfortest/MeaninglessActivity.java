@@ -40,10 +40,5 @@ public class MeaninglessActivity extends HelloActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
-    public void onHello() {
-        BluetoothManager manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        manager.getAdapter().enable();
-    }
 
 }
