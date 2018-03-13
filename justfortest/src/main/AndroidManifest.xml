@@ -31,15 +31,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HelloActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".HelloActivity"
+            android:launchMode="singleTop" />
 
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:process=":service"
-            android:exported="true"></service>
+            android:exported="true"
+            android:process=":service" />
+
+        <activity android:name=".DataBindingTestActivity"></activity>
     </application>
 
 </manifest>

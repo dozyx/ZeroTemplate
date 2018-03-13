@@ -12,7 +12,7 @@ android {
         }
     }
 
-    dataBinding{
+    dataBinding {
         enabled = true
     }
     defaultConfig {
@@ -37,11 +37,11 @@ android {
         }
     }
     flavorDimensions("default")
-    productFlavors{
-        tencent{
+    productFlavors {
+        tencent {
             dimension "default"
         }
-        baidu{
+        baidu {
             dimension "default"
         }
     }

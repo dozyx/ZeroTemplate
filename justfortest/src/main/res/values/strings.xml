@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">justForTest</string>
+    <string name="money_yuan">￥%s</string>
 </resources>

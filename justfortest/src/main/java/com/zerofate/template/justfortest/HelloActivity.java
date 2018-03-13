@@ -11,6 +11,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yeahka.factorytools.ILeposService;
+import com.zerofate.template.justfortest.exception.dialogfragment
+        .IllegalStateExceptionTestDialogFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +47,7 @@ public class HelloActivity extends AppCompatActivity {
     @BindView(R.id.image_clip)
     ImageView imageClip;
     public static MyProgressDialog sMyProgressDialog;
+    private String testString = "11111";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +58,18 @@ public class HelloActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_hello)
     void onBtnHello() {
-        startService(new Intent(this, MyService.class));
-        DialogUtil.showDialog(this);
+        textAutoSize.setText(formatIncome(getString(R.string.money_yuan, testString)));
+        testString += testString;
+//        startService(new Intent(this, MyService.class));
+//        DialogUtil.showDialog(this);
+
+    }
+
+
+    private SpannableString formatIncome(String income) {
+        SpannableString ss = new SpannableString(income);
+        ss.setSpan(new AbsoluteSizeSpan(14, true), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return ss;
     }
 
     @Override
@@ -67,7 +83,7 @@ public class HelloActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public static class MyProgressDialog extends ProgressDialog{
+    public static class MyProgressDialog extends ProgressDialog {
         public MyProgressDialog(Context context) {
             super(context);
         }
