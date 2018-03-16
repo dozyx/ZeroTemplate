@@ -66,6 +66,18 @@ public final class ViewUtil {
             // 4.4 模拟器中使用此方式并没有完全透明，而是有种透明渐变的感觉，不过应该也能满足要求
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+    }
 
+    public static void setChildrenEnabled(boolean enable, ViewGroup viewGroup) {
+        if (viewGroup == null || viewGroup.getChildCount() == 0) {
+            return;
+        }
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            child.setEnabled(enable);
+            if (child instanceof ViewGroup) {
+                setChildrenEnabled(enable, (ViewGroup) child);
+            }
+        }
     }
 }

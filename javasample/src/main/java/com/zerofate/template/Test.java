@@ -1,25 +1,97 @@
 package com.zerofate.template;
 
 
+
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.Arrays;
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * 测试 java 相关代码
+ * 约定：将测试代码放在单独方法中，main 中只执行该方法，这样就可以在测试下一个项目时保留上一次的代码
+ *
  * @author dozeboy
  * @date 2017/12/11
  */
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(Long.valueOf("04JQ7CWR",36));
+        System.out.println(format("1232.50",2,100));
+    }
+
+    public static String format(String num, int reserved, int divide) {
+        BigDecimal b1 = new BigDecimal(num);
+        BigDecimal b2 = new BigDecimal(divide);
+        String format;
+        if (reserved ==0){
+            format ="#";
+        }else {
+            StringBuilder builder = new StringBuilder("#.#");
+            for (int i =1;i<reserved;i++){
+                builder.append("#");
+            }
+            format = builder.toString();
+        }
+        return new DecimalFormat(format).format(
+                b1.divide(b2, reserved, BigDecimal.ROUND_HALF_UP).doubleValue());
+    }
+    public static String formatHundredth(String str) {
+        if (str == null || str.length() == 0)
+            return "0.00";
+        Double tempInput = Double.parseDouble(str);
+        BigDecimal b1 = new BigDecimal(tempInput.toString());
+        BigDecimal b2 = new BigDecimal("100");
+        DecimalFormat decimalFormat = new DecimalFormat("#");
+        return decimalFormat.format(b1.divide(b2, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+    }
+
+    private static void testGson() {
+        User user = new User();
+        user.setName("张三");
+        System.out.println("缺少 field：" + new Gson().toJson(user));
+
+        user.setPhone("110");
+        System.out.println("缺少对象 field：" + new Gson().toJson(user));
+        User.Address address = new User.Address();
+
+        address.setProvince("江苏");
+        address.setCity("常州");
+        user.setAddress(address);
+        System.out.println("完整：" + new Gson().toJson(user));
+
+        String jsonStr1 = "{\n"
+                + "    \"name\": \"张三\",\n"
+                + "    \"phone\": \"110\",\n"
+                + "    \"age\": 20,\n"
+                + "    \"address\": {\n"
+                + "        \"province\": \"江苏\",\n"
+                + "        \"city\": \"常州\"\n"
+                + "    }\n"
+                + "}";
+        System.out.println("jsonStr 包含多余字段：" + new Gson().fromJson(jsonStr1, User.class));
+        String jsonStr2 = "{\n"
+                + "    \"name\": \"张三\",\n"
+                + "    \"address\": {\n"
+                + "        \"province\": \"江苏\",\n"
+                + "        \"city\": \"常州\"\n"
+                + "    }\n"
+                + "}";
+        System.out.println("jsonStr 缺少字段：" + new Gson().fromJson(jsonStr2, User.class));
+
+        String jsonStr3 = "{\"data\": {\n"
+                + "    \"name\": \"张三\",\n"
+                + "    \"phone\": \"110\",\n"
+                + "    \"address\": {\n"
+                + "        \"province\": \"江苏\",\n"
+                + "        \"city\": \"常州\"\n"
+                + "    }\n"
+                + "}}";
+        System.out.println("jsonStr 增加一层data：" + new Gson().fromJson(jsonStr3, User.class));
     }
 
     public static class G2<S> extends GenericTest<S> {
@@ -31,7 +103,8 @@ public class Test {
         byte[] b = new byte[hexString.length() / 2];
         char[] hexStringByte = hexString.toCharArray();
         for (int i = 0; i < hexString.length() / 2; i++) {
-            byte byteTemp = (byte) ((toByte(hexStringByte[i * 2]) << 4) | toByte(hexStringByte[i * 2 + 1]));
+            byte byteTemp = (byte) ((toByte(hexStringByte[i * 2]) << 4) | toByte(
+                    hexStringByte[i * 2 + 1]));
             b[i] = byteTemp;
         }
         return b;
@@ -66,7 +139,7 @@ public class Test {
             this.name = name;
         }
 
-        public static class Phone{
+        public static class Phone {
             String num;
             String type;
         }
@@ -95,6 +168,7 @@ public class Test {
         }
         return date;
     }
+
     public static boolean isLetterOrNumberWithLengthLimit(String text, int min, int max) {
         String reg = "^[a-zA-Z0-9]{" + min + "," + max + "}$";
         Pattern pat = Pattern.compile(reg);
