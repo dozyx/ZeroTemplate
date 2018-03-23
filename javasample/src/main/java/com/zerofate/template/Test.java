@@ -21,7 +21,10 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(format("1232.50",2,100));
+        BigDecimal after = new BigDecimal(15*1/(double)100);
+        System.out.println(after.setScale(1,BigDecimal.ROUND_HALF_UP));
+        BigDecimal after1 = new BigDecimal(String.valueOf(0.15)).multiply(new BigDecimal(100).divide(new BigDecimal(100)));
+        System.out.println(after1.setScale(1,BigDecimal.ROUND_HALF_UP));
     }
 
     public static String format(String num, int reserved, int divide) {

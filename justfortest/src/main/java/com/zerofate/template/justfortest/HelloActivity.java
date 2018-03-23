@@ -1,40 +1,37 @@
 package com.zerofate.template.justfortest;
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Build;
+import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
-import android.widget.Button;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.yeahka.factorytools.ILeposService;
-import com.zerofate.template.justfortest.exception.dialogfragment
-        .IllegalStateExceptionTestDialogFragment;
-import com.zerofate.template.justfortest.lifecycleArch.*;
+import com.zerofate.androidsdk.util.Utils;
+import com.zerofate.androidsdk.util.ViewUtil;
+import com.zerofate.template.justfortest.databinding.ActivityHelloBinding;
 import com.zerofate.template.justfortest.lifecycleArch.User;
+import com.zerofate.template.justfortest.lifecycleArch.UserModel;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,63 +40,50 @@ import butterknife.OnClick;
 public class HelloActivity extends AppCompatActivity {
 
     private static final String TAG = "HelloActivity";
-    @BindView(R.id.btn_hello)
-    Button btnHello;
-    @BindView(R.id.edit_test)
-    CustomEditText editTest;
-    @BindView(R.id.text1)
-    TextView text1;
-    @BindView(R.id.text_auto_size)
-    TextView textAutoSize;
-    @BindView(R.id.image_clip)
-    ImageView imageClip;
-    public static MyProgressDialog sMyProgressDialog;
     private String testString = "11111";
     UserModel userModel;
+    private TextView textView;
+    MyViewModel myViewModel;
+    ActivityHelloBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello);
-        ButterKnife.bind(this);
-        userModel = ViewModelProviders.of(this).get(UserModel.class);
-        userModel.setName("你好2018");
-        userModel.getUser().observe(this,
-                new Observer<com.zerofate.template.justfortest.lifecycleArch.User>() {
-                    @Override
-                    public void onChanged(@Nullable User user) {
-                        text1.setText(user.getName());
-                    }
-                });
-    }
-
-    @OnClick(R.id.btn_hello)
-    void onBtnHello() {
-//        userModel.setName("你好");
-        userModel.getUser().observe(this, new Observer<User>() {
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_hello);
+        myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+        myViewModel.getMediator().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(@Nullable User user) {
-                text1.setText(user.getName() +"111");
+            public void onChanged(@Nullable String s) {
+                binding.textLog.setText(binding.textLog.getText() +"\n" + s);
             }
         });
-        /*new Thread(new Runnable() {
+        binding.button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                final User user = new User();
-                user.setName(editTest.getText().toString());
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                editTest.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        userModel.getUser().setValue(user);
-                    }
-                });
+            public void onClick(View v) {
+                myViewModel.setInt(new Random(99).nextInt());
             }
-        }).start();*/
+        });
+
+        binding.button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myViewModel.setString(testString);
+            }
+        });
+
+        binding.button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewModelProviders.of(HelloActivity.this).get(MyViewModel.class).getMediator().observe(
+
+                        HelloActivity.this, new Observer<String>() {
+                            @Override
+                            public void onChanged(@Nullable String s) {
+                                binding.textLog.setText(binding.textLog.getText() +"\n" +"哈哈哈哈" + s);
+                            }
+                        });
+            }
+        });
     }
 
 

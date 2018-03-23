@@ -11,112 +11,36 @@
             type="com.zerofate.template.justfortest.User" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context="com.zerofate.template.justfortest.HelloActivity">
 
-        <Button
-            android:id="@+id/btn_hello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:text="hello" />
-
-        <com.zerofate.template.justfortest.CustomEditText
-            android:id="@+id/edit_test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:hint="8~20位密码"
-            android:inputType="numberDecimal"
-            app:layout_constraintTop_toBottomOf="@id/btn_hello" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:lines="1"
-            android:gravity="center"
-            android:text="111111"
-            android:textColor="@color/colorPrimary"
-            android:autoSizeTextType="uniform"
-            app:layout_constraintLeft_toRightOf="@id/btn_hello" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/edit_test">
-
-            <include layout="@layout/merge_test" />
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="150dp">
-                <Button
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <Button
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </ScrollView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:text="测试中" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/text_auto_size"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:layout_alignLeft="@id/text1"
-                    android:layout_alignRight="@id/text1"
-                    android:layout_below="@+id/text1"
-                    android:background="@color/colorPrimary"
-                    app:autoSizeTextType="uniform" />
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:autoSizeTextType="uniform"
-                    android:lines="1"
-                    android:text="sssss"/>
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    app:autoSizeTextType="uniform"
-                    android:text="测sfsdfsdfsfdfsfdsff"/>
-
-                <ImageView
-                    android:id="@+id/image_clip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:src="@drawable/inset_test" />
-
-
-            </LinearLayout>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
-    </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_log"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </layout>
 
