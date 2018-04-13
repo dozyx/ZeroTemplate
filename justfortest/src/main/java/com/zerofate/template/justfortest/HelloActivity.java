@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
@@ -32,6 +33,7 @@ import com.zerofate.template.justfortest.lifecycleArch.User;
 import com.zerofate.template.justfortest.lifecycleArch.UserModel;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +51,11 @@ public class HelloActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_hello);
+        Log.d(TAG, new Uri.Builder().scheme("https").authority("www.example.com").appendPath(
+                "articles").appendQueryParameter("title", "张三").fragment("first").toString()+"\n");
+        Log.d(TAG, Uri.parse("https://www.example.com/articles").buildUpon().appendQueryParameter(
+                "title", "张三").fragment("first").toString());
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_hello);
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
         myViewModel.getMediator().observe(this, new Observer<String>() {
             @Override
@@ -61,6 +67,8 @@ public class HelloActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myViewModel.setInt(new Random(99).nextInt());
+                AtomicInteger atomicInteger = new AtomicInteger(1);
+                Log.d(TAG,"atom == " + atomicInteger.get());
             }
         });
 
