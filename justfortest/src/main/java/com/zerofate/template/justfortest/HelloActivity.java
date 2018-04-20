@@ -13,8 +13,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.util.TypedValue;
@@ -55,6 +57,7 @@ public class HelloActivity extends AppCompatActivity {
                 "articles").appendQueryParameter("title", "张三").fragment("first").toString()+"\n");
         Log.d(TAG, Uri.parse("https://www.example.com/articles").buildUpon().appendQueryParameter(
                 "title", "张三").fragment("first").toString());
+        Log.d(TAG,BuildConfig.ENV + "");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hello);
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
         myViewModel.getMediator().observe(this, new Observer<String>() {
@@ -63,15 +66,18 @@ public class HelloActivity extends AppCompatActivity {
                 binding.textLog.setText(binding.textLog.getText() +"\n" + s);
             }
         });
+
         binding.button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myViewModel.setInt(new Random(99).nextInt());
-                AtomicInteger atomicInteger = new AtomicInteger(1);
-                Log.d(TAG,"atom == " + atomicInteger.get());
+
             }
         });
-
+        Log.d(TAG,getString(R.string.style_text2));
+//        binding.textLog.setText(getText(R.string.style_text));
+//        binding.textLog.setText(Html.fromHtml(getString(R.string.style_text2)));
+//        binding.textLog.setText(Html.fromHtml("<font color=\"#ff0000\">你好啊</font>你好啊<font "
+//                + "color=\"#00ff00\">你好啊</font>"));
         binding.button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

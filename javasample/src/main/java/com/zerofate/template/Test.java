@@ -24,7 +24,8 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        testThreadPool();
+        BigDecimal decimal = new BigDecimal(9).divide(new BigDecimal(100)).setScale(2);
+        System.out.println(decimal.toString());
     }
 
     private static void testThreadPool() {
