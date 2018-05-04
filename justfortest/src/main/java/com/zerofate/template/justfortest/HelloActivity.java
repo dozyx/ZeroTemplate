@@ -10,6 +10,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,13 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +39,9 @@ import com.zerofate.template.justfortest.databinding.ActivityHelloBinding;
 import com.zerofate.template.justfortest.lifecycleArch.User;
 import com.zerofate.template.justfortest.lifecycleArch.UserModel;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -49,6 +57,8 @@ public class HelloActivity extends AppCompatActivity {
     private TextView textView;
     MyViewModel myViewModel;
     ActivityHelloBinding binding;
+    String text = "0";
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,11 @@ public class HelloActivity extends AppCompatActivity {
         binding.button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                binding.edit.setText(text);
+                text += "0";
+                adapter.add(new Random(10).nextInt() + "");
+                text += "0";
+                finish();
             }
         });
         Log.d(TAG,getString(R.string.style_text2));
@@ -98,6 +112,17 @@ public class HelloActivity extends AppCompatActivity {
                         });
             }
         });
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,new ArrayList
+                <String>()){
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView,
+                    @NonNull ViewGroup parent) {
+                Log.d(TAG,getString(R.string.style_text));
+                return super.getView(position, convertView, parent);
+            }
+        };
+        binding.list.setAdapter(adapter);
     }
 
 
@@ -105,6 +130,14 @@ public class HelloActivity extends AppCompatActivity {
         SpannableString ss = new SpannableString(income);
         ss.setSpan(new AbsoluteSizeSpan(14, true), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return ss;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
+        Log.d(TAG,"onRequestPermissionsResult");
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EventBus.getDefault().post(new String("111"));
     }
 
     @Override

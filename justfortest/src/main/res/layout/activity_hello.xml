@@ -32,9 +32,14 @@
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
+            <TextView
                 android:id="@+id/edit"
-                android:layout_width="100dp"
+                android:maxLines="1"
+                android:layout_width="50dp"
+                android:textSize="30sp"
+                android:text="1232262626262"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="10sp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <ScrollView
@@ -52,15 +57,23 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:lines="1"
-                        android:maxLines="2"
-                        android:text="797897987871"/>
+                        android:textSize="12sp"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="1sp"
+                        android:autoSizeMaxTextSize="50sp"
+                        android:text="797"/>
                     <TextView
                         android:id="@+id/text_log"
                         android:layout_below="@id/text_long"
                         android:layout_width="match_parent"
-                        android:text="@string/style_text2"
+                        android:textSize="30sp"
+                        android:text="111"
                         android:layout_height="match_parent" />
                 </RelativeLayout>
+                <ListView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

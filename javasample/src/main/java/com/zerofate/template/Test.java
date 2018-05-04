@@ -4,6 +4,7 @@ package com.zerofate.template;
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
@@ -24,8 +25,8 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        BigDecimal decimal = new BigDecimal(9).divide(new BigDecimal(100)).setScale(2);
-        System.out.println(decimal.toString());
+        System.out.println("625".substring(0,"625".indexOf("2")));
+
     }
 
     private static void testThreadPool() {
@@ -37,7 +38,8 @@ public class Test {
                 @Override
                 public void run() {
 
-                    System.out.println(new Date() + " & i == " + num + " & thread == " + Thread.currentThread());
+                    System.out.println(new Date() + " & i == " + num + " & thread == "
+                            + Thread.currentThread());
                     try {
                         Thread.sleep(5 * 1000);
                     } catch (InterruptedException e) {
