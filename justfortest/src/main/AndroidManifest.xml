@@ -41,7 +41,8 @@
             android:exported="true"
             android:process=":service" />
 
-        <activity android:name=".DataBindingTestActivity"></activity>
+        <activity android:name=".DataBindingTestActivity" />
+        <activity android:name=".TestIncreaseDecreaseControllerActivity"></activity>
     </application>
 
 </manifest>

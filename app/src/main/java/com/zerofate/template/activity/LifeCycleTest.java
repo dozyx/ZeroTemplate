@@ -37,14 +37,16 @@ public class LifeCycleTest extends BaseShowResultActivity {
 
     @Override
     protected void onResume() {
+        appendResult("onResume() -> called before super.onResume");
         super.onResume();
-        appendResult("onResume ->");
+        appendResult("onResume() -> called after super.onResume");
     }
 
     @Override
     protected void onPause() {
-        appendResult("onPause ->");
+        appendResult("onPause() -> called before super.onPause");
         super.onPause();
+        appendResult("onPause() -> called after super.onPause");
     }
 
     @Override

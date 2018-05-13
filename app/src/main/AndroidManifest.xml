@@ -261,11 +261,19 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".ParcelableTestActivity"
+        <activity
+            android:name=".ParcelableTestActivity"
             android:label="@string/data_parcelable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".socket.SocketTestActivity"
+            android:label="@string/network_socket">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>

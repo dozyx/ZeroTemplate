@@ -12,7 +12,7 @@
             android:text="测试"/>
         <include
             android:id="@+id/include_layout"
-            layout="@layout/activity_hello"/>
+            layout="@layout/include_layout"/>
     </LinearLayout>
 
 </layout>

@@ -16,10 +16,12 @@ public class FragmentLifeCycle extends LifeCycleTest {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(new FragmentLifeCycleFragment(), null);
-        transaction.commit();
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(new FragmentLifeCycleFragment(), null);
+            transaction.commit();
+        }
     }
 
 }

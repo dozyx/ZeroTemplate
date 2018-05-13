@@ -1,13 +1,17 @@
 package com.zerofate.template;
 
 
-
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,18 +25,40 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println(format("1232.50",2,100));
+        System.out.println("625".substring(0,"625".indexOf("2")));
+
+    }
+
+    private static void testThreadPool() {
+        ExecutorService executorService = new ThreadPoolExecutor(5, 10, 10, TimeUnit.SECONDS,
+                new LinkedBlockingDeque<>());
+        for (int i = 0; i < 10; i++) {
+            int num = i;
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+
+                    System.out.println(new Date() + " & i == " + num + " & thread == "
+                            + Thread.currentThread());
+                    try {
+                        Thread.sleep(5 * 1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 
     public static String format(String num, int reserved, int divide) {
         BigDecimal b1 = new BigDecimal(num);
         BigDecimal b2 = new BigDecimal(divide);
         String format;
-        if (reserved ==0){
-            format ="#";
-        }else {
+        if (reserved == 0) {
+            format = "#";
+        } else {
             StringBuilder builder = new StringBuilder("#.#");
-            for (int i =1;i<reserved;i++){
+            for (int i = 1; i < reserved; i++) {
                 builder.append("#");
             }
             format = builder.toString();
@@ -40,9 +66,11 @@ public class Test {
         return new DecimalFormat(format).format(
                 b1.divide(b2, reserved, BigDecimal.ROUND_HALF_UP).doubleValue());
     }
+
     public static String formatHundredth(String str) {
-        if (str == null || str.length() == 0)
+        if (str == null || str.length() == 0) {
             return "0.00";
+        }
         Double tempInput = Double.parseDouble(str);
         BigDecimal b1 = new BigDecimal(tempInput.toString());
         BigDecimal b2 = new BigDecimal("100");
