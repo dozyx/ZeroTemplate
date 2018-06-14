@@ -25,7 +25,8 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        System.out.println("625".substring(0,"625".indexOf("2")));
+        int i = 64;
+        System.out.print(i >>3);
 
     }
 
