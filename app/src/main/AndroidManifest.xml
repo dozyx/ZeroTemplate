@@ -290,6 +290,14 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.ViewLifeActivity"
+            android:label="@string/view_life">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

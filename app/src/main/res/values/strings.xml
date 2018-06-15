@@ -57,6 +57,7 @@
     <string name="title_draw_pie_chart">饼图</string>
     <string name="action_settings">Settings</string>
     <string name="security_permission">安全/权限</string>
+    <string name="view_life">View/生命周期</string>
 
 
 </resources>
