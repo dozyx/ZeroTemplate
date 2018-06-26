@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion build_versions.compile_sdk
 
     signingConfigs {
         config {
@@ -17,8 +18,8 @@ android {
     }
     defaultConfig {
         applicationId "com.zerofate.template.justfortest"
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.traget_sdk
         versionCode 1
         versionName "1.0"
 
@@ -26,20 +27,20 @@ android {
 
     }
 
-    def env;
+    def env
     buildTypes {
         debug {
-            env = "0";
+            env = "0"
             signingConfig signingConfigs.config
         }
         release {
-            env = "1";
+            env = "1"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
-        buildTypes.each{
-            it.buildConfigField("int","ENV",env)
+        buildTypes.each {
+            it.buildConfigField("int", "ENV", env)
         }
     }
     flavorDimensions("default")
@@ -63,19 +64,21 @@ android.applicationVariants.all { variant ->
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation deps.support.appcompat
+    implementation deps.constraint_layout
+    testImplementation deps.junit
+    implementation deps.support.recyclerview
+    implementation deps.butterknife.runtime
+    annotationProcessor deps.butterknife.processor
     implementation project(':zerosdk')
-    compile 'com.github.hotchemi:permissionsdispatcher:3.0.1'
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.android.support:support-v4:26.1.0'
-    implementation 'android.arch.lifecycle:extensions:1.1.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation deps.permissionsdispatcher.runtime
+    annotationProcessor deps.permissionsdispatcher.processor
+    implementation deps.gson
+    implementation deps.support.v4
+    implementation deps.lifecycle.extensions
+    implementation deps.retrofit.runtime
+    implementation deps.kotlin
+}
+repositories {
+    mavenCentral()
 }

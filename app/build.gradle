@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
     signingConfigs {
         config {
             keyAlias KEY_ALIAS
@@ -13,8 +14,8 @@ android {
     }
     defaultConfig {
         applicationId "com.zerofate.template"
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,27 +34,31 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':zerosdk')
-    compile project(':data')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'com.android.support:percent:25.3.1'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.4'
-    testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'org.greenrobot:eventbus:3.1.0-RC'
+    implementation project(':zerosdk')
+    implementation project(':data')
+    implementation deps.support.appcompat
+    implementation deps.constraint_layout
+    implementation deps.butterknife.runtime
+    annotationProcessor deps.butterknife.processor
+    implementation deps.support.percent
+    implementation deps.universal_image_loader
+    implementation deps.support.design
+    implementation deps.volley
+    implementation deps.okhttp.runtime
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.rxjava2
+    testImplementation deps.junit
+    implementation deps.eventbus
+    implementation deps.kotlin
 }

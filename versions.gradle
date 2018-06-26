@@ -1,0 +1,142 @@
+// 使用该文件来确保所有 module 使用相同版本的依赖和编译版本。除了使所有 module 使用同一版本依赖外，
+// 另一个好处是可以使多个子库保持同一版本，比如 support 库。
+// 项目集成了 gradle-versions-plugin 插件，可通过执行 gradlew dependencyUpdates -Drevision=release 来检查 dependency 更新
+ext.build_versions = [:]
+ext.deps = [:]
+def versions = [:]
+versions.retrofit = "2.3.0"
+versions.junit = "4.12"
+versions.stickylistheaders = "2.7.0"
+versions.photo_view = "1.2.4"
+versions.sector_progress_view = "2.0.0"
+versions.switch_button = "1.4.4"
+versions.pickerview = "2.0.8"
+versions.universal_image_loader = "1.9.5"
+versions.bugly = "2.6.6.1"
+versions.bugly_native = "3.3.1"
+versions.bugly_symtabfile_uploader = "2.1.2"
+versions.async_http = "1.4.9"
+versions.ucrop = "1.5.0"
+versions.bga_refresh_layout = "1.1.8"
+versions.okhttp = "3.10.0"
+versions.leakcanary = "1.5.4"
+versions.butterknife = "8.5.1"
+versions.support = "27.1.1"
+versions.constraint_layout = "1.1.0"
+versions.multidex = "1.0.1"
+versions.convenient_banner = "2.0.5"
+versions.loop_view = "0.1.2"
+versions.eventbus = "3.1.1"
+versions.fragmentation = "1.3.3"
+versions.fresco = "1.5.0"
+versions.weibo = "1.0.0"
+versions.greendao = "3.2.2"
+versions.lifecycle = "1.1.0"
+versions.espresso = "3.0.1"
+versions.android_gradle_plugin = "3.2.0-beta01"
+versions.gradle_versions_plugin = "0.20.0"
+versions.tencent_xinge = "3.2.3-release"
+versions.tencent_wup = "1.0.0.E-release"// 信鸽依赖
+versions.tencent_mid = "4.0.6-release" // 信鸽、腾讯统计依赖
+versions.tencent_mta = "3.3.1-release" // 腾讯统计
+versions.rxpermissions = "0.9.5@aar"
+versions.kotlin_version = '1.2.41'
+versions.volley = '1.1.0'
+versions.rxjava2 = '2.1.14'
+versions.kotlin = '1.2.41'
+versions.permissionsdispatcher = '3.0.1'
+versions.gson = '2.8.2'
+
+def deps = [:]
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.scalars = "com.squareup.retrofit2:converter-scalars:$versions.retrofit"
+deps.retrofit = retrofit
+
+def okhttp = [:]
+okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+deps.okhttp = okhttp
+
+def leakcanary = [:]
+leakcanary.debug = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+leakcanary.release = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
+deps.leakcanary = leakcanary
+
+def butterknife = [:]
+butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"
+butterknife.processor = "com.jakewharton:butterknife-compiler:$versions.butterknife"
+deps.butterknife = butterknife
+
+def support = [:]
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview = "com.android.support:cardview-v7:$versions.support"
+support.animated_vector_drawable = "com.android.support:animated-vector-drawable:$versions.support"
+support.appcompat = "com.android.support:appcompat-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.gridlayout = "com.android.support:gridlayout-v7:$versions.support"
+support.percent = "com.android.support:percent:$versions.support"
+deps.support = support
+
+def lifecycle = [:]
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def greendao = [:]
+greendao.runtime = "org.greenrobot:greendao:$versions.greendao"
+greendao.plugin = "org.greenrobot:greendao-gradle-plugin:$versions.greendao"
+deps.greendao = greendao
+
+def permissionsdispatcher = [:]
+permissionsdispatcher.runtime = "com.github.hotchemi:permissionsdispatcher:$versions.permissionsdispatcher"
+permissionsdispatcher.processor = "com.github.hotchemi:permissionsdispatcher-processor:$versions.permissionsdispatcher"
+deps.permissionsdispatcher = permissionsdispatcher
+
+deps.stickylistheaders = "se.emilsjolander:stickylistheaders:$versions.stickylistheaders"
+deps.junit = "junit:junit:$versions.junit"
+deps.photo_view = "com.commit451:PhotoView:$versions.photo_view"
+deps.sector_progress_view = "com.timqi.sectorprogressview:library:$versions.sector_progress_view"
+deps.switch_button = "com.kyleduo.switchbutton:library:$versions.switch_button"
+deps.pickerview = "com.bigkoo:pickerview:$versions.pickerview"
+deps.universal_image_loader = "com.nostra13.universalimageloader:universal-image-loader:$versions.universal_image_loader"
+deps.bugly = "com.tencent.bugly:crashreport:$versions.bugly"
+deps.bugly_native = "com.tencent.bugly:nativecrashreport:$versions.bugly_native"
+deps.async_http = "com.loopj.android:android-async-http:$versions.async_http"
+deps.ucrop = "com.yalantis:ucrop:$versions.ucrop"
+deps.bga_refresh_layout = "cn.bingoogolapple:bga-refreshlayout:$versions.bga_refresh_layout@aar"
+deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+deps.multidex = "com.android.support:multidex:$versions.multidex"
+deps.convenient_banner = "com.bigkoo:convenientbanner:$versions.convenient_banner"
+deps.loop_view = "com.weigan:loopView:$versions.loop_view"
+deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
+deps.fragmentation = "me.yokeyword:fragmentation:$versions.fragmentation"
+deps.fresco = "com.facebook.fresco:fresco:$versions.fresco"
+deps.weibo = "com.sina.weibo.sdk:core:$versions.weibo:openDefaultRelease@aar"
+deps.espresso = "com.android.support.test.espresso:espresso-core:$versions.espresso"
+deps.bugly_symtabfile_uploader = "com.tencent.bugly:symtabfileuploader:$versions.bugly_symtabfile_uploader"
+deps.tencent_xinge = "com.tencent.xinge:xinge:$versions.tencent_xinge"
+deps.tencent_wup = "com.tencent.wup:wup:$versions.tencent_wup"
+deps.tencent_mid = "com.tencent.mid:mid:$versions.tencent_mid"
+deps.tencent_mta = "com.qq.mta:mta:$versions.tencent_mta"
+deps.rxpermissions = "com.tbruyelle.rxpermissions2:rxpermissions:$versions.rxpermissions"
+deps.volley = "com.android.volley:volley:$versions.volley"
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+ext.deps = deps
+
+def classpath = [:]
+classpath.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+classpath.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+classpath.gradle_versions_plugin = "com.github.ben-manes:gradle-versions-plugin:$versions.gradle_versions_plugin"
+ext.classpath = classpath
+
+def build_versions = [:]
+build_versions.min_sdk = 19
+build_versions.target_sdk = 27
+build_versions.compile_sdk = 27
+build_versions.build_tools = "27.0.3"
+ext.build_versions = build_versions

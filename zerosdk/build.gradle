@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
 
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
 
@@ -23,14 +24,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:25.4.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-//    在 library module 中使用 Butter Knife 需要其他配置，因为觉得 sdk 里引入太多依赖不好，所以不打算使用该库
-//    compile 'com.jakewharton:butterknife:8.8.1'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation deps.junit
+    implementation deps.support.appcompat
+    implementation deps.constraint_layout
+    implementation deps.kotlin
 }

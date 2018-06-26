@@ -9,7 +9,7 @@
         <attr name="title" />
         <attr name="titleColor" />
         <attr name="titleSize" />
-        <attr name="content" format="string" />
+        <attr name="content"/>
         <attr name="contentColor" format="color" />
         <attr name="contentSize" format="dimension" />
         <attr name="android:hint" />
