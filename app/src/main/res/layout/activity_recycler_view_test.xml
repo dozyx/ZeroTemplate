@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.zerofate.template.view.recyclerview.RecyclerViewTestActivity">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.zerofate.template.view.recyclerview.RecyclerViewTestActivity">
+        <Button
+            android:id="@+id/btn_change_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="随机数据"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</layout>
