@@ -29,4 +29,6 @@ dependencies {
     implementation deps.support.appcompat
     implementation deps.constraint_layout
     implementation deps.kotlin
+    api deps.retrofit.runtime
+    implementation deps.okhttp.logging
 }

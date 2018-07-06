@@ -2,6 +2,8 @@ package com.zerofate.androidsdk.util;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.util.Log;
 
 import java.util.List;
 
@@ -9,7 +11,8 @@ import java.util.List;
  * @author dozeboy
  * @date 2018/3/18
  */
-public class ApplicationUtil {
+public class AppUtil {
+    private static final String TAG = "AppUtil";
 
     /**
      * 判断当前进程是否为主进程，本应用里的主进程名为包名。
@@ -30,5 +33,27 @@ public class ApplicationUtil {
             }
         }
         return context.getPackageName().equals(processName);
+    }
+
+    private static String getVersionName(Context context) {
+        String versionName = "";
+        try {
+            versionName = context.getPackageManager().getPackageInfo(context.getPackageName(),
+                    0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "getVersionName: " + e.getMessage());
+        }
+        return versionName;
+    }
+
+    private static int getVersionCode(Context context) {
+        int versionCode = 0;
+        try {
+            versionCode = context.getPackageManager().getPackageInfo(context.getPackageName(),
+                    0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "getVersionName: " + e.getMessage());
+        }
+        return versionCode;
     }
 }

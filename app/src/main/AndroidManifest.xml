@@ -244,7 +244,8 @@
 
         <service android:name=".practice.FloatWindowActivity$FloatWindowsServices" />
 
-        <activity android:name=".view.recyclerview.RecyclerViewTestActivity"
+        <activity
+            android:name=".view.recyclerview.RecyclerViewTestActivity"
             android:label="@string/view_recyclerview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -297,11 +298,19 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ViewLifeActivity"
+        <activity
+            android:name=".view.ViewLifeActivity"
             android:label="@string/view_life">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".animation.FragmentAnimationActivity"
+            android:label="@string/animation_fragment">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
