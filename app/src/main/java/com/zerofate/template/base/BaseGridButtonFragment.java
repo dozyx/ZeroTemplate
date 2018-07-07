@@ -1,30 +1,44 @@
 package com.zerofate.template.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.zerofate.template.R;
 
-public abstract class GridButtonActivity extends AppCompatActivity {
+/**
+ * @author dozeboy
+ * @date 2018/7/1
+ */
+public class BaseGridButtonFragment extends Fragment {
     private GridLayout gridLayout;
     private TextView textLog;
 
+
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid_button);
-        gridLayout = (GridLayout) findViewById(R.id.grid);
-        textLog = (TextView) findViewById(R.id.text_log);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.main_grid_button,container,false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        gridLayout = (GridLayout) view.findViewById(R.id.grid);
+        textLog = (TextView) view.findViewById(R.id.text_log);
     }
 
     protected void addButton(String text, Runnable task) {
-        Button button = new Button(this);
+        Button button = new Button(getActivity());
         button.setText(text);
         button.setId(View.generateViewId());
         button.setOnClickListener(v -> task.run());

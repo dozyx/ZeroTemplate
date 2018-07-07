@@ -61,5 +61,9 @@
     <string name="view_recyclerview">View/RecyclerView</string>
     <string name="animation_fragment">动画/fragment切换</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="arhitecture_navigation">ArchitectureComponent/Navigation</string>
+
 
 </resources>
