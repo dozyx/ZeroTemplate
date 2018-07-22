@@ -78,6 +78,7 @@ dependencies {
     implementation deps.lifecycle.extensions
     implementation deps.retrofit.runtime
     implementation deps.kotlin
+    implementation deps.support.design
 }
 repositories {
     mavenCentral()

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zerofate.andoroid.data.Shakespeare;
+import com.zerofate.android.data.Shakespeare;
 import com.zerofate.template.R;
 import com.zerofate.template.databinding.ActivityRecyclerViewTestBinding;
 

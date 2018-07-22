@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_trade"
+    app:startDestination="@id/amountInputFragment">
+
+    <fragment
+        android:id="@+id/amountInputFragment"
+        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.AmountInputFragment"
+        android:label="AmountInputFragment"
+        tools:layout="@layout/fragment_amount_input">
+        <action
+            android:id="@+id/action_amountInputFragment_to_readCardFragment"
+            app:destination="@id/readCardFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/readCardFragment"
+        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.ReadCardFragment"
+        android:label="ReadCardFragment"
+        tools:layout="@layout/fragment_read_card">
+        <action
+
+            android:id="@+id/action_readCardFragment_to_tradeSignFragment"
+            app:destination="@id/tradeSignFragment" />
+        <argument
+            android:name="amount"
+            android:defaultValue="1"
+            app:type="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/tradeSignFragment"
+        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.TradeSignFragment"
+        android:label="TradeSignFragment"
+        tools:layout="@layout/fragment_trade_sign" />
+</navigation>

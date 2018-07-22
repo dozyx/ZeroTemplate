@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import com.zerofate.andoroid.data.Shakespeare;
-import com.zerofate.template.util.Constants;
+import com.zerofate.android.data.Shakespeare;
 
 /**
  * Created by Administrator on 2017/10/30.

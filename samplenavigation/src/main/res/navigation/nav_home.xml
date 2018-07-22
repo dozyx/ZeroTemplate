@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.dozeboy.android.sample.navigation.kotlin.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_tradeActivity"
+            app:destination="@id/trade_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.dozeboy.android.sample.navigation.kotlin.DashboardFragment"
+        android:label="DashboardFragment" />
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.dozeboy.android.sample.navigation.NotificationsFragment"
+        android:label="NotificationsFragment" />
+    <activity
+        android:id="@+id/trade_activity"
+        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.TradeActivity"
+        android:label="activity_trade"
+        tools:layout="@layout/activity_trade" />
+</navigation>

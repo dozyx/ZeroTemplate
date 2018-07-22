@@ -6,14 +6,9 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,12 +16,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.zerofate.andoroid.data.Shakespeare;
+import com.zerofate.android.data.Shakespeare;
 import com.zerofate.template.R;
 import com.zerofate.template.activity.LifeCycleTest;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class FloatWindowActivity extends LifeCycleTest {
 

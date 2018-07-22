@@ -16,66 +16,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context="com.zerofate.template.justfortest.HelloActivity">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/edit"
-                android:maxLines="1"
-                android:layout_width="50dp"
-                android:textSize="30sp"
-                android:text="1232262626262"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="10sp"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <ScrollView
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
+            android:hint="float text"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_in_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/text_long"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:lines="1"
-                        android:textSize="12sp"
-                        app:autoSizeTextType="uniform"
-                        app:autoSizeMinTextSize="1sp"
-                        android:autoSizeMaxTextSize="50sp"
-                        android:text="797"/>
-                    <TextView
-                        android:id="@+id/text_log"
-                        android:layout_below="@id/text_long"
-                        android:layout_width="match_parent"
-                        android:textSize="30sp"
-                        android:text="111"
-                        android:layout_height="match_parent" />
-                </RelativeLayout>
-                <ListView
-                    android:id="@+id/list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </ScrollView>
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="11222"
+            app:hintAnimationEnabled="false">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </android.support.design.widget.TextInputLayout>
+        <EditText
+            android:id="@+id/edit_test"
+            android:layout_width="match_parent"
+            android:hint="sfdfsf"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试"/>
     </LinearLayout>
 </layout>
 

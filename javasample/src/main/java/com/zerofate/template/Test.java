@@ -25,9 +25,15 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        int i = 64;
-        System.out.print(i >>3);
 
+
+    }
+    private void foo(){
+        System.out.print(new A().str);
+    }
+
+    private class A{
+        private String str;
     }
 
     private static void testThreadPool() {
