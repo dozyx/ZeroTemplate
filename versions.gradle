@@ -46,6 +46,8 @@ versions.rxjava2 = '2.1.14'
 versions.kotlin = '1.2.41'
 versions.permissionsdispatcher = '3.0.1'
 versions.gson = '2.8.2'
+versions.test_runner = '1.0.2'
+versions.test_espresso = '3.0.2'
 
 def deps = [:]
 
@@ -126,6 +128,8 @@ deps.volley = "com.android.volley:volley:$versions.volley"
 deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
 deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.test_runner = "com.android.support.test:runner:$versions.test_runner"
+deps.test_espresso = "com.android.support.test.espresso:espresso-core:$versions.test_espresso"
 ext.deps = deps
 
 def classpath = [:]
