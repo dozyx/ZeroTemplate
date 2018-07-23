@@ -1,7 +1,6 @@
 package com.zerofate.template.view
 
-import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -10,22 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.zerofate.andoroid.data.Shakespeare
+import com.zerofate.android.data.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
-import com.zerofate.template.databinding.ActivityListViewBinding
 import kotlinx.android.synthetic.main.activity_list_view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ListViewActivity : BaseSingleFragmentActivity() {
-    override fun getFragment(): Fragment {
-        return SimpleFragemnt()
-    }
 
     override fun onDestroy() {
         Log.d("test","onDestroy activity")
         super.onDestroy()
+    }
+
+    override fun getFragment(startIntent: Intent?): Fragment {
+        return SimpleFragemnt()
     }
 
     class SimpleFragemnt : Fragment() {

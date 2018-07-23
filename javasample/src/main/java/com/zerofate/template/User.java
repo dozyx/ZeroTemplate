@@ -5,7 +5,7 @@ package com.zerofate.template;
  * @date 2018/3/14
  */
 
-public class User {
+public class User implements ITest{
     private String name;
     private String phone;
     private Address address;

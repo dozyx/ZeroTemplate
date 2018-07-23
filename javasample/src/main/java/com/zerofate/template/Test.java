@@ -25,7 +25,11 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
+        User user = new User();
+        Student student = new Student();
+    }
 
+    public static class Student extends User{
 
     }
     private void foo(){
