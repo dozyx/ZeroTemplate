@@ -3,13 +3,13 @@ package com.zerofate.template;
 
 import com.google.gson.Gson;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -25,8 +25,7 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        User user = new User();
-        Student student = new Student();
+
     }
 
     public static class Student extends User{
