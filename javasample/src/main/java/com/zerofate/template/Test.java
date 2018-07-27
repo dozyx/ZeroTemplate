@@ -25,6 +25,8 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
+        String format ="#.##";
+        System.out.println(String.format(format,0.121));
     }
 
     public static class Student extends User{
