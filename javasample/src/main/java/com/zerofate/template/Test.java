@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-
     }
 
     public static class Student extends User{
@@ -44,17 +43,14 @@ public class Test {
                 new LinkedBlockingDeque<>());
         for (int i = 0; i < 10; i++) {
             int num = i;
-            executorService.execute(new Runnable() {
-                @Override
-                public void run() {
+            executorService.execute(() -> {
 
-                    System.out.println(new Date() + " & i == " + num + " & thread == "
-                            + Thread.currentThread());
-                    try {
-                        Thread.sleep(5 * 1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                System.out.println(new Date() + " & i == " + num + " & thread == "
+                        + Thread.currentThread());
+                try {
+                    Thread.sleep(5 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             });
         }
@@ -148,9 +144,8 @@ public class Test {
         return b;
     }
 
-    public static byte toByte(char c) {
-        byte b = (byte) "0123456789ABCDEF".indexOf(c);
-        return b;
+    private static byte toByte(char c) {
+        return (byte) "0123456789ABCDEF".indexOf(c);
     }
 
     private static class Person {
@@ -177,7 +172,7 @@ public class Test {
             this.name = name;
         }
 
-        public static class Phone {
+        static class Phone {
             String num;
             String type;
         }

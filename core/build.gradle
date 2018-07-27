@@ -30,7 +30,9 @@ dependencies {
     androidTestImplementation deps.test_runner
     androidTestImplementation deps.test_espresso
     api deps.kotlin
-    api deps.android_ktx
+//    implementation deps.android_ktx
+    implementation deps.timber
+    implementation deps.logger
 }
 repositories {
     mavenCentral()

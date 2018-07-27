@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -32,18 +34,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".HelloActivity"
-            android:launchMode="singleTop" />
 
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="true"
             android:process=":service" />
 
         <activity android:name=".DataBindingTestActivity" />
-        <activity android:name=".TestIncreaseDecreaseControllerActivity"></activity>
     </application>
 
 </manifest>

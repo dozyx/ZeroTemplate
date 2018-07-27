@@ -1,4 +1,4 @@
-package com.yeahka.android.core.utli
+package com.dozeboy.android.core.utli
 
 import android.app.Application
 
