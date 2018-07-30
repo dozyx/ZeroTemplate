@@ -51,6 +51,7 @@ dependencies {
     })
     implementation project(':zerosdk')
     implementation project(':data')
+    implementation project(':core')
     implementation deps.support.appcompat
     implementation deps.constraint_layout
     implementation deps.butterknife.runtime
