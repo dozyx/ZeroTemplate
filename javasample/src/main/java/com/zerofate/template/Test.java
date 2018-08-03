@@ -7,7 +7,12 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -24,19 +29,32 @@ import java.util.regex.Pattern;
  */
 
 public class Test {
-    public static void main(String[] args) {
-        String format ="#.##";
-        System.out.println(String.format(format,0.121));
+    public static void main(String[] args) throws ParseException {
+        List<Fruit> fruits = new ArrayList<>();
+        for (Fruit fruit : fruits) {
+            System.out.println(fruit.getName());
+        }
+        String str = "0";
+        String[] strings = str.split(",");
+        for (String s:strings){
+            System.out.println(s);
+        }
     }
 
-    public static class Student extends User{
 
+    public static class Student extends User {
+        public static final String NAME = "jijiji";
+
+        static {
+            System.out.println("static");
+        }
     }
-    private void foo(){
+
+    private void foo() {
         System.out.print(new A().str);
     }
 
-    private class A{
+    private class A {
         private String str;
     }
 

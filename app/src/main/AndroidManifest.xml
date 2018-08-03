@@ -325,7 +325,14 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".design.CoordinatorLayoutActivity"></activity>
+        <activity android:name=".design.CoordinatorLayoutActivity" />
+        <activity android:name=".DialogTestActivity"
+            android:label="dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
