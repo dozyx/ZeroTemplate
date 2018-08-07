@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/debugtools/debugtools.iml" filepath="$PROJECT_DIR$/debugtools/debugtools.iml" />
       <module fileurl="file://$PROJECT_DIR$/javasample/javasample.iml" filepath="$PROJECT_DIR$/javasample/javasample.iml" />
       <module fileurl="file://$PROJECT_DIR$/justfortest/justfortest.iml" filepath="$PROJECT_DIR$/justfortest/justfortest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libJava/libJava.iml" filepath="$PROJECT_DIR$/libJava/libJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/samplenavigation/samplenavigation.iml" filepath="$PROJECT_DIR$/samplenavigation/samplenavigation.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerosdk/zerosdk.iml" filepath="$PROJECT_DIR$/zerosdk/zerosdk.iml" />
     </modules>
