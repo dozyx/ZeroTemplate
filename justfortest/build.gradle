@@ -79,7 +79,9 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.support.design
     implementation project(':core')
+    implementation deps.rxpermissions
 }
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }//rxpermissions
 }
