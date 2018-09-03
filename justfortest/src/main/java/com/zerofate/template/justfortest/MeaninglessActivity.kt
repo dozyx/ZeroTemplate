@@ -15,7 +15,6 @@ import android.widget.Button
  * 没有任何意义的Activity，可能以后会加入很多乱七八糟的东西
  */
 class MeaninglessActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
@@ -31,6 +30,7 @@ class MeaninglessActivity : AppCompatActivity() {
             }
             manager.notify(111, builder.build())
         }
+
     }
 
 

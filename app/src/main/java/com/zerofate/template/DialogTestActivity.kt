@@ -13,9 +13,9 @@ class DialogTestActivity : BaseGridButtonActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addButton("显示对话框") {
+        addButton("显示对话框", Runnable {
             DialogFragmentTest.newInstance().show(supportFragmentManager, null)
-        }
+        })
     }
 
     class DialogFragmentTest : DialogFragment() {
@@ -24,6 +24,7 @@ class DialogTestActivity : BaseGridButtonActivity() {
             super.onCreate(savedInstanceState)
             ZLog.d("onCreate")
         }
+
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -34,7 +35,7 @@ class DialogTestActivity : BaseGridButtonActivity() {
 
         override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater {
             ZLog.d("onGetLayoutInflater")
-            val inflater =  super.onGetLayoutInflater(savedInstanceState)
+            val inflater = super.onGetLayoutInflater(savedInstanceState)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                dialog.window.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent,null))
             }

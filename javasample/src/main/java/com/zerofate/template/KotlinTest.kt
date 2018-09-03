@@ -6,15 +6,26 @@ package com.zerofate.template
  */
 
 fun main(args: Array<String>) {
-    A.foo()
+    var a = "111"
+    var ins = object : A() {
+        override fun foo() {
+            a + "222"
+        }
+    }
+    a + "333"
+
+    var b :String? = null
 }
 
-class A{
+open class A() {
     init {
         println("init")
     }
+
+    open fun foo(){}
+
     companion object {
-        fun foo(){
+        fun foo() {
             println("foo")
         }
     }

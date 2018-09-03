@@ -326,10 +326,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".design.CoordinatorLayoutActivity" />
-        <activity android:name=".DialogTestActivity"
+        <activity
+            android:name=".DialogTestActivity"
             android:label="dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".arch.LiveDataActivity"
+            android:label="@string/arch_live_data">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
