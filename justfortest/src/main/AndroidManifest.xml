@@ -42,7 +42,7 @@
             android:enabled="true"
             android:process=":service" />
 
-        <activity android:name=".DataBindingTestActivity" />
+        <activity android:name=".DataBindingTestActivity" android:exported="true"/>
     </application>
 
 </manifest>
