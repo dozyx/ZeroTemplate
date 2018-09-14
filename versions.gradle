@@ -51,6 +51,7 @@ versions.test_espresso = '3.0.2'
 versions.timber = '4.7.1'
 versions.logger = '2.2.0'
 versions.rxpermissions = '0.10.2'
+versions.dagger = '2.17'
 
 def deps = [:]
 
@@ -99,6 +100,11 @@ def permissionsdispatcher = [:]
 permissionsdispatcher.runtime = "com.github.hotchemi:permissionsdispatcher:$versions.permissionsdispatcher"
 permissionsdispatcher.processor = "com.github.hotchemi:permissionsdispatcher-processor:$versions.permissionsdispatcher"
 deps.permissionsdispatcher = permissionsdispatcher
+
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.processor = "com.google.dagger:dagger-compiler:$versions.dagger"
+deps.dagger = dagger
 
 deps.stickylistheaders = "se.emilsjolander:stickylistheaders:$versions.stickylistheaders"
 deps.junit = "junit:junit:$versions.junit"

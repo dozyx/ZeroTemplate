@@ -335,7 +335,8 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".arch.LiveDataActivity"
+        <activity
+            android:name=".arch.LiveDataActivity"
             android:label="@string/arch_live_data">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -343,6 +344,7 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".inject.DaggerTestActivity"></activity>
     </application>
 
 </manifest>

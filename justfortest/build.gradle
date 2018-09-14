@@ -77,6 +77,8 @@ dependencies {
     implementation project(':zerosdk')
     implementation deps.permissionsdispatcher.runtime
     annotationProcessor deps.permissionsdispatcher.processor
+    implementation deps.dagger.runtime
+    annotationProcessor deps.dagger.processor
     implementation deps.gson
     implementation deps.support.v4
     implementation deps.lifecycle.extensions
