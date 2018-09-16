@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zerofate.template.justfortest.DataBindingTestActivity.User" />
+    </data>
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ll_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/btn_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="测试"/>
+            android:text="@{user.name}" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.address.province}" />
+
         <include
             android:id="@+id/include_layout"
-            layout="@layout/include_layout"/>
+            layout="@layout/include_layout" />
     </LinearLayout>
 
 </layout>

@@ -65,6 +65,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="arhitecture_navigation">ArchitectureComponent/Navigation</string>
     <string name="view_list">View/ListView</string>
+    <string name="arch_live_data">Arch/LiveData</string>
 
 
 </resources>

@@ -10,7 +10,9 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -19,6 +21,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * 测试 java 相关代码
@@ -31,8 +34,35 @@ import java.util.regex.Pattern;
 public class Test {
     private static final int b = Student.a;
 
-    public static void main(String[] args) throws ParseException {
-        System.out.println(b);
+    public static void main(String[] args) {
+    }
+
+    private static void testTime() {
+        Calendar now = Calendar.getInstance();
+        System.out.println(formatDate(now.getTime()));
+
+        now.add(Calendar.WEEK_OF_YEAR, -1);
+        System.out.println(formatDate(now.getTime()));
+
+        now = Calendar.getInstance();
+        now.set(Calendar.DAY_OF_MONTH, 3);
+        now.add(Calendar.WEEK_OF_MONTH, -1);
+        System.out.println(formatDate(now.getTime()));
+
+        now = Calendar.getInstance();
+        now.set(Calendar.DAY_OF_YEAR, 3);
+        now.add(Calendar.WEEK_OF_MONTH, -1);
+        System.out.println(formatDate(now.getTime()));
+
+        now = Calendar.getInstance();
+        now.add(Calendar.MONTH, -1);
+        System.out.println(formatDate(now.getTime()));
+
+
+    }
+
+    private static String formatDate(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(date);
     }
 
 
