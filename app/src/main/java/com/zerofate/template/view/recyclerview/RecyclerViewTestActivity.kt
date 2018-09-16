@@ -31,7 +31,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
     }
 
     private class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.findViewById(android.R.id.text1)
+        var textView: TextView = itemView.findViewById(R.id.text)
     }
 
     class RecyclerViewFragment : Fragment() {
@@ -65,7 +65,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
                 ): CustomViewHolder {
                     return CustomViewHolder(
                         LayoutInflater.from(activity).inflate(
-                            android.R.layout.simple_list_item_1,
+                            R.layout.item_text,
                             null
                         )
                     )

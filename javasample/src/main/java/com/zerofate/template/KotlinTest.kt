@@ -1,21 +1,26 @@
 package com.zerofate.template
 
+
 /**
  * @author dozeboy
  * @date 2018/7/8
  */
 
-fun main(args: Array<String>) {
-    A.foo()
+fun <T> printHashCode(t: T) {
+    println(t?.hashCode())
 }
 
-class A{
-    init {
-        println("init")
-    }
-    companion object {
-        fun foo(){
-            println("foo")
-        }
+fun main(args: Array<String>) {
+    printHashCode(null)
+    Person.foo(listOf("1","2"))
+}
+
+interface Processor<T> {
+    fun process(): T
+}
+
+class NoResultProcessor : Processor<Unit> {
+    override fun process() {
+        //...
     }
 }

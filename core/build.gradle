@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    api deps.okhttp.runtime
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation deps.support.appcompat

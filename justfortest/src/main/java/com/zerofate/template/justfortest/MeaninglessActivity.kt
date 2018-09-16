@@ -22,7 +22,7 @@ class MeaninglessActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button).setOnClickListener {
             var builder = NotificationCompat.Builder(this,"0").setContentTitle("哈哈哈")
                 .setContentText("ssss").setSmallIcon(R.mipmap.ic_launcher)
-            var intent = PendingIntent.getActivity(this@MeaninglessActivity,0,Intent(this@MeaninglessActivity,MeaninglessActivity.javaClass),0)
+            var intent = PendingIntent.getActivity(this@MeaninglessActivity,0, Intent(this@MeaninglessActivity, javaClass),0)
             builder.setContentIntent(intent)
             var manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

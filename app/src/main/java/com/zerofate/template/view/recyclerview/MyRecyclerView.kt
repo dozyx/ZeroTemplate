@@ -23,4 +23,10 @@ class MyRecyclerView : RecyclerView {
         super.onDetachedFromWindow()
         ZLog.d("onDetachedFromWindow: ")
     }
+
+    override fun onMeasure(widthSpec: Int, heightSpec: Int) {
+        val density = resources.displayMetrics.density
+        val heightSpecNew = MeasureSpec.makeMeasureSpec((density * 60 * 5).toInt(), MeasureSpec.AT_MOST);
+        super.onMeasure(widthSpec, heightSpecNew)
+    }
 }

@@ -29,20 +29,15 @@ import java.util.regex.Pattern;
  */
 
 public class Test {
+    private static final int b = Student.a;
+
     public static void main(String[] args) throws ParseException {
-        List<Fruit> fruits = new ArrayList<>();
-        for (Fruit fruit : fruits) {
-            System.out.println(fruit.getName());
-        }
-        String str = "0";
-        String[] strings = str.split(",");
-        for (String s:strings){
-            System.out.println(s);
-        }
+        System.out.println(b);
     }
 
 
     public static class Student extends User {
+        private static final int a = A.a;
         public static final String NAME = "jijiji";
 
         static {
@@ -54,8 +49,9 @@ public class Test {
         System.out.print(new A().str);
     }
 
-    private class A {
+    private static class A {
         private String str;
+        public static  int a = 10;
     }
 
     private static void testThreadPool() {
