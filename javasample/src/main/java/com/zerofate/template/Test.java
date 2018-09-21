@@ -33,7 +33,7 @@ import java.util.stream.Stream;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        System.out.println(Integer.toHexString(10));
+        System.out.println(Integer.parseInt("01"));
     }
 
     private static void testTime() {
