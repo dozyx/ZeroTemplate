@@ -70,6 +70,7 @@ dependencies {
     implementation deps.lifecycle.extensions
     debugImplementation deps.leakcanary.debug
     releaseImplementation deps.leakcanary.release
+    implementation("org.jetbrains:annotations:16.0.1")
     implementation deps.dagger.runtime
     annotationProcessor deps.dagger.processor
 }

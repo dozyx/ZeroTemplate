@@ -66,6 +66,7 @@ public class Test {
 
 
     public static class Student extends User {
+        private static final int a = A.a;
         public static final String NAME = "jijiji";
 
         static {
@@ -77,8 +78,9 @@ public class Test {
         System.out.print(new A().str);
     }
 
-    private class A {
+    private static class A {
         private String str;
+        public static int a = 10;
     }
 
     private static void testThreadPool() {

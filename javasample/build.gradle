@@ -37,6 +37,7 @@ dependencies {
     implementation deps.rxjava2
     implementation deps.gson
     implementation deps.kotlin
+    
 }
 repositories {
     mavenCentral()
