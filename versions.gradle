@@ -4,7 +4,7 @@
 ext.build_versions = [:]
 ext.deps = [:]
 def versions = [:]
-versions.retrofit = "2.3.0"
+versions.retrofit = "2.4.0"
 versions.junit = "4.12"
 versions.stickylistheaders = "2.7.0"
 versions.photo_view = "1.2.4"

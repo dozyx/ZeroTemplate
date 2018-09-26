@@ -33,6 +33,3 @@ dependencies {
     implementation project(':zerosdk')
     implementation deps.kotlin
 }
-repositories {
-    mavenCentral()
-}

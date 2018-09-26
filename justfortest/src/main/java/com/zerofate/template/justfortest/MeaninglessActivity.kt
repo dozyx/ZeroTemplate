@@ -1,5 +1,6 @@
 package com.zerofate.template.justfortest
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -15,6 +16,8 @@ class MeaninglessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meaningless)
         ZLog.d("onCreate: ")
         findViewById<Button>(R.id.button).setOnClickListener {
+            val intent = Intent();
+            intent.setPackage("")
         }
 
     }
