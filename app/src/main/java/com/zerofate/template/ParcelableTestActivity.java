@@ -3,7 +3,7 @@ package com.zerofate.template;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.zerofate.template.base.BaseShowResultActivity;

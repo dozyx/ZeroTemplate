@@ -1,14 +1,11 @@
 package com.zerofate.androidsdk.adapter;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import androidx.viewpager.widget.PagerAdapter;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.zerofate.androidsdk.R;
 
 /**
  * 用于 Page 为图片的 ViewPager

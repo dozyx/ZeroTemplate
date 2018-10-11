@@ -1,12 +1,8 @@
 package com.zerofate.template.justfortest;
 
-import static org.junit.Assert.*;
-
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.rule.ActivityTestRule;
 import android.test.ActivityInstrumentationTestCase;
 import android.test.ActivityInstrumentationTestCase2;
-
-import org.junit.Test;
 
 /**
  * @author Timon

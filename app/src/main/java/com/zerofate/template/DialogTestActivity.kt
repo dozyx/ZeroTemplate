@@ -2,7 +2,7 @@ package com.zerofate.template
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ class DialogTestActivity : BaseGridButtonActivity() {
         })
     }
 
-    class DialogFragmentTest : DialogFragment() {
+    class DialogFragmentTest : androidx.fragment.app.DialogFragment() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)

@@ -2,10 +2,9 @@ package com.zerofate.template.justfortest
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import com.dozeboy.android.core.utli.log.ZLog
-import javax.inject.Inject
 
 /**
  * 没有任何意义的Activity，可能以后会加入很多乱七八糟的东西

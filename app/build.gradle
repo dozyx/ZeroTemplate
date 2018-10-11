@@ -20,7 +20,7 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode 10000
         versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
@@ -43,22 +43,21 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.support.v4
-    implementation deps.constraint_layout
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-beta02', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation project(':zerosdk')
     implementation project(':data')
     implementation project(':core')
-    implementation deps.support.appcompat
-    implementation deps.constraint_layout
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor
-    implementation deps.support.percent
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
     implementation deps.universal_image_loader
-    implementation deps.support.design
+    implementation 'com.google.android.material:material:1.0.0'
     implementation deps.volley
     implementation deps.okhttp.runtime
     implementation deps.retrofit.runtime
@@ -67,10 +66,11 @@ dependencies {
     testImplementation deps.junit
     implementation deps.eventbus
     implementation deps.kotlin
-    implementation deps.lifecycle.extensions
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     debugImplementation deps.leakcanary.debug
     releaseImplementation deps.leakcanary.release
     implementation("org.jetbrains:annotations:16.0.1")
     implementation deps.dagger.runtime
+    implementation deps.flexbox
     annotationProcessor deps.dagger.processor
 }

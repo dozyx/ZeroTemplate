@@ -1,11 +1,9 @@
 package com.zerofate.template.socket;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.zerofate.template.base.BaseShowResultActivity;
-
-import java.net.Socket;
 
 public class SocketTestActivity extends BaseShowResultActivity {
     @Override

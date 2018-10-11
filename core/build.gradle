@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -26,10 +26,10 @@ dependencies {
     api deps.okhttp.runtime
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation deps.support.appcompat
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation deps.junit
-    androidTestImplementation deps.test_runner
-    androidTestImplementation deps.test_espresso
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
     api deps.kotlin
 //    implementation deps.android_ktx
     implementation deps.timber

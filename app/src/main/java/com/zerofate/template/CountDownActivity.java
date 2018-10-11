@@ -1,10 +1,9 @@
 package com.zerofate.template;
 
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.zerofate.androidsdk.view.CountDownButton;
 import com.zerofate.template.base.BaseShowResultActivity;
 
 public class CountDownActivity extends BaseShowResultActivity {
