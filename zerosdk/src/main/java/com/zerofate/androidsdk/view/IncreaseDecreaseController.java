@@ -1,7 +1,6 @@
 package com.zerofate.androidsdk.view;
 
-import android.content.IntentFilter;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;

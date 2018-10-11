@@ -3,14 +3,10 @@ package com.zerofate.template.activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.zerofate.androidsdk.util.Utils;
-import com.zerofate.template.R;
 import com.zerofate.template.base.BaseShowResultActivity;
-
-import java.util.List;
 
 /**
  * 通过 adb shell dumpsys activity activities 命令查看 Activity 栈信息

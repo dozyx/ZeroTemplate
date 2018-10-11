@@ -23,7 +23,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -68,10 +68,10 @@ android.applicationVariants.all { variant ->
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.support.appcompat
-    implementation deps.constraint_layout
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     testImplementation deps.junit
-    implementation deps.support.recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor
     implementation project(':zerosdk')
@@ -80,11 +80,11 @@ dependencies {
     implementation deps.dagger.runtime
     annotationProcessor deps.dagger.processor
     implementation deps.gson
-    implementation deps.support.v4
-    implementation deps.lifecycle.extensions
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation deps.retrofit.runtime
     implementation deps.kotlin
-    implementation deps.support.design
+    implementation 'com.google.android.material:material:1.0.0'
     implementation project(':core')
     implementation deps.rxpermissions
     implementation("org.jetbrains:annotations:16.0.1")

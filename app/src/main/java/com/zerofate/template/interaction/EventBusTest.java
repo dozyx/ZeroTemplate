@@ -1,9 +1,7 @@
 package com.zerofate.template.interaction;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.zerofate.template.R;
 import com.zerofate.template.base.BaseShowResultActivity;
 
 import org.greenrobot.eventbus.EventBus;

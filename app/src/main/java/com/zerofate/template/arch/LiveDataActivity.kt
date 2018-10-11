@@ -1,6 +1,6 @@
 package com.zerofate.template.arch
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import android.os.Bundle
 import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.template.base.BaseGridButtonActivity

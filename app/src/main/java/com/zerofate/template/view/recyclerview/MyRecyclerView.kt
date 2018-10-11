@@ -1,7 +1,7 @@
 package com.zerofate.template.view.recyclerview
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import com.dozeboy.android.core.utli.log.ZLog
 
@@ -10,11 +10,11 @@ import com.dozeboy.android.core.utli.log.ZLog
  * @date 2018/8/14
  */
 
-class MyRecyclerView : RecyclerView {
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+class MyRecyclerView : androidx.recyclerview.widget.RecyclerView {
+    constructor(context: Context?) : super(context!!)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(
-        context,
+        context!!,
         attrs,
         defStyle
     )

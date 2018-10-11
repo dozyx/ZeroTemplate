@@ -3,9 +3,9 @@ package com.zerofate.template.view.recyclerview
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ import java.util.*
 class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
 
 
-    override fun getFragment(startIntent: Intent?): Fragment {
+    override fun getFragment(startIntent: Intent?): androidx.fragment.app.Fragment {
         return RecyclerViewFragment()
     }
 
@@ -30,11 +30,11 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         super.onDestroy()
     }
 
-    private class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private class CustomViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         var textView: TextView = itemView.findViewById(R.id.text)
     }
 
-    class RecyclerViewFragment : Fragment() {
+    class RecyclerViewFragment : androidx.fragment.app.Fragment() {
         private var datas: List<String>? = null
         private val randomStrings: List<String>
             get() {
@@ -55,9 +55,9 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            recycler_view.layoutManager = LinearLayoutManager(activity)
+            recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
             datas = randomStrings
-            recycler_view.adapter = object : RecyclerView.Adapter<CustomViewHolder>() {
+            recycler_view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<CustomViewHolder>() {
                 @SuppressLint("InflateParams")
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
@@ -86,7 +86,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
 
             btn_change_data.setOnClickListener {
                 datas = randomStrings
-                recycler_view.adapter.notifyDataSetChanged()
+                (recycler_view.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
             }
         }
 

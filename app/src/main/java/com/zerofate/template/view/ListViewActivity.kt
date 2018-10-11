@@ -2,7 +2,6 @@ package com.zerofate.template.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +28,11 @@ class ListViewActivity : BaseSingleFragmentActivity() {
         super.onDetachedFromWindow()
     }
 
-    override fun getFragment(startIntent: Intent?): Fragment {
+    override fun getFragment(startIntent: Intent?): androidx.fragment.app.Fragment {
         return SimpleFragemnt()
     }
 
-    class SimpleFragemnt : Fragment() {
+    class SimpleFragemnt : androidx.fragment.app.Fragment() {
         lateinit var adapter: ArrayAdapter<String>
         override fun onCreateView(
             inflater: LayoutInflater,

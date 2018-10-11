@@ -34,7 +34,7 @@ versions.weibo = "1.0.0"
 versions.greendao = "3.2.2"
 versions.lifecycle = "1.1.1"
 versions.espresso = "3.0.1"
-versions.android_gradle_plugin = '3.3.0-alpha03'
+versions.android_gradle_plugin = '3.2.0'
 versions.gradle_versions_plugin = "0.20.0"
 versions.tencent_xinge = "3.2.3-release"
 versions.tencent_wup = "1.0.0.E-release"// 信鸽依赖
@@ -53,7 +53,11 @@ versions.timber = '4.7.1'
 versions.logger = '2.2.0'
 versions.rxpermissions = '0.10.2'
 versions.dagger = '2.17'
+<<<<<<< HEAD
 versions.utilcode = '1.20.4'
+=======
+versions.flexbox = '1.1.0'
+>>>>>>> a9055e5f726dc86df0714e26cf8e9cae62ba6555
 
 def deps = [:]
 
@@ -146,6 +150,7 @@ deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.logger = "com.orhanobut:logger:$versions.logger"
 deps.rxpermissions = "com.github.tbruyelle:rxpermissions:$versions.rxpermissions"
 deps.utilcode = "com.blankj:utilcode:$versions.utilcode"
+deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 ext.deps = deps
 
 def classpath = [:]
@@ -158,5 +163,5 @@ def build_versions = [:]
 build_versions.min_sdk = 19
 build_versions.target_sdk = 28
 build_versions.compile_sdk = 28
-build_versions.build_tools = "27.0.3"
+build_versions.build_tools = "28.0.3"
 ext.build_versions = build_versions

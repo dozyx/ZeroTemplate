@@ -344,7 +344,8 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".inject.DaggerTestActivity"></activity>
+        <activity android:name=".inject.DaggerTestActivity" />
+        <activity android:name=".socket.UdpActivity"></activity>
     </application>
 
 </manifest>
