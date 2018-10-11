@@ -2,6 +2,7 @@ package com.zerofate.template.inject
 
 import android.os.Bundle
 import com.zerofate.template.base.BaseGridButtonActivity
+import javax.inject.Inject
 
 class DaggerTestActivity : BaseGridButtonActivity() {
 
@@ -12,4 +13,6 @@ class DaggerTestActivity : BaseGridButtonActivity() {
         })
     }
 }
+
+
 

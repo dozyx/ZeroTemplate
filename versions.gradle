@@ -1,6 +1,7 @@
 // 使用该文件来确保所有 module 使用相同版本的依赖和编译版本。除了使所有 module 使用同一版本依赖外，
 // 另一个好处是可以使多个子库保持同一版本，比如 support 库。
 // 项目集成了 gradle-versions-plugin 插件，可通过执行 gradlew dependencyUpdates -Drevision=release 来检查 dependency 更新
+// 需要在项目 build.gradle 文件的 buildscript 中添加 apply from: 'versions.gradle'
 ext.build_versions = [:]
 ext.deps = [:]
 def versions = [:]
@@ -52,6 +53,7 @@ versions.timber = '4.7.1'
 versions.logger = '2.2.0'
 versions.rxpermissions = '0.10.2'
 versions.dagger = '2.17'
+versions.utilcode = '1.20.4'
 
 def deps = [:]
 
@@ -143,6 +145,7 @@ deps.android_ktx = "androidx.core:core-ktx:$versions.android_ktx"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.logger = "com.orhanobut:logger:$versions.logger"
 deps.rxpermissions = "com.github.tbruyelle:rxpermissions:$versions.rxpermissions"
+deps.utilcode = "com.blankj:utilcode:$versions.utilcode"
 ext.deps = deps
 
 def classpath = [:]
