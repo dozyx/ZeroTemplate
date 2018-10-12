@@ -4,6 +4,14 @@
 // 需要在项目 build.gradle 文件的 buildscript 中添加 apply from: 'versions.gradle'
 ext.build_versions = [:]
 ext.deps = [:]
+
+def build_versions = [:]
+build_versions.min_sdk = 19
+build_versions.target_sdk = 28
+build_versions.compile_sdk = 28
+build_versions.build_tools = "28.0.3"
+ext.build_versions = build_versions
+
 def versions = [:]
 versions.retrofit = "2.4.0"
 versions.junit = "4.12"
@@ -19,9 +27,9 @@ versions.bugly_symtabfile_uploader = "2.1.2"
 versions.async_http = "1.4.9"
 versions.ucrop = "1.5.0"
 versions.bga_refresh_layout = "1.1.8"
-versions.okhttp = "3.10.0"
-versions.leakcanary = "1.5.4"
-versions.butterknife = "8.5.1"
+versions.okhttp = "3.11.0"
+versions.leakcanary = "1.6.1"
+versions.butterknife = "9.0.0-rc1"
 versions.support = "27.1.1"
 versions.constraint_layout = "1.1.0"
 versions.multidex = "1.0.1"
@@ -34,7 +42,7 @@ versions.weibo = "1.0.0"
 versions.greendao = "3.2.2"
 versions.lifecycle = "1.1.1"
 versions.espresso = "3.0.1"
-versions.android_gradle_plugin = '3.2.0'
+versions.android_gradle_plugin = '3.3.0-alpha13'
 versions.gradle_versions_plugin = "0.20.0"
 versions.tencent_xinge = "3.2.3-release"
 versions.tencent_wup = "1.0.0.E-release"// 信鸽依赖
@@ -42,22 +50,19 @@ versions.tencent_mid = "4.0.6-release" // 信鸽、腾讯统计依赖
 versions.tencent_mta = "3.3.1-release" // 腾讯统计
 versions.rxpermissions = "0.9.5@aar"
 versions.volley = '1.1.0'
-versions.rxjava2 = '2.1.14'
-versions.kotlin = '1.2.51'
+versions.rxjava2 = '2.2.2'
+versions.kotlin = '1.2.70'
 versions.android_ktx = '1.0.0-beta01' // 与 support-appcompat 冲突
 versions.permissionsdispatcher = '3.0.1'
-versions.gson = '2.8.2'
+versions.gson = '2.8.5'
 versions.test_runner = '1.0.2'
 versions.test_espresso = '3.0.2'
 versions.timber = '4.7.1'
 versions.logger = '2.2.0'
 versions.rxpermissions = '0.10.2'
 versions.dagger = '2.17'
-<<<<<<< HEAD
 versions.utilcode = '1.20.4'
-=======
 versions.flexbox = '1.1.0'
->>>>>>> a9055e5f726dc86df0714e26cf8e9cae62ba6555
 
 def deps = [:]
 
@@ -158,10 +163,3 @@ classpath.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 classpath.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 classpath.gradle_versions_plugin = "com.github.ben-manes:gradle-versions-plugin:$versions.gradle_versions_plugin"
 ext.classpath = classpath
-
-def build_versions = [:]
-build_versions.min_sdk = 19
-build_versions.target_sdk = 28
-build_versions.compile_sdk = 28
-build_versions.build_tools = "28.0.3"
-ext.build_versions = build_versions

@@ -1,11 +1,9 @@
 package com.zerofate.template.socket
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.zerofate.template.base.BaseGridButtonActivity
+import com.zerofate.template.base.BaseTestActivity
 
-class UdpActivity : BaseGridButtonActivity() {
+class UdpActivity : BaseTestActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,5 +14,16 @@ class UdpActivity : BaseGridButtonActivity() {
 
         })
     }
+}
 
+class ClientThread :Thread(){
+    override fun run() {
+        super.run()
+    }
+}
+
+class ServerThread:Thread(){
+    override fun run() {
+        super.run()
+    }
 }

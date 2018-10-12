@@ -11,11 +11,11 @@ import androidx.core.app.AppOpsManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.PermissionChecker;
 
-import com.zerofate.template.base.BaseGridButtonActivity;
+import com.zerofate.template.base.BaseTestActivity;
 
 import java.util.Arrays;
 
-public class PermissionActivity extends BaseGridButtonActivity {
+public class PermissionActivity extends BaseTestActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

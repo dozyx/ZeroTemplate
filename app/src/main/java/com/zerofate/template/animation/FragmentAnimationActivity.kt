@@ -15,21 +15,21 @@ import android.widget.Button
 import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.template.R
 import com.zerofate.template.databinding.ActivityTestFragmentTransitionBinding
+import kotlinx.android.synthetic.main.activity_test_fragment_transition.*
 
 class FragmentAnimationActivity : AppCompatActivity() {
-    private var binding: ActivityTestFragmentTransitionBinding? = null
 
-    protected override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_test_fragment_transition)
+        setContentView(R.layout.activity_test_fragment_transition)
         val fragment = SimpleFragment()
-        binding!!.btnAddFragment.setOnClickListener { v ->
+        btn_add_fragment.setOnClickListener {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
             transaction.add(R.id.fragment_container, fragment)
             transaction.commit()
         }
-        binding!!.btnRemoveFragment.setOnClickListener { v ->
+        btn_remove_fragment.setOnClickListener {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
             transaction.remove(fragment)
@@ -40,17 +40,18 @@ class FragmentAnimationActivity : AppCompatActivity() {
     class SimpleFragment : Fragment() {
         @Nullable
         override fun onCreateView(
-            @NonNull inflater: LayoutInflater?, @Nullable container: ViewGroup?,
-            @Nullable savedInstanceState: Bundle?
-        ): View {
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
 
-            return inflater!!.inflate(R.layout.activity_test_fragment_transition, container, false)
+            return inflater.inflate(R.layout.activity_test_fragment_transition, container, false)
         }
 
-        override fun onViewCreated(@NonNull view: View?, @Nullable savedInstanceState: Bundle?) {
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            val button = view!!.findViewById<Button>(R.id.btn_add_fragment)
-            button.setOnClickListener { v -> ToastX.showShort(activity, "hahaha") }
+            val button = view.findViewById<Button>(R.id.btn_add_fragment)
+            button.setOnClickListener { ToastX.showShort(activity, "hahaha") }
         }
     }
 

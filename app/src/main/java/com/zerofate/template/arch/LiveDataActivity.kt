@@ -2,17 +2,16 @@ package com.zerofate.template.arch
 
 import androidx.lifecycle.*
 import android.os.Bundle
-import com.zerofate.androidsdk.util.ToastX
-import com.zerofate.template.base.BaseGridButtonActivity
+import com.zerofate.template.base.BaseTestActivity
 
-class LiveDataActivity : BaseGridButtonActivity() {
+class LiveDataActivity : BaseTestActivity() {
 
     private lateinit var userModel: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val observer = Observer<User> {
-            ToastX.showShort(this, it.toString())
+            appendLog(it.toString())
         }
         userModel = ViewModelProviders.of(this).get(UserModel::class.java)
         addButton("observe", Runnable {
@@ -42,7 +41,7 @@ class LiveDataActivity : BaseGridButtonActivity() {
         })
         addButton("single observe2", Runnable {
             userModel.singleLiveUserData.observe(this, Observer {
-                ToastX.showShort(this, "single2: $it")
+                appendLog("single2: $it")
             })
         })
 
@@ -55,15 +54,15 @@ class LiveDataActivity : BaseGridButtonActivity() {
         val mediator = MediatorLiveData<Int>()
         addButton("MediatorLiveData Add Source", Runnable {
             mediator.addSource(data1) {
-                ToastX.showShort(this, "data1")
+                appendLog("data1")
             }
             mediator.addSource(data2) {
-                ToastX.showShort(this, "data2")
+                appendLog("data2")
             }
         })
         addButton("MediatorLiveData observe", Runnable {
             mediator.observe(this, Observer<Int> {
-                ToastX.showShort(this, "mediator")
+                appendLog("mediator")
             })
         })
         addButton("MediatorLiveData data1 change", Runnable {

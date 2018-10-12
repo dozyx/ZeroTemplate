@@ -2,14 +2,13 @@ package com.zerofate.template
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dozeboy.android.core.utli.log.ZLog
-import com.zerofate.template.base.BaseGridButtonActivity
+import com.zerofate.template.base.BaseTestActivity
 
-class DialogTestActivity : BaseGridButtonActivity() {
+class DialogTestActivity : BaseTestActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

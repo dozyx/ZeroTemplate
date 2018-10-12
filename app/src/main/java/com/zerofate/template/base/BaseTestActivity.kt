@@ -8,7 +8,7 @@ import android.widget.Button
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.main_grid_button.*
 
-abstract class BaseGridButtonActivity : AppCompatActivity() {
+abstract class BaseTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +18,9 @@ abstract class BaseGridButtonActivity : AppCompatActivity() {
     protected fun addButton(text: String, task: Runnable) {
         val button = Button(this)
         button.text = text
+        button.setOnClickListener{
+            task.run()
+        }
         flexbox.addView(button)
     }
 

@@ -73,6 +73,9 @@ class ListViewActivity : BaseSingleFragmentActivity() {
                 }
             }
             (btn_list as ListView).adapter = adapter
+            btn_change_data.setOnClickListener {
+                adapter.add(Random().nextInt().toString())
+            }
         }
 
         override fun onDestroyView() {
@@ -88,10 +91,6 @@ class ListViewActivity : BaseSingleFragmentActivity() {
         override fun onDetach() {
             ZLog.d("onDetach: ")
             super.onDetach()
-        }
-
-        fun onBtnChangeData(view: View) {
-            adapter.add(Random().nextInt().toString());
         }
     }
 }
