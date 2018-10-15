@@ -4,7 +4,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import android.widget.Button
 
 import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.template.R
-import com.zerofate.template.databinding.ActivityTestFragmentTransitionBinding
 import kotlinx.android.synthetic.main.activity_test_fragment_transition.*
 
 class FragmentAnimationActivity : AppCompatActivity() {

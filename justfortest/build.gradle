@@ -32,6 +32,7 @@ android {
         debug {
             env = "0"
             signingConfig signingConfigs.config
+            resValue("string", "PORT_NUMBER", "8200")
         }
         release {
             env = "1"
@@ -88,6 +89,8 @@ dependencies {
     implementation project(':core')
     implementation deps.rxpermissions
     implementation("org.jetbrains:annotations:16.0.1")
+    implementation deps.mmkv
+    debugImplementation deps.debug_db
 }
 repositories {
     mavenCentral()

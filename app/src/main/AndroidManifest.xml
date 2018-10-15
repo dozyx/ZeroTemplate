@@ -25,7 +25,7 @@
             android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -345,7 +345,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".inject.DaggerTestActivity" />
-        <activity android:name=".socket.UdpActivity"></activity>
+        <activity android:name=".socket.UdpActivity" />
+        <activity android:name=".view.SurfaceViewActivity"
+            android:label="@string/view_surface">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
