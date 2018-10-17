@@ -19,5 +19,12 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/holo_blue_light"
         app:layout_constraintTop_toBottomOf="@id/flexbox" />
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_goneMarginTop="8dp"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintTop_toBottomOf="@id/text_log" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

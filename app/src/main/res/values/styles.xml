@@ -8,11 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="LaunchTheme" parent="AppTheme">
-    </style>
+
+    <style name="LaunchTheme" parent="AppTheme"></style>
+
     <style name="ButtonStyleTheme">
         <item name="android:background">@android:color/holo_green_light</item>
     </style>
+
     <style name="ButtonStyle">
         <item name="android:background">@android:color/holo_blue_light</item>
     </style>

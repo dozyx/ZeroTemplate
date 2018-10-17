@@ -26,6 +26,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -346,10 +347,30 @@
         </activity>
         <activity android:name=".inject.DaggerTestActivity" />
         <activity android:name=".socket.UdpActivity" />
-        <activity android:name=".view.SurfaceViewActivity"
+        <activity
+            android:name=".view.SurfaceViewActivity"
             android:label="@string/view_surface">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.DrawerToolBarActivity"
+            android:label="@string/title_activity_drawer_tool_bar"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.ToolbarActivity"
+            android:label="@string/view_toolbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>

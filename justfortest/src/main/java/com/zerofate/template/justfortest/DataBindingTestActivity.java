@@ -3,7 +3,9 @@ package com.zerofate.template.justfortest;
 import androidx.databinding.DataBindingUtil;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
+import com.zerofate.androidsdk.util.ToastX;
 import com.zerofate.template.justfortest.databinding.ActivityDataBindingTestBinding;
 
 public class DataBindingTestActivity extends AppCompatActivity {
@@ -20,6 +22,10 @@ public class DataBindingTestActivity extends AppCompatActivity {
             user.address.province = "广东";
             dataBindingTestActivity.setUser(user);
         });
+    }
+
+    public void onProvinceClicked(View view) {
+        ToastX.showShort(this,"点击");
     }
 
     public static class User {
