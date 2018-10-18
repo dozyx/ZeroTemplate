@@ -3,17 +3,12 @@ package com.zerofate.template;
 
 import com.google.gson.Gson;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -21,7 +16,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
  * 测试 java 相关代码
@@ -33,7 +27,21 @@ import java.util.stream.Stream;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        System.out.println(Integer.parseInt("01"));
+        parseStringDate();
+    }
+
+    private static void parseStringDate() throws ParseException {
+        String date = "2018-10-08";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(format.parse(date));
+        System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+
+        Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-(\\d{2})");
+        Matcher matcher = pattern.matcher(date);
+        if (matcher.find()) {
+            System.out.println(matcher.group(1));
+        }
     }
 
     private static void testTime() {
