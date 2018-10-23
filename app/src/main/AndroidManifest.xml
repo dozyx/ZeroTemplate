@@ -366,8 +366,18 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ToolbarActivity"
+        <activity
+            android:name=".view.ToolbarActivity"
             android:label="@string/view_toolbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".dialog.PopupWindowActivity"
+            android:label="@string/dialog_popup_window">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

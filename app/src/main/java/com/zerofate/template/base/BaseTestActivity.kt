@@ -3,6 +3,7 @@ package com.zerofate.template.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -20,13 +21,18 @@ abstract class BaseTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_base_test)
     }
 
-    protected fun addButton(text: String, task: Runnable) {
+    protected fun addButton(text: String, task: Runnable?): Button {
         val button = Button(this)
         button.text = text
         button.setOnClickListener {
-            task.run()
+            task?.run()
         }
         flexbox.addView(button)
+        return button
+    }
+
+    protected fun setButtonOnClickListener(view: View, task: Runnable) {
+        view.setOnClickListener { task.run() }
     }
 
     protected fun appendLog(log: String) {
