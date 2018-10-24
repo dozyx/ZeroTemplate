@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        parseStringDate();
+        System.out.println(Float.MAX_VALUE);
     }
 
     private static void parseStringDate() throws ParseException {
@@ -52,6 +52,11 @@ public class Test {
         System.out.println(formatDate(now.getTime()));
 
         now = Calendar.getInstance();
+        now.set(Calendar.WEEK_OF_MONTH, 1);
+        now.add(Calendar.WEEK_OF_MONTH, -1);
+        System.out.println(formatDate(now.getTime()));
+
+        now = Calendar.getInstance();
         now.set(Calendar.DAY_OF_MONTH, 3);
         now.add(Calendar.WEEK_OF_MONTH, -1);
         System.out.println(formatDate(now.getTime()));
@@ -64,7 +69,6 @@ public class Test {
         now = Calendar.getInstance();
         now.add(Calendar.MONTH, -1);
         System.out.println(formatDate(now.getTime()));
-
 
     }
 

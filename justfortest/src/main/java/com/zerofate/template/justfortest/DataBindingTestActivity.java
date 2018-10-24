@@ -3,6 +3,7 @@ package com.zerofate.template.justfortest;
 import androidx.databinding.DataBindingUtil;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.zerofate.androidsdk.util.ToastX;
