@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.dozeboy.android.core.utli.log.ZLog
 import com.zerofate.android.data.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
@@ -57,6 +58,9 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
             datas = randomStrings
+            val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            itemDecoration.setDrawable(context?.resources?.getDrawable(R.drawable.abc_list_divider_material)!!)
+            recycler_view.addItemDecoration(itemDecoration)
             recycler_view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<CustomViewHolder>() {
                 @SuppressLint("InflateParams")
                 override fun onCreateViewHolder(

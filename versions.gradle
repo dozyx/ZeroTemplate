@@ -66,6 +66,7 @@ versions.flexbox = '1.1.0'
 versions.mmkv = '1.0.11'
 // 数据库/SharedPreference 调试库，可直接在网页上查看保存的数据。https://github.com/amitshekhariitbhu/Android-Debug-Database
 versions.debug_db = '1.0.4'
+versions.mp_android_chart = 'v3.0.3'
 
 def deps = [:]
 
@@ -161,6 +162,7 @@ deps.utilcode = "com.blankj:utilcode:$versions.utilcode"
 deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 deps.mmkv = "com.tencent:mmkv:$versions.mmkv"
 deps.debug_db = "com.amitshekhar.android:debug-db:$versions.debug_db"
+deps.mp_android_chart = "com.github.PhilJay:MPAndroidChart:$versions.mp_android_chart"
 ext.deps = deps
 
 def classpath = [:]

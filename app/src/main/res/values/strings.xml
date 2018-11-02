@@ -75,6 +75,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="view_toolbar">view/toolbar</string>
     <string name="dialog_popup_window">Dialog/PopupWindow</string>
+    <string name="drawable_tint">Drawable/Tint</string>
+    <string name="design_tablayout">Design_TabLayout</string>
+    <string name="view_chart_mp_chart">View/Chart/MPAndroidChart</string>
 
 
 </resources>

@@ -4,6 +4,7 @@ package com.zerofate.template;
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,13 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        System.out.println(Float.MAX_VALUE);
+        String hex = "A20670100203020180000250323600064710300633522704008C7B641250500881025007";
+        String interger = "413230363730313030323033303230313830303030323530333233363030303634373130333030363333353232373034303038433742363431323530353030383831303235303037";
+        System.out.println(new BigInteger(hex,16));
+        System.out.println(String.format("%040x", new BigInteger(1, hex.getBytes())));
+    }
+    private static <T> boolean isAssignableFrom( T type){
+        return String.class.isAssignableFrom(type.getClass());
     }
 
     private static void parseStringDate() throws ParseException {

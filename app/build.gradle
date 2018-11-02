@@ -73,4 +73,5 @@ dependencies {
     implementation deps.dagger.runtime
     implementation deps.flexbox
     annotationProcessor deps.dagger.processor
+    implementation deps.mp_android_chart
 }

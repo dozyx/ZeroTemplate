@@ -1,28 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:useDefaultMargins="true"
+    android:layout_height="wrap_content"
     android:alignmentMode="alignBounds"
+    android:background="@android:color/white"
     android:columnCount="4"
-    android:background="@android:color/white">
-<!--    <Button android:text="测试1" android:layout_gravity="center" />
-    <Button android:text="测试2ssssssssss" android:layout_column="2" />
-    <Button android:text="测试4" android:layout_column="0" />
-    <Button android:text="测试5"/>
-    <Button android:text="测试7" android:layout_column="3"/>
-    <Button android:text="测试8"/>
-    <Button android:text="测试9" android:layout_columnSpan="2"/>
-    <Button android:text="测试10" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
-    <Button android:text="测试11" />
-    <Button android:text="测试12s" android:layout_gravity="right" android:layout_columnWeight="0.5"/>
-    <Button android:text="测试" android:minWidth="0dp" />-->
-    <Button android:text="测试" android:layout_width="0dp" android:minWidth="0dp" android:layout_columnWeight="1" />
-    <Button android:text="测试" android:layout_width="0dp" android:minWidth="0dp" android:layout_columnWeight="1" />
-    <Button android:text="测试" android:layout_width="0dp" android:minWidth="0dp" android:layout_columnWeight="1" />
-    <Button android:text="测试" android:layout_width="0dp" android:minWidth="0dp" android:layout_columnWeight="1" />
+    android:orientation="horizontal"
+    android:useDefaultMargins="true">
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="1"
+        android:text="666" />
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="1"
+        android:text="6666" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="1"
+        android:text="666" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:text="666\n元\n元" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_rowSpan="2"
+        android:layout_columnWeight="1"
+        android:layout_gravity="center"
+        android:text="666" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:text="666" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginTop="10dp"
+        android:text="666" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:text="666" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:text="666" />
 
 </GridLayout>
