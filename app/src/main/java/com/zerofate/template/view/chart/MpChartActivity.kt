@@ -1,5 +1,6 @@
 package com.zerofate.template.view.chart
 
+import android.graphics.Color
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,7 +40,7 @@ class MpChartActivity : AppCompatActivity() {
 //        chart.axisLeft.setDrawAxisLine(false)
         // 设置左轴从 0 开始
         chart.axisLeft.axisMinimum = 0f
-        chart.axisLeft.setLabelCount(5, false)
+        chart.axisLeft.setLabelCount(6, false)
         // 隐藏右轴标注
         chart.axisRight.setDrawLabels(false)
         // 禁用右轴
@@ -52,28 +53,34 @@ class MpChartActivity : AppCompatActivity() {
         chart.xAxis.textSize = 11f
         chart.xAxis.valueFormatter = object : IAxisValueFormatter {
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                return "${value}日"
+                return "${value.toInt()}日"
             }
         }
 
 
         val values = ArrayList<BarEntry>(7)
-        values.add(BarEntry(1f, 1.58f))
-        values.add(BarEntry(2f, 1.58f))
-        values.add(BarEntry(3f, 3.69f))
-        values.add(BarEntry(4f, 1.94f))
-        values.add(BarEntry(5f, 1.43f))
-        values.add(BarEntry(6f, 4.56f))
-        values.add(BarEntry(7f, 3.05f))
+        values.add(BarEntry(11f, 1.58f))
+        values.add(BarEntry(12f, 1.58f))
+        values.add(BarEntry(13f, 3.69f))
+        values.add(BarEntry(14f, 1.94f))
+        values.add(BarEntry(15f, 1.43f))
+        values.add(BarEntry(16f, 12.56f))
+        values.add(BarEntry(17f, 3.05f))
         // BarEntry 的两个参数分别为 x 和 y 坐标
         // BarEntry 的数量也是 x 轴同时显示的 bar 的数量
 
         val barDataSet = BarDataSet(values, "22222")
+        // bar 颜色
+        barDataSet.color = Color.parseColor("#ff8a17")
+        // bar 值的大小
+        barDataSet.valueTextSize = 21f
 
         val dataSets = ArrayList<IBarDataSet>()
         dataSets.add(barDataSet)
 
         val barData = BarData(dataSets)
+        // bar 宽，为百分比
+        barData.barWidth = 0.3f
         chart.data = barData
     }
 }

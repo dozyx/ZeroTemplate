@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import com.dozeboy.android.core.utli.log.ZLog
 import com.tencent.mmkv.MMKV
-
+import com.zerofate.androidsdk.util.ToastX
 
 
 /**
@@ -18,8 +18,7 @@ class MeaninglessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meaningless)
         ZLog.d("onCreate: ")
         findViewById<Button>(R.id.button).setOnClickListener {
-            val intent = Intent();
-            intent.setPackage("")
+            ToastX.showShort(this,"")
         }
         val rootDir = MMKV.initialize(this)
         ZLog.d("mmkv root: $rootDir")
