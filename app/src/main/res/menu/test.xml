@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_share"
+        android:title="item"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_share1"
+        android:title="share"
+        android:icon="@android:drawable/ic_menu_week"
+        app:showAsAction="never"
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"/>
+
+</menu>

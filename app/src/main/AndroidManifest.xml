@@ -368,7 +368,8 @@
         </activity>
         <activity
             android:name=".view.ToolbarActivity"
-            android:label="@string/view_toolbar">
+            android:label="@string/view_toolbar"
+            android:parentActivityName=".view.chart.MpChartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
