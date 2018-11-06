@@ -86,6 +86,8 @@ deps.okhttp = okhttp
 def leakcanary = [:]
 leakcanary.debug = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
 leakcanary.release = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
+// Optional, if you use support library fragments
+leakcanary.debug_support = "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary"
 deps.leakcanary = leakcanary
 
 def butterknife = [:]
