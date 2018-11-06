@@ -67,6 +67,8 @@ versions.mmkv = '1.0.11'
 // 数据库/SharedPreference 调试库，可直接在网页上查看保存的数据。https://github.com/amitshekhariitbhu/Android-Debug-Database
 versions.debug_db = '1.0.4'
 versions.mp_android_chart = 'v3.0.3'
+versions.rx_lifecycle = '3.0.0'
+versions.rx_android = '2.1.0'
 
 def deps = [:]
 
@@ -121,6 +123,17 @@ dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
 dagger.processor = "com.google.dagger:dagger-compiler:$versions.dagger"
 deps.dagger = dagger
 
+def rx_lifecycle = [:]
+// If you want to bind to Android-specific lifecycles
+rx_lifecycle.android = "com.trello.rxlifecycle3:rxlifecycle-android:$versions.rx_lifecycle"
+// If you want pre-written Activities and Fragments you can subclass as providers
+rx_lifecycle.components = "com.trello.rxlifecycle3:rxlifecycle-components:$versions.rx_lifecycle"
+// If you want pre-written support preference Fragments you can subclass as providers
+rx_lifecycle.preference = "com.trello.rxlifecycle3:rxlifecycle-components-preference:$versions.rx_lifecycle"
+// If you want to use Android Lifecycle for providers
+rx_lifecycle.android_lifecycle = "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:$versions.rx_lifecycle"
+deps.rx_lifecycle = rx_lifecycle
+
 deps.stickylistheaders = "se.emilsjolander:stickylistheaders:$versions.stickylistheaders"
 deps.junit = "junit:junit:$versions.junit"
 deps.photo_view = "com.commit451:PhotoView:$versions.photo_view"
@@ -163,6 +176,7 @@ deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 deps.mmkv = "com.tencent:mmkv:$versions.mmkv"
 deps.debug_db = "com.amitshekhar.android:debug-db:$versions.debug_db"
 deps.mp_android_chart = "com.github.PhilJay:MPAndroidChart:$versions.mp_android_chart"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
 ext.deps = deps
 
 def classpath = [:]

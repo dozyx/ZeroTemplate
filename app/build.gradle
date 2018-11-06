@@ -74,4 +74,5 @@ dependencies {
     implementation deps.flexbox
     annotationProcessor deps.dagger.processor
     implementation deps.mp_android_chart
+    implementation deps.rx_lifecycle.android
 }

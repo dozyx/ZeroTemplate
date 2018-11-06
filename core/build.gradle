@@ -20,20 +20,25 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     api deps.okhttp.runtime
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation deps.junit
     androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
     api deps.kotlin
-//    implementation deps.android_ktx
+    //    implementation deps.android_ktx
     implementation deps.timber
     implementation deps.logger
+    implementation deps.rxjava2
+    implementation deps.rx_android
 }
 repositories {
     mavenCentral()
