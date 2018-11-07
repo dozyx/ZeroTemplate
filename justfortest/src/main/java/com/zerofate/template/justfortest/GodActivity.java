@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * 控制启动界面
- * @author Timon
+ * @author dozeboy
  * @date 2017/11/13
  */
 

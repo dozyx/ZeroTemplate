@@ -43,4 +43,6 @@ dependencies {
     implementation deps.rxjava2
     implementation deps.rx_android
     implementation deps.utilcode
+    implementation deps.dagger.runtime
+    annotationProcessor deps.dagger.processor
 }

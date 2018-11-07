@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import com.dozeboy.android.core.utli.log.ZLog
 
 /**
- * @author timon
+ * @author dozeboy
  * @date 2018/8/14
  */
 

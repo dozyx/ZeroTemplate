@@ -1,7 +1,7 @@
 package com.zerofate.template;
 
 /**
- * @author timon
+ * @author dozeboy
  * @date 2018/10/18
  */
 public abstract class ThisPattern<T extends ThisPattern<T>> {

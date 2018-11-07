@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2017/12/21
  */
 

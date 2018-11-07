@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.annotation.Nullable;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2018/3/22
  */
 

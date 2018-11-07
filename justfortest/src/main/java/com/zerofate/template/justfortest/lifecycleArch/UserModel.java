@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2018/3/15
  */
 

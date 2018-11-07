@@ -5,7 +5,7 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 
 /**
- * @author timon
+ * @author dozeboy
  * @date 2018/7/27
  */
 class PlusMinusController(

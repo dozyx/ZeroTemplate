@@ -1,7 +1,7 @@
 package com.zerofate.template.justfortest.lifecycleArch;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2018/3/15
  */
 

@@ -3,12 +3,14 @@ package com.dozeboy.android.template.base;
 import android.app.Application;
 import android.os.StrictMode;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.Utils;
 import com.squareup.leakcanary.BuildConfig;
 import com.squareup.leakcanary.LeakCanary;
 
 
 /**
- * @author timon
+ * @author dozeboy
  * @date 2018/11/6
  */
 public class BaseApplication extends Application {
@@ -20,6 +22,7 @@ public class BaseApplication extends Application {
         }
         super.onCreate();
         initLeakCanary();
+        Utils.init(this);
     }
 
     private void initLeakCanary() {

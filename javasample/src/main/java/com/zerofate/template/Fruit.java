@@ -1,7 +1,7 @@
 package com.zerofate.template;
 
 /**
- * @author timon
+ * @author dozeboy
  * @date 2018/8/3
  */
 public enum Fruit {

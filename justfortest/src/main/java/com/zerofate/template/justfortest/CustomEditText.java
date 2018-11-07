@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2018/1/9
  */
 

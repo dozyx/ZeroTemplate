@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author timon
+ * @author dozeboy
  * @date 2018/11/6
  */
 public class RxJavaUtil {

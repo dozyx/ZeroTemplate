@@ -5,7 +5,7 @@ import android.test.ActivityInstrumentationTestCase;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
- * @author Timon
+ * @author dozeboy
  * @date 2018/4/18
  */
 public class HelloActivityTest extends ActivityTestRule<HelloActivity> {

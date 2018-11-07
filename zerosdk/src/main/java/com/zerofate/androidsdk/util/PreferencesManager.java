@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 /**
  * SharedPreference 用法模板类
  *
- * @author Timon
+ * @author dozeboy
  * @date 2018/1/8
  */
 

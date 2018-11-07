@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 /**
  * 因为考虑大部分使用场景的数字不会太多，所以使用 float 进行处理
  *
- * @author Timon
+ * @author dozeboy
  * @date 2018/1/5
  */
 
