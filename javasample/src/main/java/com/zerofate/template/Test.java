@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -28,7 +29,8 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        System.out.println(String.format("%-5s","rr 0"));
+        GenericTest2<String> genericTest2 = new GenericTest2();
+        genericTest2.get(new ArrayList<>());
     }
 
     private static void testStringToHex() {

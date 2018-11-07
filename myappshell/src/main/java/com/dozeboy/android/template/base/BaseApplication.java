@@ -1,8 +1,9 @@
 package com.dozeboy.android.template.base;
 
-import android.app.Activity;
 import android.app.Application;
+import android.os.StrictMode;
 
+import com.squareup.leakcanary.BuildConfig;
 import com.squareup.leakcanary.LeakCanary;
 
 
@@ -14,6 +15,9 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        if (BuildConfig.DEBUG) {
+            configStrictMode();
+        }
         super.onCreate();
         initLeakCanary();
     }
@@ -23,5 +27,18 @@ public class BaseApplication extends Application {
             return;
         }
         LeakCanary.install(this);
+    }
+
+    private void configStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build());
+
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectLeakedSqlLiteObjects()
+                .penaltyLog()
+                .penaltyDeath()
+                .build());
     }
 }
