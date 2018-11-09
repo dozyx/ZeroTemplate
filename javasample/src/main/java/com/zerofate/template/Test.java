@@ -29,8 +29,16 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        GenericTest2<String> genericTest2 = new GenericTest2();
-        genericTest2.get(new ArrayList<>());
+        System.out.println(formatComma("1212100"));
+    }
+    public static String formatComma(String amount) {
+        double doubleAmount;
+        try {
+            doubleAmount = Double.valueOf(amount);
+        } catch (NumberFormatException e) {
+            return amount;
+        }
+        return new DecimalFormat("#,###.00").format(doubleAmount);
     }
 
     private static void testStringToHex() {

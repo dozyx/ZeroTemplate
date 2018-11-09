@@ -45,4 +45,5 @@ dependencies {
     implementation deps.utilcode
     implementation deps.dagger.runtime
     annotationProcessor deps.dagger.processor
+    implementation deps.gson
 }
