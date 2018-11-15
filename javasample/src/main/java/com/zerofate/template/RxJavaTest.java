@@ -18,6 +18,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxJavaTest {
     public static void main(String[] args) {
+        Observable.just("111").flatMap()
+    }
+
+    private static void testFlowable() {
         Flowable.create(new FlowableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull FlowableEmitter<String> emitter)

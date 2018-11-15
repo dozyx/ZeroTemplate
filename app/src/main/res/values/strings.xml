@@ -78,6 +78,7 @@
     <string name="drawable_tint">Drawable/Tint</string>
     <string name="design_tablayout">Design_TabLayout</string>
     <string name="view_chart_mp_chart">View/Chart/MPAndroidChart</string>
+    <string name="view_status_bar">View/StatusBar</string>
 
 
 </resources>

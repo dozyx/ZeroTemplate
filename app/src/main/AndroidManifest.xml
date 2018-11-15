@@ -403,8 +403,17 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.chart.MpChartActivity"
+        <activity
+            android:name=".view.chart.MpChartActivity"
             android:label="@string/view_chart_mp_chart">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.StatusBarActivity"
+            android:label="@string/view_status_bar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
