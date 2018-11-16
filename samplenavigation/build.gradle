@@ -27,10 +27,14 @@ android {
     }
 
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
@@ -40,11 +44,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
-    implementation "android.arch.navigation:navigation-fragment:1.0.0-alpha02"
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha02'
     // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui:1.0.0-alpha02" // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha02"
+    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha02'
     // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha02" // use -ktx for Kotlin
-
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha02'
+    // use -ktx for Kotlin
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha02'
+    // use -ktx for Kotlin
 }
