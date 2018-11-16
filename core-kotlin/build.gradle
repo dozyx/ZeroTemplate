@@ -1,13 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion build_versions.compile_sdk
-
-
-
     defaultConfig {
-        applicationId "com.zerofate.template.app_float"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
@@ -24,12 +20,26 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
+    api deps.okhttp.runtime
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation deps.junit
-    implementation project(':core')
-    implementation deps.kotlin
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
+    api deps.kotlin
+    //    implementation deps.android_ktx
+    implementation deps.timber
+    implementation deps.logger
+    implementation deps.rxjava2
+    implementation deps.rx_android
+}
+repositories {
+    mavenCentral()
 }

@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.dozeboy.android.core.utli.log.ZLog
-import com.zerofate.android.data.Shakespeare
+import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_list_view.*
