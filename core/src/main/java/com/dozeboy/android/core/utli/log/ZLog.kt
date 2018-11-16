@@ -1,7 +1,7 @@
 package com.dozeboy.android.core.utli.log
 
 import android.text.TextUtils
-import com.yeahka.android.core.BuildConfig
+import com.zerofate.android.core.BuildConfig
 import org.jetbrains.annotations.NonNls
 import org.json.JSONArray
 import org.json.JSONException

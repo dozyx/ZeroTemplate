@@ -13,12 +13,45 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class RxJavaTest {
     public static void main(String[] args) {
-        Observable.just("111").flatMap()
+        BehaviorSubject<Integer> subject = BehaviorSubject.create();
+        ((BehaviorSubject)subject.hide()).getValue();
+        subject.onNext(11);
+        subject.onNext(31);
+        Disposable disposable = subject.hide().subscribe(integer -> System.out.println("integer = [" + integer + "]"));
+        subject.onNext(1);
+        subject.onNext(3);
+        subject.subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                System.out.println("d = [" + d + "]");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                System.out.println("integer = [" + integer + "]");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("onComplete");
+            }
+        });
+        subject.onNext(2);
+        disposable.dispose();
+        subject.onNext(2);
+        subject.onComplete();
     }
 
     private static void testFlowable() {
