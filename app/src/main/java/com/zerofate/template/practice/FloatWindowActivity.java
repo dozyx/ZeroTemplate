@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.zerofate.android.data.Shakespeare;
+import com.zerofate.android.mock.Shakespeare;
 import com.zerofate.template.R;
 import com.zerofate.template.activity.LifeCycleTest;
 

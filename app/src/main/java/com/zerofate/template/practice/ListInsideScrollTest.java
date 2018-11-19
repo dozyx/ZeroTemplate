@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.zerofate.android.data.Shakespeare;
+import com.zerofate.android.mock.Shakespeare;
 import com.zerofate.template.R;
 
 import butterknife.BindView;

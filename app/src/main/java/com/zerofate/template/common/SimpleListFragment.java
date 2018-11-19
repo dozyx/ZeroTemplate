@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.zerofate.android.data.Shakespeare;
+import com.zerofate.android.mock.Shakespeare;
 
 /**
  * Created by Administrator on 2017/10/30.

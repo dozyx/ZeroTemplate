@@ -75,7 +75,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor
-    implementation project(':zerosdk')
+    implementation project(':core')
     implementation deps.permissionsdispatcher.runtime
     annotationProcessor deps.permissionsdispatcher.processor
     implementation deps.dagger.runtime
@@ -86,7 +86,7 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.kotlin
     implementation 'com.google.android.material:material:1.0.0'
-    implementation project(':core')
+    implementation project(':core-kotlin')
     implementation deps.rxpermissions
     implementation("org.jetbrains:annotations:16.0.1")
     implementation deps.mmkv
