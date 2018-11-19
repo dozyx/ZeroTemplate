@@ -46,4 +46,5 @@ dependencies {
     implementation deps.dagger.runtime
     annotationProcessor deps.dagger.processor
     implementation deps.gson
+    implementation deps.statusbar_util
 }
