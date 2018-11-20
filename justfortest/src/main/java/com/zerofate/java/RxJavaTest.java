@@ -1,4 +1,4 @@
-package com.zerofate.template;
+package com.zerofate.java;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

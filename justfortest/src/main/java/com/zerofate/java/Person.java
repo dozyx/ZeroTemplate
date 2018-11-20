@@ -1,4 +1,4 @@
-package com.zerofate.template;
+package com.zerofate.java;
 
 import java.util.List;
 
