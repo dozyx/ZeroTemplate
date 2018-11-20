@@ -50,4 +50,5 @@ dependencies {
     implementation deps.dagger.runtime
     annotationProcessor deps.dagger.processor
     implementation deps.gson
+    implementation deps.bar_util
 }
