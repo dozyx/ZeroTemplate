@@ -24,12 +24,12 @@ public class PermissionActivity extends BaseTestActivity {
     }
 
     private void requestLocationPermission() {
-        appendLog("location rationale: " + ActivityCompat.shouldShowRequestPermissionRationale(this,
+        appendResult("location rationale: " + ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.ACCESS_FINE_LOCATION));
-        appendLog(
+        appendResult(
                 "location xiaomi check: " + hasSelfPermissionForXiaomi(this,
                         Manifest.permission.ACCESS_FINE_LOCATION));
-        appendLog("location check: " + ContextCompat.checkSelfPermission(this,
+        appendResult("location check: " + ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION));
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
@@ -51,6 +51,6 @@ public class PermissionActivity extends BaseTestActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
             @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        appendLog(Arrays.toString(permissions) + " & " + Arrays.toString(grantResults));
+        appendResult(Arrays.toString(permissions) + " & " + Arrays.toString(grantResults));
     }
 }

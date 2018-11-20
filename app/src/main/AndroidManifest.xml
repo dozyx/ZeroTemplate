@@ -173,7 +173,7 @@
             android:launchMode="singleTask"
             android:taskAffinity=".test" />
         <activity
-            android:name=".fragment.FragmentLifeCycle"
+            android:name=".fragment.FragmentLifeCycleActivity"
             android:label="@string/fragment_life_cycle"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

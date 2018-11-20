@@ -75,4 +75,5 @@ dependencies {
     annotationProcessor deps.dagger.processor
     implementation deps.mp_android_chart
     implementation deps.rx_lifecycle.android
+    implementation deps.bar_util
 }

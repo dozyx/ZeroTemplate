@@ -11,7 +11,7 @@ class LiveDataActivity : BaseTestActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val observer = Observer<User> {
-            appendLog(it.toString())
+            appendResult(it.toString())
         }
         userModel = ViewModelProviders.of(this).get(UserModel::class.java)
         addButton("observe", Runnable {
@@ -41,7 +41,7 @@ class LiveDataActivity : BaseTestActivity() {
         })
         addButton("single observe2", Runnable {
             userModel.singleLiveUserData.observe(this, Observer {
-                appendLog("single2: $it")
+                appendResult("single2: $it")
             })
         })
 
@@ -54,15 +54,15 @@ class LiveDataActivity : BaseTestActivity() {
         val mediator = MediatorLiveData<Int>()
         addButton("MediatorLiveData Add Source", Runnable {
             mediator.addSource(data1) {
-                appendLog("data1")
+                appendResult("data1")
             }
             mediator.addSource(data2) {
-                appendLog("data2")
+                appendResult("data2")
             }
         })
         addButton("MediatorLiveData observe", Runnable {
             mediator.observe(this, Observer<Int> {
-                appendLog("mediator")
+                appendResult("mediator")
             })
         })
         addButton("MediatorLiveData data1 change", Runnable {

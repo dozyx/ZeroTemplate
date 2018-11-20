@@ -69,6 +69,7 @@ versions.debug_db = '1.0.4'
 versions.mp_android_chart = 'v3.0.3'
 versions.rx_lifecycle = '3.0.0'
 versions.rx_android = '2.1.0'
+versions.bar_util = '1.5.1'
 
 def deps = [:]
 
@@ -179,6 +180,7 @@ deps.mmkv = "com.tencent:mmkv:$versions.mmkv"
 deps.debug_db = "com.amitshekhar.android:debug-db:$versions.debug_db"
 deps.mp_android_chart = "com.github.PhilJay:MPAndroidChart:$versions.mp_android_chart"
 deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.bar_util = "com.jaeger.statusbarutil:library:$versions.bar_util"
 ext.deps = deps
 
 def classpath = [:]

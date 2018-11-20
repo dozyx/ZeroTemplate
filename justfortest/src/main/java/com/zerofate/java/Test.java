@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        System.out.println(formatComma("11111212101"));
+        System.out.println(0^1);
     }
     public static String formatComma(String amount) {
         double doubleAmount;
