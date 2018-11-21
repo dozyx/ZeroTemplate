@@ -1,19 +1,32 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="Base.V0.AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--添加属性-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/AndroidAnimation.ActivityAnimation</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
+    <style name="AppTheme" parent="Base.V0.AppTheme">
+        <!--不要在AppTheme里添加属性-->
+    </style>
+
+    <style name="AndroidAnimation.ActivityAnimation" parent="@android:style/Animation.Translucent">
+        <!-- windowIsTranslucent 属性会导致 windowAnimationStyle 可能出现失效的情况，所以要继承 Translucent 的 Style-->
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>-->
+        <item name="android:activityCloseEnterAnimation">@null</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
+
+    <style name="AndroidAnimation" parent="@android:style/Animation.Activity" />
 
 </resources>

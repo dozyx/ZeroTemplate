@@ -51,4 +51,5 @@ dependencies {
     annotationProcessor deps.dagger.processor
     implementation deps.gson
     implementation deps.bar_util
+    implementation project(':core-kotlin')
 }
