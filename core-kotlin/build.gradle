@@ -39,6 +39,10 @@ dependencies {
     implementation deps.logger
     implementation deps.rxjava2
     implementation deps.rx_android
+    implementation deps.rxjava_adapter
+    implementation deps.okhttp.logging
+    api deps.retrofit.runtime
+    api deps.retrofit.gson
 }
 repositories {
     mavenCentral()

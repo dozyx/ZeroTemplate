@@ -91,6 +91,7 @@ dependencies {
     implementation("org.jetbrains:annotations:16.0.1")
     implementation deps.mmkv
     debugImplementation deps.debug_db
+    implementation deps.background
 }
 repositories {
     mavenCentral()

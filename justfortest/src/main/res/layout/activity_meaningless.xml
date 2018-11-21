@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.zerofate.template.justfortest.MeaninglessActivity">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:bl_corners_radius="8dp"
+        app:backgroundTint="@color/colorAccent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text"
