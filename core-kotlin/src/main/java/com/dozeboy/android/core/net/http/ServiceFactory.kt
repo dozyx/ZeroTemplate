@@ -1,7 +1,5 @@
 package com.dozeboy.android.core.net.http
 
-import com.dozeboy.android.core.net.http.ServiceFactory.Companion.TIME_OUT_CONNECT
-import com.dozeboy.android.core.net.http.ServiceFactory.Companion.TIME_OUT_READ
 import com.zerofate.android.core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
