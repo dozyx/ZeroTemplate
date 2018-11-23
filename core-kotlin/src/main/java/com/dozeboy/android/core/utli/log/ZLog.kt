@@ -23,7 +23,7 @@ import javax.xml.transform.stream.StreamSource
  */
 class ZLog private constructor() {
 
-    companion object {
+    companion object : ILog {
         const val TAG = "ZLog"
         private const val JSON_INDENT = 2
 
@@ -31,87 +31,87 @@ class ZLog private constructor() {
             Timber.plant(if (BuildConfig.DEBUG) LoggerLogcatTree() else RemoteLogTree())
         }
 
-        fun v(@NonNls message: String, vararg args: Any) {
+        override fun v(@NonNls message: String, vararg args: Any) {
             Timber.v(message, *args)
         }
 
-        fun v(t: Throwable, @NonNls message: String, vararg args: Any) {
+        override fun v(t: Throwable, @NonNls message: String, vararg args: Any) {
             Timber.v(t, message, *args)
         }
 
-        fun v(t: Throwable) {
+        override fun v(t: Throwable) {
             Timber.v(t)
         }
 
-        fun d(@NonNls message: String, vararg args: Any) {
+        override fun d(@NonNls message: String, vararg args: Any) {
             Timber.d(message, *args)
         }
 
-        fun d(t: Throwable, @NonNls message: String, vararg args: Any) {
+        override fun d(t: Throwable, @NonNls message: String, vararg args: Any) {
             Timber.d(t, message, *args)
         }
 
-        fun d(t: Throwable) {
+        override fun d(t: Throwable) {
             Timber.d(t)
         }
 
-        fun d(any: Any?) {
+        override fun d(any: Any?) {
             Timber.d(asString(any))
         }
 
-        fun i(@NonNls message: String, vararg args: Any) {
+        override fun i(@NonNls message: String, vararg args: Any) {
             Timber.i(message, *args)
         }
 
-        fun i(t: Throwable, @NonNls message: String, vararg args: Any) {
+        override fun i(t: Throwable, @NonNls message: String, vararg args: Any) {
             Timber.i(t, message, *args)
         }
 
-        fun i(t: Throwable) {
+        override fun i(t: Throwable) {
             Timber.i(t)
         }
 
-        fun w(@NonNls message: String, vararg args: Any) {
+        override fun w(@NonNls message: String, vararg args: Any) {
             Timber.w(message, *args)
         }
 
-        fun w(t: Throwable, @NonNls message: String, vararg args: Any) {
+        override fun w(t: Throwable, @NonNls message: String, vararg args: Any) {
             Timber.w(t, message, *args)
         }
 
-        fun w(t: Throwable) {
+        override fun w(t: Throwable) {
             Timber.w(t)
         }
 
-        fun e(@NonNls message: String, vararg args: Any) {
+        override fun e(@NonNls message: String, vararg args: Any) {
             Timber.e(message, *args)
         }
 
-        fun e(t: Throwable, @NonNls message: String, vararg args: Any) {
+        override fun e(t: Throwable, @NonNls message: String, vararg args: Any) {
             Timber.e(t, message, *args)
         }
 
-        fun e(t: Throwable) {
+        override fun e(t: Throwable) {
             Timber.e(t)
         }
 
-        fun wtf(@NonNls message: String, vararg args: Any) {
+        override fun wtf(@NonNls message: String, vararg args: Any) {
             Timber.wtf(message, *args)
         }
 
-        fun wtf(t: Throwable, @NonNls message: String, vararg args: Any) {
+        override fun wtf(t: Throwable, @NonNls message: String, vararg args: Any) {
             Timber.wtf(t, message, *args)
         }
 
-        fun wtf(t: Throwable) {
+        override fun wtf(t: Throwable) {
             Timber.wtf(t)
         }
 
-        fun json(json: String) {
+        override fun json(json: String) {
             jsonInternal(json)
         }
 
-        fun xml(xml: String) {
+        override fun xml(xml: String) {
             xmlInternal(xml)
         }
 

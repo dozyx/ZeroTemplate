@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.ActivityUtils
+import com.dozeboy.android.core.utli.log.ZLog
 import com.dozeboy.android.core.utli.util.ColorUtil
 import kotlinx.android.synthetic.main.activity_main.*
 

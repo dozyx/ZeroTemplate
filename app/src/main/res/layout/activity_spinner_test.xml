@@ -22,9 +22,25 @@
         android:id="@+id/popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dropdown_spinner"
         android:text="popup"/>
+
+    <Button
+        android:id="@+id/btn_toggle_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/popup"
+        app:layout_constraintTop_toBottomOf="@id/dropdown_spinner"
+        android:text="toggle selected"/>
+
+    <Button
+        android:id="@+id/btn_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/btn_toggle_selected"
+        app:layout_constraintTop_toBottomOf="@id/dropdown_spinner"
+        android:text="selection"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
