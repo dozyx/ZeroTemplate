@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import com.dozeboy.android.core.utli.log.ZLog
 import com.noober.background.BackgroundLibrary
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import com.tencent.mmkv.MMKV
 import com.zerofate.androidsdk.util.ToastX
+import timber.log.Timber
 
 
 /**
@@ -17,23 +20,19 @@ class MeaninglessActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
-        ZLog.d("onCreate: ")
         findViewById<Button>(R.id.button).setOnClickListener {
             ToastX.showShort(this,"")
         }
-        val rootDir = MMKV.initialize(this)
-        ZLog.d("mmkv root: $rootDir")
-        val kv = MMKV.defaultMMKV()
+        Timber.plant(Timber.DebugTree())
+        Timber.d("debugTree")
 
-        kv.encode("bool", true)
-        val bValue = kv.decodeBool("bool")
-        ZLog.d(bValue)
-        kv.encode("int", Integer.MIN_VALUE)
-        val iValue = kv.decodeInt("int")
-        ZLog.d(iValue)
-        kv.encode("string", "Hello from mmkv")
-        val str = kv.decodeString("string")
-        ZLog.d(str)
+        Logger.addLogAdapter(object :AndroidLogAdapter(){
+            override fun isLoggable(priority: Int, tag: String?): Boolean {
+                return false
+            }
+        })
+        Logger.addLogAdapter(AndroidLogAdapter())
+        Logger.d("logger")
     }
 
 

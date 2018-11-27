@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +30,9 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        System.out.println(0^1);
+        for (String s:Collections.<String>emptyList()){
+            System.out.println(s);
+        }
     }
     public static String formatComma(String amount) {
         double doubleAmount;

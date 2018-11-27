@@ -92,6 +92,8 @@ dependencies {
     implementation deps.mmkv
     debugImplementation deps.debug_db
     implementation deps.background
+    implementation deps.timber
+    implementation deps.logger
 }
 repositories {
     mavenCentral()

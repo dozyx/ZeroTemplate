@@ -1,11 +1,15 @@
 package com.zerofate.template.view.chart
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -13,10 +17,14 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.github.mikephil.charting.listener.ChartTouchListener
+import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.ViewPortHandler
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_mp_chart.*
+import java.util.*
 
 class MpChartActivity : AppCompatActivity() {
 
@@ -55,21 +63,22 @@ class MpChartActivity : AppCompatActivity() {
         chart.xAxis.setDrawGridLines(false)
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         chart.xAxis.textSize = 11f
-        chart.xAxis.textColor = ActivityCompat.getColor(this,android.R.color.holo_red_light)
+        chart.xAxis.textColor = ActivityCompat.getColor(this,android.R.color.holo_green_dark)
         chart.xAxis.valueFormatter = object : IAxisValueFormatter {
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
                 return "${value.toInt()}日"
             }
         }
 
+
         val values = ArrayList<BarEntry>(7)
-        values.add(BarEntry(11f, 0.0058f))
-        values.add(BarEntry(12f, 0.0058f))
-        values.add(BarEntry(13f, 0.0058f))
-        values.add(BarEntry(14f, 0.0058f))
-        values.add(BarEntry(15f, 0.0058f))
-        values.add(BarEntry(16f, 0.0058f))
-        values.add(BarEntry(17f, 0.0058f))
+        values.add(BarEntry(0f, 0.0058f))
+        values.add(BarEntry(1f, 0.0058f))
+        values.add(BarEntry(2f, 0.0058f))
+        values.add(BarEntry(3f, 0.0058f))
+        values.add(BarEntry(4f, 0.0058f))
+        values.add(BarEntry(5f, 0.0058f))
+        values.add(BarEntry(6f, 0.0058f))
         // BarEntry 的两个参数分别为 x 和 y 坐标
         // BarEntry 的数量也是 x 轴同时显示的 bar 的数量
 
@@ -98,5 +107,27 @@ class MpChartActivity : AppCompatActivity() {
             }
         })
         chart.data = barData
+
+        chart.marker = BarTouchView(this)
+        chart.highlightValue(14f,0)
+    }
+
+    class BarTouchView(context: Context) : MarkerView(context, android.R.layout.simple_list_item_1) {
+        private val textValue: TextView
+
+        init {
+            textValue = findViewById(android.R.id.text1)
+            textValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
+            textValue.setTextColor(Color.parseColor("#ff7e00"))
+        }
+
+        override fun refreshContent(e: Entry?, highlight: Highlight?) {
+            textValue.text = String.format(Locale.getDefault(), "%.2f", e!!.y)
+            super.refreshContent(e, highlight)
+        }
+
+        override fun getOffset(): MPPointF {
+            return MPPointF((-(width / 2)).toFloat(), (-height).toFloat())
+        }
     }
 }
