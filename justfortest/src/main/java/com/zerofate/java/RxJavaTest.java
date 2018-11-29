@@ -3,11 +3,15 @@ package com.zerofate.java;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -19,9 +23,84 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 
 public class RxJavaTest {
+
     public static void main(String[] args) {
+
+    }
+
+    private static void testDelayZip() {
+        Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                Thread.sleep(4000);
+                emitter.onNext(1);
+                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.newThread());
+        Observable<Integer> observable2 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                Thread.sleep(5000);
+                emitter.onNext(2);
+                emitter.onNext(3);
+                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.newThread());
+        System.out.println(System.currentTimeMillis());
+        Observable.zip(observable, observable2, new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer, Integer integer2) throws Exception {
+                return integer + integer2;
+            }
+        }).subscribe(observer);
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testZip() {
+        Observable<Integer> observable1 = getObservable(1, 2, 3);
+        Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2,TimeUnit.SECONDS);
+        Observable.zip(observable1, observable2, (integer, integer2) -> integer + integer2).subscribe(observer);
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static Observer<Integer> observer = new Observer<Integer>() {
+        @Override
+        public void onSubscribe(Disposable d) {
+            System.out.println("onSubscribe d = [" + d + "]");
+        }
+
+        @Override
+        public void onNext(Integer integer) {
+            System.out.println("onNext integer = [" + integer + "]");
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            System.out.println("onError e = [" + e + "]");
+        }
+
+        @Override
+        public void onComplete() {
+            System.out.println(System.currentTimeMillis());
+            System.out.println("onComplete");
+        }
+    };
+
+    private static Observable<Integer> getObservable(Integer... datas) {
+        return Observable.fromArray(datas);
+    }
+
+    private static void testSubject() {
         BehaviorSubject<Integer> subject = BehaviorSubject.create();
-        ((BehaviorSubject)subject.hide()).getValue();
+        ((BehaviorSubject) subject.hide()).getValue();
         subject.onNext(11);
         subject.onNext(31);
         Disposable disposable = subject.hide().subscribe(integer -> System.out.println("integer = [" + integer + "]"));
@@ -65,7 +144,7 @@ public class RxJavaTest {
                     emitter.onNext(count + "\n");
                 }
             }
-        },  BackpressureStrategy.DROP)
+        }, BackpressureStrategy.DROP)
                 .observeOn(Schedulers.newThread(), false, 3)
                 .subscribe(new Subscriber<String>() {
                     @Override
@@ -98,9 +177,11 @@ public class RxJavaTest {
     public static class RxJava {
         private void doSomeWork() {
         }
+
         private Observable<String> getObservable() {
             return Observable.just("Cricket", "Football");
         }
+
         private Observer<String> getObserver() {
             return new Observer<String>() {
 

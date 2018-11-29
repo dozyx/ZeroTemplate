@@ -1,0 +1,19 @@
+apply plugin: 'findbugs'
+
+task findbugs(type: FindBugs, dependsOn: 'assembleRelease') {
+    description 'Find bugs mainly design flaws, bad practices, multithreaded correctness and code vulnerabilities.'
+    group 'verification'
+    excludeFilter = file("$project.rootDir/tools/rules-findbugs.xml")
+    // clases 配置分析的 class 文件位置，不同工程可能不一样
+    classes = fileTree("$project.buildDir/intermediates/javac")
+    source = fileTree('src/main/java')
+    effort 'max'
+    reportLevel = "high"
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = "$project.buildDir/outputs/findbugs/findbugs.html"
+    }
+}

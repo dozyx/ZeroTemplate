@@ -30,9 +30,7 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        for (String s:Collections.<String>emptyList()){
-            System.out.println(s);
-        }
+            System.out.println(0.0 ==0);
     }
     public static String formatComma(String amount) {
         double doubleAmount;
