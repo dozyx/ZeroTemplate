@@ -1,0 +1,4 @@
+// 集成全部的静态代码分析工具
+apply from: "$project.rootDir/tools/findbugs.gradle"
+apply from: "$project.rootDir/tools/checkstyle.gradle"
+apply from: "$project.rootDir/tools/pmd.gradle"
