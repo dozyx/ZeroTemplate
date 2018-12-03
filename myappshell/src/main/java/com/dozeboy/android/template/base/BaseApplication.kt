@@ -5,9 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.os.StrictMode
 
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
-import com.squareup.leakcanary.BuildConfig
+import com.dozeboy.android.template.BuildConfig
 import com.squareup.leakcanary.LeakCanary
 
 
@@ -40,15 +39,15 @@ abstract class BaseApplication : Application() {
         }
         super.onCreate()
         if (isMainProcess) {
-            initMainProcess()
+            initOnMainProcess()
         }
-        initAllProcess()
+        initOnAllProcess()
         initLeakCanary()
         Utils.init(this)
     }
 
-    abstract fun initMainProcess()
-    abstract fun initAllProcess()
+    abstract fun initOnMainProcess()
+    abstract fun initOnAllProcess()
 
     private fun initLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {

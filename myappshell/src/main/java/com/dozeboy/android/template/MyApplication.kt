@@ -7,11 +7,11 @@ import com.dozeboy.android.template.base.BaseApplication
  * @date 2018/11/23
  */
 class MyApplication : BaseApplication() {
-    override fun initMainProcess() {
+    override fun initOnMainProcess() {
 
     }
 
-    override fun initAllProcess() {
+    override fun initOnAllProcess() {
 
     }
 }
