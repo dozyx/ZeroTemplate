@@ -1,9 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: "$project.rootDir/tools/findbugs.gradle"
-apply from: "$project.rootDir/tools/checkstyle.gradle"
-apply from: "$project.rootDir/tools/pmd.gradle"
+apply from: "$project.rootDir/tools/allsca.gradle"
 android {
     compileSdkVersion 28
 
