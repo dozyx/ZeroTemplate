@@ -56,8 +56,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
             datas = randomStrings
-            val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-            itemDecoration.setDrawable(context?.resources?.getDrawable(R.drawable.abc_list_divider_material)!!)
+            val itemDecoration = DividerItemDecoration(context!!, CustomItemDecoration.VERTICAL)
             recycler_view.addItemDecoration(itemDecoration)
             recycler_view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<CustomViewHolder>() {
                 @SuppressLint("InflateParams")
