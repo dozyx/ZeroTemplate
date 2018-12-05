@@ -80,4 +80,5 @@ dependencies {
     implementation deps.mp_android_chart
     implementation deps.rx_lifecycle.android
     implementation deps.bar_util
+    implementation deps.utilcode
 }

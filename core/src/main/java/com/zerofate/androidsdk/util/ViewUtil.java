@@ -55,14 +55,14 @@ public final class ViewUtil {
 
     public static void transparentStatusBar(Activity activity) {
         //注意使用 android:fitsSystemWindows="true" 来避免视图被遮挡
-        if (Utils.hasLollipop()) {
+        if (VersionUtil.hasLollipop()) {
             View decorView = activity.getWindow().getDecorView();
             decorView.setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
             return;
         }
-        if (Utils.hasJellyBean()) {
+        if (VersionUtil.hasJellyBean()) {
             // 4.4 模拟器中使用此方式并没有完全透明，而是有种透明渐变的感觉，不过应该也能满足要求
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }

@@ -9,6 +9,8 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabGravity="center"
         android:paddingRight="15dp">
 
         <com.google.android.material.tabs.TabItem
@@ -25,7 +27,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7天无交易" />
+            android:text="7天" />
     </com.google.android.material.tabs.TabLayout>
 
 </LinearLayout>

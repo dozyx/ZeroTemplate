@@ -22,11 +22,11 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         setContentView(R.layout.activity_base_test)
     }
 
-    protected fun addButton(text: String, task: Runnable?): Button {
+    protected fun addButton(text: String, task: Runnable): Button {
         val button = Button(this)
         button.text = text
         button.setOnClickListener {
-            task?.run()
+            task.run()
         }
         flex_box.addView(button)
         return button

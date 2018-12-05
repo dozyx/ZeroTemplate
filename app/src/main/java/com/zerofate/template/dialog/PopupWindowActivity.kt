@@ -14,7 +14,7 @@ class PopupWindowActivity : BaseTestActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val button = addButton("显示", null)
+        val button = addButton("显示", Runnable {  })
         setButtonOnClickListener(button, Runnable {
             val window = PopupWindow(LayoutInflater.from(this@PopupWindowActivity).inflate(R.layout.popup_window, null), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             window.elevation = 50f

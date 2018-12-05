@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.androidsdk.util.Utils
+import com.zerofate.androidsdk.util.VersionUtil
 import com.zerofate.template.R
 import com.zerofate.template.util.Constants
 import kotlinx.android.synthetic.main.activity_spinner_test.*
@@ -57,7 +58,7 @@ class SpinnerTestActivity : AppCompatActivity() {
         }
         val imageView = ImageView(this)
         imageView.setImageResource(R.mipmap.ic_launcher_round)
-        if (Utils.hasLollipop()) {
+        if (VersionUtil.hasLollipop()) {
             window.elevation = 100f
         }
         //
