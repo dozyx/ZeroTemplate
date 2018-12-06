@@ -80,7 +80,8 @@
     <string name="view_chart_mp_chart">View/Chart/MPAndroidChart</string>
     <string name="view_status_bar">View/StatusBar</string>
     <string name="file_basic">File/Basic</string>
-    <string name="hardware_camera">Hardware/Camera</string>
+    <string name="hardware_camera">Hardware/Camera/Intent</string>
+    <string name="hardware_camera_control">Hardware/Camera/Control</string>
 
 
 </resources>

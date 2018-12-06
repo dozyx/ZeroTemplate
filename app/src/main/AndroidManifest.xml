@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".ZTApplication"
@@ -441,8 +442,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".hardware.CameraActivity"
+            android:name=".hardware.camera.CameraActivity"
             android:label="@string/hardware_camera">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".hardware.camera.CameraControlActivity"
+            android:label="@string/hardware_camera_control">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.zerofate.intent.category.sample" />

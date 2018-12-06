@@ -1,4 +1,4 @@
-package com.zerofate.template.hardware
+package com.zerofate.template.hardware.camera
 
 import android.app.Activity
 import android.content.Intent
@@ -13,7 +13,6 @@ import android.text.TextUtils
 import androidx.core.content.FileProvider
 import com.blankj.utilcode.util.ImageUtils
 import com.zerofate.androidsdk.util.PrintUtil
-import com.zerofate.androidsdk.util.VersionUtil
 
 import com.zerofate.template.base.BaseTestActivity
 import kotlinx.android.synthetic.main.activity_base_test.*

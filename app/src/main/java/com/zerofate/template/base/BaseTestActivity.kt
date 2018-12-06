@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -85,4 +87,9 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     override fun clearResult() {
         text_log.text = ""
     }
+
+    fun addView(view: View) {
+        linear_layout_in_scroll.addView(view)
+    }
+
 }
