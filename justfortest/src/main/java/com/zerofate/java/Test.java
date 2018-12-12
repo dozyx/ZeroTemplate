@@ -8,9 +8,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -30,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-            System.out.println("你好");
+            System.out.println(Math.sqrt(Math.pow(10 - 15, 2) + Math.pow(6 - 8, 2)));
     }
     public static String formatComma(String amount) {
         double doubleAmount;
