@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:orientation="horizontal"
+    android:useDefaultMargins="true">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="fitXY"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fitXY"
+            android:textColor="@color/colorAccent"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="fitCenter"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fitCenter"
+            android:textColor="@color/colorAccent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="center"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="center"
+            android:textColor="@color/colorAccent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="centerCrop"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="centerCrop"
+            android:textColor="@color/colorAccent"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="centerInside"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="centerInside"
+            android:textColor="@color/colorAccent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="fitEnd"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fitEnd"
+            android:textColor="@color/colorAccent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="matrix"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="matrix"
+            android:textColor="@color/colorAccent"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:scaleType="fitStart"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fitStart"
+            android:textColor="@color/colorAccent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:background="@android:color/background_dark"
+            android:src="@drawable/anime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="无"
+            android:textColor="@color/colorAccent" />
+    </FrameLayout>
+
+</GridLayout>
