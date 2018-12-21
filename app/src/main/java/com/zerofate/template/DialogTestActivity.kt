@@ -2,12 +2,11 @@ package com.zerofate.template
 
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.dozeboy.android.core.utli.log.ZLog
+import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.template.base.BaseTestActivity
 
 class DialogTestActivity : BaseTestActivity() {
@@ -26,7 +25,7 @@ class DialogTestActivity : BaseTestActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            ZLog.d("onCreate")
+            LogUtil.d("onCreate")
         }
 
         override fun onCreateView(
@@ -38,7 +37,7 @@ class DialogTestActivity : BaseTestActivity() {
         }
 
         override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater {
-            ZLog.d("onGetLayoutInflater")
+            LogUtil.d("onGetLayoutInflater")
             val inflater = super.onGetLayoutInflater(savedInstanceState)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                dialog.window.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent,null))

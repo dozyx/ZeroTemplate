@@ -21,10 +21,10 @@ import javax.xml.transform.stream.StreamSource
  * @author dozeboy
  * @date 2018/7/26
  */
-class ZLog private constructor() {
+class LogUtil private constructor() {
 
     companion object : ILog {
-        const val TAG = "ZLog"
+        const val TAG = "LogUtil"
         private const val JSON_INDENT = 2
 
         init {

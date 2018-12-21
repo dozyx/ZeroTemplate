@@ -1,6 +1,9 @@
 package com.zerofate.java;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
@@ -8,6 +11,8 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -28,8 +33,22 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        String s = "1";
-        System.out.println(s.getClass().equals(String.class));
+        for (int i = 0; i < 4; i++) {
+            a:
+            for (int j = 0; j < 5; j++) {
+                if(i == 1 && j == 2) {
+                    System.out.println("result: " + i + "," + j);
+                    break a;
+                }
+                System.out.println(i + "," + j);
+            }
+        }
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private static void testLocalDateTime() {
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM")));
     }
 
     public static String formatComma(String amount) {

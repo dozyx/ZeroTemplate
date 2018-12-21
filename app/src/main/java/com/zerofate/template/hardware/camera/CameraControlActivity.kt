@@ -6,7 +6,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.ViewGroup
 import com.dozeboy.android.core.utli.CameraUtil
-import com.dozeboy.android.core.utli.log.ZLog
+import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.template.base.BaseTestActivity
 import kotlinx.android.synthetic.main.activity_base_test.*
 
@@ -24,6 +24,7 @@ class CameraControlActivity : BaseTestActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         surfaceView = SurfaceView(this)
+        surfaceView.background = getDrawable(android.R.color.transparent)
         val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 500)
         surfaceView.layoutParams = params
         addView(surfaceView)
@@ -31,13 +32,15 @@ class CameraControlActivity : BaseTestActivity() {
         holder = surfaceView.holder.apply {
             addCallback(object : SurfaceHolder.Callback {
                 override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-
+                    LogUtil.d("CameraControlActivity.surfaceChanged: ")
                 }
 
                 override fun surfaceDestroyed(holder: SurfaceHolder?) {
+                    LogUtil.d("CameraControlActivity.surfaceDestroyed: ")
                 }
 
                 override fun surfaceCreated(holder: SurfaceHolder?) {
+                    LogUtil.d("CameraControlActivity.surfaceCreated: ")
                 }
             })
             setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
@@ -73,7 +76,7 @@ class CameraControlActivity : BaseTestActivity() {
             }
             true
         } catch (e: Exception) {
-            ZLog.e(e)
+            LogUtil.e(e)
             false
         }
     }

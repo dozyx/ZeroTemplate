@@ -1,14 +1,10 @@
 package com.zerofate.template.justfortest
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
-import com.dozeboy.android.core.utli.log.ZLog
-import com.noober.background.BackgroundLibrary
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.tencent.mmkv.MMKV
 import com.zerofate.androidsdk.util.ToastX
 import timber.log.Timber
 

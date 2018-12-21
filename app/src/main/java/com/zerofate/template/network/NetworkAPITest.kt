@@ -4,17 +4,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 
 import com.android.volley.Request
-import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
-import com.dozeboy.android.core.utli.log.ZLog
-import com.zerofate.androidsdk.util.ToastX
+import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.template.base.BaseShowResultActivity
 
 import java.io.IOException
@@ -127,7 +123,7 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
     private fun startDownloadWithRetrofit() {
         val retrofit = Retrofit.Builder().baseUrl(URL_STRING).build()
         val service = retrofit.create(IBaiduHomePage::class.java)
-        ZLog.d("startDownloadWithRetrofit: " + service + " & " + retrofit.create(IBaiduHomePage::class.java))
+        LogUtil.d("startDownloadWithRetrofit: " + service + " & " + retrofit.create(IBaiduHomePage::class.java))
         var call: retrofit2.Call<ResponseBody> = service.data
         for (i in 0..9) {
             if (call.isExecuted) {

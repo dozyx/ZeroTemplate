@@ -10,7 +10,7 @@ task findbugs(type: FindBugs, dependsOn: 'assembleRelease') {
     classes = fileTree("$project.buildDir/intermediates/javac")
     source = fileTree('src/main/java')
     effort 'max'
-    reportLevel = "high"
+    reportLevel = "low"
     classpath = files()
 
     reports {

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.dozeboy.android.core.utli.log.ZLog
+import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
@@ -20,11 +20,11 @@ class ListViewActivity : BaseSingleFragmentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        ZLog.d("onDestroy: ")
+        LogUtil.d("onDestroy: ")
     }
 
     override fun onDetachedFromWindow() {
-        ZLog.d("onDetachedFromWindow: ")
+        LogUtil.d("onDetachedFromWindow: ")
         super.onDetachedFromWindow()
     }
 
@@ -53,7 +53,7 @@ class ListViewActivity : BaseSingleFragmentActivity() {
             adapter = object :
                 ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, data) {
                 override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-                    ZLog.d("getView: $position")
+                    LogUtil.d("getView: $position")
                     val viewHolder: ViewHolder
                     if (convertView != null) {
                         viewHolder = convertView.tag as ViewHolder
@@ -79,17 +79,17 @@ class ListViewActivity : BaseSingleFragmentActivity() {
         }
 
         override fun onDestroyView() {
-            ZLog.d("onDestroyView: ")
+            LogUtil.d("onDestroyView: ")
             super.onDestroyView()
         }
 
         override fun onDestroy() {
-            ZLog.d("onDestroy: ")
+            LogUtil.d("onDestroy: ")
             super.onDestroy()
         }
 
         override fun onDetach() {
-            ZLog.d("onDetach: ")
+            LogUtil.d("onDetach: ")
             super.onDetach()
         }
     }

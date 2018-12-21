@@ -1,9 +1,8 @@
 package com.zerofate.template.view.recyclerview
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
-import com.dozeboy.android.core.utli.log.ZLog
+import com.dozeboy.android.core.utli.log.LogUtil
 
 /**
  * @author dozeboy
@@ -21,7 +20,7 @@ class MyRecyclerView : androidx.recyclerview.widget.RecyclerView {
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        ZLog.d("onDetachedFromWindow: ")
+        LogUtil.d("onDetachedFromWindow: ")
     }
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {

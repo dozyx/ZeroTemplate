@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.dozeboy.android.core.utli.log.ZLog
+import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
@@ -49,7 +49,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
-            ZLog.d("onCreateView: ")
+            LogUtil.d("onCreateView: ")
             return inflater.inflate(R.layout.activity_recycler_view_test, container, false)
         }
 
@@ -93,17 +93,17 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
 
         override fun onDestroyView() {
             super.onDestroyView()
-            ZLog.d("onDestroyView: ")
+            LogUtil.d("onDestroyView: ")
         }
 
         override fun onDestroy() {
             super.onDestroy()
-            ZLog.d("onDestroy: ")
+            LogUtil.d("onDestroy: ")
         }
 
         override fun onDetach() {
             super.onDetach()
-            ZLog.d("onDetach: ")
+            LogUtil.d("onDetach: ")
         }
     }
 
