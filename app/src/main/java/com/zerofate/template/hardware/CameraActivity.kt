@@ -66,7 +66,6 @@ class CameraActivity : BaseTestActivity() {
 
     private fun takeFullSizePictureByIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        // 返回的是图片的缩略图
         if (takePictureIntent.resolveActivity(packageManager) != null) {
             val file: File? = try {
                 createImageFile()

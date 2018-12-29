@@ -42,7 +42,13 @@
             android:enabled="true"
             android:process=":service" />
 
-        <activity android:name=".DataBindingTestActivity" android:exported="true"/>
+        <activity
+            android:name=".DataBindingTestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NavigationDrawerActivity"
+            android:label="@string/title_activity_navigation_drawer"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

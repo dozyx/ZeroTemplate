@@ -1,19 +1,22 @@
 package com.dozeboy.android.template
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.blankj.utilcode.util.ActivityUtils
-import com.dozeboy.android.core.utli.log.ZLog
-import com.dozeboy.android.core.utli.util.ColorUtil
+import androidx.appcompat.app.ActionBarDrawerToggle
+import com.dozeboy.android.template.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        view_root.setBackgroundColor(ColorUtil.random())
-        text.setOnClickListener { ActivityUtils.startActivity(this@MainActivity.javaClass) }
+        setupDrawer()
+    }
+
+    private fun setupDrawer() {
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
     }
 }

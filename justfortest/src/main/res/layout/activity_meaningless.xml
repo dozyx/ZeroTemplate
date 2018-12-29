@@ -68,6 +68,15 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:text="111111122222" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="25dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"/>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 

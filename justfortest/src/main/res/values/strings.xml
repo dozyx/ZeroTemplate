@@ -3,4 +3,11 @@
     <string name="money_yuan">￥%s</string>
     <string name="style_text">&lt;font color="#ff0000">你好啊&lt;/font>你好啊&lt;font color="#00ff00">你好啊&lt;/font></string>
     <string name="style_text2"><![CDATA[<font color="#ff0000">你好啊</font>你<b>好</b>啊<font color="#00ff00">你好啊</font>]]></string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
