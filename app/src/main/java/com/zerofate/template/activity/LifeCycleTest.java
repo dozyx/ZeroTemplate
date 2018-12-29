@@ -1,5 +1,6 @@
 package com.zerofate.template.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.zerofate.template.base.BaseShowResultActivity;
@@ -33,6 +34,12 @@ public class LifeCycleTest extends BaseShowResultActivity {
     protected void onRestart() {
         super.onRestart();
         appendResult("onRestart ->");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        appendResult("onNewIntent ->");
     }
 
     @Override

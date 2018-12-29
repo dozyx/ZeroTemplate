@@ -12,12 +12,18 @@
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorAccent"
         app:bl_corners_radius="8dp" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/switch_thumb"
+        app:layout_constraintLeft_toRightOf="@id/button"/>
 
     <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="11111"
+        android:text="11111***"
         app:layout_constraintRight_toLeftOf="@+id/text2"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -26,9 +32,12 @@
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="22222222"
+        android:text="*****"
+        android:gravity="center"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="10dp"
+        android:includeFontPadding="false"
+        app:layout_constraintBaseline_toBaselineOf="@id/text1"
         app:layout_constraintLeft_toRightOf="@+id/text1" />
 
     <androidx.appcompat.widget.AppCompatTextView

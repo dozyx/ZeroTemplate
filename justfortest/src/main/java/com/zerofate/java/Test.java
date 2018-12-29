@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -32,18 +33,10 @@ import java.util.regex.Pattern;
  */
 
 public class Test {
-    public static void main(String[] args) throws ParseException {
-        for (int i = 0; i < 4; i++) {
-            a:
-            for (int j = 0; j < 5; j++) {
-                if(i == 1 && j == 2) {
-                    System.out.println("result: " + i + "," + j);
-                    break a;
-                }
-                System.out.println(i + "," + j);
-            }
-        }
+    private static final Boolean lock = Boolean.TRUE;
 
+    public static void main(String[] args) throws ParseException {
+        System.out.println("args = [" + args + "]");
     }
 
     @TargetApi(Build.VERSION_CODES.O)
