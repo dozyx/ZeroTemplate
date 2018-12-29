@@ -1,15 +1,10 @@
 package com.zerofate.template.justfortest
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Button
-import com.dozeboy.android.core.utli.log.ZLog
-import com.noober.background.BackgroundLibrary
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.tencent.mmkv.MMKV
-import com.zerofate.androidsdk.util.ToastX
+import kotlinx.android.synthetic.main.activity_meaningless.*
 import timber.log.Timber
 
 
@@ -20,12 +15,11 @@ class MeaninglessActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
-        findViewById<Button>(R.id.button).setOnClickListener {
-            ToastX.showShort(this,"")
+        button.setOnClickListener {
+            switch_test.isChecked = !switch_test.isChecked
         }
         Timber.plant(Timber.DebugTree())
         Timber.d("debugTree")
-
         Logger.addLogAdapter(object :AndroidLogAdapter(){
             override fun isLoggable(priority: Int, tag: String?): Boolean {
                 return false
@@ -33,6 +27,7 @@ class MeaninglessActivity : AppCompatActivity() {
         })
         Logger.addLogAdapter(AndroidLogAdapter())
         Logger.d("logger")
+        switch_test.isChecked = true
     }
 
 

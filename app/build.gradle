@@ -26,6 +26,9 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.config
+            splits.abi.enable = false
+            splits.density.enable = false
+            aaptOptions.cruncherEnabled = false
         }
         release {
             minifyEnabled true
@@ -42,6 +45,17 @@ android {
     }
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
+    }
+
+    flavorDimensions "mode"
+    productFlavors {
+        getThisObject().properties.clear()
+        this.properties.clear()
+        development{
+            // 避免使用 Legacy Multidex 以加快编译，注意：实际开发中，IDE 判断的最小sdk会变成这个
+            minSdkVersion build_versions.min_sdk_debug
+            resConfigs("xhdpi")
+        }
     }
 }
 

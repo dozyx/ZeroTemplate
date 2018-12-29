@@ -21,7 +21,7 @@ class LoggerLogcatTree : Timber.Tree() {
         val formatStrategy =
             PrettyFormatStrategy.newBuilder().logStrategy(logStrategy).showThreadInfo(false)
                 .methodCount(2)
-                .methodOffset(6).tag(ZLog.TAG).build()
+                .methodOffset(6).tag(LogUtil.TAG).build()
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
     }
 

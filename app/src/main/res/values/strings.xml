@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">ZeroTemplate</string>
     <!--activity-->
-    <string name="activity_life_cycle">activity/生命周期</string>
-    <string name="activity_launch_mode">activity/启动模式</string>
+    <string name="activity_life_cycle">Activity/生命周期</string>
+    <string name="activity_launch_mode">Activity/启动模式</string>
 
     <!--fragment-->
-    <string name="fragment_life_cycle">fragment/生命周期</string>
+    <string name="fragment_life_cycle">Fragment/生命周期</string>
 
     <!--service-->
-    <string name="service_life_cycle">service/生命周期</string>
+    <string name="service_life_cycle">Service/生命周期</string>
 
     <!--view-->
     <string name="view_custom">View/自定义</string>
@@ -20,11 +20,11 @@
     <string name="view_spinner">View/Spinner测试</string>
 
     <!--design-->
-    <string name="design_behavior">design/behavior</string>
+    <string name="design_behavior">Design/Behavior</string>
 
     <!--网络-->
     <string name="network_basic">网络/基本</string>
-    <string name="network_socket">网络/socket</string>
+    <string name="network_socket">网络/Socket</string>
     <string name="network_api">网络/API测试</string>
 
     <!--数据存储-->
@@ -44,43 +44,42 @@
     <!--data-->
     <string name="data_parcelable">Data/Parcelable</string>
 
-    <string name="title_draw_color">drawColor()</string>
-    <string name="title_draw_circle">drawCircle()</string>
-    <string name="title_draw_rect">drawRect()</string>
-    <string name="title_draw_point">drawPoint()</string>
-    <string name="title_draw_oval">drawOval()</string>
-    <string name="title_draw_line">drawLine()</string>
-    <string name="title_draw_round_rect">drawRoundRect()</string>
-    <string name="title_draw_arc">drawArc()</string>
-    <string name="title_draw_path">drawPath()</string>
+    <string name="title_draw_color">DrawColor()</string>
+    <string name="title_draw_circle">DrawCircle()</string>
+    <string name="title_draw_rect">DrawRect()</string>
+    <string name="title_draw_point">DrawPoint()</string>
+    <string name="title_draw_oval">DrawOval()</string>
+    <string name="title_draw_line">DrawLine()</string>
+    <string name="title_draw_round_rect">DrawRoundRect()</string>
+    <string name="title_draw_arc">DrawArc()</string>
+    <string name="title_draw_path">DrawPath()</string>
     <string name="title_draw_histogram">直方图</string>
     <string name="title_draw_pie_chart">饼图</string>
     <string name="action_settings">Settings</string>
     <string name="security_permission">安全/权限</string>
     <string name="view_life">View/生命周期</string>
     <string name="view_recyclerview">View/RecyclerView</string>
-    <string name="animation_fragment">动画/fragment切换</string>
+    <string name="animation_fragment">动画/Fragment切换</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="arhitecture_navigation">ArchitectureComponent/Navigation</string>
     <string name="view_list">View/ListView</string>
     <string name="arch_live_data">Arch/LiveData</string>
-    <string name="view_surface">view/surface</string>
-    <string name="title_activity_drawer_tool_bar">view/drawer_toolbar</string>
+    <string name="view_surface">View/surface</string>
+    <string name="title_activity_drawer_tool_bar">View/drawer_toolbar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="view_toolbar">view/toolbar</string>
+    <string name="view_toolbar">View/Toolbar</string>
     <string name="dialog_popup_window">Dialog/PopupWindow</string>
     <string name="drawable_tint">Drawable/Tint</string>
     <string name="design_tablayout">Design_TabLayout</string>
     <string name="view_chart_mp_chart">View/Chart/MPAndroidChart</string>
     <string name="view_status_bar">View/StatusBar</string>
     <string name="file_basic">File/Basic</string>
-    <string name="hardware_camera">Hardware/Camera</string>
+    <string name="hardware_camera">Hardware/Camera/Intent</string>
+    <string name="hardware_camera_control">Hardware/Camera/Control</string>
+    <string name="view_pager">View/ViewPager</string>
 
 
 </resources>

@@ -1,6 +1,9 @@
 package com.zerofate.java;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
@@ -8,9 +11,10 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -29,9 +33,17 @@ import java.util.regex.Pattern;
  */
 
 public class Test {
+    private static final Boolean lock = Boolean.TRUE;
+
     public static void main(String[] args) throws ParseException {
-            System.out.println("你好");
+        System.out.println("args = [" + args + "]");
     }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private static void testLocalDateTime() {
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM")));
+    }
+
     public static String formatComma(String amount) {
         double doubleAmount;
         try {
@@ -44,17 +56,18 @@ public class Test {
 
     private static void testStringToHex() {
         String str = "A20670100203020180000250323600064710300633522704008C7B641250500881025007";
-        String interger = "413230363730313030323033303230313830303030323530333233363030303634373130333030363333353232373034303038433742363431323530353030383831303235303037";
-        System.out.println(new BigInteger(str,16));
+        String interger =
+                "413230363730313030323033303230313830303030323530333233363030303634373130333030363333353232373034303038433742363431323530353030383831303235303037";
+        System.out.println(new BigInteger(str, 16));
         System.out.println(String.format("%040x", new BigInteger(1, str.getBytes())));
         System.out.println(String.format("%x", new BigInteger(1, str.getBytes())));
         System.out.println(String.format("%x", 10));
         System.out.println(new BigInteger(1, str.getBytes()));
         System.out.println(String.format("%040x", 10));
-        System.out.println(String.format("%03d","11111".length()));
+        System.out.println(String.format("%03d", "11111".length()));
     }
 
-    private static <T> boolean isAssignableFrom( T type){
+    private static <T> boolean isAssignableFrom(T type) {
         return String.class.isAssignableFrom(type.getClass());
     }
 
