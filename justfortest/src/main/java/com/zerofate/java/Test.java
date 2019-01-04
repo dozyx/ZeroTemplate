@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 
 import com.google.gson.Gson;
+import com.zerofate.java.bean.GsonBean;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -36,8 +37,10 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println("args = [" + args + "]");
+        System.out.println(String.format("%-3d",1));
     }
+
+
 
     @TargetApi(Build.VERSION_CODES.O)
     private static void testLocalDateTime() {

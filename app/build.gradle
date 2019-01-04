@@ -62,7 +62,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation deps.constraint_layout
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-beta02', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -70,7 +70,7 @@ dependencies {
     implementation project(':model')
     implementation project(':core-kotlin')
     implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation deps.constraint_layout
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor
     implementation 'androidx.percentlayout:percentlayout:1.0.0'

@@ -77,7 +77,7 @@ android.applicationVariants.all { variant ->
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation deps.constraint_layout
     testImplementation deps.junit
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation deps.butterknife.runtime
@@ -101,6 +101,8 @@ dependencies {
     implementation deps.background
     implementation deps.timber
     implementation deps.logger
+    implementation deps.flexbox
+    implementation deps.support.gridlayout
 }
 repositories {
     mavenCentral()

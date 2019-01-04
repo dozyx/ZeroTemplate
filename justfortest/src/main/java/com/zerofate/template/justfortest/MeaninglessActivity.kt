@@ -2,6 +2,7 @@ package com.zerofate.template.justfortest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.chip.ChipGroup
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_meaningless.*
