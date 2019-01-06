@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.zerofate.template.base.BaseShowResultActivity;
 
 public class CountDownActivity extends BaseShowResultActivity {
