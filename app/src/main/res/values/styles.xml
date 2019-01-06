@@ -10,6 +10,14 @@
         <item name="actionMenuTextColor">@color/colorAccent</item>
     </style>
 
+    <style name="Translucent" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="TranslucentDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <style name="AppTheme.ActionBar">
         <item name="actionMenuTextColor">@color/colorAccent</item>
     </style>

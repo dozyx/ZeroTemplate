@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.dozeboy.android.sample.navigation.R
+import kotlinx.android.synthetic.main.fragment_read_card.*
 
 /**
  * @author dozeboy

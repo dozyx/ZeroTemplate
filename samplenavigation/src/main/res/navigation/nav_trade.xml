@@ -28,7 +28,7 @@
         <argument
             android:name="amount"
             android:defaultValue="1"
-            app:type="string" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/tradeSignFragment"

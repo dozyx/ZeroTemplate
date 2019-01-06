@@ -1,50 +1,9 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply from: "$project.rootDir/tools/allsca.gradle"
+apply from: "${rootDir}/config_app.gradle"
 
-android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_tools
-
-    signingConfigs {
-        config {
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
-            storeFile file(STORE_FILE)
-            storePassword STORE_PASSWORD
-        }
-    }
+android{
     defaultConfig {
-        applicationId "com.zerofate.template"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
         versionCode 10000
         versionName "1.0.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.config
-            splits.abi.enable = false
-            splits.density.enable = false
-            aaptOptions.cruncherEnabled = false
-        }
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-        }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
-    dataBinding {
-        enabled = true
-    }
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
     }
 
     flavorDimensions "mode"

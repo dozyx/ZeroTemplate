@@ -1,32 +1,9 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply from: "${rootDir}/config_app.gradle"
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-
-
-
     defaultConfig {
-        applicationId "com.zerofate.template.app_float"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        versionCode 10000
+        versionName "1.0.0"
     }
 }
 

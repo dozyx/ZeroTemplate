@@ -1,7 +1,8 @@
 package com.dozeboy.android.core.utli.log
 
+import android.content.Context
 import android.text.TextUtils
-import com.zerofate.android.core.BuildConfig
+import com.dozeboy.android.core.ex.debuggable
 import org.jetbrains.annotations.NonNls
 import org.json.JSONArray
 import org.json.JSONException
@@ -22,13 +23,17 @@ import javax.xml.transform.stream.StreamSource
  * @date 2018/7/26
  */
 class LogUtil private constructor() {
-
     companion object : ILog {
         const val TAG = "LogUtil"
+        var isDebug = false
         private const val JSON_INDENT = 2
 
-        init {
-            Timber.plant(if (BuildConfig.DEBUG) LoggerLogcatTree() else RemoteLogTree())
+        fun init(context: Context, debugTree: Timber.Tree, releaseTree: Timber.Tree) {
+            if (context.debuggable()) {
+                Timber.plant(debugTree)
+            } else {
+                Timber.plant(releaseTree)
+            }
         }
 
         override fun v(@NonNls message: String, vararg args: Any) {

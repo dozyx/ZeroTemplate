@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Base.V21.AppTheme" parent="Base.V0.AppTheme">
-
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 
     <style name="AppTheme" parent="Base.V21.AppTheme">

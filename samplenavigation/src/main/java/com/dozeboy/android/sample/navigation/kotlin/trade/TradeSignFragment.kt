@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dozeboy.android.sample.navigation.R
+import kotlinx.android.synthetic.main.fragment_trade_sign.*
 
 /**
  * @author dozeboy

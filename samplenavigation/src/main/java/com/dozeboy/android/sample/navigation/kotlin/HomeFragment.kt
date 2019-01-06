@@ -5,13 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.dozeboy.android.sample.navigation.R
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * @author dozeboy
  * @date 2018/7/19
  */
-class HomeFragment : androidx.fragment.app.Fragment() {
+class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

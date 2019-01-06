@@ -32,7 +32,7 @@ versions.okhttp = "3.11.0"
 versions.leakcanary = "1.6.2"
 versions.butterknife = "9.0.0-rc1"
 versions.support = "27.1.1"
-versions.constraint_layout = "1.1.0"
+versions.constraint_layout = "1.1.3"
 versions.multidex = "1.0.1"
 versions.convenient_banner = "2.0.5"
 versions.loop_view = "0.1.2"
@@ -73,6 +73,7 @@ versions.rx_android = '2.1.0'
 versions.bar_util = '1.5.1'
 versions.rxjava_adapter = '2.5.0'
 versions.background = '1.3.1'
+versions.appcompat = '1.0.2'
 
 def deps = [:]
 
@@ -152,7 +153,7 @@ deps.bugly_native = "com.tencent.bugly:nativecrashreport:$versions.bugly_native"
 deps.async_http = "com.loopj.android:android-async-http:$versions.async_http"
 deps.ucrop = "com.yalantis:ucrop:$versions.ucrop"
 deps.bga_refresh_layout = "cn.bingoogolapple:bga-refreshlayout:$versions.bga_refresh_layout@aar"
-deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 deps.multidex = "com.android.support:multidex:$versions.multidex"
 deps.convenient_banner = "com.bigkoo:convenientbanner:$versions.convenient_banner"
 deps.loop_view = "com.weigan:loopView:$versions.loop_view"
@@ -186,6 +187,7 @@ deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
 deps.bar_util = "com.jaeger.statusbarutil:library:$versions.bar_util"
 deps.rxjava_adapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.rxjava_adapter"
 deps.background = "com.noober.background:core:$versions.background"
+deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
 ext.deps = deps
 
 def classpath = [:]

@@ -3,18 +3,32 @@ package com.zerofate.template.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.zerofate.template.R;
 import com.zerofate.template.base.BaseShowResultActivity;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class LifeCycleTest extends BaseShowResultActivity {
 
     @Override
     protected String[] getButtonText() {
-        return new String[]{"清空"};
+        return new String[]{"启动", "清空", "Dialog"};
     }
 
     @Override
     public void onButton1() {
+        startActivity(new Intent(this, LifeCycleTest.class));
+    }
+
+    @Override
+    public void onButton2() {
         setText("");
+    }
+
+    @Override
+    public void onButton3() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TranslucentDialog);
+        builder.setMessage("哈哈哈").show();
     }
 
     @Override

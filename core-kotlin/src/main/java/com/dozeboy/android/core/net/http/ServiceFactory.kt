@@ -1,6 +1,6 @@
 package com.dozeboy.android.core.net.http
 
-import com.zerofate.android.core.BuildConfig
+import com.dozeboy.android.core.utli.util.Util
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,8 +22,8 @@ object ServiceFactory {
     private val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
 
     init {
-        loggingInterceptor.level =
-                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        loggingInterceptor.level = 
+                if (Util.isDebug) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -32,7 +32,7 @@ object ServiceFactory {
         var service = serviceCache[serviceWrapper]
         if (service == null) {
             val builder = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             if (interceptor != null) {
                 builder.client(getClientBuilder().addInterceptor(interceptor).build())
             }
@@ -44,7 +44,7 @@ object ServiceFactory {
 
     private fun getClientBuilder(): OkHttpClient.Builder {
         return OkHttpClient.Builder().connectTimeout(TIME_OUT_CONNECT, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT_READ, TimeUnit.SECONDS).addInterceptor(loggingInterceptor)
+                .readTimeout(TIME_OUT_READ, TimeUnit.SECONDS).addInterceptor(loggingInterceptor)
     }
 
 

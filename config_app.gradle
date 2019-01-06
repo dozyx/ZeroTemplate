@@ -1,0 +1,71 @@
+apply {
+    plugin "com.android.application"
+}
+apply from: "$project.rootDir/tools/allsca.gradle"
+
+configSigning project
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        applicationId "com.zerofate.${suffix}"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            splits.abi.enable = false
+            splits.density.enable = false
+            aaptOptions.cruncherEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+
+dependencies {
+    // LeakCanary
+    debugImplementation deps.leakcanary.debug
+    debugImplementation deps.leakcanary.debug_support
+    releaseImplementation deps.leakcanary.release
+}
+
+private String getSuffix() {
+    String[] splits = project.name.split("-")
+    return splits[0]
+}
+
+def configSigning(Project pro) {
+
+    println "$pro.name config sign start..."
+    pro.android {
+        signingConfigs {
+            release {
+                keyAlias KEY_ALIAS
+                keyPassword KEY_PASSWORD
+                storeFile file(STORE_FILE)
+                storePassword STORE_PASSWORD
+            }
+        }
+        buildTypes.release.signingConfig signingConfigs.release
+    }
+    println "$pro.name config sign end..."
+}
