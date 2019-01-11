@@ -1,45 +1,21 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply from: "${rootDir}/config_app.gradle"
+apply from: "${rootDir}/config_kt.gradle"
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-
-    signingConfigs {
-        config {
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
-            storeFile file(STORE_FILE)
-            storePassword STORE_PASSWORD
-        }
-    }
-
-    dataBinding {
-        enabled = true
-    }
     defaultConfig {
-        applicationId "com.zerofate.template.justfortest"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.traget_sdk
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        versionCode 10001
+        versionName "1.0.1"
     }
-
     def env
     buildTypes {
         debug {
             env = "0"
-            signingConfig signingConfigs.config
             resValue("string", "PORT_NUMBER", "8200")
         }
         release {
             env = "1"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
         buildTypes.each {
             it.buildConfigField("int", "ENV", env)
@@ -53,11 +29,6 @@ android {
         baidu {
             dimension "default"
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 android.applicationVariants.all { variant ->

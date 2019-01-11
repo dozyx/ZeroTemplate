@@ -2,6 +2,7 @@ package com.zerofate.template.justfortest
 
 import android.app.Application
 import android.util.Log
+import com.frogermcs.androiddevmetrics.AndroidDevMetrics
 
 /**
  * @author dozeboy
@@ -14,6 +15,9 @@ class MyApplication : Application(), Thread.UncaughtExceptionHandler {
         super.onCreate()
         uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(this)
+        if (BuildConfig.DEBUG){
+            AndroidDevMetrics.initWith(this)
+        }
     }
 
     override fun uncaughtException(t: Thread, e: Throwable) {

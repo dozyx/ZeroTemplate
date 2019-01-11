@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dozeboy.sample1.di;
+package com.zerofate.template.justfortest.di;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

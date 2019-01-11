@@ -12,5 +12,6 @@ dependencies {
     api deps.appcompat
     api deps.constraint_layout
     api deps.retrofit.runtime
+    api deps.gson
     implementation deps.okhttp.logging
 }

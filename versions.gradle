@@ -74,6 +74,7 @@ versions.bar_util = '1.5.1'
 versions.rxjava_adapter = '2.5.0'
 versions.background = '1.3.1'
 versions.appcompat = '1.0.2'
+versions.androiddevmetrics = '0.6'
 
 def deps = [:]
 
@@ -194,4 +195,5 @@ def classpath = [:]
 classpath.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 classpath.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 classpath.gradle_versions_plugin = "com.github.ben-manes:gradle-versions-plugin:$versions.gradle_versions_plugin"
+classpath.androiddevmetrics = "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androiddevmetrics"
 ext.classpath = classpath

@@ -1,9 +1,8 @@
-package com.dozeboy.sample1.di;
+package com.zerofate.template.justfortest.di;
 
 import android.app.Application;
 
-import com.dozeboy.sample1.MainActivity;
-import com.squareup.haha.perflib.Main;
+import com.google.gson.Gson;
 
 import javax.inject.Singleton;
 
@@ -18,6 +17,7 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 public interface AppComponent {
     Application application();
+    Gson gson();
 
     @Component.Builder
     interface Builder {
