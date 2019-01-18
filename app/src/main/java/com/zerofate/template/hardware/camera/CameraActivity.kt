@@ -13,9 +13,7 @@ import android.text.TextUtils
 import androidx.core.content.FileProvider
 import com.blankj.utilcode.util.ImageUtils
 import com.zerofate.androidsdk.util.PrintUtil
-
 import com.zerofate.template.base.BaseTestActivity
-import kotlinx.android.synthetic.main.activity_base_test.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat

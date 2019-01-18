@@ -1,6 +1,5 @@
 package com.zerofate.template.socket;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.zerofate.template.base.BaseShowResultActivity;
@@ -13,7 +12,7 @@ public class SocketTestActivity extends BaseShowResultActivity {
 
     @Override
     public void onButton1() {
-        for (int i= 0;i<65535;i++){
+        for (int i = 0; i < 65535; i++) {
         }
     }
 

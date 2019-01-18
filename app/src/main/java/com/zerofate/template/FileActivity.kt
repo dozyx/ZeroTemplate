@@ -1,6 +1,5 @@
 package com.zerofate.template
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.DIRECTORY_PICTURES

@@ -1,16 +1,14 @@
 package com.zerofate.template.view
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.zerofate.template.R
-import kotlinx.android.synthetic.main.activity_drawer_tool_bar.*
-import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.*
 
 class DrawerToolBarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,11 +19,11 @@ class DrawerToolBarActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+                    .setAction("Action", null).show()
         }
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         toggle.setHomeAsUpIndicator(R.drawable.ic_menu_camera)
         drawer_layout.addDrawerListener(toggle)

@@ -1,15 +1,16 @@
 package com.zerofate.template.socket;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zerofate.template.R;
 import com.zerofate.template.util.Utils;
@@ -95,7 +96,7 @@ public class SocketActivity extends AppCompatActivity {
     public void onClick() {
         final String msg = mSendEdit.getText().toString();
         if (!TextUtils.isEmpty(msg) && mPrintWriter != null) {
-            new Thread(){
+            new Thread() {
                 @Override
                 public void run() {
                     mPrintWriter.println(msg);

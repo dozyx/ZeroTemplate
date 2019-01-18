@@ -9,7 +9,6 @@
         </shape>
     </item>
     <item>
-        <clip android:drawable="@color/colorAccent">
-        </clip>
+        <clip android:drawable="@color/colorAccent"></clip>
     </item>
 </layer-list>

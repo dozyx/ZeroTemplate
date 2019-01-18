@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Process;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
+
+import java.util.List;
 
 /**
  * Created by zero on 2017/8/24.

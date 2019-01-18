@@ -3,13 +3,14 @@ package com.zerofate.template.aidl;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zerofate.template.R;
 import com.zerofate.template.util.Constants;

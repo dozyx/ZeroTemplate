@@ -17,6 +17,7 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 public interface AppComponent {
     Application application();
+
     Gson gson();
 
     @Component.Builder

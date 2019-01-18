@@ -22,7 +22,7 @@ object ServiceFactory {
     private val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
 
     init {
-        loggingInterceptor.level = 
+        loggingInterceptor.level =
                 if (Util.isDebug) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
     }
 

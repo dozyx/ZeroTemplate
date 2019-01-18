@@ -21,7 +21,7 @@ abstract class BaseApplication : Application() {
             var processName = ""
             val pid = android.os.Process.myPid()
             val activityManager = getSystemService(
-                Context.ACTIVITY_SERVICE
+                    Context.ACTIVITY_SERVICE
             ) as ActivityManager
             val allProcesses = activityManager.runningAppProcesses
             for (process in allProcesses) {
@@ -58,18 +58,18 @@ abstract class BaseApplication : Application() {
 
     private fun configStrictMode() {
         StrictMode.setThreadPolicy(
-            StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build()
+                StrictMode.ThreadPolicy.Builder()
+                        .detectAll()
+                        .penaltyLog()
+                        .build()
         )
 
         StrictMode.setVmPolicy(
-            StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects()
-                .penaltyLog()
-                .penaltyDeath()
-                .build()
+                StrictMode.VmPolicy.Builder()
+                        .detectLeakedSqlLiteObjects()
+                        .penaltyLog()
+                        .penaltyDeath()
+                        .build()
         )
     }
 }

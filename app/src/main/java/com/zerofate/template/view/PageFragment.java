@@ -1,19 +1,22 @@
 package com.zerofate.template.view;
 
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.zerofate.template.R;
 
 public class PageFragment extends Fragment {
-    @LayoutRes int sampleLayoutRes;
-    @LayoutRes int practiceLayoutRes;
+    @LayoutRes
+    int sampleLayoutRes;
+    @LayoutRes
+    int practiceLayoutRes;
 
     public static PageFragment newInstance(@LayoutRes int sampleLayoutRes, @LayoutRes int practiceLayoutRes) {
         PageFragment fragment = new PageFragment();
@@ -26,7 +29,8 @@ public class PageFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
 
         ViewStub sampleStub = (ViewStub) view.findViewById(R.id.sampleStub);

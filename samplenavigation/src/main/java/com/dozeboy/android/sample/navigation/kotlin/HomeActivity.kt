@@ -1,12 +1,12 @@
 package com.dozeboy.android.sample.navigation.kotlin
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.dozeboy.android.sample.navigation.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
 
@@ -15,7 +15,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
+                .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
         setupBottomNavMenu(host.navController)
     }
 

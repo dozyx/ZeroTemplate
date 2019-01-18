@@ -2,16 +2,11 @@ package com.zerofate.template.view
 
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import androidx.core.app.ActivityCompat
-import com.jaeger.library.StatusBarUtil
+import androidx.core.content.ContextCompat
 import com.zerofate.template.R
 import com.zerofate.template.base.BaseTestActivity
-import androidx.core.content.ContextCompat
 
 
 class StatusBarActivity : BaseTestActivity() {
@@ -31,8 +26,8 @@ class StatusBarActivity : BaseTestActivity() {
         }*/
 
         getWindow()
-            .getDecorView()
-            .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+                .getDecorView()
+                .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
 
 
         addButton("light mode", Runnable {

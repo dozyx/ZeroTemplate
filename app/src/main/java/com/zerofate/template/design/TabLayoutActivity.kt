@@ -1,7 +1,7 @@
 package com.zerofate.template.design
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.zerofate.template.R
 
 class TabLayoutActivity : AppCompatActivity() {

@@ -29,9 +29,9 @@ class DialogTestActivity : BaseTestActivity() {
         }
 
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
         ): View? {
             return inflater.inflate(R.layout.dialog_fragment_test, container, false)
         }
@@ -55,8 +55,9 @@ class TopDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL,R.style.full_dialog)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.full_dialog)
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_top, container, false)
     }

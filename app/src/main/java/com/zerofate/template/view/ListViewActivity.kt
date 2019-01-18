@@ -12,7 +12,6 @@ import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
-import kotlinx.android.synthetic.main.activity_list_view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,9 +34,9 @@ class ListViewActivity : BaseSingleFragmentActivity() {
     class SimpleFragemnt : androidx.fragment.app.Fragment() {
         lateinit var adapter: ArrayAdapter<String>
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
         ): View? {
             return inflater.inflate(R.layout.activity_list_view, container, false)
         }
@@ -51,7 +50,7 @@ class ListViewActivity : BaseSingleFragmentActivity() {
                 }
             }
             adapter = object :
-                ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, data) {
+                    ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, data) {
                 override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                     LogUtil.d("getView: $position")
                     val viewHolder: ViewHolder
@@ -60,8 +59,8 @@ class ListViewActivity : BaseSingleFragmentActivity() {
                     } else {
                         viewHolder = ViewHolder()
                         viewHolder.textView = LayoutInflater.from(activity)
-                            .inflate(android.R.layout.simple_list_item_1, null)
-                            .findViewById<TextView>(android.R.id.text1)
+                                .inflate(android.R.layout.simple_list_item_1, null)
+                                .findViewById<TextView>(android.R.id.text1)
                         viewHolder.textView.tag = viewHolder
                     }
                     viewHolder.textView.text = resources.getString(R.string.network_api)

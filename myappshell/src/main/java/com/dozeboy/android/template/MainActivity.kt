@@ -3,8 +3,6 @@ package com.dozeboy.android.template
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.dozeboy.android.template.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : BaseActivity() {
 

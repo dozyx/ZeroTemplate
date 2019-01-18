@@ -1,7 +1,5 @@
 package com.dozeboy.android.template.di.module;
 
-import com.google.gson.Gson;
-
 import dagger.Module;
 
 /**

@@ -2,7 +2,6 @@ package com.zerofate.template.justfortest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.chip.ChipGroup
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_meaningless.*
@@ -21,7 +20,7 @@ class MeaninglessActivity : AppCompatActivity() {
         }
         Timber.plant(Timber.DebugTree())
         Timber.d("debugTree")
-        Logger.addLogAdapter(object :AndroidLogAdapter(){
+        Logger.addLogAdapter(object : AndroidLogAdapter() {
             override fun isLoggable(priority: Int, tag: String?): Boolean {
                 return false
             }

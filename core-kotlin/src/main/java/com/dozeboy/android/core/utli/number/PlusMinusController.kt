@@ -9,12 +9,12 @@ import java.text.DecimalFormat
  * @date 2018/7/27
  */
 class PlusMinusController(
-    value: Double = 50.0,
-    val step: Double = 1.0,
-    val max: Double = 100.0,
-    val min: Double = 0.0,
-    val reserveBit: Int = 2,
-    val format: String = "#.##"
+        value: Double = 50.0,
+        val step: Double = 1.0,
+        val max: Double = 100.0,
+        val min: Double = 0.0,
+        val reserveBit: Int = 2,
+        val format: String = "#.##"
 ) {
     var value = value
         get() = BigDecimal.valueOf(field).setScale(reserveBit, RoundingMode.HALF_UP).toDouble()
@@ -77,7 +77,7 @@ class PlusMinusController(
     fun getStringValue(): String {
         val bitCount = format.substring(format.indexOf('.') + 1).length
         return DecimalFormat(format).format(
-            BigDecimal(value).setScale(bitCount, RoundingMode.HALF_UP)
+                BigDecimal(value).setScale(bitCount, RoundingMode.HALF_UP)
         )
     }
 

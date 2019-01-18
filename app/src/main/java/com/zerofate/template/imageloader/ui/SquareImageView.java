@@ -1,9 +1,10 @@
 package com.zerofate.template.imageloader.ui;
 
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import android.util.AttributeSet;
 
 /**
  * 以宽作为边的正方形 ImageView

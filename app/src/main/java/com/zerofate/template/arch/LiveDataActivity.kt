@@ -1,7 +1,7 @@
 package com.zerofate.template.arch
 
-import androidx.lifecycle.*
 import android.os.Bundle
+import androidx.lifecycle.*
 import com.zerofate.template.base.BaseTestActivity
 
 class LiveDataActivity : BaseTestActivity() {

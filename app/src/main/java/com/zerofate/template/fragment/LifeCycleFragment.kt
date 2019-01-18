@@ -1,17 +1,14 @@
 package com.zerofate.template.fragment
 
 import android.content.Context
-import androidx.annotation.Nullable
-import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
 import com.zerofate.template.R
 import com.zerofate.template.base.IBaseView
-import kotlinx.android.synthetic.main.fragment_life_cycle.*
 
 /**
  * A placeholder fragment containing a simple view.

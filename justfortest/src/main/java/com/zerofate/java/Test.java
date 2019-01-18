@@ -5,7 +5,6 @@ import android.annotation.TargetApi;
 import android.os.Build;
 
 import com.google.gson.Gson;
-import com.zerofate.java.bean.GsonBean;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,7 +13,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -37,9 +35,8 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(String.format("%-3d",1));
+        System.out.println(String.format("%-3d", 1));
     }
-
 
 
     @TargetApi(Build.VERSION_CODES.O)

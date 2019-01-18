@@ -1,9 +1,10 @@
 package com.zerofate.template.rxjava;
 
 import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.zerofate.template.R;
 import com.zerofate.template.base.BaseShowResultActivity;

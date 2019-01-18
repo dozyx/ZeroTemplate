@@ -1,6 +1,5 @@
 package com.zerofate.template.justfortest.lifecycleArch;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,7 +15,7 @@ public class UserModel extends ViewModel {
         return userLiveData;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         User user = new User();
         user.setName(name);
         userLiveData.setValue(user);

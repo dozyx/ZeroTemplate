@@ -1,7 +1,10 @@
 package com.dozeboy.android.core.utli.log
 
 import android.util.Log
-import com.orhanobut.logger.*
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.LogStrategy
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.PrettyFormatStrategy
 import timber.log.Timber
 
 /**
@@ -19,9 +22,9 @@ class LoggerLogcatTree : Timber.Tree() {
             }
         }
         val formatStrategy =
-            PrettyFormatStrategy.newBuilder().logStrategy(logStrategy).showThreadInfo(false)
-                .methodCount(2)
-                .methodOffset(6).tag(LogUtil.TAG).build()
+                PrettyFormatStrategy.newBuilder().logStrategy(logStrategy).showThreadInfo(false)
+                        .methodCount(2)
+                        .methodOffset(6).tag(LogUtil.TAG).build()
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
     }
 

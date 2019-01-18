@@ -3,10 +3,11 @@ package com.zerofate.template.permission;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Process;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import android.os.Bundle;
 import androidx.core.app.AppOpsManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.PermissionChecker;

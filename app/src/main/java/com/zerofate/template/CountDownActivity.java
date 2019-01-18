@@ -1,10 +1,8 @@
 package com.zerofate.template;
 
-import android.os.CountDownTimer;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 
-import com.google.gson.Gson;
 import com.zerofate.template.base.BaseShowResultActivity;
 
 public class CountDownActivity extends BaseShowResultActivity {

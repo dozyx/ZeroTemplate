@@ -10,10 +10,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.StatFs;
-import androidx.annotation.NonNull;
 import android.util.Log;
 import android.util.LruCache;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
 
 import com.zerofate.template.R;
 
@@ -34,7 +35,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 
 /**

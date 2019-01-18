@@ -3,7 +3,6 @@ package com.zerofate.template.activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.zerofate.template.base.BaseShowResultActivity;
@@ -24,7 +23,7 @@ public class LaunchModeTest extends BaseShowResultActivity {
     @Override
     protected String[] getButtonText() {
         return new String[]{
-                "standard", "singleTop", "singleTask", "singleInstance","singleTask with taskAffinity"
+                "standard", "singleTop", "singleTask", "singleInstance", "singleTask with taskAffinity"
         };
     }
 
@@ -50,8 +49,8 @@ public class LaunchModeTest extends BaseShowResultActivity {
 
     @Override
     public void onButton5() {
-        Intent intent = new Intent(this,StandardLaunchModeTest.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(this, StandardLaunchModeTest.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
         startActivity(intent);
     }

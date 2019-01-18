@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
-import androidx.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.zerofate.android.mock.Shakespeare;
 import com.zerofate.template.R;
@@ -26,7 +27,7 @@ public class FloatWindowActivity extends LifeCycleTest {
 
     @Override
     protected String[] getButtonText() {
-        return new String[]{"开关","占位"};
+        return new String[]{"开关", "占位"};
     }
 
     @Override
@@ -81,7 +82,8 @@ public class FloatWindowActivity extends LifeCycleTest {
             button1 = (Button) windowView.findViewById(R.id.float_button1);
             button2 = (Button) windowView.findViewById(R.id.float_button2);
             listView = (ListView) windowView.findViewById(R.id.list);
-            listView.setAdapter(new ArrayAdapter<>(FloatWindowsServices.this, android.R.layout.simple_list_item_1, Shakespeare.MORE_TITLES));
+            listView.setAdapter(new ArrayAdapter<>(FloatWindowsServices.this, android.R.layout.simple_list_item_1,
+                    Shakespeare.MORE_TITLES));
             button1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,7 +103,8 @@ public class FloatWindowActivity extends LifeCycleTest {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(FloatWindowsServices.this, (String) (parent.getAdapter().getItem(position)), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FloatWindowsServices.this, (String) (parent.getAdapter().getItem(position)),
+                            Toast.LENGTH_SHORT).show();
                 }
             });
         }

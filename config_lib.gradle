@@ -1,5 +1,5 @@
 apply plugin: "com.android.library"
-apply from: "$project.rootDir/tools/allsca.gradle"
+apply from: "$project.rootDir/config/quality.gradle"
 
 android {
     println "config_lib android start"

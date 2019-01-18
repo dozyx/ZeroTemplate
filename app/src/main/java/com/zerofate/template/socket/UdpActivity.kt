@@ -16,13 +16,13 @@ class UdpActivity : BaseTestActivity() {
     }
 }
 
-class ClientThread :Thread(){
+class ClientThread : Thread() {
     override fun run() {
         super.run()
     }
 }
 
-class ServerThread:Thread(){
+class ServerThread : Thread() {
     override fun run() {
         super.run()
     }

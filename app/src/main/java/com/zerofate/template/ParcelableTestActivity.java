@@ -1,10 +1,9 @@
 package com.zerofate.template;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.zerofate.template.base.BaseShowResultActivity;
 
@@ -14,9 +13,10 @@ import com.zerofate.template.base.BaseShowResultActivity;
 public class ParcelableTestActivity extends BaseShowResultActivity {
 
     private Person person;
+
     @Override
     protected String[] getButtonText() {
-        return new String[]{"发送数据","显示Intent数据","修改数据","显示 Person"};
+        return new String[]{"发送数据", "显示Intent数据", "修改数据", "显示 Person"};
     }
 
     @Override
@@ -27,14 +27,14 @@ public class ParcelableTestActivity extends BaseShowResultActivity {
     @Override
     public void onButton1() {
         person = new Person("张三", 18);
-        Intent intent = new Intent(this,ParcelableTestActivity.class);
-        intent.putExtra("person",person);
+        Intent intent = new Intent(this, ParcelableTestActivity.class);
+        intent.putExtra("person", person);
         startActivity(intent);
     }
 
     @Override
     public void onButton2() {
-        if (getIntent() != null){
+        if (getIntent() != null) {
             person = getIntent().getParcelableExtra("person");
             appendResult(person.toString());
         }
@@ -42,7 +42,7 @@ public class ParcelableTestActivity extends BaseShowResultActivity {
 
     @Override
     public void onButton3() {
-        if (person != null){
+        if (person != null) {
             person.name = "李四";
         }
     }

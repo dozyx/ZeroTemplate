@@ -1,9 +1,8 @@
 package com.dozeboy.android.template
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_splash.*
+import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -11,7 +10,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        text_welcome.setOnClickListener{
+        text_welcome.setOnClickListener {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         }
     }

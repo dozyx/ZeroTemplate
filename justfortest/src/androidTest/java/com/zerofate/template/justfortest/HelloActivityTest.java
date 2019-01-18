@@ -1,8 +1,6 @@
 package com.zerofate.template.justfortest;
 
 import androidx.test.rule.ActivityTestRule;
-import android.test.ActivityInstrumentationTestCase;
-import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * @author dozeboy

@@ -4,4 +4,4 @@
     android:layout_height="match_parent"
     android:scaleType="centerInside"
     android:background="#506E7A"
-    android:src="@drawable/sample_histogram"/>
+    android:src="@drawable/sample_histogram" />

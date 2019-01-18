@@ -1,10 +1,10 @@
 package com.zerofate.template.justfortest;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-import androidx.annotation.Nullable;
 
 /**
  * @author dozeboy
@@ -16,8 +16,8 @@ public class MyViewModel extends ViewModel {
     private MutableLiveData<String> source1 = new MutableLiveData<>();
     private MutableLiveData<Integer> source2 = new MutableLiveData<>();
 
-    public MediatorLiveData<String> getMediator(){
-        if (mediatorLiveData == null){
+    public MediatorLiveData<String> getMediator() {
+        if (mediatorLiveData == null) {
             mediatorLiveData = new MediatorLiveData<>();
             mediatorLiveData.addSource(source1, new Observer<String>() {
                 @Override
@@ -35,11 +35,11 @@ public class MyViewModel extends ViewModel {
         return mediatorLiveData;
     }
 
-    public void setInt(int value){
+    public void setInt(int value) {
         source2.setValue(value);
     }
 
-    public void setString(String value){
+    public void setString(String value) {
         source1.setValue(value);
     }
 

@@ -1,18 +1,13 @@
 package com.zerofate.template.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-
 import com.zerofate.template.R
-import kotlinx.android.synthetic.main.activity_base_test.*
 
 /**
  * 添加按钮及其点击事件，显示日志，添加一个 fragment 页

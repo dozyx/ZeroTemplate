@@ -3,14 +3,15 @@ package com.zerofate.template.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.os.Parcelable;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zerofate.template.R;
 

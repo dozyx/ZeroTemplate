@@ -1,19 +1,15 @@
 package com.zerofate.template.animation
 
-import androidx.databinding.DataBindingUtil
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
+import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.template.R
-import kotlinx.android.synthetic.main.activity_test_fragment_transition.*
 
 class FragmentAnimationActivity : AppCompatActivity() {
 
@@ -38,9 +34,9 @@ class FragmentAnimationActivity : AppCompatActivity() {
     class SimpleFragment : Fragment() {
         @Nullable
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
         ): View? {
 
             return inflater.inflate(R.layout.activity_test_fragment_transition, container, false)

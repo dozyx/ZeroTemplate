@@ -12,10 +12,13 @@ import com.zerofate.androidsdk.util.Utils;
 
 public class ZTApplication extends Application {
     private static final String TAG = "ZTApplication";
+
     @Override
     public void onCreate() {
         super.onCreate();
         LeakCanary.install(this);
-        Log.d(TAG, "onCreate: app module BuildConfig.DEBUG == " + BuildConfig.DEBUG + " & sdk module BuildConfig.DEBUG == " + Utils.isDebug());
+        Log.d(TAG,
+                "onCreate: app module BuildConfig.DEBUG == " + BuildConfig.DEBUG + " & sdk module BuildConfig.DEBUG == "
+                        + Utils.isDebug());
     }
 }

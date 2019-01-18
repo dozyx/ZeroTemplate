@@ -3,11 +3,12 @@ package com.zerofate.template;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zerofate.androidsdk.util.PackageUtil;
 

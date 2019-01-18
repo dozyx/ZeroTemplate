@@ -12,13 +12,10 @@ import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 
@@ -62,7 +59,7 @@ public class RxJavaTest {
 
     private static void testZip() {
         Observable<Integer> observable1 = getObservable(1, 2, 3);
-        Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2,TimeUnit.SECONDS);
+        Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2, TimeUnit.SECONDS);
         Observable.zip(observable1, observable2, (integer, integer2) -> integer + integer2).subscribe(observer);
         try {
             Thread.sleep(10000);

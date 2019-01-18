@@ -1,8 +1,9 @@
 package com.zerofate.android.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
+
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
