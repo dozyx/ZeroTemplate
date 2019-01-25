@@ -15,6 +15,7 @@ import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.androidsdk.util.VersionUtil
 import com.zerofate.template.R
 import com.zerofate.template.util.Constants
+import kotlinx.android.synthetic.main.activity_spinner_test.*
 
 class SpinnerTestActivity : AppCompatActivity() {
     internal lateinit var window: PopupWindow

@@ -14,6 +14,7 @@ import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_recycler_view_test.*
 import java.util.*
 
 class RecyclerViewTestActivity : BaseSingleFragmentActivity() {

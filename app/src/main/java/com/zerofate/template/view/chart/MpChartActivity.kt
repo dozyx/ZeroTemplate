@@ -21,6 +21,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.ViewPortHandler
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_mp_chart.*
 import java.util.*
 
 class MpChartActivity : AppCompatActivity() {

@@ -9,6 +9,8 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_drawer_tool_bar.*
+import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.*
 
 class DrawerToolBarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

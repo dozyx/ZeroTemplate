@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_toolbar.*
 
 class ToolbarActivity : AppCompatActivity() {
 

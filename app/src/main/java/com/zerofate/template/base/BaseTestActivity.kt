@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_base_test.*
 
 /**
  * 添加按钮及其点击事件，显示日志，添加一个 fragment 页

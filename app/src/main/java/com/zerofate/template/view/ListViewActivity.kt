@@ -12,6 +12,7 @@ import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_list_view.*
 import java.util.*
 import kotlin.collections.ArrayList
 

@@ -9,6 +9,7 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.zerofate.template.R
 import com.zerofate.template.base.IBaseView
+import kotlinx.android.synthetic.main.fragment_life_cycle.*
 
 /**
  * A placeholder fragment containing a simple view.

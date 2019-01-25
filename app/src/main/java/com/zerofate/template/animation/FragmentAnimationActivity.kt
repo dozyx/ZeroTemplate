@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.zerofate.androidsdk.util.ToastX
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_test_fragment_transition.*
 
 class FragmentAnimationActivity : AppCompatActivity() {
 

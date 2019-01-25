@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dozeboy.android.core.utli.CameraUtil
 import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.template.R
+import kotlinx.android.synthetic.main.activity_surface_view.*
 
 
 class CameraSurfaceViewActivity : AppCompatActivity() {
