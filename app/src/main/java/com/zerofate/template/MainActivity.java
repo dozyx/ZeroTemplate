@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -20,10 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnItemClick;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final String CATEGORY_MY_SAMPLE = "com.zerofate.intent.category.sample";
@@ -31,14 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String prefixPath;
     private List<String> paths = new ArrayList<>();
-    @BindView(R.id.main_list)
     ListView browseListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        browseListView = findViewById(R.id.main_list);
         prefixPath = getIntent().getStringExtra(EXTRA_PREFIX_PATH);
         if (prefixPath == null) {
             prefixPath = "";
@@ -46,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         browseListView.setAdapter(
                 new SimpleAdapter(this, getData(prefixPath), android.R.layout.simple_list_item_1,
                         new String[]{"title"}, new int[]{android.R.id.text1}));
+        browseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Map<String, Object> info = (Map<String, Object>) parent.getItemAtPosition(position);
+                Intent intent = (Intent) info.get("intent");
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -131,12 +135,5 @@ public class MainActivity extends AppCompatActivity {
         result.setClass(this, MainActivity.class);
         result.putExtra(EXTRA_PREFIX_PATH, path);
         return result;
-    }
-
-    @OnItemClick(R.id.main_list)
-    void onItemClick(AdapterView<?> parent, int position) {
-        Map<String, Object> info = (Map<String, Object>) parent.getItemAtPosition(position);
-        Intent intent = (Intent) info.get("intent");
-        startActivity(intent);
     }
 }

@@ -35,7 +35,7 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(String.format("%-3d", 1));
+        System.out.println(String.valueOf((int)(0.599999*100)));
     }
 
 

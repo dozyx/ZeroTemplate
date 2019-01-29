@@ -5,33 +5,22 @@ import android.os.Environment
 import android.os.Environment.DIRECTORY_PICTURES
 import androidx.core.content.ContextCompat
 import com.zerofate.template.base.BaseTestActivity
+import java.util.*
 
 class FileActivity : BaseTestActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addButton("public picture 目录", Runnable {
-            appendResult(Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES).absolutePath)
-        })
-        addButton("data 目录", Runnable {
-            appendResult(Environment.getDataDirectory().absolutePath)
-        })
-        addButton("storage 目录", Runnable {
-            appendResult(Environment.getExternalStorageDirectory().absolutePath)
-        })
-        addButton("download cache 目录", Runnable {
-            appendResult(Environment.getDownloadCacheDirectory().absolutePath)
-        })
-        addButton("app cache 目录", Runnable {
-            appendResult(this@FileActivity.cacheDir.absolutePath)
-        })
-
-        addButton("app data 目录", Runnable {
-            appendResult(ContextCompat.getDataDir(this@FileActivity)?.absolutePath ?: "无")
-        })
-
-        addButton("app files 目录", Runnable {
-            appendResult(this@FileActivity.filesDir.absolutePath)
-        })
+        appendResult("""
+            Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES): ${Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES).absolutePath}\n
+            Environment.getDataDirectory(): ${Environment.getDataDirectory().absolutePath}
+            Environment.getExternalStorageDirectory(): ${Environment.getExternalStorageDirectory().absolutePath}
+            Environment.getDownloadCacheDirectory(): ${Environment.getDownloadCacheDirectory().absolutePath}
+            ContextCompat.getDataDir: ${ContextCompat.getDataDir(this)?.absolutePath ?: "无"}
+            context.filesDir: ${filesDir.absolutePath}
+            ContextCompat.getExternalCacheDirs: ${Arrays.toString(ContextCompat.getExternalCacheDirs(this))}
+            context.cacheDir: ${cacheDir.absolutePath}
+            context.getExternalFilesDir(Environment.DIRECTORY_PICTURES): ${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}
+        """.trimIndent())
     }
 }
