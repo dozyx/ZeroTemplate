@@ -1,0 +1,26 @@
+apply from: "${rootDir}/config_app.gradle"
+apply from: "${rootDir}/config_kt.gradle"
+android {
+    defaultConfig {
+        versionCode 10001
+        versionName "1.0.1"
+    }
+}
+
+dependencies {
+    implementation deps.kotlin
+    implementation deps.appcompat
+    implementation deps.constraint_layout
+    testImplementation deps.junit
+    androidTestImplementation deps.test_runner
+    androidTestImplementation deps.test_espresso
+    implementation deps.rxjava2
+    implementation deps.rx_android
+    implementation deps.utilcode
+    implementation deps.dagger.runtime
+    annotationProcessor deps.dagger.processor
+    implementation deps.gson
+    implementation deps.bar_util
+    implementation project(':core-kotlin')
+    implementation project(':theme')
+}

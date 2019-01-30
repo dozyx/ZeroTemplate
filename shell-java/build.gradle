@@ -1,0 +1,18 @@
+apply from: "${rootDir}/config_app.gradle"
+
+android {
+    defaultConfig {
+        versionCode 10001
+        versionName "1.0.1"
+    }
+}
+
+
+dependencies {
+    testImplementation deps.junit
+    implementation deps.dagger.runtime
+    annotationProcessor deps.dagger.processor
+    androidTestImplementation deps.test_runner
+    androidTestImplementation deps.test_espresso
+    implementation project(':core')
+}

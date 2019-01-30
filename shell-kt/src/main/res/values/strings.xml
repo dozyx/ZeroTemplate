@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">shell kotlin</string>
+    <string name="leak_canary_display_activity_label">shell leak</string>
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+
+</resources>
