@@ -7,7 +7,7 @@ import android.app.Application;
  * @date 2019/1/6
  */
 public class BaseApplication extends Application {
-    public static BaseApplication sInstance;
+    private static BaseApplication sInstance;
 
     @Override
     public void onCreate() {
