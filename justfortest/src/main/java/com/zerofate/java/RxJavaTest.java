@@ -16,13 +16,40 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
 public class RxJavaTest {
 
     public static void main(String[] args) {
+        PublishSubject<Integer> subject = PublishSubject.create();
+        subject.onNext(1);
+        subject.onComplete();
+        subject.subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                System.out.println("d = [" + d + "]");
+            }
 
+            @Override
+            public void onNext(Integer integer) {
+                System.out.println("integer = [" + integer + "]");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("e = [" + e + "]");
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("onComplete");
+            }
+        });
+        subject.onNext(2);
+        subject.onComplete();
     }
 
     private static void testDelayZip() {

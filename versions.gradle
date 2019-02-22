@@ -76,6 +76,7 @@ versions.background = '1.3.1'
 versions.appcompat = '1.0.2'
 versions.androiddevmetrics = '0.6'
 versions.material = '1.1.0-alpha02'
+versions.rxbinding = '3.0.0-alpha2'
 
 def deps = [:]
 
@@ -132,6 +133,19 @@ dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
 dagger.processor = "com.google.dagger:dagger-compiler:$versions.dagger"
 deps.dagger = dagger
 
+def rxbinding = [:]
+rxbinding.base = "com.jakewharton.rxbinding3:rxbinding:$versions.rxbinding"
+rxbinding.core = "com.jakewharton.rxbinding3:rxbinding-core:$versions.rxbinding"
+rxbinding.appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:$versions.rxbinding"
+rxbinding.drawerlayout = "com.jakewharton.rxbinding3:rxbinding-drawerlayout:$versions.rxbinding"
+rxbinding.leanback = "com.jakewharton.rxbinding3:rxbinding-leanback:$versions.rxbinding"
+rxbinding.recyclerview = "com.jakewharton.rxbinding3:rxbinding-recyclerview:$versions.rxbinding"
+rxbinding.slidingpanelayout = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:$versions.rxbinding"
+rxbinding.swiperefreshlayout = "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:$versions.rxbinding"
+rxbinding.viewpager = "com.jakewharton.rxbinding3:rxbinding-viewpager:$versions.rxbinding"
+rxbinding.material = "com.jakewharton.rxbinding3:rxbinding-material:$versions.rxbinding"
+deps.rxbinding = rxbinding
+
 def rx_lifecycle = [:]
 // If you want to bind to Android-specific lifecycles
 rx_lifecycle.android = "com.trello.rxlifecycle3:rxlifecycle-android:$versions.rx_lifecycle"
@@ -169,7 +183,6 @@ deps.tencent_xinge = "com.tencent.xinge:xinge:$versions.tencent_xinge"
 deps.tencent_wup = "com.tencent.wup:wup:$versions.tencent_wup"
 deps.tencent_mid = "com.tencent.mid:mid:$versions.tencent_mid"
 deps.tencent_mta = "com.qq.mta:mta:$versions.tencent_mta"
-deps.rxpermissions = "com.tbruyelle.rxpermissions2:rxpermissions:$versions.rxpermissions"
 deps.volley = "com.android.volley:volley:$versions.volley"
 deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
 deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"

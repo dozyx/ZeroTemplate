@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jakewharton.rxbinding3.view.RxView;
+
 /**
  * 控制启动界面
  *
