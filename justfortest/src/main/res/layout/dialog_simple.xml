@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="316dp"
+    android:layout_height="269dp">
+
+    <ImageView
+        android:id="@+id/image_dialog_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_apply_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:text="绿洲活动申请"
+        android:textColor="#ff000000"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_dialog_close" />
+
+    <TextView
+        android:id="@+id/text_apply_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="申请时间"
+        app:layout_constraintLeft_toLeftOf="@id/text_apply_info_title"
+        app:layout_constraintTop_toBottomOf="@id/text_apply_info_title" />
+
+    <TextView
+        android:id="@+id/text_rejected_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="驳回时间"
+        app:layout_constraintLeft_toLeftOf="@id/text_apply_info_title"
+        app:layout_constraintTop_toBottomOf="@id/text_apply_time_title" />
+
+    <TextView
+        android:id="@+id/text_apply_status_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="审核状态"
+        app:layout_constraintLeft_toLeftOf="@id/text_apply_info_title"
+        app:layout_constraintTop_toBottomOf="@id/text_rejected_time_title" />
+
+    <TextView
+        android:id="@+id/text_apply_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_apply_time_title"
+        tools:text="2018-12-22  16:30" />
+
+    <TextView
+        android:id="@+id/text_rejected_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_rejected_time_title"
+        tools:text="2018-12-22  16:30" />
+
+    <TextView
+        android:id="@+id/text_apply_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF6363"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_apply_status_title"
+        tools:text="待修改资料" />
+
+    <Button
+        android:id="@+id/btn_dialog_cancel"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#80E7E7E7"
+        android:text="取消"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_dialog_positive" />
+
+    <Button
+        android:id="@+id/btn_dialog_positive"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="去修改资料"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/btn_dialog_cancel"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

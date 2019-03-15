@@ -35,7 +35,11 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(String.valueOf((int)(0.599999*100)));
+        String reg = "^[\\u2E80-\\uFE4F]{2,6}$";
+        Pattern pat = Pattern.compile(reg);
+        Matcher mat = pat.matcher("卡尔·马克思");
+        System.out.println(mat.matches());
+        SingleInstance.INSTANCE.foo();
     }
 
 
@@ -224,6 +228,13 @@ public class Test {
                 + "    }\n"
                 + "}}";
         System.out.println("jsonStr 增加一层data：" + new Gson().fromJson(jsonStr3, User.class));
+
+        String jsonStr4 = "{\"data\": {\n"
+                + "    \"name\": \"张三\",\n"
+                + "    \"phone\": \"110\",\n"
+                + "    \"address\": \"\"\n"
+                + "}}";
+        System.out.println("对象类型错误：" + new Gson().fromJson(jsonStr4, User.class));
     }
 
     public static class G2<S> extends GenericTest<S> {

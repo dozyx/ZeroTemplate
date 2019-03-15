@@ -15,6 +15,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.Permission
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.zerofate.java.SimpleDialog
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_meaningless.*
 import timber.log.Timber
@@ -30,7 +31,7 @@ class MeaninglessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
         button.clicks().compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION)).subscribe {
-            switch_test.isChecked = !switch_test.isChecked
+            SimpleDialog(this).show()
         }
         Timber.plant(Timber.DebugTree())
         Timber.d("debugTree")

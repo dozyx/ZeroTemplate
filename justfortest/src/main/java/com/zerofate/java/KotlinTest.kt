@@ -8,6 +8,7 @@ package com.zerofate.java
 
 fun <T> printHashCode(t: T) {
     println(t?.hashCode())
+    SingleInstance.foo()
 }
 
 fun main(args: Array<String>) {
@@ -17,6 +18,11 @@ fun main(args: Array<String>) {
 
 interface Processor<T> {
     fun process(): T
+}
+
+fun foo2() {
+    val nothing:Nothing? = null
+    nothing.hashCode()
 }
 
 class NoResultProcessor : Processor<Unit> {
