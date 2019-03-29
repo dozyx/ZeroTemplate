@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zerofate.template.justfortest.MeaninglessActivity">
 
     <androidx.appcompat.widget.AppCompatButton
@@ -82,19 +83,19 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:singleLine="true"
-            app:errorEnabled="false"
-            app:passwordToggleEnabled="true"
             app:boxBackgroundMode="outline"
+            app:errorEnabled="false"
+            app:hintEnabled="true"
             app:passwordToggleDrawable="@drawable/password_eye"
-            app:hintEnabled="true">
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="17sp"
                 android:background="@null"
+                android:hint="请输入密码"
                 android:inputType="textPassword"
-                android:hint="请输入密码" />
+                android:textSize="17sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.cardview.widget.CardView
@@ -165,7 +166,10 @@
                 android:progress="100"
                 android:progressDrawable="@drawable/custom_seekbar" />
         </LinearLayout>
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/darker_gray"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="100dp">
@@ -187,8 +191,10 @@
                 app:layout_constraintLeft_toRightOf="@id/image"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 

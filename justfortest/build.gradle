@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation project(':core-kotlin')
     implementation deps.rxpermissions
-    implementation 'org.jetbrains:annotations:16.0.1'
+    implementation deps.annotations
     implementation deps.mmkv
     debugImplementation deps.debug_db
     implementation deps.background
@@ -72,6 +72,7 @@ dependencies {
     implementation deps.support.gridlayout
     implementation deps.rxbinding.base
     implementation project(':ui')
+    implementation deps.immersionbar
 }
 repositories {
     mavenCentral()

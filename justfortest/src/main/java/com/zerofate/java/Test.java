@@ -2,12 +2,14 @@ package com.zerofate.java;
 
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,11 +37,22 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        String reg = "^[\\u2E80-\\uFE4F]{2,6}$";
-        Pattern pat = Pattern.compile(reg);
-        Matcher mat = pat.matcher("卡尔·马克思");
-        System.out.println(mat.matches());
-        SingleInstance.INSTANCE.foo();
+        String json = "{\n"
+                + "    \"name\": \"1\",\n"
+                + "    \"root.age\": 19\n"
+                + "}";
+        System.out.println(new Gson().fromJson(json,Student1.class).toString());
+    }
+
+    private static void testFianl() {
+        Integer integer = new Integer(1);
+        System.out.println(integer);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(integer);
+            }
+        }).start();
     }
 
 

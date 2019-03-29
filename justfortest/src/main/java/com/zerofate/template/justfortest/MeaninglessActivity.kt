@@ -2,13 +2,21 @@ package com.zerofate.template.justfortest
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcel
+import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextWatcher
 import android.text.style.BulletSpan
+import android.view.View
+import android.view.WindowManager
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.view.clicks
 import com.orhanobut.logger.AndroidLogAdapter
@@ -28,6 +36,7 @@ import java.util.*
 class MeaninglessActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
+        ImmersionBar.with(this).statusBarColor(android.R.color.transparent).keyboardEnable(true).init()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
         button.clicks().compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION)).subscribe {
@@ -43,6 +52,11 @@ class MeaninglessActivity : AppCompatActivity() {
         Logger.addLogAdapter(AndroidLogAdapter())
         Logger.d("logger")
         switch_test.isChecked = true
+    }
+
+    override fun onDestroy() {
+        ImmersionBar.with(this).destroy()
+        super.onDestroy()
     }
 
 

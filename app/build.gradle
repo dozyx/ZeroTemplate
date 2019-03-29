@@ -47,7 +47,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     debugImplementation deps.leakcanary.debug
     releaseImplementation deps.leakcanary.release
-    implementation("org.jetbrains:annotations:16.0.1")
+    implementation deps.annotations
     implementation deps.dagger.runtime
     implementation deps.flexbox
     annotationProcessor deps.dagger.processor
@@ -55,4 +55,5 @@ dependencies {
     implementation deps.rx_lifecycle.android
     implementation deps.bar_util
     implementation deps.utilcode
+    implementation deps.rxpermissions
 }
