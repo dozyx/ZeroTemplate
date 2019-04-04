@@ -25,9 +25,12 @@ public class RxJavaTest {
 
     public static void main(String[] args) {
         PublishSubject<Integer> subject = PublishSubject.create();
-        subject.onNext(1);
-        subject.onComplete();
-        subject.subscribe(new Observer<Integer>() {
+        subject.doOnError(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                System.out.println("doOnError = [" + throwable + "]" + throwable.getMessage());
+            }
+        }).onErrorReturnItem(999).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
                 System.out.println("d = [" + d + "]");
@@ -40,7 +43,7 @@ public class RxJavaTest {
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("e = [" + e + "]");
+                System.out.println("e = [" + e + "]" + e.getMessage());
             }
 
             @Override
@@ -49,6 +52,7 @@ public class RxJavaTest {
             }
         });
         subject.onNext(2);
+        subject.onError(new Throwable("1111"));
         subject.onComplete();
     }
 

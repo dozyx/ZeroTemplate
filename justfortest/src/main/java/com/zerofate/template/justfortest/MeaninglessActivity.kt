@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.Parcel
 import android.text.Editable
@@ -14,6 +15,7 @@ import android.text.style.BulletSpan
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.gyf.barlibrary.ImmersionBar
@@ -36,9 +38,9 @@ import java.util.*
 class MeaninglessActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this).statusBarColor(android.R.color.transparent).keyboardEnable(true).init()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
+        ImmersionBar.with(this).statusBarColor(android.R.color.transparent).init()
         button.clicks().compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION)).subscribe {
             SimpleDialog(this).show()
         }
@@ -52,6 +54,11 @@ class MeaninglessActivity : AppCompatActivity() {
         Logger.addLogAdapter(AndroidLogAdapter())
         Logger.d("logger")
         switch_test.isChecked = true
+        window.decorView.viewTreeObserver.addOnGlobalLayoutListener{
+            val rect = Rect()
+            window.decorView.getGlobalVisibleRect(rect)
+            val contentView = findViewById<FrameLayout>(android.R.id.content)
+        }
     }
 
     override fun onDestroy() {
