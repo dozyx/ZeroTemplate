@@ -6,12 +6,20 @@
         <variable
             name="user"
             type="com.zerofate.template.justfortest.DataBindingTestActivity.User" />
+        <variable
+            name="handler"
+            type="com.zerofate.template.justfortest.DataBindingTestActivity.EventHandler"/>
+
+        <variable
+            name="presenter"
+            type="com.zerofate.template.justfortest.DataBindingTestActivity.Presenter"/>
     </data>
 
     <LinearLayout
         android:id="@+id/ll_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->presenter.onClickRoot()}"
         android:orientation="vertical">
 
         <Button
@@ -26,6 +34,50 @@
             android:layout_height="wrap_content"
             android:onClick="onProvinceClicked"
             android:text="@{user.address.province}" />
+
+        <Button
+            android:id="@+id/btn_handler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="handler"
+            android:onClick="@{handler::onClick}" />
+
+        <Button
+            android:id="@+id/btn_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="method"
+            android:onClick="@{()->presenter.onClick()}" />
+
+        <com.zerofate.template.justfortest.MyButton
+            android:id="@+id/btn_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="custom view"
+            android:onClick="@{()->presenter.onClick()}" />
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:onClick="@{()->presenter.onClickRoot()}" />
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/holo_orange_light"
+            android:onClick="@{()->presenter.onClickRoot()}" />
+
+        <com.zerofate.template.justfortest.MyLinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/holo_blue_light"
+            android:onClick="@{()->presenter.onClickRoot()}">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->presenter.onClick()}"/>
+        </com.zerofate.template.justfortest.MyLinearLayout>
 
         <include
             android:id="@+id/include_layout"

@@ -40,29 +40,10 @@ class MeaninglessActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
-        ImmersionBar.with(this).statusBarColor(android.R.color.transparent).init()
-        button.clicks().compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION)).subscribe {
-            SimpleDialog(this).show()
-        }
-        Timber.plant(Timber.DebugTree())
-        Timber.d("debugTree")
-        Logger.addLogAdapter(object : AndroidLogAdapter() {
-            override fun isLoggable(priority: Int, tag: String?): Boolean {
-                return false
-            }
-        })
-        Logger.addLogAdapter(AndroidLogAdapter())
-        Logger.d("logger")
-        switch_test.isChecked = true
-        window.decorView.viewTreeObserver.addOnGlobalLayoutListener{
-            val rect = Rect()
-            window.decorView.getGlobalVisibleRect(rect)
-            val contentView = findViewById<FrameLayout>(android.R.id.content)
-        }
+        edit.requestFocus()
     }
 
     override fun onDestroy() {
-        ImmersionBar.with(this).destroy()
         super.onDestroy()
     }
 
