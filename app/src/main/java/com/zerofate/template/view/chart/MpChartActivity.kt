@@ -62,11 +62,11 @@ class MpChartActivity : AppCompatActivity() {
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         chart.xAxis.textSize = 11f
         chart.xAxis.textColor = ActivityCompat.getColor(this, android.R.color.holo_green_dark)
-        chart.xAxis.valueFormatter = object : IAxisValueFormatter {
-            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                return "${value.toInt()}日"
-            }
-        }
+//        chart.xAxis.valueFormatter = object : IAxisValueFormatter {
+//            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+//                return "${value.toInt()}日"
+//            }
+//        }
 
 
         val values = ArrayList<BarEntry>(7)
@@ -94,16 +94,16 @@ class MpChartActivity : AppCompatActivity() {
         // bar 宽，为百分比
         barData.barWidth = 0.3f
         // 格式化 value
-        barData.setValueFormatter(object : IValueFormatter {
-            override fun getFormattedValue(
-                    value: Float,
-                    entry: Entry?,
-                    dataSetIndex: Int,
-                    viewPortHandler: ViewPortHandler?
-            ): String {
-                return String.format("%.2f", value)
-            }
-        })
+//        barData.setValueFormatter(object : IValueFormatter {
+//            override fun getFormattedValue(
+//                    value: Float,
+//                    entry: Entry?,
+//                    dataSetIndex: Int,
+//                    viewPortHandler: ViewPortHandler?
+//            ): String {
+//                return String.format("%.2f", value)
+//            }
+//        })
         chart.data = barData
 
         chart.marker = BarTouchView(this)

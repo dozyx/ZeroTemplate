@@ -1,5 +1,6 @@
 package com.zerofate.template
 
+import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,17 @@ class DialogTestActivity : BaseTestActivity() {
         })
         addButton("top对话框", Runnable {
             TopDialog().show(supportFragmentManager, null)
+        })
+        addButton("constraint对话框", Runnable {
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.dialog_constraint)
+            dialog.show()
+        })
+
+        addButton("constraint style对话框", Runnable {
+            val dialog = Dialog(this,R.style.Dialog)
+            dialog.setContentView(R.layout.dialog_constraint)
+            dialog.show()
         })
     }
 
