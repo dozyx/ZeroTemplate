@@ -2,12 +2,14 @@ package com.zerofate.template.justfortest;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.zerofate.androidsdk.util.ToastX;
 import com.zerofate.template.justfortest.databinding.ActivityDataBindingTestBinding;
+import com.zerofate.template.justfortest.databinding.ActivityMeaninglessBinding;
 
 public class DataBindingTestActivity extends AppCompatActivity {
 
@@ -25,6 +27,14 @@ public class DataBindingTestActivity extends AppCompatActivity {
         });
         dataBindingTestActivity.setHandler(new EventHandler());
         dataBindingTestActivity.setPresenter(new Presenter());
+        dataBindingTestActivity.stub.setOnInflateListener(new ViewStub.OnInflateListener() {
+            @Override
+            public void onInflate(ViewStub stub, View inflated) {
+
+            }
+        });
+        dataBindingTestActivity.stub.getViewStub().setVisibility(View.VISIBLE);
+        ((ActivityMeaninglessBinding) dataBindingTestActivity.stub.getBinding()).edit.setText("11111");
     }
 
     @Override

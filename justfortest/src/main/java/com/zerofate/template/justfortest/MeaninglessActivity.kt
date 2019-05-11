@@ -18,6 +18,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.blankj.utilcode.util.SPUtils
 import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.view.clicks
@@ -41,6 +42,7 @@ class MeaninglessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
         edit.requestFocus()
+        SPUtils.getInstance().put("111","1112")
     }
 
     override fun onDestroy() {

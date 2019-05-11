@@ -3,6 +3,7 @@ package com.zerofate.template;
 import android.app.Application;
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.zerofate.androidsdk.util.Utils;
 
@@ -17,6 +18,7 @@ public class ZTApplication extends Application {
     public void onCreate() {
         super.onCreate();
         LeakCanary.install(this);
+        LogUtils.getConfig().setGlobalTag("ZeroTemplate");
         Log.d(TAG,
                 "onCreate: app module BuildConfig.DEBUG == " + BuildConfig.DEBUG + " & sdk module BuildConfig.DEBUG == "
                         + Utils.isDebug());

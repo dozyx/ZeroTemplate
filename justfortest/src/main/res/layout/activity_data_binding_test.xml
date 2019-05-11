@@ -3,6 +3,7 @@
 
     <data>
 
+        <import type="androidx.databinding.ObservableArrayList" />
         <variable
             name="user"
             type="com.zerofate.template.justfortest.DataBindingTestActivity.User" />
@@ -48,6 +49,10 @@
             android:layout_height="wrap_content"
             android:text="method"
             android:onClick="@{()->presenter.onClick()}" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
         <com.zerofate.template.justfortest.MyButton
             android:id="@+id/btn_custom"
@@ -82,6 +87,14 @@
         <include
             android:id="@+id/include_layout"
             layout="@layout/include_layout" />
+        <ViewStub
+            android:id="@+id/stub"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout="@layout/activity_meaningless">
+        </ViewStub>
+
+
     </LinearLayout>
 
 </layout>

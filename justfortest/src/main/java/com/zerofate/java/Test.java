@@ -7,6 +7,7 @@ import android.os.Build;
 
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -15,9 +16,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -37,12 +43,24 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        String json = "{\n"
-                + "    \"name\": \"1\",\n"
-                + "    \"root.age\": 19\n"
-                + "}";
-        System.out.println(new Gson().fromJson(json,Student1.class).toString());
+        Map<String,Object> fields = new HashMap<>();
+        fields.put("1",null);
     }
+
+    private static Random rnd = new Random();
+
+    private static long random(long n) {
+        //(0 ~ Integer.MAX_VALUE)  =  Integer.MAX_VALUE / 2;
+
+        return Math.abs(rnd.nextLong()) % n;
+    }
+
+    private static void randomTest() {
+        for (int i = 0; i < 100; i++) {
+            System.out.printf(random(2) + " ");
+        }
+    }
+
 
     private static void testFianl() {
         Integer integer = new Integer(1);
