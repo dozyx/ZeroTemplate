@@ -7,13 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Region;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 
-import com.blankj.utilcode.util.ImageUtils;
-import com.blankj.utilcode.util.SizeUtils;
-import com.zerofate.androidsdk.util.ScreenUtil;
 import com.zerofate.template.R;
 
 /**
