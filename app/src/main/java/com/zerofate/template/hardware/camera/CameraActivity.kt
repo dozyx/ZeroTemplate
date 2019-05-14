@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -13,6 +13,7 @@ import android.text.TextUtils
 import androidx.core.content.FileProvider
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.UriUtils
 import com.zerofate.androidsdk.util.PrintUtil
 import com.zerofate.template.base.BaseTestActivity
 import kotlinx.android.synthetic.main.activity_base_test.*
@@ -45,6 +46,24 @@ class CameraActivity : BaseTestActivity() {
         addButton("显示小图", Runnable {
             showScaledImage()
         })
+
+        addButton("相册", Runnable {
+            pickPhoto()
+        })
+
+        val addButton = addButton("缩小一半", Runnable {
+            val bitmap = (image_view.drawable as BitmapDrawable).bitmap
+            appendResult("width == ${bitmap.width},height == ${bitmap.height}, count ==${bitmap.byteCount}")
+            val scaleBitmap = ImageUtils.scale(bitmap, 0.5f, 0.5f)
+            appendResult("width == ${scaleBitmap.width},height == ${scaleBitmap.height}, count ==${scaleBitmap.byteCount}")
+            image_view.setImageBitmap(scaleBitmap)
+        })
+    }
+
+    private fun pickPhoto() {
+        val pickIntent = Intent(Intent.ACTION_PICK, null)
+        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(pickIntent, REQUEST_CODE_PICK_PHOTO)
     }
 
     private fun galleryAddPic() {
@@ -97,14 +116,18 @@ class CameraActivity : BaseTestActivity() {
         if (resultCode != Activity.RESULT_OK) {
             return
         }
-        if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            var bitmap = data?.extras?.get("data") as Bitmap
-            image_view.setImageBitmap(bitmap)
-        } else if (requestCode == REQUEST_TAKE_PHOTO) {
-            val bitmap = BitmapFactory.decodeFile(currentPicturePath)
-            // setImageURI 会自动旋转图片
-            image_view.setImageBitmap(bitmap)
+        when (requestCode) {
+            REQUEST_IMAGE_CAPTURE -> {
+                var bitmap = data?.extras?.get("data") as Bitmap
+                image_view.setImageBitmap(bitmap)
+            }
+            REQUEST_TAKE_PHOTO -> {
+                val bitmap = BitmapFactory.decodeFile(currentPicturePath)
+                // setImageURI 会自动旋转图片
+                image_view.setImageBitmap(bitmap)
 //            image_view.postDelayed({ image_view.setImageURI(Uri.fromFile(File(currentPicturePath))) }, 3000)
+            }
+            REQUEST_CODE_PICK_PHOTO -> image_view.setImageURI(data?.data)
         }
     }
 
@@ -138,5 +161,6 @@ class CameraActivity : BaseTestActivity() {
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 0
         private const val REQUEST_TAKE_PHOTO = 1
+        private const val REQUEST_CODE_PICK_PHOTO = 2
     }
 }

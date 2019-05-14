@@ -43,8 +43,7 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        Map<String,Object> fields = new HashMap<>();
-        fields.put("1",null);
+        System.out.println(Math.cos(Math.toRadians(60)));
     }
 
     private static Random rnd = new Random();

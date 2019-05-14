@@ -1,4 +1,4 @@
-package com.zerofate.template.view.practice.qijian.chapter1;
+package com.zerofate.template.view.practice.qijian.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

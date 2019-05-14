@@ -1,4 +1,4 @@
-package com.zerofate.template.view.practice.qijian.chapter1;
+package com.zerofate.template.view.practice.qijian.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.blankj.utilcode.util.LogUtils;
 
 /**
  * Create by timon on 2019/5/11
@@ -93,8 +95,12 @@ public class CustomView1 extends View {
     private void drawRegion(Canvas canvas, Paint paint, Region region) {
         RegionIterator regionIterator = new RegionIterator(region);
         Rect rect = new Rect();
+        int drawCount = 0;
+        LogUtils.d("start drawRegion");
         while (regionIterator.next(rect)) {
+            drawCount++;
             canvas.drawRect(rect, paint);
         }
+        LogUtils.d("end drawRegion：" + drawCount);
     }
 }

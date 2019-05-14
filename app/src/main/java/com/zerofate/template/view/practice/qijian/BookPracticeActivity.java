@@ -1,5 +1,6 @@
 package com.zerofate.template.view.practice.qijian;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,15 +8,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.zerofate.template.view.practice.qijian.chapter1.CustomView1;
-import com.zerofate.template.view.practice.qijian.chapter1.CustomView2;
-import com.zerofate.template.view.practice.qijian.chapter1.CustomView3;
+import com.blankj.utilcode.util.LogUtils;
+import com.zerofate.template.view.practice.qijian.view.CustomView1;
+import com.zerofate.template.view.practice.qijian.view.CustomView2;
+import com.zerofate.template.view.practice.qijian.view.CustomView3;
+import com.zerofate.template.view.practice.qijian.view.CustomView4;
+import com.zerofate.template.view.practice.qijian.view.CustomView5;
+import com.zerofate.template.view.practice.qijian.view.CustomView6;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +30,7 @@ import java.util.List;
 public class BookPracticeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private static final List<View> views = new ArrayList<>();
+    private static final List<Class> views = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,9 +42,12 @@ public class BookPracticeActivity extends AppCompatActivity {
     }
 
     private void prepareData() {
-        views.add(new CustomView3(this));
-        views.add(new CustomView2(this));
-        views.add(new CustomView1(this));
+        views.add(CustomView6.class);
+        views.add(CustomView5.class);
+        views.add(CustomView4.class);
+        views.add(CustomView3.class);
+        views.add(CustomView2.class);
+        views.add(CustomView1.class);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -49,7 +56,20 @@ public class BookPracticeActivity extends AppCompatActivity {
             @NonNull
             @Override
             public Object instantiateItem(@NonNull ViewGroup container, int position) {
-                View pageView = views.get(position);
+                LogUtils.d(container);
+                View pageView = null;
+                try {
+                    pageView = (View) views.get(position).getDeclaredConstructor(Context.class).newInstance(
+                            BookPracticeActivity.this);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
                 container.addView(pageView);
                 return pageView;
             }
@@ -62,6 +82,11 @@ public class BookPracticeActivity extends AppCompatActivity {
             @Override
             public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
                 return view == object;
+            }
+
+            @Override
+            public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+                container.removeView((View) object);
             }
         });
     }
