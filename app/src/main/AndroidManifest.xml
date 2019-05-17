@@ -513,8 +513,17 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.practice.qijian.BookPracticeActivity"
+        <activity
+            android:name=".view.practice.qijian.BookPracticeActivity"
             android:label="View/Android自定义控件开发入门与实践">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".database.room.RoomActivity"
+            android:label="数据库/Room">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.zerofate.intent.category.sample" />

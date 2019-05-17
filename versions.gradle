@@ -43,7 +43,7 @@ versions.weibo = "1.0.0"
 versions.greendao = "3.2.2"
 versions.lifecycle = "1.1.1"
 versions.espresso = "3.0.1"
-versions.android_gradle_plugin = '3.3.0'
+versions.android_gradle_plugin = '3.4.1'
 versions.gradle_versions_plugin = "0.20.0"
 versions.tencent_xinge = "3.2.3-release"
 versions.tencent_wup = "1.0.0.E-release"// 信鸽依赖
@@ -80,6 +80,8 @@ versions.rxbinding = '3.0.0-alpha2'
 versions.annotations = '17.0.0'
 versions.navigation = '1.0.0'
 versions.immersionbar = '2.3.3'
+versions.room = "2.1.0-alpha07"
+versions.stetho = "1.5.1"
 
 def deps = [:]
 
@@ -167,6 +169,15 @@ rx_lifecycle.preference = "com.trello.rxlifecycle3:rxlifecycle-components-prefer
 rx_lifecycle.android_lifecycle = "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:$versions.rx_lifecycle"
 deps.rx_lifecycle = rx_lifecycle
 
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.processor = "androidx.room:room-compiler:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+room.guava = "androidx.room:room-guava:$versions.room"
+room.test = "androidx.room:room-testing:$versions.room"
+deps.room = room
+
 deps.stickylistheaders = "se.emilsjolander:stickylistheaders:$versions.stickylistheaders"
 deps.junit = "junit:junit:$versions.junit"
 deps.photo_view = "com.commit451:PhotoView:$versions.photo_view"
@@ -216,6 +227,7 @@ deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
 deps.material = "com.google.android.material:material:$versions.material"
 deps.annotations = "org.jetbrains:annotations:$versions.annotations"
 deps.immersionbar = "com.gyf.immersionbar:immersionbar:$versions.immersionbar"
+deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"
 ext.deps = deps
 
 def classpath = [:]

@@ -56,4 +56,7 @@ dependencies {
     implementation deps.bar_util
     implementation deps.utilcode
     implementation deps.rxpermissions
+    kapt deps.room.processor
+    implementation deps.room.runtime
+    implementation deps.stetho
 }

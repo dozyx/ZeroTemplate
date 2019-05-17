@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.zerofate.androidsdk.util.Utils;
 
@@ -22,5 +23,6 @@ public class ZTApplication extends Application {
         Log.d(TAG,
                 "onCreate: app module BuildConfig.DEBUG == " + BuildConfig.DEBUG + " & sdk module BuildConfig.DEBUG == "
                         + Utils.isDebug());
+        Stetho.initializeWithDefaults(this);
     }
 }
