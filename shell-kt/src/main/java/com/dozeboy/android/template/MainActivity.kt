@@ -10,10 +10,10 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setupDrawer()
     }
 
+    override fun getLayoutId(): Int = R.layout.activity_main
     private fun setupDrawer() {
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close)
         drawer_layout.addDrawerListener(toggle)

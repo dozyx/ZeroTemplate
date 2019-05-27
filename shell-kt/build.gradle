@@ -1,5 +1,6 @@
 apply from: "${rootDir}/config_app.gradle"
 apply from: "${rootDir}/config_kt.gradle"
+apply from: "${rootDir}/test_dependencies.gradle"
 android {
     defaultConfig {
         versionCode 10001
@@ -11,9 +12,6 @@ dependencies {
     implementation deps.kotlin
     implementation deps.appcompat
     implementation deps.constraint_layout
-    testImplementation deps.junit
-    androidTestImplementation deps.test_runner
-    androidTestImplementation deps.test_espresso
     implementation deps.rxjava2
     implementation deps.rx_android
     implementation deps.utilcode

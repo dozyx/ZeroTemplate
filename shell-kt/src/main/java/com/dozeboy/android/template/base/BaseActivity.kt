@@ -13,8 +13,11 @@ open abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(getLayoutId())
         setupToolbar()
     }
+
+    abstract fun getLayoutId(): Int
 
     private fun setupToolbar() {
         findViewById<Toolbar>(R.id.toolbar)?.apply {

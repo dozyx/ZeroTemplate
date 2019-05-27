@@ -9,7 +9,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation deps.appcompat
     testImplementation deps.junit
     implementation project(':core')
     implementation deps.kotlin

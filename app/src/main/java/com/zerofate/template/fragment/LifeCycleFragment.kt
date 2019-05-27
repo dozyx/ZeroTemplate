@@ -29,7 +29,7 @@ class LifeCycleFragment : Fragment() {
         return inflater!!.inflate(R.layout.fragment_life_cycle, container, false)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         baseView = context as IBaseView?
         baseView!!.appendResult("Fragment$localSymbol: onAttach() -> ")

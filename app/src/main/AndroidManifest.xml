@@ -529,6 +529,13 @@
                 <category android:name="com.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".hardware.camera.CameraXActivity"
+            android:label="Hardware/Camera/CameraX">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

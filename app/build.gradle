@@ -29,7 +29,7 @@ dependencies {
     implementation project(':core')
     implementation project(':model')
     implementation project(':core-kotlin')
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation deps.appcompat
 //    implementation deps.constraint_layout
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor
@@ -59,4 +59,6 @@ dependencies {
     kapt deps.room.processor
     implementation deps.room.runtime
     implementation deps.stetho
+    implementation deps.camerax.core
+    implementation deps.camerax.camera2
 }

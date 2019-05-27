@@ -1,5 +1,6 @@
 apply from: "${rootDir}/config_app.gradle"
 apply from: "${rootDir}/config_kt.gradle"
+apply from: "${rootDir}/test_dependencies.gradle"
 
 android {
     defaultConfig {
@@ -44,8 +45,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation deps.constraint_layout
-    testImplementation deps.junit
-    testImplementation deps.test_runner
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor

@@ -12,6 +12,7 @@ android {
         targetSdkVersion build_versions.target_sdk
         applicationId "com.zerofate.${suffix}"
         multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
