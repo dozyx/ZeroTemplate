@@ -1,5 +1,6 @@
 package com.zerofate.template
 
+import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,17 @@ class DialogTestActivity : BaseTestActivity() {
         addButton("top对话框", Runnable {
             TopDialog().show(supportFragmentManager, null)
         })
+        addButton("constraint对话框", Runnable {
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.dialog_constraint)
+            dialog.show()
+        })
+
+        addButton("constraint style对话框", Runnable {
+            val dialog = Dialog(this,R.style.Dialog)
+            dialog.setContentView(R.layout.dialog_constraint)
+            dialog.show()
+        })
     }
 
     class DialogFragmentTest : DialogFragment() {
@@ -29,9 +41,9 @@ class DialogTestActivity : BaseTestActivity() {
         }
 
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
         ): View? {
             return inflater.inflate(R.layout.dialog_fragment_test, container, false)
         }
@@ -55,8 +67,9 @@ class TopDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL,R.style.full_dialog)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.full_dialog)
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_top, container, false)
     }

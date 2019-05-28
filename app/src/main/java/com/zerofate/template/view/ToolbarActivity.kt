@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NavUtils
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_toolbar.*
 

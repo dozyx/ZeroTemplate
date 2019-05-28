@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 
 /**
  * 因为考虑大部分使用场景的数字不会太多，所以使用 float 进行处理

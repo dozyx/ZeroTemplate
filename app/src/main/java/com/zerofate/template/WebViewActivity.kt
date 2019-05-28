@@ -7,26 +7,26 @@ import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.os.Message
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
+import androidx.appcompat.app.AppCompatActivity
 import java.net.URLDecoder
 import java.net.URLEncoder
 
 class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val webView = object :WebView(this){
+        val webView = object : WebView(this) {
             override fun loadUrl(url: String?) {
                 super.loadUrl(url)
-                Log.d(TAG,"loadUrl: $url")
+                Log.d(TAG, "loadUrl: $url")
             }
 
             override fun postUrl(url: String?, postData: ByteArray?) {
                 super.postUrl(url, postData)
-                Log.d(TAG,"postUrl: $url")
+                Log.d(TAG, "postUrl: $url")
             }
 
 
@@ -47,9 +47,9 @@ class WebViewActivity : AppCompatActivity() {
         webView.loadUrl("www.baidu.com")
 
         val data = ""
-        val sendData = URLEncoder.encode(data,"utf-8")
-        val recData = URLDecoder.decode(sendData,"utf-8")
-        Log.d(TAG,"onCreate: $sendData + & + $recData")
+        val sendData = URLEncoder.encode(data, "utf-8")
+        val recData = URLDecoder.decode(sendData, "utf-8")
+        Log.d(TAG, "onCreate: $sendData + & + $recData")
     }
 
     private fun configWebChromeClient(webView: WebView) {
@@ -60,21 +60,21 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onJsAlert(
-                view: WebView?,
-                url: String?,
-                message: String?,
-                result: JsResult?
+                    view: WebView?,
+                    url: String?,
+                    message: String?,
+                    result: JsResult?
             ): Boolean {
                 Log.d(TAG, "onJsAlert: ")
                 return super.onJsAlert(view, url, message, result)
             }
 
             override fun onJsPrompt(
-                view: WebView?,
-                url: String?,
-                message: String?,
-                defaultValue: String?,
-                result: JsPromptResult?
+                    view: WebView?,
+                    url: String?,
+                    message: String?,
+                    defaultValue: String?,
+                    result: JsPromptResult?
             ): Boolean {
                 Log.d(TAG, "onJsPrompt: ")
                 return super.onJsPrompt(view, url, message, defaultValue, result)
@@ -86,8 +86,8 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onGeolocationPermissionsShowPrompt(
-                origin: String?,
-                callback: GeolocationPermissions.Callback?
+                    origin: String?,
+                    callback: GeolocationPermissions.Callback?
             ) {
                 super.onGeolocationPermissionsShowPrompt(origin, callback)
                 Log.d(TAG, "onGeolocationPermissionsShowPrompt: ")
@@ -109,18 +109,18 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onShowFileChooser(
-                webView: WebView?,
-                filePathCallback: ValueCallback<Array<Uri>>?,
-                fileChooserParams: FileChooserParams?
+                    webView: WebView?,
+                    filePathCallback: ValueCallback<Array<Uri>>?,
+                    fileChooserParams: FileChooserParams?
             ): Boolean {
                 Log.d(TAG, "onShowFileChooser: ")
                 return super.onShowFileChooser(webView, filePathCallback, fileChooserParams)
             }
 
             override fun onReceivedTouchIconUrl(
-                view: WebView?,
-                url: String?,
-                precomposed: Boolean
+                    view: WebView?,
+                    url: String?,
+                    precomposed: Boolean
             ) {
                 Log.d(TAG, "onReceivedTouchIconUrl: ")
                 super.onReceivedTouchIconUrl(view, url, precomposed)
@@ -142,10 +142,10 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onJsConfirm(
-                view: WebView?,
-                url: String?,
-                message: String?,
-                result: JsResult?
+                    view: WebView?,
+                    url: String?,
+                    message: String?,
+                    result: JsResult?
             ): Boolean {
                 Log.d(TAG, "onJsConfirm: ")
                 return super.onJsConfirm(view, url, message, result)
@@ -157,10 +157,10 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onJsBeforeUnload(
-                view: WebView?,
-                url: String?,
-                message: String?,
-                result: JsResult?
+                    view: WebView?,
+                    url: String?,
+                    message: String?,
+                    result: JsResult?
             ): Boolean {
                 Log.d(TAG, "onJsBeforeUnload: ")
                 return super.onJsBeforeUnload(view, url, message, result)
@@ -172,10 +172,10 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onCreateWindow(
-                view: WebView?,
-                isDialog: Boolean,
-                isUserGesture: Boolean,
-                resultMsg: Message?
+                    view: WebView?,
+                    isDialog: Boolean,
+                    isUserGesture: Boolean,
+                    resultMsg: Message?
             ): Boolean {
                 Log.d(TAG, "onCreateWindow: ")
                 return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
@@ -211,10 +211,10 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onSafeBrowsingHit(
-                view: WebView?,
-                request: WebResourceRequest?,
-                threatType: Int,
-                callback: SafeBrowsingResponse?
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    threatType: Int,
+                    callback: SafeBrowsingResponse?
             ) {
                 Log.d(TAG, "onSafeBrowsingHit: ")
                 super.onSafeBrowsingHit(view, request, threatType, callback)
@@ -226,41 +226,41 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?
             ) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     Log.d(
-                        TAG,
-                        "onReceivedError: " + request?.url.toString() + " & " + error?.description
+                            TAG,
+                            "onReceivedError: " + request?.url.toString() + " & " + error?.description
                     )
                 }
                 super.onReceivedError(view, request, error)
             }
 
             override fun onRenderProcessGone(
-                view: WebView?,
-                detail: RenderProcessGoneDetail?
+                    view: WebView?,
+                    detail: RenderProcessGoneDetail?
             ): Boolean {
                 Log.d(TAG, "onRenderProcessGone: ")
                 return super.onRenderProcessGone(view, detail)
             }
 
             override fun onReceivedLoginRequest(
-                view: WebView?,
-                realm: String?,
-                account: String?,
-                args: String?
+                    view: WebView?,
+                    realm: String?,
+                    account: String?,
+                    args: String?
             ) {
                 Log.d(TAG, "onReceivedLoginRequest: ")
                 super.onReceivedLoginRequest(view, realm, account, args)
             }
 
             override fun onReceivedHttpError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                errorResponse: WebResourceResponse?
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    errorResponse: WebResourceResponse?
             ) {
                 Log.d(TAG, "onReceivedHttpError: ")
                 super.onReceivedHttpError(view, request, errorResponse)
@@ -278,8 +278,8 @@ class WebViewActivity : AppCompatActivity() {
 
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
+                    view: WebView?,
+                    request: WebResourceRequest?
             ): Boolean {
                 Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url}")
 //                view?.loadUrl(request.url.toString())
@@ -308,28 +308,28 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             override fun onReceivedHttpAuthRequest(
-                view: WebView?,
-                handler: HttpAuthHandler?,
-                host: String?,
-                realm: String?
+                    view: WebView?,
+                    handler: HttpAuthHandler?,
+                    host: String?,
+                    realm: String?
             ) {
                 Log.d(TAG, "onReceivedHttpAuthRequest: ")
                 super.onReceivedHttpAuthRequest(view, handler, host, realm)
             }
 
             override fun onReceivedSslError(
-                view: WebView?,
-                handler: SslErrorHandler?,
-                error: SslError?
+                    view: WebView?,
+                    handler: SslErrorHandler?,
+                    error: SslError?
             ) {
                 Log.d(TAG, "onReceivedSslError: ")
                 super.onReceivedSslError(view, handler, error)
             }
 
             override fun onFormResubmission(
-                view: WebView?,
-                dontResend: Message?,
-                resend: Message?
+                    view: WebView?,
+                    dontResend: Message?,
+                    resend: Message?
             ) {
                 Log.d(TAG, "onFormResubmission: ")
                 super.onFormResubmission(view, dontResend, resend)

@@ -10,7 +10,8 @@ import android.content.Context;
 
 public class DialogUtil {
     private static ProgressDialog sProgressDialog;
-    public static void showDialog(Context context){
+
+    public static void showDialog(Context context) {
         sProgressDialog = new ProgressDialog(context);
         sProgressDialog.show();
     }

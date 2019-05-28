@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
  * @date 2018/11/21
  */
 abstract class BaseActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
     }
 

@@ -1,127 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.zerofate.template.justfortest.MeaninglessActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:backgroundTint="@color/colorAccent"
-        app:bl_corners_radius="8dp" />
+    <data>
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:thumb="@drawable/switch_thumb"
-        app:layout_constraintLeft_toRightOf="@id/button" />
-
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="11111***"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/text2" />
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:text="*****"
-        app:layout_constraintBaseline_toBaselineOf="@id/text1"
-        app:layout_constraintLeft_toRightOf="@+id/text1"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="12sp"
-        android:autoSizeStepGranularity="2sp"
-        android:maxLines="1"
-        android:text="11111111111111111111111111111111111111111111111111111"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintTop_toBottomOf="@id/button" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/layer_list_test"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/text">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="测试" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:padding="20dp"
-            android:src="@drawable/inset_test" />
+        tools:context="com.zerofate.template.justfortest.MeaninglessActivity">
 
         <EditText
-            android:layout_width="100dp"
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="111111122222" />
-        <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="25dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher"/>
-        </androidx.cardview.widget.CardView>
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
 
-        <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="100dp"
-            app:flexWrap="wrap"
-            app:justifyContent="space_between"
-            app:maxLine="2"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1111111"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22222"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="11111"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22222"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="11111"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22222"/>
-        </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 

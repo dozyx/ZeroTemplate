@@ -1,7 +1,6 @@
 package com.dozeboy.android.core.utli.util
 
 
-import android.content.Context
 import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -13,9 +12,9 @@ import io.reactivex.schedulers.Schedulers
 object RxJavaUtil {
     private val schedulersTransformer = SingleTransformer<Any, Any> { upstream ->
         upstream.subscribeOn(
-            Schedulers.io()
+                Schedulers.io()
         ).observeOn(
-            AndroidSchedulers.mainThread()
+                AndroidSchedulers.mainThread()
         )
     }
 

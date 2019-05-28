@@ -4,23 +4,19 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-
 import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.template.base.BaseShowResultActivity
-
-import java.io.IOException
-
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import java.io.IOException
 
 /**
  * Created by zero on 2017/9/22.
@@ -50,10 +46,10 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
     override fun onButton2() {
         val requests = Volley.newRequestQueue(this)
         requests.add(
-            StringRequest(Request.Method.GET,
-                URL_STRING,
-                Response.Listener { s -> setText(s) },
-                Response.ErrorListener { volleyError -> setText(volleyError.message) })
+                StringRequest(Request.Method.GET,
+                        URL_STRING,
+                        Response.Listener { s -> setText(s) },
+                        Response.ErrorListener { volleyError -> setText(volleyError.message) })
         )
 
     }
@@ -74,7 +70,7 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
 
     override fun getActiveNetworkInfo(): NetworkInfo {
         val connectivityManager = getSystemService(
-            Context.CONNECTIVITY_SERVICE
+                Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
         return connectivityManager.activeNetworkInfo
     }
@@ -103,7 +99,7 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
     private fun startDownloadWithOkHttp3() {
         val client = OkHttpClient()
         val request = okhttp3.Request.Builder().url(
-            URL_STRING
+                URL_STRING
         ).build()
         val call = client.newCall(request)
         call.enqueue(object : Callback {
@@ -131,8 +127,8 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
             }
             call.enqueue(object : retrofit2.Callback<ResponseBody> {
                 override fun onResponse(
-                    call: retrofit2.Call<ResponseBody>,
-                    response: retrofit2.Response<ResponseBody>
+                        call: retrofit2.Call<ResponseBody>,
+                        response: retrofit2.Response<ResponseBody>
                 ) {
                     //                try {
                     //                    ToastX.showShort(NetworkAPITest.this,count +"");

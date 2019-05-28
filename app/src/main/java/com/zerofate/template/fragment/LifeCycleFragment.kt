@@ -1,14 +1,12 @@
 package com.zerofate.template.fragment
 
 import android.content.Context
-import androidx.annotation.Nullable
-import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
 import com.zerofate.template.R
 import com.zerofate.template.base.IBaseView
 import kotlinx.android.synthetic.main.fragment_life_cycle.*
@@ -31,7 +29,7 @@ class LifeCycleFragment : Fragment() {
         return inflater!!.inflate(R.layout.fragment_life_cycle, container, false)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         baseView = context as IBaseView?
         baseView!!.appendResult("Fragment$localSymbol: onAttach() -> ")

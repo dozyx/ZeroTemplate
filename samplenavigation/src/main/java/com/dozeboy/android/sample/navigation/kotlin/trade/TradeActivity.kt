@@ -1,7 +1,7 @@
 package com.dozeboy.android.sample.navigation.kotlin.trade
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.dozeboy.android.sample.navigation.R
 
 class TradeActivity : AppCompatActivity() {

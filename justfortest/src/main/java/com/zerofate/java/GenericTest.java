@@ -7,7 +7,7 @@ package com.zerofate.java;
 
 public class GenericTest<T> {
 
-    public  T get(T data){
+    public T get(T data) {
         return data;
     }
 }

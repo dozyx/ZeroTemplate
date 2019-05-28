@@ -2,11 +2,10 @@ package com.zerofate.template.view.chart
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Paint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.MarkerView
@@ -19,7 +18,6 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
-import com.github.mikephil.charting.listener.ChartTouchListener
 import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.ViewPortHandler
 import com.zerofate.template.R
@@ -63,12 +61,12 @@ class MpChartActivity : AppCompatActivity() {
         chart.xAxis.setDrawGridLines(false)
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         chart.xAxis.textSize = 11f
-        chart.xAxis.textColor = ActivityCompat.getColor(this,android.R.color.holo_green_dark)
-        chart.xAxis.valueFormatter = object : IAxisValueFormatter {
-            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                return "${value.toInt()}日"
-            }
-        }
+        chart.xAxis.textColor = ActivityCompat.getColor(this, android.R.color.holo_green_dark)
+//        chart.xAxis.valueFormatter = object : IAxisValueFormatter {
+//            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+//                return "${value.toInt()}日"
+//            }
+//        }
 
 
         val values = ArrayList<BarEntry>(7)
@@ -96,20 +94,20 @@ class MpChartActivity : AppCompatActivity() {
         // bar 宽，为百分比
         barData.barWidth = 0.3f
         // 格式化 value
-        barData.setValueFormatter(object :IValueFormatter{
-            override fun getFormattedValue(
-                value: Float,
-                entry: Entry?,
-                dataSetIndex: Int,
-                viewPortHandler: ViewPortHandler?
-            ): String {
-                return String.format("%.2f",value)
-            }
-        })
+//        barData.setValueFormatter(object : IValueFormatter {
+//            override fun getFormattedValue(
+//                    value: Float,
+//                    entry: Entry?,
+//                    dataSetIndex: Int,
+//                    viewPortHandler: ViewPortHandler?
+//            ): String {
+//                return String.format("%.2f", value)
+//            }
+//        })
         chart.data = barData
 
         chart.marker = BarTouchView(this)
-        chart.highlightValue(14f,0)
+        chart.highlightValue(14f, 0)
     }
 
     class BarTouchView(context: Context) : MarkerView(context, android.R.layout.simple_list_item_1) {

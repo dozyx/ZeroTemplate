@@ -1,6 +1,5 @@
 package com.zerofate.java.bean;
 
-import java.util.List;
 import java.util.Map;
 
 public class GsonBean {
@@ -12,7 +11,7 @@ public class GsonBean {
      */
 
     private String error_code;
-    private Map<String,String> data;
+    private Map<String, String> data;
 
     public String getError_code() {
         return error_code;

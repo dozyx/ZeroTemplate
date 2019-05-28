@@ -12,20 +12,48 @@ import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
 public class RxJavaTest {
 
     public static void main(String[] args) {
+        PublishSubject<Integer> subject = PublishSubject.create();
+        subject.doOnError(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                System.out.println("doOnError = [" + throwable + "]" + throwable.getMessage());
+            }
+        }).onErrorReturnItem(999).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                System.out.println("d = [" + d + "]");
+            }
 
+            @Override
+            public void onNext(Integer integer) {
+                System.out.println("integer = [" + integer + "]");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("e = [" + e + "]" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("onComplete");
+            }
+        });
+        subject.onNext(2);
+        subject.onError(new Throwable("1111"));
+        subject.onComplete();
     }
 
     private static void testDelayZip() {
@@ -62,7 +90,7 @@ public class RxJavaTest {
 
     private static void testZip() {
         Observable<Integer> observable1 = getObservable(1, 2, 3);
-        Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2,TimeUnit.SECONDS);
+        Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2, TimeUnit.SECONDS);
         Observable.zip(observable1, observable2, (integer, integer2) -> integer + integer2).subscribe(observer);
         try {
             Thread.sleep(10000);

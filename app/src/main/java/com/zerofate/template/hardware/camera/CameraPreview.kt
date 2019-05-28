@@ -23,15 +23,7 @@ import android.hardware.Camera.CameraInfo
 import android.hardware.Camera.Size
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.SurfaceHolder
-import android.view.SurfaceView
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-
+import android.view.*
 import java.io.IOException
 
 // Need the following import to get access to the app resources, since this
@@ -72,7 +64,7 @@ class CameraPreview : Activity() {
             }
         }
 
-        mPreview?.setOnClickListener{
+        mPreview?.setOnClickListener {
             if (numberOfCameras == 1) {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("只有一个摄像头")

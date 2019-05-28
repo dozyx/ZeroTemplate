@@ -16,6 +16,7 @@ public enum Fruit {
     static {
         System.out.println("static enum");
     }
+
     Fruit(String name, String price) {
         System.out.println("constructor enum");
         this.name = name;

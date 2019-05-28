@@ -3,7 +3,7 @@ package com.zerofate.template.activity
 import android.os.Bundle
 import com.zerofate.template.base.BaseTestActivity
 
-class ConfigActivity:BaseTestActivity(){
+class ConfigActivity : BaseTestActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addButton("orientation", Runnable {

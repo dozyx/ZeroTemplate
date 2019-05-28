@@ -1,11 +1,12 @@
 package com.zerofate.template.design;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import com.google.android.material.behavior.SwipeDismissBehavior;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.behavior.SwipeDismissBehavior;
 import com.zerofate.template.R;
 
 import butterknife.BindView;

@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -43,7 +42,7 @@ public class FloatService extends Service implements View.OnTouchListener {
     }
 
     private void initFloatView() {
-        floatView = LayoutInflater.from(this).inflate(R.layout.float_view,null);
+        floatView = LayoutInflater.from(this).inflate(R.layout.float_view, null);
         floatImage = floatView.findViewById(R.id.float_image);
         floatImage.setOnTouchListener(this);
     }

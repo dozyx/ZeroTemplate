@@ -2,13 +2,15 @@ package com.zerofate.java;
 
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 
 import com.google.gson.Gson;
-import com.zerofate.java.bean.GsonBean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +19,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -37,9 +43,34 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(String.format("%-3d",1));
+        System.out.println(Math.cos(Math.toRadians(60)));
     }
 
+    private static Random rnd = new Random();
+
+    private static long random(long n) {
+        //(0 ~ Integer.MAX_VALUE)  =  Integer.MAX_VALUE / 2;
+
+        return Math.abs(rnd.nextLong()) % n;
+    }
+
+    private static void randomTest() {
+        for (int i = 0; i < 100; i++) {
+            System.out.printf(random(2) + " ");
+        }
+    }
+
+
+    private static void testFianl() {
+        Integer integer = new Integer(1);
+        System.out.println(integer);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(integer);
+            }
+        }).start();
+    }
 
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -227,6 +258,13 @@ public class Test {
                 + "    }\n"
                 + "}}";
         System.out.println("jsonStr 增加一层data：" + new Gson().fromJson(jsonStr3, User.class));
+
+        String jsonStr4 = "{\"data\": {\n"
+                + "    \"name\": \"张三\",\n"
+                + "    \"phone\": \"110\",\n"
+                + "    \"address\": \"\"\n"
+                + "}}";
+        System.out.println("对象类型错误：" + new Gson().fromJson(jsonStr4, User.class));
     }
 
     public static class G2<S> extends GenericTest<S> {

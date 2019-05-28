@@ -1,13 +1,15 @@
 package com.zerofate.template.justfortest;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewStub;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.zerofate.androidsdk.util.ToastX;
 import com.zerofate.template.justfortest.databinding.ActivityDataBindingTestBinding;
+import com.zerofate.template.justfortest.databinding.ActivityMeaninglessBinding;
 
 public class DataBindingTestActivity extends AppCompatActivity {
 
@@ -23,10 +25,40 @@ public class DataBindingTestActivity extends AppCompatActivity {
             user.address.province = "广东";
             dataBindingTestActivity.setUser(user);
         });
+        dataBindingTestActivity.setHandler(new EventHandler());
+        dataBindingTestActivity.setPresenter(new Presenter());
+        dataBindingTestActivity.stub.setOnInflateListener(new ViewStub.OnInflateListener() {
+            @Override
+            public void onInflate(ViewStub stub, View inflated) {
+
+            }
+        });
+        dataBindingTestActivity.stub.getViewStub().setVisibility(View.VISIBLE);
+        ((ActivityMeaninglessBinding) dataBindingTestActivity.stub.getBinding()).edit.setText("11111");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     public void onProvinceClicked(View view) {
-        ToastX.showShort(this,"点击");
+        ToastX.showShort(this, "点击");
+    }
+
+    public class EventHandler{
+        public void onClick(View view){
+            ToastX.showShort(DataBindingTestActivity.this,"onClick view");
+        }
+    }
+
+    public class Presenter{
+        public void onClick(){
+            ToastX.showShort(DataBindingTestActivity.this,"onClick presenter");
+        }
+        public void onClickRoot(){
+            ToastX.showShort(DataBindingTestActivity.this,"onClickRoot presenter");
+        }
     }
 
     public static class User {

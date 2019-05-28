@@ -1,8 +1,6 @@
 package com.zerofate.androidsdk.view;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
@@ -68,6 +66,7 @@ public class NumberTextView extends TextView {
 
     public interface OnOverRangeListener {
         void onOverMax();
+
         void onBelowMin();
     }
 }

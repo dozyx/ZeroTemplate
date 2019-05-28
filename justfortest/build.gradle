@@ -1,6 +1,7 @@
 apply from: "${rootDir}/config_app.gradle"
 apply from: "${rootDir}/config_kt.gradle"
 apply plugin: 'kotlin-kapt'
+apply from: "${rootDir}/test_dependencies.gradle"
 
 android {
     defaultConfig {
@@ -41,10 +42,10 @@ android.applicationVariants.all { variant ->
 }
 
 dependencies {
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation deps.constraint_layout
-    testImplementation deps.junit
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.processor
@@ -61,7 +62,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation project(':core-kotlin')
     implementation deps.rxpermissions
-    implementation("org.jetbrains:annotations:16.0.1")
+    implementation deps.annotations
     implementation deps.mmkv
     debugImplementation deps.debug_db
     implementation deps.background
@@ -69,6 +70,23 @@ dependencies {
     implementation deps.logger
     implementation deps.flexbox
     implementation deps.support.gridlayout
+    implementation deps.rxbinding.base
+    implementation project(':ui')
+    implementation deps.immersionbar
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.27'
+    releaseImplementation 'com.willowtreeapps.hyperion:hyperion-core-no-op:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.27'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.27'
+    debugImplementation "com.star_zero:hyperion-appinfo:1.0.0"
 }
 repositories {
     mavenCentral()

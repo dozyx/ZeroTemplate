@@ -1,11 +1,12 @@
 package com.zerofate.androidsdk.view;
 
-import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 

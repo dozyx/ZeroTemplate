@@ -1,7 +1,7 @@
 package com.zerofate.template.arch
 
-import androidx.lifecycle.*
 import android.os.Bundle
+import androidx.lifecycle.*
 import com.zerofate.template.base.BaseTestActivity
 
 class LiveDataActivity : BaseTestActivity() {
@@ -55,9 +55,11 @@ class LiveDataActivity : BaseTestActivity() {
         addButton("MediatorLiveData Add Source", Runnable {
             mediator.addSource(data1) {
                 appendResult("data1")
+                mediator.value = 1
             }
             mediator.addSource(data2) {
                 appendResult("data2")
+                mediator.value = 2
             }
         })
         addButton("MediatorLiveData observe", Runnable {

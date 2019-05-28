@@ -3,10 +3,10 @@ package com.zerofate.template.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.zerofate.template.R;
 import com.zerofate.template.base.BaseShowResultActivity;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class LifeCycleTest extends BaseShowResultActivity {
 

@@ -3,12 +3,16 @@ package com.zerofate.template.justfortest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jakewharton.rxbinding3.view.RxView;
+
 /**
  * 控制启动界面
+ *
  * @author dozeboy
  * @date 2017/11/13
  */

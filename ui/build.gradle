@@ -1,0 +1,15 @@
+apply from: "${rootDir}/config_lib.gradle"
+
+android {
+    defaultConfig {
+        versionCode 10000
+        versionName "1.0.0"
+    }
+}
+
+dependencies {
+    testImplementation deps.junit
+    api deps.appcompat
+    api deps.constraint_layout
+}
+

@@ -1,7 +1,5 @@
 package com.dozeboy.android.core.utli.money
 
-import org.junit.Assert.*
-
 import org.junit.Test
 
 /**

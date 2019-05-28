@@ -48,12 +48,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- ******************************************************************************
+ * *****************************************************************************
  * Taken from the JB source code, can be found in:
  * libcore/luni/src/main/java/libcore/io/DiskLruCache.java
  * or direct link:
  * https://android.googlesource.com/platform/libcore/+/android-4.1.1_r1/luni/src/main/java/libcore/io/DiskLruCache.java
- ******************************************************************************
+ * *****************************************************************************
  *
  * A cache that uses a bounded amount of space on a filesystem. Each cache
  * entry has a string key and a fixed number of values. Values are byte
@@ -76,12 +76,12 @@ import java.util.concurrent.TimeUnit;
  * entry may have only one editor at one time; if a value is not available to be
  * edited then {@link #edit} will return null.
  * <ul>
- *     <li>When an entry is being <strong>created</strong> it is necessary to
- *         supply a full set of values; the empty value should be used as a
- *         placeholder if necessary.
- *     <li>When an entry is being <strong>edited</strong>, it is not necessary
- *         to supply data for every value; values default to their previous
- *         value.
+ * <li>When an entry is being <strong>created</strong> it is necessary to
+ * supply a full set of values; the empty value should be used as a
+ * placeholder if necessary.
+ * <li>When an entry is being <strong>edited</strong>, it is not necessary
+ * to supply data for every value; values default to their previous
+ * value.
  * </ul>
  * Every {@link #edit} call must be matched by a call to {@link Editor#commit}
  * or {@link Editor#abort}. Committing is atomic: a read observes the full set
@@ -210,7 +210,7 @@ public final class DiskLruCache implements Closeable {
      * "\n".
      *
      * @throws EOFException if the stream is exhausted before the next newline
-     *     character.
+     *                      character.
      */
     public static String readAsciiLine(InputStream in) throws IOException {
         // TODO: support UTF-8 here instead
@@ -270,7 +270,8 @@ public final class DiskLruCache implements Closeable {
     private final ExecutorService executorService = new ThreadPoolExecutor(0, 1,
             60L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
     private final Callable<Void> cleanupCallable = new Callable<Void>() {
-        @Override public Void call() throws Exception {
+        @Override
+        public Void call() throws Exception {
             synchronized (DiskLruCache.this) {
                 if (journalWriter == null) {
                     return null; // closed
@@ -298,10 +299,9 @@ public final class DiskLruCache implements Closeable {
      * Opens the cache in {@code directory}, creating a cache if none exists
      * there.
      *
-     * @param directory a writable directory
-     * @param appVersion
+     * @param directory  a writable directory
      * @param valueCount the number of values per cache entry. Must be positive.
-     * @param maxSize the maximum number of bytes this cache should use to store
+     * @param maxSize    the maximum number of bytes this cache should use to store
      * @throws IOException if reading or writing the cache directory fails
      */
     public static DiskLruCache open(File directory, int appVersion, int valueCount, long maxSize)
@@ -761,7 +761,8 @@ public final class DiskLruCache implements Closeable {
             return inputStreamToString(getInputStream(index));
         }
 
-        @Override public void close() {
+        @Override
+        public void close() {
             for (InputStream in : ins) {
                 closeQuietly(in);
             }
@@ -859,7 +860,8 @@ public final class DiskLruCache implements Closeable {
                 super(out);
             }
 
-            @Override public void write(int oneByte) {
+            @Override
+            public void write(int oneByte) {
                 try {
                     out.write(oneByte);
                 } catch (IOException e) {
@@ -867,7 +869,8 @@ public final class DiskLruCache implements Closeable {
                 }
             }
 
-            @Override public void write(byte[] buffer, int offset, int length) {
+            @Override
+            public void write(byte[] buffer, int offset, int length) {
                 try {
                     out.write(buffer, offset, length);
                 } catch (IOException e) {
@@ -875,7 +878,8 @@ public final class DiskLruCache implements Closeable {
                 }
             }
 
-            @Override public void close() {
+            @Override
+            public void close() {
                 try {
                     out.close();
                 } catch (IOException e) {
@@ -883,7 +887,8 @@ public final class DiskLruCache implements Closeable {
                 }
             }
 
-            @Override public void flush() {
+            @Override
+            public void flush() {
                 try {
                     out.flush();
                 } catch (IOException e) {

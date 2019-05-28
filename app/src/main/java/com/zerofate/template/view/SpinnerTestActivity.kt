@@ -12,7 +12,6 @@ import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.zerofate.androidsdk.util.ToastX
-import com.zerofate.androidsdk.util.Utils
 import com.zerofate.androidsdk.util.VersionUtil
 import com.zerofate.template.R
 import com.zerofate.template.util.Constants
@@ -42,11 +41,11 @@ class SpinnerTestActivity : AppCompatActivity() {
             popup()
         }
 
-        btn_toggle_selected.setOnClickListener{
+        btn_toggle_selected.setOnClickListener {
             dropdown_spinner.isSelected = !dropdown_spinner.isSelected
         }
 
-        btn_selection.setOnClickListener{
+        btn_selection.setOnClickListener {
             dropdown_spinner.setSelection(-1)
         }
     }

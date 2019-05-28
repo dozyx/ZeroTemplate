@@ -1,7 +1,7 @@
 package com.zerofate.template.drawable
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.zerofate.template.R
 
 class BackgroundTintActivity : AppCompatActivity() {

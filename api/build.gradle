@@ -1,6 +1,6 @@
 apply from: "${rootDir}/config_lib.gradle"
 
-android{
+android {
     defaultConfig {
         versionCode 10000
         versionName "1.0.0"

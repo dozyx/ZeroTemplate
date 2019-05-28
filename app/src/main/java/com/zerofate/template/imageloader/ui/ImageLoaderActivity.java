@@ -2,7 +2,6 @@ package com.zerofate.template.imageloader.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zerofate.template.R;
 import com.zerofate.template.imageloader.ImageLoader;
@@ -35,7 +36,8 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_loader);
-        mImageWidth = (getResources().getDisplayMetrics().widthPixels - 20) / 3;// 以屏幕宽度的三分之一来计算缩放图尺寸，因为 GridView 在 XML 中设定为3列。这里感觉其实不是很严谨，觉得列数也应该动态设置才好，不过一个 sample 不需要这么严格吧
+        mImageWidth = (getResources().getDisplayMetrics().widthPixels - 20)
+                / 3;// 以屏幕宽度的三分之一来计算缩放图尺寸，因为 GridView 在 XML 中设定为3列。这里感觉其实不是很严谨，觉得列数也应该动态设置才好，不过一个 sample 不需要这么严格吧
 
         mImageGridView = (GridView) findViewById(R.id.gridView);
         mImageAdapter = new ImageAdapter(this);

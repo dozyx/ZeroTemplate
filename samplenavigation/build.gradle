@@ -44,12 +44,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
+    implementation deps.navigation.navigation_fragment
     // use -ktx for Kotlin
-    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha09'
+    implementation deps.navigation.navigation_ui
     // use -ktx for Kotlin
-    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha09'
+    implementation deps.navigation.navigation_fragment_ktx
     // use -ktx for Kotlin
-    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha09'
+    implementation deps.navigation.navigation_ui_ktx
     // use -ktx for Kotlin
 }

@@ -3,9 +3,10 @@ package com.zerofate.template.view.practice;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 public class Practice7DrawRoundRectView extends View {
 
@@ -33,7 +34,7 @@ public class Practice7DrawRoundRectView extends View {
 
         canvas.drawRoundRect(halfWidth - RECT_WIDTH_HEIGHT, halfHeight - RECT_WIDTH_HEIGHT,
                 halfWidth + RECT_WIDTH_HEIGHT, halfHeight + RECT_WIDTH_HEIGHT, 50, 50,
-        new Paint(Paint.ANTI_ALIAS_FLAG));
+                new Paint(Paint.ANTI_ALIAS_FLAG));
 //        练习内容：使用 canvas.drawRoundRect() 方法画圆角矩形
     }
 }

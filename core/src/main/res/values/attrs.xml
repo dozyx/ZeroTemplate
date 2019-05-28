@@ -9,11 +9,11 @@
         <attr name="title" />
         <attr name="titleColor" />
         <attr name="titleSize" />
-        <attr name="content"/>
+        <attr name="content" />
         <attr name="contentColor" format="color" />
         <attr name="contentSize" format="dimension" />
         <attr name="android:hint" />
-        <attr name="android:textColorHint"/>
-        <attr name="android:inputType"/>
+        <attr name="android:textColorHint" />
+        <attr name="android:inputType" />
     </declare-styleable>
 </resources>

@@ -3,13 +3,13 @@ package com.zerofate.template.view.recyclerview
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
@@ -45,9 +45,9 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
             }
 
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
         ): View? {
             LogUtil.d("onCreateView: ")
             return inflater.inflate(R.layout.activity_recycler_view_test, container, false)
@@ -61,20 +61,20 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
             recycler_view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<CustomViewHolder>() {
                 @SuppressLint("InflateParams")
                 override fun onCreateViewHolder(
-                    parent: ViewGroup,
-                    viewType: Int
+                        parent: ViewGroup,
+                        viewType: Int
                 ): CustomViewHolder {
                     return CustomViewHolder(
-                        LayoutInflater.from(activity).inflate(
-                            R.layout.item_text,
-                            null
-                        )
+                            LayoutInflater.from(activity).inflate(
+                                    R.layout.item_text,
+                                    null
+                            )
                     )
                 }
 
                 override fun onBindViewHolder(
-                    holder: CustomViewHolder,
-                    position: Int
+                        holder: CustomViewHolder,
+                        position: Int
                 ) {
                     Log.d(TAG, "onBindViewHolder: $position")
                     holder.textView.text = resources.getString(R.string.network_api)

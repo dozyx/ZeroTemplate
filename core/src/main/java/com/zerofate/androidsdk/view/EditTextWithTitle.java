@@ -3,7 +3,6 @@ package com.zerofate.androidsdk.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,11 +12,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.zerofate.androidsdk.R;
 
 
 /**
  * TODO: 添加最小的宽度或者实现不同字数等距显示
+ *
  * @author dozeboy
  * @date 2017/12/4
  */

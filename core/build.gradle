@@ -17,5 +17,6 @@ dependencies {
     implementation deps.rx_android
     implementation deps.rxjava_adapter
     implementation deps.okhttp.logging
+    api deps.utilcode
     implementation deps.okhttp.logging
 }

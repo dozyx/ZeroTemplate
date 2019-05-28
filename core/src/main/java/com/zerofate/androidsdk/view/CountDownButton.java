@@ -2,8 +2,9 @@ package com.zerofate.androidsdk.view;
 
 import android.content.Context;
 import android.os.CountDownTimer;
-import androidx.appcompat.widget.AppCompatButton;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 /**
  * @author dozeboy
