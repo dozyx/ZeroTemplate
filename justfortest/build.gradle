@@ -1,5 +1,6 @@
 apply from: "${rootDir}/config_app.gradle"
 apply from: "${rootDir}/config_kt.gradle"
+apply plugin: 'kotlin-kapt'
 apply from: "${rootDir}/test_dependencies.gradle"
 
 android {
@@ -52,7 +53,7 @@ dependencies {
     implementation deps.permissionsdispatcher.runtime
     annotationProcessor deps.permissionsdispatcher.processor
     implementation deps.dagger.runtime
-    annotationProcessor deps.dagger.processor
+    kapt deps.dagger.processor
     implementation deps.gson
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'

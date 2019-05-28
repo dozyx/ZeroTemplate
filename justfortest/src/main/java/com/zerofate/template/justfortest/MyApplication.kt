@@ -14,6 +14,8 @@ class MyApplication : Application(), Thread.UncaughtExceptionHandler {
         super.onCreate()
         uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler(this)
+        if (BuildConfig.DEBUG){
+        }
     }
 
     override fun uncaughtException(t: Thread, e: Throwable) {

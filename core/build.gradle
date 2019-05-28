@@ -13,6 +13,10 @@ dependencies {
     api deps.constraint_layout
     api deps.retrofit.runtime
     api deps.gson
+    api deps.rxjava2
+    implementation deps.rx_android
+    implementation deps.rxjava_adapter
+    implementation deps.okhttp.logging
     api deps.utilcode
     implementation deps.okhttp.logging
 }
