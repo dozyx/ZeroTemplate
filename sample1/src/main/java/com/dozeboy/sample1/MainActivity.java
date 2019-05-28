@@ -21,6 +21,7 @@ public class MainActivity extends BaseSampleActivity<ActivityMainBinding> {
         binding.textHello.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));
         });
+        ActivityMainBinding.inflate(getLayoutInflater());
     }
 
     @Override

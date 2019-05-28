@@ -6,6 +6,6 @@ import dagger.Component;
  * @author dozeboy
  * @date 2019/1/7
  */
-@Component(dependencies = AppComponent.class)
+@Component
 public interface MainComponent {
 }
