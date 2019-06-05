@@ -1,10 +1,12 @@
 package com.zerofate.template.dialog
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import androidx.core.widget.PopupWindowCompat
 import com.zerofate.template.R
 import com.zerofate.template.base.BaseTestActivity
 
@@ -18,6 +20,8 @@ class PopupWindowActivity : BaseTestActivity() {
             window.elevation = 50f
             // 好像不能设置 modal，有一个 setTouchModal 方法，不过被标记为 @hide
             window.showAsDropDown(button)
+            window.isFocusable = true
+            window.setBackgroundDrawable(ColorDrawable())
         })
     }
 }

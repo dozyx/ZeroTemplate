@@ -61,4 +61,5 @@ dependencies {
     implementation deps.stetho
     implementation deps.camerax.core
     implementation deps.camerax.camera2
+    implementation Deps.picasso
 }

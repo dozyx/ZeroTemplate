@@ -3,6 +3,7 @@ package com.zerofate.template.justfortest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.blankj.utilcode.util.SPUtils
 import kotlinx.android.synthetic.main.activity_meaningless.*
 
 

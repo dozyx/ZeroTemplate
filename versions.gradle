@@ -139,7 +139,6 @@ dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
 dagger.processor = "com.google.dagger:dagger-compiler:$versions.dagger"
 deps.dagger = dagger
 
-<<<<<<< HEAD
 def koin = [:]
 koin.core = "org.koin:koin-core:$versions.koin"
 koin.ext = "org.koin:koin-core-ext:$versions.koin"
@@ -152,7 +151,6 @@ koin.androidx_scope = "org.koin:koin-androidx-scope:$versions.koin"
 koin.androidx_viewmodel = "org.koin:koin-androidx-viewmodel:$versions.koin"
 koin.ktor = "org.koin:koin-ktor:$versions.koin"
 koin.dagger = koin
-=======
 def navigation = [:]
 navigation.navigation_fragment = "android.arch.navigation:navigation-fragment:$versions.navigation"
 navigation.navigation_ui = "android.arch.navigation:navigation-ui:$versions.navigation"
@@ -172,7 +170,6 @@ rxbinding.swiperefreshlayout = "com.jakewharton.rxbinding3:rxbinding-swiperefres
 rxbinding.viewpager = "com.jakewharton.rxbinding3:rxbinding-viewpager:$versions.rxbinding"
 rxbinding.material = "com.jakewharton.rxbinding3:rxbinding-material:$versions.rxbinding"
 deps.rxbinding = rxbinding
->>>>>>> 1884fc6f2b9e82b116e506ac8ee5d7dd5df21450
 
 def rx_lifecycle = [:]
 // If you want to bind to Android-specific lifecycles

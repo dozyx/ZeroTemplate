@@ -1,6 +1,7 @@
 object Versions {
     val kotlinVersion = "1.3.31"
     val androidGradleVersion = "3.4.1"
+    val picasso = "2.71828"
 }
 
 
@@ -20,7 +21,8 @@ object Android {
 
 }
 
-object Libs {
+object Deps {
+    val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
 }
 
 object TestLibs {

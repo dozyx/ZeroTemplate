@@ -4,23 +4,23 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.*
+import com.blankj.utilcode.util.ToastUtils
 import com.dozeboy.android.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_recycler_view_test.*
+import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.*
 import java.util.*
 
 class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
 
 
-    override fun getFragment(startIntent: Intent?): androidx.fragment.app.Fragment {
+    override fun getFragment(startIntent: Intent?): Fragment {
         return RecyclerViewFragment()
     }
 
@@ -29,13 +29,13 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         super.onDestroy()
     }
 
-    private class CustomViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.findViewById(R.id.text)
+    private class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var textView: TextView = itemView.findViewById(android.R.id.text1)
     }
 
-    class RecyclerViewFragment : androidx.fragment.app.Fragment() {
-        private var datas: List<String>? = null
-        private val randomStrings: List<String>
+    class RecyclerViewFragment : Fragment() {
+        private var datas: MutableList<String>? = null
+        private val randomStrings: MutableList<String>
             get() {
                 val newDatas = ArrayList<String>(5)
                 for (i in 0..100) {
@@ -53,12 +53,24 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
             return inflater.inflate(R.layout.activity_recycler_view_test, container, false)
         }
 
+        override fun onContextItemSelected(item: MenuItem): Boolean {
+            ToastUtils.showShort(item.title)
+            return false
+        }
+
+        override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+            super.onCreateContextMenu(menu, v, menuInfo)
+            val menuInflater = activity?.menuInflater
+            menuInflater?.inflate(R.menu.context_menu, menu)
+        }
+
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+            recycler_view.layoutManager = LinearLayoutManager(activity)
             datas = randomStrings
-            val itemDecoration = DividerItemDecoration(context!!, CustomItemDecoration.VERTICAL)
-            recycler_view.addItemDecoration(itemDecoration)
-            recycler_view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<CustomViewHolder>() {
+//            recycler_view.addItemDecoration(DividerItemDecoration(context!!, CustomItemDecoration.HORIZONTAL))
+            recycler_view.addItemDecoration(DividerItemDecoration(context!!, CustomItemDecoration.VERTICAL))
+            recycler_view.adapter = object : RecyclerView.Adapter<CustomViewHolder>() {
+
                 @SuppressLint("InflateParams")
                 override fun onCreateViewHolder(
                         parent: ViewGroup,
@@ -66,7 +78,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
                 ): CustomViewHolder {
                     return CustomViewHolder(
                             LayoutInflater.from(activity).inflate(
-                                    R.layout.item_text,
+                                    android.R.layout.simple_list_item_1,
                                     null
                             )
                     )
@@ -78,12 +90,22 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
                 ) {
                     Log.d(TAG, "onBindViewHolder: $position")
                     holder.textView.text = resources.getString(R.string.network_api)
+                    holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
                 }
 
                 override fun getItemCount(): Int {
                     return datas!!.size
                 }
             }
+
+            val swipeHandler = object : SwipeToDeleteCallback(context!!) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val adapter = recycler_view.adapter
+//                    datas?.removeAt(viewHolder.adapterPosition)
+//                    adapter?.notifyItemRemoved(viewHolder.adapterPosition)
+                }
+            }
+            ItemTouchHelper(SwipeController(context!!)).attachToRecyclerView(recycler_view)
 
             btn_change_data.setOnClickListener {
                 datas = randomStrings

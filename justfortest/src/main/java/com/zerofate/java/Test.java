@@ -43,7 +43,23 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(Math.cos(Math.toRadians(60)));
+        char c = 123;
+        System.out.println(c);
+    }
+
+    private static void testDate() {
+        String payTime = "2019-06-01";
+        int year = Integer.parseInt(payTime.substring(0, 4));
+        int month = Integer.parseInt(payTime.substring(5, 7));
+        int day = Integer.parseInt(payTime.substring(8, 10));
+        Date date = new Date(year, month, day);
+        System.out.println(date.getTime());
+        String payTime1 = "2019-05-31";
+        int year1 = Integer.parseInt(payTime1.substring(0, 4));
+        int month1 = Integer.parseInt(payTime1.substring(5, 7));
+        int day1 = Integer.parseInt(payTime1.substring(8, 10));
+        Date date1 = new Date(year1, month1, day1);
+        System.out.println(date1.getTime());
     }
 
     private static Random rnd = new Random();
