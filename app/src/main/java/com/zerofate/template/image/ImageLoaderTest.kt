@@ -1,10 +1,8 @@
 package com.zerofate.template.image
 
-import android.app.Activity
 import android.os.Bundle
 
-import androidx.appcompat.app.AppCompatActivity
-import com.dozeboy.android.core.base.BaseActivity
+import com.dozeboy.core.base.BaseActivity
 import com.squareup.picasso.Picasso
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.image_activity_loader.*

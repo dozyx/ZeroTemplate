@@ -2,7 +2,7 @@ package com.zerofate.template.view.recyclerview
 
 import android.content.Context
 import android.util.AttributeSet
-import com.dozeboy.android.core.utli.log.LogUtil
+import com.dozeboy.core.utli.log.LogUtil
 
 /**
  * @author dozeboy

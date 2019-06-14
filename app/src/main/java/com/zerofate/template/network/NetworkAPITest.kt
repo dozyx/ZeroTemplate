@@ -8,7 +8,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.dozeboy.android.core.utli.log.LogUtil
+import com.dozeboy.core.utli.log.LogUtil
 import com.zerofate.template.base.BaseShowResultActivity
 import okhttp3.Call
 import okhttp3.Callback

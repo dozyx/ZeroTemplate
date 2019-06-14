@@ -9,12 +9,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.*
 import com.blankj.utilcode.util.ToastUtils
-import com.dozeboy.android.core.utli.log.LogUtil
+import com.dozeboy.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
 import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_recycler_view_test.*
-import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.*
 import java.util.*
 
 class RecyclerViewTestActivity : BaseSingleFragmentActivity() {

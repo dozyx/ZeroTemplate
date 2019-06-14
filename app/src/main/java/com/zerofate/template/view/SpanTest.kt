@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.ImageSpan
 
-import com.dozeboy.android.core.base.BaseActivity
+import com.dozeboy.core.base.BaseActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_span_test.*
 

@@ -1,6 +1,6 @@
 package com.zerofate.template.view.scroll
 
-import com.dozeboy.android.core.base.BaseActivity
+import com.dozeboy.core.base.BaseActivity
 import com.zerofate.template.R
 
 /**

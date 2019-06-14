@@ -3,7 +3,7 @@
 
     <application>
         <provider
-            android:name="com.dozeboy.android.core.provider.AppProvider"
+            android:name="com.dozeboy.core.provider.AppProvider"
             android:authorities="${applicationId}.AppProvider" />
     </application>
 </manifest>

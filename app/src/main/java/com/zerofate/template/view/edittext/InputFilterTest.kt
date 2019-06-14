@@ -3,11 +3,10 @@ package com.zerofate.template.view.edittext
 import android.text.InputFilter
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
-import com.dozeboy.android.core.base.BaseActivity
-import com.dozeboy.android.core.utli.edittext.SpaceInputFilter
+import com.dozeboy.core.base.BaseActivity
+import com.dozeboy.core.utli.edittext.SpaceInputFilter
 
 /**
  * Create by timon on 2019/5/31

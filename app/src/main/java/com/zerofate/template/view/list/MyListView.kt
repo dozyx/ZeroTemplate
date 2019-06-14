@@ -3,7 +3,7 @@ package com.zerofate.template.view.list
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ListView
-import com.dozeboy.android.core.utli.log.LogUtil
+import com.dozeboy.core.utli.log.LogUtil
 
 /**
  * @author dozeboy

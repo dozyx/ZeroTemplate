@@ -1,7 +1,7 @@
 package com.zerofate.template.view
 
 import android.os.Bundle
-import com.dozeboy.android.core.base.BaseActivity
+import com.dozeboy.core.base.BaseActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_focus_test.*
 

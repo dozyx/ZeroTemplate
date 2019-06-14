@@ -5,13 +5,11 @@ import android.graphics.Matrix
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
-import android.os.PersistableBundle
 import android.util.Log
 import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.camera.core.*
@@ -19,7 +17,7 @@ import androidx.camera.core.Preview
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
-import com.dozeboy.android.core.base.BaseActivity
+import com.dozeboy.core.base.BaseActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.camerax_activity.*
 import java.io.File

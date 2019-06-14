@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.room.Room;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.dozeboy.android.core.utli.executor.SingleThreadExecutorKt;
+import com.dozeboy.core.utli.executor.SingleThreadExecutorKt;
 import com.zerofate.template.base.BaseTestActivity;
 
 import org.jetbrains.annotations.NotNull;
