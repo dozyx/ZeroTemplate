@@ -13,7 +13,6 @@ import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.zerofate.androidsdk.util.ViewUtil;
 import com.zerofate.template.app_float.R;
 
 public class FloatService extends Service implements View.OnTouchListener {

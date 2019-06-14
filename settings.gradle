@@ -1,1 +1,1 @@
-include ':app',  ':model', ':app_float', ':justfortest', ':samplenavigation', ':core', ':shell', ':ui', ':javaSample'
+include ':demo-app', ':demo-model', ':demo-float-window', ':demo-nothing', ':demo-navigation', ':core', ':shell', ':ui'
