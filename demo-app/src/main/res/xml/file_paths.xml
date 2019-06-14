@@ -2,7 +2,7 @@
 <paths>
     <!--<external-path
         name="my_images"
-        path="Android/data/com.zerofate.template/files/Pictures" />-->
+        path="Android/data/cn.dozyx.template/files/Pictures" />-->
     <external-files-path
         name="my_images"
         path="Pictures/" />

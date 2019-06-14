@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="修改数据" />
 
-    <com.zerofate.template.view.list.MyListView
+    <cn.dozyx.template.view.list.MyListView
         android:id="@+id/btn_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

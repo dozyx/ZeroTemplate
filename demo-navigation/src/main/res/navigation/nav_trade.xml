@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/amountInputFragment"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.AmountInputFragment"
+        android:name="cn.dozyx.navigation.kotlin.trade.AmountInputFragment"
         android:label="AmountInputFragment"
         tools:layout="@layout/fragment_amount_input">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/readCardFragment"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.ReadCardFragment"
+        android:name="cn.dozyx.navigation.kotlin.trade.ReadCardFragment"
         android:label="ReadCardFragment"
         tools:layout="@layout/fragment_read_card">
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/tradeSignFragment"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.TradeSignFragment"
+        android:name="cn.dozyx.navigation.kotlin.trade.TradeSignFragment"
         android:label="TradeSignFragment"
         tools:layout="@layout/fragment_trade_sign" />
 </navigation>

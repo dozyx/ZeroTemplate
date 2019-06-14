@@ -11,7 +11,7 @@
         android:layout_marginLeft="50dp"
         android:background="@android:color/darker_gray">
 
-        <com.zerofate.template.view.custom.TouchFollowView
+        <cn.dozyx.template.view.custom.TouchFollowView
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@color/colorAccent" />

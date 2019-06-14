@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zerofate.template.view.recyclerview.RecyclerViewTestActivity">
+    tools:context="cn.dozyx.template.view.recyclerview.RecyclerViewTestActivity">
 
     <Button
         android:id="@+id/btn_change_data"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="随机数据" />
 
-    <com.zerofate.template.view.recyclerview.MyRecyclerView
+    <cn.dozyx.template.view.recyclerview.MyRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:paddingTop="48dp"

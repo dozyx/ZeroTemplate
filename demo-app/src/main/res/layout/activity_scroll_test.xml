@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.zerofate.template.view.scroll.TouchScrollView
+    <cn.dozyx.template.view.scroll.TouchScrollView
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@android:color/holo_red_dark" />
 
-    <com.zerofate.template.view.scroll.ScrollableLinearLayout
+    <cn.dozyx.template.view.scroll.ScrollableLinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
@@ -23,5 +23,5 @@
             android:layout_height="match_parent"
             android:background="@android:color/darker_gray"
             android:text="删除" />
-    </com.zerofate.template.view.scroll.ScrollableLinearLayout>
+    </cn.dozyx.template.view.scroll.ScrollableLinearLayout>
 </LinearLayout>

@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".kotlin.HomeActivity"
+            android:name="cn.dozyx.navigation.kotlin.HomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".kotlin.posble.PosBleManagerActivity" />
-        <activity android:name=".kotlin.trade.TradeActivity"></activity>
+        <activity android:name="cn.dozyx.navigation.kotlin.posble.PosBleManagerActivity" />
+        <activity android:name="cn.dozyx.navigation.kotlin.trade.TradeActivity"></activity>
     </application>
 
 </manifest>

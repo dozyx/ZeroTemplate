@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zerofate.template.view.SpinnerTestActivity">
+    tools:context="cn.dozyx.template.view.SpinnerTestActivity">
 
     <Spinner
         android:id="@+id/dialog_spinner"

@@ -6,14 +6,14 @@
         <import type="androidx.databinding.ObservableArrayList" />
         <variable
             name="user"
-            type="com.zerofate.template.justfortest.DataBindingTestActivity.User" />
+            type="cn.dozyx.template.justfortest.DataBindingTestActivity.User" />
         <variable
             name="handler"
-            type="com.zerofate.template.justfortest.DataBindingTestActivity.EventHandler"/>
+            type="cn.dozyx.template.justfortest.DataBindingTestActivity.EventHandler"/>
 
         <variable
             name="presenter"
-            type="com.zerofate.template.justfortest.DataBindingTestActivity.Presenter"/>
+            type="cn.dozyx.template.justfortest.DataBindingTestActivity.Presenter"/>
     </data>
 
     <LinearLayout
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             />
 
-        <com.zerofate.template.justfortest.MyButton
+        <cn.dozyx.template.justfortest.MyButton
             android:id="@+id/btn_custom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             android:background="@android:color/holo_orange_light"
             android:onClick="@{()->presenter.onClickRoot()}" />
 
-        <com.zerofate.template.justfortest.MyLinearLayout
+        <cn.dozyx.template.justfortest.MyLinearLayout
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/holo_blue_light"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->presenter.onClick()}"/>
-        </com.zerofate.template.justfortest.MyLinearLayout>
+        </cn.dozyx.template.justfortest.MyLinearLayout>
 
         <include
             android:id="@+id/include_layout"

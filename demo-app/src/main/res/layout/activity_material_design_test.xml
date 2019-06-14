@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zerofate.template.view.MaterialDesignTestActivity"
+    tools:context="cn.dozyx.template.view.MaterialDesignTestActivity"
     android:padding="8dp">
 
     <LinearLayout

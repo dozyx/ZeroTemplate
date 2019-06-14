@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.HomeFragment"
+        android:name="cn.dozyx.navigation.kotlin.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -16,15 +16,15 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.DashboardFragment"
+        android:name="cn.dozyx.navigation.kotlin.DashboardFragment"
         android:label="DashboardFragment" />
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.dozeboy.android.sample.navigation.NotificationsFragment"
+        android:name="cn.dozyx.NotificationsFragment"
         android:label="NotificationsFragment" />
     <activity
         android:id="@+id/trade_activity"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.trade.TradeActivity"
+        android:name="cn.dozyx.navigation.kotlin.trade.TradeActivity"
         android:label="activity_trade"
         tools:layout="@layout/activity_trade" />
 </navigation>

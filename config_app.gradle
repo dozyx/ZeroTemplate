@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        applicationId "com.zerofate.${suffix}"
+        applicationId "cn.dozyx.zerofate.${suffix}"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zerofate.template.practice.ListInsideScrollTest">
+    tools:context="cn.dozyx.template.practice.ListInsideScrollTest">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="测试" />
 
-            <com.zerofate.template.practice.InScrollListView
+            <cn.dozyx.template.practice.InScrollListView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash_background"
-    tools:context="com.dozyx.shell.SplashActivity">
+    tools:context="cn.dozyx.shell.SplashActivity">
 
     <TextView
         android:id="@+id/text_welcome"

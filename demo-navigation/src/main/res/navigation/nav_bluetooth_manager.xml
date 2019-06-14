@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/posBleManagerFragment"
-        android:name="com.dozeboy.android.sample.navigation.kotlin.posble.PosBleManagerFragment"
+        android:name="cn.dozyx.navigation.kotlin.posble.PosBleManagerFragment"
         android:label="fragment_pos_ble_manager"
         tools:layout="@layout/fragment_pos_ble_manager" />
 </navigation>
