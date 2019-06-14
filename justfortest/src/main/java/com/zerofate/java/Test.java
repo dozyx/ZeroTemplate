@@ -43,8 +43,7 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        char c = 123;
-        System.out.println(c);
+        System.out.println(Byte.valueOf("AA",16));
     }
 
     private static void testDate() {
