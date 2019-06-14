@@ -1,9 +1,9 @@
-package com.dozeboy.android.template
+package com.dozyx.shell
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.dozeboy.android.template.base.BaseShellActivity
+import com.dozeboy.android.template.R
+import com.dozyx.shell.base.BaseShellActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import timber.log.Timber
 

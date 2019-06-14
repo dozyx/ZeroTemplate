@@ -1,6 +1,6 @@
-package com.dozeboy.android.template.di.component;
+package com.dozyx.shell.di.component;
 
-import com.dozeboy.android.template.di.module.AppModule;
+import com.dozyx.shell.di.module.AppModule;
 
 import javax.inject.Singleton;
 

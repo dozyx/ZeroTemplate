@@ -1,6 +1,6 @@
-package com.dozeboy.android.template
+package com.dozyx.shell
 
-import com.dozeboy.android.template.base.BaseApplication
+import com.dozyx.shell.base.BaseApplication
 
 /**
  * @author timon

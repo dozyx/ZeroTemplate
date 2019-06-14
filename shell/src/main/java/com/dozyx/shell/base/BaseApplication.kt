@@ -1,4 +1,4 @@
-package com.dozeboy.android.template.base
+package com.dozyx.shell.base
 
 import android.app.Application
 import android.os.StrictMode

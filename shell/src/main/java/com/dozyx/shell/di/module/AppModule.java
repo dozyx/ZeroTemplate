@@ -1,4 +1,4 @@
-package com.dozeboy.android.template.di.module;
+package com.dozyx.shell.di.module;
 
 import dagger.Module;
 

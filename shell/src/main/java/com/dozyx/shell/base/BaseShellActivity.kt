@@ -1,4 +1,4 @@
-package com.dozeboy.android.template.base
+package com.dozyx.shell.base
 
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
