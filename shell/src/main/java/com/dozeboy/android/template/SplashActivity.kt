@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dozeboy.android.template.base.BaseShellActivity
 import kotlinx.android.synthetic.main.activity_splash.*
+import timber.log.Timber
 
 class SplashActivity : BaseShellActivity() {
 
@@ -16,5 +17,6 @@ class SplashActivity : BaseShellActivity() {
         text_welcome.setOnClickListener {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         }
+        Timber.d("SplashActivity.onCreate")
     }
 }

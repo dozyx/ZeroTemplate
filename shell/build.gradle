@@ -9,6 +9,8 @@ android {
 }
 
 dependencies {
+    implementation project(':core-kotlin')
+    implementation project(':ui')
     implementation deps.kotlin
     implementation deps.appcompat
     implementation deps.constraint_layout
@@ -19,6 +21,6 @@ dependencies {
     annotationProcessor deps.dagger.processor
     implementation deps.gson
     implementation deps.bar_util
-    implementation project(':core-kotlin')
-    implementation project(':ui')
+    implementation deps.timber
+    implementation deps.logger
 }

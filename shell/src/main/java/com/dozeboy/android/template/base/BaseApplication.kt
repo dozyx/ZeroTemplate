@@ -1,13 +1,14 @@
 package com.dozeboy.android.template.base
 
-import android.app.ActivityManager
 import android.app.Application
-import android.content.Context
 import android.os.StrictMode
-
 import com.blankj.utilcode.util.Utils
 import com.dozeboy.android.template.BuildConfig
+import com.dozeboy.core.ex.isMainProcess
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import com.squareup.leakcanary.LeakCanary
+import timber.log.Timber
 
 
 /**
@@ -16,34 +17,35 @@ import com.squareup.leakcanary.LeakCanary
  */
 abstract class BaseApplication : Application() {
 
-    private val isMainProcess: Boolean
-        get() {
-            var processName = ""
-            val pid = android.os.Process.myPid()
-            val activityManager = getSystemService(
-                    Context.ACTIVITY_SERVICE
-            ) as ActivityManager
-            val allProcesses = activityManager.runningAppProcesses
-            for (process in allProcesses) {
-                if (process.pid == pid) {
-                    processName = process.processName
-                    break
-                }
-            }
-            return packageName == processName
-        }
-
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
             configStrictMode()
         }
         super.onCreate()
-        if (isMainProcess) {
+        if (isMainProcess()) {
             initOnMainProcess()
         }
+        Utils.init(this)
         initOnAllProcess()
         initLeakCanary()
-        Utils.init(this)
+        initLog()
+    }
+
+    private fun initLog() {
+        var tree: Timber.Tree? = null
+        if (BuildConfig.DEBUG) {
+            Logger.addLogAdapter(AndroidLogAdapter())
+            tree = object : Timber.Tree() {
+                override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+                    Logger.log(priority, tag, message, t)
+                }
+            }
+        } else {
+
+        }
+        tree?.let {
+            Timber.plant(tree)
+        }
     }
 
     abstract fun initOnMainProcess()
