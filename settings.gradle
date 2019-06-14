@@ -1,1 +1,1 @@
-include ':app', ':core', ':model', ':app_float', ':justfortest', ':samplenavigation', ':core-kotlin', ':shell', ':api', ':ui', ':javaSample'
+include ':app',  ':model', ':app_float', ':justfortest', ':samplenavigation', ':core', ':shell', ':ui', ':javaSample'

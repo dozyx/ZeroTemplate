@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
-import com.zerofate.androidsdk.util.ToastX
+import com.blankj.utilcode.util.ToastUtils
 import com.zerofate.androidsdk.util.VersionUtil
 import com.zerofate.template.R
 import com.zerofate.template.util.Constants
@@ -29,11 +29,11 @@ class SpinnerTestActivity : AppCompatActivity() {
         dropdown_spinner.adapter = adapter
         dropdown_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                ToastX.showShort(this@SpinnerTestActivity, "onItemSelected: $position")
+                ToastUtils.showShort("onItemSelected: $position")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                ToastX.showShort(this@SpinnerTestActivity, "onNothingSelected")
+                ToastUtils.showShort("onNothingSelected")
             }
         }
         window = PopupWindow(this)
@@ -57,9 +57,9 @@ class SpinnerTestActivity : AppCompatActivity() {
         }
         val imageView = ImageView(this)
         imageView.setImageResource(R.mipmap.ic_launcher_round)
-        if (VersionUtil.hasLollipop()) {
-            window.elevation = 100f
-        }
+//        if (VersionUtil.hasLollipop()) {
+//            window.elevation = 100f
+//        }
         //
         //        window.setOverlapAnchor(true);
         window.isFocusable = true// 效果类似于modal,接收全部触摸事件，如果点击外围部分将隐藏

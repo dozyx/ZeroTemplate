@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.zerofate.androidsdk.util.ToastX
+import com.blankj.utilcode.util.ToastUtils
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_test_fragment_transition.*
 
@@ -46,7 +46,7 @@ class FragmentAnimationActivity : AppCompatActivity() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             val button = view.findViewById<Button>(R.id.btn_add_fragment)
-            button.setOnClickListener { ToastX.showShort(activity, "hahaha") }
+            button.setOnClickListener { ToastUtils.showShort("hahaha") }
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -34,7 +35,7 @@ public class FloatService extends Service implements View.OnTouchListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        sTouchSlop = ViewUtil.getTouchSlop(this);
+        sTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         windowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_PHONE);
         initFloatView();

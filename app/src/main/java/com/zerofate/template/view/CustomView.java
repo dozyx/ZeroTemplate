@@ -10,7 +10,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.zerofate.androidsdk.util.ScreenUtil;
 
 /**
  * Paint 有三种模式：FILL 填充，将忽略所有 stroke 相关的设置；STROKE 划线；FILL_AND_STROKE 同时填充并且划线
@@ -35,7 +34,6 @@ public class CustomView extends View {
         super.onDraw(canvas);
         int width = getMeasuredWidth();
         Paint paint = new Paint();
-        int displayWidth = ScreenUtil.getDisplayMetrics(getContext()).widthPixels;
         paint.setColor(Color.RED);
         paint.setStrokeWidth(30);
 //        paint.setStrokeCap(Paint.Cap.ROUND);// 端点形状，相当于在已绘制形状的端点加上"帽子"（会占用额外的大小）

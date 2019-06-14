@@ -11,7 +11,6 @@ import android.widget.SimpleAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.zerofate.androidsdk.util.PackageUtil;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -59,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(CATEGORY_MY_SAMPLE);
 
-        List<ResolveInfo> activities = PackageUtil.getActivities(this,
-                mainIntent);
+        List<ResolveInfo> activities = getPackageManager().queryIntentActivities(mainIntent, 0);
         if (activities == null) {
             return data;
         }

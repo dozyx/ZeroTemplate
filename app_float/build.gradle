@@ -11,6 +11,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.appcompat
     testImplementation deps.junit
-    implementation project(':core')
     implementation deps.kotlin
 }

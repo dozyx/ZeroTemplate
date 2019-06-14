@@ -14,7 +14,6 @@ import androidx.core.content.FileProvider
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.UriUtils
-import com.zerofate.androidsdk.util.PrintUtil
 import com.zerofate.template.base.BaseTestActivity
 import kotlinx.android.synthetic.main.activity_base_test.*
 import java.io.File
@@ -112,7 +111,7 @@ class CameraActivity : BaseTestActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        appendResult("requestCode: $requestCode resultCode: ${PrintUtil.printResultCode(resultCode)} $data")
+        appendResult("requestCode: $requestCode resultCode:  $data")
         if (resultCode != Activity.RESULT_OK) {
             return
         }

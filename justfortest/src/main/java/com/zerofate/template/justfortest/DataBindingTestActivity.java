@@ -7,7 +7,7 @@ import android.view.ViewStub;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.zerofate.androidsdk.util.ToastX;
+import com.blankj.utilcode.util.ToastUtils;
 import com.zerofate.template.justfortest.databinding.ActivityDataBindingTestBinding;
 import com.zerofate.template.justfortest.databinding.ActivityMeaninglessBinding;
 
@@ -43,21 +43,22 @@ public class DataBindingTestActivity extends AppCompatActivity {
     }
 
     public void onProvinceClicked(View view) {
-        ToastX.showShort(this, "点击");
+        ToastUtils.showShort("点击");
     }
 
-    public class EventHandler{
-        public void onClick(View view){
-            ToastX.showShort(DataBindingTestActivity.this,"onClick view");
+    public class EventHandler {
+        public void onClick(View view) {
+            ToastUtils.showShort("onClick view");
         }
     }
 
-    public class Presenter{
-        public void onClick(){
-            ToastX.showShort(DataBindingTestActivity.this,"onClick presenter");
+    public class Presenter {
+        public void onClick() {
+            ToastUtils.showShort("onClick presenter");
         }
-        public void onClickRoot(){
-            ToastX.showShort(DataBindingTestActivity.this,"onClickRoot presenter");
+
+        public void onClickRoot() {
+            ToastUtils.showShort("onClickRoot presenter");
         }
     }
 

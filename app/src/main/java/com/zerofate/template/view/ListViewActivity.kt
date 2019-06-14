@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.dozeboy.core.base.BaseSingleFragmentActivity
 import com.dozeboy.core.utli.log.LogUtil
 import com.zerofate.android.mock.Shakespeare
-import com.zerofate.androidsdk.base.BaseSingleFragmentActivity
 import com.zerofate.template.R
 import kotlinx.android.synthetic.main.activity_list_view.*
 import java.util.*
@@ -28,11 +29,11 @@ class ListViewActivity : BaseSingleFragmentActivity() {
         super.onDetachedFromWindow()
     }
 
-    override fun getFragment(startIntent: Intent?): androidx.fragment.app.Fragment {
+    override fun getFragment(startIntent: Intent): Fragment {
         return SimpleFragemnt()
     }
 
-    class SimpleFragemnt : androidx.fragment.app.Fragment() {
+    class SimpleFragemnt : Fragment() {
         lateinit var adapter: ArrayAdapter<String>
         override fun onCreateView(
                 inflater: LayoutInflater,
