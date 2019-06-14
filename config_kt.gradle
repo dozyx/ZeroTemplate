@@ -3,3 +3,4 @@ apply {
     plugin "kotlin-android-extensions"
     plugin 'kotlin-kapt'
 }
+apply from: "$project.rootDir/test_dependencies.gradle"
