@@ -86,6 +86,7 @@ dependencies {
     debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.27'
     debugImplementation 'com.willowtreeapps.hyperion:hyperion-build-config:0.9.27'
     debugImplementation "com.star_zero:hyperion-appinfo:1.0.0"
+    implementation Deps.threeten
 }
 repositories {
     mavenCentral()

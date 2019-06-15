@@ -1,5 +1,6 @@
 apply plugin: "com.android.library"
 apply from: "$project.rootDir/config/quality.gradle"
+apply from: "$project.rootDir/test_dependencies.gradle"
 
 android {
     println "config_lib android start"

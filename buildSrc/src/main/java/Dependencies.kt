@@ -2,6 +2,7 @@ object Versions {
     val kotlinVersion = "1.3.31"
     val androidGradleVersion = "3.4.1"
     val picasso = "2.71828"
+    val threeten = "1.2.1"
 }
 
 
@@ -23,6 +24,7 @@ object Android {
 
 object Deps {
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    val threeten = "com.jakewharton.threetenabp:threetenabp:${Versions.threeten}"
 }
 
 object TestLibs {
