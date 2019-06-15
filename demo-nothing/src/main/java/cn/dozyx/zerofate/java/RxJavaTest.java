@@ -12,11 +12,14 @@ import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
@@ -24,6 +27,44 @@ import io.reactivex.subjects.PublishSubject;
 public class RxJavaTest {
 
     public static void main(String[] args) {
+        testConditionChain();
+    }
+
+    private static void testConditionChain() {
+        Observable<String> stringObservable = Observable.just("1");
+        Observable<Boolean> booleanObservable = Observable.just(true);
+        stringObservable.flatMap(new Function<String, ObservableSource<Boolean>>() {
+            @Override
+            public ObservableSource<Boolean> apply(String s) throws Exception {
+                if ("2".equals(s)){
+                    return Observable.empty();
+                }
+                return booleanObservable;
+            }
+        }).subscribe(new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                System.out.println("d = [" + d + "]");
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+                System.out.println("aBoolean = [" + aBoolean + "]");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("e = [" + e + "]");
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("onComplete");
+            }
+        });
+    }
+
+    private static void testPublishSubject() {
         PublishSubject<Integer> subject = PublishSubject.create();
         subject.doOnError(new Consumer<Throwable>() {
             @Override
