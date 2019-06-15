@@ -27,4 +27,5 @@ dependencies {
     implementation deps.okhttp.logging
     api deps.retrofit.runtime
     api deps.retrofit.gson
+    api deps.utilcode
 }
