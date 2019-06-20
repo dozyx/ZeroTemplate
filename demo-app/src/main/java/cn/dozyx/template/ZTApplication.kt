@@ -5,7 +5,6 @@ import android.app.Application
 import com.blankj.utilcode.util.LogUtils
 import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
-import cn.dozyx.zerofate.androidsdk.util.Utils
 
 import timber.log.Timber
 

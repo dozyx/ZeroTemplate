@@ -40,6 +40,11 @@
             android:text="正在整改"
             android:textAppearance="@style/CustomTextAppearance"
             android:textSize="36dp"/>
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="110dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/test"/>
 
 
     </LinearLayout>

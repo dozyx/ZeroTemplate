@@ -12,7 +12,6 @@ import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.blankj.utilcode.util.ToastUtils
-import cn.dozyx.zerofate.androidsdk.util.VersionUtil
 import cn.dozyx.template.R
 import cn.dozyx.template.util.Constants
 import kotlinx.android.synthetic.main.activity_spinner_test.*

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.DialogFragment
 import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
@@ -27,8 +29,29 @@ class DialogTestActivity : BaseTestActivity() {
         })
 
         addButton("constraint style对话框", Runnable {
-            val dialog = Dialog(this,R.style.Dialog)
+            val dialog = Dialog(this, R.style.Dialog)
             dialog.setContentView(R.layout.dialog_constraint)
+            dialog.show()
+        })
+        addButton("Alert Dialog", Runnable {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("标题").setMessage("内容").setNegativeButton("取消", null).setPositiveButton("确定", null)
+            val dialog = builder.show()
+            dialog.window
+            window.attributes
+        })
+
+        addButton("自定义", Runnable {
+            val dialog = object : AppCompatDialog(this, R.style.CustomDialog) {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    val attributes = window.attributes
+//                    attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
+//                    window.attributes = attributes
+                }
+            }
+            dialog.setContentView(R.layout.dialog_custom)
+            val window = dialog.window
             dialog.show()
         })
     }

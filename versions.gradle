@@ -61,7 +61,7 @@ versions.timber = '4.7.1'
 versions.logger = '2.2.0'
 versions.rxpermissions = '0.10.2'
 versions.dagger = '2.21'
-versions.utilcode = '1.20.4'
+versions.utilcode = '1.24.3'
 versions.flexbox = '1.1.0'
 versions.mmkv = '1.0.18'
 // 数据库/SharedPreference 调试库，可直接在网页上查看保存的数据。https://github.com/amitshekhariitbhu/Android-Debug-Database
