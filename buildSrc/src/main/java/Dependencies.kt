@@ -3,6 +3,7 @@ object Versions {
     val androidGradleVersion = "3.4.1"
     val picasso = "2.71828"
     val threeten = "1.2.1"
+    val leakcanary = "1.6.3"
 }
 
 
@@ -25,6 +26,9 @@ object Android {
 object Deps {
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
     val threeten = "com.jakewharton.threetenabp:threetenabp:${Versions.threeten}"
+    val leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
+    val leakcanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakcanary}"
+    val leakcanaryDebugSupport = "com.squareup.leakcanary:leakcanary-support-fragment:${Versions.leakcanary}"
 }
 
 object TestLibs {

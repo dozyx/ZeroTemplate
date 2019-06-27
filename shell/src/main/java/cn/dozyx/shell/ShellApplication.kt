@@ -1,6 +1,7 @@
 package cn.dozyx.shell
 
-import cn.dozyx.shell.base.BaseApplication
+import cn.dozyx.core.base.BaseApplication
+
 
 /**
  * @author timon

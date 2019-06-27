@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".view.DrawerToolBarActivity">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/colorAccent"
+            android:text="222222222222222" />
+    </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,26 +28,27 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="标题"
-            app:titleTextColor="@color/colorAccent"
-            app:navigationIcon="@android:drawable/ic_menu_help"
             app:collapseIcon="@android:drawable/ic_menu_help"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:layout_scrollFlags="enterAlways"
+            app:navigationIcon="@android:drawable/ic_menu_help"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="标题"
+            app:titleTextColor="@color/colorAccent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="自定义标题"
                 android:layout_gravity="center"
+                android:text="自定义标题"
                 android:textColor="@color/colorAccent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="选项"
-                android:textSize="16sp"
                 android:layout_gravity="end|center_vertical"
-                android:textColor="@color/colorAccent" />
+                android:text="选项"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -24,6 +24,13 @@ android {
     println "config_lib android end"
 }
 
+
+dependencies {
+    debugImplementation Deps.leakcanaryDebug
+    debugImplementation Deps.leakcanaryDebugSupport
+    releaseImplementation Deps.leakcanaryRelease
+}
+
 afterEvaluate {
     generateReleaseBuildConfig.enabled = false
     generateDebugBuildConfig.enabled = false
