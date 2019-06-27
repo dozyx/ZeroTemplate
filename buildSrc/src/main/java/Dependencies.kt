@@ -4,6 +4,7 @@ object Versions {
     val picasso = "2.71828"
     val threeten = "1.2.1"
     val leakcanary = "1.6.3"
+    val dagger = "2.23.2"
 }
 
 
@@ -29,6 +30,13 @@ object Deps {
     val leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
     val leakcanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakcanary}"
     val leakcanaryDebugSupport = "com.squareup.leakcanary:leakcanary-support-fragment:${Versions.leakcanary}"
+    val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    val daggerAndroid = "com.google.dagger:dagger-android-support:${Versions.dagger}"
+}
+
+object Processor {
+    val dagger = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    val daggerAndroid = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 }
 
 object TestLibs {
