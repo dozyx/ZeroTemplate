@@ -14,6 +14,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
@@ -27,7 +28,65 @@ import io.reactivex.subjects.PublishSubject;
 public class RxJavaTest {
 
     public static void main(String[] args) {
-        testConditionChain();
+        testBlockingFirst();
+    }
+
+    private static void testBlockingFirst() {
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                System.out.println("start subscribe: " + Thread.currentThread());
+//                emitter.onNext("0");
+                Thread.sleep(3000);
+                emitter.onNext("1");
+                Thread.sleep(3000);
+                emitter.onNext("2");
+                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(Schedulers.io());
+        final Disposable[] disposable = new Disposable[1];
+        Observable<String> interval = Observable.interval(3, TimeUnit.SECONDS).map(new Function<Long, String>() {
+            @Override
+            public String apply(Long aLong) throws Exception {
+                return String.valueOf(aLong);
+            }
+        });
+        try{
+            Observable.just(observable.blockingFirst()).subscribe(
+                    new Observer<String>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            System.out.println("d = [" + d + "]");
+                            disposable[0] = d;
+                        }
+
+                        @Override
+                        public void onNext(String s) {
+                            System.out.println("onNext s = [" + s + "]");
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            System.out.println("onError e = [" + e + "]");
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            System.out.println("onComplete");
+                        }
+                    });
+        } catch (Exception e){
+            System.out.println();
+        }
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (disposable[0] != null) {
+            System.out.println("dispose..." + Thread.currentThread());
+            disposable[0].dispose();
+        }
     }
 
     private static void testConditionChain() {
@@ -36,7 +95,7 @@ public class RxJavaTest {
         stringObservable.flatMap(new Function<String, ObservableSource<Boolean>>() {
             @Override
             public ObservableSource<Boolean> apply(String s) throws Exception {
-                if ("2".equals(s)){
+                if ("2".equals(s)) {
                     return Observable.empty();
                 }
                 return booleanObservable;
