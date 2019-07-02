@@ -2,6 +2,7 @@ apply from: "${rootDir}/config_app.gradle"
 apply from: "${rootDir}/config_kt.gradle"
 apply plugin: 'kotlin-kapt'
 apply from: "${rootDir}/test_dependencies.gradle"
+apply from: "${rootDir}/practice.gradle"
 
 android {
     defaultConfig {

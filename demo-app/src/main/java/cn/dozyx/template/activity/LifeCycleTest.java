@@ -2,8 +2,11 @@ package cn.dozyx.template.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.blankj.utilcode.util.ActivityUtils;
 
 import cn.dozyx.template.R;
 import cn.dozyx.template.base.BaseShowResultActivity;
@@ -12,7 +15,7 @@ public class LifeCycleTest extends BaseShowResultActivity {
 
     @Override
     protected String[] getButtonText() {
-        return new String[]{"启动", "清空", "Dialog"};
+        return new String[]{"启动", "清空", "Dialog", "延迟启动"};
     }
 
     @Override
@@ -29,6 +32,16 @@ public class LifeCycleTest extends BaseShowResultActivity {
     public void onButton3() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TranslucentDialog);
         builder.setMessage("哈哈哈").show();
+    }
+
+    @Override
+    public void onButton4() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ActivityUtils.startActivity(LifeCycleTest.class);
+            }
+        }, 2000);
     }
 
     @Override

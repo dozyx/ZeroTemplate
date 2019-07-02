@@ -41,6 +41,7 @@ abstract class BaseApplication : Application() {
         if (debuggable()) {
             var builder = PrettyFormatStrategy.newBuilder()
             builder.methodOffset(5).tag("Dozyx")
+            builder.showThreadInfo(false)
             Logger.addLogAdapter(AndroidLogAdapter(builder.build()))
             tree = object : Timber.Tree() {
                 override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
