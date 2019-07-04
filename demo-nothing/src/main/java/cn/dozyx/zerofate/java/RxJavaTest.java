@@ -31,6 +31,46 @@ public class RxJavaTest {
         testBlockingFirst();
     }
 
+    private static void testCreate() {
+        Observable<String> source = Observable.create(emitter -> {
+            try {
+                emitter.onNext("Alpha");
+                emitter.onNext("Beta");
+                emitter.onNext("Gamma");
+                emitter.onNext("Delta");
+//                emitter.onNext(null);
+//                emitter.onError(new NullPointerException());
+                // onError 之后会 dispose，所有后续的 onNext 和 onComplete 会无效
+                emitter.onNext("Epsilon");
+                emitter.onComplete();
+            } catch (Throwable e) {
+                System.out.println("into catch");
+                emitter.onError(e);
+            }
+        });
+//        source.map(s -> s.length());
+        source.map(s -> s.length()).subscribe(s -> System.out.println("RECEIVED: " + s), Throwable::printStackTrace);
+    }
+
+    private static void testInterval() {
+        Observable<Long> secondIntervals = Observable.interval(1, TimeUnit.SECONDS);
+        secondIntervals.subscribe(s -> {
+            System.out.println(s.toString() + Thread.currentThread());
+        });
+        /* Hold main thread for 5 seconds so Observable above has chance to fire */
+        System.out.println("sleep start" + Thread.currentThread());
+        sleep(5000);
+        System.out.println("sleep end" + Thread.currentThread());
+    }
+
+    private static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void testBlockingFirst() {
         Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -51,7 +91,7 @@ public class RxJavaTest {
                 return String.valueOf(aLong);
             }
         });
-        try{
+        try {
             Observable.just(observable.blockingFirst()).subscribe(
                     new Observer<String>() {
                         @Override
@@ -75,7 +115,7 @@ public class RxJavaTest {
                             System.out.println("onComplete");
                         }
                     });
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println();
         }
         try {

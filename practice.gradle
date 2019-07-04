@@ -1,0 +1,16 @@
+class CustomPluginPluginExtension {
+    String message = 'from CustomPlugin'
+}
+class CustomPlugin implements Plugin<Project> {
+    @Override
+    void apply(Project project) {
+        def extension = project.extensions.create('custom', CustomPluginPluginExtension)//1
+        project.task('CustomPluginTask') {
+            doLast {
+                println extension.message
+            }
+        }
+    }
+}
+apply plugin: CustomPlugin
+custom.message = "自定义插件拓展"

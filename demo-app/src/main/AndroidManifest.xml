@@ -586,6 +586,14 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".exception.ExceptionTest"
+            android:label="Error/Exception">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
