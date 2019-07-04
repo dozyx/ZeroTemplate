@@ -170,7 +170,7 @@
         <activity
             android:name=".activity.LaunchModeTest$SingleTopLaunchModeTest"
             android:exported="true"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.LaunchModeTest$SingleTaskLaunchModeTest"
             android:exported="true"

@@ -20,6 +20,10 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         setContentView(R.layout.activity_base_test)
     }
 
+    protected fun addAction(action: Action) {
+        addButton(action.name, action)
+    }
+
     protected fun addButton(text: String, task: Runnable): Button {
         val button = Button(this)
         button.text = text
