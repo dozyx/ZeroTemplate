@@ -1,5 +1,11 @@
 package cn.dozyx.zerofate.java
 
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
+import java.lang.reflect.Type
+
 
 /**
  * @author dozeboy
@@ -12,9 +18,53 @@ fun <T> printHashCode(t: T) {
 }
 
 fun main(args: Array<String>) {
-    printHashCode(null)
-    Person.foo(listOf("1", "2"))
+    intDefault0()
 }
+
+class IntDefaut0Adapter : JsonDeserializer<Int> {
+    override fun deserialize(json: JsonElement?,
+                             typeOfT: Type?,
+                             context: JsonDeserializationContext?): Int {
+        if (json?.getAsString().equals("")) {
+            return 0
+        }
+        try {
+            return json!!.getAsInt()
+        } catch (e: NumberFormatException) {
+            return 0
+        }
+    }
+}
+
+fun intDefault0(){
+    val jsonStr = """
+        {
+            "name":"承香墨影",
+            "age":""
+        }
+    """.trimIndent()
+    val user = GsonBuilder()
+            .registerTypeAdapter(
+                    Int::class.java,
+                    IntDefaut0Adapter())
+            .create()
+            .fromJson(jsonStr,User1::class.java)
+    println("user: ${user.toString()}")
+}
+
+class User1{
+    var name = ""
+    var age = 0
+    override fun toString(): String {
+        return """
+            {
+                "name":"${name}",
+                "age":${age}
+            }
+        """.trimIndent()
+    }
+}
+
 
 interface Processor<T> {
     fun process(): T

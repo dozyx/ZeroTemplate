@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -24,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
+
 /**
  * 测试 java 相关代码
  * 约定：将测试代码放在单独方法中，main 中只执行该方法，这样就可以在测试下一个项目时保留上一次的代码
@@ -36,7 +39,13 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(Byte.valueOf("AA",16));
+        testGson();
+    }
+
+    private static void testType() {
+        System.out.println(Integer.TYPE);
+        System.out.println(Integer.TYPE == Integer.class);
+        System.out.println(Integer.class instanceof Class);
     }
 
     private static void testDate() {
@@ -225,6 +234,13 @@ public class Test {
     }
 
     private static void testGson() {
+        Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE, new IntDefaultZeroAdapter()).create();
+        String personJsonWithoutAge = "{\"name\":\"张三\"}";
+        Person person = customGson.fromJson(personJsonWithoutAge, Person.class);
+        System.out.println(person);
+        String personJsonWrongType = "{\"name\":\"张三\",\"age\":\"\"}";
+        person = customGson.fromJson(personJsonWrongType, Person.class);
+        System.out.println(person);
         User user = new User();
         user.setName("张三");
         System.out.println("缺少 field：" + new Gson().toJson(user));
@@ -293,37 +309,6 @@ public class Test {
 
     private static byte toByte(char c) {
         return (byte) "0123456789ABCDEF".indexOf(c);
-    }
-
-    private static class Person {
-        String name;
-        String age;
-        Phone phone;
-
-        public Person() {
-        }
-
-        public void setAge(String age) {
-            this.age = age;
-        }
-
-        public String getAge() {
-            return age;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        static class Phone {
-            String num;
-            String type;
-        }
-
     }
 
     private static void testCalculate() {

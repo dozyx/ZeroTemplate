@@ -60,7 +60,7 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.kotlin
     implementation 'com.google.android.material:material:1.0.0'
-    implementation project(':core')
+    api project(':core')
     implementation deps.rxpermissions
     implementation deps.annotations
     implementation deps.mmkv
