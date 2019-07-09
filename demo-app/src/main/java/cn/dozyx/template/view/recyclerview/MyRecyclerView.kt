@@ -23,9 +23,10 @@ class MyRecyclerView : androidx.recyclerview.widget.RecyclerView {
         LogUtil.d("onDetachedFromWindow: ")
     }
 
-    override fun onMeasure(widthSpec: Int, heightSpec: Int) {
+    /*override fun onMeasure(widthSpec: Int, heightSpec: Int) {
         val density = resources.displayMetrics.density
-        val heightSpecNew = MeasureSpec.makeMeasureSpec((density * 60 * 5).toInt(), MeasureSpec.AT_MOST);
+        // 限制高度
+        val heightSpecNew = MeasureSpec.makeMeasureSpec((density * 60 * 5).toInt(), MeasureSpec.AT_MOST)
         super.onMeasure(widthSpec, heightSpecNew)
-    }
+    }*/
 }

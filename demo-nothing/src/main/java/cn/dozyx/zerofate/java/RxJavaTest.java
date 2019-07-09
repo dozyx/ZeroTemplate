@@ -1,8 +1,11 @@
 package cn.dozyx.zerofate.java;
 
+import android.annotation.SuppressLint;
+
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.BackpressureStrategy;
@@ -21,15 +24,51 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
+import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
-
     public static void main(String[] args) {
-        testBlockingFirst();
+        testCallable();
     }
+
+    @SuppressLint("CheckResult")
+    private static void testCallable() {
+        // 不会回调 onError 的例子
+//        Observable.just(1 / 0).subscribe(integer -> System.out.println("Received: " + integer),
+//                throwable -> System.out.println("Error: " + throwable));
+        Observable.fromCallable(() -> 1 / 0).subscribe(integer -> System.out.println("Received: " + integer),
+                throwable -> System.out.println("Error: " + throwable));
+    }
+
+    private static int start = 1;
+    private static int count = 5;
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
+    private static void testDefer() {
+        Observable<Integer> source = Observable.defer(() -> Observable.range(start, count));
+        source.subscribe(integer -> System.out.println("observer 1: " + integer));
+        count = 10;
+        source.subscribe(integer -> System.out.println("observer 2: " + integer));
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
+    private static void testConnectableObservable() {
+        ConnectableObservable<String> publish = getWordObservable().publish();
+        publish.subscribe(s -> System.out.println("Observer 1: " + s));
+        publish.map(String::length).subscribe(i -> System.out.println("Observer 2: " + i));
+        publish.connect();
+    }
+
+    private static Observable<String> getWordObservable() {
+        return Observable.just("Alpha", "Beta", "Gamma", "Delta", "Epsilon");
+    }
+
 
     private static void testCreate() {
         Observable<String> source = Observable.create(emitter -> {

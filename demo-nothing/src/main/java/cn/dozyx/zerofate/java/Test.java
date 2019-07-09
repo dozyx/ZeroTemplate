@@ -39,7 +39,7 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        testGson();
+        System.out.println(Math.pow((double)(1), 0.45454545454545453D) * 255.0F);
     }
 
     private static void testType() {
