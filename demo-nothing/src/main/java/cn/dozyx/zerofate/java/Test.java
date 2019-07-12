@@ -39,7 +39,25 @@ public class Test {
     private static final Boolean lock = Boolean.TRUE;
 
     public static void main(String[] args) throws ParseException {
-        System.out.println(Math.pow((double)(1), 0.45454545454545453D) * 255.0F);
+        testShiftOperator();
+    }
+
+    private static void testShiftOperator() {
+        // >> 算术右移，整体右移，包括符号位，原符号位正数补0，负数补1。右移一位相当于处于2
+        // >>> 逻辑右移（无符号右移），整体右移，包括符号位，高位补 0
+        // << 算术左移，低位补0，可能导致负数变为正数，或相反，但这些情况意味着发生了溢出。左移一位相当于乘以2
+        // 没有逻辑左移，因为它的结果与算术左移一致。 https://www.quora.com/Why-is-there-no-unsigned-left-shift-operator-in-Java
+        System.out.println(Integer.toHexString(2));
+        System.out.println(Integer.toHexString(-2));
+        System.out.println(Integer.toHexString(2 >> 1));
+        System.out.println(Integer.toHexString(-2 >> 1));
+        System.out.println(Integer.toHexString(2 >>> 1));
+        System.out.println(Integer.toHexString(-2 >>> 1));
+        System.out.println(Integer.toHexString(2 << 1));
+        System.out.println(Integer.toHexString(-2 << 1));
+        System.out.println(Integer.toHexString(0x7fffffff << 1));
+//        System.out.println(Integer.toHexString(0x8f000000 << 1));
+        System.out.println(Integer.MIN_VALUE);
     }
 
     private static void testType() {

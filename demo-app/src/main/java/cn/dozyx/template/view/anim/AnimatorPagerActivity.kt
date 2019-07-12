@@ -19,7 +19,7 @@ class AnimatorPagerActivity : BaseActivity() {
     }
 
     private fun setupPager() {
-        val fragments = arrayOf(FragmentWrapper("响铃", BellAnimatorFragment()), FragmentWrapper("菜单", ExpandMenuFragment()))
+        val fragments = arrayOf(FragmentWrapper("转圈", LoadingAnimatorFragment()), FragmentWrapper("响铃", BellAnimatorFragment()), FragmentWrapper("菜单", ExpandMenuFragment()))
         pager_fragment.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getItem(position: Int): Fragment {
                 Timber.d("AnimatorPagerActivity.getItem: $position")
