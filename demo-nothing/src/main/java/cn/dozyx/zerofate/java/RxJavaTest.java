@@ -37,6 +37,10 @@ public class RxJavaTest {
 
     @SuppressLint("CheckResult")
     private static void testCallable() {
+        testCreate();
+    }
+
+    private static void testError() {
         // 不会回调 onError 的例子
 //        Observable.just(1 / 0).subscribe(integer -> System.out.println("Received: " + integer),
 //                throwable -> System.out.println("Error: " + throwable));
@@ -88,7 +92,12 @@ public class RxJavaTest {
             }
         });
 //        source.map(s -> s.length());
-        source.map(s -> s.length()).subscribe(s -> System.out.println("RECEIVED: " + s), Throwable::printStackTrace);
+        source.map(s -> s.length()).doOnNext(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                System.out.println("doOnNext integer = [" + integer + "]");
+            }
+        }).subscribe(s -> System.out.println("RECEIVED: " + s), Throwable::printStackTrace);
     }
 
     private static void testInterval() {
