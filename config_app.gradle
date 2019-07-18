@@ -67,6 +67,7 @@ def configSigning(Project pro) {
             }
         }
         buildTypes.release.signingConfig signingConfigs.release
+        buildTypes.debug.signingConfig signingConfigs.release
     }
     println "$pro.name config sign end..."
 }

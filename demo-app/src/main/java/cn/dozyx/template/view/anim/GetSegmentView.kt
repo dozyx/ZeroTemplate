@@ -13,6 +13,7 @@ import kotlin.math.abs
  **/
 
 class GetSegmentView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+    private var animator: ValueAnimator?
     private var curAnimValue: Float = 0f
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val dstPath = Path()
@@ -28,15 +29,22 @@ class GetSegmentView(context: Context?, attrs: AttributeSet?) : View(context, at
         // 硬件加速会导致绘图出问题，因此关闭。
         // 改成启用硬件加速也没发现有什么问题
 //        setLayerType(LAYER_TYPE_SOFTWARE, null)
-        val animator = ValueAnimator.ofFloat(0f, 1f)
-        animator.interpolator = AccelerateDecelerateInterpolator()
-        animator.repeatCount = ValueAnimator.INFINITE
-        animator.addUpdateListener {
-            curAnimValue = it.animatedValue as Float
-            invalidate()
+        animator = ValueAnimator.ofFloat(0f, 1f)
+        animator?.apply {
+            interpolator = AccelerateDecelerateInterpolator()
+            repeatCount = ValueAnimator.INFINITE
+            addUpdateListener {
+                curAnimValue = it.animatedValue as Float
+                invalidate()
+            }
+            duration = 2000
+            start()
         }
-        animator.duration = 2000
-        animator.start()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        animator?.cancel()
     }
 
     override fun onDraw(canvas: Canvas?) {
