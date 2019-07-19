@@ -5,6 +5,11 @@ import android.annotation.SuppressLint;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -31,13 +36,58 @@ import io.reactivex.subjects.PublishSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+    private static Observer sObserver = new Observer() {
+        @Override
+        public void onSubscribe(Disposable d) {
+            print("d = [" + d + "]");
+        }
+
+        @Override
+        public void onNext(Object o) {
+            print("o = [" + o + "]");
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            print("e = [" + e + "]");
+        }
+
+        @Override
+        public void onComplete() {
+            print("");
+        }
+    };
+
     public static void main(String[] args) {
-        testCallable();
+        testDelay();
+    }
+
+    private static void print(String msg) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        DateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        System.out.println(format.format(Calendar.getInstance().getTime()) + " -> " + stackTrace[3].getMethodName() + " " + msg);
     }
 
     @SuppressLint("CheckResult")
     private static void testCallable() {
-        testCreate();
+        testDelay();
+    }
+
+    private static void testDelay() {
+        // delay：经过一段延迟后再发射，但 error 不会延迟，有重载方法配置延迟error
+        Observable.range(1, 5).delay(3, TimeUnit.SECONDS).subscribe(sObserver);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testTake() {
+        // takeWhile：发射满足条件的 item，一旦出现不满足条件的 item 就停止。并不会检查不满足条件item之后的item，这点与 filter 不同
+        Observable.range(1, 100).takeWhile(i -> i == 5).subscribe(sObserver);
+        // takeUtil：满足某个条件时停止
+//        Observable.range(1, 100).takeUntil(i -> i <= 5).subscribe(sObserver);
     }
 
     private static void testError() {

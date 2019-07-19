@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import timber.log.Timber
 
 /**
@@ -70,13 +71,15 @@ class PaySuccessView : View {
     }
 
     override fun onAttachedToWindow() {
+        Timber.d("PaySuccessView.onAttachedToWindow")
         super.onAttachedToWindow()
         animator?.start()
     }
 
     override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
+        Timber.d("PaySuccessView.onDetachedFromWindow")
         animator?.cancel()
+        super.onDetachedFromWindow()
     }
 
     override fun onDraw(canvas: Canvas?) {
