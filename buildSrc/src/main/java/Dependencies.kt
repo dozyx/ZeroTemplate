@@ -90,10 +90,6 @@ object Android {
 }
 
 object Deps {
-    val retrofit_runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-    retrofit.scalars = "com.squareup.retrofit2:converter-scalars:$versions.retrofit"
-    retrofit.rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
     val picasso = "com.squareup.picasso:picasso:${Version.picasso}"
     val threeten = "com.jakewharton.threetenabp:threetenabp:${Version.threeten}"
     val leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Version.leakcanary}"
