@@ -7,8 +7,12 @@ import android.os.Build;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.junit.Test;
+
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,24 +33,38 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 
 /**
  * 测试 java 相关代码
- * 约定：将测试代码放在单独方法中，main 中只执行该方法，这样就可以在测试下一个项目时保留上一次的代码
  *
  * @author dozeboy
  * @date 2017/12/11
  */
 
-public class Test {
-    private static final Boolean lock = Boolean.TRUE;
+public class JavaTest {
 
-    public static void main(String[] args) throws ParseException {
-        testShiftOperator();
+
+    @Test
+    public void testThreadStack() {
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        for (StackTraceElement stackTraceElement : trace) {
+            print(stackTraceElement.toString());
+        }
     }
 
-    private static void testShiftOperator() {
+    private void print(String msg) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        DateFormat format = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
+        System.out.println(
+                format.format(Calendar.getInstance().getTime())
+                        + " -> " /*+ stackTrace[3].getMethodName()*/ + " "
+                        + msg);
+    }
+
+    @Test
+    public void testShiftOperator() {
         // >> 算术右移，整体右移，包括符号位，原符号位正数补0，负数补1。右移一位相当于处于2
         // >>> 逻辑右移（无符号右移），整体右移，包括符号位，高位补 0
         // << 算术左移，低位补0，可能导致负数变为正数，或相反，但这些情况意味着发生了溢出。左移一位相当于乘以2
-        // 没有逻辑左移，因为它的结果与算术左移一致。 https://www.quora.com/Why-is-there-no-unsigned-left-shift-operator-in-Java
+        // 没有逻辑左移，因为它的结果与算术左移一致。 https://www.quora
+        // .com/Why-is-there-no-unsigned-left-shift-operator-in-Java
         System.out.println(Integer.toHexString(2));
         System.out.println(Integer.toHexString(-2));
         System.out.println(Integer.toHexString(2 >> 1));
@@ -60,13 +78,13 @@ public class Test {
         System.out.println(Integer.MIN_VALUE);
     }
 
-    private static void testType() {
+    public void testType() {
         System.out.println(Integer.TYPE);
         System.out.println(Integer.TYPE == Integer.class);
         System.out.println(Integer.class instanceof Class);
     }
 
-    private static void testDate() {
+    public void testDate() {
         String payTime = "2019-06-01";
         int year = Integer.parseInt(payTime.substring(0, 4));
         int month = Integer.parseInt(payTime.substring(5, 7));
@@ -81,22 +99,22 @@ public class Test {
         System.out.println(date1.getTime());
     }
 
-    private static Random rnd = new Random();
+    public Random rnd = new Random();
 
-    private static long random(long n) {
+    public long random(long n) {
         //(0 ~ Integer.MAX_VALUE)  =  Integer.MAX_VALUE / 2;
 
         return Math.abs(rnd.nextLong()) % n;
     }
 
-    private static void randomTest() {
+    public void randomTest() {
         for (int i = 0; i < 100; i++) {
             System.out.printf(random(2) + " ");
         }
     }
 
 
-    private static void testFianl() {
+    public void testFianl() {
         Integer integer = new Integer(1);
         System.out.println(integer);
         new Thread(new Runnable() {
@@ -109,11 +127,11 @@ public class Test {
 
 
     @TargetApi(Build.VERSION_CODES.O)
-    private static void testLocalDateTime() {
+    public void testLocalDateTime() {
         System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM")));
     }
 
-    public static String formatComma(String amount) {
+    public String formatComma(String amount) {
         double doubleAmount;
         try {
             doubleAmount = Double.parseDouble(amount);
@@ -123,7 +141,7 @@ public class Test {
         return new DecimalFormat("#,##0.00").format(doubleAmount);
     }
 
-    private static void testStringToHex() {
+    public void testStringToHex() {
         String str = "A20670100203020180000250323600064710300633522704008C7B641250500881025007";
         String interger =
                 "413230363730313030323033303230313830303030323530333233363030303634373130333030363333353232373034303038433742363431323530353030383831303235303037";
@@ -136,11 +154,11 @@ public class Test {
         System.out.println(String.format("%03d", "11111".length()));
     }
 
-    private static <T> boolean isAssignableFrom(T type) {
+    public <T> boolean isAssignableFrom(T type) {
         return String.class.isAssignableFrom(type.getClass());
     }
 
-    private static void parseStringDate() throws ParseException {
+    public void parseStringDate() throws ParseException {
         String date = "2018-10-08";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         Calendar calendar = Calendar.getInstance();
@@ -154,7 +172,7 @@ public class Test {
         }
     }
 
-    private static void testTime() {
+    public void testTime() {
         Calendar now = Calendar.getInstance();
         System.out.println(formatDate(now.getTime()));
 
@@ -182,30 +200,21 @@ public class Test {
 
     }
 
-    private static String formatDate(Date date) {
+    public String formatDate(Date date) {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(date);
     }
 
 
-    public static class Student extends User {
-        private static final int a = A.a;
-        public static final String NAME = "jijiji";
-
-        static {
-            System.out.println("static");
-        }
-    }
-
-    private void foo() {
+    public void foo() {
         System.out.print(new A().str);
     }
 
-    private static class A {
-        private String str;
-        public static int a = 10;
+    public class A {
+        public String str;
+        public int a = 10;
     }
 
-    private static void testThreadPool() {
+    public void testThreadPool() {
         ExecutorService executorService = new ThreadPoolExecutor(5, 10, 10, TimeUnit.SECONDS,
                 new LinkedBlockingDeque<>());
         for (int i = 0; i < 10; i++) {
@@ -223,7 +232,7 @@ public class Test {
         }
     }
 
-    public static String format(String num, int reserved, int divide) {
+    public String format(String num, int reserved, int divide) {
         BigDecimal b1 = new BigDecimal(num);
         BigDecimal b2 = new BigDecimal(divide);
         String format;
@@ -240,7 +249,7 @@ public class Test {
                 b1.divide(b2, reserved, BigDecimal.ROUND_HALF_UP).doubleValue());
     }
 
-    public static String formatHundredth(String str) {
+    public String formatHundredth(String str) {
         if (str == null || str.length() == 0) {
             return "0.00";
         }
@@ -251,8 +260,9 @@ public class Test {
         return decimalFormat.format(b1.divide(b2, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
     }
 
-    private static void testGson() {
-        Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE, new IntDefaultZeroAdapter()).create();
+    public void testGson() {
+        Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE,
+                new IntDefaultZeroAdapter()).create();
         String personJsonWithoutAge = "{\"name\":\"张三\"}";
         Person person = customGson.fromJson(personJsonWithoutAge, Person.class);
         System.out.println(person);
@@ -309,11 +319,11 @@ public class Test {
         System.out.println("对象类型错误：" + new Gson().fromJson(jsonStr4, User.class));
     }
 
-    public static class G2<S> extends GenericTest<S> {
+    public class G2<S> extends GenericTest<S> {
 
     }
 
-    public static byte[] HexString2bytes(String hexString) {
+    public byte[] HexString2bytes(String hexString) {
         hexString = hexString.toUpperCase();
         byte[] b = new byte[hexString.length() / 2];
         char[] hexStringByte = hexString.toCharArray();
@@ -325,11 +335,11 @@ public class Test {
         return b;
     }
 
-    private static byte toByte(char c) {
+    public byte toByte(char c) {
         return (byte) "0123456789ABCDEF".indexOf(c);
     }
 
-    private static void testCalculate() {
+    public void testCalculate() {
         // float 计算
         BigDecimal bigDecimal1 = new BigDecimal(0.58f);
         BigDecimal bigDecimal2 = new BigDecimal(0.01f);
@@ -343,7 +353,7 @@ public class Test {
         System.out.println((int) ((0.58 + 0.01) * 100));
     }
 
-    public static String removeSecond(String date) {
+    public String removeSecond(String date) {
 
         final int colonCount = date.length() - date.replace(":", "").length();
         if (colonCount > 1) {
@@ -352,7 +362,7 @@ public class Test {
         return date;
     }
 
-    public static boolean isLetterOrNumberWithLengthLimit(String text, int min, int max) {
+    public boolean isLetterOrNumberWithLengthLimit(String text, int min, int max) {
         String reg = "^[a-zA-Z0-9]{" + min + "," + max + "}$";
         Pattern pat = Pattern.compile(reg);
         Matcher mat = pat.matcher(text);

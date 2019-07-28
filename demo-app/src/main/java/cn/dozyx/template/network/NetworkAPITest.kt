@@ -9,14 +9,18 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import cn.dozyx.core.utli.log.LogUtil
+import cn.dozyx.core.utli.util.RxJavaUtil
 import cn.dozyx.template.base.BaseShowResultActivity
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
+import io.reactivex.Observable
+import io.reactivex.functions.Consumer
+import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.http.GET
+import timber.log.Timber
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by zero on 2017/9/22.
@@ -36,7 +40,7 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
 
 
     override fun getButtonText(): Array<String> {
-        return arrayOf("HttpURLConnection", "Volley", "OkHttp", "Retrofit")
+        return arrayOf("HttpURLConnection", "Volley", "OkHttp", "Retrofit", "Rx+Retrofit")
     }
 
     override fun onButton1() {
@@ -60,6 +64,22 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
 
     override fun onButton4() {
         startDownloadWithRetrofit()
+    }
+
+    override fun onButton5() {
+        startDownloadWithRxRetrofit()
+    }
+
+    private fun startDownloadWithRxRetrofit() {
+        val logInterceptor = HttpLoggingInterceptor()
+        logInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+        val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
+        val retrofit = Retrofit.Builder().baseUrl(URL_STRING).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).client(client).build()
+        val iApi = retrofit.create(IApi::class.java)
+        iApi.getCnBetaHome().repeat(2).compose(RxJavaUtil.applySchedulers2()).subscribe(Consumer {
+            Timber.d("NetworkAPITest.startDownloadWithRxRetrofit")
+        })
+        Observable.interval(2,TimeUnit.SECONDS)
     }
 
     override fun updateFromDownload(result: String?) {

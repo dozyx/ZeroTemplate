@@ -37,8 +37,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation deps.volley
     implementation deps.okhttp.runtime
+    implementation deps.okhttp.logging
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation deps.retrofit.rxjava2
     implementation deps.rxjava2
     testImplementation deps.junit
     implementation deps.eventbus
