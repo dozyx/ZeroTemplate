@@ -2,14 +2,16 @@ apply {
     plugin "com.android.application"
 }
 apply from: "$project.rootDir/config/quality.gradle"
+apply from: "$project.rootDir/buildKotlin.gradle"
+apply from: "$project.rootDir/buildTest.gradle"
 
 configSigning project
 
 android {
-    compileSdkVersion build_versions.compile_sdk
+    compileSdkVersion Android.compileSdkVersion
     defaultConfig {
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
         applicationId "cn.dozyx.zerofate.${suffix}"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -55,19 +57,22 @@ private String getSuffix() {
 }
 
 def configSigning(Project pro) {
-
-    println "$pro.name config sign start..."
     pro.android {
         signingConfigs {
+            debug {
+                keyAlias KEY_ALIAS
+                keyPassword KEY_PASSWORD
+                storeFile file("$project.rootDir/${STORE_FILE}")
+                storePassword STORE_PASSWORD
+            }
             release {
                 keyAlias KEY_ALIAS
                 keyPassword KEY_PASSWORD
-                storeFile file(STORE_FILE)
+                storeFile file("$project.rootDir/${STORE_FILE}")
                 storePassword STORE_PASSWORD
             }
         }
         buildTypes.release.signingConfig signingConfigs.release
         buildTypes.debug.signingConfig signingConfigs.release
     }
-    println "$pro.name config sign end..."
 }

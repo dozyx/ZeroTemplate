@@ -1,5 +1,4 @@
-apply from: "${rootDir}/config_app.gradle"
-apply from: "${rootDir}/config_kt.gradle"
+apply from: "${rootDir}/buildApp.gradle"
 
 android {
     defaultConfig {
@@ -13,7 +12,7 @@ android {
         this.properties.clear()
         development {
             // 避免使用 Legacy Multidex 以加快编译，注意：实际开发中，IDE 判断的最小sdk会变成这个
-            minSdkVersion build_versions.min_sdk_debug
+            minSdkVersion Android.minDebugSdkVersion
             resConfigs("xhdpi")
         }
     }

@@ -1,12 +1,12 @@
 apply plugin: "com.android.library"
 apply from: "$project.rootDir/config/quality.gradle"
-apply from: "$project.rootDir/test_dependencies.gradle"
+apply from: "$project.rootDir/buildKotlin.gradle"
+apply from: "$project.rootDir/buildTest.gradle"
 
 android {
-    println "config_lib android start"
-    compileSdkVersion build_versions.compile_sdk
+    compileSdkVersion Android.compileSdkVersion
     defaultConfig {
-        minSdkVersion build_versions.min_sdk
+        minSdkVersion Android.minSdkVersion
         consumerProguardFiles 'proguard-rules.pro'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,7 +21,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    println "config_lib android end"
 }
 
 

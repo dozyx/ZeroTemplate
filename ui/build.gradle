@@ -1,4 +1,4 @@
-apply from: "${rootDir}/config_lib.gradle"
+apply from: "${rootDir}/buildLib.gradle"
 
 android {
     defaultConfig {
