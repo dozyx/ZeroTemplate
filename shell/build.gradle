@@ -9,16 +9,16 @@ android {
 dependencies {
     implementation project(':core')
     implementation project(':ui')
-    implementation deps.kotlin
-    implementation deps.appcompat
-    implementation deps.constraint_layout
-    implementation deps.rxjava2
-    implementation deps.rx_android
-    implementation deps.utilcode
-    implementation deps.dagger.runtime
-    annotationProcessor deps.dagger.processor
-    implementation deps.gson
-    implementation deps.bar_util
-    implementation deps.timber
-    implementation deps.logger
+    implementation Deps.kotlin
+    implementation Deps.appcompat
+    implementation Deps.constraintLayout
+    implementation Deps.rxjava2
+    implementation Deps.rxAndroid
+    implementation Deps.utilcode
+    implementation Deps.Dagger.runtime
+    annotationProcessor Deps.Dagger.processor
+    implementation Deps.gson
+    implementation Deps.barUtil
+    implementation Deps.timber
+    implementation Deps.logger
 }

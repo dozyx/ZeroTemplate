@@ -20,47 +20,41 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-beta02', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     implementation project(':model')
     implementation project(':core')
-    implementation deps.appcompat
-//    implementation deps.constraint_layout
-    implementation deps.butterknife.runtime
-    annotationProcessor deps.butterknife.processor
-    implementation 'androidx.percentlayout:percentlayout:1.0.0'
-    implementation deps.universal_image_loader
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation deps.volley
-    implementation deps.okhttp.runtime
-    implementation deps.okhttp.logging
-    implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
-    implementation deps.retrofit.rxjava2
-    implementation deps.rxjava2
-    testImplementation deps.junit
-    implementation deps.eventbus
-    implementation deps.kotlin
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    debugImplementation deps.leakcanary.debug
-    releaseImplementation deps.leakcanary.release
-    implementation deps.annotations
-    implementation deps.dagger.runtime
-    implementation deps.flexbox
-    annotationProcessor deps.dagger.processor
-    implementation deps.mp_android_chart
-    implementation deps.rx_lifecycle.android
-    implementation deps.bar_util
-    implementation deps.utilcode
-    implementation deps.rxpermissions
-    kapt deps.room.processor
-    implementation deps.room.runtime
-    implementation deps.stetho
-    implementation deps.camerax.core
-    implementation deps.camerax.camera2
+    implementation Deps.constraintLayout
+    implementation Deps.legacySupportV4
+    implementation Deps.appcompat
+    implementation Deps.ButterKnife.runtime
+    annotationProcessor Deps.ButterKnife.processor
+    implementation Deps.percentlayout
+    implementation Deps.universalImageLoader
+    implementation Deps.material
+    implementation Deps.volley
+    implementation Deps.OkHttp.runtime
+    implementation Deps.OkHttp.logging
+    implementation Deps.OkHttp.logging
+    implementation Deps.Retrofit.runtime
+    implementation Deps.Retrofit.gson
+    implementation Deps.Retrofit.rxjava2
+    implementation Deps.rxjava2
+    implementation Deps.eventbus
+    implementation Deps.kotlin
+    implementation Deps.lifecycle
+    implementation Deps.annotations
+    implementation Deps.flexbox
+    implementation Deps.Dagger.runtime
+    annotationProcessor Deps.Dagger.processor
+    implementation Deps.mpAndroidChart
+    implementation Deps.RxLifecycle.android
+    implementation Deps.barUtil
+    implementation Deps.utilcode
+    implementation Deps.rxpermissions
+    kapt Deps.Room.processor
+    implementation Deps.Room.runtime
+    implementation Deps.stetho
+    implementation Deps.Camera.core
+    implementation Deps.Camera.view
     implementation Deps.picasso
-    implementation deps.timber
+    implementation Deps.timber
 }

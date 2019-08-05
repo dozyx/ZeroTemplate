@@ -10,21 +10,17 @@ android {
 }
 
 dependencies {
-    api deps.okhttp.runtime
+    api Deps.OkHttp.runtime
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.appcompat
-    testImplementation deps.junit
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
-    api deps.kotlin
-    //    implementation deps.android_ktx
-    implementation deps.timber
-    implementation deps.logger
-    implementation deps.rxjava2
-    implementation deps.rx_android
-    implementation deps.rxjava_adapter
-    implementation deps.okhttp.logging
-    api deps.retrofit.runtime
-    api deps.retrofit.gson
-    api deps.utilcode
+    implementation Deps.appcompat
+    api Deps.kotlin
+    implementation Deps.timber
+    implementation Deps.logger
+    implementation Deps.rxjava2
+    implementation Deps.rxAndroid
+    implementation Deps.Retrofit.rxjava2
+    implementation Deps.OkHttp.logging
+    api Deps.Retrofit.runtime
+    api Deps.Retrofit.gson
+    api Deps.utilcode
 }

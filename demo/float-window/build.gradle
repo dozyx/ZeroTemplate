@@ -9,7 +9,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.appcompat
-    testImplementation deps.junit
-    implementation deps.kotlin
+    implementation Deps.appcompat
+    implementation Deps.kotlin
 }

@@ -25,9 +25,9 @@ android {
 
 
 dependencies {
-    debugImplementation Deps.leakcanaryDebug
-    debugImplementation Deps.leakcanaryDebugSupport
-    releaseImplementation Deps.leakcanaryRelease
+    debugImplementation Deps.LeakCanary.debug
+    debugImplementation Deps.LeakCanary.debugSupportFragment
+    releaseImplementation Deps.LeakCanary.release
 }
 
 afterEvaluate {

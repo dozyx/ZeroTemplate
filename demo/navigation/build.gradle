@@ -5,7 +5,6 @@ android {
     compileSdkVersion 28
 
 
-
     defaultConfig {
         applicationId "com.dozeboy.android.sample.navigation"
         minSdkVersion 19
@@ -35,21 +34,14 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.kotlin
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation deps.constraint_layout
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation deps.navigation.navigation_fragment
-    // use -ktx for Kotlin
-    implementation deps.navigation.navigation_ui
-    // use -ktx for Kotlin
-    implementation deps.navigation.navigation_fragment_ktx
-    // use -ktx for Kotlin
-    implementation deps.navigation.navigation_ui_ktx
-    // use -ktx for Kotlin
+    implementation Deps.kotlin
+    implementation Deps.appcompat
+    implementation Deps.material
+    implementation Deps.legacySupportV4
+    implementation Deps.constraintLayout
+    implementation Deps.vectordrawable
+    implementation Deps.Navigation.fragment
+    implementation Deps.Navigation.ui
+    implementation Deps.Navigation.fragmentKtx
+    implementation Deps.Navigation.uiKtx
 }

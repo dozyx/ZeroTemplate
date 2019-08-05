@@ -45,10 +45,9 @@ android {
 
 
 dependencies {
-    // LeakCanary
-    debugImplementation deps.leakcanary.debug
-    debugImplementation deps.leakcanary.debug_support
-    releaseImplementation deps.leakcanary.release
+    debugImplementation Deps.LeakCanary.debug
+    debugImplementation Deps.LeakCanary.debugSupportFragment
+    releaseImplementation Deps.LeakCanary.release
 }
 
 private String getSuffix() {
