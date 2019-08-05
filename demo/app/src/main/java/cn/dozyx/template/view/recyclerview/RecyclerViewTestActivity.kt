@@ -1,18 +1,17 @@
 package cn.dozyx.template.view.recyclerview
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.*
-import com.blankj.utilcode.util.ToastUtils
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import cn.dozyx.constant.Shakespeare
 import cn.dozyx.core.base.BaseSingleFragmentActivity
 import cn.dozyx.core.utli.log.LogUtil
-import cn.dozyx.constant.Shakespeare
 import cn.dozyx.template.R
+import cn.dozyx.template.view.recyclerview.adapter.QuickAdapter
+import com.blankj.utilcode.util.ToastUtils
 import kotlinx.android.synthetic.main.activity_recycler_view_test.*
 import java.util.*
 
@@ -20,15 +19,6 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
 
     override fun getFragment(startIntent: Intent): Fragment {
         return RecyclerViewFragment()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy: ")
-        super.onDestroy()
-    }
-
-    private class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.findViewById(android.R.id.text1)
     }
 
     class RecyclerViewFragment : Fragment() {
@@ -63,36 +53,17 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            recycler_view.layoutManager = LinearLayoutManager(activity)
+            recycler_view.layoutManager = FixedGridLayoutManager()
             datas = randomStrings
-//            recycler_view.addItemDecoration(DividerItemDecoration(context!!, CustomItemDecoration.HORIZONTAL))
-            recycler_view.addItemDecoration(DividerItemDecoration(context!!, CustomItemDecoration.VERTICAL))
-            recycler_view.adapter = object : RecyclerView.Adapter<CustomViewHolder>() {
-
-                @SuppressLint("InflateParams")
-                override fun onCreateViewHolder(
-                        parent: ViewGroup,
-                        viewType: Int
-                ): CustomViewHolder {
-                    return CustomViewHolder(
-                            LayoutInflater.from(activity).inflate(
-                                    android.R.layout.simple_list_item_1,
-                                    null
-                            )
-                    )
+            recycler_view.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
+            recycler_view.adapter = object :QuickAdapter<String>(datas){
+                override fun getLayoutId(viewType: Int): Int {
+                    return android.R.layout.simple_list_item_1
                 }
 
-                override fun onBindViewHolder(
-                        holder: CustomViewHolder,
-                        position: Int
-                ) {
-                    Log.d(TAG, "onBindViewHolder: $position")
-                    holder.textView.text = resources.getString(R.string.network_api)
+                override fun convert(holder: VH, data: String, position: Int) {
+                    holder.setText(android.R.id.text1,data)
                     holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
-                }
-
-                override fun getItemCount(): Int {
-                    return datas!!.size
                 }
             }
 

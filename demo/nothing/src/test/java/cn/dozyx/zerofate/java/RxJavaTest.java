@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.BackpressureStrategy;
@@ -35,6 +36,16 @@ import io.reactivex.subjects.PublishSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+    @Test
+    public void testReplay() {
+        Observable<Long> seconds = Observable.interval(1,
+                TimeUnit.SECONDS).replay().autoConnect();
+        seconds.subscribe(l -> System.out.println("Observer 1: " + l));
+        sleep(3);
+        seconds.subscribe(l -> System.out.println("Observer 2: " + l));
+        sleep(3);
+    }
 
     @Test
     public void testGroupBy() {
@@ -258,11 +269,37 @@ public class RxJavaTest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
+    @Test
     public void testConnectableObservable() {
+        // ConnectableObservable 将 source 的 emission 强制变为 hot
+        // 这种为多个 observer 提供单个 stream 的做法称为 multicasting
         ConnectableObservable<String> publish = getStringObservable().publish();
         publish.subscribe(s -> System.out.println("Observer 1: " + s));
         publish.map(String::length).subscribe(i -> System.out.println("Observer 2: " + i));
         publish.connect();
+    }
+
+    @Test
+    public void testMulticasting() {
+        Observable<Integer> threeRandoms = Observable.range(1, 3).map(i -> randomInt());
+        // threeRandoms 会产生两个独立的 emission 生成器
+        threeRandoms.subscribe(i -> print("threeRandoms Observer 1: " + i));
+        threeRandoms.subscribe(i -> print("threeRandoms Observer 2: " + i));
+
+
+        ConnectableObservable<Integer> threeInts = Observable.range(1, 3).publish();
+        threeRandoms = threeInts.map(i -> randomInt());
+        // multicast 在 map 之前，所以每个 observer 在 map 时还是得到了单独的 stream。如果需要防止产生两个 stream，需要将 publish
+        // 放在 map 之后
+        threeRandoms.subscribe(i -> print("threeInts Observer 1: " + i));
+        threeRandoms.subscribe(i -> print("threeInts Observer 2: " + i));
+        threeInts.connect();
+
+
+    }
+
+    private int randomInt() {
+        return ThreadLocalRandom.current().nextInt(100000);
     }
 
     public Observable<String> getStringObservable() {

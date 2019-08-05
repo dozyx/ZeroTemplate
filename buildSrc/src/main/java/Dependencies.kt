@@ -1,6 +1,6 @@
 object Version {
     const val kotlinVersion = "1.3.31"
-    const val androidGradleVersion = "3.4.1"
+    const val androidGradleVersion = "3.4.2"
     const val picasso = "2.71828"
     const val threeten = "1.2.1"
     const val leakcanary = "1.6.3"

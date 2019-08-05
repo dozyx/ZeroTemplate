@@ -26,7 +26,7 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-beta02', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation project(':demo-model')
+    implementation project(':model')
     implementation project(':core')
     implementation deps.appcompat
 //    implementation deps.constraint_layout

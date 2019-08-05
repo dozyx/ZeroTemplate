@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 
 /**
  * @author dozeboy
@@ -25,11 +26,18 @@ class CustomItemDecoration(val context: Context, val orientation: Int) : Recycle
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        Timber.d("CustomItemDecoration.onDraw")
         if (orientation == VERTICAL) {
             drawVertical(c, parent)
         } else {
             drawHorizontal(c, parent)
         }
+    }
+
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDrawOver(c, parent, state)
+        // onDraw 在绘制 Item 之前调用；onDrawOver 在绘制 Item 之后调用
+        Timber.d("CustomItemDecoration.onDrawOver")
     }
 
     private fun drawHorizontal(c: Canvas, parent: RecyclerView) {
@@ -57,6 +65,7 @@ class CustomItemDecoration(val context: Context, val orientation: Int) : Recycle
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        // outRect 表示 item 四边的边距
         when (orientation) {
             VERTICAL -> outRect.set(0, 0, 0, divider.intrinsicHeight)
             HORIZONTAL -> outRect.set(0, 0, divider.intrinsicWidth, 0)

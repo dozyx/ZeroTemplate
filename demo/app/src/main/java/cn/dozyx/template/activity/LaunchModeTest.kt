@@ -8,6 +8,7 @@ import cn.dozyx.template.base.Action
 
 import cn.dozyx.template.base.BaseShowResultActivity
 import cn.dozyx.template.base.BaseTestActivity
+import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.*
 import timber.log.Timber
 
 /**
@@ -36,6 +37,14 @@ open class LaunchModeTest : BaseTestActivity() {
         addAction(object : Action("singleInstance") {
             override fun run() {
                 callActivity(SingleInstanceLaunchModeTest::class.java)
+            }
+        })
+
+        addAction(object : Action("standard finish") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, StandardLaunchModeTest::class.java)
+                intent.putExtra("autoFinish", true)
+                startActivity(intent)
             }
         })
         addAction(object : Action("singleTask with taskAffinity") {
@@ -86,7 +95,13 @@ open class LaunchModeTest : BaseTestActivity() {
         super.onDestroy()
     }
 
-    class StandardLaunchModeTest : LaunchModeTest()
+    class StandardLaunchModeTest : LaunchModeTest() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            val autoFinish = intent.getBooleanExtra("autoFinish", false)
+            if (autoFinish) finish()
+        }
+    }
 
     class SingleTopLaunchModeTest : LaunchModeTest()
 

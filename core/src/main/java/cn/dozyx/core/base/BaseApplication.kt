@@ -2,6 +2,7 @@ package cn.dozyx.core.base
 
 import android.app.Application
 import android.os.StrictMode
+import cn.dozyx.core.debug.LogActivityLifecycleCallbacks
 import cn.dozyx.core.ex.debuggable
 import cn.dozyx.core.ex.isMainProcess
 import com.blankj.utilcode.util.Utils
@@ -25,6 +26,7 @@ abstract class BaseApplication : Application() {
     override fun onCreate() {
         if (debuggable()) {
             configStrictMode()
+//            registerActivityLifecycleCallbacks(LogActivityLifecycleCallbacks())
         }
         super.onCreate()
         if (isMainProcess()) {

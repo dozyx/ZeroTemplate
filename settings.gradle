@@ -1,6 +1,7 @@
-include ':demo-app', ':demo-model', ':demo-float-window', ':demo-nothing', ':demo-navigation', ':core', ':shell', ':ui'
-include ':demos:dagger'
+include ':demo:app', ':model', ':demo:float-window', ':demo:nothing', ':demo:navigation', ':core', ':shell', ':ui'
+include ':demo:dagger'
 
+/*
 
 rootProject.children.each { p ->
 
@@ -21,4 +22,4 @@ rootProject.children.each { p ->
         // have unique directory names throughout our subprojects.
         project.name = project.path.substring(1).replace(':', '-')
     }
-}
+}*/
