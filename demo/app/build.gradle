@@ -33,10 +33,9 @@ dependencies {
     implementation Deps.volley
     implementation DepsOkHttp.runtime
     implementation DepsOkHttp.logging
-    implementation DepsOkHttp.logging
     implementation DepsRetrofit.runtime
     implementation DepsRetrofit.gson
-    implementation DepsRetrofit.rxjava2
+    implementation DepsRetrofit.rxjavaAdapter
     implementation Deps.rxjava2
     implementation Deps.eventbus
     implementation Deps.kotlin

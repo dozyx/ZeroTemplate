@@ -18,7 +18,7 @@ dependencies {
     implementation Deps.logger
     implementation Deps.rxjava2
     implementation Deps.rxAndroid
-    implementation DepsRetrofit.rxjava2
+    implementation DepsRetrofit.rxjavaAdapter
     implementation DepsOkHttp.logging
     api DepsRetrofit.runtime
     api DepsRetrofit.gson

@@ -135,7 +135,7 @@ object DepsRetrofit {
     val runtime = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
     val gson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
     val scalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
-    val rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
+    val rxjavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
 }
 
 object DepsLeakCanary {
