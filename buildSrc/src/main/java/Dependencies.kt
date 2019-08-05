@@ -19,7 +19,7 @@ object Deps {
     val daggerAndroid = "com.google.dagger:dagger-android-support:${Version.dagger}"
     val volley = "com.android.volley:volley:${Version.volley}"
     val constraintLayout = "com.android.support.constraint:constraint-layout:${Version.constraintLayout}"
-    val appcompat = "com.android.support:appcompat-v7:${Version.appcompat}"
+    val appcompat = "androidx.appcompat:appcompat:${Version.appcompat}"
     val percentlayout = "androidx.percentlayout:percentlayout:${Version.percentlayout}"
     val universalImageLoader = "com.nostra13.universalimageloader:universal-image-loader:${Version.universalImageLoader}"
     val material = "com.google.android.material:material:${Version.material}"
@@ -47,105 +47,108 @@ object Deps {
     val immersionbar = "com.gyf.immersionbar:immersionbar:${Version.immersionbar}"
     val gson = "com.google.code.gson:gson:${Version.gson}"
 
-    object Hyperion {
-        val debugCore = "com.willowtreeapps.hyperion:hyperion-core:${Version.hyperion}"
-        val releaseCore = "com.willowtreeapps.hyperion:hyperion-core-no-op:${Version.hyperion}"
-        val debugAttr = "com.willowtreeapps.hyperion:hyperion-attr:${Version.hyperion}"
-        val debugMeasurement = "com.willowtreeapps.hyperion:hyperion-measurement:${Version.hyperion}"
-        val debugDisk = "com.willowtreeapps.hyperion:hyperion-disk:${Version.hyperion}"
-        val debugRecorder = "com.willowtreeapps.hyperion:hyperion-recorder:${Version.hyperion}"
-        val debugPhoenix = "com.willowtreeapps.hyperion:hyperion-phoenix:${Version.hyperion}"
-        val debugCrash = "com.willowtreeapps.hyperion:hyperion-crash:${Version.hyperion}"
-        val debugSP = "com.willowtreeapps.hyperion:hyperion-shared-preferences:${Version.hyperion}"
-        val debugGeigerCounter = "com.willowtreeapps.hyperion:hyperion-geiger-counter:${Version.hyperion}"
-        val debugTimber = "com.willowtreeapps.hyperion:hyperion-timber:${Version.hyperion}"
-        val debugbuildConfig = "com.willowtreeapps.hyperion:hyperion-build-config:${Version.hyperion}"
-        val debugAppInfo = "com.star_zero:hyperion-appinfo:1.0.0"
-    }
 
-    object RxBinding {
-        val base = "com.jakewharton.rxbinding3:rxbinding:${Version.rxbinding}"
-        val core = "com.jakewharton.rxbinding3:rxbinding-core:${Version.rxbinding}"
-        val appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:${Version.rxbinding}"
-        val drawerlayout = "com.jakewharton.rxbinding3:rxbinding-drawerlayout:${Version.rxbinding}"
-        val leanback = "com.jakewharton.rxbinding3:rxbinding-leanback:${Version.rxbinding}"
-        val recyclerview = "com.jakewharton.rxbinding3:rxbinding-recyclerview:${Version.rxbinding}"
-        val slidingpanelayout = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:${Version.rxbinding}"
-        val swiperefreshlayout = "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Version.rxbinding}"
-        val viewpager = "com.jakewharton.rxbinding3:rxbinding-viewpager:${Version.rxbinding}"
-        val material = "com.jakewharton.rxbinding3:rxbinding-material:${Version.rxbinding}"
-    }
+}
+object DepsHyperion {
+    val debugCore = "com.willowtreeapps.hyperion:hyperion-core:${Version.hyperion}"
+    val releaseCore = "com.willowtreeapps.hyperion:hyperion-core-no-op:${Version.hyperion}"
+    val debugAttr = "com.willowtreeapps.hyperion:hyperion-attr:${Version.hyperion}"
+    val debugMeasurement = "com.willowtreeapps.hyperion:hyperion-measurement:${Version.hyperion}"
+    val debugDisk = "com.willowtreeapps.hyperion:hyperion-disk:${Version.hyperion}"
+    val debugRecorder = "com.willowtreeapps.hyperion:hyperion-recorder:${Version.hyperion}"
+    val debugPhoenix = "com.willowtreeapps.hyperion:hyperion-phoenix:${Version.hyperion}"
+    val debugCrash = "com.willowtreeapps.hyperion:hyperion-crash:${Version.hyperion}"
+    val debugSP = "com.willowtreeapps.hyperion:hyperion-shared-preferences:${Version.hyperion}"
+    val debugGeigerCounter = "com.willowtreeapps.hyperion:hyperion-geiger-counter:${Version.hyperion}"
+    val debugTimber = "com.willowtreeapps.hyperion:hyperion-timber:${Version.hyperion}"
+    val debugbuildConfig = "com.willowtreeapps.hyperion:hyperion-build-config:${Version.hyperion}"
+    val debugAppInfo = "com.star_zero:hyperion-appinfo:1.0.0"
+}
 
-    object Room {
-        val runtime = "androidx.room:room-runtime:${Version.room}"
-        val processor = "androidx.room:room-compiler:${Version.room}"
-        val ktx = "androidx.room:room-ktx:${Version.room}"
-        val rxjava2 = "androidx.room:room-rxjava2:${Version.room}"
-        val guava = "androidx.room:room-guava:${Version.room}"
-        val test = "androidx.room:room-testing:${Version.room}"
-    }
+object DepsRxBinding {
+    val base = "com.jakewharton.rxbinding3:rxbinding:${Version.rxbinding}"
+    val core = "com.jakewharton.rxbinding3:rxbinding-core:${Version.rxbinding}"
+    val appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:${Version.rxbinding}"
+    val drawerlayout = "com.jakewharton.rxbinding3:rxbinding-drawerlayout:${Version.rxbinding}"
+    val leanback = "com.jakewharton.rxbinding3:rxbinding-leanback:${Version.rxbinding}"
+    val recyclerview = "com.jakewharton.rxbinding3:rxbinding-recyclerview:${Version.rxbinding}"
+    val slidingpanelayout = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:${Version.rxbinding}"
+    val swiperefreshlayout = "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Version.rxbinding}"
+    val viewpager = "com.jakewharton.rxbinding3:rxbinding-viewpager:${Version.rxbinding}"
+    val material = "com.jakewharton.rxbinding3:rxbinding-material:${Version.rxbinding}"
+}
 
-    object Camera {
-        val core = "androidx.camera:camera-core:${Version.camerax}"
-        val view = "androidx.camera:camera-view:${Version.camerax}"
-        val camera2 = "androidx.camera:camera-camera2:${Version.camerax}"
-    }
+object DepsRoom {
+    val runtime = "androidx.room:room-runtime:${Version.room}"
+    val processor = "androidx.room:room-compiler:${Version.room}"
+    val ktx = "androidx.room:room-ktx:${Version.room}"
+    val rxjava2 = "androidx.room:room-rxjava2:${Version.room}"
+    val guava = "androidx.room:room-guava:${Version.room}"
+    val test = "androidx.room:room-testing:${Version.room}"
+}
 
-    object RxLifecycle {
-        // If you want to bind to Android-specific lifecycles
-        val android = "com.trello.rxlifecycle3:rxlifecycle-android:${Version.rx_lifecycle}"
-        // If you want pre-written Activities and Fragments you can subclass as providers
-        val components = "com.trello.rxlifecycle3:rxlifecycle-components:${Version.rx_lifecycle}"
-        // If you want pre-written support preference Fragments you can subclass as providers
-        val preference = "com.trello.rxlifecycle3:rxlifecycle-components-preference:${Version.rx_lifecycle}"
-        // If you want to use Android Lifecycle for providers
-        val androidLifecycle = "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:${Version.rx_lifecycle}"
-    }
+object DepsCamera {
+    val core = "androidx.camera:camera-core:${Version.camerax}"
+    val view = "androidx.camera:camera-view:${Version.camerax}"
+    val camera2 = "androidx.camera:camera-camera2:${Version.camerax}"
+}
 
-    object ButterKnife {
-        val runtime = "com.jakewharton:butterknife:${Version.butterknife}"
-        val processor = "com.jakewharton:butterknife-compiler:${Version.butterknife}"
-    }
+object DepsRxLifecycle {
+    // If you want to bind to Android-specific lifecycles
+    val android = "com.trello.rxlifecycle3:rxlifecycle-android:${Version.rx_lifecycle}"
+    // If you want pre-written Activities and Fragments you can subclass as providers
+    val components = "com.trello.rxlifecycle3:rxlifecycle-components:${Version.rx_lifecycle}"
+    // If you want pre-written support preference Fragments you can subclass as providers
+    val preference = "com.trello.rxlifecycle3:rxlifecycle-components-preference:${Version.rx_lifecycle}"
+    // If you want to use Android Lifecycle for providers
+    val androidLifecycle = "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:${Version.rx_lifecycle}"
+}
 
-    object Dagger {
-        val runtime = "com.google.dagger:dagger:${Version.dagger}"
-        val processor = "com.google.dagger:dagger-compiler:${Version.dagger}"
-        val androidProcessor = "com.google.dagger:dagger-android-processor:${Version.dagger}"
-    }
+object DepsButterKnife {
+    val runtime = "com.jakewharton:butterknife:${Version.butterknife}"
+    val processor = "com.jakewharton:butterknife-compiler:${Version.butterknife}"
+}
 
-    object PermissionsDispatcher {
-        val runtime = "com.github.hotchemi:permissionsdispatcher:${Version.permissionsdispatcher}"
-        val processor = "com.github.hotchemi:permissionsdispatcher-processor:${Version.permissionsdispatcher}"
-    }
+object DepsDagger {
+    val runtime = "com.google.dagger:dagger:${Version.dagger}"
+    val processor = "com.google.dagger:dagger-compiler:${Version.dagger}"
+    val androidProcessor = "com.google.dagger:dagger-android-processor:${Version.dagger}"
+}
 
-    object OkHttp {
-        val runtime = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
-        val logging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
-    }
+object DepsPermissionsDispatcher {
+    val runtime = "com.github.hotchemi:permissionsdispatcher:${Version.permissionsdispatcher}"
+    val processor = "com.github.hotchemi:permissionsdispatcher-processor:${Version.permissionsdispatcher}"
+}
 
-    object Test {
-        val junit = "junit:junit:${Version.junit}"
-    }
+object DepsOkHttp {
+    val runtime = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
+    val logging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
+}
 
-    object Retrofit {
-        val runtime = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
-        val gson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
-        val scalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
-        val rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
-    }
+object DepsTest {
+    val junit = "junit:junit:${Version.junit}"
+    val testRunner = "androidx.test:runner:${Version.testRunner}"
+    val espresso = "androidx.test.espresso:espresso-core:${Version.espresso}"
+}
 
-    object LeakCanary {
-        val debug = "com.squareup.leakcanary:leakcanary-android:${Version.leakcanary}"
-        val release = "com.squareup.leakcanary:leakcanary-android-no-op:${Version.leakcanary}"
-        val debugSupportFragment = "com.squareup.leakcanary:leakcanary-support-fragment:${Version.leakcanary}"
-    }
+object DepsRetrofit {
+    val runtime = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+    val gson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
+    val scalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
+    val rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
+}
 
-    object Navigation {
-        val fragment = "android.arch.navigation:navigation-fragment:${Version.navigation}"
-        val ui = "android.arch.navigation:navigation-ui:${Version.navigation}"
-        val fragmentKtx = "android.arch.navigation:navigation-fragmentt-ktx:${Version.navigation}"
-        val uiKtx = "android.arch.navigation:navigation-ui-ktx:${Version.navigation}"
-    }
+object DepsLeakCanary {
+    val debug = "com.squareup.leakcanary:leakcanary-android:${Version.leakcanary}"
+    val release = "com.squareup.leakcanary:leakcanary-android-no-op:${Version.leakcanary}"
+    val debugSupportFragment = "com.squareup.leakcanary:leakcanary-support-fragment:${Version.leakcanary}"
+}
+
+object DepsNavigation {
+    val fragment = "android.arch.navigation:navigation-fragment:${Version.navigation}"
+    val ui = "android.arch.navigation:navigation-ui:${Version.navigation}"
+    val fragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Version.navigation}"
+    val uiKtx = "android.arch.navigation:navigation-ui-ktx:${Version.navigation}"
 }
 
 object Version {
@@ -194,7 +197,7 @@ object Version {
     const val android_ktx = "1.0.0-beta01" // 与 support-appcompat 冲突
     const val permissionsdispatcher = "3.0.1"
     const val gson = "2.8.5"
-    const val test_runner = "1.1.0"
+    const val testRunner = "1.1.0"
     const val espresso = "3.1.1"
     const val timber = "4.7.1"
     const val logger = "2.2.0"
@@ -210,7 +213,7 @@ object Version {
     const val barUtil = "1.5.1"
     const val rxjava_adapter = "2.5.0"
     const val background = "1.4.1"
-    const val appcompat = "1.1.0-alpha05"
+    const val appcompat = "1.1.0-rc01"
     const val androiddevmetrics = "0.6"
     const val koin = "1.0.2"
     const val material = "1.1.0-alpha02"
@@ -221,10 +224,10 @@ object Version {
     const val room = "2.1.0-alpha07"
     const val stetho = "1.5.1"
     const val camerax = "1.0.0-alpha01"
-    const val percentlayout = "1.1.0"
+    const val percentlayout = "1.0.0"
     const val rxAndroid = "2.1.1"
     const val vectordrawable = "1.0.1"
-    const val recyclerview = "1.1.0"
+    const val recyclerview = "1.1.0-beta01"
     const val gridlayout = "1.0.0"
     const val hyperion = "0.9.27"
 }

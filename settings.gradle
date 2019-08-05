@@ -1,8 +1,7 @@
 include ':demo:app', ':model', ':demo:float-window', ':demo:nothing', ':demo:navigation', ':core', ':shell', ':ui'
 include ':demo:dagger'
 
-/*
-
+// 如果出现 project 报错问题，可尝试将所有 iml 文件删除，再重新导入工程
 rootProject.children.each { p ->
 
     def allChildren = []
@@ -22,4 +21,4 @@ rootProject.children.each { p ->
         // have unique directory names throughout our subprojects.
         project.name = project.path.substring(1).replace(':', '-')
     }
-}*/
+}

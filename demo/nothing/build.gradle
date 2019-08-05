@@ -44,20 +44,20 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':core')
     implementation project(':ui')
-    implementation Deps.RxBinding.base
+    implementation DepsRxBinding.base
     implementation Deps.appcompat
     implementation Deps.constraintLayout
     implementation Deps.recyclerview
-    implementation Deps.ButterKnife.runtime
-    annotationProcessor Deps.ButterKnife.processor
-    implementation Deps.PermissionsDispatcher.runtime
-    annotationProcessor Deps.PermissionsDispatcher.processor
-    implementation Deps.Dagger.runtime
-    kapt Deps.Dagger.runtime
+    implementation DepsButterKnife.runtime
+    annotationProcessor DepsButterKnife.processor
+    implementation DepsPermissionsDispatcher.runtime
+    annotationProcessor DepsPermissionsDispatcher.processor
+    implementation DepsDagger.runtime
+    kapt DepsDagger.runtime
     implementation Deps.gson
     implementation Deps.legacySupportV4
     implementation Deps.lifecycle
-    implementation Deps.Retrofit.runtime
+    implementation DepsRetrofit.runtime
     implementation Deps.kotlin
     implementation Deps.material
     implementation Deps.rxpermissions
@@ -69,21 +69,21 @@ dependencies {
     implementation Deps.logger
     implementation Deps.flexbox
     implementation Deps.gridlayout
-    implementation Deps.RxBinding.base
+    implementation DepsRxBinding.base
     implementation Deps.immersionbar
-    debugImplementation Deps.Hyperion.debugCore
-    releaseImplementation Deps.Hyperion.releaseCore
-    debugImplementation Deps.Hyperion.debugAttr
-    debugImplementation Deps.Hyperion.debugMeasurement
-    debugImplementation Deps.Hyperion.debugDisk
-    debugImplementation Deps.Hyperion.debugRecorder
-    debugImplementation Deps.Hyperion.debugPhoenix
-    debugImplementation Deps.Hyperion.debugCrash
-    debugImplementation Deps.Hyperion.debugSP
-    debugImplementation Deps.Hyperion.debugGeigerCounter
-    debugImplementation Deps.Hyperion.debugTimber
-    debugImplementation Deps.Hyperion.debugbuildConfig
-    debugImplementation Deps.Hyperion.debugAppInfo
+    debugImplementation DepsHyperion.debugCore
+    releaseImplementation DepsHyperion.releaseCore
+    debugImplementation DepsHyperion.debugAttr
+    debugImplementation DepsHyperion.debugMeasurement
+    debugImplementation DepsHyperion.debugDisk
+    debugImplementation DepsHyperion.debugRecorder
+    debugImplementation DepsHyperion.debugPhoenix
+    debugImplementation DepsHyperion.debugCrash
+    debugImplementation DepsHyperion.debugSP
+    debugImplementation DepsHyperion.debugGeigerCounter
+    debugImplementation DepsHyperion.debugTimber
+    debugImplementation DepsHyperion.debugbuildConfig
+    debugImplementation DepsHyperion.debugAppInfo
     implementation Deps.threeten
 }
 repositories {

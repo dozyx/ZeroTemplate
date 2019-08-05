@@ -25,36 +25,35 @@ dependencies {
     implementation Deps.constraintLayout
     implementation Deps.legacySupportV4
     implementation Deps.appcompat
-    implementation Deps.ButterKnife.runtime
-    annotationProcessor Deps.ButterKnife.processor
+    implementation DepsButterKnife.runtime
+    annotationProcessor DepsButterKnife.processor
     implementation Deps.percentlayout
     implementation Deps.universalImageLoader
     implementation Deps.material
     implementation Deps.volley
-    implementation Deps.OkHttp.runtime
-    implementation Deps.OkHttp.logging
-    implementation Deps.OkHttp.logging
-    implementation Deps.Retrofit.runtime
-    implementation Deps.Retrofit.gson
-    implementation Deps.Retrofit.rxjava2
+    implementation DepsOkHttp.runtime
+    implementation DepsOkHttp.logging
+    implementation DepsOkHttp.logging
+    implementation DepsRetrofit.runtime
+    implementation DepsRetrofit.gson
+    implementation DepsRetrofit.rxjava2
     implementation Deps.rxjava2
     implementation Deps.eventbus
     implementation Deps.kotlin
     implementation Deps.lifecycle
     implementation Deps.annotations
     implementation Deps.flexbox
-    implementation Deps.Dagger.runtime
-    annotationProcessor Deps.Dagger.processor
+    implementation DepsDagger.runtime
+    annotationProcessor DepsDagger.processor
     implementation Deps.mpAndroidChart
-    implementation Deps.RxLifecycle.android
+    implementation DepsRxLifecycle.android
     implementation Deps.barUtil
     implementation Deps.utilcode
     implementation Deps.rxpermissions
-    kapt Deps.Room.processor
-    implementation Deps.Room.runtime
+    kapt DepsRoom.processor
+    implementation DepsRoom.runtime
     implementation Deps.stetho
-    implementation Deps.Camera.core
-    implementation Deps.Camera.view
+    implementation DepsCamera.core
     implementation Deps.picasso
     implementation Deps.timber
 }

@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    api Deps.OkHttp.runtime
+    api DepsOkHttp.runtime
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation Deps.appcompat
     api Deps.kotlin
@@ -18,9 +18,9 @@ dependencies {
     implementation Deps.logger
     implementation Deps.rxjava2
     implementation Deps.rxAndroid
-    implementation Deps.Retrofit.rxjava2
-    implementation Deps.OkHttp.logging
-    api Deps.Retrofit.runtime
-    api Deps.Retrofit.gson
+    implementation DepsRetrofit.rxjava2
+    implementation DepsOkHttp.logging
+    api DepsRetrofit.runtime
+    api DepsRetrofit.gson
     api Deps.utilcode
 }

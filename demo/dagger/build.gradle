@@ -31,6 +31,6 @@ dependencies {
     implementation Deps.constraintLayout
     implementation Deps.dagger
     implementation Deps.daggerAndroid
-    annotationProcessor Deps.Dagger.processor
-    annotationProcessor Deps.Dagger.androidProcessor
+    annotationProcessor DepsDagger.processor
+    annotationProcessor DepsDagger.androidProcessor
 }

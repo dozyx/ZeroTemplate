@@ -15,8 +15,8 @@ dependencies {
     implementation Deps.rxjava2
     implementation Deps.rxAndroid
     implementation Deps.utilcode
-    implementation Deps.Dagger.runtime
-    annotationProcessor Deps.Dagger.processor
+    implementation DepsDagger.runtime
+    annotationProcessor DepsDagger.processor
     implementation Deps.gson
     implementation Deps.barUtil
     implementation Deps.timber
