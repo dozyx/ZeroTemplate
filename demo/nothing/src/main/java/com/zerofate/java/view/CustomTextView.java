@@ -1,17 +1,18 @@
 package com.zerofate.java.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.zerofate.template.justfortest.R;
+import cn.dozyx.template.justfortest.R;
 
-import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * @author dozeboy
  * @date 2019-06-14
  */
+@SuppressLint("AppCompatCustomView")
 public class CustomTextView extends TextView {
 
 

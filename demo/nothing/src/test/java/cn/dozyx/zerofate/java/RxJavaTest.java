@@ -31,11 +31,22 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.AsyncSubject;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.ReplaySubject;
+import io.reactivex.subjects.Subject;
+import io.reactivex.subjects.UnicastSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+    @Test
+    public void testCache() {
+        Observable<Integer> cache = Observable.just(6, 2, 5, 6, 1, 4, 9, 8, 3).scan(0,
+                (total, next) -> total + next).cache();
+        cache.subscribe(System.out::println);
+    }
 
     @Test
     public void testReplay() {
@@ -456,37 +467,69 @@ public class RxJavaTest {
         });
     }
 
+    @Test
     public void testPublishSubject() {
-        PublishSubject<Integer> subject = PublishSubject.create();
-        subject.doOnError(new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                System.out.println("doOnError = [" + throwable + "]" + throwable.getMessage());
-            }
-        }).onErrorReturnItem(999).subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                System.out.println("d = [" + d + "]");
-            }
+        Observable<String> source1 = Observable.interval(1, TimeUnit.SECONDS).map(
+                l -> (l + 1) + "seconds");
+        Observable<String> source2 = Observable.interval(300, TimeUnit.MILLISECONDS).map(
+                l -> ((l + 1) * 300 + " milliseconds"));
+        PublishSubject<String> subject = PublishSubject.create();
+        subject.subscribe(System.out::println);
 
-            @Override
-            public void onNext(Integer integer) {
-                System.out.println("integer = [" + integer + "]");
-            }
+        source1.subscribe(subject);
+        source2.subscribe(subject);
+        sleep(3);
 
-            @Override
-            public void onError(Throwable e) {
-                System.out.println("e = [" + e + "]" + e.getMessage());
-            }
+    }
 
-            @Override
-            public void onComplete() {
-                System.out.println("onComplete");
-            }
-        });
-        subject.onNext(2);
-        subject.onError(new Throwable("1111"));
+    @Test
+    public void testBehaviorSubject() {
+        BehaviorSubject<String> subject = BehaviorSubject.create();
+        subject.subscribe(s -> System.out.println("Observer 1: " + s));
+        subject.onNext("Alpha");
+        subject.onNext("Beta");
+        subject.onNext("Gamma");
+
+        subject.subscribe(s -> System.out.println("Observer 2: " + s));
+    }
+
+    @Test
+    public void testReplaySubject() {
+        ReplaySubject<String> subject = ReplaySubject.create();
+        subject.subscribe(s -> System.out.println("Observer 1: " + s));
+        subject.onNext("Alpha");
+        subject.onNext("Beta");
+        subject.onNext("Gamma");
+
+        subject.subscribe(s -> System.out.println("Observer 2: " + s));
+    }
+
+    @Test
+    public void testAsyncSubject() {
+        // 只发送最后一个值
+        AsyncSubject<String> subject = AsyncSubject.create();
+        subject.subscribe(s -> System.out.println("Observer 1: " + s), Throwable::printStackTrace,
+                () -> System.out.println("Observer 1 done"));
+        subject.onNext("Alpha");
+        subject.onNext("Beta");
+        subject.onNext("Gamma");
         subject.onComplete();
+
+        subject.subscribe(s -> System.out.println("Observer 2: " + s), Throwable::printStackTrace,
+                () -> System.out.println("Observer 2 done"));
+    }
+
+    @Test
+    public void testUnicastSubject() {
+        // 先缓冲所有的 emission知道有 observer 订阅，接着释放所有的 emission 并清除缓存
+        // 只能有一个 Observer
+        Subject<String> subject = UnicastSubject.create();
+
+        Observable.interval(300, TimeUnit.MILLISECONDS).map(
+                l -> (l + 1) * 300 + " milliseconds").subscribe(subject);
+        sleep(2);
+        subject.subscribe(s -> System.out.println("Observer 1:" + s));
+        sleep(2);
     }
 
     public void testDelayZip() {
