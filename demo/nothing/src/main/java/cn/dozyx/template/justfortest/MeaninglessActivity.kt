@@ -3,6 +3,7 @@ package cn.dozyx.template.justfortest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.blankj.utilcode.util.ToastUtils
 import kotlinx.android.synthetic.main.activity_meaningless.*
 
 
@@ -15,6 +16,9 @@ class MeaninglessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
         edit.requestFocus()
+        text.setOnClickListener {
+            ToastUtils.showShort("点击")
+        }
     }
 
     override fun onDestroy() {
