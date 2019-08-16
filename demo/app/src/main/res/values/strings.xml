@@ -73,7 +73,7 @@
     <string name="view_toolbar">View/Toolbar</string>
     <string name="dialog_popup_window">Dialog/PopupWindow</string>
     <string name="drawable_tint">Drawable/Tint</string>
-    <string name="design_tablayout">Design_TabLayout</string>
+    <string name="design_tablayout">Design/TabLayout</string>
     <string name="view_chart_mp_chart">View/Chart/MPAndroidChart</string>
     <string name="view_status_bar">View/StatusBar</string>
     <string name="file_basic">File/Basic</string>

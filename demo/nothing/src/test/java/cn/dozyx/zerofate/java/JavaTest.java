@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DateFormat;
@@ -18,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -40,6 +42,36 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 
 public class JavaTest {
 
+
+    @Test
+    public void testReflect() {
+        Class cls = ReflectClass.class;
+        print(Arrays.toString(cls.getTypeParameters()));
+        Method[] methods = cls.getDeclaredMethods();
+        for (Method method : methods) {
+            print(method.getName() + " getGenericParameterTypes: " + Arrays.toString(
+                    method.getGenericParameterTypes()));
+            print(method.getName() + " getReturnType: " + method.getReturnType());
+            print(method.getName() + " getGenericReturnType: " + method.getGenericReturnType());
+        }
+    }
+
+    private static class ReflectClass<T> {
+        private T data;
+
+        private <K> K foo1(K type) {
+            return type;
+        }
+
+        private <K> String foo2(K type) {
+            return "string";
+        }
+
+        private String foo3(String text) {
+            return text;
+        }
+
+    }
 
     @Test
     public void testThreadStack() {

@@ -53,7 +53,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            recycler_view.layoutManager = FixedGridLayoutManager()
+            recycler_view.layoutManager = CustomLayoutManager()
             datas = randomStrings
             recycler_view.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
             recycler_view.adapter = object :QuickAdapter<String>(datas){

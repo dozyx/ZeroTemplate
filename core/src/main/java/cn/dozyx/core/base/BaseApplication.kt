@@ -2,7 +2,7 @@ package cn.dozyx.core.base
 
 import android.app.Application
 import android.os.StrictMode
-import cn.dozyx.core.debug.LogActivityLifecycleCallbacks
+import cn.dozyx.core.GlobalConfig
 import cn.dozyx.core.ex.debuggable
 import cn.dozyx.core.ex.isMainProcess
 import com.blankj.utilcode.util.Utils
@@ -42,7 +42,7 @@ abstract class BaseApplication : Application() {
         var tree: Timber.Tree? = null
         if (debuggable()) {
             var builder = PrettyFormatStrategy.newBuilder()
-            builder.methodOffset(5).tag("Dozyx")
+            builder.methodOffset(5).tag(GlobalConfig.TAG)
             builder.showThreadInfo(false)
             Logger.addLogAdapter(AndroidLogAdapter(builder.build()))
             tree = object : Timber.Tree() {

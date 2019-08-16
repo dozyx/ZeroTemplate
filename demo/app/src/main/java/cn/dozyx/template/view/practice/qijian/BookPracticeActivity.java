@@ -12,12 +12,16 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
+
+import cn.dozyx.template.view.practice.qijian.view.BazierTest;
 import cn.dozyx.template.view.practice.qijian.view.CustomView1;
 import cn.dozyx.template.view.practice.qijian.view.CustomView2;
 import cn.dozyx.template.view.practice.qijian.view.CustomView3;
 import cn.dozyx.template.view.practice.qijian.view.CustomView4;
 import cn.dozyx.template.view.practice.qijian.view.CustomView5;
 import cn.dozyx.template.view.practice.qijian.view.CustomView6;
+import cn.dozyx.template.view.practice.qijian.view.DrawTextView;
+import cn.dozyx.template.view.practice.qijian.view.GestureTrackView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -42,6 +46,9 @@ public class BookPracticeActivity extends AppCompatActivity {
     }
 
     private void prepareData() {
+        views.add(GestureTrackView.class);
+        views.add(BazierTest.class);
+        views.add(DrawTextView.class);
         views.add(CustomView6.class);
         views.add(CustomView5.class);
         views.add(CustomView4.class);
