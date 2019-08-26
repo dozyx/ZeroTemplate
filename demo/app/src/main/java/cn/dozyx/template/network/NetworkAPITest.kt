@@ -12,11 +12,15 @@ import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.core.utli.util.RxJavaUtil
 import cn.dozyx.template.base.BaseShowResultActivity
 import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import timber.log.Timber
 import java.io.IOException
@@ -72,14 +76,26 @@ class NetworkAPITest : BaseShowResultActivity(), DownloadCallback {
 
     private fun startDownloadWithRxRetrofit() {
         val logInterceptor = HttpLoggingInterceptor()
-        logInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+        logInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
-        val retrofit = Retrofit.Builder().baseUrl(URL_STRING).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).client(client).build()
+        val retrofit = Retrofit.Builder().baseUrl(URL_STRING).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create()).client(client).build()
         val iApi = retrofit.create(IApi::class.java)
-        iApi.getCnBetaHome().repeat(2).compose(RxJavaUtil.applySchedulers2()).subscribe(Consumer {
-            Timber.d("NetworkAPITest.startDownloadWithRxRetrofit")
+        iApi.getCategories().compose(RxJavaUtil.applySchedulers2()).subscribe(object : Observer<String> {
+            override fun onComplete() {
+                Timber.d("NetworkAPITest.onComplete")
+            }
+
+            override fun onSubscribe(d: Disposable) {
+            }
+
+            override fun onNext(t: String) {
+                Timber.d("NetworkAPITest.onNext: $t")
+            }
+
+            override fun onError(e: Throwable) {
+                Timber.d("NetworkAPITest.onError")
+            }
         })
-        Observable.interval(2,TimeUnit.SECONDS)
     }
 
     override fun updateFromDownload(result: String?) {

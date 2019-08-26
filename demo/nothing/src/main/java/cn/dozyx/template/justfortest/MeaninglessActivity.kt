@@ -1,6 +1,10 @@
 package cn.dozyx.template.justfortest
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.ToastUtils
@@ -31,5 +35,17 @@ class MeaninglessActivity : AppCompatActivity() {
         private val TAG = "MeaninglessActivity"
     }
 
+    override fun getResources(): Resources {
+        val resources = super.getResources()
+        val oldConfig = resources.configuration
+        oldConfig.fontScale = 1f
+        val newConfig = Configuration(oldConfig)
+        if (SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            createConfigurationContext(newConfig)
+            // 这个没有效果
+        }
+        resources.updateConfiguration(newConfig,resources.displayMetrics)
+        return resources
+    }
 
 }

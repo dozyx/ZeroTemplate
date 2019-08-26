@@ -55,4 +55,6 @@ dependencies {
     implementation DepsCamera.core
     implementation Deps.picasso
     implementation Deps.timber
+    implementation DepsRetrofit.scalars
+    implementation Deps.material
 }

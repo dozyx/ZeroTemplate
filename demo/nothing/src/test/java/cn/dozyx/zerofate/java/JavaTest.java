@@ -7,9 +7,17 @@ import android.os.Build;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -44,11 +52,65 @@ public class JavaTest {
 
 
     @Test
+    public void testAnnotation() {
+        Class cls = AnnotationClass.class;
+        print(Arrays.toString(cls.getTypeParameters()));
+        Method[] methods = cls.getDeclaredMethods();
+        for (Method method : methods) {
+            // getAnnotation 获取指定类型的注解，如果不存在则返回 null。注意：只能反射出 retain 为 runtime 的注解
+            print(method.getName() + " getAnnotation for NotNull: " + method.getAnnotation(NotNull.class));
+            print(method.getName() + " getAnnotation for CustomAnnotation: " + method.getAnnotation(
+                    CustomAnnotation.class));
+            print(method.getName() + " getAnnotations: " + Arrays.toString(method.getAnnotations()));
+            print(method.getName() + " getDeclaredAnnotations: " + Arrays.toString(method.getDeclaredAnnotations()));
+            // getParameterAnnotations 为每个参数返回一个注解数组，如果某个参数没有注解，则返回长度为 0 的数组
+            Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+            for (Annotation[] parameterAnnotation : parameterAnnotations) {
+                print(method.getName() + " getParameterAnnotations: " + Arrays.toString(parameterAnnotation));
+            }
+        }
+    }
+
+    private static class AnnotationClass implements AnnotationSuper {
+        @Nullable
+        private String text;
+
+        @NotNull
+        @Override
+        public String foo1() {
+            return "";
+        }
+
+        @CustomAnnotation("hello")
+        private String foo2() {
+            return "";
+        }
+
+        @CustomAnnotation("hello")
+        private String foo3(String text1, @CustomAnnotation String text2) {
+            return "";
+        }
+    }
+
+    private interface AnnotationSuper {
+        @CustomAnnotation
+        String foo1();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
+    private @interface CustomAnnotation {
+        String value() default "";
+    }
+
+    @Test
     public void testReflect() {
         Class cls = ReflectClass.class;
         print(Arrays.toString(cls.getTypeParameters()));
         Method[] methods = cls.getDeclaredMethods();
         for (Method method : methods) {
+            // getGenericParameterTypes 返回参数的类型。如果某个参数的类型是泛型，则返回的 Type
+            // 对象必须能准确地反射出代码中使用的实际类型（关于泛型这部分不是很懂，实际打印出来是显示的就是表示泛型的字母）
             print(method.getName() + " getGenericParameterTypes: " + Arrays.toString(
                     method.getGenericParameterTypes()));
             print(method.getName() + " getReturnType: " + method.getReturnType());

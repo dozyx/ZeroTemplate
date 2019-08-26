@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/holo_green_light</item>
         <item name="colorPrimaryDark">#ff33b5e5</item>
@@ -12,6 +12,24 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
         <item name="customTextStyle">@style/CustomTextStyle</item>
+    </style>
+
+    <style name="ParentStyle">
+<!--        <item name="android:textColor">@android:color/holo_red_dark</item>-->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="Theme.My" parent="Theme.AppCompat">
+
+    </style>
+
+    <style name="DotStyle">
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DotStyle.TestStyle" parent="ParentStyle">
     </style>
 
     <style name="CompatTheme" parent="Theme.AppCompat.Light.NoActionBar">

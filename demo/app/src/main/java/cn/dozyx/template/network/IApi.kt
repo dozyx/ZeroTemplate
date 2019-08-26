@@ -11,4 +11,7 @@ import retrofit2.http.GET
 interface IApi {
     @GET("http://www.cnbeta.com/")
     fun getCnBetaHome(): Observable<ResponseBody>
+
+    @GET("http://gank.io/api/xiandu/categories")
+    fun getCategories(): Observable<String>
 }
