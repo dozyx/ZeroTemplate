@@ -212,7 +212,7 @@ object Version {
     const val rx_android = "2.1.1"
     const val barUtil = "1.5.1"
     const val rxjava_adapter = "2.5.0"
-    const val background = "1.4.1"
+    const val background = "1.5.6"
     const val appcompat = "1.1.0-rc01"
     const val androiddevmetrics = "0.6"
     const val koin = "1.0.2"

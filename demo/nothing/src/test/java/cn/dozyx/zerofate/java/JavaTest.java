@@ -18,6 +18,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -116,10 +117,22 @@ public class JavaTest {
             print(method.getName() + " getReturnType: " + method.getReturnType());
             print(method.getName() + " getGenericReturnType: " + method.getGenericReturnType());
         }
+        try {
+            ReflectClass<Object> object = new ReflectClass<>();
+            Field sBoolean = cls.getDeclaredField("sBoolean");
+            sBoolean.setAccessible(true);
+            print(sBoolean.isAccessible()+"");
+            sBoolean.setBoolean(object,false);
+            print(sBoolean.isAccessible()+"");
+            print(sBoolean.getBoolean(object) +"");
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     private static class ReflectClass<T> {
         private T data;
+        private static boolean sBoolean = true;
 
         private <K> K foo1(K type) {
             return type;
