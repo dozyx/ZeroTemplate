@@ -367,6 +367,7 @@ public class JavaTest {
         return decimalFormat.format(b1.divide(b2, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
     }
 
+    @Test
     public void testGson() {
         Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE,
                 new IntDefaultZeroAdapter()).create();

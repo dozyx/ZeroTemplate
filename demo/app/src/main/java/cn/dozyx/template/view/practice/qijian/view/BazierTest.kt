@@ -23,6 +23,8 @@ class BazierTest : View {
         //二阶贝塞尔曲线
         path.quadTo(200f, 200f, 300f, 300f)
         path.quadTo(400f, 400f, 500f, 300f)
+//        path.rQuadTo(100f, -100f, 200f, 0f)
+//        path.rQuadTo(100f, 100f, 200f, 0f)
 
         val paint = Paint()
         paint.color = Color.RED
