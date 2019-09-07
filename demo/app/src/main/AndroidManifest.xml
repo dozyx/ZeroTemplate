@@ -17,9 +17,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <!-- action 为 main，category 为 cn.dozyx.zerofate.intent.category.sample 的activity 将显示在列表中 -->
         <activity
@@ -611,6 +611,9 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.practice.qijian.view.CustomViewActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

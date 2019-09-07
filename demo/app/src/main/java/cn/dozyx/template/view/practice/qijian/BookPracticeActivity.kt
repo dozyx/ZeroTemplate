@@ -45,6 +45,12 @@ class BookPracticeActivity : AppCompatActivity() {
     }
 
     private fun prepareData() {
+        views.add(AvatarView::class.java)
+        views.add(TelescopeView::class.java)
+        views.add(BitmapShaderView::class.java)
+        views.add(BitmapShadowView::class.java)
+        views.add(BlurMaskFilterView::class.java)
+        views.add(ShadowLayerView::class.java)
         views.add(AnimWaveView::class.java)
 //        views.add(GestureTrackView::class.java) // 会滑动冲突
         views.add(BazierTest::class.java)
