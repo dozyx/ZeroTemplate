@@ -22,6 +22,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -31,8 +33,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -51,6 +55,16 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 
 public class JavaTest {
 
+    @Test
+    public void testBuffer() {
+        byte[] data = new byte[]{1, 5, 2, 3, 1, 5, 2};
+        ByteBuffer byteBuffer = ByteBuffer.wrap(data);
+        print(byteBuffer.remaining());
+        print(byteBuffer.get(1));
+        IntBuffer intBuffer = byteBuffer.asIntBuffer();
+        print(intBuffer.remaining());
+        print(intBuffer.get(0));
+    }
 
     @Test
     public void testAnnotation() {
@@ -59,15 +73,19 @@ public class JavaTest {
         Method[] methods = cls.getDeclaredMethods();
         for (Method method : methods) {
             // getAnnotation 获取指定类型的注解，如果不存在则返回 null。注意：只能反射出 retain 为 runtime 的注解
-            print(method.getName() + " getAnnotation for NotNull: " + method.getAnnotation(NotNull.class));
+            print(method.getName() + " getAnnotation for NotNull: " + method.getAnnotation(
+                    NotNull.class));
             print(method.getName() + " getAnnotation for CustomAnnotation: " + method.getAnnotation(
                     CustomAnnotation.class));
-            print(method.getName() + " getAnnotations: " + Arrays.toString(method.getAnnotations()));
-            print(method.getName() + " getDeclaredAnnotations: " + Arrays.toString(method.getDeclaredAnnotations()));
+            print(method.getName() + " getAnnotations: " + Arrays.toString(
+                    method.getAnnotations()));
+            print(method.getName() + " getDeclaredAnnotations: " + Arrays.toString(
+                    method.getDeclaredAnnotations()));
             // getParameterAnnotations 为每个参数返回一个注解数组，如果某个参数没有注解，则返回长度为 0 的数组
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
             for (Annotation[] parameterAnnotation : parameterAnnotations) {
-                print(method.getName() + " getParameterAnnotations: " + Arrays.toString(parameterAnnotation));
+                print(method.getName() + " getParameterAnnotations: " + Arrays.toString(
+                        parameterAnnotation));
             }
         }
     }
@@ -121,10 +139,10 @@ public class JavaTest {
             ReflectClass<Object> object = new ReflectClass<>();
             Field sBoolean = cls.getDeclaredField("sBoolean");
             sBoolean.setAccessible(true);
-            print(sBoolean.isAccessible()+"");
-            sBoolean.setBoolean(object,false);
-            print(sBoolean.isAccessible()+"");
-            print(sBoolean.getBoolean(object) +"");
+            print(sBoolean.isAccessible() + "");
+            sBoolean.setBoolean(object, false);
+            print(sBoolean.isAccessible() + "");
+            print(sBoolean.getBoolean(object) + "");
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -156,13 +174,13 @@ public class JavaTest {
         }
     }
 
-    private void print(String msg) {
+    private void print(Object msg) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         DateFormat format = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
         System.out.println(
                 format.format(Calendar.getInstance().getTime())
                         + " -> " /*+ stackTrace[3].getMethodName()*/ + " "
-                        + msg);
+                        + msg.toString());
     }
 
     @Test
@@ -312,8 +330,10 @@ public class JavaTest {
     }
 
 
+    @Test
     public void foo() {
-        System.out.print(new A().str);
+        int i = 0;
+        print("abc".charAt(++i) + "");
     }
 
     public class A {
