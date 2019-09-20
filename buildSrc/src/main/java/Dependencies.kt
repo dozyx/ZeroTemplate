@@ -46,6 +46,7 @@ object Deps {
     val gridlayout = "androidx.gridlayout:gridlayout:${Version.gridlayout}"
     val immersionbar = "com.gyf.immersionbar:immersionbar:${Version.immersionbar}"
     val gson = "com.google.code.gson:gson:${Version.gson}"
+    val convenientBanner = "com.bigkoo:convenientbanner:${Version.convenient_banner}"
 
 
 }
@@ -177,7 +178,7 @@ object Version {
     const val support = "1.0.0"
     const val constraintLayout = "2.0.0-beta2"
     const val multidex = "1.0.1"
-    const val convenient_banner = "2.0.5"
+    const val convenient_banner = "2.1.5"
     const val loop_view = "0.1.2"
     const val eventbus = "3.1.1"
     const val fragmentation = "1.3.3"

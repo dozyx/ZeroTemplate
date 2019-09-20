@@ -56,6 +56,36 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 public class JavaTest {
 
     @Test
+    public void testByte() {
+        Byte b = -89;
+        print(b);
+        int integer = b;
+        print(integer);
+        b = (byte) 255;
+        print(b);
+        b = -1;
+        print(b & 0xff);
+        print((int)b);
+        byte[] bytes = new byte[]{-89, 0, 34, -89, 0, 34, -87, 0, 33, -87, 0, 33};
+        int[] pixels = new int[bytes.length / 3];
+        for (int i = 0, j = 0; i < bytes.length; i += 3) {
+            byte red = bytes[i];
+            byte green = bytes[i + 1];
+            byte blue = bytes[i + 2];
+            pixels[j++] =
+                    0xFF000000 | ((blue & 0xff) << 16) | ((green & 0xff) << 8) | (red & 0xff);
+        }
+        print(Arrays.toString(pixels));
+    }
+
+    public static int convertByteToInt(byte data) {
+
+        int heightBit = (int) ((data >> 4) & 0x0F);
+        int lowBit = (int) (0x0F & data);
+        return heightBit * 16 + lowBit;
+    }
+
+    @Test
     public void testBuffer() {
         byte[] data = new byte[]{1, 5, 2, 3, 1, 5, 2};
         ByteBuffer byteBuffer = ByteBuffer.wrap(data);
@@ -332,8 +362,8 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        int i = 0;
-        print("abc".charAt(++i) + "");
+        int[] data = new int[0];
+        print(data[0]);
     }
 
     public class A {
