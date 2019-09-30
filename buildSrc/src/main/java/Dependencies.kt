@@ -110,6 +110,11 @@ object DepsButterKnife {
     val processor = "com.jakewharton:butterknife-compiler:${Version.butterknife}"
 }
 
+object DepsGlide {
+    val runtime = "com.github.bumptech.glide:glide:${Version.glide}"
+    val processor = "com.github.bumptech.glide:compiler:${Version.glide}"
+}
+
 object DepsDagger {
     val runtime = "com.google.dagger:dagger:${Version.dagger}"
     val processor = "com.google.dagger:dagger-compiler:${Version.dagger}"
@@ -231,4 +236,5 @@ object Version {
     const val recyclerview = "1.1.0-beta01"
     const val gridlayout = "1.0.0"
     const val hyperion = "0.9.27"
+    const val glide = "4.10.0"
 }

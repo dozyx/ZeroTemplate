@@ -4,6 +4,8 @@ package cn.dozyx.zerofate.java;
 import android.annotation.TargetApi;
 import android.os.Build;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -56,6 +58,36 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 public class JavaTest {
 
     @Test
+    public void testException() {
+        try {
+            new ExceptionClass().foo();
+        }catch (Exception e){
+
+        }
+    }
+
+    private void throwException(){
+        throw new NullPointerException("我是空的");
+    }
+
+    @Test
+    public void testTryCatch() {
+        print(tryOperation(1));
+    }
+
+    private int tryOperation(int i) {
+        try {
+            i++;
+            throw new NullPointerException();
+//            return i;
+        } catch (Exception e) {
+            return i++;
+        } finally {
+            return ++i;
+        }
+    }
+
+    @Test
     public void testByte() {
         Byte b = -89;
         print(b);
@@ -65,7 +97,7 @@ public class JavaTest {
         print(b);
         b = -1;
         print(b & 0xff);
-        print((int)b);
+        print((int) b);
         byte[] bytes = new byte[]{-89, 0, 34, -89, 0, 34, -87, 0, 33, -87, 0, 33};
         int[] pixels = new int[bytes.length / 3];
         for (int i = 0, j = 0; i < bytes.length; i += 3) {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.dozyx.constant.Shakespeare
 import cn.dozyx.core.base.BaseSingleFragmentActivity
@@ -53,7 +54,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            recycler_view.layoutManager = CustomLayoutManager()
+            recycler_view.layoutManager = LinearLayoutManager(context)
             datas = randomStrings
             recycler_view.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
             recycler_view.adapter = object :QuickAdapter<String>(datas){
@@ -64,6 +65,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
                 override fun convert(holder: VH, data: String, position: Int) {
                     holder.setText(android.R.id.text1,data)
                     holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
+                    (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).topMargin = 100
                 }
             }
 
