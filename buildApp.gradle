@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdkVersion Android.minSdkVersion
         targetSdkVersion Android.targetSdkVersion
-        applicationId "cn.dozyx.zerofate.${suffix}"
+        applicationId "cn.dozyx.${suffix}"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,19 +51,12 @@ dependencies {
 }
 
 private String getSuffix() {
-    String[] splits = project.name.split("-")
-    return splits[0]
+    return project.name.replace("-",".")
 }
 
 def configSigning(Project pro) {
     pro.android {
         signingConfigs {
-            debug {
-                keyAlias KEY_ALIAS
-                keyPassword KEY_PASSWORD
-                storeFile file("$project.rootDir/${STORE_FILE}")
-                storePassword STORE_PASSWORD
-            }
             release {
                 keyAlias KEY_ALIAS
                 keyPassword KEY_PASSWORD

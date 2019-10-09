@@ -1,4 +1,4 @@
-include ':demo:app', ':model', ':demo:float-window', ':demo:nothing', ':demo:navigation', ':core', ':shell', ':ui'
+include ':demo:app', ':model', ':demo:float-window', ':demo:nothing', ':demo:navigation', ':core', ':shell', ':ui', ':sampleLib'
 include ':demo:dagger'
 ConfigUtils.addBuildListener(gradle)
 // 如果出现 project 报错问题，可尝试将所有 iml 文件删除，再重新导入工程

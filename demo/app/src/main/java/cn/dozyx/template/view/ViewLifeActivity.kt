@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -81,6 +82,22 @@ class ViewLifeActivity : LifeCycleActivity() {
             super.onRestoreInstanceState(state)
             Timber.d("onRestoreInstanceState: ")
         }
+
+        override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+            super.onSizeChanged(w, h, oldw, oldh)
+            Timber.d("ViewLifeView.onSizeChanged")
+        }
+
+        override fun dispatchDraw(canvas: Canvas?) {
+            super.dispatchDraw(canvas)
+            Timber.d("ViewLifeView.dispatchDraw")
+        }
+
+        override fun onTouchEvent(event: MotionEvent): Boolean {
+            Timber.d("ViewLifeView.onTouchEvent ${MotionEvent.actionToString(event.action)}")
+            return event.action == MotionEvent.ACTION_DOWN
+//            return super.onTouchEvent(event)
+        }
     }
 
     class LifeViewLinearLayout : LinearLayout {
@@ -104,6 +121,17 @@ class ViewLifeActivity : LifeCycleActivity() {
         override fun onRestoreInstanceState(state: Parcelable) {
             super.onRestoreInstanceState(state)
             Timber.d("onRestoreInstanceState: view group")
+        }
+
+        override fun onTouchEvent(event: MotionEvent): Boolean {
+            Timber.d("LifeViewLinearLayout.onTouchEvent ${MotionEvent.actionToString(event.action)}")
+            return super.onTouchEvent(event)
+        }
+
+        override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+            Timber.d("LifeViewLinearLayout.onInterceptTouchEvent ${MotionEvent.actionToString(ev.action)}")
+            return super.onInterceptTouchEvent(ev)
+//            return true
         }
     }
 }

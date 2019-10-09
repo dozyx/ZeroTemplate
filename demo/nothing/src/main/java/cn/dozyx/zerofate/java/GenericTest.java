@@ -1,6 +1,8 @@
 package cn.dozyx.zerofate.java;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author dozeboy
@@ -31,5 +33,20 @@ public class GenericTest<T> {
         public <T extends Type> T foo() {
             return (T) new TypeChild();
         }
+    }
+
+
+    public static class New {
+        public static <K, V> Map<K, V> map() {
+            return new HashMap<>();
+        }
+    }
+
+
+    static void f(Map<Person, List<? extends CharSequence>> petPeople) {
+    }
+
+    public static void main(String[] args) {
+//        f(New.map()); // Does not compile
     }
 }

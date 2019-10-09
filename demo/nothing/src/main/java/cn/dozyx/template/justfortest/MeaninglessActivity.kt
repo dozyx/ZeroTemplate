@@ -8,14 +8,12 @@ import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
+import android.os.*
 import android.os.Build.VERSION.SDK_INT
-import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Printer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -44,6 +42,8 @@ import java.io.IOException
 class MeaninglessActivity : AppCompatActivity() {
     var time = 0
     lateinit var alertDialog: AlertDialog
+    lateinit var thread: Thread
+    var threadLooper: Looper? = null
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,28 +54,15 @@ class MeaninglessActivity : AppCompatActivity() {
         // keyboardEnable true 不会自动弹出，false 会自动弹出
         // 不设置也沉浸式会自动弹出
         ImmersionBar.with(this).init()
+        thread = Thread {
+            Looper.prepare()
+            Timber.d("MeaninglessActivity.onCreate looper start")
+            Looper.loop()
+            threadLooper = Looper.myLooper()
+        }
 
         text.setOnClickListener {
-            var picUrl = "http://pic.lepass.cn/hashpic/73813234dddc6167bfaa415f1bc472f9.jpg"
-            val glideUrl = GlideUrl(picUrl, LazyHeaders.Builder()
-//            .addHeader("User-Agent", "Android_10092_1_9_28_MI 8")
-            .addHeader("User-Agent", "Android")
-            .build())
-            Glide.with(this).load(glideUrl).into(image)
-            /*val httpClient = OkHttpClient()
-            httpClient.newCall(Request.Builder().url(picUrl).build()).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Timber.d("MeaninglessActivity.onFailure")
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    Timber.d("MeaninglessActivity.onResponse")
-                    var bitmap = BitmapFactory.decodeStream(response.body()?.byteStream())
-                    runOnUiThread {
-                        image.setImageBitmap(bitmap)
-                    }
-                }
-            })*/
+//            threadLooper?.quit()
         }
     }
 

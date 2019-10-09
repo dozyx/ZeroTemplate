@@ -13,10 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
-import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -32,17 +30,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.Deque;
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
+import java.util.Stack;
+import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,16 +60,125 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 
 public class JavaTest {
 
+
+    @Test
+    public void testIntArray() {
+        int[] numbers = new int[10];
+        print(Arrays.toString(numbers));
+        print(duplicate(new int[]{0,1},2,new int[1]));
+    }
+
+    public boolean duplicate(int numbers[], int length, int [] duplication) {
+        if (numbers == null || length <= 0) {
+            return false;
+        }
+        for (int i = 0; i < length; i++) {
+            if (numbers[i] < 0 || numbers[i] > length - 1) {
+                return false;
+            }
+            while (numbers[i] != i) {
+                if (numbers[numbers[i]] == numbers[i]) {
+                    duplication[0] = numbers[i];
+                    return true;
+                } else {
+                    int temp = numbers[i];
+                    numbers[i] = numbers[temp];
+                    numbers[temp] = temp;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void testThreadLocal() {
+        ThreadLocal<Integer> threadLocal1 = new ThreadLocal<>();
+        ThreadLocal<Integer> threadLocal2 = new ThreadLocal<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                threadLocal1.set(1);
+                threadLocal2.set(2);
+                print("两个 threadLocal 是否操作的同一个变量： " + threadLocal1.get());
+                print("两个 threadLocal 是否操作的同一个变量： " + threadLocal2.get());
+            }
+        }).start();
+        sleep(1);
+
+    }
+
+    @Test
+    public void testReentrantLock() {
+        ReentrantLock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lock.lock();
+                print("进入 lock1");
+                try {
+                    print("阻塞 lock1");
+                    condition.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                print("执行 lock1");
+                sleep(2);
+                lock.unlock();
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lock.lock();
+                print("执行 lock2");
+                sleep(2);
+                condition.signal();
+                lock.unlock();
+            }
+        }).start();
+        sleep(5);
+
+    }
+
+
+    private void sleep(int timeInSeconds) {
+        try {
+            Thread.sleep(timeInSeconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testVector() {
+        Vector<Integer> vector = new Vector<>();
+        vector.add(1);
+        Stack<Integer> stack = new Stack<>();
+        stack.add(1);
+        stack.push(2);
+        stack.remove(1);
+
+        Deque<Integer> deque = new ArrayDeque<>();
+        deque.push(1);
+        deque.push(2);
+        deque.push(3);
+        print(deque.poll());
+        print(deque.pop());
+        print(deque.pop());
+
+    }
+
     @Test
     public void testException() {
         try {
             new ExceptionClass().foo();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
-    private void throwException(){
+    private void throwException() {
         throw new NullPointerException("我是空的");
     }
 
@@ -227,6 +339,22 @@ public class JavaTest {
         }
 
     }
+
+    public void testFoo() {
+
+        print(-123 / 10);
+    }
+
+    @Test
+    public void testGeneric() {
+        ArrayList<String> strings = new ArrayList<>();
+        ArrayList<Integer> integers = new ArrayList<>();
+        System.out.println(strings.getClass() == integers.getClass());
+        print(Arrays.toString(strings.getClass().getTypeParameters()));
+        ArrayList<? extends Number> list = new ArrayList<Integer>();
+        list.get(0).byteValue();
+    }
+
 
     @Test
     public void testThreadStack() {
@@ -394,8 +522,7 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        int[] data = new int[0];
-        print(data[0]);
+        print(-123 / 10);
     }
 
     public class A {
