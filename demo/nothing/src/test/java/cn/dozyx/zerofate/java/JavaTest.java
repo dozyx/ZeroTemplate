@@ -4,10 +4,12 @@ package cn.dozyx.zerofate.java;
 import android.annotation.TargetApi;
 import android.os.Build;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
@@ -34,14 +37,16 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
@@ -65,10 +70,10 @@ public class JavaTest {
     public void testIntArray() {
         int[] numbers = new int[10];
         print(Arrays.toString(numbers));
-        print(duplicate(new int[]{0,1},2,new int[1]));
+        print(duplicate(new int[]{0, 1}, 2, new int[1]));
     }
 
-    public boolean duplicate(int numbers[], int length, int [] duplication) {
+    public boolean duplicate(int numbers[], int length, int[] duplication) {
         if (numbers == null || length <= 0) {
             return false;
         }
@@ -530,22 +535,24 @@ public class JavaTest {
         public int a = 10;
     }
 
+    @Test
     public void testThreadPool() {
         ExecutorService executorService = new ThreadPoolExecutor(5, 10, 10, TimeUnit.SECONDS,
-                new LinkedBlockingDeque<>());
-        for (int i = 0; i < 10; i++) {
-            int num = i;
+                new LinkedBlockingQueue<>(3));
+        // 最多提交任务数：maximumPoolSize + deque 大小
+        for (int i = 0; i < 13; i++) {
+            int flag = i;
+            // 先执行了 core 任务，后续任务放入 deque，deque 后执行新加任务，有空闲线程后再执行 deque 任务
             executorService.execute(() -> {
-
-                System.out.println(new Date() + " & i == " + num + " & thread == "
-                        + Thread.currentThread());
+                print(" & i == " + flag + " & thread == " + Thread.currentThread());
                 try {
-                    Thread.sleep(5 * 1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             });
         }
+        sleep(5);
     }
 
     public String format(String num, int reserved, int divide) {
@@ -574,6 +581,68 @@ public class JavaTest {
         BigDecimal b2 = new BigDecimal("100");
         DecimalFormat decimalFormat = new DecimalFormat("#");
         return decimalFormat.format(b1.divide(b2, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+    }
+
+    @Test
+    public void testGsonIncorrect() {
+//        String json = "{ \"phones\": [\"1111\"], \"data\": {\"address\":\"11\"} }";
+        String json = "{ \"phones\": \"1111\", \"data\": {\"address\":\"11\"} }";// List 传成字符串
+//        String json = "{ \"phones\": [\"1111\"], \"data\": [] }";// Object 传成 List
+        Gson gson = new GsonBuilder().registerTypeAdapter(Data.class,
+                new JsonDeserializer<Data>() {
+                    @Override
+                    public Data deserialize(JsonElement json, Type typeOfT,
+                            JsonDeserializationContext context) throws JsonParseException {
+                        print("deserialize " + json.toString() + " " + typeOfT.getTypeName());
+                        if (json.isJsonObject()) {
+                            print("deserialize " + json.toString());
+                            return new Gson().fromJson(json, typeOfT);
+                        }
+                        return null;
+                    }
+                }).registerTypeHierarchyAdapter(List.class,
+                (JsonDeserializer<List>) (json1, typeOfT, context) -> {
+                    print("deserialize " + json1);
+                    if (json1.isJsonArray()) {
+                        return new Gson().fromJson(json1, typeOfT);
+                    }
+                    return Collections.EMPTY_LIST;
+                }).registerTypeHierarchyAdapter(String.class, new JsonDeserializer<String>() {
+            @Override
+            public String deserialize(JsonElement json, Type typeOfT,
+                    JsonDeserializationContext context) throws JsonParseException {
+                if (json.isJsonPrimitive()) {
+                    return json.getAsString();
+                }
+                return "hello";
+            }
+        }).create();
+        Home user = gson.fromJson(json, Home.class);
+        print(user);
+    }
+
+    private static class Home {
+        private List<String> phones;
+        private Data data;
+
+        @Override
+        public String toString() {
+            return "Home{" +
+                    "phones=" + phones +
+                    ", data=" + data +
+                    '}';
+        }
+    }
+
+    private static class Data {
+        private String address;
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "address='" + address + '\'' +
+                    '}';
+        }
     }
 
     @Test
