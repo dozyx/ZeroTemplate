@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_base_show_result.*
 /**
  * 用于基本的按键-显示操作
  */
+@Deprecated("使用 BaseTestActivity")
 abstract class BaseShowResultActivity : AppCompatActivity(), IBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,4 +91,7 @@ abstract class BaseShowResultActivity : AppCompatActivity(), IBaseView {
     }
 
     protected abstract fun getButtonText(): Array<String>
+    override fun showResult(text: String?) {
+
+    }
 }

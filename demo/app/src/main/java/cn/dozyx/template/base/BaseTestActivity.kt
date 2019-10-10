@@ -39,13 +39,19 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun appendResult(log: String) {
-        var previousLog = text_log!!.text as String
-        if (TextUtils.isEmpty(previousLog)) {
-            previousLog = ""
+        runOnUiThread {
+            var previousLog = text_log!!.text as String
+            if (TextUtils.isEmpty(previousLog)) {
+                previousLog = ""
+            }
+            val builder = StringBuilder()
+            builder.append(log).append("\n").append(previousLog)
+            text_log!!.text = builder.toString()
         }
-        val builder = StringBuilder()
-        builder.append(log).append("\n").append(previousLog)
-        text_log!!.text = builder.toString()
+    }
+
+    override fun showResult(text: String?) {
+        text_log.text = text
     }
 
     protected fun addFragment(fragment: Fragment) {

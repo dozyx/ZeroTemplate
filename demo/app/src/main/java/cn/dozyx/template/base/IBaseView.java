@@ -8,4 +8,6 @@ public interface IBaseView {
     void clearResult();
 
     void appendResult(String text);
+
+    void showResult(String text);
 }
