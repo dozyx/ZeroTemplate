@@ -4,6 +4,13 @@ package cn.dozyx.zerofate.java;
 import android.annotation.TargetApi;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -67,6 +74,42 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 
 public class JavaTest {
 
+
+    @Test
+    public void testLiveData() {
+        // liveData 是一个具有生命周期感知的 data 持有类
+        MutableLiveData<Integer> liveData = new MutableLiveData<>();
+        liveData.observe(new LifecycleOwner() {
+            @NonNull
+            @Override
+            public Lifecycle getLifecycle() {
+                return new Lifecycle() {
+                    @Override
+                    public void addObserver(@NonNull LifecycleObserver observer) {
+
+                    }
+
+                    @Override
+                    public void removeObserver(@NonNull LifecycleObserver observer) {
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public State getCurrentState() {
+                        return State.CREATED;
+                    }
+                };
+            }
+        }, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                print(integer);
+            }
+        });
+        liveData.setValue(1);
+
+    }
 
     @Test
     public void testDynamicProxy() {

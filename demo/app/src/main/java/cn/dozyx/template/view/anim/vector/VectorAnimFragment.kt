@@ -9,7 +9,7 @@ import cn.dozyx.template.R
 import cn.dozyx.template.view.anim.BaseSingleViewDemoFragment
 
 /**
- * Create by timon on 2019/7/18
+ * Create by dozyx on 2019/7/18
  */
 class VectorAnimFragment : BaseSingleViewDemoFragment<ImageView>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

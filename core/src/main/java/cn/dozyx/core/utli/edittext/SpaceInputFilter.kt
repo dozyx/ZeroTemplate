@@ -5,7 +5,7 @@ import android.text.Spanned
 import android.text.TextUtils
 
 /**
- * Create by timon on 2019/5/31
+ * Create by dozyx on 2019/5/31
  **/
 class SpaceInputFilter : InputFilter {
     override fun filter(source: CharSequence?, start: Int, end: Int, dest: Spanned?, dstart: Int, dend: Int): CharSequence? {

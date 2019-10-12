@@ -7,7 +7,7 @@ import cn.dozyx.template.R
 
 /**
  * 模糊
- * Create by timon on 2019/9/7
+ * Create by dozyx on 2019/9/7
  **/
 class ShadowLayerView(context: Context) : View(context) {
     private val paint = Paint()

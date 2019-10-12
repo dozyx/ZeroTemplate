@@ -6,7 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Create by timon on 2019/6/27
+ * Create by dozyx on 2019/6/27
  **/
 @Module
 public abstract class MainActivityModule {

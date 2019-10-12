@@ -8,7 +8,7 @@ import androidx.room.Query;
 import java.util.List;
 
 /**
- * Create by timon on 2019/5/17
+ * Create by dozyx on 2019/5/17
  **/
 @Dao
 public interface UserDao {

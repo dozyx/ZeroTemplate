@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/7/2
+ * Create by dozyx on 2019/7/2
  */
 abstract class LifeCycleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

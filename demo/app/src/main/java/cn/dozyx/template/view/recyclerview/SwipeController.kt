@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/5/30
+ * Create by dozyx on 2019/5/30
  **/
 class SwipeController(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 

@@ -8,7 +8,7 @@ import cn.dozyx.template.R
 
 /**
  * BitmapShader 实现望远镜效果，显示触摸位置的图像
- * Create by timon on 2019/9/7
+ * Create by dozyx on 2019/9/7
  **/
 class TelescopeView(context: Context) : View(context) {
     private val paint = Paint()

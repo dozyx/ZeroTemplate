@@ -6,7 +6,7 @@ import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.activity_focus_test.*
 
 /**
- * Create by timon on 2019/6/5
+ * Create by dozyx on 2019/6/5
  */
 class FocusTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

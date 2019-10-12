@@ -1,7 +1,7 @@
 package cn.dozyx.core.widget;
 
 /**
- * Create by timon on 2019/8/21
+ * Create by dozyx on 2019/8/21
  **/
 
 import android.content.Context;

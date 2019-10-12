@@ -10,7 +10,7 @@ import android.view.View;
 import com.blankj.utilcode.util.SizeUtils;
 
 /**
- * Create by timon on 2019/5/14
+ * Create by dozyx on 2019/5/14
  **/
 public class CustomView4 extends View {
     private Paint textPaint;

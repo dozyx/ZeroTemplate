@@ -11,7 +11,7 @@ import cn.dozyx.template.base.BaseTestActivity
 import io.reactivex.disposables.Disposable
 
 /**
- * Create by timon on 2019/3/25
+ * Create by dozyx on 2019/3/25
  **/
 class CameraControlActivity : BaseTestActivity(), TextureView.SurfaceTextureListener {
     private lateinit var rxPermissions: RxPermissions;

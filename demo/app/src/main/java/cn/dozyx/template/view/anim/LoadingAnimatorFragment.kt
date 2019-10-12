@@ -4,7 +4,7 @@ import cn.dozyx.core.base.BaseFragment
 import cn.dozyx.template.R
 
 /**
- * Create by timon on 2019/7/11
+ * Create by dozyx on 2019/7/11
  **/
 class LoadingAnimatorFragment : BaseFragment() {
     override fun getLayoutId(): Int {

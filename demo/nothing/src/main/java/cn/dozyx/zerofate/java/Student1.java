@@ -3,7 +3,7 @@ package cn.dozyx.zerofate.java;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Create by timon on 2019/3/27
+ * Create by dozyx on 2019/3/27
  **/
 public class Student1 {
 

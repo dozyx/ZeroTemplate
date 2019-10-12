@@ -9,7 +9,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/6/25
+ * Create by dozyx on 2019/6/25
  */
 class CustomBehavior<V : View>: CoordinatorLayout.Behavior<V> {
     constructor() : super()

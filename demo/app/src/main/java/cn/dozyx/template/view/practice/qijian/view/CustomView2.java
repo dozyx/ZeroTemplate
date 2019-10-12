@@ -11,7 +11,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 /**
- * Create by timon on 2019/5/11
+ * Create by dozyx on 2019/5/11
  **/
 public class CustomView2 extends View {
     public CustomView2(Context context) {

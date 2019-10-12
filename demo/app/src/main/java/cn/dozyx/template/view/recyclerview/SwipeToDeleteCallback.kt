@@ -16,7 +16,7 @@ import cn.dozyx.template.R
 /**
  * @see <a href="https://medium.com/@kitek/recyclerview-swipe-to-delete-easier-than-you-thought-cff67ff5e5f6> </a>
  * @see <a href="https://codeburst.io/android-swipe-menu-with-recyclerview-8f28a235ff28> </a>
- * Create by timon on 2019/5/30
+ * Create by dozyx on 2019/5/30
  **/
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
     private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_24)!!

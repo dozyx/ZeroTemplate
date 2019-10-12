@@ -1,4 +1,4 @@
-package cn.dozyx.navigation.kotlin
+package cn.dozyx.kotlin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +14,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val host: NavHostFragment = supportFragmentManager
-                .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
+        val host = supportFragmentManager
+                .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
         setupBottomNavMenu(host.navController)
     }
 

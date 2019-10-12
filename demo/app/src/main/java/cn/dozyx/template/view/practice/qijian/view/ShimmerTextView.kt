@@ -8,7 +8,7 @@ import android.widget.TextView
 
 /**
  * 闪光文字
- * Create by timon on 2019/9/7
+ * Create by dozyx on 2019/9/7
  **/
 class ShimmerTextView : TextView {
 

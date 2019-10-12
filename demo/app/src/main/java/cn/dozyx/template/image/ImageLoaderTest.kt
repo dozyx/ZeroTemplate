@@ -8,7 +8,7 @@ import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.image_activity_loader.*
 
 /**
- * Create by timon on 2019/5/28
+ * Create by dozyx on 2019/5/28
  */
 private val IMAGE_URLS = arrayOf("https://img-cms.pchome.net/article/1k0/bh/36/o1dzur-1hvc.jpg", "https://img-cms.pchome.net/article/1k0/bh/36/o1dzus-dmd.jpg", "https://img-cms.pchome.net/article/1k0/bh/36/o1dzus-ji3.jpg")
 

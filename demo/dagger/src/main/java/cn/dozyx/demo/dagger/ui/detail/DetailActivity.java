@@ -12,7 +12,7 @@ import cn.dozyx.demo.dagger.ui.detail.fragment.DetailFragment;
 import dagger.android.support.DaggerAppCompatActivity;
 
 /**
- * Create by timon on 2019/6/27
+ * Create by dozyx on 2019/6/27
  **/
 public class DetailActivity extends DaggerAppCompatActivity implements DetailView {
     private static final String TAG = "DetailActivity";

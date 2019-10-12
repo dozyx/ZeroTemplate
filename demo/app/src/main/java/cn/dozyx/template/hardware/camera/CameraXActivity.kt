@@ -25,7 +25,7 @@ import java.nio.ByteBuffer
 import java.util.concurrent.TimeUnit
 
 /**
- * Create by timon on 2019/5/20
+ * Create by dozyx on 2019/5/20
  */
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)

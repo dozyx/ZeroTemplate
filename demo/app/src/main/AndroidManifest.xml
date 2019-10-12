@@ -612,8 +612,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.practice.qijian.view.CustomViewActivity"
-            android:exported="true" />
+            android:name=".data.ParcelableTest"
+            android:label="data/Parcelable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

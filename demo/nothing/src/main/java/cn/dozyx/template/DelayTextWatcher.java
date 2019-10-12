@@ -4,7 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 
 /**
- * Create by timon on 2019/9/6
+ * Create by dozyx on 2019/9/6
  **/
 public class DelayTextWatcher implements TextWatcher {
     private TextWatcher textWatcher;

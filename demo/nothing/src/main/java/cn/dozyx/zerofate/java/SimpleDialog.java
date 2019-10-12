@@ -6,7 +6,7 @@ import android.content.Context;
 import cn.dozyx.template.justfortest.R;
 
 /**
- * Create by timon on 2019/3/14
+ * Create by dozyx on 2019/3/14
  **/
 public class SimpleDialog extends Dialog {
     public SimpleDialog(Context context) {

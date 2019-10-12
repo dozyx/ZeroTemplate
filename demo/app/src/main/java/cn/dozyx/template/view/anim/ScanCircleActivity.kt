@@ -8,7 +8,7 @@ import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.activity_scan_circel.*
 
 /**
- * Create by timon on 2019/7/8
+ * Create by dozyx on 2019/7/8
  */
 class ScanCircleActivity : BaseActivity() {
 

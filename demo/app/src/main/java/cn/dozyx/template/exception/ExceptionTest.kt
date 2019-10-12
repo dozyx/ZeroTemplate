@@ -6,7 +6,7 @@ import timber.log.Timber
 import java.lang.RuntimeException
 
 /**
- * Create by timon on 2019/7/1
+ * Create by dozyx on 2019/7/1
  */
 class ExceptionTest : BaseTestActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

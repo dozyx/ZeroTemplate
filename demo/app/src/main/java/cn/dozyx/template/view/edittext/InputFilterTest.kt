@@ -9,7 +9,7 @@ import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.core.utli.edittext.SpaceInputFilter
 
 /**
- * Create by timon on 2019/5/31
+ * Create by dozyx on 2019/5/31
  **/
 class InputFilterTest : BaseActivity() {
     override fun getLayoutId(): Int {

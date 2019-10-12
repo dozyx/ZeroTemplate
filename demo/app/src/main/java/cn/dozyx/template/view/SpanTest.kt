@@ -11,7 +11,7 @@ import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.activity_span_test.*
 
 /**
- * Create by timon on 2019/6/4
+ * Create by dozyx on 2019/6/4
  */
 class SpanTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

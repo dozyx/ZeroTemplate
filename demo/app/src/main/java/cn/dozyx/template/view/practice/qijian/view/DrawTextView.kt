@@ -9,7 +9,7 @@ import android.view.View
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/8/14
+ * Create by dozyx on 2019/8/14
  */
 class DrawTextView : View {
     constructor(context: Context) : super(context) {}

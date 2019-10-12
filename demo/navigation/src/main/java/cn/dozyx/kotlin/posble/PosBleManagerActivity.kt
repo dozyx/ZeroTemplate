@@ -1,4 +1,4 @@
-package cn.dozyx.navigation.kotlin.posble
+package cn.dozyx.kotlin.posble
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

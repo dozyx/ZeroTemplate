@@ -24,7 +24,6 @@ object Deps {
     val universalImageLoader = "com.nostra13.universalimageloader:universal-image-loader:${Version.universalImageLoader}"
     val material = "com.google.android.material:material:${Version.material}"
     val rxjava2 = "io.reactivex.rxjava2:rxjava:${Version.rxjava2}"
-    val eventbus = "org.greenrobot:eventbus:${Version.eventbus}"
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
     val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Version.lifecycle}"
     val annotations = "org.jetbrains:annotations:${Version.annotations}"
@@ -49,6 +48,10 @@ object Deps {
     val convenientBanner = "com.bigkoo:convenientbanner:${Version.convenient_banner}"
 
 
+}
+object DepsEventBus  {
+    val core = "org.greenrobot:eventbus:${Version.eventbus}"
+    val processor = "org.greenrobot:eventbus-annotation-processor:${Version.eventbus}"
 }
 object DepsHyperion {
     val debugCore = "com.willowtreeapps.hyperion:hyperion-core:${Version.hyperion}"
@@ -151,10 +154,10 @@ object DepsLeakCanary {
 }
 
 object DepsNavigation {
-    val fragment = "android.arch.navigation:navigation-fragment:${Version.navigation}"
-    val ui = "android.arch.navigation:navigation-ui:${Version.navigation}"
-    val fragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Version.navigation}"
-    val uiKtx = "android.arch.navigation:navigation-ui-ktx:${Version.navigation}"
+    val fragment = "androidx.navigation:navigation-fragment:${Version.navigation}"
+    val ui = "androidx.navigation:navigation-ui:${Version.navigation}"
+    val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
+    val uiKtx = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
 }
 
 object Version {
@@ -225,7 +228,7 @@ object Version {
     const val material = "1.1.0-alpha09"
     const val rxbinding = "3.0.0-alpha2"
     const val annotations = "17.0.0"
-    const val navigation = "1.0.0"
+    const val navigation = "2.1.0"
     const val immersionbar = "2.3.3"
     const val room = "2.1.0-alpha07"
     const val stetho = "1.5.1"

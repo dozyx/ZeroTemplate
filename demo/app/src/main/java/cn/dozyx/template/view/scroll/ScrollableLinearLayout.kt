@@ -6,7 +6,7 @@ import android.view.MotionEvent
 import android.widget.LinearLayout
 
 /**
- * Create by timon on 2019/5/29
+ * Create by dozyx on 2019/5/29
  **/
 class ScrollableLinearLayout(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
     override fun onTouchEvent(event: MotionEvent?): Boolean {

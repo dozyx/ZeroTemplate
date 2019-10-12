@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 
 /**
- * Create by timon on 2019/8/16
+ * Create by dozyx on 2019/8/16
  */
 class BazierTest : View {
     constructor(context: Context) : super(context) {}

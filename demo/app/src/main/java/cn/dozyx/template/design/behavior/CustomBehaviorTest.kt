@@ -10,7 +10,7 @@ import com.google.android.material.behavior.SwipeDismissBehavior
 import kotlinx.android.synthetic.main.activity_custom_behavior.*
 
 /**
- * Create by timon on 2019/6/26
+ * Create by dozyx on 2019/6/26
  */
 class CustomBehaviorTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

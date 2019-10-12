@@ -9,7 +9,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import kotlin.math.abs
 
 /**
- * Create by timon on 2019/7/11
+ * Create by dozyx on 2019/7/11
  **/
 
 class GetSegmentView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {

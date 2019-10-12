@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerFragment;
 
 /**
- * Create by timon on 2019/6/27
+ * Create by dozyx on 2019/6/27
  **/
 public class DetailFragment extends DaggerFragment implements DetailFragmentView {
     private static final String TAG = "DetailFragment";

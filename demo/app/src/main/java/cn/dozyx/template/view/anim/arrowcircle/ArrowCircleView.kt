@@ -9,7 +9,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import cn.dozyx.template.R
 
 /**
- * Create by timon on 2019/7/18
+ * Create by dozyx on 2019/7/18
  */
 class ArrowCircleView : View {
 

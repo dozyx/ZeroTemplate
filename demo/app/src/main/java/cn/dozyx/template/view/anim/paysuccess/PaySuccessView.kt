@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/7/18
+ * Create by dozyx on 2019/7/18
  */
 class PaySuccessView : View {
     constructor(context: Context?) : super(context)

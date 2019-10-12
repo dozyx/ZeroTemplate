@@ -12,7 +12,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 /**
- * Create by timon on 2019/7/9
+ * Create by dozyx on 2019/7/9
  */
 class ExpandMenuFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {

@@ -10,7 +10,7 @@ import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.vector_fragment_search.*
 
 /**
- * Create by timon on 2019/7/19
+ * Create by dozyx on 2019/7/19
  **/
 
 class SearchVectorAnimFragment : BaseFragment() {

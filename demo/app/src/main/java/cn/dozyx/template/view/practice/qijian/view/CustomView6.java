@@ -12,7 +12,7 @@ import android.view.View;
 import cn.dozyx.template.R;
 
 /**
- * Create by timon on 2019/5/14
+ * Create by dozyx on 2019/5/14
  **/
 public class CustomView6 extends View {
     private Bitmap bitmap;

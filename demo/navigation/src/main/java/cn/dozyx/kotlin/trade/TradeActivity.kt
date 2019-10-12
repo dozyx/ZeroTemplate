@@ -1,4 +1,4 @@
-package cn.dozyx.navigation.kotlin.trade
+package cn.dozyx.kotlin.trade
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

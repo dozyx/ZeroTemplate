@@ -19,7 +19,7 @@ import java.util.ArrayList
 
 /**
  * 《Android自定义控件开发入门与实战》练习
- * Create by timon on 2019/5/11
+ * Create by dozyx on 2019/5/11
  */
 class BookPracticeActivity : AppCompatActivity() {
 

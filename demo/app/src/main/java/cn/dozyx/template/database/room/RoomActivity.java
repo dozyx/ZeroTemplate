@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 
 /**
- * Create by timon on 2019/5/17
+ * Create by dozyx on 2019/5/17
  **/
 public class RoomActivity extends BaseTestActivity {
     private AppDatabase appDatabase;

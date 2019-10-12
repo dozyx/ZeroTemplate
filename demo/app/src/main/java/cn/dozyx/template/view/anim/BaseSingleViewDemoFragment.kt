@@ -8,7 +8,7 @@ import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.base_fragment_anim_demo.*
 
 /**
- * Create by timon on 2019/7/18
+ * Create by dozyx on 2019/7/18
  */
 abstract class BaseSingleViewDemoFragment<V : View> : BaseFragment() {
     protected lateinit var animView1: V

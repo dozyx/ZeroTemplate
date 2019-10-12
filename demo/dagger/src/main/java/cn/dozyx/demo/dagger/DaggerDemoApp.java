@@ -7,7 +7,7 @@ import dagger.android.DaggerApplication;
 
 /**
  * https://github.com/iammert/dagger-android-injection
- * Create by timon on 2019/6/27
+ * Create by dozyx on 2019/6/27
  **/
 public class DaggerDemoApp extends DaggerApplication {
 

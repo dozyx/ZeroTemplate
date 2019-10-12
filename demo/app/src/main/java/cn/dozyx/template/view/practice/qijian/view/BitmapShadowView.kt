@@ -8,7 +8,7 @@ import cn.dozyx.template.R
 /**
  * 绘制纯色阴影
  * 原理：绘制一个灰色副本，并使其发光，偏移作为阴影
- * Create by timon on 2019/9/7
+ * Create by dozyx on 2019/9/7
  **/
 class BitmapShadowView(context: Context) : View(context) {
     private val paint = Paint()

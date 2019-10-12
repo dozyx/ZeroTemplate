@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_animator_pager.*
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/7/9
+ * Create by dozyx on 2019/7/9
  */
 class AnimatorPagerActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package cn.dozyx.navigation.kotlin
+package cn.dozyx.kotlin
 
 import android.os.Bundle
 import android.view.LayoutInflater

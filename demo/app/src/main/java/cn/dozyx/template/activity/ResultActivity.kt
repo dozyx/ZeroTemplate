@@ -11,7 +11,7 @@ import cn.dozyx.template.base.BaseShowResultActivity
 import java.io.File
 
 /**
- * Create by timon on 2019/5/9
+ * Create by dozyx on 2019/5/9
  */
 class ResultActivity : BaseShowResultActivity() {
     override fun getButtonText(): Array<String> {

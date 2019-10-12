@@ -10,7 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 
 /**
- * Create by timon on 2019/8/16
+ * Create by dozyx on 2019/8/16
  **/
 class GestureTrackView(context: Context?) : View(context) {
     val path = Path()

@@ -7,7 +7,7 @@ import cn.dozyx.template.R
 
 /**
  * 发光
- * Create by timon on 2019/9/7
+ * Create by dozyx on 2019/9/7
  **/
 class BlurMaskFilterView(context: Context) : View(context) {
     private val paint = Paint()

@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.LogUtils;
 
 /**
- * Create by timon on 2019/5/11
+ * Create by dozyx on 2019/5/11
  **/
 public class CustomView1 extends View {
     public CustomView1(Context context) {

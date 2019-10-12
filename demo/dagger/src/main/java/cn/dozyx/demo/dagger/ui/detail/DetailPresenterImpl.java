@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import cn.dozyx.demo.dagger.data.ApiService;
 
 /**
- * Create by timon on 2019/6/27
+ * Create by dozyx on 2019/6/27
  **/
 public class DetailPresenterImpl implements DetailPresenter {
     DetailView detailView;

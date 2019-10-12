@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.LogUtils
 /**
  * View 相当于一个窗口，scroll 过程中，窗口的位置是固定的，scroll 的实际对象是 content。
  * 向上向左 scroll 时，scroll 距离是正的，反之为负。
- * Create by timon on 2019/5/29
+ * Create by dozyx on 2019/5/29
  */
 class TouchScrollView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private var lastTouchX = 0f

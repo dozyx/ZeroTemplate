@@ -12,7 +12,7 @@ import android.view.animation.LinearInterpolator
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/9/3
+ * Create by dozyx on 2019/9/3
  **/
 class AnimWaveView(context: Context) : View(context) {
     private val paint: Paint = Paint()

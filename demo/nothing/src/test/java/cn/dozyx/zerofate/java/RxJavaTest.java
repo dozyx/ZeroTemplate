@@ -42,6 +42,28 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
+    public void testRetry() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                for (int i = 0; i< 5;i ++){
+                    if (i ==3 ){
+                        emitter.onError(null);
+                    } else {
+                        emitter.onNext(randomInt());
+                    }
+                }
+                emitter.onComplete();
+            }
+        }).doOnSubscribe(new Consumer<Disposable>() {
+            @Override
+            public void accept(Disposable disposable) throws Exception {
+                print("doOnSubscribe");
+            }
+        }).retry(3).subscribe(sObserver);
+    }
+
+    @Test
     public void testCache() {
         Observable<Integer> cache = Observable.just(6, 2, 5, 6, 1, 4, 9, 8, 3).scan(0,
                 (total, next) -> total + next).cache();

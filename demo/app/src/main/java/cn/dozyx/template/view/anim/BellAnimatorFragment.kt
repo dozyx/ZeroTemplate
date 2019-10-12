@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_animator_bell.*
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/7/9
+ * Create by dozyx on 2019/7/9
  */
 class BellAnimatorFragment : BaseFragment() {
 

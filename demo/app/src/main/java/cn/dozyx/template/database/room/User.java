@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
- * Create by timon on 2019/5/17
+ * Create by dozyx on 2019/5/17
  **/
 @Entity
 public class User {

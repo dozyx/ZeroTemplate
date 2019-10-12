@@ -4,6 +4,11 @@ android {
     defaultConfig {
         versionCode 10000
         versionName "1.0.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.example.myapp.MyEventBusIndex' ]
+            }
+        }
     }
 
     flavorDimensions "mode"
@@ -37,7 +42,8 @@ dependencies {
     implementation DepsRetrofit.gson
     implementation DepsRetrofit.rxjavaAdapter
     implementation Deps.rxjava2
-    implementation Deps.eventbus
+    implementation DepsEventBus.core
+    annotationProcessor DepsEventBus.processor
     implementation Deps.kotlin
     implementation Deps.lifecycle
     implementation Deps.annotations

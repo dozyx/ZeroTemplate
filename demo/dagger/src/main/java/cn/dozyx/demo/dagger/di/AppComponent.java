@@ -12,7 +12,7 @@ import dagger.android.DaggerApplication;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
- * Create by timon on 2019/6/27
+ * Create by dozyx on 2019/6/27
  **/
 @Singleton
 @Component(modules = {

@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(":ui")
     implementation Deps.kotlin
     implementation Deps.appcompat
     implementation Deps.material

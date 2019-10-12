@@ -10,7 +10,7 @@ import android.view.View;
 import com.blankj.utilcode.util.LogUtils;
 
 /**
- * Create by timon on 2019/5/11
+ * Create by dozyx on 2019/5/11
  **/
 public class CustomView3 extends View {
     private Paint radarPaint;

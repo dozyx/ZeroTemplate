@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 /**
- * Create by timon on 2019/4/9
+ * Create by dozyx on 2019/4/9
  **/
 public class MyLinearLayout extends LinearLayout implements Runnable {
     public MyLinearLayout(Context context, @Nullable AttributeSet attrs) {

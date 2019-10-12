@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 /**
- * Create by timon on 2019/5/23
+ * Create by dozyx on 2019/5/23
  **/
 // Using a nested EnumMap to associate data with enum pairs
 @TargetApi(Build.VERSION_CODES.N)

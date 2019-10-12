@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.dozyx.navigation.kotlin.posble.PosBleManagerActivity">
+    tools:context="cn.dozyx.kotlin.posble.PosBleManagerActivity">
 
     <fragment
         android:id="@+id/my_nav_host_fragment"

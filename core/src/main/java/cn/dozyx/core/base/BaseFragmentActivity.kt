@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 /**
- * Create by timon on 2019/6/14
+ * Create by dozyx on 2019/6/14
  **/
 abstract class BaseSingleFragmentActivity : AppCompatActivity() {
 
