@@ -4,6 +4,9 @@ import android.os.Bundle
 import cn.dozyx.template.base.BaseTestActivity
 
 class UdpActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

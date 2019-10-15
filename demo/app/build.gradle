@@ -27,6 +27,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':model')
     implementation project(':core')
+    implementation project(':ui')
     implementation Deps.constraintLayout
     implementation Deps.legacySupportV4
     implementation Deps.appcompat

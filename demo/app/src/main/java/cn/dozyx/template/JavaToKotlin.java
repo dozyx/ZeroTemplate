@@ -9,4 +9,8 @@ public class JavaToKotlin {
     public <T extends View> T getView(int id){
         return null;
     }
+
+    public <T extends View> T getView(Class<T> clz){
+        return null;
+    }
 }

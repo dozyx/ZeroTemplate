@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.BitmapFactory
+import android.graphics.Outline
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.*
@@ -14,9 +15,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Printer
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.context.CustomContextWrapper
@@ -64,6 +63,19 @@ class MeaninglessActivity : AppCompatActivity() {
         text.setOnClickListener {
 //            threadLooper?.quit()
         }
+        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            image.outlineProvider = ViewOutlineProvider.BOUNDS
+//            image.outlineProvider = ViewOutlineProvider.PADDED_BOUNDS
+//            image.outlineProvider = object :ViewOutlineProvider(){
+//                override fun getOutline(view: View, outline: Outline) {
+//                    Timber.d("MeaninglessActivity.getOutline ${view.width} ${view.height}")
+//                    outline.setOval(0,0,view.width,view.height)
+//                }
+//            }
+            image.clipToOutline = true
+        }
+
+
     }
 
     override fun onDestroy() {

@@ -12,6 +12,9 @@ import cn.dozyx.template.base.BaseShowResultActivity
 import cn.dozyx.template.base.BaseTestActivity
 
 class ServiceLifeCycleActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     private var serviceIntent: Intent? = null
     private var connection: ServiceConnection? = null

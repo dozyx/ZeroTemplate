@@ -45,4 +45,8 @@ public class RoomActivity extends BaseTestActivity {
         LogUtils.d(user);
         return user;
     }
+
+    @Override
+    public void initActions() {
+    }
 }

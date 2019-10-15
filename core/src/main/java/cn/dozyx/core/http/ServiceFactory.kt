@@ -1,4 +1,4 @@
-package cn.dozyx.core.net.http
+package cn.dozyx.core.http
 
 import cn.dozyx.core.utli.util.Util
 import okhttp3.Interceptor

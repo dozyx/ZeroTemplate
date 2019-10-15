@@ -54,4 +54,9 @@ public class PermissionActivity extends BaseTestActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         appendResult(Arrays.toString(permissions) + " & " + Arrays.toString(grantResults));
     }
+
+    @Override
+    public void initActions() {
+
+    }
 }

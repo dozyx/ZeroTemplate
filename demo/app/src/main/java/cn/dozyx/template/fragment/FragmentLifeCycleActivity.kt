@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import cn.dozyx.template.base.BaseTestActivity
 
 class FragmentLifeCycleActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     private var topFragment: Fragment? = null
 

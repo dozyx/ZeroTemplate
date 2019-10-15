@@ -11,4 +11,18 @@
         android:layout_height="160dp"
         android:background="@color/colorAccent"
         android:text="滑动删除" />
+    <TextView
+        android:id="@+id/swipe_dismiss_text2"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/colorPrimary"
+        android:text="滑动删除" />
+    <TextView
+        android:id="@+id/swipe_dismiss_text3"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="400dp"
+        android:background="@color/colorPrimary"
+        android:text="滑动删除" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

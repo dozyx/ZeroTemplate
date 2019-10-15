@@ -9,6 +9,10 @@ import java.lang.RuntimeException
  * Create by dozyx on 2019/7/1
  */
 class ExceptionTest : BaseTestActivity() {
+    override fun initActions() {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addButton("runtime", Runnable {

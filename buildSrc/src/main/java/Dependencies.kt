@@ -226,7 +226,7 @@ object Version {
     const val appcompat = "1.1.0-rc01"
     const val androiddevmetrics = "0.6"
     const val koin = "1.0.2"
-    const val material = "1.1.0-alpha09"
+    const val material = "1.1.0-beta01"
     const val rxbinding = "3.0.0-alpha2"
     const val annotations = "17.0.0"
     const val navigation = "2.1.0"

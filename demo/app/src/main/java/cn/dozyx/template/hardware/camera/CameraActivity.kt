@@ -21,6 +21,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CameraActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
+
     private var currentPicturePath: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

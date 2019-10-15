@@ -13,6 +13,9 @@ import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
 
 class DialogTestActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

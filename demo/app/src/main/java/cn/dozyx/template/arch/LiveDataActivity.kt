@@ -5,6 +5,9 @@ import androidx.lifecycle.*
 import cn.dozyx.template.base.BaseTestActivity
 
 class LiveDataActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     private lateinit var userModel: UserModel
 

@@ -10,6 +10,9 @@ import cn.dozyx.template.R
 import cn.dozyx.template.base.BaseTestActivity
 
 class PopupWindowActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

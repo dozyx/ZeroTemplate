@@ -5,11 +5,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="@color/colorAccent"
-        app:layout_behavior="cn.dozyx.template.design.CustomBehavior"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="cn.dozyx.template.design.CustomBehavior"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/colorAccent"
+            app:layout_behavior="cn.dozyx.template.design.CustomBehavior"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/colorPrimary"
+            app:layout_behavior="cn.dozyx.template.design.CustomBehavior"/>
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_behavior="com.google.android.material.behavior.SwipeDismissBehavior"/>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

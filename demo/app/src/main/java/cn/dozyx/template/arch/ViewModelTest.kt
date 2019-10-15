@@ -10,6 +10,10 @@ import timber.log.Timber
  * Create by timon on 2019/10/14
  */
 class ViewModelTest : BaseTestActivity() {
+    override fun initActions() {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val modelProvider1 = ViewModelProviders.of(this)

@@ -167,6 +167,7 @@
         <activity
             android:name=".activity.LaunchModeTest$StandardLaunchModeTest"
             android:exported="true"
+            android:theme="@style/AppTheme.Home"
             android:launchMode="standard" />
         <activity
             android:name=".activity.LaunchModeTest$SingleTopLaunchModeTest"
@@ -626,6 +627,14 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".demo.DemoActivity"
+            android:label="demo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.swipedismiss.SwipeDismissActivity" />
     </application>
 
 </manifest>

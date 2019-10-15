@@ -14,6 +14,10 @@ import io.reactivex.disposables.Disposable
  * Create by dozyx on 2019/3/25
  **/
 class CameraControlActivity : BaseTestActivity(), TextureView.SurfaceTextureListener {
+    override fun initActions() {
+
+    }
+
     private lateinit var rxPermissions: RxPermissions;
     private val textureView: TextureView by lazy { TextureView(this) }
     private var camera: Camera? = null

@@ -8,6 +8,9 @@ import cn.dozyx.template.base.BaseTestActivity
 import java.util.*
 
 class FileActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -43,6 +43,9 @@ import java.net.URL
  */
 
 class NetworkAPITest : BaseTestActivity(), DownloadCallback {
+    override fun initActions() {
+
+    }
 
     private var networkFragment: NetworkFragment? = null
     private var downloading = false

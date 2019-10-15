@@ -15,6 +15,9 @@ import timber.log.Timber
  * 通过 adb shell dumpsys activity activities 命令查看 Activity 栈信息
  */
 open class LaunchModeTest : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

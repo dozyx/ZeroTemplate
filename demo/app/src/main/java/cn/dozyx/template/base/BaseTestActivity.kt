@@ -18,7 +18,10 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_test)
+        initActions()
     }
+
+    abstract fun initActions()
 
     protected fun addAction(action: Action) {
         addButton(action.name, action)

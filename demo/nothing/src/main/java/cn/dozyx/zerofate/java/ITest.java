@@ -6,4 +6,5 @@ package cn.dozyx.zerofate.java;
  */
 public interface ITest{
     int NUM = 0;
+    default void foo(){}
 }

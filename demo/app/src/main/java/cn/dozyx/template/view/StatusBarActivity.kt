@@ -10,6 +10,9 @@ import cn.dozyx.template.base.BaseTestActivity
 
 
 class StatusBarActivity : BaseTestActivity() {
+    override fun initActions() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,7 +11,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.blankj.utilcode.util.ObjectUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -28,7 +27,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -51,10 +49,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
@@ -79,33 +75,34 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 public class JavaTest {
 
     @Test
-    public void testClass() {
-        Integer integer1 = Integer.valueOf(1);
-        Integer integer2 = Integer.valueOf(2);
-        print(integer1.getClass().hashCode());
-        print(integer2.getClass().hashCode());
-        Float aFloat = Float.valueOf(1);
-        print(aFloat.getClass().hashCode());
+    public void testThreadJoin() throws InterruptedException {
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                print("thread2 start");
+                sleep(1);
+                print("thread2 end");
+            }
+        });
+        thread1.start();
+        thread1.join();
+        // 当前线程被阻塞
+        print("hahaha");
+        sleep(2);
     }
 
+    private static final Object lock = new Object();
     @Test
-    public void testType() {
-        print(Integer.class);
-        print(Integer.class.getTypeName());
+    public void testThreadWait() throws InterruptedException {
+        synchronized (lock){
+            print("wait");
+            lock.wait(1000);
+        }
+        // 当前线程被阻塞
+        print("hahaha");
+        sleep(2);
     }
 
-    @Test
-    public void testWeakReferenceKey() {
-        WeakReference<Object> weakReference = new WeakReference<>(new Object());
-        Map<WeakReference<Object>,String> map = new HashMap<>();
-        map.put(weakReference,"test");
-        print(weakReference.get() == null);
-        System.gc();
-        sleep(1);
-        print(map.containsKey(weakReference));
-        print(map.get(weakReference));
-        print(weakReference.get() == null);
-    }
 
     @Test
     public void testLiveData() {
@@ -291,9 +288,9 @@ public class JavaTest {
             throw new NullPointerException();
 //            return i;
         } catch (Exception e) {
-            return i++;
+            return 3;
         } finally {
-            return ++i;
+            return 4;
         }
     }
 
@@ -449,42 +446,8 @@ public class JavaTest {
         ArrayList<Integer> integers = new ArrayList<>();
         System.out.println(strings.getClass() == integers.getClass());
         print(Arrays.toString(strings.getClass().getTypeParameters()));
-
-        ArrayList<? extends Number> list = new ArrayList<>();
-        list.add(null);
-//        list.add(Integer.valueOf(1)); // 不能 add。? extends 意味着没有指定任何类型
+        ArrayList<? extends Number> list = new ArrayList<Integer>();
         list.get(0).byteValue();
-
-        ArrayList<? super Number> list1 = new ArrayList<>();
-        list1.add(null);
-        list1.add(1);
-//        list1.get(0).byteValue(); // 不能 get
-
-        List<? extends Apple> list2 = new ArrayList<>();
-        Fruit fruit = new Fruit();
-        Apple apple = new Apple();
-        AppleChild appleChild = new AppleChild();
-//        list2.add(fruit);
-//        list2.add(apple);
-//        list2.add(appleChild);
-        Apple apple1 = list2.get(0);
-
-        List<? super Apple> list3 = new ArrayList<>();
-//        list3.add(fruit);
-        list3.add(apple);
-        list3.add(appleChild);
-//        list3.add(new Object());
-        Object object = list3.get(0);
-    }
-
-    private static class Fruit {
-
-    }
-    private static class Apple extends Fruit {
-
-    }
-    private static class AppleChild extends Apple {
-
     }
 
 
@@ -523,6 +486,12 @@ public class JavaTest {
         System.out.println(Integer.toHexString(0x7fffffff << 1));
 //        System.out.println(Integer.toHexString(0x8f000000 << 1));
         System.out.println(Integer.MIN_VALUE);
+    }
+
+    public void testType() {
+        System.out.println(Integer.TYPE);
+        System.out.println(Integer.TYPE == Integer.class);
+        System.out.println(Integer.class instanceof Class);
     }
 
     public void testDate() {
@@ -648,8 +617,7 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        int i = 1;
-        print((++i) + (++i));
+        print(-123 / 10);
     }
 
     public class A {
