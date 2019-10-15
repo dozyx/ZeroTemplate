@@ -634,7 +634,7 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".demo.swipedismiss.SwipeDismissActivity" />
+        <activity android:name=".demo.swipedismiss.DragDismissActivity" />
     </application>
 
 </manifest>
