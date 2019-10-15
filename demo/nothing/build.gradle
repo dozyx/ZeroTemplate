@@ -89,6 +89,7 @@ dependencies {
     implementation Deps.threeten
     implementation Deps.convenientBanner
     implementation DepsGlide.runtime
+    implementation Deps.adapterHelper
     annotationProcessor DepsGlide.processor
 //    implementation ("com.github.bumptech.glide:okhttp3-integration:4.10.0"){
 //        exclude group: "com.squareup.okhttp3", module: "okhttp"

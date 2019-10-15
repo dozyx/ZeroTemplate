@@ -46,6 +46,7 @@ object Deps {
     val immersionbar = "com.gyf.immersionbar:immersionbar:${Version.immersionbar}"
     val gson = "com.google.code.gson:gson:${Version.gson}"
     val convenientBanner = "com.bigkoo:convenientbanner:${Version.convenient_banner}"
+    val adapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.adapter_helper}"
 
 
 }
@@ -240,4 +241,5 @@ object Version {
     const val gridlayout = "1.0.0"
     const val hyperion = "0.9.27"
     const val glide = "4.10.0"
+    const val adapter_helper = "2.9.50"
 }

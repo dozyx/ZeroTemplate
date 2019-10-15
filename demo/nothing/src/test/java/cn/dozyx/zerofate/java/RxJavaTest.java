@@ -30,6 +30,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.observables.ConnectableObservable;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.AsyncSubject;
 import io.reactivex.subjects.BehaviorSubject;
@@ -40,6 +41,23 @@ import io.reactivex.subjects.UnicastSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+
+    @Test
+    public void testRxJavaPlugin(){
+        // hook 函数
+        RxJavaPlugins.setOnObservableAssembly(observable -> {
+            print("onAssembly " + observable.getClass());
+            return observable;
+        });
+        RxJavaPlugins.onAssembly(new Observable<Integer>() {
+            @Override
+            protected void subscribeActual(io.reactivex.Observer<? super Integer> observer) {
+                print("subscribeActual: ");
+            }
+        });
+        testRetry();
+    }
 
     @Test
     public void testRetry() {
