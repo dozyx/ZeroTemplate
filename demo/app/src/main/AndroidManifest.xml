@@ -167,8 +167,8 @@
         <activity
             android:name=".activity.LaunchModeTest$StandardLaunchModeTest"
             android:exported="true"
-            android:theme="@style/AppTheme.Home"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:theme="@style/AppTheme.Home" />
         <activity
             android:name=".activity.LaunchModeTest$SingleTopLaunchModeTest"
             android:exported="true"
@@ -620,14 +620,16 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".arch.ViewModelTest"
+        <activity
+            android:name=".arch.ViewModelTest"
             android:label="arch/ViewModel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".demo.DemoActivity"
+        <activity
+            android:name=".demo.DemoActivity"
             android:label="demo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -635,6 +637,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".demo.swipedismiss.DragDismissActivity" />
+        <activity
+            android:name=".animation.AnimationTest"
+            android:label="anim">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
