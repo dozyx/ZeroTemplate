@@ -47,7 +47,7 @@ class CameraPreview : Activity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        // Create a RelativeLayout container that will hold a SurfaceView,
+        // Create a RelativeLayoutTest container that will hold a SurfaceView,
         // and set it as the content of our activity.
         mPreview = Preview(this)
         setContentView(mPreview)
