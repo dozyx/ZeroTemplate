@@ -12,6 +12,9 @@ import com.blankj.utilcode.util.ViewUtils
 
 import androidx.customview.widget.ViewDragHelper
 import timber.log.Timber
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 /**
  * @author dozyx
@@ -30,6 +33,8 @@ class DragDismissFrameLayout(context: Context, attrs: AttributeSet) : FrameLayou
     var dismissCallback: DragDismissCallback? = null
 
     private var shouldDismissOnRelease = false
+
+    private val MIN_ALPHA = 0.3F
 
 
     override fun onFinishInflate() {
@@ -52,6 +57,8 @@ class DragDismissFrameLayout(context: Context, attrs: AttributeSet) : FrameLayou
                 changedView.scaleX = scale
                 changedView.scaleY = scale
                 shouldDismissOnRelease = scale < 0.6
+
+                background.alpha = (max(MIN_ALPHA, scale) * 255).roundToInt()
             }
 
             override fun onViewCaptured(capturedChild: View, activePointerId: Int) {
