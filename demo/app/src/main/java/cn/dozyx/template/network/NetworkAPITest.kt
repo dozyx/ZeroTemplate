@@ -16,7 +16,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.core.utli.util.RxJavaUtil
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
@@ -81,6 +80,12 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
                 startDownloadWithRetrofit()
             }
         })
+
+        addAction(object : Action("404 error") {
+            override fun run() {
+                startErrorRequest()
+            }
+        })
         addAction(object : Action("Rx+Retrofit") {
             override fun run() {
                 startDownloadWithRxRetrofit()
@@ -104,6 +109,24 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
                 }
             }
         }, intentFilter)
+    }
+
+    private fun startErrorRequest() {
+        val service = createService()
+        Timber.d("NetworkAPITest.startDownloadWithRetrofit")
+        var call: retrofit2.Call<ResponseBody> = service.doErrorRequest()
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                    call: retrofit2.Call<ResponseBody>,
+                    response: retrofit2.Response<ResponseBody>
+            ) {
+                appendResult((++count).toString() + " " + response.code() + " " + response.body())
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                appendResult("onFailure: " + t.message)
+            }
+        })
     }
 
     private fun startDownloadFile(uri: String) {
@@ -294,37 +317,47 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
     }
 
     private fun createService(): IService {
-        val retrofit = Retrofit.Builder().baseUrl(URL_STRING).build()
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
+        val client = OkHttpClient.Builder().addInterceptor() { chain ->
+            Timber.d("NetworkAPITest addInterceptor")
+            var response = chain.proceed(chain.request())
+            if (response.code() != 404) {
+                return@addInterceptor response
+            }
+            response.newBuilder().code(200).build()
+        }.addInterceptor(httpLoggingInterceptor).build()
+        val retrofit = Retrofit.Builder().baseUrl(URL_STRING).client(client).build()
         return retrofit.create(IService::class.java)
     }
 
     private fun startDownloadWithRetrofit() {
         val service = createService()
-        LogUtil.d("startDownloadWithRetrofit: " + service + " & " + createService())
+        Timber.d("NetworkAPITest.startDownloadWithRetrofit")
         var call: retrofit2.Call<ResponseBody> = service.data
-        for (i in 0..9) {
-            if (call.isExecuted) {
-                call = call.clone()
-            }
-            call.enqueue(object : retrofit2.Callback<ResponseBody> {
-                override fun onResponse(
-                        call: retrofit2.Call<ResponseBody>,
-                        response: retrofit2.Response<ResponseBody>
-                ) {
-                    //                try {
-                    //                    ToastX.showShort(NetworkAPITest.this,count +"");
-                    //                    setText(response.body().string());
-                    appendResult((++count).toString() + "")
-                    //                } catch (IOException e) {
-                    //                    e.printStackTrace();
-                    //                }
-                }
-
-                override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
-                    appendResult("onFailure: " + t.message)
-                }
-            })
+//        for (i in 0..9) {
+        if (call.isExecuted) {
+            call = call.clone()
         }
+        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onResponse(
+                    call: retrofit2.Call<ResponseBody>,
+                    response: retrofit2.Response<ResponseBody>
+            ) {
+                //                try {
+                //                    ToastX.showShort(NetworkAPITest.this,count +"");
+                //                    setText(response.body().string());
+                appendResult((++count).toString() + "")
+                //                } catch (IOException e) {
+                //                    e.printStackTrace();
+                //                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
+                appendResult("onFailure: " + t.message)
+            }
+        })
+//        }
     }
 
     private interface IService {
@@ -334,6 +367,9 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
         @Streaming
         @GET
         fun downApk(@Url uri: String): retrofit2.Call<ResponseBody>
+
+        @GET("/error")
+        fun doErrorRequest(): retrofit2.Call<ResponseBody>
     }
 
     companion object {

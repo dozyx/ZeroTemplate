@@ -328,11 +328,18 @@ public class JavaTest {
     public void testBuffer() {
         byte[] data = new byte[]{1, 5, 2, 3, 1, 5, 2};
         ByteBuffer byteBuffer = ByteBuffer.wrap(data);
-        print(byteBuffer.remaining());
+        // remaining() 返回当前位置到最大值的 byte 数目
+        print("remaining()" + byteBuffer.remaining());
         print(byteBuffer.get(1));
         IntBuffer intBuffer = byteBuffer.asIntBuffer();
-        print(intBuffer.remaining());
+        print("int remaining()" + intBuffer.remaining());
         print(intBuffer.get(0));
+        print(byteBuffer.get());
+        print("remaining()" + byteBuffer.remaining());
+        byte[] bytes = new byte[byteBuffer.remaining()];
+        // get(byte[]) 内部实现调用的是 get()，会导致当前位置的移动
+        byteBuffer.get(bytes);
+        print("remaining()" + byteBuffer.remaining());
     }
 
     @Test
