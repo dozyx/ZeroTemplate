@@ -164,7 +164,7 @@ object DepsNavigation {
 object Version {
     const val legacySupportV4 = "1.0.0"
     const val kotlinVersion = "1.3.31"
-    const val androidGradleVersion = "3.4.2"
+    const val androidGradleVersion = "3.5.1"
     const val picasso = "2.71828"
     const val threeten = "1.2.1"
     const val leakcanary = "1.6.3"

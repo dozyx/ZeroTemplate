@@ -64,4 +64,5 @@ dependencies {
     implementation Deps.timber
     implementation DepsRetrofit.scalars
     implementation Deps.material
+    implementation Deps.adapterHelper
 }

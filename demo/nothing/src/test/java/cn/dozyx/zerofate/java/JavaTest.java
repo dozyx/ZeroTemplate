@@ -75,6 +75,16 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 public class JavaTest {
 
     @Test
+    public void testGetInterfaces() {
+        // 如果是一个 class，getInterfaces 返回的是该 class 实现的 interface；如果是 interface，返回的是 interface 继承的
+        // interface
+        // 注意：getInterfaces 不会返回超类实现的接口
+        print(Arrays.toString(ListImpl.class.getInterfaces()));
+        print(Arrays.toString(ListImpl2.class.getInterfaces()));
+        print(Arrays.toString(ListImpl3.class.getInterfaces()));
+    }
+
+    @Test
     public void testThreadJoin() throws InterruptedException {
         Thread thread1 = new Thread(new Runnable() {
             @Override
@@ -92,9 +102,10 @@ public class JavaTest {
     }
 
     private static final Object lock = new Object();
+
     @Test
     public void testThreadWait() throws InterruptedException {
-        synchronized (lock){
+        synchronized (lock) {
             print("wait");
             lock.wait(1000);
         }

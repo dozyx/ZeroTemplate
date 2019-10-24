@@ -34,7 +34,6 @@ public class DataBindingTestActivity extends AppCompatActivity {
             }
         });
         dataBindingTestActivity.stub.getViewStub().setVisibility(View.VISIBLE);
-        ((ActivityMeaninglessBinding) dataBindingTestActivity.stub.getBinding()).edit.setText("11111");
     }
 
     @Override

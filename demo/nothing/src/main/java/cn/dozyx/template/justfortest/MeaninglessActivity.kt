@@ -16,6 +16,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Printer
 import android.view.*
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.context.CustomContextWrapper
@@ -61,7 +62,7 @@ class MeaninglessActivity : AppCompatActivity() {
         }
 
         text.setOnClickListener {
-//            threadLooper?.quit()
+            //            threadLooper?.quit()
         }
         if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            image.outlineProvider = ViewOutlineProvider.BOUNDS

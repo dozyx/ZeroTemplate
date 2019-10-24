@@ -69,4 +69,8 @@
     <style name="CustomTextAppearance">
         <item name="android:textColor">@android:color/holo_orange_light</item>
     </style>
+
+    <style name="EditTextStyle">
+        <item name="android:id">@id/edit</item>
+    </style>
 </resources>

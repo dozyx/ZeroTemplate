@@ -15,7 +15,7 @@
             android:text="1111111" />
 
         <EditText
-            android:id="@+id/edit"
+            style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
