@@ -12,13 +12,19 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
         <item name="customTextStyle">@style/CustomTextStyle</item>
+        <item name="android:textViewStyle">@style/TextNormal</item>
+    </style>
+
+    <style name="TextNormal" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="ParentStyle">
-<!--        <item name="android:textColor">@android:color/holo_red_dark</item>-->
+        <!--        <item name="android:textColor">@android:color/holo_red_dark</item>-->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="Theme.My" parent="Theme.AppCompat">
 
     </style>
@@ -29,8 +35,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="DotStyle.TestStyle" parent="ParentStyle">
-    </style>
+    <style name="DotStyle.TestStyle" parent="ParentStyle"></style>
 
     <style name="CompatTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
@@ -41,7 +46,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextAppearanceNormal" parent="TextAppearance.AppCompat.Body1">
-
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="CustomDialog" parent="@android:style/Theme.Dialog">
@@ -54,7 +59,7 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <attr name="customTextStyle" format="reference"/>
+    <attr name="customTextStyle" format="reference" />
 
     <style name="CustomTextStyle">
         <item name="android:textColor">@android:color/holo_red_light</item>
@@ -63,9 +68,11 @@
     <style name="CustomTextStyleRes">
         <item name="android:textColor">@android:color/holo_green_light</item>
     </style>
+
     <style name="CustomTextStyle2">
         <item name="android:textColor">@android:color/holo_purple</item>
     </style>
+
     <style name="CustomTextAppearance">
         <item name="android:textColor">@android:color/holo_orange_light</item>
     </style>

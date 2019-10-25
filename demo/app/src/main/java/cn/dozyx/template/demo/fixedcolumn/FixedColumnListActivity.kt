@@ -15,7 +15,8 @@ import timber.log.Timber
 /**
  * 实现功能：列表中显示了多列内容，每一行一个水平滑动，滑动时，前几列保持固定
  * 思路1：使用 HorizontalScrollView 作为可滚动列的父布局，监听滚动，再同步滚动其他列。
- *        问题：如何避免同步滚动时，滚动事件被重复触发？
+ *        问题：如何避免同步滚动时，滚动事件被重复触发？(这个问题还好，scrollTo 是在位置变化才会发生滚动并触发回调，所以并不会循环回调)
+ *        问题2：发生滚动后，滑动显示其他 item，新的 item 的位置可能为初始状态
  * 思路2：ScrollView 包含两部分：左侧固定列部分，右侧 HorizontalScrollView 可水平滚动部分
  *        问题：两侧数据要单独添加，要注意对齐；view 会一次性全部加载
  * 思路3：垂直滚动无论用 ScrollView 还是列表都比较好实现，难点在于行的同步滚动。可以通过处理这个区域的根 ViewGroup 触摸事件来实现，
@@ -28,11 +29,18 @@ class FixedColumnListActivity : BaseActivity() {
         var scrollListener = object : View.OnScrollChangeListener {
             override fun onScrollChange(v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
                 Timber.d("FixedColumnListActivity.onScrollChange")
+                recycler_view.layoutManager?.apply {
+                    for (i in 0 until childCount - 1) {
+                        val child = getChildAt(i)
+                        if (child != v) {
+                            child!!.findViewById<HorizontalScrollView>(R.id.scroll_columns).scrollTo(scrollX, scrollY)
+                        }
+                    }
+                }
             }
         }
         var adapter = object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_fixed_column) {
             override fun convert(helper: BaseViewHolder, item: String?) {
-
                 helper.getView<HorizontalScrollView>(R.id.scroll_columns).setOnScrollChangeListener(scrollListener)
             }
         }
@@ -42,7 +50,7 @@ class FixedColumnListActivity : BaseActivity() {
             datas.add("$i")
         }
         recycler_view.setOnTouchListener { v, event ->
-            if(event.action == MotionEvent.ACTION_DOWN){
+            if (event.action == MotionEvent.ACTION_DOWN) {
             }
             return@setOnTouchListener false
         }
