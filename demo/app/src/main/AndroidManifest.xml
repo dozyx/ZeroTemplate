@@ -685,8 +685,17 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".demo.fixedcolumn.FixedColumnListActivity2"
+        <activity
+            android:name=".demo.fixedcolumn.FixedColumnListActivity2"
             android:label="demo/固定列表列2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".demo.fixedcolumn.FixedColumnListActivity3"
+            android:label="demo/固定列表列3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

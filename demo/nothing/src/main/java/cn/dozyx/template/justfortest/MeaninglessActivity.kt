@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.context.CustomContextWrapper
 import cn.dozyx.template.DelayTextWatcher
+import com.blankj.utilcode.util.ThreadUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -76,7 +77,33 @@ class MeaninglessActivity : AppCompatActivity() {
             image.clipToOutline = true
         }
 
+        testIdleHandler()
 
+
+    }
+
+    private fun testIdleHandler() {
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            Timber.d("MeaninglessActivity.testIdleHandler 执行 message 1")
+        }, 500) // 延时比较短时还是会先执行 message
+        if (SDK_INT >= Build.VERSION_CODES.M) {
+            Looper.myLooper().queue.addIdleHandler {
+                Timber.d("MeaninglessActivity.testIdleHandler 执行 IdleHandler  ${ThreadUtils.isMainThread()}")
+                false
+            }
+        }
+        handler.postDelayed(Runnable {
+            Timber.d("MeaninglessActivity.testIdleHandler 执行 message 2")
+        }, 50)
+    }
+
+    private fun testLooperPrinter() {
+        Looper.myLooper().setMessageLogging(object : Printer {
+            override fun println(x: String?) {
+                Timber.d("MeaninglessActivity.println $x")
+            }
+        })
     }
 
     override fun onDestroy() {

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:id="@+id/fixed_columns"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.52">
+
+        <TextView
+            android:id="@+id/columns_0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.26"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.26"
+            android:gravity="center"
+            android:text="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scroll_columns"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.44">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:background="@android:color/holo_purple"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:background="@android:color/holo_green_light"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:gravity="center"
+            android:text="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.24"
+            android:background="@android:color/holo_blue_bright"
+            android:gravity="center"
+            android:text="1" />
+    </LinearLayout>
+
+</LinearLayout>

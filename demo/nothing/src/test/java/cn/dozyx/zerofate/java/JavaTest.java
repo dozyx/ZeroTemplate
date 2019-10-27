@@ -157,14 +157,16 @@ public class JavaTest {
                 new Class[]{IWorker.class},
                 (proxy, method, args) -> {
                     print(proxy.getClass() + " " + method.getName());
+                    print(proxy.getClass() + " " + method.getReturnType() + " " + method.getGenericReturnType());
+//                    method.invoke(proxy, args);
                     print("hello");
-                    return "world";
+                    return "hello " + args[0];
                 });
-        print(worker.sayHello());
+        print(worker.sayHello("temo"));
     }
 
     interface IWorker {
-        String sayHello();
+        String sayHello(String name);
     }
 
     @Test
@@ -506,8 +508,10 @@ public class JavaTest {
         System.out.println(Integer.MIN_VALUE);
     }
 
+    @Test
     public void testType() {
-        System.out.println(Integer.TYPE);
+
+        System.out.println(Boolean.TYPE);
         System.out.println(Integer.TYPE == Integer.class);
         System.out.println(Integer.class instanceof Class);
     }
