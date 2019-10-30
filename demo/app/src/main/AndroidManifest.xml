@@ -709,6 +709,14 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.touch.conflict.TouchConflictActivity"
+            android:label="View/触摸/滑动冲突">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

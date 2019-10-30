@@ -50,9 +50,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
@@ -480,7 +482,7 @@ public class JavaTest {
         }
     }
 
-    private void print(Object msg) {
+    private static void print(Object msg) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         DateFormat format = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
         System.out.println(
@@ -640,10 +642,14 @@ public class JavaTest {
 
     @Test
     public void foo() {
+<<<<<<< Updated upstream
         print(parse("0.50"));
     }
     public static String parse(String fen) {
         return new DecimalFormat("##0.00").format(Double.valueOf(fen) / 100.0);
+=======
+        print(Integer.MIN_VALUE);
+>>>>>>> Stashed changes
     }
 
     public class A {
@@ -869,6 +875,12 @@ public class JavaTest {
         Pattern pat = Pattern.compile(reg);
         Matcher mat = pat.matcher(text);
         return mat.matches();
+    }
+
+    public static void main(String[] args){
+        int i = Integer.MAX_VALUE +1;
+        print(i);
+        print(Integer.MAX_VALUE);
     }
 
 }
