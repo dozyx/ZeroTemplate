@@ -34,6 +34,7 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.text.DateFormat;
@@ -639,7 +640,10 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        print(-123 / 10);
+        print(parse("0.50"));
+    }
+    public static String parse(String fen) {
+        return new DecimalFormat("##0.00").format(Double.valueOf(fen) / 100.0);
     }
 
     public class A {
