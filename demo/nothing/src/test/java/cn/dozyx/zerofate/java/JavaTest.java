@@ -642,14 +642,11 @@ public class JavaTest {
 
     @Test
     public void foo() {
-<<<<<<< Updated upstream
         print(parse("0.50"));
     }
+
     public static String parse(String fen) {
         return new DecimalFormat("##0.00").format(Double.valueOf(fen) / 100.0);
-=======
-        print(Integer.MIN_VALUE);
->>>>>>> Stashed changes
     }
 
     public class A {
