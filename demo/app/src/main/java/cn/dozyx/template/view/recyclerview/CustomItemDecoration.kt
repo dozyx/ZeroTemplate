@@ -21,7 +21,7 @@ class CustomItemDecoration(val context: Context, val orientation: Int) : Recycle
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs)
-        divider = typedArray.getDrawable(0)
+        divider = typedArray.getDrawable(0)!!
         typedArray.recycle()
     }
 

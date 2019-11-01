@@ -40,7 +40,7 @@ class DialogTestActivity : BaseTestActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("标题").setMessage("内容").setNegativeButton("取消", null).setPositiveButton("确定", null)
             val dialog = builder.show()
-            dialog.window
+            dialog.window!!
             window.attributes
         })
 
@@ -48,13 +48,13 @@ class DialogTestActivity : BaseTestActivity() {
             val dialog = object : AppCompatDialog(this, R.style.CustomDialog) {
                 override fun onCreate(savedInstanceState: Bundle?) {
                     super.onCreate(savedInstanceState)
-                    val attributes = window.attributes
+                    val attributes = window!!.attributes
 //                    attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
 //                    window.attributes = attributes
                 }
             }
             dialog.setContentView(R.layout.dialog_custom)
-            val window = dialog.window
+            val window = dialog.window!!
             dialog.show()
         })
     }

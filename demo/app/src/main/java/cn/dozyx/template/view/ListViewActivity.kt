@@ -52,17 +52,17 @@ class ListViewActivity : BaseSingleFragmentActivity() {
                 }
             }
             adapter = object :
-                    ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, data) {
-                override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+                    ArrayAdapter<String>(activity!!, android.R.layout.simple_list_item_1, data) {
+                override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                     LogUtil.d("getView: $position")
                     val viewHolder: ViewHolder
                     if (convertView != null) {
                         viewHolder = convertView.tag as ViewHolder
                     } else {
                         viewHolder = ViewHolder()
-                        viewHolder.textView = LayoutInflater.from(activity)
+                        viewHolder.textView = LayoutInflater.from(activity!!)
                                 .inflate(android.R.layout.simple_list_item_1, null)
-                                .findViewById<TextView>(android.R.id.text1)
+                                .findViewById(android.R.id.text1)
                         viewHolder.textView.tag = viewHolder
                     }
                     viewHolder.textView.text = resources.getString(R.string.network_api)

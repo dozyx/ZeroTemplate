@@ -17,22 +17,22 @@ class AppProvider : ContentProvider() {
         return true
     }
 
-    override fun insert(uri: Uri?, values: ContentValues?): Uri {
+    override fun insert(uri: Uri, values: ContentValues?): Uri {
         throw UnsupportedOperationException("Not implement in core")
     }
 
-    override fun query(uri: Uri?, projection: Array<out String>?, selection: String?, selectionArgs: Array<out String>?, sortOrder: String?): Cursor {
+    override fun query(uri: Uri, projection: Array<out String>?, selection: String?, selectionArgs: Array<out String>?, sortOrder: String?): Cursor {
         throw UnsupportedOperationException("Not implement in core")
     }
 
 
-    override fun update(uri: Uri?, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
+    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
         throw UnsupportedOperationException("Not implement in core")
     }
 
-    override fun delete(uri: Uri?, selection: String?, selectionArgs: Array<out String>?): Int {
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
         throw UnsupportedOperationException("Not implement in core")
     }
 
-    override fun getType(uri: Uri?): String? = null
+    override fun getType(uri: Uri): String? = null
 }

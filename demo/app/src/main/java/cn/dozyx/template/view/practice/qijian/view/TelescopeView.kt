@@ -13,7 +13,7 @@ import cn.dozyx.template.R
 class TelescopeView(context: Context) : View(context) {
     private val paint = Paint()
     private val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_scenery)
-    private var bitmapBG: Bitmap? = null
+    private lateinit var bitmapBG: Bitmap
     private var lastX = -1
     private var lastY = -1
 
@@ -40,11 +40,9 @@ class TelescopeView(context: Context) : View(context) {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        if (bitmapBG == null) {
-            bitmapBG = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            val canvasBG = Canvas(bitmapBG)
-            canvasBG.drawBitmap(bitmap, null, Rect(0, 0, width, height), paint)
-        }
+        bitmapBG = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvasBG = Canvas(bitmapBG)
+        canvasBG.drawBitmap(bitmap, null, Rect(0, 0, width, height), paint)
         if (lastX != -1 && lastY != -1) {
             paint.shader = BitmapShader(bitmapBG, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT)
             canvas?.drawCircle(lastX.toFloat(), lastY.toFloat(), 150f, paint)

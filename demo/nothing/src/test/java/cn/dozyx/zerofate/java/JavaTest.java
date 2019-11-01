@@ -642,7 +642,9 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        print(parse("0.50"));
+        Date date = new Date();
+        date.setTime(1571901056000L);
+        print(formatDate(date));
     }
 
     public static String parse(String fen) {

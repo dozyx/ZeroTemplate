@@ -17,8 +17,8 @@ class ServiceLifeCycleActivity : BaseTestActivity() {
     }
 
     private var serviceIntent: Intent? = null
-    private var connection: ServiceConnection? = null
-    private var connection2: ServiceConnection? = null
+    private lateinit var connection: ServiceConnection
+    private lateinit var connection2: ServiceConnection
     // 一开始怀疑多次绑定只调用 onBind 一次是否与绑定使用的是同一个ServiceConnection有关，事实证明多个客户端绑定的确只调用一次
 
     private var simpleService: SimpleService? = null

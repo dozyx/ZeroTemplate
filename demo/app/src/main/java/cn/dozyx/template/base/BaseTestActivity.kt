@@ -41,7 +41,10 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         view.setOnClickListener { task.run() }
     }
 
-    override fun appendResult(log: String) {
+    override fun appendResult(log: String?) {
+        if (log == null) {
+            return
+        }
         runOnUiThread {
             var previousLog = text_log!!.text as String
             if (TextUtils.isEmpty(previousLog)) {

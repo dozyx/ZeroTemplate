@@ -8,8 +8,8 @@ object BuildPlugins {
 object Android {
     val minSdkVersion = 19
     val minDebugSdkVersion = 21
-    val targetSdkVersion = 27
-    val compileSdkVersion = 28
+    val targetSdkVersion = 29
+    val compileSdkVersion = 29
 }
 
 object Deps {
