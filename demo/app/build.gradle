@@ -65,4 +65,6 @@ dependencies {
     implementation DepsRetrofit.scalars
     implementation Deps.material
     implementation Deps.adapterHelper
+    implementation Deps.calligraphy
+    implementation Deps.viewpump
 }

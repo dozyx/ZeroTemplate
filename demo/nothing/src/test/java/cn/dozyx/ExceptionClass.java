@@ -1,4 +1,4 @@
-package cn.dozyx.zerofate.java;
+package cn.dozyx;
 
 /**
  * Create by dozyx on 2019/9/30

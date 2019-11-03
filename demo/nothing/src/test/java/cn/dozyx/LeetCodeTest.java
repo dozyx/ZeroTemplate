@@ -1,4 +1,4 @@
-package cn.dozyx.zerofate.java;
+package cn.dozyx;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package cn.dozyx.zerofate.java;
+package cn.dozyx;
 
 
 import android.annotation.TargetApi;
@@ -22,19 +22,22 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.text.DateFormat;
@@ -50,11 +53,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
@@ -67,6 +68,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
+import cn.dozyx.zerofate.java.GenericTest;
+import cn.dozyx.zerofate.java.Person;
 
 /**
  * 测试 java 相关代码
@@ -76,6 +79,28 @@ import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testSerializable() throws IOException {
+        SerializableUser user = new SerializableUser(0, "张三", false);
+        print(user);
+        ObjectOutputStream outputStream = null;
+        outputStream = new ObjectOutputStream(
+                new FileOutputStream("cache.txt"));
+        outputStream.writeObject(user);
+        // 如果 object 不是  Serializable 对象，会抛出 NotSerializableException 异常
+        outputStream.close();
+    }
+
+    @Test
+    public void testDeserialization() throws IOException, ClassNotFoundException {
+        ObjectInputStream inputStream = null;
+        inputStream = new ObjectInputStream(
+                new FileInputStream("cache.txt"));
+        SerializableUser user2 = (SerializableUser) inputStream.readObject();
+        print(user2);
+        inputStream.close();
+    }
 
     @Test
     public void testGetInterfaces() {
@@ -160,7 +185,8 @@ public class JavaTest {
                 new Class[]{IWorker.class},
                 (proxy, method, args) -> {
                     print(proxy.getClass() + " " + method.getName());
-                    print(proxy.getClass() + " " + method.getReturnType() + " " + method.getGenericReturnType());
+                    print(proxy.getClass() + " " + method.getReturnType() + " "
+                            + method.getGenericReturnType());
 //                    method.invoke(proxy, args);
                     print("hello");
                     return "hello " + args[0];
@@ -776,13 +802,13 @@ public class JavaTest {
         String personJsonWrongType = "{\"name\":\"张三\",\"age\":\"\"}";
         person = customGson.fromJson(personJsonWrongType, Person.class);
         System.out.println(person);
-        User user = new User();
+        cn.dozyx.zerofate.java.User user = new cn.dozyx.zerofate.java.User();
         user.setName("张三");
         System.out.println("缺少 field：" + new Gson().toJson(user));
 
         user.setPhone("110");
         System.out.println("缺少对象 field：" + new Gson().toJson(user));
-        User.Address address = new User.Address();
+        cn.dozyx.zerofate.java.User.Address address = new cn.dozyx.zerofate.java.User.Address();
 
         address.setProvince("江苏");
         address.setCity("常州");
@@ -798,7 +824,8 @@ public class JavaTest {
                 + "        \"city\": \"常州\"\n"
                 + "    }\n"
                 + "}";
-        System.out.println("jsonStr 包含多余字段：" + new Gson().fromJson(jsonStr1, User.class));
+        System.out.println("jsonStr 包含多余字段：" + new Gson().fromJson(jsonStr1,
+                cn.dozyx.zerofate.java.User.class));
         String jsonStr2 = "{\n"
                 + "    \"name\": \"张三\",\n"
                 + "    \"address\": {\n"
@@ -806,7 +833,8 @@ public class JavaTest {
                 + "        \"city\": \"常州\"\n"
                 + "    }\n"
                 + "}";
-        System.out.println("jsonStr 缺少字段：" + new Gson().fromJson(jsonStr2, User.class));
+        System.out.println(
+                "jsonStr 缺少字段：" + new Gson().fromJson(jsonStr2, cn.dozyx.zerofate.java.User.class));
 
         String jsonStr3 = "{\"data\": {\n"
                 + "    \"name\": \"张三\",\n"
@@ -816,14 +844,15 @@ public class JavaTest {
                 + "        \"city\": \"常州\"\n"
                 + "    }\n"
                 + "}}";
-        System.out.println("jsonStr 增加一层data：" + new Gson().fromJson(jsonStr3, User.class));
+        System.out.println("jsonStr 增加一层data：" + new Gson().fromJson(jsonStr3,
+                cn.dozyx.zerofate.java.User.class));
 
         String jsonStr4 = "{\"data\": {\n"
                 + "    \"name\": \"张三\",\n"
                 + "    \"phone\": \"110\",\n"
                 + "    \"address\": \"\"\n"
                 + "}}";
-        System.out.println("对象类型错误：" + new Gson().fromJson(jsonStr4, User.class));
+        System.out.println("对象类型错误：" + new Gson().fromJson(jsonStr4, SerializableUser.class));
     }
 
     public class G2<S> extends GenericTest<S> {
@@ -876,8 +905,8 @@ public class JavaTest {
         return mat.matches();
     }
 
-    public static void main(String[] args){
-        int i = Integer.MAX_VALUE +1;
+    public static void main(String[] args) {
+        int i = Integer.MAX_VALUE + 1;
         print(i);
         print(Integer.MAX_VALUE);
     }

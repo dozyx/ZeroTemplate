@@ -1,4 +1,4 @@
-package cn.dozyx.zerofate.java;
+package cn.dozyx;
 
 import java.util.List;
 

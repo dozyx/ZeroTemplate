@@ -1,4 +1,4 @@
-package cn.dozyx.zerofate.java;
+package cn.dozyx;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

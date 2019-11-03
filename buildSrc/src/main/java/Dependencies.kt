@@ -47,6 +47,8 @@ object Deps {
     val gson = "com.google.code.gson:gson:${Version.gson}"
     val convenientBanner = "com.bigkoo:convenientbanner:${Version.convenient_banner}"
     val adapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.adapter_helper}"
+    val calligraphy = "io.github.inflationx:calligraphy3:${Version.calligraphy}"
+    val viewpump = "io.github.inflationx:viewpump:${Version.viewpump}"
 
 
 }
@@ -242,4 +244,6 @@ object Version {
     const val hyperion = "0.9.27"
     const val glide = "4.10.0"
     const val adapter_helper = "2.9.50"
+    const val calligraphy = "3.1.1"
+    const val viewpump = "2.0.3"
 }

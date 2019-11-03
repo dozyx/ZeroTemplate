@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 
-class FixedTextVieww(context: Context,
-                     attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
+class FixedTextView(context: Context,
+                    attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
     init {
         init(attrs)
     }

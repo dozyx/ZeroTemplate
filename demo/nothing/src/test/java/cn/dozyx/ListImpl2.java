@@ -1,6 +1,4 @@
-package cn.dozyx.zerofate.java;
-
-import java.util.List;
+package cn.dozyx;
 
 /**
  * Create by timon on 2019/10/23

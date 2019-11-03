@@ -11,6 +11,8 @@ import cn.dozyx.template.R
 import com.blankj.utilcode.util.SizeUtils
 import kotlinx.android.synthetic.main.activity_text_size.*
 import timber.log.Timber
+import androidx.core.content.ContextCompat.getSystemService
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 
 class TextSizeActivity : BaseActivity() {
@@ -44,7 +46,6 @@ class TextSizeActivity : BaseActivity() {
             SizeUtils.sp2px(14f)
         }
     }
-
     override fun attachBaseContext(newBase: Context?) {
         Timber.d("TextSizeActivity.attachBaseContext ${newBase!!::class.java.name}")
         var newContext = newBase
@@ -55,6 +56,7 @@ class TextSizeActivity : BaseActivity() {
         }
         super.attachBaseContext(newContext)
     }
+
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         Timber.d("TextSizeActivity.onConfigurationChanged")

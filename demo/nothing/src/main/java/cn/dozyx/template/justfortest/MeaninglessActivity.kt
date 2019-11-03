@@ -88,7 +88,7 @@ class MeaninglessActivity : AppCompatActivity() {
             Timber.d("MeaninglessActivity.testIdleHandler 执行 message 1")
         }, 500) // 延时比较短时还是会先执行 message
         if (SDK_INT >= Build.VERSION_CODES.M) {
-            Looper.myLooper().queue.addIdleHandler {
+            Looper.myLooper()!!.queue.addIdleHandler {
                 Timber.d("MeaninglessActivity.testIdleHandler 执行 IdleHandler  ${ThreadUtils.isMainThread()}")
                 false
             }
@@ -99,7 +99,7 @@ class MeaninglessActivity : AppCompatActivity() {
     }
 
     private fun testLooperPrinter() {
-        Looper.myLooper().setMessageLogging(object : Printer {
+        Looper.myLooper()!!.setMessageLogging(object : Printer {
             override fun println(x: String?) {
                 Timber.d("MeaninglessActivity.println $x")
             }
