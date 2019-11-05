@@ -67,4 +67,5 @@ dependencies {
     implementation Deps.adapterHelper
     implementation Deps.calligraphy
     implementation Deps.viewpump
+    implementation DepsGlide.runtime
 }

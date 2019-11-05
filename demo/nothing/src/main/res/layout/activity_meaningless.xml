@@ -22,12 +22,7 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="360dp"
-            android:paddingLeft="48dp"
-            android:paddingBottom="48dp"
-            android:translationZ="50dp"
             android:layout_height="360dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/test"
             android:background="@drawable/circel_black" />
         <Button
             android:layout_width="100dp"
