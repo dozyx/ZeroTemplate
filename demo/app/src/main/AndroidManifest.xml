@@ -718,6 +718,9 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="cn.dozyx.template.provide.book"
+            android:name=".provider.BookContentProvider"/>
     </application>
 
 </manifest>
