@@ -29,14 +29,14 @@
 
     <TextView
         android:id="@+id/text4"
-        android:layout_width="50dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text3"
         android:background="@android:color/holo_blue_dark"
         android:lines="1"
         android:text="auto size中文：111abcdABCD中文"
         android:textSize="24sp"
-        app:autoSizeMinTextSize="10px"
+        app:autoSizeMinTextSize="16sp"
         app:autoSizeTextType="uniform" />
 
     <Button
