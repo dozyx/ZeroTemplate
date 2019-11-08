@@ -40,6 +40,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -79,6 +80,23 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testByteToString() {
+        String str = "123";
+        print(Arrays.toString(str.getBytes()));
+        byte[] bytes = new byte[]{48, 66, 127};
+        print(new String(bytes));
+        print(Charset.defaultCharset());
+    }
+
+    @Test
+    public void testArrayCopy() {
+        byte[] bytes = {1, 2, 3, 4};
+        byte[] dest = new byte[4];
+        System.arraycopy(bytes, 1, dest, 1, 3);
+        print(Arrays.toString(dest));
+    }
 
     @Test
     public void testSerializable() throws IOException {
