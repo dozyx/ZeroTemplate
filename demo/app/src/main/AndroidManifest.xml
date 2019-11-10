@@ -718,18 +718,30 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="cn.dozyx.template.provide.book"
-            android:name=".provider.BookContentProvider"/>
-        <activity android:name=".gl.OpenGLES20Activity"
+            android:name=".provider.BookContentProvider"
+            android:authorities="cn.dozyx.template.provide.book" />
+
+        <activity
+            android:name=".gl.OpenGLES20Activity"
             android:label="音视频/GL">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".image.GlideTest"
+        <activity
+            android:name=".image.GlideTest"
             android:label="Image/Glide">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".demo.fixedcolumn.FixedColumnLIstActivity4"
+            android:label="demo/固定列表列4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

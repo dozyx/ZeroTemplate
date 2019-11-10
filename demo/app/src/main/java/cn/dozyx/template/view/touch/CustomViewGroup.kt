@@ -33,11 +33,15 @@ class CustomViewGroup : ViewGroup {
         if (ev.action == MotionEvent.ACTION_MOVE) {
 //            return true
         }
+//        return true
         return false
     }
 
+    var i = 0
     override fun onTouchEvent(event: MotionEvent): Boolean {
         Timber.d("CustomViewGroup.onTouchEvent ${MotionEvent.actionToString(event.action)}")
+
+//        return false
         return true
     }
 }

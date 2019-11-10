@@ -23,6 +23,7 @@ class CustomView : View {
         if (event.action == MotionEvent.ACTION_DOWN){
 //            return true
         }
+//        parent.requestDisallowInterceptTouchEvent(true)
         return false
     }
 
