@@ -82,6 +82,22 @@ import cn.dozyx.zerofate.java.Person;
 public class JavaTest {
 
     @Test
+    public  void testSubstring() {
+        print("2.66".substring(0, 2));
+    }
+
+    @Test
+    public  void testStringFormat() {
+        print(String.format(Locale.getDefault(), "%.1f", 0.04));
+    }
+
+    @Test
+    public  void testBidDecimal() {
+        print(BigDecimal.valueOf(1.000).stripTrailingZeros());
+        print(new BigDecimal(1.01).toString());
+    }
+
+    @Test
     public void testByteToString() {
         String str = "123";
         print(Arrays.toString(str.getBytes()));

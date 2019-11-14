@@ -77,9 +77,9 @@ class MeaninglessActivity : AppCompatActivity() {
             image.clipToOutline = true
         }
 
+
         testIdleHandler()
-
-
+        edit.isEnabled = false
     }
 
     private fun testIdleHandler() {

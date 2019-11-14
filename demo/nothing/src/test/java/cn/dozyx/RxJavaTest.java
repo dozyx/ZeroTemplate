@@ -173,6 +173,26 @@ public class RxJavaTest {
     }
 
     @Test
+    public void testSwitchMap() {
+        Observable<Integer> integerObservable = Observable.just(2, 3, 10, 7);
+        // 只会订阅最后一个 Observable，会取消旧的 Observable 的订阅
+        integerObservable.switchMap(i -> Observable.interval(i, TimeUnit.SECONDS).map(
+                i2 -> i + "s interval: " + ((i2 + 1) * i) + " seconds elapsed")).subscribe(
+                sObserver);
+        sleep(12);
+    }
+
+    @Test
+    public void testConcatMap() {
+        Observable<Integer> integerObservable = Observable.just(2, 3, 10, 7);
+        // 当前面的 Observable 完成时，才会开始下一个 Observable，因为这里一直 repeat，所以只有第一个 Observable 在发送数据
+        integerObservable.concatMap(i -> Observable.interval(i, TimeUnit.SECONDS).map(
+                i2 -> i + "s interval: " + ((i2 + 1) * i) + " seconds elapsed")).subscribe(
+                sObserver);
+        sleep(12);
+    }
+
+    @Test
     public void testConcat() {
         // concat：拼接
         // 按顺序发射多个 observable 的 item
