@@ -69,6 +69,7 @@ abstract class BaseApplication : Application() {
         StrictMode.setThreadPolicy(
                 StrictMode.ThreadPolicy.Builder()
                         .detectAll()
+                        .permitDiskReads()
                         .penaltyLog()
                         .build()
         )
