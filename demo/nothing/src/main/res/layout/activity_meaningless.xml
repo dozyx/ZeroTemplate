@@ -23,8 +23,13 @@
 
         <EditText
             android:id="@+id/edit"
-            style="@style/EditTextStyle"
-            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.TextView"
+            android:text="111111122222222222"
+            android:textColor="@color/textColorPrimary"
+            android:ellipsize="middle"
+            android:enabled="false"
+            android:singleLine="true"
+            android:layout_width="100dp"
             android:layout_height="wrap_content" />
 
         <ImageView

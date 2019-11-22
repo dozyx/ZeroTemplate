@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Outline
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -66,14 +67,16 @@ class MeaninglessActivity : AppCompatActivity() {
             //            threadLooper?.quit()
         }
         if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            image.outlineProvider = ViewOutlineProvider.BOUNDS
-//            image.outlineProvider = ViewOutlineProvider.PADDED_BOUNDS
-//            image.outlineProvider = object :ViewOutlineProvider(){
-//                override fun getOutline(view: View, outline: Outline) {
-//                    Timber.d("MeaninglessActivity.getOutline ${view.width} ${view.height}")
-//                    outline.setOval(0,0,view.width,view.height)
-//                }
-//            }
+            image.outlineProvider = ViewOutlineProvider.BOUNDS
+            image.outlineProvider = ViewOutlineProvider.PADDED_BOUNDS
+            image.outlineSpotShadowColor = Color.parseColor("#FF0000")
+            image.outlineAmbientShadowColor = Color.parseColor("#00FF00")
+            image.outlineProvider = object :ViewOutlineProvider(){
+                override fun getOutline(view: View, outline: Outline) {
+                    Timber.d("MeaninglessActivity.getOutline ${view.width} ${view.height}")
+                    outline.setOval(0,0,view.width,view.height)
+                }
+            }
             image.clipToOutline = true
         }
 
