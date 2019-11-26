@@ -1,2 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.dozyx.zerofate.ui" />
+    package="cn.dozyx.zerofate.ui">
+
+    <application>
+        <activity
+            android:name="cn.dozyx.ui.mvp.DemoActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>
