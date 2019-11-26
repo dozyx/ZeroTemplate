@@ -11,5 +11,6 @@ dependencies {
     api Deps.appcompat
     api Deps.constraintLayout
     api Deps.material
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
-
