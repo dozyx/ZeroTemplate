@@ -285,17 +285,17 @@ public class JavaTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                lock.lock();
+                lock.lock();// 请求锁
                 print("进入 lock1");
                 try {
                     print("阻塞 lock1");
-                    condition.await();
+                    condition.await(); // 等待，接收到 signal 或者 interrupt。condition 关联的锁会释放
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 print("执行 lock1");
                 sleep(2);
-                lock.unlock();
+                lock.unlock(); // 释放锁
             }
         }).start();
         new Thread(new Runnable() {

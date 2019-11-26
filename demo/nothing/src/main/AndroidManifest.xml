@@ -31,7 +31,7 @@
             android:name=".MeaninglessActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".GodActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">

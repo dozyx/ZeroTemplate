@@ -6,8 +6,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:fitsSystemWindows="true"
+        android:orientation="vertical"
         tools:context="cn.dozyx.template.justfortest.MeaninglessActivity">
 
         <CheckedTextView
@@ -24,24 +24,25 @@
         <EditText
             android:id="@+id/edit"
             style="@style/Widget.AppCompat.TextView"
-            android:text="111111122222222222"
-            android:textColor="@color/textColorPrimary"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:ellipsize="middle"
             android:enabled="false"
             android:singleLine="true"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
+            android:text="111111122222222222"
+            android:textColor="@color/textColorPrimary" />
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="360dp"
             android:layout_height="360dp"
             android:background="@drawable/circel_black" />
+
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:elevation="6dp"
-            android:background="@drawable/circel_black"/>
+            android:background="@drawable/circel_black"
+            android:elevation="6dp" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -105,14 +106,21 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.zerofate.java.view.CustomTextView
-            android:id="@+id/text"
+        <blink
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableRight="@mipmap/ic_launcher"
-            android:text="正在整改"
-            android:textAppearance="@style/CustomTextAppearance"
-            android:textSize="36sp" />
+            android:layout_height="wrap_content">
+
+            <com.zerofate.java.view.CustomTextView
+                android:id="@+id/text"
+                style="@style/CustomTextStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/ic_launcher"
+                android:text="正在整改"
+                android:textAppearance="@style/CustomTextAppearance"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textSize="36sp" />
+        </blink>
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@
         <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
         <item name="customTextStyle">@style/CustomTextStyle</item>
         <item name="android:textViewStyle">@style/TextNormal</item>
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
     </style>
 
     <style name="TextNormal" parent="Widget.AppCompat.TextView">
@@ -66,7 +67,7 @@
     </style>
 
     <style name="CustomTextStyleRes">
-        <item name="android:textColor">@android:color/holo_green_light</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
     </style>
 
     <style name="CustomTextStyle2">
