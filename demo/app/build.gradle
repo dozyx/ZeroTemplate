@@ -68,4 +68,6 @@ dependencies {
     implementation Deps.calligraphy
     implementation Deps.viewpump
     implementation DepsGlide.runtime
+    implementation DepsPaging.runtime
+    implementation DepsPaging.rxjava2
 }

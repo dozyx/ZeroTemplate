@@ -1,0 +1,22 @@
+apply from: "${rootDir}/buildApp.gradle"
+
+android {
+
+    defaultConfig {
+        versionCode 1
+        versionName "1.0.0"
+    }
+}
+
+dependencies {
+
+    implementation Deps.appcompat
+    implementation Deps.material
+    implementation Deps.constraintLayout
+    implementation DepsNavigation.fragment
+    implementation DepsNavigation.ui
+    implementation Deps.lifecycle
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

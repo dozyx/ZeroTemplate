@@ -52,10 +52,12 @@ object Deps {
 
 
 }
-object DepsEventBus  {
+
+object DepsEventBus {
     val core = "org.greenrobot:eventbus:${Version.eventbus}"
     val processor = "org.greenrobot:eventbus-annotation-processor:${Version.eventbus}"
 }
+
 object DepsHyperion {
     val debugCore = "com.willowtreeapps.hyperion:hyperion-core:${Version.hyperion}"
     val releaseCore = "com.willowtreeapps.hyperion:hyperion-core-no-op:${Version.hyperion}"
@@ -163,6 +165,17 @@ object DepsNavigation {
     val uiKtx = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
 }
 
+object DepsPaging {
+    val runtime = "androidx.paging:paging-runtime:${Version.paging}"
+    val rxjava2 = "androidx.paging:paging-rxjava2:${Version.paging}"
+    // common 用于 testImplementation
+    val common = "androidx.paging:paging-common:${Version.paging}"
+
+    val runtimeKtx = "androidx.paging:paging-runtime-ktx:${Version.paging}"
+    val rxjava2Ktx = "androidx.paging:paging-rxjava2-ktx:${Version.paging}"
+    val commonKtx = "androidx.paging:paging-common-ktx:${Version.paging}"
+}
+
 object Version {
     const val legacySupportV4 = "1.0.0"
     const val kotlinVersion = "1.3.31"
@@ -232,6 +245,7 @@ object Version {
     const val rxbinding = "3.0.0-alpha2"
     const val annotations = "17.0.0"
     const val navigation = "2.1.0"
+    const val paging = "2.1.0"
     const val immersionbar = "2.3.3"
     const val room = "2.1.0-alpha07"
     const val stetho = "1.5.1"
