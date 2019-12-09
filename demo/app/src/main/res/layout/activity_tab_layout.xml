@@ -11,12 +11,14 @@
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         app:tabGravity="center"
+        app:tabInlineLabel="false"
         android:paddingRight="15dp">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:icon="@drawable/bg_0"
             android:text="下滑超20%" />
 
         <com.google.android.material.tabs.TabItem
