@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
+import java.util.*
 
 /**
  * 万能适配器
@@ -14,8 +16,17 @@ abstract class QuickAdapter<T> : RecyclerView.Adapter<QuickAdapter.VH> {
 
     private var datas: List<T>? = null
 
+
+
     constructor(datas: List<T>?) : super() {
         this.datas = datas
+    }
+
+    constructor() : super()
+
+    fun setData(data:List<T>) {
+        datas = data
+        notifyDataSetChanged()
     }
 
     abstract fun getLayoutId(viewType: Int): Int
@@ -30,6 +41,11 @@ abstract class QuickAdapter<T> : RecyclerView.Adapter<QuickAdapter.VH> {
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         convert(holder, datas!![position], position)
+    }
+
+    override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+        Timber.d("QuickAdapter.onBindViewHolder $position payloads $payloads")
     }
 
     class VH private constructor(private val convertView: View) : RecyclerView.ViewHolder(convertView) {

@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,7 +46,7 @@ public class RxJavaTest {
 
 
     @Test
-    public void testRxJavaPlugin(){
+    public void testRxJavaPlugin() {
         // hook 函数
         RxJavaPlugins.setOnObservableAssembly(observable -> {
             print("onAssembly " + observable.getClass());
@@ -64,8 +66,8 @@ public class RxJavaTest {
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                for (int i = 0; i< 5;i ++){
-                    if (i ==3 ){
+                for (int i = 0; i < 5; i++) {
+                    if (i == 3) {
                         emitter.onError(null);
                     } else {
                         emitter.onNext(randomInt());

@@ -23,7 +23,6 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
     }
 
     class RecyclerViewFragment : Fragment() {
-        private var datas: MutableList<String>? = null
         private val randomStrings: MutableList<String>
             get() {
                 val newDatas = ArrayList<String>(5)
@@ -32,6 +31,17 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
                 }
                 return newDatas
             }
+        private val adapter = object :QuickAdapter<String>(){
+            override fun getLayoutId(viewType: Int): Int {
+                return android.R.layout.simple_list_item_1
+            }
+
+            override fun convert(holder: VH, data: String, position: Int) {
+                holder.setText(android.R.id.text1,data)
+                holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
+                (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).topMargin = 100
+            }
+        }
 
         override fun onCreateView(
                 inflater: LayoutInflater,
@@ -55,20 +65,10 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             recycler_view.layoutManager = LinearLayoutManager(context)
-            datas = randomStrings
             recycler_view.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
-            recycler_view.adapter = object :QuickAdapter<String>(datas){
-                override fun getLayoutId(viewType: Int): Int {
-                    return android.R.layout.simple_list_item_1
-                }
-
-                override fun convert(holder: VH, data: String, position: Int) {
-                    holder.setText(android.R.id.text1,data)
-                    holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
-                    (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).topMargin = 100
-                }
-            }
-
+            recycler_view.adapter = adapter
+            adapter.notifyDataSetChanged()
+            adapter.setData(randomStrings)
             val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val adapter = recycler_view.adapter
@@ -79,8 +79,14 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
             ItemTouchHelper(SwipeController(context!!)).attachToRecyclerView(recycler_view)
 
             btn_change_data.setOnClickListener {
-                datas = randomStrings
+                adapter.setData(randomStrings)
                 (recycler_view.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
+            }
+            btn_notify.setOnClickListener {
+//                adapter.notifyItemChanged(2)
+                adapter.notifyItemChanged(2,"1111")
+                adapter.notifyItemChanged(2,"2222")
+                adapter.notifyItemChanged(3,"2222")
             }
         }
 

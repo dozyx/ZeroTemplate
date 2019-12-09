@@ -26,7 +26,7 @@ class CustomItemDecoration(val context: Context, val orientation: Int) : Recycle
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        Timber.d("CustomItemDecoration.onDraw")
+//        Timber.d("CustomItemDecoration.onDraw")
         if (orientation == VERTICAL) {
             drawVertical(c, parent)
         } else {
@@ -37,7 +37,7 @@ class CustomItemDecoration(val context: Context, val orientation: Int) : Recycle
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         // onDraw 在绘制 Item 之前调用；onDrawOver 在绘制 Item 之后调用
-        Timber.d("CustomItemDecoration.onDrawOver")
+//        Timber.d("CustomItemDecoration.onDrawOver")
     }
 
     private fun drawHorizontal(c: Canvas, parent: RecyclerView) {

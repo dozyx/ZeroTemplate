@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:text="随机数据" />
 
+    <Button
+        android:id="@+id/btn_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="notify" />
+
     <cn.dozyx.template.view.recyclerview.MyRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

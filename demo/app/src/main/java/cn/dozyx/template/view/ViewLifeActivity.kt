@@ -60,6 +60,7 @@ class ViewLifeActivity : LifeCycleActivity() {
         override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
             Timber.d("onMeasure: ")
+            // 执行了两次
         }
 
         override fun onDraw(canvas: Canvas) {

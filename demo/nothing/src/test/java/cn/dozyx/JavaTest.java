@@ -2,6 +2,7 @@ package cn.dozyx;
 
 
 import android.annotation.TargetApi;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import org.junit.Test;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.annotation.Annotation;
@@ -38,6 +40,7 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
@@ -80,6 +83,38 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+
+    @Test
+    public void testUriBuilder(){
+
+    }
+
+    @Test
+    public void testClassLoader() throws Exception {
+        ClassLoader myLoader = new ClassLoader() {
+            @Override
+            public Class<?> loadClass(String name) throws ClassNotFoundException {
+                try {
+                    String fileName = name.substring(name.lastIndexOf(".") + 1) + ".class";
+                    InputStream is = getClass().getResourceAsStream(fileName);
+                    if (is == null) {
+                        return super.loadClass(name);
+                    }
+                    byte[] b = new byte[is.available()];
+                    is.read(b);
+                    return defineClass(name, b, 0, b.length);
+                } catch (IOException e) {
+                    throw new ClassNotFoundException();
+                }
+            }
+        };
+
+        Object obj = myLoader.loadClass("cn.dozyx.JavaTest").newInstance();
+        print(obj.getClass());
+        //加载类的类加载器和类本身确立其在 Java 虚拟机中的唯一性
+        print(obj instanceof RxJavaTest);
+    }
 
     @Test
     public  void testSubstring() {

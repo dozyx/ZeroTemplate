@@ -755,6 +755,14 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".arch.PagingTest"
+            android:label="Arch/Paging">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
