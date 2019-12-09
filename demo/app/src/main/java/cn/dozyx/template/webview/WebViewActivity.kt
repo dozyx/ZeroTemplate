@@ -1,4 +1,4 @@
-package cn.dozyx.template
+package cn.dozyx.template.webview
 
 import android.annotation.TargetApi
 import android.graphics.Bitmap
@@ -12,6 +12,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
+import cn.dozyx.core.widget.webview.WebViewUtil
 import java.net.URLDecoder
 import java.net.URLEncoder
 
@@ -31,20 +32,15 @@ class WebViewActivity : AppCompatActivity() {
 
 
         }
-        val webSettings = webView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.domStorageEnabled = true
-        webSettings.allowFileAccess = true
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        }
+        WebViewUtil.init(webView)
 
         setContentView(webView)
 
         configWebViewClient(webView)
         configWebChromeClient(webView)
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-        webView.loadUrl("www.baidu.com")
+        val url = "https://h5.leshuazf.com/online-register/#/little-company?merchantType=1&merchantId=xxx&sessionId=xxxx&loginUserName=xxx"
+        webView.loadUrl(url)
 
         val data = ""
         val sendData = URLEncoder.encode(data, "utf-8")
@@ -108,6 +104,7 @@ class WebViewActivity : AppCompatActivity() {
                 Log.d(TAG, "onPermissionRequestCanceled: ")
             }
 
+            // 通知 client 显示一个文件选择器
             override fun onShowFileChooser(
                     webView: WebView?,
                     filePathCallback: ValueCallback<Array<Uri>>?,

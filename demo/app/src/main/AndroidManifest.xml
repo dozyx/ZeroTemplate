@@ -239,7 +239,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WebViewActivity"
+            android:name=".webview.WebViewActivity"
             android:label="@string/view_webview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
