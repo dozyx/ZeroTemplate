@@ -3,7 +3,6 @@ package cn.dozyx.template.demo.fixedcolumn
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
@@ -38,14 +37,14 @@ class FixedColumnLIstActivity4 : BaseActivity() {
 
             }
         }
-        recycler_view.adapter = adapter
-        adapter.bindToRecyclerView(recycler_view)
+        rv_common.adapter = adapter
+        adapter.bindToRecyclerView(rv_common)
         val datas = ArrayList<String>()
         for (i in 0..50) {
             datas.add(i.toString())
         }
         adapter.setNewData(datas)
-        recycler_view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+        rv_common.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
             var downX = 0f
             var downY = 0f
             var lastX = 0f
@@ -53,10 +52,10 @@ class FixedColumnLIstActivity4 : BaseActivity() {
             override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
                 Timber.d("FixedColumnLIstActivity4.onTouchEvent")
                 if (e.action == MotionEvent.ACTION_MOVE) {
-                    val maxHScroll = recycler_view.getChildAt(0).findViewById<View>(R.id.scroll_columns).right - recycler_view.right
+                    val maxHScroll = rv_common.getChildAt(0).findViewById<View>(R.id.scroll_columns).right - rv_common.right
                     nestedHScrollX = max(0F, min(nestedHScrollX + lastX - e.x, maxHScroll.toFloat()))
-                    for (i in 0 until recycler_view.childCount) {
-                        val child = recycler_view.getChildAt(i)
+                    for (i in 0 until rv_common.childCount) {
+                        val child = rv_common.getChildAt(i)
                         val scrollView = child.findViewById<View>(R.id.scroll_columns)
                         scrollView.scrollTo(nestedHScrollX.toInt(), 0)
                     }
@@ -66,7 +65,7 @@ class FixedColumnLIstActivity4 : BaseActivity() {
             }
 
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                if (recycler_view.scrollState != RecyclerView.SCROLL_STATE_IDLE) {
+                if (rv_common.scrollState != RecyclerView.SCROLL_STATE_IDLE) {
                     return false
                 }
                 when (e.action) {

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
-import cn.dozyx.template.view.recyclerview.adapter.QuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import kotlinx.android.synthetic.main.activity_fixed_column.*
@@ -35,7 +34,7 @@ class FixedColumnListActivity : BaseActivity() {
         var scrollListener = object : View.OnScrollChangeListener {
             override fun onScrollChange(v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
                 Timber.d("FixedColumnListActivity.onScrollChange")
-                recycler_view.layoutManager?.apply {
+                rv_common.layoutManager?.apply {
                     for (i in 0 until childCount) {
                         val child = getChildAt(i)
                         if (child != v) {
@@ -61,12 +60,12 @@ class FixedColumnListActivity : BaseActivity() {
                 return viewHolder
             }
         }
-        recycler_view.adapter = adapter
+        rv_common.adapter = adapter
         var datas = ArrayList<String>()
         for (i in 0..20) {
             datas.add("$i")
         }
-        recycler_view.setOnTouchListener { v, event ->
+        rv_common.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
             }
             return@setOnTouchListener false

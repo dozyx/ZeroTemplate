@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
+ * 实体类，表示一条数据
  * Create by dozyx on 2019/5/17
  **/
 @Entity

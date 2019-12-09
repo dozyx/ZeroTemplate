@@ -64,23 +64,23 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            recycler_view.layoutManager = LinearLayoutManager(context)
-            recycler_view.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
-            recycler_view.adapter = adapter
+            rv_common.layoutManager = LinearLayoutManager(context)
+            rv_common.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
+            rv_common.adapter = adapter
             adapter.notifyDataSetChanged()
             adapter.setData(randomStrings)
             val swipeHandler = object : SwipeToDeleteCallback(context!!) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val adapter = recycler_view.adapter
+                    val adapter = rv_common.adapter
 //                    datas?.removeAt(viewHolder.adapterPosition)
 //                    adapter?.notifyItemRemoved(viewHolder.adapterPosition)
                 }
             }
-            ItemTouchHelper(SwipeController(context!!)).attachToRecyclerView(recycler_view)
+            ItemTouchHelper(SwipeController(context!!)).attachToRecyclerView(rv_common)
 
             btn_change_data.setOnClickListener {
                 adapter.setData(randomStrings)
-                (recycler_view.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
+                (rv_common.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
             }
             btn_notify.setOnClickListener {
 //                adapter.notifyItemChanged(2)

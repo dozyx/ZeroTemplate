@@ -13,9 +13,7 @@ import cn.dozyx.template.R
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import kotlinx.android.synthetic.main.activity_fixed_column3.*
-import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.view.*
 import timber.log.Timber
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.min
@@ -45,8 +43,8 @@ class FixedColumnListActivity3 : BaseActivity() {
 
             }
         }
-        recycler_view.adapter = adapter
-        adapter.bindToRecyclerView(recycler_view)
+        rv_common.adapter = adapter
+        adapter.bindToRecyclerView(rv_common)
         val datas = ArrayList<String>()
         for (i in 0..20) {
             datas.add(i.toString())
