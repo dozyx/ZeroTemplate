@@ -2,6 +2,7 @@ package cn.dozyx;
 
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
@@ -86,7 +87,7 @@ public class JavaTest {
 
 
     @Test
-    public void testUriBuilder(){
+    public void testUriBuilder() {
 
     }
 
@@ -117,17 +118,17 @@ public class JavaTest {
     }
 
     @Test
-    public  void testSubstring() {
+    public void testSubstring() {
         print("2.66".substring(0, 2));
     }
 
     @Test
-    public  void testStringFormat() {
+    public void testStringFormat() {
         print(String.format(Locale.getDefault(), "%.1f", 0.04));
     }
 
     @Test
-    public  void testBidDecimal() {
+    public void testBidDecimal() {
         print(BigDecimal.valueOf(1.000).stripTrailingZeros());
         print(new BigDecimal(1.01).toString());
     }
@@ -179,6 +180,23 @@ public class JavaTest {
         print(Arrays.toString(ListImpl.class.getInterfaces()));
         print(Arrays.toString(ListImpl2.class.getInterfaces()));
         print(Arrays.toString(ListImpl3.class.getInterfaces()));
+    }
+
+    @Test
+    public void testThread() throws InterruptedException {
+        Thread thread1 = new Thread(() -> {
+            sleep(1);
+            print("thread 1" + Thread.currentThread());
+        }, "thread");
+        thread1.start();
+
+        Thread thread2 = new Thread(() -> {
+            sleep(1);
+            print("thread 2" + Thread.currentThread());
+        }, "thread");
+        thread2.start();
+        print(thread1 + " & " + thread2  + " " + thread1.equals(thread2));
+        sleep(2);
     }
 
     @Test

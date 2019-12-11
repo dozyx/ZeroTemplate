@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import cn.dozyx.core.base.BaseActivity
+import cn.dozyx.core.utli.SampleUtil
 import cn.dozyx.template.R
 import com.chad.library.adapter.base.BaseViewHolder
 import kotlinx.android.synthetic.main.common_list.*
@@ -32,7 +34,12 @@ class PagingTest : BaseActivity() {
         super.onCreate(savedInstanceState)
         val config = PagedList.Config.Builder().setEnablePlaceholders(false).setInitialLoadSizeHint(10).setPageSize(20).build()
         rv_common.adapter = pagedAdapter
+        executor.execute {
+            pagedList = PagedList.Builder<Long, String>(StringDataSource(), config).setNotifyExecutor(ArchTaskExecutor.getMainThreadExecutor()).setFetchExecutor(executor).setBoundaryCallback(object : PagedList.BoundaryCallback<String>() {
 
+            }).build()
+        }
+        pagedAdapter.submitList(pagedList)
     }
 
     override fun getLayoutId(): Int {
@@ -74,7 +81,9 @@ class TextViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 class StringDataSource : PageKeyedDataSource<Long, String>() {
     override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Long, String>) {
         // 加载第一页
-        Timber.d("CustomDataSource.loadInitial")
+        Timber.d("CustomDataSource.loadInitial ${params.placeholdersEnabled} ${params.requestedLoadSize}")
+        var datas = SampleUtil.getStrings(params.requestedLoadSize)
+        callback.onResult(datas, 0, datas.size, 0, 1)
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, String>) {

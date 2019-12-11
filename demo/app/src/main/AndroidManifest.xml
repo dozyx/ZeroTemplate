@@ -763,6 +763,28 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".transition.TransitionTest"
+            android:label="Activity/Transition">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".transition.TransitionTest1" />
+        <activity
+            android:name=".transition.TransitionTest2"
+            android:theme="@style/TransitionTheme" />
+        <activity
+            android:name=".keyboard.KeyBoardTest"
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:label="KeyBoard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
