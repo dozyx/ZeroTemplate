@@ -49,7 +49,7 @@ class TouchConflictActivity : BaseActivity() {
             }
         }
         recyclerView.adapter = adapter
-        adapter.setNewData(SampleUtil.getStrings())
+        adapter.setNewData(SampleUtil.strings)
     }
 
 

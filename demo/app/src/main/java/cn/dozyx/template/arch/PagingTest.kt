@@ -5,54 +5,47 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.arch.core.executor.ArchTaskExecutor
-import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.core.utli.SampleUtil
 import cn.dozyx.template.R
-import com.chad.library.adapter.base.BaseViewHolder
-import kotlinx.android.synthetic.main.common_list.*
+import kotlinx.android.synthetic.main.activity_paging.*
 import timber.log.Timber
-import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 /**
  * PagedList：继承于 AbstractList，管理数据，通过 DataSource 加载数据
  */
 class PagingTest : BaseActivity() {
-    val executor = Executors.newFixedThreadPool(5)
+    private val executor = Executors.newFixedThreadPool(5) { r -> Thread(r, "paging") }
     private val pagedAdapter = PagedAdapter()
     private var pagedList: PagedList<String>? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val config = PagedList.Config.Builder().setEnablePlaceholders(false).setInitialLoadSizeHint(10).setPageSize(20).build()
-        rv_common.adapter = pagedAdapter
+        val config = PagedList.Config.Builder().setEnablePlaceholders(false).setInitialLoadSizeHint(10).setPageSize(30).build()
+        rv_paging.adapter = pagedAdapter
+        srl_paging.setOnRefreshListener { initPaging(config) }
+    }
+
+    private fun initPaging(config: PagedList.Config) {
         executor.execute {
-            pagedList = PagedList.Builder<Long, String>(StringDataSource(), config).setNotifyExecutor(ArchTaskExecutor.getMainThreadExecutor()).setFetchExecutor(executor).setBoundaryCallback(object : PagedList.BoundaryCallback<String>() {
+            pagedList = PagedList.Builder<Long, String>(StringDataSource(srl_paging), config).setNotifyExecutor(ArchTaskExecutor.getMainThreadExecutor()).setFetchExecutor(executor).setBoundaryCallback(object : PagedList.BoundaryCallback<String>() {
 
             }).build()
+            pagedAdapter.submitList(pagedList)
         }
-        pagedAdapter.submitList(pagedList)
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.common_list
+        return R.layout.activity_paging
     }
 
-    fun newData(size: Int): List<String> {
-        val datas = ArrayList<String>()
-        for (index in 0 until size) {
-            datas.add((pagedAdapter.itemCount + index).toString())
-        }
-        return datas
-    }
 }
 
 
@@ -78,19 +71,22 @@ class PagedAdapter : PagedListAdapter<String, TextViewHolder>(object : DiffUtil.
 
 class TextViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
-class StringDataSource : PageKeyedDataSource<Long, String>() {
+private class StringDataSource(val refreshLayout: SwipeRefreshLayout) : PageKeyedDataSource<Long, String>() {
     override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Long, String>) {
         // 加载第一页
-        Timber.d("CustomDataSource.loadInitial ${params.placeholdersEnabled} ${params.requestedLoadSize}")
-        var datas = SampleUtil.getStrings(params.requestedLoadSize)
-        callback.onResult(datas, 0, datas.size, 0, 1)
+        Timber.d("CustomDataSource.loadInitial ${params.placeholdersEnabled} ${params.requestedLoadSize} ${Thread.currentThread()}")
+        var datas = SampleUtil.getStrings(params.requestedLoadSize, "init")
+        callback.onResult(datas, 0, 1)
+        refreshLayout.isRefreshing = false
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, String>) {
-        Timber.d("CustomDataSource.loadAfter")
+        Timber.d("CustomDataSource.loadAfter ${params.key} ${params.requestedLoadSize} ${Thread.currentThread()}")
+        callback.onResult(SampleUtil.getStrings(params.requestedLoadSize, "after"), params.key + 1)
     }
 
     override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, String>) {
-        Timber.d("CustomDataSource.loadBefore")
+        Timber.d("CustomDataSource.loadBefore ${params.key} ${params.requestedLoadSize} ${Thread.currentThread()}")
+//        callback.onResult(SampleUtil.getStrings(params.requestedLoadSize, "before"), params.key)
     }
 }
