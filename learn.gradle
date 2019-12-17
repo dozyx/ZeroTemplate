@@ -1,0 +1,9 @@
+// 用来学习 gradle 用法
+
+task foo() {
+    println("readLocal ${Util.readLocal("channel_file", project)}")
+}
+
+project.afterEvaluate {
+    println()
+}

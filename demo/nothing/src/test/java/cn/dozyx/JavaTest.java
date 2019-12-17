@@ -85,10 +85,16 @@ import cn.dozyx.zerofate.java.Person;
 
 public class JavaTest {
 
-
     @Test
-    public void testUriBuilder() {
+    public void testArray() {
+        int[][] array = {{1, 2, 3}, {4, 5}};
+        print(array.length);
+        print(array[0].length);
+        print(array[1].length);
+        print(array[1][1]);
 
+        int[][] array2 = new int[3][2];// 三行两列
+        print(array2[2][1]);
     }
 
     @Test
@@ -195,7 +201,7 @@ public class JavaTest {
             print("thread 2" + Thread.currentThread());
         }, "thread");
         thread2.start();
-        print(thread1 + " & " + thread2  + " " + thread1.equals(thread2));
+        print(thread1 + " & " + thread2 + " " + thread1.equals(thread2));
         sleep(2);
     }
 
