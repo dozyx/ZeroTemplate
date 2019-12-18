@@ -12,47 +12,61 @@ import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
+import cn.dozyx.core.widget.webview.WebConfig
 import cn.dozyx.core.widget.webview.WebViewUtil
+import cn.dozyx.template.R
+import kotlinx.android.synthetic.main.activity_web_view.*
+import timber.log.Timber
 import java.net.URLDecoder
 import java.net.URLEncoder
 
 class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_web_view)
         val webView = object : WebView(this) {
             override fun loadUrl(url: String?) {
                 super.loadUrl(url)
-                Log.d(TAG, "loadUrl: $url")
+                Timber.d("loadUrl: $url")
             }
 
             override fun postUrl(url: String?, postData: ByteArray?) {
                 super.postUrl(url, postData)
-                Log.d(TAG, "postUrl: $url")
+                Timber.d("postUrl: $url")
             }
 
 
         }
-        WebViewUtil.init(webView)
+        val config = WebConfig.getDefault()
+        config.jsEnable = true
+        WebViewUtil.init(webView, config)
 
-        setContentView(webView)
+        fl_web.addView(webView)
 
         configWebViewClient(webView)
         configWebChromeClient(webView)
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-        val url = "https://h5.leshuazf.com/online-register/#/little-company?merchantType=1&merchantId=xxx&sessionId=xxxx&loginUserName=xxx"
+        val url = "http://www.yeahka.com"
         webView.loadUrl(url)
 
         val data = ""
         val sendData = URLEncoder.encode(data, "utf-8")
         val recData = URLDecoder.decode(sendData, "utf-8")
-        Log.d(TAG, "onCreate: $sendData + & + $recData")
+        Timber.d("onCreate: $sendData + & + $recData")
+        btn_back.setOnClickListener {
+            if (webView.canGoBack()){
+                webView.goBack()
+            } else{
+                finish()
+            }
+        }
     }
 
     private fun configWebChromeClient(webView: WebView) {
         webView.webChromeClient = object : WebChromeClient() {
             override fun onRequestFocus(view: WebView?) {
                 super.onRequestFocus(view)
-                Log.d(TAG, "onRequestFocus: ")
+                Timber.d("onRequestFocus: ")
             }
 
             override fun onJsAlert(
@@ -61,7 +75,7 @@ class WebViewActivity : AppCompatActivity() {
                     message: String?,
                     result: JsResult?
             ): Boolean {
-                Log.d(TAG, "onJsAlert: ")
+                Timber.d( "onJsAlert: ")
                 return super.onJsAlert(view, url, message, result)
             }
 
@@ -72,13 +86,13 @@ class WebViewActivity : AppCompatActivity() {
                     defaultValue: String?,
                     result: JsPromptResult?
             ): Boolean {
-                Log.d(TAG, "onJsPrompt: ")
+                Timber.d( "onJsPrompt: ")
                 return super.onJsPrompt(view, url, message, defaultValue, result)
             }
 
             override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
                 super.onShowCustomView(view, callback)
-                Log.d(TAG, "onShowCustomView: ")
+                Timber.d("onShowCustomView: ")
             }
 
             override fun onGeolocationPermissionsShowPrompt(
@@ -86,22 +100,22 @@ class WebViewActivity : AppCompatActivity() {
                     callback: GeolocationPermissions.Callback?
             ) {
                 super.onGeolocationPermissionsShowPrompt(origin, callback)
-                Log.d(TAG, "onGeolocationPermissionsShowPrompt: ")
+                Timber.d( "onGeolocationPermissionsShowPrompt: ")
             }
 
             override fun onPermissionRequest(request: PermissionRequest?) {
                 super.onPermissionRequest(request)
-                Log.d(TAG, "onPermissionRequest: ")
+                Timber.d("onPermissionRequest: ")
             }
 
             override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
                 return super.onConsoleMessage(consoleMessage)
-                Log.d(TAG, "onConsoleMessage: ")
+                Timber.d( "onConsoleMessage: ")
             }
 
             override fun onPermissionRequestCanceled(request: PermissionRequest?) {
                 super.onPermissionRequestCanceled(request)
-                Log.d(TAG, "onPermissionRequestCanceled: ")
+                Timber.d( "onPermissionRequestCanceled: ")
             }
 
             // 通知 client 显示一个文件选择器
@@ -110,7 +124,7 @@ class WebViewActivity : AppCompatActivity() {
                     filePathCallback: ValueCallback<Array<Uri>>?,
                     fileChooserParams: FileChooserParams?
             ): Boolean {
-                Log.d(TAG, "onShowFileChooser: ")
+                Timber.d("onShowFileChooser: ")
                 return super.onShowFileChooser(webView, filePathCallback, fileChooserParams)
             }
 
@@ -119,23 +133,23 @@ class WebViewActivity : AppCompatActivity() {
                     url: String?,
                     precomposed: Boolean
             ) {
-                Log.d(TAG, "onReceivedTouchIconUrl: ")
+                Timber.d( "onReceivedTouchIconUrl: ")
                 super.onReceivedTouchIconUrl(view, url, precomposed)
             }
 
             override fun onReceivedIcon(view: WebView?, icon: Bitmap?) {
                 super.onReceivedIcon(view, icon)
-                Log.d(TAG, "onReceivedIcon: ")
+                Timber.d( "onReceivedIcon: ")
             }
 
             override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, title)
-                Log.d(TAG, "onReceivedTitle: ")
+                Timber.d( "onReceivedTitle: ")
             }
 
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
-                Log.d(TAG, "onProgressChanged: ")
+                Timber.d( "onProgressChanged: ")
             }
 
             override fun onJsConfirm(
@@ -144,13 +158,13 @@ class WebViewActivity : AppCompatActivity() {
                     message: String?,
                     result: JsResult?
             ): Boolean {
-                Log.d(TAG, "onJsConfirm: ")
+                Timber.d("onJsConfirm: ")
                 return super.onJsConfirm(view, url, message, result)
             }
 
             override fun onGeolocationPermissionsHidePrompt() {
                 super.onGeolocationPermissionsHidePrompt()
-                Log.d(TAG, "onGeolocationPermissionsHidePrompt: ")
+                Timber.d( "onGeolocationPermissionsHidePrompt: ")
             }
 
             override fun onJsBeforeUnload(
@@ -159,13 +173,13 @@ class WebViewActivity : AppCompatActivity() {
                     message: String?,
                     result: JsResult?
             ): Boolean {
-                Log.d(TAG, "onJsBeforeUnload: ")
+                Timber.d("onJsBeforeUnload: ")
                 return super.onJsBeforeUnload(view, url, message, result)
             }
 
             override fun onHideCustomView() {
                 super.onHideCustomView()
-                Log.d(TAG, "onHideCustomView: ")
+                Timber.d("onHideCustomView: ")
             }
 
             override fun onCreateWindow(
@@ -174,13 +188,13 @@ class WebViewActivity : AppCompatActivity() {
                     isUserGesture: Boolean,
                     resultMsg: Message?
             ): Boolean {
-                Log.d(TAG, "onCreateWindow: ")
+                Timber.d("onCreateWindow: ")
                 return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg)
             }
 
             override fun onCloseWindow(window: WebView?) {
                 super.onCloseWindow(window)
-                Log.d(TAG, "onCloseWindow: ")
+                Timber.d("onCloseWindow: ")
             }
         }
     }
@@ -189,7 +203,7 @@ class WebViewActivity : AppCompatActivity() {
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                Log.d(TAG, "onPageFinished: ")
+                Timber.d("onPageFinished: ")
             }
 
 
@@ -197,13 +211,13 @@ class WebViewActivity : AppCompatActivity() {
                 view: WebView?,
                 request: WebResourceRequest?
             ): WebResourceResponse {
-                Log.d(TAG, "shouldInterceptRequest: "  + request?.url)
+                Timber.d("shouldInterceptRequest: "  + request?.url)
                 return super.shouldInterceptRequest(view, request)
             }*/
 
 
             override fun shouldOverrideKeyEvent(view: WebView?, event: KeyEvent?): Boolean {
-                Log.d(TAG, "shouldOverrideKeyEvent: ")
+                Timber.d("shouldOverrideKeyEvent: ")
                 return super.shouldOverrideKeyEvent(view, event)
             }
 
@@ -213,13 +227,13 @@ class WebViewActivity : AppCompatActivity() {
                     threatType: Int,
                     callback: SafeBrowsingResponse?
             ) {
-                Log.d(TAG, "onSafeBrowsingHit: ")
+                Timber.d("onSafeBrowsingHit: ")
                 super.onSafeBrowsingHit(view, request, threatType, callback)
             }
 
             override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
                 super.doUpdateVisitedHistory(view, url, isReload)
-                Log.d(TAG, "doUpdateVisitedHistory: ")
+                Timber.d("doUpdateVisitedHistory: ")
             }
 
             override fun onReceivedError(
@@ -240,7 +254,7 @@ class WebViewActivity : AppCompatActivity() {
                     view: WebView?,
                     detail: RenderProcessGoneDetail?
             ): Boolean {
-                Log.d(TAG, "onRenderProcessGone: ")
+                Timber.d("onRenderProcessGone: ")
                 return super.onRenderProcessGone(view, detail)
             }
 
@@ -250,7 +264,7 @@ class WebViewActivity : AppCompatActivity() {
                     account: String?,
                     args: String?
             ) {
-                Log.d(TAG, "onReceivedLoginRequest: ")
+                Timber.d("onReceivedLoginRequest: ")
                 super.onReceivedLoginRequest(view, realm, account, args)
             }
 
@@ -259,18 +273,18 @@ class WebViewActivity : AppCompatActivity() {
                     request: WebResourceRequest?,
                     errorResponse: WebResourceResponse?
             ) {
-                Log.d(TAG, "onReceivedHttpError: ")
+                Timber.d("onReceivedHttpError: ")
                 super.onReceivedHttpError(view, request, errorResponse)
             }
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                Log.d(TAG, "onPageStarted: $url")
+                Timber.d("onPageStarted: $url")
                 super.onPageStarted(view, url, favicon)
             }
 
             override fun onScaleChanged(view: WebView?, oldScale: Float, newScale: Float) {
                 super.onScaleChanged(view, oldScale, newScale)
-                Log.d(TAG, "onScaleChanged: ")
+                Timber.d("onScaleChanged: ")
             }
 
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -278,30 +292,30 @@ class WebViewActivity : AppCompatActivity() {
                     view: WebView?,
                     request: WebResourceRequest?
             ): Boolean {
-                Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url}")
+                Timber.d("shouldOverrideUrlLoading: ${request?.url}")
 //                view?.loadUrl(request.url.toString())
                 return false
             }
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                Log.d(TAG, "shouldOverrideUrlLoading: deprecated $url")
+                Timber.d("shouldOverrideUrlLoading: deprecated $url")
 //                view?.loadUrl(url)
                 return false
             }
 
             override fun onPageCommitVisible(view: WebView?, url: String?) {
                 super.onPageCommitVisible(view, url)
-                Log.d(TAG, "onPageCommitVisible: ")
+                Timber.d("onPageCommitVisible: ")
             }
 
             override fun onUnhandledKeyEvent(view: WebView?, event: KeyEvent?) {
                 super.onUnhandledKeyEvent(view, event)
-                Log.d(TAG, "onUnhandledKeyEvent: ")
+                Timber.d("onUnhandledKeyEvent: ")
             }
 
             override fun onReceivedClientCertRequest(view: WebView?, request: ClientCertRequest?) {
                 super.onReceivedClientCertRequest(view, request)
-                Log.d(TAG, "onReceivedClientCertRequest: ")
+                Timber.d("onReceivedClientCertRequest: ")
             }
 
             override fun onReceivedHttpAuthRequest(
@@ -310,7 +324,7 @@ class WebViewActivity : AppCompatActivity() {
                     host: String?,
                     realm: String?
             ) {
-                Log.d(TAG, "onReceivedHttpAuthRequest: ")
+                Timber.d("onReceivedHttpAuthRequest: ")
                 super.onReceivedHttpAuthRequest(view, handler, host, realm)
             }
 
@@ -319,7 +333,7 @@ class WebViewActivity : AppCompatActivity() {
                     handler: SslErrorHandler?,
                     error: SslError?
             ) {
-                Log.d(TAG, "onReceivedSslError: ")
+                Timber.d("onReceivedSslError: ")
                 super.onReceivedSslError(view, handler, error)
             }
 
@@ -328,13 +342,13 @@ class WebViewActivity : AppCompatActivity() {
                     dontResend: Message?,
                     resend: Message?
             ) {
-                Log.d(TAG, "onFormResubmission: ")
+                Timber.d("onFormResubmission: ")
                 super.onFormResubmission(view, dontResend, resend)
             }
 
             override fun onLoadResource(view: WebView?, url: String?) {
                 super.onLoadResource(view, url)
-                Log.d(TAG, "onLoadResource: ")
+                Timber.d("onLoadResource: ")
             }
         }
     }
