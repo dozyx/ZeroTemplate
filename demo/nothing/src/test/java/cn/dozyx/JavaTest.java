@@ -45,6 +45,7 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
+import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -84,6 +85,37 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+    private static volatile int race = 0;
+
+    /**
+     * 请用 debug 运行，否则会进入死循环。因为 run 运行时，idea 会多启动一个线程。
+     */
+    @Test
+    public void testVolatile(){
+        // 局部变量是线程私有的，并不会共享，所以不存在并发问题
+        // volatile 保证可见性和禁止指令重排序，但不保证原子性
+        Thread[] threads = new Thread[20];
+        for (int i = 0; i < 20; i++) {
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int j = 0; j < 10000; j++) {
+                        increaseRace();
+                    }
+                }
+            });
+            threads[i].start();
+        }
+        while (Thread.activeCount() > 1){
+            Thread.yield();
+            print(race);
+        }
+    }
+
+    private static void increaseRace(){
+        race++;
+    }
 
     @Test
     public void testArray() {
