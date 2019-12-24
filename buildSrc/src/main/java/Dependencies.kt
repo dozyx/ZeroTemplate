@@ -184,7 +184,7 @@ object Version {
     const val threeten = "1.2.1"
     const val leakcanary = "1.6.3"
     const val dagger = "2.23.2"
-    const val retrofit = "2.5.0"
+    const val retrofit = "2.7.0"
     const val junit = "4.12"
     const val stickylistheaders = "2.7.0"
     const val photoView = "1.2.4"
@@ -197,7 +197,7 @@ object Version {
     const val async_http = "1.4.9"
     const val ucrop = "1.5.0"
     const val bga_refresh_layout = "1.1.8"
-    const val okhttp = "3.14.0"
+    const val okhttp = "3.14.4"
     const val butterknife = "10.1.0"
     const val support = "1.0.0"
     const val constraintLayout = "2.0.0-beta2"
@@ -217,7 +217,7 @@ object Version {
     const val tencent_mid = "4.0.6-release" // 信鸽、腾讯统计依赖
     const val tencent_mta = "3.3.1-release" // 腾讯统计
     const val volley = "1.1.1"
-    const val rxjava2 = "2.2.7"
+    const val rxjava2 = "2.2.16"
     const val kotlin = "1.3.31"
     const val android_ktx = "1.0.0-beta01" // 与 support-appcompat 冲突
     const val permissionsdispatcher = "3.0.1"
