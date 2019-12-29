@@ -16,8 +16,8 @@ dependencies {
     api Deps.utilcode
     api Deps.constraintLayout
     api Deps.kotlin
+    api Deps.timber
     implementation Deps.appcompat
-    implementation Deps.timber
     implementation Deps.logger
     implementation Deps.rxjava2
     implementation Deps.rxAndroid

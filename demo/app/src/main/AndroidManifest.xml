@@ -343,7 +343,7 @@
         <activity android:name=".design.CoordinatorLayoutActivity" />
         <activity
             android:name=".DialogTestActivity"
-            android:label="dialog">
+            android:label="Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -541,7 +541,7 @@
         </activity>
         <activity
             android:name=".image.ImageLoaderTest"
-            android:label="image/loader">
+            android:label="Image/loader">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -614,7 +614,7 @@
         </activity>
         <activity
             android:name=".data.ParcelableTest"
-            android:label="data/Parcelable">
+            android:label="Data/Parcelable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -622,7 +622,7 @@
         </activity>
         <activity
             android:name=".arch.ViewModelTest"
-            android:label="arch/ViewModel">
+            android:label="Arch/ViewModel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -630,7 +630,7 @@
         </activity>
         <activity
             android:name=".demo.DemoActivity"
-            android:label="demo">
+            android:label="Demo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -638,7 +638,7 @@
         </activity>
         <activity
             android:name=".demo.swipedismiss.DragDismissActivity"
-            android:label="demo/拖动关闭"
+            android:label="Demo/拖动关闭"
             android:theme="@style/Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -647,7 +647,7 @@
         </activity>
         <activity
             android:name=".animation.AnimationTest"
-            android:label="anim">
+            android:label="Anim">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -655,7 +655,7 @@
         </activity>
         <activity
             android:name=".view.touch.TouchTest"
-            android:label="view/触摸事件">
+            android:label="View/触摸事件">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -663,7 +663,7 @@
         </activity>
         <activity
             android:name=".demo.dragpanel.DragPanelActivity"
-            android:label="demo/dragpanel">
+            android:label="Demo/dragpanel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -679,7 +679,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnListActivity"
-            android:label="demo/固定列表列">
+            android:label="Demo/固定列表列">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -687,7 +687,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnListActivity2"
-            android:label="demo/固定列表列2">
+            android:label="Demo/固定列表列2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -695,7 +695,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnListActivity3"
-            android:label="demo/固定列表列3">
+            android:label="Demo/固定列表列3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -741,7 +741,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnLIstActivity4"
-            android:label="demo/固定列表列4">
+            android:label="Demo/固定列表列4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -749,7 +749,7 @@
         </activity>
         <activity
             android:name=".bug.CalledFromWrongThreadTest"
-            android:label="bug/CalledFromWrongThread">
+            android:label="Bug/CalledFromWrongThread">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -786,6 +786,13 @@
         </activity>
         <activity android:name=".AndroidTest" android:exported="true"/>
         <activity android:name=".TransparentActivity" android:exported="true" android:theme="@style/ActivityTranslucent"/>
+        <activity android:name=".pager.PagerTransformTest"
+            android:label="View/Pager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
     </application>
 

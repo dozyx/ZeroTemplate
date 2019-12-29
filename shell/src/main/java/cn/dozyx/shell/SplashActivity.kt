@@ -18,5 +18,12 @@ class SplashActivity : BaseShellActivity() {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         }
         Timber.d("SplashActivity.onCreate")
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+//        if (!isTaskRoot) {
+//            finish()
+//            return
+//        }
     }
 }

@@ -14,7 +14,9 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val contentView = getLayoutView()
         if (contentView == null) {
-            setContentView(getLayoutId())
+            if (getLayoutId() != 0) {
+                setContentView(getLayoutId())
+            }
         } else {
             setContentView(contentView)
         }

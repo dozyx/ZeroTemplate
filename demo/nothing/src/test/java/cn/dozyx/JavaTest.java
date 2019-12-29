@@ -86,7 +86,6 @@ import cn.dozyx.zerofate.java.Person;
 
 public class JavaTest {
 
-
     @Test
     public void testDeadLock() throws Exception {
         // https://blog.csdn.net/Andy_96/article/details/82812538?utm_source=blogxgwz7
@@ -477,6 +476,16 @@ public class JavaTest {
 
     @Test
     public void testException() {
+//        try {
+            uncheckedException();
+//        }catch (Exception e){
+
+//        }
+        try {
+            checkedException();
+        } catch (IOException e) {
+
+        }
         try {
             new ExceptionClass().foo();
         } catch (Exception e) {
@@ -484,8 +493,16 @@ public class JavaTest {
         }
     }
 
-    private void throwException() {
+    private static void uncheckedException() {
+        // RuntimeException 不要求抛出的方法或构造函数使用 throws
+        // 运行时异常一般是由于代码逻辑问题引起的
+        // 也可以 catch，但容易掩盖问题代码
         throw new NullPointerException("我是空的");
+    }
+
+    private static void checkedException() throws IOException {
+        // 非运行时异常需要  catch 或 throws
+        throw new IOException();
     }
 
     @Test
