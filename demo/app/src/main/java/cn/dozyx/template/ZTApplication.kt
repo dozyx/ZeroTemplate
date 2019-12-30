@@ -1,7 +1,9 @@
 package cn.dozyx.template
 
 import cn.dozyx.core.base.BaseApplication
+import com.blankj.utilcode.util.ThreadUtils
 import com.facebook.stetho.Stetho
+import timber.log.Timber
 
 
 /**
@@ -9,6 +11,10 @@ import com.facebook.stetho.Stetho
  */
 
 class ZTApplication : BaseApplication() {
+
+    override fun onCreate() {
+        super.onCreate()
+    }
 
     override fun initOnMainProcess() {
         Stetho.initializeWithDefaults(this)

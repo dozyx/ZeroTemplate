@@ -792,6 +792,8 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".AndroidTest" android:exported="true"/>
+        <activity android:name=".TransparentActivity" android:exported="true" android:theme="@style/ActivityTranslucent"/>
 
     </application>
 

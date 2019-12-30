@@ -45,6 +45,7 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
+import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -84,6 +85,80 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+
+    @Test
+    public void testDeadLock() throws Exception {
+        // https://blog.csdn.net/Andy_96/article/details/82812538?utm_source=blogxgwz7
+        String lockA = "lockA";
+        String lockB = "lockB";
+        DeadLockSample t1 = new DeadLockSample("Thread1", lockA, lockB);
+        DeadLockSample t2 = new DeadLockSample("Thread2", lockB, lockA);
+        t1.start();
+        t2.start();
+        // 两个线程有一些先获得 first 的锁，比如 t1
+        // 需要注意，synchronized 的是对象锁，t1 的 first 是 lockA，t2 的 first 是 lockB
+        // 所以在 synchronized (first) 的地方，t1 和 t2 都会获得各自的锁
+        // 但继续执行，因为下一个锁被互相已经锁住，没办法获得，所以形成死锁
+        t1.join();
+        t2.join();
+    }
+    private class DeadLockSample extends Thread {
+        private final String first;
+        private final String second;
+        private DeadLockSample(String name, String first, String second) {
+            super(name);
+            this.first = first;
+            this.second = second;
+        }
+
+        public  void run() {
+            synchronized (first) {
+                print(this.getName() + " obtained: " + first);
+                try {
+                    Thread.sleep(1000L);
+                    synchronized (second) {
+                        print(this.getName() + " obtained: " + second);
+                    }
+                } catch (InterruptedException e) {
+                    // Do nothing
+                }
+            }
+        }
+    }
+
+
+
+    private static volatile int race = 0;
+
+    /**
+     * 请用 debug 运行，否则会进入死循环。因为 run 运行时，idea 会多启动一个线程。
+     */
+    @Test
+    public void testVolatile(){
+        // 局部变量是线程私有的，并不会共享，所以不存在并发问题
+        // volatile 保证可见性和禁止指令重排序，但不保证原子性
+        Thread[] threads = new Thread[20];
+        for (int i = 0; i < 20; i++) {
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int j = 0; j < 10000; j++) {
+                        increaseRace();
+                    }
+                }
+            });
+            threads[i].start();
+        }
+        while (Thread.activeCount() > 1){
+            Thread.yield();
+            print(race);
+        }
+    }
+
+    private static void increaseRace(){
+        race++;
+    }
 
     @Test
     public void testArray() {
@@ -216,6 +291,7 @@ public class JavaTest {
             }
         });
         thread1.start();
+        // join() 阻塞，直到该线程 die
         thread1.join();
         // 当前线程被阻塞
         print("hahaha");
@@ -588,9 +664,91 @@ public class JavaTest {
         ArrayList<Integer> integers = new ArrayList<>();
         System.out.println(strings.getClass() == integers.getClass());
         print(Arrays.toString(strings.getClass().getTypeParameters()));
-        ArrayList<? extends Number> list = new ArrayList<Integer>();
-        list.get(0).byteValue();
+
+        // 上界通配符
+        // List<? extends Parent> 声明一个 List，它的实例的具体类型可以为 Parent 类型或 Parent 的子类类型
+        List<? extends Parent> list1 = new ArrayList<>();
+        // 无法 add，因为并不知道 list1 的具体类型是哪个
+        // 比如，假设具体类型是 Child，那么就只能 add Child 而不能 add Child 的父类；
+        // 假设具体类型是 Parent，那么就只能 add Parent 和其子类
+        // 疑问，具体类型为 Child 或者 Parent，都能 add Child 才对？不对，假如 Parent 有另一个子类 Child2，那么 add Child 也不行。所以，能确定的只有读出来的是 Parent
+//        list1.add(new People());
+//        list1.add(new Parent());
+//        list1.add(new Child());
+        Parent parent = list1.get(0);
+        // 使用场景
+        list1(new ArrayList<>());
+//        list1(new ArrayList<People>());
+        list1(new ArrayList<Parent>());
+        list1(new ArrayList<Child>());
+        list1(new ArrayList<Child2>());
+
+        // 下界通配符，接收指定类本身或其父类
+        // List<? super Parent> 声明一个 List，它对应的实例的类型可以为 Parent 类型或 Parent 的超类
+        List<? super Parent> list2 = new ArrayList<>();
+        // 因为多态，所以可以 add Parent 及其子类
+//        list2.add(new People());
+        list2.add(new Parent());
+        list2.add(new Child());
+        Object object = list2.get(0);
+        list2(new ArrayList<>());
+        list2(new ArrayList<People>());
+        list2(new ArrayList<Parent>());
+//        list2(new ArrayList<Child>());
+
+        List<Parent> list3 = new ArrayList<>();
+//        list3.add(new People());
+        list3.add(new Parent());
+        list3.add(new Child());
+
+        List<Child> list4 = new ArrayList<>();
+//        list3.add(new People());
+//        list4.add(new Parent());
+        list4.add(new Child());
+
+        list3(list3);
+        list4(list3);
+//        list5(list3);
     }
+
+
+    private void list1(List<? extends Parent> list){
+
+    }
+
+    private void list2(List<? super Parent> list){
+
+    }
+
+    private void list3(List<?> list){
+
+    }
+    private void list4(List list){
+
+    }
+    private void list5(List<Object> list){
+
+    }
+
+
+    private class People {
+        void fun1() throws IllegalAccessError{
+
+        }
+    }
+    private interface People2 {
+    }
+
+    private class Parent extends People implements People2 {
+
+    }
+
+    private class Child extends Parent {
+    }
+
+    private class Child2 extends Parent {
+    }
+
 
 
     @Test

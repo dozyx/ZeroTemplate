@@ -41,7 +41,9 @@
         <item name="actionMenuTextColor">@color/colorAccent</item>
     </style>
 
-    <style name="LaunchTheme" parent="AppTheme"></style>
+    <style name="LaunchTheme" parent="AppTheme">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
 
     <style name="ButtonStyleTheme">
         <item name="android:background">@android:color/holo_green_light</item>
