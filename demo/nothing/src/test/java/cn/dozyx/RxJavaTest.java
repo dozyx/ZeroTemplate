@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -44,6 +46,49 @@ import io.reactivex.subjects.UnicastSubject;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
 
+    @Test
+    public void testAmb() {
+        Observable.ambArray(Observable.just(1,2,3)/*.delay(100,TimeUnit.MILLISECONDS)*/,Observable.empty()).subscribe(sObserver);
+        sleep(2);
+    }
+
+    @Test
+    public void testScheduler() {
+        RxJavaPlugins.setOnObservableSubscribe(new BiFunction<Observable, Observer, Observer>() {
+            @Override
+            public Observer apply(Observable observable, Observer observer) throws Exception {
+                print("hook setOnObservableSubscribe -> " + Thread.currentThread() + " " + observable);
+                return observer;
+            }
+        });
+        getCreateObservable().flatMap(new Function<String, ObservableSource<String>>() {
+            @Override
+            public ObservableSource<String> apply(String s) throws Exception {
+                return getCreateObservable();
+            }
+        })/*.observeOn(Schedulers.io())*/.subscribeOn(Schedulers.io()).subscribeOn(Schedulers.computation()).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                print("onSubscribe -> " + Thread.currentThread());
+            }
+
+            @Override
+            public void onNext(String s) {
+                print("onNext -> " + Thread.currentThread());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                print("onError -> " + Thread.currentThread());
+            }
+
+            @Override
+            public void onComplete() {
+                print("onComplete -> " + Thread.currentThread());
+            }
+        });
+        sleep(1);
+    }
 
     @Test
     public void testRxJavaPlugin() {
@@ -384,7 +429,8 @@ public class RxJavaTest {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {
                 String item = "Alpha" + new Random().nextInt();
-                System.out.println("emitter = [" + emitter + "] " + item);
+//                System.out.println("emitter = [" + emitter + "] " + item);
+                print("create -> " + Thread.currentThread());
                 emitter.onNext(item);
             }
         });

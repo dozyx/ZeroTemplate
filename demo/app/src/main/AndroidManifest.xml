@@ -258,6 +258,7 @@
         </activity>
 
         <service android:name=".practice.FloatWindowActivity$FloatWindowsServices" />
+        <service android:name=".service.MyIntentService" />
 
         <activity
             android:name=".view.recyclerview.RecyclerViewTestActivity"
@@ -779,6 +780,13 @@
             android:name=".keyboard.KeyBoardTest"
             android:windowSoftInputMode="adjustResize|stateVisible"
             android:label="KeyBoard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".service.ServiceTest"
+            android:label="Service/IntentService">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
