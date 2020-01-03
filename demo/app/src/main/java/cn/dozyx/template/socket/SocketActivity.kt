@@ -6,27 +6,14 @@ import android.os.Handler
 import android.os.Message
 import android.os.SystemClock
 import android.text.TextUtils
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
-
-import cn.dozyx.template.R
-import cn.dozyx.template.util.Utils
-
-import java.io.BufferedReader
-import java.io.BufferedWriter
-import java.io.IOException
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
-import java.io.PrintWriter
-import java.net.Socket
-
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import cn.dozyx.template.R
+import cn.dozyx.template.util.Utils
 import kotlinx.android.synthetic.main.activity_socket.*
+import java.io.*
+import java.net.Socket
 
 /**
  * 《Android开发艺术探索》
