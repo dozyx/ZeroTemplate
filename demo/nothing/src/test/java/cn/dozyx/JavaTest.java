@@ -24,12 +24,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -41,6 +46,8 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -86,6 +93,89 @@ import cn.dozyx.zerofate.java.Person;
 
 public class JavaTest {
 
+    @Test
+    public void testSocket() {
+        new SocketServerThread().start();
+        new SocketClientThread().start();
+        sleep(2);
+    }
+
+    private static class SocketClientThread extends Thread {
+        private Socket client;
+        private PrintWriter writer;
+        private BufferedReader reader;
+
+        @Override
+        public void run() {
+            try {
+                while (client == null) {
+                    client = new Socket("localhost", 9876);
+                    writer = new PrintWriter(
+                            new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),
+                            true);
+                    reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < 10; i++) {
+                print(i);
+                writer.println("socket客户端：" + i);
+            }
+            String line;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    print(line);
+                }
+            } catch (Exception e) {
+                print(e);
+            }
+        }
+    }
+
+    private static class SocketServerThread extends Thread {
+
+        private ServerSocket serverSocket;
+
+        private SocketServerThread() {
+            try {
+                serverSocket = new ServerSocket(9876);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void run() {
+            // 监听接入的 Socket 连接
+            Socket client;
+            try {
+                client = serverSocket.accept();
+                //接收客户端信息
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(client.getInputStream()));
+                //向客户端发送信息
+                PrintWriter writer = new PrintWriter(
+                        new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),
+                        true);
+                writer.println("欢迎来到聊天室！");
+                while (true) {
+                    // 不断地响应该 client 的请求
+                    String str = reader.readLine();
+                    if (str == null) {
+                        break;//断开
+                    }
+                    int i = new Random().nextInt();
+                    writer.println(str + ": " + i);
+                }
+                writer.close();
+                reader.close();
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Test
     public void testDeadLock() throws Exception {
@@ -103,16 +193,18 @@ public class JavaTest {
         t1.join();
         t2.join();
     }
+
     private class DeadLockSample extends Thread {
         private final String first;
         private final String second;
+
         private DeadLockSample(String name, String first, String second) {
             super(name);
             this.first = first;
             this.second = second;
         }
 
-        public  void run() {
+        public void run() {
             synchronized (first) {
                 print(this.getName() + " obtained: " + first);
                 try {
@@ -128,14 +220,13 @@ public class JavaTest {
     }
 
 
-
     private static volatile int race = 0;
 
     /**
      * 请用 debug 运行，否则会进入死循环。因为 run 运行时，idea 会多启动一个线程。
      */
     @Test
-    public void testVolatile(){
+    public void testVolatile() {
         // 局部变量是线程私有的，并不会共享，所以不存在并发问题
         // volatile 保证可见性和禁止指令重排序，但不保证原子性
         Thread[] threads = new Thread[20];
@@ -150,13 +241,13 @@ public class JavaTest {
             });
             threads[i].start();
         }
-        while (Thread.activeCount() > 1){
+        while (Thread.activeCount() > 1) {
             Thread.yield();
             print(race);
         }
     }
 
-    private static void increaseRace(){
+    private static void increaseRace() {
         race++;
     }
 
@@ -671,7 +762,8 @@ public class JavaTest {
         // 无法 add，因为并不知道 list1 的具体类型是哪个
         // 比如，假设具体类型是 Child，那么就只能 add Child 而不能 add Child 的父类；
         // 假设具体类型是 Parent，那么就只能 add Parent 和其子类
-        // 疑问，具体类型为 Child 或者 Parent，都能 add Child 才对？不对，假如 Parent 有另一个子类 Child2，那么 add Child 也不行。所以，能确定的只有读出来的是 Parent
+        // 疑问，具体类型为 Child 或者 Parent，都能 add Child 才对？不对，假如 Parent 有另一个子类 Child2，那么 add Child
+        // 也不行。所以，能确定的只有读出来的是 Parent
 //        list1.add(new People());
 //        list1.add(new Parent());
 //        list1.add(new Child());
@@ -712,30 +804,33 @@ public class JavaTest {
     }
 
 
-    private void list1(List<? extends Parent> list){
+    private void list1(List<? extends Parent> list) {
 
     }
 
-    private void list2(List<? super Parent> list){
+    private void list2(List<? super Parent> list) {
 
     }
 
-    private void list3(List<?> list){
+    private void list3(List<?> list) {
 
     }
-    private void list4(List list){
+
+    private void list4(List list) {
 
     }
-    private void list5(List<Object> list){
+
+    private void list5(List<Object> list) {
 
     }
 
 
     private class People {
-        void fun1() throws IllegalAccessError{
+        void fun1() throws IllegalAccessError {
 
         }
     }
+
     private interface People2 {
     }
 
@@ -748,7 +843,6 @@ public class JavaTest {
 
     private class Child2 extends Parent {
     }
-
 
 
     @Test
