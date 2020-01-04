@@ -118,4 +118,7 @@
         <item name="android:layout_gravity">bottom|right</item>
     </style>
 
+    <style name="TabAppearance" parent="TextAppearance.Design.Tab">
+    </style>
+
 </resources>

@@ -5,6 +5,7 @@ import android.os.StrictMode
 import cn.dozyx.core.GlobalConfig
 import cn.dozyx.core.ex.debuggable
 import cn.dozyx.core.ex.isMainProcess
+import com.blankj.utilcode.util.CrashUtils
 import com.blankj.utilcode.util.Utils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -36,6 +37,13 @@ abstract class BaseApplication : Application() {
         initOnAllProcess()
         initLeakCanary()
         initLog()
+        initCrash()
+    }
+
+    private fun initCrash() {
+        CrashUtils.init { crashInfo, e ->
+            Timber.e("BaseApplication.initCrash $crashInfo")
+        }
     }
 
     private fun initLog() {
