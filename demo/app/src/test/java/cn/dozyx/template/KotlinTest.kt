@@ -14,6 +14,14 @@ import org.junit.Test
 class KotlinTest {
 
     @Test
+    fun testNull() {
+        val str: String? = null
+        str?.apply {
+            print(this)
+        } ?: print("null")
+    }
+
+    @Test
     fun testCoroutine1() {
         GlobalScope.launch {
             //启动一个协程
@@ -25,7 +33,8 @@ class KotlinTest {
         println("Hello,")
         Thread.sleep(2000L)
     }
-    fun printThread(){
+
+    fun printThread() {
         println(Thread.currentThread())
     }
 }
