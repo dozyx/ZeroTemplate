@@ -65,9 +65,10 @@ class CustomItemDecoration(val context: Context, val orientation: Int) : Recycle
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        // outRect 表示 item 四边的边距
+        // outRect 表示 item 的内边距
+        // 用来为 decoration 预留绘制空间
         when (orientation) {
-            VERTICAL -> outRect.set(0, 0, 0, divider.intrinsicHeight)
+            VERTICAL -> outRect.set(0+30, 0, 0, divider.intrinsicHeight)
             HORIZONTAL -> outRect.set(0, 0, divider.intrinsicWidth, 0)
         }
     }

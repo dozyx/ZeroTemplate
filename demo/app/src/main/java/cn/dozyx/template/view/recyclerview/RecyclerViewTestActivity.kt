@@ -1,6 +1,7 @@
 package cn.dozyx.template.view.recyclerview
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -37,6 +38,7 @@ class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
             }
 
             override fun convert(holder: VH, data: String, position: Int) {
+                holder.itemView.setBackgroundColor(Color.GRAY)
                 holder.setText(android.R.id.text1,data)
                 holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
                 (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).topMargin = 100
