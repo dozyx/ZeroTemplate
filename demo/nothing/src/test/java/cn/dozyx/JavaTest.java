@@ -2,8 +2,6 @@ package cn.dozyx;
 
 
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -42,17 +40,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
-import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -569,7 +566,7 @@ public class JavaTest {
     @Test
     public void testException() {
 //        try {
-            uncheckedException();
+        uncheckedException();
 //        }catch (Exception e){
 
 //        }
@@ -765,6 +762,28 @@ public class JavaTest {
     public void testFoo() {
 
         print(-123 / 10);
+    }
+
+    @Test
+    public void testGeneric2() {
+        new GenericSuperClass<Integer, Long>();
+        new GenericClass<Integer>();
+        new GenericClass<Integer>(){};
+    }
+
+    private static class GenericSuperClass<T, R> {
+        private GenericSuperClass() {
+//            print("super getClass " + getClass());
+        }
+    }
+
+    private static class GenericClass<T> extends GenericSuperClass<String, T> {
+        private GenericClass() {
+            super();
+            // getGenericSuperclass 返回直接继承的父类（包含泛型参数）。注意：所有 Class 都继承了 Object
+            print(getClass().getGenericSuperclass());
+            print(((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
+        }
     }
 
     @Test
