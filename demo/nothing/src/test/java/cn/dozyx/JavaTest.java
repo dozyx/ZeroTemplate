@@ -42,8 +42,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
+import java.lang.reflect.WildcardType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.ServerSocket;
@@ -92,6 +94,25 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testNullIndex(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add(null);
+        list.add(null);
+        print(list.indexOf(null));// 如果元素中有 null，将返回第一个 null 的索引
+        print(list.size());
+    }
+
+    private static final String PARAM = "[a-zA-Z][a-zA-Z0-9_-]*";
+    private static final Pattern PARAM_URL_REGEX = Pattern.compile("\\{(" + PARAM + ")\\}");
+    @Test
+    public void testRegex(){
+        Matcher queryParamMatcher = PARAM_URL_REGEX.matcher("{aa}");
+        print(queryParamMatcher.matches());
+        print(queryParamMatcher.group(0));
+    }
 
     @Test
     public void testSocket() {
@@ -728,17 +749,24 @@ public class JavaTest {
             // 对象必须能准确地反射出代码中使用的实际类型（关于泛型这部分不是很懂，实际打印出来是显示的就是表示泛型的字母）
             print(method.getName() + " getGenericParameterTypes: " + Arrays.toString(
                     method.getGenericParameterTypes()));
+        }
+        for (Method method : methods) {
+            // getReturnType() 获取返回值类型，如果返回值是一个泛型，则为泛型的边界类型
+            // 返回值是一个 Class
             print(method.getName() + " getReturnType: " + method.getReturnType());
+        }
+        for (Method method : methods) {
+            // getGenericReturnType() 返回一个表示返回类型的 Type 对象
             print(method.getName() + " getGenericReturnType: " + method.getGenericReturnType());
         }
         try {
             ReflectClass<Object> object = new ReflectClass<>();
             Field sBoolean = cls.getDeclaredField("sBoolean");
             sBoolean.setAccessible(true);
-            print(sBoolean.isAccessible() + "");
+            print("sBoolean.isAccessible() " + sBoolean.isAccessible());
             sBoolean.setBoolean(object, false);
-            print(sBoolean.isAccessible() + "");
-            print(sBoolean.getBoolean(object) + "");
+            print("sBoolean.isAccessible() " + sBoolean.isAccessible());
+            print("sBoolean.isAccessible() " + sBoolean.getBoolean(object));
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -748,7 +776,7 @@ public class JavaTest {
         private T data;
         private static boolean sBoolean = true;
 
-        private <K> K foo1(K type) {
+        private <K extends CharSequence> K foo1(K type) {
             return type;
         }
 
@@ -903,9 +931,14 @@ public class JavaTest {
     @Test
     public void testType() {
 
-        System.out.println(Boolean.TYPE);
-        System.out.println(Integer.TYPE == Integer.class);
-        System.out.println(Integer.class instanceof Class);
+        print(Boolean.TYPE);
+        print(Integer.TYPE == Integer.class);
+        print(Integer.class instanceof Class);
+        print(new TypeTest<String>().name);
+    }
+
+    private static class TypeTest<T>{
+        private T name;
     }
 
     public void testDate() {

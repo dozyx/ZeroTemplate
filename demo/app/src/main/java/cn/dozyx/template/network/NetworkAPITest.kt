@@ -339,7 +339,7 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
         if (call.isExecuted) {
             call = call.clone()
         }
-        call.enqueue(object : retrofit2.Callback<ResponseBody> {
+        /*call.enqueue(object : retrofit2.Callback<ResponseBody> {
             override fun onResponse(
                     call: retrofit2.Call<ResponseBody>,
                     response: retrofit2.Response<ResponseBody>
@@ -356,13 +356,17 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
             override fun onFailure(call: retrofit2.Call<ResponseBody>, t: Throwable) {
                 appendResult("onFailure: " + t.message)
             }
-        })
+        })*/
+        service.foo.execute()
 //        }
     }
 
     private interface IService {
-        @get:GET("\\")
+        @get:GET("index")
         val data: retrofit2.Call<ResponseBody>
+
+        @get:GET("index")
+        val foo: retrofit2.Call<retrofit2.Response<String>>
 
         @Streaming
         @GET
