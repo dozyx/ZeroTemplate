@@ -48,7 +48,8 @@ public class RxJavaTest {
 
     @Test
     public void testAmb() {
-        Observable.ambArray(Observable.just(1,2,3)/*.delay(100,TimeUnit.MILLISECONDS)*/,Observable.empty()).subscribe(sObserver);
+        Observable.ambArray(Observable.just(1, 2, 3)/*.delay(100,TimeUnit.MILLISECONDS)*/,
+                Observable.empty()).subscribe(sObserver);
         sleep(2);
     }
 
@@ -57,7 +58,8 @@ public class RxJavaTest {
         RxJavaPlugins.setOnObservableSubscribe(new BiFunction<Observable, Observer, Observer>() {
             @Override
             public Observer apply(Observable observable, Observer observer) throws Exception {
-                print("hook setOnObservableSubscribe -> " + Thread.currentThread() + " " + observable);
+                print("hook setOnObservableSubscribe -> " + Thread.currentThread() + " "
+                        + observable);
                 return observer;
             }
         });
@@ -66,7 +68,8 @@ public class RxJavaTest {
             public ObservableSource<String> apply(String s) throws Exception {
                 return getCreateObservable();
             }
-        })/*.observeOn(Schedulers.io())*/.subscribeOn(Schedulers.io()).subscribeOn(Schedulers.computation()).subscribe(new Observer<String>() {
+        })/*.observeOn(Schedulers.io())*/.subscribeOn(Schedulers.io()).subscribeOn(
+                Schedulers.computation()).subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
                 print("onSubscribe -> " + Thread.currentThread());
@@ -672,6 +675,7 @@ public class RxJavaTest {
         }
     }
 
+    @Test
     public void testZip() {
         Observable<Integer> observable1 = getObservable(1, 2, 3);
         Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2, TimeUnit.SECONDS);
@@ -684,15 +688,30 @@ public class RxJavaTest {
         }
     }
 
+
+    @Test
+    public void testZipArray() {
+        Observable<Integer> observable1 = getObservable(1, 2, 3);
+        Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2, TimeUnit.SECONDS);
+        Observable.zipArray(objects -> (Integer) objects[0] + (Integer) objects[1], false, 2,
+                observable1, observable2).subscribe(observer);
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     Observer<Integer> observer = new Observer<Integer>() {
         @Override
         public void onSubscribe(Disposable d) {
-            System.out.println("onSubscribe d = [" + d + "]");
+            print("onSubscribe d = [" + d + "]");
         }
 
         @Override
         public void onNext(Integer integer) {
-            System.out.println("onNext integer = [" + integer + "]");
+            print("onNext integer = [" + integer + "]");
         }
 
         @Override
@@ -702,8 +721,7 @@ public class RxJavaTest {
 
         @Override
         public void onComplete() {
-            System.out.println(System.currentTimeMillis());
-            System.out.println("onComplete");
+            print("onComplete");
         }
     };
 
