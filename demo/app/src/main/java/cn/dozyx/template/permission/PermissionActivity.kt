@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 
 import cn.dozyx.template.base.BaseTestActivity
+import com.tbruyelle.rxpermissions2.RxPermissions
 import timber.log.Timber
 
 import java.util.Arrays

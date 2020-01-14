@@ -64,8 +64,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
@@ -90,6 +92,38 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testQueue(){
+        // 先进先出，元素添加到尾部
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        // peek 获取队列的 head 元素，但不会 remove
+        print(queue.peek());
+        print(queue.size());
+        // 在 LinkedList 的 offer 实现里，调用的就是 add 方法
+        //
+        print(queue.offer(10));
+        print(queue.size());
+
+        // 有界队列
+        LinkedBlockingQueue<Integer> blockingQueue = new LinkedBlockingQueue<>(1);
+        blockingQueue.add(0);
+        // add、put、offer 都可以用来添加元素，但在队列已满的情况下执行的策略不同
+        // add 如果队列已满，将直接抛出异常。LinkedBlockingQueue 实现里调用的是 offer 方法，offer 返回 false 则抛出异常
+        // put 如果队列已满，将阻塞线程，LinkedBlockingQueue 通过 ReentrantLock 实现
+        // offer 如果队列已满，将返回 false，但不会抛出异常
+//        print(blockingQueue.add(1));
+        print("put before");
+        /*try {
+            blockingQueue.put(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        print("put after");
+        print(blockingQueue.offer(3));
+        sleep(1);
+    }
 
     @Test
     public void testNullIndex(){
@@ -928,20 +962,20 @@ public class JavaTest {
 
     @Test
     public void testShiftOperator() {
-        // >> 算术右移，整体右移，包括符号位，原符号位正数补0，负数补1。右移一位相当于处于2
+        // >> 算术右移，整体右移，包括符号位，原符号位正数补0，负数补1。右移一位相当于除以2
         // >>> 逻辑右移（无符号右移），整体右移，包括符号位，高位补 0
         // << 算术左移，低位补0，可能导致负数变为正数，或相反，但这些情况意味着发生了溢出。左移一位相当于乘以2
         // 没有逻辑左移，因为它的结果与算术左移一致。 https://www.quora
         // .com/Why-is-there-no-unsigned-left-shift-operator-in-Java
-        System.out.println(Integer.toHexString(2));
-        System.out.println(Integer.toHexString(-2));
-        System.out.println(Integer.toHexString(2 >> 1));
-        System.out.println(Integer.toHexString(-2 >> 1));
-        System.out.println(Integer.toHexString(2 >>> 1));
-        System.out.println(Integer.toHexString(-2 >>> 1));
-        System.out.println(Integer.toHexString(2 << 1));
-        System.out.println(Integer.toHexString(-2 << 1));
-        System.out.println(Integer.toHexString(0x7fffffff << 1));
+        System.out.println(Integer.toBinaryString(2));
+        System.out.println(Integer.toBinaryString(-2));
+        System.out.println(Integer.toBinaryString(2 >> 1));
+        System.out.println(Integer.toBinaryString(-2 >> 1));
+        System.out.println(Integer.toBinaryString(2 >>> 1));
+        System.out.println(Integer.toBinaryString(-2 >>> 1));
+        System.out.println(Integer.toBinaryString(2 << 1));
+        System.out.println(Integer.toBinaryString(-2 << 1));
+        System.out.println(Integer.toBinaryString(0x7fffffff << 1));
 //        System.out.println(Integer.toHexString(0x8f000000 << 1));
         System.out.println(Integer.MIN_VALUE);
     }
@@ -1082,9 +1116,8 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        Date date = new Date();
-        date.setTime(1571901056000L);
-        print(formatDate(date));
+        int i = -1;
+        print((i << 1)>>>1);
     }
 
     public static String parse(String fen) {
