@@ -75,6 +75,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -92,6 +93,15 @@ import cn.dozyx.zerofate.java.Person;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testAtomic(){
+        AtomicInteger integer = new AtomicInteger();
+        print(integer.compareAndSet(1,1));
+        print(integer.get());
+        print(integer.compareAndSet(0,2));
+        print(integer.get());
+    }
 
     @Test
     public void testQueue(){
