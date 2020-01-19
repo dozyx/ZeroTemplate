@@ -101,38 +101,38 @@ class ViewLifeActivity : LifeCycleActivity() {
         }
     }
 
-    class LifeViewLinearLayout : LinearLayout {
-        constructor(context: Context) : super(context) {
-            Timber.d("LifeViewGroup: 1")
-        }
+}
+class LifeViewLinearLayout : LinearLayout {
+    constructor(context: Context) : super(context) {
+        Timber.d("LifeViewGroup: 1")
+    }
 
-        constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-            Timber.d("LifeViewGroup: 2")
-        }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        Timber.d("LifeViewGroup: 2")
+    }
 
-        constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-            Timber.d("LifeViewGroup: 3")
-        }
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        Timber.d("LifeViewGroup: 3")
+    }
 
-        override fun onSaveInstanceState(): Parcelable? {
-            Timber.d("onSaveInstanceState: view group")
-            return super.onSaveInstanceState()
-        }
+    override fun onSaveInstanceState(): Parcelable? {
+        Timber.d("onSaveInstanceState: view group")
+        return super.onSaveInstanceState()
+    }
 
-        override fun onRestoreInstanceState(state: Parcelable) {
-            super.onRestoreInstanceState(state)
-            Timber.d("onRestoreInstanceState: view group")
-        }
+    override fun onRestoreInstanceState(state: Parcelable) {
+        super.onRestoreInstanceState(state)
+        Timber.d("onRestoreInstanceState: view group")
+    }
 
-        override fun onTouchEvent(event: MotionEvent): Boolean {
-            Timber.d("LifeViewLinearLayout.onTouchEvent ${MotionEvent.actionToString(event.action)}")
-            return super.onTouchEvent(event)
-        }
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        Timber.d("LifeViewLinearLayout.onTouchEvent ${MotionEvent.actionToString(event.action)}")
+        return super.onTouchEvent(event)
+    }
 
-        override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-            Timber.d("LifeViewLinearLayout.onInterceptTouchEvent ${MotionEvent.actionToString(ev.action)}")
-            return super.onInterceptTouchEvent(ev)
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        Timber.d("LifeViewLinearLayout.onInterceptTouchEvent ${MotionEvent.actionToString(ev.action)}")
+        return super.onInterceptTouchEvent(ev)
 //            return true
-        }
     }
 }
