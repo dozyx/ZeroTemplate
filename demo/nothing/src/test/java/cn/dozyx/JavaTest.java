@@ -1064,9 +1064,7 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        Date date = new Date();
-        date.setTime(1571901056000L);
-        print(formatDate(date));
+        print(5&(-5));
     }
 
     public static String parse(String fen) {

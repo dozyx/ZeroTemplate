@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewLifeActivity">
 
-    <view
-        class="cn.dozyx.template.view.ViewLifeActivity$LifeViewLinearLayout"
+    <cn.dozyx.template.view.LifeViewLinearLayout
         android:id="@+id/life_view_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -17,6 +16,6 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@color/colorAccent" />
-    </view>
+    </cn.dozyx.template.view.LifeViewLinearLayout>
 
 </FrameLayout>

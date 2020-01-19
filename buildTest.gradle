@@ -1,5 +1,7 @@
 dependencies {
     testImplementation DepsTest.junit
     androidTestImplementation DepsTest.testRunner
+    androidTestImplementation DepsTest.rules
+    androidTestImplementation DepsTest.junitExt
     androidTestImplementation DepsTest.espresso
 }

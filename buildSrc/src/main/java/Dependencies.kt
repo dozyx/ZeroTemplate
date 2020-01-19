@@ -141,7 +141,9 @@ object DepsOkHttp {
 
 object DepsTest {
     val junit = "junit:junit:${Version.junit}"
+    val junitExt = "androidx.test.ext:junit:${Version.junit_ext}"
     val testRunner = "androidx.test:runner:${Version.testRunner}"
+    val rules = "androidx.test:rules:${Version.testRunner}"
     val espresso = "androidx.test.espresso:espresso-core:${Version.espresso}"
 }
 
@@ -186,6 +188,7 @@ object Version {
     const val dagger = "2.23.2"
     const val retrofit = "2.7.0"
     const val junit = "4.12"
+    const val junit_ext = "1.1.1"
     const val stickylistheaders = "2.7.0"
     const val photoView = "1.2.4"
     const val sectorProgressView = "2.0.0"
