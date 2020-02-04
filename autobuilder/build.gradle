@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Deps.javaPoet
+//    implementation Deps.autoService
+//    annotationProcessor Deps.autoService
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
