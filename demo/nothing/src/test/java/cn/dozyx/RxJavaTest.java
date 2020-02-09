@@ -28,6 +28,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
@@ -66,9 +67,10 @@ public class RxJavaTest {
         getCreateObservable().flatMap(new Function<String, ObservableSource<String>>() {
             @Override
             public ObservableSource<String> apply(String s) throws Exception {
+                print("apply -> " + Thread.currentThread());
                 return getCreateObservable();
             }
-        })/*.observeOn(Schedulers.io())*/.subscribeOn(Schedulers.io()).subscribeOn(
+        }).observeOn(Schedulers.computation()).observeOn(Schedulers.io()).subscribeOn(Schedulers.io()).subscribeOn(
                 Schedulers.computation()).subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
