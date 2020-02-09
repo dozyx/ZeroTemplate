@@ -1,5 +1,7 @@
 package cn.dozyx;
 
+import static cn.dozyx.LogUtils.print;
+
 import android.annotation.SuppressLint;
 
 import org.junit.Test;
@@ -323,15 +325,6 @@ public class RxJavaTest {
         }).subscribe(sObserver);*/
     }
 
-    public void print(String msg) {
-        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-        DateFormat format = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
-        System.out.println(
-                format.format(Calendar.getInstance().getTime())
-                        + " -> " /*+ stackTrace[3].getMethodName()*/ + " "
-                        + msg);
-    }
-
     @SuppressLint("CheckResult")
     public void testCallable() {
         testDelay();
@@ -354,6 +347,7 @@ public class RxJavaTest {
 //        Observable.range(1, 100).takeUntil(i -> i <= 5).subscribe(sObserver);
     }
 
+    @Test
     public void testError() {
         // 不会回调 onError 的例子
 //        Observable.just(1 / 0).subscribe(integer -> System.out.println("Received: " + integer),
@@ -376,6 +370,16 @@ public class RxJavaTest {
                 return integer - 1;
             }
         }).subscribe(sObserver);
+
+
+        Observable.just(1).map(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer) throws Exception {
+                String str = null;
+                str.length();// 异常被 catch
+                return 2;
+            }
+        }).subscribe(observer);
     }
 
     public int start = 1;
@@ -442,6 +446,7 @@ public class RxJavaTest {
     }
 
 
+    @Test
     public void testCreate() {
         Observable<String> source = Observable.create(emitter -> {
             try {

@@ -1,4 +1,4 @@
-package com.zerofate.java.annotation;
+package com.zerofate.java.annotation.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
@@ -15,6 +15,7 @@ public class UseCustomAnnotation {
     }
 
     private static void readAnnotation(AnnotatedElement element) {
+        // 在运行时通过反射读取注解里的信息
         try {
             System.out.println("Annotation element values: \n");
             if (element.isAnnotationPresent(TypeHeader.class)) {

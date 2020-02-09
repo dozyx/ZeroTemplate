@@ -1,9 +1,12 @@
-package com.zerofate.java.annotation;
+package com.zerofate.java.annotation.reflect;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * 创建一个注解
+ * RetentionPolicy.RUNTIME 在运行时可以通过反射读取注解
+ *
  * @author dozeboy
  * @date 2019-06-01
  */

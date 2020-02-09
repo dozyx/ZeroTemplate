@@ -49,7 +49,8 @@ object Deps {
     val adapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.adapter_helper}"
     val calligraphy = "io.github.inflationx:calligraphy3:${Version.calligraphy}"
     val viewpump = "io.github.inflationx:viewpump:${Version.viewpump}"
-
+    val autoService = "com.google.auto.service:auto-service:${Version.auto_service}"
+    val javaPoet = "com.squareup:javapoet:${Version.java_poet}"
 
 }
 
@@ -263,4 +264,6 @@ object Version {
     const val adapter_helper = "2.9.50"
     const val calligraphy = "3.1.1"
     const val viewpump = "2.0.3"
+    const val auto_service = "1.0-rc6"
+    const val java_poet = "1.12.1"
 }

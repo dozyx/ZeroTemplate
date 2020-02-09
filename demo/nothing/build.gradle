@@ -51,7 +51,7 @@ dependencies {
     implementation DepsButterKnife.runtime
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    annotationProcessor DepsButterKnife.processor
+    kapt DepsButterKnife.processor
     implementation DepsPermissionsDispatcher.runtime
     annotationProcessor DepsPermissionsDispatcher.processor
     implementation DepsDagger.runtime
@@ -91,6 +91,11 @@ dependencies {
     implementation DepsGlide.runtime
     implementation Deps.adapterHelper
     annotationProcessor DepsGlide.processor
+    implementation Deps.javaPoet
+    implementation project(':butterknife-annotations')
+    kapt project(':butterknife-compiler')
+    implementation project(':autobuilder')
+    annotationProcessor project(':autobuilder')
 //    implementation ("com.github.bumptech.glide:okhttp3-integration:4.10.0"){
 //        exclude group: "com.squareup.okhttp3", module: "okhttp"
 //    }

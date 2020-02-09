@@ -3,15 +3,24 @@ package cn.dozyx.template.justfortest;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.dozex.butterknife_annotations.BindView;
+
 import cn.dozyx.template.justfortest.databinding.ActivityDataBindingTestBinding;
 import cn.dozyx.template.justfortest.databinding.ActivityMeaninglessBinding;
 
 public class DataBindingTestActivity extends AppCompatActivity {
+
+    @BindView(R.id.btn_test)
+    Button button;
+
+    @butterknife.BindView(R.id.btn_test)
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
