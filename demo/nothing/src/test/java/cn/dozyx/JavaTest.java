@@ -149,7 +149,59 @@ public class JavaTest {
     }
 
     @Test
-    public void testConcurrentHashMap() {
+    public void testStack(){
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        while (!stack.empty()){
+            print(stack.pop());
+        }
+    }
+
+    @Test
+    public void testListNode(){
+        ListNode node = new ListNode(1);
+        node.next = new ListNode(2);
+        node.next.next = new ListNode(3);
+        printListNode(node);
+
+        // 反转
+        Stack<ListNode> stack = new Stack<>();
+        ListNode current = node;
+        do {
+            stack.push(current);
+            current.next = null;
+            current = current.next;
+        } while (current != null);
+
+        ListNode newHead = stack.pop();
+        current = newHead;
+        while (!stack.empty()) {
+            current.next = stack.pop();
+            current = current.next;
+        }
+        printListNode(newHead);
+    }
+
+    private void printListNode(ListNode node) {
+        ListNode current = node;
+        while (current != null){
+            print(current.val);
+            current = current.next;
+        }
+    }
+
+    private class ListNode {
+        private ListNode next;
+        private int val;
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public void testConcurrentHashMap(){
         ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
         map.put("key", 1);
         for (int i = 0; i < 10000; i++) {
