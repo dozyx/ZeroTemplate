@@ -61,7 +61,7 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".perfermance.BitmapActivity" />
+        <activity android:name=".performance.BitmapActivity" />
         <activity
             android:name=".imageloader.ui.ImageLoaderActivity"
             android:label="@string/view_image_loader">
@@ -810,6 +810,14 @@
         </activity>
         <activity android:name=".permission.RxPermissionsActivity"
             android:label="权限/RxPermissions">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".performance.UIPerformanceTest"
+            android:label="性能/UI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

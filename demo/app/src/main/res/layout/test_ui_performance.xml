@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_add_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试过渡绘制" />
+
+    <FrameLayout
+        android:id="@+id/fl_views"
+        android:background="#000000"
+        android:layout_width="360dp"
+        android:layout_height="360dp" /><!--
+    <FrameLayout
+        android:background="#660000FF"
+        android:layout_width="360dp"
+        android:elevation="5dp"
+        android:layout_marginTop="-50dp"
+        android:layout_height="360dp" />
+    <FrameLayout
+        android:background="#6600FF00"
+        android:layout_width="360dp"
+        android:elevation="5dp"
+        android:layout_marginTop="-50dp"
+        android:layout_height="360dp" />-->
+
+</LinearLayout>

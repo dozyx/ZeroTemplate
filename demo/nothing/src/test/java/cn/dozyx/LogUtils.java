@@ -16,6 +16,9 @@ public class LogUtils {
     }
 
     public static void print(Object msg) {
+        if (msg == null){
+            msg = "is null";
+        }
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         DateFormat format = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
         System.out.println(

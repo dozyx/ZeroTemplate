@@ -1,4 +1,4 @@
-package cn.dozyx.template.perfermance;
+package cn.dozyx.template.performance;
 
 import android.os.Bundle;
 
