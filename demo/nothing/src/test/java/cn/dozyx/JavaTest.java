@@ -103,6 +103,33 @@ import cn.dozyx.zerofate.java.Person;
 public class JavaTest {
 
     @Test
+    public void testTableForSize(){
+//        print(tableSizeFor(0));
+        print(1 << 31);
+        print(0x80000000);
+    }
+
+    private static final int MAXIMUM_CAPACITY = 1 << 30;
+    private static int tableSizeFor(int cap) {
+        // cap 是初始容量
+        // 返回值作为下一次 resize 的阈值
+        int n = cap;
+        print(Integer.toBinaryString(n));
+        n |= n >>> 1;
+        print(Integer.toBinaryString(n));
+        n |= n >>> 2;
+        print(Integer.toBinaryString(n));
+        n |= n >>> 4;
+        print(Integer.toBinaryString(n));
+        n |= n >>> 8;
+        print(Integer.toBinaryString(n));
+        n |= n >>> 16;
+        print(Integer.toBinaryString(n));
+        // MAXIMUM_CAPACITY 等于 1 << 30
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+    }
+
+    @Test
     public void testGc(){
         Object object = new Object();
         ReferenceQueue<Object> queue = new ReferenceQueue<>();

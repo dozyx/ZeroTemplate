@@ -29,10 +29,12 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -48,6 +50,86 @@ import io.reactivex.subjects.UnicastSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+    @Test
+    public void testRefCount() {
+        Observable<Long> origin = Observable.interval(1, TimeUnit.SECONDS);
+        Observable<Long> publish = origin.doOnDispose(() -> print("doOnDispose")).doOnNext(
+                aLong -> print("doOnNext " + aLong)).publish().refCount();
+        Disposable subscribe1 = publish.subscribe(getConsumer(1));
+        sleep(3);
+        Disposable subscribe2 = publish.subscribe(getConsumer(2));// 第二个订阅者只能接收到后续的信息。
+        sleep(5);
+
+        subscribe1.dispose();
+        subscribe2.dispose();// 当所有订阅者都取消了订阅时，将取消数据发送
+//        publish.subscribe(getConsumer(3));// 接收到的是从开始发送的数据
+        sleep(3);
+    }
+
+    @Test
+    public void testPublish() {
+        Observable<Long> origin = Observable.interval(1, TimeUnit.SECONDS);
+        ConnectableObservable<Long> publish = origin.doOnNext(
+                aLong -> print("doOnNext " + aLong)).publish();
+        Disposable subscribe1 = publish.subscribe(getConsumer(1));
+        Disposable publishDisposeable = publish.connect();
+        sleep(3);
+        Disposable subscribe2 = publish.doOnSubscribe(new Consumer<Disposable>() {
+            @Override
+            public void accept(Disposable disposable) throws Exception {
+                print("second subscriber");
+            }
+        }).subscribe(getConsumer(2));// 第二个订阅者只能接收到后续的信息。
+//        publish.connect();
+        sleep(5);
+
+        subscribe1.dispose();
+        subscribe2.dispose();
+        sleep(3);
+        publish.subscribe(getConsumer(3));// 接收到的是后续的数据，说明即使取消了所有订阅，数据还是在产生。
+        sleep(3);
+
+        publishDisposeable.dispose();
+        publish.subscribe(getConsumer(4));
+        sleep(3);
+    }
+
+    private <T> Consumer<T> getConsumer(int flag) {
+        return t -> print(flag + " accept " + t);
+    }
+
+    @Test
+    public void testShare() {
+        Observable<Integer> source = getObservable(1, 2, 3);
+        source.subscribe(sObserver);
+//        source.subscribe(sObserver);
+        source.share().subscribe(sObserver);
+    }
+
+    @Test
+    public void testHide() {
+        BehaviorSubject<Integer> subject = BehaviorSubject.create();
+        subject.onNext(1);
+        Observable<Integer> hide = subject.hide();// onNext 方法被隐藏了起来
+    }
+
+    @Test
+    public void testCompose() {
+        // 应用一个函数，可以对上游的 observable 处理，并返回一个用于下游的 observable。也可以直接将上游的 observable
+        getObservable(1, 2, 3).doOnNext(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                // 这个方法没有被执行，因为被订阅的是 compose 返回的 observable
+                print("doOnNext -> " + integer);
+            }
+        }).compose(new ObservableTransformer<Integer, Integer>() {
+            @Override
+            public ObservableSource<Integer> apply(Observable<Integer> upstream) {
+                return getObservable(4, 5, 6);
+            }
+        }).subscribe(sObserver);
+    }
 
     @Test
     public void testAmb() {
@@ -72,7 +154,8 @@ public class RxJavaTest {
                 print("apply -> " + Thread.currentThread());
                 return getCreateObservable();
             }
-        }).observeOn(Schedulers.computation()).observeOn(Schedulers.io()).subscribeOn(Schedulers.io()).subscribeOn(
+        }).observeOn(Schedulers.computation()).observeOn(Schedulers.io()).subscribeOn(
+                Schedulers.io()).subscribeOn(
                 Schedulers.computation()).subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
