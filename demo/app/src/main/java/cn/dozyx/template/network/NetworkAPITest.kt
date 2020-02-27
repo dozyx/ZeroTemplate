@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
+import cn.dozyx.core.rx.SchedulersTransformer
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -244,7 +245,7 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
         val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
         val retrofit = Retrofit.Builder().baseUrl(URL_STRING).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create()).client(client).build()
         val iApi = retrofit.create(IApi::class.java)
-        iApi.getCategories().compose(RxJavaUtil.applySchedulers2()).subscribe(object : Observer<String> {
+        iApi.getCategories().compose(SchedulersTransformer.get()).subscribe(object : Observer<String> {
             override fun onComplete() {
                 Timber.d("NetworkAPITest.onComplete")
             }

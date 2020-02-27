@@ -103,6 +103,16 @@ import cn.dozyx.zerofate.java.Person;
 public class JavaTest {
 
     @Test
+    public void testConstantPool() {
+        String str1 = new StringBuilder("计算机").append("软件").toString();
+        System.out.println(str1.intern());
+        System.out.println(str1.intern() == str1);
+        String str2 = new StringBuilder("ja").append("va").toString();
+        System.out.println(str2.intern());
+        System.out.println(str2.intern() == str2);
+    }
+
+    @Test
     public void testTableForSize(){
 //        print(tableSizeFor(0));
         print(1 << 31);
