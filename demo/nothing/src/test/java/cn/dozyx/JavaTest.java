@@ -92,6 +92,8 @@ import java.util.regex.Pattern;
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 import cn.dozyx.zerofate.java.GenericTest;
 import cn.dozyx.zerofate.java.Person;
+import io.reactivex.Observable;
+import io.reactivex.internal.operators.observable.ObservableZip;
 
 /**
  * 测试 java 相关代码
@@ -282,6 +284,16 @@ public class JavaTest {
         print("🙂".length());// 一个 emoji 字符占两个长度
         print("123".length());// Java9若发现整个字符串中只有ascii码字符，则会使用byte来存，不使用char存储，这样就会节省一半字符，此时字符串长度
         // 也!= 字符数
+    }
+
+
+    @Test
+    public void testLinkedList(){
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        print(list.poll());
     }
 
 
@@ -1188,6 +1200,25 @@ public class JavaTest {
     }
 
     @Test
+    public void testGenericWildcard(){
+        List<A> listA = new ArrayList<>();
+        listA.add(new A());
+        listA.add(new B());
+        // listA 可以添加 A 及其子类
+
+        List<B> listB = new ArrayList<>();
+//        listA = listB;// 因为 listA 可以插入 C 实例，这样就会通过 listB 来进行插入，这是不允许的。即导致插入错误
+//        listB = listA;// 假如可以的话，会导致 listB 中出现非 B 的实例，因为 listA 可以插入 A 的所有子类。即导致读取错误。
+        // 无法相互赋值
+
+
+    }
+
+    private class A{}
+    private class B extends A{}
+    private class C extends A{}
+
+    @Test
     public void testGeneric() {
         ArrayList<String> strings = new ArrayList<>();
         ArrayList<Integer> integers = new ArrayList<>();
@@ -1463,11 +1494,6 @@ public class JavaTest {
 
     public static String parse(String fen) {
         return new DecimalFormat("##0.00").format(Double.valueOf(fen) / 100.0);
-    }
-
-    public class A {
-        public String str;
-        public int a = 10;
     }
 
     @Test
