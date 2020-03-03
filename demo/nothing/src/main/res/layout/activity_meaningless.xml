@@ -3,129 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
         tools:context="cn.dozyx.template.justfortest.MeaninglessActivity">
 
-        <CheckedTextView
-            style="@style/DotStyle.TestStyle"
-            android:text="1111111" />
-
-        <TextView
-            android:id="@+id/text_length"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:text="中文" />
+            android:layout_gravity="center">
+            <View
+                android:id="@+id/view_first"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/shape_circle_yellow"/>
+            <View
+                android:id="@+id/view_second"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:translationZ="1dp"
+                android:layout_marginLeft="-5dp"
+                android:background="@drawable/shape_circle_blue"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit"
-            style="@style/Widget.AppCompat.TextView"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="middle"
-            android:enabled="false"
-            android:singleLine="true"
-            android:text="111111122222222222"
-            android:textColor="@color/textColorPrimary" />
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="360dp"
-            android:layout_height="360dp"
-            android:background="@drawable/circel_black" />
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/circel_black"
-            android:elevation="6dp" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RadioGroup>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RadioButton"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RadioButton"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton3"
-                app:layout_constraintStart_toEndOf="@+id/radioButton"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RadioButton"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton4"
-                app:layout_constraintStart_toEndOf="@+id/radioButton2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RadioButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/radioButton3"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <cn.dozyx.core.widget.ConstraintRadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="radioButton,radioButton2,radioButton3,radioButton4"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <blink
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.zerofate.java.view.CustomTextView
-                android:id="@+id/text"
-                style="@style/CustomTextStyle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@mipmap/ic_launcher"
-                android:text="正在整改"
-                android:textAppearance="@style/CustomTextAppearance"
-                android:textColor="@android:color/holo_blue_bright"
-                android:textSize="36sp" />
-        </blink>
-
-    </LinearLayout>
-
-    <data>
-
-    </data>
+    </FrameLayout>
 </layout>
 

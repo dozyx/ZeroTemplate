@@ -1,5 +1,9 @@
 package cn.dozyx.template.justfortest
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
@@ -22,6 +26,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.context.CustomContextWrapper
 import cn.dozyx.template.DelayTextWatcher
+import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.ThreadUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
@@ -42,47 +47,31 @@ import java.io.IOException
  * 没有任何意义的Activity，可能以后会加入很多乱七八糟的东西
  */
 class MeaninglessActivity : AppCompatActivity() {
-    var time = 0
-    lateinit var alertDialog: AlertDialog
-    lateinit var thread: Thread
-    var threadLooper: Looper? = null
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContentView(R.layout.activity_meaningless)
-//        edit.requestFocus()
-        // keyboardEnable true 不会自动弹出，false 会自动弹出
-        // 不设置也沉浸式会自动弹出
-        ImmersionBar.with(this).init()
-        thread = Thread {
-            Looper.prepare()
-            Timber.d("MeaninglessActivity.onCreate looper start")
-            Looper.loop()
-            threadLooper = Looper.myLooper()
-        }
+        startLoadingAnim()
+    }
 
-        text.setOnClickListener {
-            //            threadLooper?.quit()
-        }
-        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            image.outlineProvider = ViewOutlineProvider.BOUNDS
-            image.outlineProvider = ViewOutlineProvider.PADDED_BOUNDS
-            image.outlineSpotShadowColor = Color.parseColor("#FF0000")
-            image.outlineAmbientShadowColor = Color.parseColor("#00FF00")
-            image.outlineProvider = object :ViewOutlineProvider(){
-                override fun getOutline(view: View, outline: Outline) {
-                    Timber.d("MeaninglessActivity.getOutline ${view.width} ${view.height}")
-                    outline.setOval(0,0,view.width,view.height)
-                }
-            }
-            image.clipToOutline = true
-        }
+    private fun startLoadingAnim() {
+        val z1 = PropertyValuesHolder.ofFloat("translationZ", SizeUtils.dp2px(1F).toFloat())
+        val x1 = PropertyValuesHolder.ofFloat("translationX", SizeUtils.dp2px(10F).toFloat())
+        val animator1 = ObjectAnimator.ofPropertyValuesHolder(view_first, z1, x1)
+        animator1.repeatCount = ObjectAnimator.INFINITE
+        animator1.repeatMode = ObjectAnimator.REVERSE
 
+        val z2 = PropertyValuesHolder.ofFloat("translationZ", SizeUtils.dp2px(0F).toFloat())
+        val x2 = PropertyValuesHolder.ofFloat("translationX", -SizeUtils.dp2px(10F).toFloat())
+        val animator2 = ObjectAnimator.ofPropertyValuesHolder(view_second, z2, x2)
+        animator2.repeatCount = ObjectAnimator.INFINITE
+        animator2.repeatMode = ObjectAnimator.REVERSE
 
-        testIdleHandler()
-        edit.isEnabled = false
+        val set = AnimatorSet()
+        set.duration = 1000
+        set.playTogether(animator1, animator2)
+        set.start()
     }
 
     private fun testIdleHandler() {
@@ -109,34 +98,7 @@ class MeaninglessActivity : AppCompatActivity() {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-
     companion object {
-
         private val TAG = "MeaninglessActivity"
     }
-
-    /*override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CustomContextWrapper.wrap(newBase, 1.0f))
-    }*/
-
-    /*override fun getResources(): Resources {
-        val resources = super.getResources()
-        val oldConfig = resources.configuration
-        Timber.d("MeaninglessActivity.getResources ${oldConfig.fontScale}")
-        oldConfig.fontScale = 2f
-//        resources.displayMetrics.scaledDensity = resources.displayMetrics.density
-        val newConfig = Configuration(oldConfig)
-        if (SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            createConfigurationContext(newConfig)
-            // 这个没有效果
-        }
-        Timber.d("MeaninglessActivity.getResources ${resources.displayMetrics.scaledDensity } ${resources.displayMetrics.density}")
-        resources.updateConfiguration(newConfig,resources.displayMetrics)
-        return resources
-    }*/
-
 }

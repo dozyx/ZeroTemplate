@@ -778,37 +778,46 @@
             android:theme="@style/TransitionTheme" />
         <activity
             android:name=".keyboard.KeyBoardTest"
-            android:windowSoftInputMode="adjustResize|stateVisible"
-            android:label="KeyBoard">
+            android:label="KeyBoard"
+            android:windowSoftInputMode="adjustResize|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".service.ServiceTest"
+        <activity
+            android:name=".service.ServiceTest"
             android:label="Service/IntentService">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".AndroidTest" android:exported="true"/>
-        <activity android:name=".TransparentActivity" android:exported="true" android:theme="@style/ActivityTranslucent"/>
-        <activity android:name=".pager.PagerTransformTest"
+        <activity
+            android:name=".AndroidTest"
+            android:exported="true" />
+        <activity
+            android:name=".TransparentActivity"
+            android:exported="true"
+            android:theme="@style/ActivityTranslucent" />
+        <activity
+            android:name=".pager.PagerTransformTest"
             android:label="View/Pager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".HandlerTest"
+        <activity
+            android:name=".HandlerTest"
             android:label="Handler">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".permission.RxPermissionsActivity"
+        <activity
+            android:name=".permission.RxPermissionsActivity"
             android:label="权限/RxPermissions">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -823,8 +832,17 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".performance.GcTest"
+        <activity
+            android:name=".performance.GcTest"
             android:label="性能/GC">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".performance.ProfileTest"
+            android:label="性能/Profile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

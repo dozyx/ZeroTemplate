@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.FrameMetrics;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,8 @@ import android.widget.SimpleAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import com.blankj.utilcode.util.ThreadUtils;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -52,7 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        new Thread(()->{
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            reportFullyDrawn();
+        }).start();
     }
 
     private List<Map<String, Object>> getData(String prefix) {

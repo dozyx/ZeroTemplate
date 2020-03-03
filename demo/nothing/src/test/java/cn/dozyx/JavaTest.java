@@ -1632,6 +1632,17 @@ public class JavaTest {
 
 
     @Test
+    public void testGson1() {
+        IntArrayData intArrayData = new IntArrayData();
+        intArrayData.data = new int[]{1,2,3};
+        print(new Gson().toJson(intArrayData));
+    }
+
+    private static class IntArrayData {
+        private int[] data;
+    }
+
+    @Test
     public void testGson() {
         Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE,
                 new IntDefaultZeroAdapter()).create();
