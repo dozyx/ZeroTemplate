@@ -71,7 +71,6 @@ dependencies {
     implementation Deps.logger
     implementation Deps.flexbox
     implementation Deps.gridlayout
-    implementation DepsRxBinding.base
     implementation Deps.immersionbar
     debugImplementation DepsHyperion.debugCore
     releaseImplementation DepsHyperion.releaseCore

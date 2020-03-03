@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +51,85 @@ import io.reactivex.subjects.UnicastSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+    @Test
+    public void testC() {
+        Observable<Integer> source1 = getObservable(1,2,3).delay(100,TimeUnit.MILLISECONDS);
+        Observable<Integer> source2 = getObservable().delay(200, TimeUnit.MILLISECONDS);
+        Observable.combineLatest(Arrays.asList(source1, source2), new Function<Object[], String>() {
+            @Override
+            public String apply(Object[] objects) throws Exception {
+                return Arrays.toString(objects);
+            }
+        }).subscribe(LogObserver.get());
+        sleep(1);
+    }
+    @Test
+    public void testStartWith() {
+        getObservable(1, 2, 3).startWith(4).subscribe(LogObserver.get());
+    }
+
+    @Test
+    public void testBuffer() {
+        // 缓存多个 item，达到一定数量或者触发 event 时发送
+        getObservable(1, 2, 3, 4, 5).buffer(2).subscribe(LogObserver.get("buffer(count)"));
+        // skip 参数表示下一次触发之前，经过多少个 item 的发送。当 count 和 skip 相同时不会有 item 被忽略。skip 可以小于 count。
+        getObservable(1, 2, 3, 4, 5).buffer(2, 3).subscribe(LogObserver.get("buffer(count, skip)"));
+        getObservable(1, 2, 3, 4, 5).buffer(2, 3).subscribe(LogObserver.get("buffer(count, skip)"));
+    }
+
+    private static class LogObserver<T> implements Observer<T> {
+        static final String DEFAULT_PREFIX = "default";
+        private String tagPrefix = DEFAULT_PREFIX;
+
+        LogObserver() {
+        }
+
+        LogObserver(String tagPrefix) {
+            this.tagPrefix = tagPrefix;
+        }
+
+        private static <T> LogObserver<T> get() {
+            return new LogObserver<>();
+        }
+
+        private static <T> LogObserver<T> get(String prefix) {
+            return new LogObserver<>(prefix);
+        }
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            // 有的 Disposable 实现是继承于 AtomicInteger 的，所以 d.toString 可能是一个 int
+            print(tagPrefix + " onSubscribe: " + d);
+        }
+
+        @Override
+        public void onNext(T t) {
+            print(tagPrefix + " onNext: " + t);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            print(tagPrefix + " onError: " + e);
+        }
+
+        @Override
+        public void onComplete() {
+            print(tagPrefix + " onComplete");
+        }
+    }
+
+    @Test
+    public void testScheduleHandler() {
+        RxJavaPlugins.setScheduleHandler(new Function<Runnable, Runnable>() {
+            @Override
+            public Runnable apply(Runnable runnable) throws Exception {
+                print("hook onScheduleHandler : " + Thread.currentThread());
+                return runnable;
+            }
+        });
+        getObservable(1, 2, 3).subscribeOn(Schedulers.newThread()).subscribe();
+    }
 
     @Test
     public void testRefCount() {
@@ -339,6 +419,7 @@ public class RxJavaTest {
     }
 
 
+    @Test
     public void testMerge() {
         // 将多个 observable 的 item 合并之后发送。
         // merge 操作符会同时订阅到指定的 observable，但是，如果这些 observable 是 cold 的并且在同一线程上，那么发射顺序可能会相同

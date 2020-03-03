@@ -9,6 +9,9 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.Random;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+
 /**
  * 用于编写 Java 代码，再粘贴到 kt 文件实现自动转换，以方便查看 kotlin 语法
  **/
