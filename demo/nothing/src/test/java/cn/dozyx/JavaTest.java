@@ -1505,7 +1505,8 @@ public class JavaTest {
         // 最多提交任务数：maximumPoolSize + deque 大小
         for (int i = 0; i < 13; i++) {
             int flag = i;
-            // 先执行了 core 任务，后续任务放入 deque，deque 后执行新加任务，有空闲线程后再执行 deque 任务
+            // 先执行了 core 任务，后续任务放入 deque，满deque 后执行新加任务，有空闲线程后再执行 deque 任务
+            // 为什么要队列满了才启动非核心线程？设计如此？避免启动过多线程？如果要实现立即执行，需要修改队列？
             executorService.execute(() -> {
                 print(" & i == " + flag + " & thread == " + Thread.currentThread());
                 try {

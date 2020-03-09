@@ -4,8 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 悬浮窗 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 悬浮窗 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -20,7 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".performance.RuntimeActivity"
+            android:label="系统/Runtime">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
         <!-- action 为 main，category 为 cn.dozyx.zerofate.intent.category.sample 的activity 将显示在列表中 -->
         <activity
             android:name=".MainActivity"
@@ -441,6 +447,7 @@
             android:label="@string/file_basic">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -449,6 +456,7 @@
             android:label="@string/hardware_camera">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -457,6 +465,7 @@
             android:label="@string/hardware_camera_control">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -465,6 +474,7 @@
             android:label="@string/view_pager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -473,6 +483,7 @@
             android:label="Hardware/Camera/Android">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -481,6 +492,7 @@
             android:label="Activity/Config">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -489,6 +501,7 @@
             android:label="View/Custom/TouchFollow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -497,6 +510,7 @@
             android:label="Hardware/Camera/Texture">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -505,6 +519,7 @@
             android:label="Hardware/Camera/Control">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -513,6 +528,7 @@
             android:label="Activity/Result">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -521,6 +537,7 @@
             android:label="View/Android自定义控件开发入门与实践">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -529,6 +546,7 @@
             android:label="数据库/Room">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -537,6 +555,7 @@
             android:label="Hardware/Camera/CameraX">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -545,6 +564,7 @@
             android:label="Image/loader">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -553,6 +573,7 @@
             android:label="View/Scroll">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -561,6 +582,7 @@
             android:label="View/EditText/InputFilter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -569,6 +591,7 @@
             android:label="View/TextView/Span">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -578,6 +601,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -586,6 +610,7 @@
             android:label="View/Behavior">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -594,6 +619,7 @@
             android:label="Error/Exception">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -602,6 +628,7 @@
             android:label="View/动画">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -610,6 +637,7 @@
             android:label="View/动画/全部">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -618,6 +646,7 @@
             android:label="Data/Parcelable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -626,6 +655,7 @@
             android:label="Arch/ViewModel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -634,6 +664,7 @@
             android:label="Demo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -643,6 +674,7 @@
             android:theme="@style/Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -651,6 +683,7 @@
             android:label="Anim">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -659,6 +692,7 @@
             android:label="View/触摸事件">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -667,6 +701,7 @@
             android:label="Demo/dragpanel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -675,6 +710,7 @@
             android:label="View/RelativeLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -683,6 +719,7 @@
             android:label="Demo/固定列表列">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -691,6 +728,7 @@
             android:label="Demo/固定列表列2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -699,6 +737,7 @@
             android:label="Demo/固定列表列3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -707,15 +746,16 @@
             android:label="View/固定文本大小">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.touch.conflict.TouchConflictActivity"
             android:label="View/触摸/滑动冲突">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -729,6 +769,7 @@
             android:label="音视频/GL">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -737,6 +778,7 @@
             android:label="Image/Glide">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -745,6 +787,7 @@
             android:label="Demo/固定列表列4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -753,6 +796,7 @@
             android:label="Bug/CalledFromWrongThread">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -761,6 +805,7 @@
             android:label="Arch/Paging">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -769,6 +814,7 @@
             android:label="Activity/Transition">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -782,6 +828,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -790,6 +837,7 @@
             android:label="Service/IntentService">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -805,6 +853,7 @@
             android:label="View/Pager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -813,6 +862,7 @@
             android:label="Handler">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -821,6 +871,7 @@
             android:label="权限/RxPermissions">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -829,6 +880,7 @@
             android:label="性能/UI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -837,6 +889,7 @@
             android:label="性能/GC">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -845,10 +898,10 @@
             android:label="性能/Profile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
