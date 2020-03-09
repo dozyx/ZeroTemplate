@@ -11,19 +11,26 @@ import java.util.Locale;
  * @date 2020-02-03
  */
 public class LogUtils {
-    public static void print(byte[] bytes){
+
+    private static final SimpleDateFormat LOG_TIME_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS",
+            Locale.getDefault());
+
+    public static void print(byte[] bytes) {
         print(Arrays.toString(bytes));
     }
 
     public static void print(Object msg) {
-        if (msg == null){
+        if (msg == null) {
             msg = "is null";
         }
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-        DateFormat format = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
-        System.out.println(
-                format.format(Calendar.getInstance().getTime())
-                        + " -> " /*+ stackTrace[3].getMethodName()*/ + " "
-                        + msg.toString());
+        System.out.println(formatTime(Calendar.getInstance().getTime().getTime())
+                + " -> " /*+ stackTrace[3].getMethodName()*/ + " "
+                + msg.toString());
     }
+
+    public static String formatTime(long timeInMill) {
+        return LOG_TIME_FORMAT.format(timeInMill);
+    }
+
 }

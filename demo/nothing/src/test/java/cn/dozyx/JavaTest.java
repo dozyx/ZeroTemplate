@@ -79,8 +79,12 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,6 +94,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
+import cn.dozyx.core.utli.log.LogUtil;
 import cn.dozyx.zerofate.java.GenericTest;
 import cn.dozyx.zerofate.java.Person;
 import io.reactivex.Observable;
@@ -240,20 +245,61 @@ public class JavaTest {
         }
     }
 
-    public void testConcurrentHashMap(){
+    private static final Object LOCK = new Object();
+    @Test
+    public void testConcurrentHashMap() throws InterruptedException {
+        Executor executor = Executors.newCachedThreadPool();
+        final CountDownLatch latch = new CountDownLatch(10000);
         ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+        ConcurrentHashMap<String, AtomicInteger> map2 = new ConcurrentHashMap<>();
         map.put("key", 1);
+        map2.put("key2", new AtomicInteger(1));
+        long start = System.currentTimeMillis();
+
+//        print("time1");
         for (int i = 0; i < 10000; i++) {
-            new Thread(new Runnable() {
+            executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     // 只保证了单个方法调用是线程安全的
-                    map.put("key", map.get("key") + 1);
+                    /*try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }*/
+                    synchronized (LOCK) {
+                        // 采用 synchronized 确保多个操作的原子性
+                        map.put("key", map.get("key") + 1);
+                    }
+//                    map2.get("key2").getAndIncrement();// 采用 CAS 确保多个操作的原子性
+                    latch.countDown();
                 }
-            }).start();
+            });
         }
-        sleep(5);
+        latch.await();
+        // 第一次测试时间（操作是直接 new Thread 执行）：采用 synchronized 执行时间大概是 600ms（本机环境），CAS 大概 500 ms，但偶尔也有接近 600ms 的。
+        // 第二次测试时间（使用线程池）：synchronized 大概 40+ms，CAS 大概是 30+ms。（线程池的提升比我想象的大得多。。。）
+//        print("time2");
+        // 测试过程中发现一个问题：没有使用 CountDownLatch，子线程任务也能完整执行。进一步观察发现，猜测可能是 execute 方法本身的执行导致主线程产生了耗时。
+        //     如果增加 task 的执行时间，那么就出现了部分 task 没有顺利执行问题，需要使用 CountDownLatch 来确保每个 task 都执行完才结束主线程。
+        print("elapse time " + (System.currentTimeMillis() - start));
         print(map.get("key"));
+        print(map2.get("key2"));
+    }
+
+    @Test
+    public void testMainThread(){
+        Executors.newFixedThreadPool(1).execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1);
+                    print("execute thread");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Test
@@ -1274,11 +1320,21 @@ public class JavaTest {
 
 
     private void list1(List<? extends Parent> list) {
+        // 具体类型可能是 Parent 或 Parent 子类
+        list = new ArrayList<>();
+//        list.add(new Parent());
+//        list.add(new Child());
+        Parent parent = list.get(0);
+        // 无法 add Parent，因为不能向下转型
+        // 无法 add Child，因为 child 也不能相互转
 
     }
 
     private void list2(List<? super Parent> list) {
-
+        // 具体类型可能是 Parent 或 Parent 父类
+        list.add(new Parent());
+        list.add(new Child());// Child 可以向上转型为 Parent
+//        list.add(new People());
     }
 
     private void list3(List<?> list) {
@@ -1479,7 +1535,10 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        new SubClass().foo();
+        int count = 10;
+        int newCapacity = count + (count >> 1);
+        newCapacity = newCapacity + (newCapacity >> 1);
+        print(newCapacity);
     }
 
     private static class SuperClass {
