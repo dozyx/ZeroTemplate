@@ -53,6 +53,25 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
+    public void testIfFlatMap() {
+        // 场景：
+        // 1. 根据手机号获取用户名
+        // 2. 获取成功使用用户名登录，获取失败提示输入图形验证码
+        // 3. 如果需要输入图形验证码，输入正确后继续 1
+        Observable.just(true).flatMap(new Function<Boolean, ObservableSource<Integer>>() {
+            @Override
+            public ObservableSource<Integer> apply(Boolean aBoolean) throws Exception {
+                if (aBoolean){
+                    // 成功，登录
+                    return Observable.just(1);
+                }
+                // 失败
+                // 获取验证码操作
+                return Observable.empty();
+            }
+        }).subscribe(sObserver);
+    }
+    @Test
     public void testC() {
         Observable<Integer> source1 = getObservable(1,2,3).delay(100,TimeUnit.MILLISECONDS);
         Observable<Integer> source2 = getObservable().delay(200, TimeUnit.MILLISECONDS);

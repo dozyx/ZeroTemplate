@@ -1,5 +1,6 @@
 package cn.dozyx.template.justfortest
 
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ClipDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ScaleDrawable
@@ -17,6 +18,11 @@ class DrawableTest : BaseActivity() {
             if (clipDrawable is ClipDrawable) {
                 clipDrawable.level = 7000
             }
+        }
+
+        val bitmapDrawable = image_bitmap.drawable
+        if(bitmapDrawable is BitmapDrawable){
+            bitmapDrawable.level = 0
         }
 
         sb_scale_level.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -38,6 +44,7 @@ class DrawableTest : BaseActivity() {
         if (drawable2 is LayerDrawable) {
             val scaleDrawable = drawable2.getDrawable(1)
             if (scaleDrawable is ScaleDrawable) {
+                // 0 缩放到最小，10000 不缩放
                 scaleDrawable.level = level * 100
             }
         }

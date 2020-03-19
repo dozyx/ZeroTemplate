@@ -5,7 +5,9 @@
     <item>
         <scale
             android:drawable="@drawable/bg_0"
-            android:scaleWidth="100%"
+            android:scaleWidth="200%"
+            android:scaleHeight="50%"
+            android:useIntrinsicSizeAsMinimum="false"
             android:scaleGravity="top|left" />
     </item>
 </layer-list>

@@ -16,6 +16,12 @@
         android:layout_height="100dp"
         android:src="@drawable/scale_test" />
 
+    <ImageView
+        android:id="@+id/image_bitmap"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/bg_0" />
+
     <SeekBar
         android:id="@+id/sb_scale_level"
         android:layout_width="200dp"
