@@ -55,6 +55,9 @@
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme" />
         <activity android:name=".RxBindingTest" android:exported="true" />
+        <activity
+            android:name=".DrawableTest"
+            android:exported="true" />
     </application>
 
 </manifest>

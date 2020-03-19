@@ -9,6 +9,9 @@
         </shape>
     </item>
     <item>
-        <clip android:drawable="@color/colorAccent"></clip>
+        <clip
+            android:clipOrientation="vertical"
+            android:drawable="@drawable/ic_launcher"
+            android:gravity="top" />
     </item>
 </layer-list>

@@ -3,11 +3,9 @@
 
     <item android:drawable="@color/colorPrimary" />
     <item>
-        <inset
+        <scale
             android:drawable="@drawable/bg_0"
-            android:insetLeft="20dp"
-            android:insetTop="20dp"
-            android:insetRight="20dp"
-            android:insetBottom="20dp" />
+            android:scaleWidth="100%"
+            android:scaleGravity="top|left" />
     </item>
 </layer-list>
