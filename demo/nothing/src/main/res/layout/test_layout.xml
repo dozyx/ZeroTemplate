@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- <editor-fold desc="标题">-->
     <Button
         android:id="@+id/btn1"
         android:layout_width="100dp"
@@ -19,7 +20,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        app:layout_constraintLeft_toLeftOf="@id/btn1"/>
+        app:layout_constraintLeft_toLeftOf="@id/btn1" />
+    <!-- </editor-fold>-->
 
     <Button
         android:id="@+id/btn2"
