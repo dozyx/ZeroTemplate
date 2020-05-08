@@ -1535,10 +1535,9 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        int count = 10;
-        int newCapacity = count + (count >> 1);
-        newCapacity = newCapacity + (newCapacity >> 1);
-        print(newCapacity);
+        print(35 >> 1);
+        print(35 >> 32);
+        print((35 >> 16) >> 16);
     }
 
     private static class SuperClass {

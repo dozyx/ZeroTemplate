@@ -7,6 +7,7 @@ import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.BitmapFactory
@@ -53,6 +54,12 @@ class MeaninglessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
         startLoadingAnim()
+        button.setOnClickListener{
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_DEFAULT)
+            intent.setClassName("com.mobiu.poseidon.athena","com.snaptube.premium.activity.FeedbackActivity")
+            startActivity(intent)
+        }
     }
 
     private fun startLoadingAnim() {
