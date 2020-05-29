@@ -18,6 +18,7 @@ import android.net.Uri
 import android.os.*
 import android.os.Build.VERSION.SDK_INT
 import android.text.Editable
+import android.text.SpannableString
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Printer
@@ -60,6 +61,11 @@ class MeaninglessActivity : AppCompatActivity() {
             intent.setClassName("com.mobiu.poseidon.athena","com.snaptube.premium.activity.FeedbackActivity")
             startActivity(intent)
         }
+        val source = SpannableString(
+            "https://gitlab.mobiuspace.net/mobiuspace111/and-team/em-snaptube-dataadapter/merge_requests/13\n" +
+                    "https://gitlab.mobiuspace.net/mobiuspace/and-team/snaptube/merge_requests/702"
+        )
+        tv_link.text = source
     }
 
     private fun startLoadingAnim() {

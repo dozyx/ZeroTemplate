@@ -110,6 +110,23 @@ import io.reactivex.internal.operators.observable.ObservableZip;
 public class JavaTest {
 
     @Test
+    public void testForLoop(){
+        ArrayList<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(2);
+        data.add(3);
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i) == 2){
+                data.remove(i);
+            }
+        }
+        ArrayList<Object> list = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            print(list);
+        }
+    }
+
+    @Test
     public void testConstantPool() {
         String str1 = new StringBuilder("计算机").append("软件").toString();
         System.out.println(str1.intern());
@@ -1181,9 +1198,11 @@ public class JavaTest {
 
     }
 
+    @Test
     public void testFoo() {
-
-        print(-123 / 10);
+        String url = "https://www.baidu.com/index";
+        print(url.substring(url.lastIndexOf("/")));
+        int i = 1000 * 60 * 60 * 2;
     }
 
     @Test

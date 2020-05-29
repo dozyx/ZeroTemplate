@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -14,24 +14,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <View
                 android:id="@+id/view_first"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:background="@drawable/shape_circle_yellow"/>
+                android:background="@drawable/shape_circle_yellow" />
+
             <View
                 android:id="@+id/view_second"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:translationZ="1dp"
                 android:layout_marginLeft="-5dp"
-                android:background="@drawable/shape_circle_blue"/>
+                android:background="@drawable/shape_circle_blue"
+                android:translationZ="1dp" />
         </LinearLayout>
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
-    </FrameLayout>
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/button"
+            android:text="1111111111111"
+            android:checked="true"
+            android:checkMark="@drawable/ic_menu_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:elevation="8dp"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_link"
+            android:layout_width="300dp"
+            android:breakStrategy="high_quality"
+            android:hyphenationFrequency="full"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="https://gitlab.mobiuspace./netmobiuspace111/and-team/em-snaptube-dataadapter/merge_requests/13"/>
+
+    </LinearLayout>
 </layout>
 

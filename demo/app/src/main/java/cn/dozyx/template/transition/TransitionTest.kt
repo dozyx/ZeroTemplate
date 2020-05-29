@@ -1,6 +1,7 @@
 package cn.dozyx.template.transition
 
 import android.content.Intent
+import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 
@@ -17,6 +18,12 @@ open class TransitionTest : BaseTestActivity() {
         addAction(object : Action("theme") {
             override fun run() {
                 startActivity(Intent(this@TransitionTest, TransitionTest2::class.java))
+            }
+        })
+        addAction(object : Action("override") {
+            override fun run() {
+                startActivity(Intent(this@TransitionTest, TransitionTest2::class.java))
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_down)
             }
         })
     }

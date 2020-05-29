@@ -1,14 +1,10 @@
 package cn.dozyx.template.activity
 
-import android.app.ActivityManager
-import android.content.Context
 import android.content.Intent
+import android.content.Intent.*
 import android.os.Bundle
 import cn.dozyx.template.base.Action
-
-import cn.dozyx.template.base.BaseShowResultActivity
 import cn.dozyx.template.base.BaseTestActivity
-import kotlinx.android.synthetic.main.app_bar_drawer_tool_bar.*
 import timber.log.Timber
 
 /**
@@ -21,7 +17,43 @@ open class LaunchModeTest : BaseTestActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appendResult("onCreate ${javaClass.simpleName} flag = ${intent?.flags?.let { Integer.toHexString(it) }}")
         Timber.d("LaunchModeTest.onCreate ${this.javaClass.name} $taskId")
+
+        addAction(object : Action("start self") {
+            override fun run() {
+                callActivity(LaunchModeTest::class.java)
+            }
+        })
+
+        addAction(object : Action("(flag new task or clear top) start self") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, LaunchModeTest::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NO_ANIMATION
+                startActivity(intent)
+            }
+        })
+
+        addAction(object : Action("restart by launch intent") {
+            override fun run() {
+                finish()
+                val intent = packageManager.getLaunchIntentForPackage(packageName)
+//                intent?.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                intent?.flags = FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_RESET_TASK_IF_NEEDED or FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NO_ANIMATION
+//                intent?.flags = 0
+                startActivity(intent)
+            }
+        })
+
+        addAction(object : Action("restart by class") {
+            override fun run() {
+                finish()
+                val intent = Intent(this@LaunchModeTest, LaunchModeTest::class.java)
+//                val intent = packageManager.getLaunchIntentForPackage(packageName)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                startActivity(intent)
+            }
+        })
         addAction(object : Action("standard") {
             override fun run() {
                 callActivity(StandardLaunchModeTest::class.java)
@@ -35,6 +67,7 @@ open class LaunchModeTest : BaseTestActivity() {
         addAction(object : Action("singleTask") {
             override fun run() {
                 callActivity(SingleTaskLaunchModeTest::class.java)
+                // singleTask 在栈顶，再次启动不会重建，但是会触发 onpause 和 onresume
             }
         })
         addAction(object : Action("singleInstance") {
@@ -81,10 +114,57 @@ open class LaunchModeTest : BaseTestActivity() {
                 startActivity(intent)
             }
         })
+
+        addAction(object : Action("(flag clear top) start singleTop") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, SingleTopLaunchModeTest::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                // SingleTopLaunchModeTest 上面有 Activity，会销毁其上面的 Activity
+                // 没有，SingleTopLaunchModeTest 不会重建，但会重新执行 pause 和 resume。。。
+                // 如果 栈中存在多个 SingleTopLaunchModeTest，那么被销毁的只是最上面的 SingleTopLaunchModeTest 上面的 Activity
+            }
+        })
+
+        addAction(object : Action("(flag new task) start singleTop") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, SingleTopLaunchModeTest::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                // SingleTopLaunchModeTest 上面有 Activity，会新建一个
+                // 没有，SingleTopLaunchModeTest 不会重建，但会重新执行 pause 和 resume。。。
+            }
+        })
+
+        addAction(object : Action("(flag new task | clear top) start singleTop") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, SingleTopLaunchModeTest::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                // 行为同只加了 Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+        })
+
+        addAction(object : Action("(flag new task) start singleTask") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, SingleTaskLaunchModeTest::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                // 还是会销毁上面的 Activity
+            }
+        })
+        addAction(object : Action("(flag new task | clear top) start singleTask") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, SingleTaskLaunchModeTest::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        appendResult("onNewIntent ${javaClass.simpleName} flag = ${intent?.flags?.let { Integer.toHexString(it) }}")
         Timber.d("LaunchModeTest.onNewIntent $taskId")
     }
 

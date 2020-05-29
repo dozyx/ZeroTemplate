@@ -1,6 +1,7 @@
 package cn.dozyx.template
 
 import cn.dozyx.core.base.BaseApplication
+import cn.dozyx.core.debug.ActivityLifecycleLoggerCallbacks
 import com.blankj.utilcode.util.ThreadUtils
 import com.facebook.stetho.Stetho
 import timber.log.Timber
@@ -14,6 +15,7 @@ class ZTApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        registerActivityLifecycleCallbacks(ActivityLifecycleLoggerCallbacks())
     }
 
     override fun initOnMainProcess() {

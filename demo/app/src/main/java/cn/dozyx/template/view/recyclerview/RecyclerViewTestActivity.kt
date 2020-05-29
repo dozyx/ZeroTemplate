@@ -1,116 +1,140 @@
 package cn.dozyx.template.view.recyclerview
 
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.dozyx.constant.Shakespeare
-import cn.dozyx.core.base.BaseSingleFragmentActivity
-import cn.dozyx.core.utli.log.LogUtil
+import cn.dozyx.core.base.BaseActivity
+import cn.dozyx.core.utli.util.ColorUtil
 import cn.dozyx.template.R
 import cn.dozyx.template.view.recyclerview.adapter.QuickAdapter
+import cn.dozyx.template.view.recyclerview.layoutmanager.FixedRowGridLayoutManager
+import com.blankj.utilcode.util.ScreenUtils
 import com.blankj.utilcode.util.ToastUtils
 import kotlinx.android.synthetic.main.activity_recycler_view_test.*
 import java.util.*
+import kotlin.collections.ArrayList
 
-class RecyclerViewTestActivity : BaseSingleFragmentActivity() {
+class RecyclerViewTestActivity : BaseActivity() {
 
-    override fun getFragment(startIntent: Intent): Fragment {
-        return RecyclerViewFragment()
+    override fun getLayoutId() = R.layout.activity_recycler_view_test
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        ToastUtils.showShort(item.title)
+        return false
     }
 
-    class RecyclerViewFragment : Fragment() {
-        private val randomStrings: MutableList<String>
-            get() {
-                val newDatas = ArrayList<String>(5)
-                for (i in 0..100) {
-                    newDatas.add(Shakespeare.TITLES[Random().nextInt(Shakespeare.TITLES.size)])
-                }
-                return newDatas
-            }
-        private val adapter = object :QuickAdapter<String>(){
-            override fun getLayoutId(viewType: Int): Int {
-                return android.R.layout.simple_list_item_1
-            }
+    private lateinit var adapter :QuickAdapter<String>
 
-            override fun convert(holder: VH, data: String, position: Int) {
-                holder.itemView.setBackgroundColor(Color.GRAY)
-                holder.setText(android.R.id.text1,data)
-                holder.itemView.setOnCreateContextMenuListener(this@RecyclerViewFragment)
-                (holder.itemView.layoutParams as ViewGroup.MarginLayoutParams).topMargin = 100
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        rv_common.layoutManager = getLayoutManager(LAYOUT_LINEAR)
+        initItemDecoration()
+        adapter = NestedListAdapter()
+        adapter.setData(newDatas())
+        rv_common.adapter = adapter
+        initItemTouch()
+        initEvent()
+    }
+
+    private fun initItemTouch() {
+//            ItemTouchHelper(SwipeController(context!!)).attachToRecyclerView(rv_common)
+    }
+
+    private fun initEvent() {
+        btn_change_data.setOnClickListener {
+//                adapter.setData(getData())
+//                (rv_common.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
         }
-
-        override fun onCreateView(
-                inflater: LayoutInflater,
-                container: ViewGroup?,
-                savedInstanceState: Bundle?
-        ): View? {
-            LogUtil.d("onCreateView: ")
-            return inflater.inflate(R.layout.activity_recycler_view_test, container, false)
-        }
-
-        override fun onContextItemSelected(item: MenuItem): Boolean {
-            ToastUtils.showShort(item.title)
-            return false
-        }
-
-        override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-            super.onCreateContextMenu(menu, v, menuInfo)
-            val menuInflater = activity?.menuInflater
-            menuInflater?.inflate(R.menu.context_menu, menu)
-        }
-
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            rv_common.layoutManager = LinearLayoutManager(context)
-            rv_common.addItemDecoration(CustomItemDecoration(context!!, CustomItemDecoration.VERTICAL))
-            rv_common.adapter = adapter
-            adapter.notifyDataSetChanged()
-            adapter.setData(randomStrings)
-            val swipeHandler = object : SwipeToDeleteCallback(context!!) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val adapter = rv_common.adapter
-//                    datas?.removeAt(viewHolder.adapterPosition)
-//                    adapter?.notifyItemRemoved(viewHolder.adapterPosition)
-                }
-            }
-            ItemTouchHelper(SwipeController(context!!)).attachToRecyclerView(rv_common)
-
-            btn_change_data.setOnClickListener {
-                adapter.setData(randomStrings)
-                (rv_common.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
-            }
-            btn_notify.setOnClickListener {
-//                adapter.notifyItemChanged(2)
-                adapter.notifyItemChanged(2,"1111")
-                adapter.notifyItemChanged(2,"2222")
-                adapter.notifyItemChanged(3,"2222")
-            }
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            LogUtil.d("onDestroyView: ")
-        }
-
-        override fun onDestroy() {
-            super.onDestroy()
-            LogUtil.d("onDestroy: ")
-        }
-
-        override fun onDetach() {
-            super.onDetach()
-            LogUtil.d("onDetach: ")
+        btn_notify.setOnClickListener {
+            //                adapter.notifyItemChanged(2)
+            adapter.notifyItemChanged(2, "1111")
+            adapter.notifyItemChanged(2, "2222")
+            adapter.notifyItemChanged(3, "2222")
         }
     }
+
+    private fun initItemDecoration() {
+        /*rv_common.addItemDecoration(
+            CustomItemDecoration(
+                context!!,
+                CustomItemDecoration.VERTICAL
+            )
+        )*/
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.context_menu, menu)
+    }
+
 
     companion object {
         private const val TAG = "RecyclerViewTestActivit"
+        private const val LAYOUT_LINEAR = 0
+        private const val LAYOUT_FIXED_ROW_GRID = 1
     }
 
+    inner class NestedListAdapter : QuickAdapter<String>() {
+
+        override fun getLayoutId(viewType: Int): Int {
+            return R.layout.partial_recycler_view
+        }
+
+        override fun convert(holder: VH, data: String, position: Int) {
+            val recyclerView = holder.getView<RecyclerView>(R.id.recycler_view)
+            recyclerView.layoutManager = getLayoutManager(LAYOUT_FIXED_ROW_GRID)
+            var contentAdapter = ContentAdapter()
+            contentAdapter.setData(newDatas())
+            recyclerView.adapter = contentAdapter
+        }
+
+        override fun getItemCount(): Int {
+            return 3
+        }
+
+    }
+
+    class ContentAdapter : QuickAdapter<String>() {
+        override fun getLayoutId(viewType: Int): Int {
+            return android.R.layout.simple_list_item_1
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+            val viewHolder = super.onCreateViewHolder(parent, viewType)
+            viewHolder.itemView.apply {
+                layoutParams.width = ScreenUtils.getScreenWidth() - 100
+            }
+            return viewHolder
+        }
+
+        override fun convert(holder: VH, data: String, position: Int) {
+            holder.itemView.setBackgroundColor(ColorUtil.random())
+            holder.setText(android.R.id.text1, data)
+//            holder.itemView.setOnCreateContextMenuListener()
+        }
+    }
+
+    private fun getLayoutManager(type: Int) = when (type) {
+        LAYOUT_FIXED_ROW_GRID -> FixedRowGridLayoutManager(this)
+        else -> LinearLayoutManager(this)
+    }
+
+    private fun newDatas(): ArrayList<String> {
+        val newDatas = ArrayList<String>(5)
+        for (i in 0..100) {
+            newDatas.add(Shakespeare.TITLES[Random().nextInt(Shakespeare.TITLES.size)])
+        }
+        return newDatas
+    }
 
 }
+
+
+
