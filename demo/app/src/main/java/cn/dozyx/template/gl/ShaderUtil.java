@@ -3,7 +3,7 @@ package cn.dozyx.template.gl;
 import android.opengl.GLES20;
 
 /**
- * Create by timon on 2019/11/4
+ * Create by dozyx on 2019/11/4
  **/
 public class ShaderUtil {
 

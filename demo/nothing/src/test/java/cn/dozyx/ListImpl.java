@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Create by timon on 2019/10/23
+ * Create by dozyx on 2019/10/23
  **/
 public class ListImpl implements List<Integer> {
     @Override

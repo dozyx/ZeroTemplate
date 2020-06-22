@@ -48,6 +48,7 @@ dependencies {
     debugImplementation DepsLeakCanary.debug
     debugImplementation DepsLeakCanary.debugSupportFragment
     releaseImplementation DepsLeakCanary.release
+    implementation Deps.multidex
 }
 
 private String getSuffix() {

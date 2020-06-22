@@ -22,12 +22,11 @@ import kotlin.math.max
  * 自定义 tab indicator 宽度
  */
 class ViewPagerActivity : AppCompatActivity() {
-    private val MIN_TAB_TEXT_SIZE_IN_SP = 14f
-    private val MAX_TAB_TEXT_SIZE_IN_SP = 24f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pager_with_top_tab)
-        vp_fragment.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        vp_fragment.adapter = object :
+            FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getItem(position: Int): Fragment {
                 return ColorFragment.newInstance("$position")
             }
@@ -62,7 +61,11 @@ class ViewPagerActivity : AppCompatActivity() {
                 Timber.d("ViewPagerActivity.onPageScrollStateChanged $state")
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 // 注意理解这个方法参数。position 表示的是第一个显示的 page 的位置。比如，左滑，position 是当前显示的 page；右滑，position 是左侧即将进入的 page
                 // positionOffset 表示 position 对应的 page 的偏移量，区间[0, 1]，0 表示处于当前屏幕位置，1 表示完全偏出
                 Timber.d("ViewPagerActivity.onPageScrolled $position $positionOffset $positionOffsetPixels current ${tl_top.selectedTabPosition}")
@@ -71,9 +74,15 @@ class ViewPagerActivity : AppCompatActivity() {
                 // position 并不一定表示当前 tab，右滑时为左侧要移入的 tab 的位置
                 // 左滑时，position 移出屏幕，字体变小，position + 1 移入屏幕，字体变大。右滑时，position 移入屏幕，position +1 移出屏幕。
                 // 即，无论左滑还是右滑，变化的两个 tab 位置都是 position 和 position + 1
-                setTabTextSize(position, MAX_TAB_TEXT_SIZE_IN_SP - (MAX_TAB_TEXT_SIZE_IN_SP - MIN_TAB_TEXT_SIZE_IN_SP) * positionOffset)
+                setTabTextSize(
+                    position,
+                    MAX_TAB_TEXT_SIZE_IN_SP - (MAX_TAB_TEXT_SIZE_IN_SP - MIN_TAB_TEXT_SIZE_IN_SP) * positionOffset
+                )
                 // position + 1 字体大小变化与 position 相反
-                setTabTextSize(position + 1, MAX_TAB_TEXT_SIZE_IN_SP - (MAX_TAB_TEXT_SIZE_IN_SP - MIN_TAB_TEXT_SIZE_IN_SP) * (1 - positionOffset))
+                setTabTextSize(
+                    position + 1,
+                    MAX_TAB_TEXT_SIZE_IN_SP - (MAX_TAB_TEXT_SIZE_IN_SP - MIN_TAB_TEXT_SIZE_IN_SP) * (1 - positionOffset)
+                )
             }
 
             override fun onPageSelected(position: Int) {
@@ -111,7 +120,8 @@ class ViewPagerActivity : AppCompatActivity() {
     }
 
     private fun setTabTextSize(tabPosition: Int, newTextSize: Float) {
-        val textView = tl_top.getTabAt(tabPosition)?.customView?.findViewById<TextView>(android.R.id.text1)
+        val textView =
+            tl_top.getTabAt(tabPosition)?.customView?.findViewById<TextView>(android.R.id.text1)
         Timber.d("ViewPagerActivity.setTabTextSize $tabPosition $newTextSize")
         textView?.let {
             val newTextSizeInPx = SizeUtils.sp2px(newTextSize)
@@ -119,7 +129,10 @@ class ViewPagerActivity : AppCompatActivity() {
                 it.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSizeInPx.toFloat())
             }
         }
+    }
 
-
+    companion object {
+        private const val MIN_TAB_TEXT_SIZE_IN_SP = 14f
+        private const val MAX_TAB_TEXT_SIZE_IN_SP = 24f
     }
 }

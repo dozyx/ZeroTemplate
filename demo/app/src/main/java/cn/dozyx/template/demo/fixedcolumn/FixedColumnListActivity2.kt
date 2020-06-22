@@ -4,7 +4,7 @@ import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
 
 /**
- * Create by timon on 2019/10/24
+ * Create by dozyx on 2019/10/24
  */
 class FixedColumnListActivity2 : BaseActivity() {
     override fun getLayoutId(): Int {

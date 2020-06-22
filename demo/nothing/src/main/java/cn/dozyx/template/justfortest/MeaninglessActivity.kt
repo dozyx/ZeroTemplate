@@ -1,47 +1,22 @@
 package cn.dozyx.template.justfortest
 
-import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Outline
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.*
+import android.os.Build
 import android.os.Build.VERSION.SDK_INT
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.AttributeSet
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.SpannableString
 import android.util.Printer
-import android.view.*
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import cn.dozyx.core.context.CustomContextWrapper
-import cn.dozyx.template.DelayTextWatcher
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.ThreadUtils
-import com.blankj.utilcode.util.ToastUtils
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.gyf.barlibrary.ImmersionBar
 import kotlinx.android.synthetic.main.activity_meaningless.*
-import okhttp3.*
 import timber.log.Timber
-import java.io.IOException
 
 
 /**
@@ -59,7 +34,14 @@ class MeaninglessActivity : AppCompatActivity() {
             intent.addCategory(Intent.CATEGORY_DEFAULT)
             intent.setClassName("com.mobiu.poseidon.athena","com.snaptube.premium.activity.FeedbackActivity")
             startActivity(intent)
+            input_layout.error = "111"
+            input_layout.error
         }
+        val source = SpannableString(
+            "https://gitlab.mobiuspace.net/mobiuspace111/and-team/em-snaptube-dataadapter/merge_requests/13\n" +
+                    "https://gitlab.mobiuspace.net/mobiuspace/and-team/snaptube/merge_requests/702"
+        )
+        tv_link.text = source
     }
 
     private fun startLoadingAnim() {

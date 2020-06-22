@@ -9,6 +9,7 @@ android {
         minSdkVersion Android.minSdkVersion
         consumerProguardFiles 'proguard-rules.pro'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -28,6 +29,7 @@ dependencies {
     debugImplementation DepsLeakCanary.debug
     debugImplementation DepsLeakCanary.debugSupportFragment
     releaseImplementation DepsLeakCanary.release
+    implementation Deps.multidex
 }
 
 afterEvaluate {

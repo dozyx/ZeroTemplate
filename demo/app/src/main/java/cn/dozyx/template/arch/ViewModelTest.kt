@@ -7,7 +7,7 @@ import cn.dozyx.template.base.BaseTestActivity
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/10/14
+ * Create by dozyx on 2019/10/14
  */
 class ViewModelTest : BaseTestActivity() {
     override fun initActions() {

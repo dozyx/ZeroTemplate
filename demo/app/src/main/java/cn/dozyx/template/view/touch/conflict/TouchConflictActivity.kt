@@ -11,7 +11,7 @@ import cn.dozyx.core.utli.SampleUtil
 import cn.dozyx.template.R
 import com.blankj.utilcode.util.ScreenUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * @author dozyx
@@ -44,12 +44,12 @@ class TouchConflictActivity : BaseActivity() {
     private fun createList(layout: ViewGroup) {
         val recyclerView = layout.findViewById<RecyclerView>(R.id.list)
         var adapter = object : BaseQuickAdapter<String, BaseViewHolder>(android.R.layout.simple_list_item_1) {
-            override fun convert(helper: BaseViewHolder, item: String?) {
+            override fun convert(helper: BaseViewHolder, item: String) {
                 helper.setText(android.R.id.text1, item)
             }
         }
         recyclerView.adapter = adapter
-        adapter.setNewData(SampleUtil.strings)
+        adapter.setNewInstance(SampleUtil.strings)
     }
 
 

@@ -1,5 +1,6 @@
 package cn.dozyx.template
 
+import android.net.Uri
 import android.os.Looper
 import android.widget.Toast
 import cn.dozyx.template.base.BaseTestActivity
@@ -12,7 +13,11 @@ import timber.log.Timber
  */
 class AndroidTest : BaseTestActivity() {
     override fun initActions() {
-        testLooper()
+        testUri()
+    }
+
+    private fun testUri() {
+        Timber.d("AndroidTest.initActions ${Uri.encode("key")} ${Uri.encode("=key%")}")
     }
 
     private fun testLooper() {

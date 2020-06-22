@@ -11,7 +11,7 @@ import com.gyf.barlibrary.ImmersionBar
 import kotlinx.android.synthetic.main.activity_key_board.*
 
 /**
- * Create by timon on 2019/12/11
+ * Create by dozyx on 2019/12/11
  */
 class KeyBoardTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

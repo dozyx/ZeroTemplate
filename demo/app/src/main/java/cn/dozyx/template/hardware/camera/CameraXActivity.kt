@@ -3,28 +3,22 @@ package cn.dozyx.template.hardware.camera
 import android.content.pm.PackageManager
 import android.graphics.Matrix
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.util.Log
-import android.util.Rational
-import android.util.Size
 import android.view.Surface
 import android.view.TextureView
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.camera.core.*
-import androidx.camera.core.Preview
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.blankj.utilcode.util.LogUtils
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
+import com.blankj.utilcode.util.LogUtils
 import kotlinx.android.synthetic.main.camerax_activity.*
-import java.io.File
 import java.nio.ByteBuffer
 import java.util.concurrent.TimeUnit
 
 /**
+ * 库更新之后 API 有变动，代码先注释掉了
  * Create by dozyx on 2019/5/20
  */
 private const val REQUEST_CODE_PERMISSIONS = 10
@@ -46,7 +40,7 @@ class CameraXActivity : BaseActivity() {
     }
 
     private fun startCamera() {
-        val previewConfig = PreviewConfig.Builder().apply {
+        /*val previewConfig = PreviewConfig.Builder().apply {
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(640, 640))
         }.build()
@@ -95,7 +89,7 @@ class CameraXActivity : BaseActivity() {
             analyzer = LuminosityAnalyzer()
         }
 
-        CameraX.bindToLifecycle(this, preview, imageCapure, analyserUseCase)
+        CameraX.bindToLifecycle(this, preview, imageCapure, analyserUseCase)*/
     }
 
     private fun updateTransform() {
@@ -144,7 +138,7 @@ private class LuminosityAnalyzer : ImageAnalysis.Analyzer {
         return data
     }
 
-    override fun analyze(image: ImageProxy, rotationDegrees: Int) {
+    override fun analyze(image: ImageProxy) {
         val currentTimestamp = System.currentTimeMillis()
         if (currentTimestamp - lastAnalyzedTimestamp > TimeUnit.SECONDS.toMillis(1)) {
             val buffer = image.planes[0].buffer

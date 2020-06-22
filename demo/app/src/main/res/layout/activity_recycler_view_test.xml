@@ -21,11 +21,6 @@
     <cn.dozyx.template.view.recyclerview.MyRecyclerView
         android:id="@+id/rv_common"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="true"
-        android:paddingLeft="16dp"
-        android:paddingTop="48dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="24dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

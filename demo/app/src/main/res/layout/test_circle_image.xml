@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/bg_0" />
+
+    <!-- 这个 sdk 大于 25 才显示正常，
+    目录里 v26 使用的 ic_launcher 是 xml 文件定义的 adaptive-icon，删掉之后也会不正常
+    似乎是 png 边距问题。。。加上 border 就比较明显了-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_orange_light"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="2dp"
+        android:src="@mipmap/ic_launcher" />
+    <!--        app:srcCompat="@mipmap/ic_launcher"/>-->
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_orange_light"
+        android:src="@mipmap/ic_launcher" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/bg_0" />
+
+</LinearLayout>

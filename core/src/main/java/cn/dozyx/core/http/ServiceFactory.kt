@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * @author timon
+ * @author dozyx
  * @date 2018/11/21
  */
 

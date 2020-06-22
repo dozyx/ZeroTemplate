@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.dozyx.core.utli.SampleUtil
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
- * Create by timon on 2019/10/28
+ * Create by dozyx on 2019/10/28
  */
 class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -25,11 +26,11 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = object : BaseQuickAdapter<String, BaseViewHolder>(android.R.layout.simple_list_item_1) {
-            override fun convert(helper: BaseViewHolder, item: String?) {
+            override fun convert(helper: BaseViewHolder, item: String) {
                 helper.setText(android.R.id.text1, item)
             }
         }
         recyclerView.adapter = adapter
-        adapter.setNewData(getStrings(30))
+        adapter.setNewData(SampleUtil.getStrings(30))
     }
 }

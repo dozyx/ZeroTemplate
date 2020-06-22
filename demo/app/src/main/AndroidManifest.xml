@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cn.dozyx.template">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -9,6 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <uses-sdk tools:overrideLibrary="androidx.camera.camera2, androidx.camera.core" />
 
     <application
         android:name=".ZTApplication"
@@ -19,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".performance.RuntimeActivity"
+        <activity
+            android:name=".performance.RuntimeActivity"
             android:label="系统/Runtime">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -157,16 +162,17 @@
             android:label="@string/activity_life_cycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.LaunchModeTest"
-            android:label="@string/activity_launch_mode">
+            android:label="@string/activity_launch_mode"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -907,7 +913,72 @@
             android:label="Activity/Intent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
+        <activity
+            android:name=".PipTest"
+            android:label="视频/画中画"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            tools:targetApi="n">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".data.SharedPreferenceTest"
+            android:label="Data/SharedPreference">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ThirdAppTest"
+            android:label="Activity/ThirdApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MockThirdAppTest"
+            android:taskAffinity="cn.dozyx.template.thirdapp">
+            <intent-filter>
+                <action android:name="cn.dozyx.mockthird" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".menu.ActionModeTest"
+            android:label="Menu/ActionMode">
+<!--            android:theme="@style/CustomActionModeTheme">-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".install.InstallTest"
+            android:label="App/安装">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".image.CircleImageTest"
+            android:label="View/CircleImage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".provider.ContentProviderTest"
+            android:label="存储/ContentProvider">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>

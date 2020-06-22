@@ -64,6 +64,9 @@ class AnimationTest : BaseActivity() {
         resume_property.setOnClickListener {
             objectAnimator.resume()
         }
+        bt_log.setOnClickListener {
+            Timber.d("getLeft ${image_anim.left}")
+        }
     }
 
     private fun stopTranslationAnim() {

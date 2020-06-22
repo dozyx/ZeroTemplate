@@ -1,7 +1,9 @@
 package cn.dozyx.core.base
 
 import android.app.Application
+import android.content.Context
 import android.os.StrictMode
+import androidx.multidex.MultiDex
 import cn.dozyx.core.GlobalConfig
 import cn.dozyx.core.ex.debuggable
 import cn.dozyx.core.ex.isMainProcess
@@ -38,6 +40,11 @@ abstract class BaseApplication : Application() {
         initLeakCanary()
         initLog()
         initCrash()
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     private fun initCrash() {

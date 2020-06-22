@@ -30,8 +30,12 @@
         <activity
             android:name=".MeaninglessActivity"
             android:exported="true"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="cn.dozyx.thirdapp"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".GodActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">

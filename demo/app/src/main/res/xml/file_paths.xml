@@ -5,5 +5,8 @@
         path="Android/data/cn.dozyx.template/files/Pictures" />-->
     <external-files-path
         name="my_images"
-        path="Pictures/" />
+        path="Pictures/" /><!--
+    <external-files-path
+        name="downloads"
+        path="Download" />-->
 </paths>

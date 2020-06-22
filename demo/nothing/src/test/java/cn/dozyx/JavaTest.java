@@ -27,6 +27,7 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -108,6 +109,52 @@ import io.reactivex.internal.operators.observable.ObservableZip;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testIterator() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == 2){
+//                list.remove(i);// 这种移除虽然没有异常，但是其实逻辑已经有问题，因为移除之后，后面的 index 会改变，导致下一个元素没有参与到遍历中
+            }
+        }
+        for (Integer integer : list) {
+            if (integer == 2){
+                //迭代过程中移除，抛出异常
+//                list.remove(integer);
+            }
+        }
+        sleep(1);
+    }
+
+    @Test
+    public void testFile() {
+        File file = new File("1");
+        print(Long.MAX_VALUE);
+        print(Integer.MAX_VALUE);
+        print("9223372036854775807".substring(0, 13));
+    }
+
+    @Test
+    public void testForLoop(){
+        ArrayList<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(2);
+        data.add(3);
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i) == 2){
+                data.remove(i);
+            }
+        }
+        ArrayList<Object> list = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            print(list);
+        }
+    }
 
     @Test
     public void testConstantPool() {
@@ -1181,9 +1228,11 @@ public class JavaTest {
 
     }
 
+    @Test
     public void testFoo() {
-
-        print(-123 / 10);
+        String url = "https://www.baidu.com/index";
+        print(url.substring(url.lastIndexOf("/")));
+        int i = 1000 * 60 * 60 * 2;
     }
 
     @Test

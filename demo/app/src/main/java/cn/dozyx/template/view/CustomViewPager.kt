@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import timber.log.Timber
 
 /**
- * Create by timon on 2019/10/28
+ * Create by dozyx on 2019/10/28
  */
 class CustomViewPager : ViewPager {
     constructor(context: Context) : super(context) {}

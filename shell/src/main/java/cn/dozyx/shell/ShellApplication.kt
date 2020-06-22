@@ -4,7 +4,7 @@ import cn.dozyx.core.base.BaseApplication
 
 
 /**
- * @author timon
+ * @author dozyx
  * @date 2018/11/23
  */
 class ShellApplication : BaseApplication() {

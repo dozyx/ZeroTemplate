@@ -30,6 +30,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     protected fun addButton(text: String, task: Runnable): Button {
         val button = Button(this)
         button.text = text
+        button.textSize = 12f
         button.setOnClickListener {
             task.run()
         }
