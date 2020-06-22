@@ -2,7 +2,7 @@ package cn.dozyx.core.model
 
 /**
  * 带状态的数据源
- * @author timon
+ * @author dozyx
  * @date 2018/11/21
  */
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {

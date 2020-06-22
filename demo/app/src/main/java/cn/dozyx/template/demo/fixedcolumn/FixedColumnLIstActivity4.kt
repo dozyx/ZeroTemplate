@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import kotlinx.android.synthetic.main.common_list.*
 import timber.log.Timber
 import kotlin.math.abs
@@ -23,7 +23,7 @@ class FixedColumnLIstActivity4 : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val adapter = object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.itemfixed_column2) {
-            override fun convert(helper: BaseViewHolder, item: String?) {
+            override fun convert(helper: BaseViewHolder, item: String) {
                 Timber.d("FixedColumnListActivity3.convert ${helper.itemView} $item")
                 helper.setText(R.id.columns_0, item)
                 if (recyclerView == null) {
@@ -38,7 +38,6 @@ class FixedColumnLIstActivity4 : BaseActivity() {
             }
         }
         rv_common.adapter = adapter
-        adapter.bindToRecyclerView(rv_common)
         val datas = ArrayList<String>()
         for (i in 0..50) {
             datas.add(i.toString())

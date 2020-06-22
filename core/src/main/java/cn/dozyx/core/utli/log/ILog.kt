@@ -3,7 +3,7 @@ package cn.dozyx.core.utli.log
 import org.jetbrains.annotations.NonNls
 
 /**
- * @author timon
+ * @author dozyx
  * @date 2018/11/23
  */
 

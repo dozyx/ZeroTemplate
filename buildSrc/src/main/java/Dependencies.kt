@@ -1,8 +1,13 @@
 // 使用 default package 时，在 groovy 的 build.gradle 文件无法访问 kotlin 的内部类 https://github.com/gradle/gradle/issues/9251
 
 object BuildPlugins {
+    val greendao = "org.greenrobot.greendao"
+}
+
+object ClassPath {
     val androidGradle = "com.android.tools.build:gradle:${Version.androidGradleVersion}"
     val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlinVersion}"
+    val greendao = "org.greenrobot:greendao-gradle-plugin:${Version.greendao}"
 }
 
 object Android {
@@ -51,6 +56,9 @@ object Deps {
     val viewpump = "io.github.inflationx:viewpump:${Version.viewpump}"
     val autoService = "com.google.auto.service:auto-service:${Version.auto_service}"
     val javaPoet = "com.squareup:javapoet:${Version.java_poet}"
+    val multidex = "androidx.multidex:multidex:${Version.multidex}"
+    val circleImageView = "de.hdodenhof:circleimageview:${Version.circle_image}"
+    val greendao = "org.greenrobot:greendao:${Version.greendao}"
 
 }
 
@@ -98,9 +106,11 @@ object DepsRoom {
 }
 
 object DepsCamera {
-    val core = "androidx.camera:camera-core:${Version.camerax}"
-    val view = "androidx.camera:camera-view:${Version.camerax}"
+    // minSdkVersion 至少为 21
     val camera2 = "androidx.camera:camera-camera2:${Version.camerax}"
+    val view = "androidx.camera:camera-view:1.0.0-alpha10"
+    val lifeCycle = "androidx.camera:camera-lifecycle:${Version.camerax}"
+    val extensions = "androidx.camera:camera-extensions:1.0.0-alpha10"
 }
 
 object DepsRxLifecycle {
@@ -186,7 +196,7 @@ object Version {
     const val picasso = "2.71828"
     const val threeten = "1.2.1"
     const val leakcanary = "1.6.3"
-    const val dagger = "2.23.2"
+    const val dagger = "2.28"
     const val retrofit = "2.7.0"
     const val junit = "4.12"
     const val junit_ext = "1.1.1"
@@ -205,14 +215,14 @@ object Version {
     const val butterknife = "10.1.0"
     const val support = "1.0.0"
     const val constraintLayout = "2.0.0-beta2"
-    const val multidex = "1.0.1"
+    const val multidex = "2.0.1"
     const val convenient_banner = "2.1.5"
     const val loop_view = "0.1.2"
     const val eventbus = "3.1.1"
     const val fragmentation = "1.3.3"
     const val fresco = "1.5.0"
     const val weibo = "1.0.0"
-    const val greendao = "3.2.2"
+    const val greendao = "3.3.0"
     const val lifecycle = "2.0.0"
     const val android_gradle_plugin = "3.4.1"
     const val gradle_versions_plugin = "0.20.0"
@@ -253,7 +263,7 @@ object Version {
     const val immersionbar = "2.3.3"
     const val room = "2.1.0-alpha07"
     const val stetho = "1.5.1"
-    const val camerax = "1.0.0-alpha01"
+    const val camerax = "1.0.0-beta03"
     const val percentlayout = "1.0.0"
     const val rxAndroid = "2.1.1"
     const val vectordrawable = "1.0.1"
@@ -261,9 +271,10 @@ object Version {
     const val gridlayout = "1.0.0"
     const val hyperion = "0.9.27"
     const val glide = "4.10.0"
-    const val adapter_helper = "2.9.50"
+    const val adapter_helper = "3.0.4"
     const val calligraphy = "3.1.1"
     const val viewpump = "2.0.3"
     const val auto_service = "1.0-rc6"
     const val java_poet = "1.12.1"
+    const val circle_image = "3.1.0"
 }

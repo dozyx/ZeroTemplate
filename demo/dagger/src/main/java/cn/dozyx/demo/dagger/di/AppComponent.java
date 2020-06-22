@@ -5,6 +5,7 @@ import android.app.Application;
 import javax.inject.Singleton;
 
 import cn.dozyx.demo.dagger.DaggerDemoApp;
+import cn.dozyx.demo.dagger.test.SingletonTest;
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
@@ -25,6 +26,8 @@ public interface AppComponent extends AndroidInjector<DaggerApplication> {
 
     @Override
     void inject(DaggerApplication instance);
+
+    void inject(SingletonTest singletonTest);
 
     @Component.Builder
     interface Builder {

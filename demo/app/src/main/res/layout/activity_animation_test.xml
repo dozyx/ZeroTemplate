@@ -61,6 +61,14 @@
         app:layout_constraintStart_toEndOf="@+id/pause_property"
         app:layout_constraintTop_toTopOf="@+id/start_property" />
 
+    <Button
+        android:id="@+id/bt_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/start_property"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="数据"/>
+
     <ImageView
         android:id="@+id/image_anim"
         android:layout_width="wrap_content"

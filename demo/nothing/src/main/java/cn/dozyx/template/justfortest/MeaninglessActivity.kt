@@ -56,10 +56,8 @@ class MeaninglessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meaningless)
         startLoadingAnim()
         button.setOnClickListener{
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_DEFAULT)
-            intent.setClassName("com.mobiu.poseidon.athena","com.snaptube.premium.activity.FeedbackActivity")
-            startActivity(intent)
+            input_layout.error = "111"
+            input_layout.error
         }
         val source = SpannableString(
             "https://gitlab.mobiuspace.net/mobiuspace111/and-team/em-snaptube-dataadapter/merge_requests/13\n" +

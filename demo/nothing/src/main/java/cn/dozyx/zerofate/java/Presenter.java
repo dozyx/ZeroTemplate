@@ -3,7 +3,7 @@ package cn.dozyx.zerofate.java;
 import cn.dozyx.core.debug.MockUtils;
 
 /**
- * Create by timon on 2019/11/1
+ * Create by dozyx on 2019/11/1
  **/
 public class Presenter {
     private IView view;

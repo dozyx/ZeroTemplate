@@ -5,7 +5,7 @@ import android.view.View;
 import androidx.databinding.BindingAdapter;
 
 /**
- * Create by timon on 2019/11/6
+ * Create by dozyx on 2019/11/6
  **/
 public class CustomBindingAdapter {
     @BindingAdapter("android:paddingLeft")

@@ -4,4 +4,65 @@
     <style name="EditTextPhone">
         <item name="android:inputType">phone</item>
     </style>
+
+
+    <style name="ZT.TextAppearance.Base" parent="TextAppearance.AppCompat" />
+
+    <style name="ZT.TextView.Base" parent="android:Widget.TextView">
+        <item name="android:textAppearance">@style/ZT.TextAppearance.Base</item>
+    </style>
+
+    <style name="ZT.TextAppearance.Dialog.Message" parent="ZT.TextAppearance.Base">
+        <item name="android:textColor">?attr/textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ZT.TextAppearance.Dialog.Message.Large">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ListItemActionButton">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="ListItemActionButton.Large">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+    </style>
+
+    <style name="ZT.TextAppearance.Title.Base" parent="ZT.TextAppearance.Base">
+        <item name="android:textColor">?attr/textColorPrimary</item>
+    </style>
+
+    <style name="ZT.TextAppearance.SubTitle.Base" parent="ZT.TextAppearance.Base">
+        <item name="android:textColor">?attr/textColorSubTitle</item>
+    </style>
+
+    <style name="ZT.TextView.Title.Base" parent="ZT.TextView.Base">
+        <item name="android:textColor">?attr/textColorPrimary</item>
+    </style>
+
+    <!-- <editor-fold desc="Item title">-->
+    <style name="ZT.TextAppearance.Title.Item" parent="ZT.TextAppearance.Title.Base">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ZT.TextView.Title.Item" parent="ZT.TextView.Base">
+        <item name="android:textAppearance">@style/ZT.TextAppearance.Title.Item</item>
+    </style>
+    <!-- </editor-fold>-->
+
+    <!-- <editor-fold desc="Item subtitle">-->
+    <style name="ZT.TextAppearance.SubTitle.Item" parent="ZT.TextAppearance.SubTitle.Base">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ZT.TextView.SubTitle.Item" parent="ZT.TextView.Base">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <!-- </editor-fold>-->
+
 </resources>

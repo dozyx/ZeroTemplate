@@ -1,9 +1,11 @@
 package cn.dozyx.template.justfortest
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.multidex.MultiDex
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -40,6 +42,11 @@ class MyApplication : Application(), Thread.UncaughtExceptionHandler {
         Timber.d(MonthDay.now().toString())
         Timber.d(Instant.now().toString())
 
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     override fun uncaughtException(t: Thread, e: Throwable) {

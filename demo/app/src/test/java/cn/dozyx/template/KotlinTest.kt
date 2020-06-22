@@ -1,9 +1,9 @@
 package cn.dozyx.template
 
+import io.reactivex.Observable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.junit.Assert.*
 
 import org.junit.Test
 import kotlin.concurrent.thread
@@ -13,6 +13,34 @@ import kotlin.concurrent.thread
  * @date 2019-12-09
  */
 class KotlinTest {
+
+    @Test
+    fun foo1() {
+        Observable.just(1).subscribe({
+            return@subscribe
+        }, {
+
+        })
+    }
+
+    @Test
+    fun foo2(): String? {
+        val meta1: String? = null
+        val meta2: String? = null
+
+//        meta1 ?: return meta2
+//        meta2 ?: return meta1
+
+        return meta1?.run {
+            return meta2?.run {
+                // do something
+                return ""
+            }
+        } ?: meta2
+
+        //do something
+//        return ""
+    }
 
     @Test
     fun testNull() {

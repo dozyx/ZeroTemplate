@@ -8,14 +8,13 @@ import java.util.ArrayList
  */
 object SampleUtil {
 
-    val strings: List<String>
+    val strings: MutableList<String>
         get() = getStrings(50)
 
     @JvmOverloads
-    fun getStrings(count: Int, tag: String = ""): List<String> {
-        val datas = ArrayList<String>()
-        for (i in 0 until count) {
-            datas.add("sample $tag: $i ")
+    fun getStrings(count: Int, tag: String = ""): MutableList<String> {
+        val datas = MutableList<String>(count) {
+            "sample $tag: $it "
         }
         return datas
     }

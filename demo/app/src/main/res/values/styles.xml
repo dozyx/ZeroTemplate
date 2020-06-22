@@ -106,6 +106,15 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="no_frame_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="ExpandMenuStyle">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
@@ -119,6 +128,14 @@
     </style>
 
     <style name="TabAppearance" parent="TextAppearance.Design.Tab">
+    </style>
+    
+    <style name="CustomActionModeTheme" parent="AppTheme">
+        <item name="actionModeCloseButtonStyle">@style/CustomActionModeStyle</item>
+    </style>
+
+    <style name="CustomActionModeStyle">
+        <item name="android:visibility">gone</item>
     </style>
 
 </resources>

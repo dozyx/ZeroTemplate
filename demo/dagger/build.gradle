@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: "$project.rootDir/buildKotlin.gradle"
 
 android {
     compileSdkVersion 29
@@ -31,6 +32,6 @@ dependencies {
     implementation Deps.constraintLayout
     implementation Deps.dagger
     implementation Deps.daggerAndroid
-    annotationProcessor DepsDagger.processor
-    annotationProcessor DepsDagger.androidProcessor
+    kapt DepsDagger.processor
+    kapt DepsDagger.androidProcessor
 }

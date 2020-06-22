@@ -8,7 +8,7 @@ import android.widget.HorizontalScrollView
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import kotlinx.android.synthetic.main.activity_fixed_column.*
 import timber.log.Timber
 
@@ -46,7 +46,7 @@ class FixedColumnListActivity : BaseActivity() {
             }
         }
         var adapter = object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_fixed_column) {
-            override fun convert(helper: BaseViewHolder, item: String?) {
+            override fun convert(helper: BaseViewHolder, item: String) {
                 val scrollView = helper.getView<HorizontalScrollView>(R.id.scroll_columns)
                 scrollView.setOnScrollChangeListener(scrollListener)
             }

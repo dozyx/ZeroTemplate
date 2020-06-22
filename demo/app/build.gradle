@@ -10,6 +10,7 @@ android {
                 arguments = [ eventBusIndex : 'com.example.myapp.MyEventBusIndex' ]
             }
         }
+        vectorDrawables.useSupportLibrary = true
     }
 
     flavorDimensions "mode"
@@ -18,7 +19,8 @@ android {
         this.properties.clear()
         development {
             // 避免使用 Legacy Multidex 以加快编译，注意：实际开发中，IDE 判断的最小sdk会变成这个
-            minSdkVersion Android.minDebugSdkVersion
+            // 避免使用 Legacy Multidex 以加快编译，注意：实际开发中，IDE 判断的最小sdk会变成这个
+//            minSdkVersion Android.minDebugSdkVersion
             resConfigs("xhdpi")
         }
     }
@@ -60,7 +62,7 @@ dependencies {
     kapt DepsRoom.processor
     implementation DepsRoom.runtime
     implementation Deps.stetho
-    implementation DepsCamera.core
+    implementation DepsCamera.camera2
     implementation Deps.picasso
     implementation Deps.timber
     implementation DepsRetrofit.scalars
@@ -73,4 +75,6 @@ dependencies {
     implementation DepsPaging.rxjava2
     implementation Deps.immersionbar
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
+    implementation Deps.circleImageView
+    implementation Deps.greendao
 }

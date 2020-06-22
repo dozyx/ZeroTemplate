@@ -6,6 +6,7 @@ android {
     defaultConfig {
         versionCode 10001
         versionName "1.0.1"
+        multiDexEnabled true
     }
     def env
     buildTypes {
@@ -36,7 +37,7 @@ android.applicationVariants.all { variant ->
     variant.outputs.all {
         def date = new Date().format("MMddHH")
         def productFlavorName = variant.productFlavors[0].name
-        outputFileName = "应用名称" + "-${variant.versionName}-" + productFlavorName + "-" + date + "-${variant.buildType.name}" + ".apk"
+        outputFileName = "app" + "-${variant.versionName}-" + productFlavorName + "-" + date + "-${variant.buildType.name}" + ".apk"
     }
 }
 
@@ -95,7 +96,8 @@ dependencies {
     kapt project(':butterknife-compiler')
     implementation project(':autobuilder')
     annotationProcessor project(':autobuilder')
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation Deps.circleImageView
+    implementation Deps.multidex
 //    implementation ("com.github.bumptech.glide:okhttp3-integration:4.10.0"){
 //        exclude group: "com.squareup.okhttp3", module: "okhttp"
 //    }

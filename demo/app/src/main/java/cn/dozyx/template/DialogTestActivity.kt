@@ -57,6 +57,14 @@ class DialogTestActivity : BaseTestActivity() {
             val window = dialog.window!!
             dialog.show()
         })
+        addButton("自定义2", Runnable {
+            val dialog = Dialog(this, R.style.no_frame_dialog)
+            // inflate 出来的 view 的 layout_params 无效了
+            val content = LayoutInflater.from(this).inflate(R.layout.dialog_custom2, null)
+            dialog.setContentView(content)
+//            dialog.setContentView(content, content.layoutParams)
+            dialog.show()
+        })
     }
 
     class DialogFragmentTest : DialogFragment() {

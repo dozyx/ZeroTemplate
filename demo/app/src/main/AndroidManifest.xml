@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <uses-sdk tools:overrideLibrary="androidx.camera.camera2, androidx.camera.core" />
 
     <application
         android:name=".ZTApplication"
@@ -33,12 +36,12 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/LaunchTheme">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
 
         <provider
@@ -164,11 +167,12 @@
         </activity>
         <activity
             android:name=".activity.LaunchModeTest"
-            android:launchMode="singleTop"
-            android:label="@string/activity_launch_mode">
+            android:label="@string/activity_launch_mode"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -905,7 +909,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".IntentTest"
+        <activity
+            android:name=".IntentTest"
             android:label="Activity/Intent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -926,7 +931,53 @@
         </activity>
         <activity
             android:name=".data.SharedPreferenceTest"
-            android:label="Data/SharedPreference" >
+            android:label="Data/SharedPreference">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ThirdAppTest"
+            android:label="Activity/ThirdApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MockThirdAppTest"
+            android:taskAffinity="cn.dozyx.template.thirdapp">
+            <intent-filter>
+                <action android:name="cn.dozyx.mockthird" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".menu.ActionModeTest"
+            android:label="Menu/ActionMode">
+<!--            android:theme="@style/CustomActionModeTheme">-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".install.InstallTest"
+            android:label="App/安装">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".image.CircleImageTest"
+            android:label="View/CircleImage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".provider.ContentProviderTest"
+            android:label="存储/ContentProvider">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

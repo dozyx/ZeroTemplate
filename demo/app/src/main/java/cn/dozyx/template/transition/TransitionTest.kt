@@ -6,7 +6,7 @@ import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 
 /**
- * Create by timon on 2019/12/10
+ * Create by dozyx on 2019/12/10
  */
 open class TransitionTest : BaseTestActivity() {
     override fun initActions() {
