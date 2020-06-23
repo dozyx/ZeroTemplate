@@ -12,7 +12,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.dozex.butterknife_annotations.BindView;
 
 import cn.dozyx.template.justfortest.databinding.ActivityDataBindingTestBinding;
-import cn.dozyx.template.justfortest.databinding.ActivityMeaninglessBinding;
 
 public class DataBindingTestActivity extends AppCompatActivity {
 

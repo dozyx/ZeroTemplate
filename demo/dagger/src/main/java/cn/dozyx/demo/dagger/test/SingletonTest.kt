@@ -5,7 +5,7 @@ import cn.dozyx.demo.dagger.java.Machine
 import javax.inject.Inject
 
 object SingletonTest {
-    @set:Inject
+//    @set:Inject
     lateinit var machine: Machine
 
     init {

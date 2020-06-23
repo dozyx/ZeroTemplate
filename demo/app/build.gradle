@@ -1,5 +1,6 @@
 apply from: "${rootDir}/buildApp.gradle"
 apply from: "${rootDir}/learn.gradle"
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     defaultConfig {
@@ -24,6 +25,14 @@ android {
             resConfigs("xhdpi")
         }
     }
+    sourceSets {
+        // https://stackoverflow.com/questions/41507389/unresolved-reference-daosession-using-greendao-and-kotlin
+        main.java.srcDirs += 'build/generated/source/greendao'
+    }
+}
+greendao {
+    schemaVersion 3 // 版本号，所有 greenDao 的数据库会共享，可以在生成的 DaoMaster 里看到这个版本号
+    // 如果 Entity 类增加了字段，但没有在
 }
 
 dependencies {

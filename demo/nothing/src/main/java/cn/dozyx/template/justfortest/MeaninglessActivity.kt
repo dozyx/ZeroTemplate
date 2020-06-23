@@ -28,7 +28,6 @@ class MeaninglessActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
-        startLoadingAnim()
         button.setOnClickListener{
             val intent = Intent(Intent.ACTION_MAIN)
             intent.addCategory(Intent.CATEGORY_DEFAULT)
