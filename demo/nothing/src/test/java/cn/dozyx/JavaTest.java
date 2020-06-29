@@ -1461,6 +1461,12 @@ public class JavaTest {
         private T name;
     }
 
+    @Test
+    public void testDateCompare() throws ParseException {
+        String date = "2020-06-24";
+        print(System.currentTimeMillis() > new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+    }
+
     public void testDate() {
         String payTime = "2019-06-01";
         int year = Integer.parseInt(payTime.substring(0, 4));
@@ -1584,9 +1590,7 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        print(35 >> 1);
-        print(35 >> 32);
-        print((35 >> 16) >> 16);
+        print(Integer.MAX_VALUE);
     }
 
     private static class SuperClass {

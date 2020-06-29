@@ -53,6 +53,15 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
+    public void testIterator(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        Observable.fromIterable(list).subscribe(observer);
+    }
+
+    @Test
     public void testIfFlatMap() {
         // 场景：
         // 1. 根据手机号获取用户名
@@ -893,15 +902,15 @@ public class RxJavaTest {
     }
 
 
-    Observer<Integer> observer = new Observer<Integer>() {
+    Observer<Object> observer = new Observer<Object>() {
         @Override
         public void onSubscribe(Disposable d) {
             print("onSubscribe d = [" + d + "]");
         }
 
         @Override
-        public void onNext(Integer integer) {
-            print("onNext integer = [" + integer + "]");
+        public void onNext(Object object) {
+            print("onNext object = [" + object + "]");
         }
 
         @Override

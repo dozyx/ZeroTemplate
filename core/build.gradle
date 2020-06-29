@@ -25,4 +25,5 @@ dependencies {
     implementation DepsRetrofit.rxjavaAdapter
     implementation DepsOkHttp.logging
     implementation DepsRxBinding.base
+    implementation Deps.greendao
 }
