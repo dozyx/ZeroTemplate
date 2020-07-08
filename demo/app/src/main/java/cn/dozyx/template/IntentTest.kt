@@ -1,6 +1,7 @@
 package cn.dozyx.template
 
 import android.content.Intent
+import android.net.Uri
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import timber.log.Timber
@@ -14,10 +15,17 @@ class IntentTest : BaseTestActivity() {
     override fun initActions() {
         addAction(object : Action("解析") {
             override fun run() {
-                var intent = Intent.parseUri(URI_INTENT, Intent.URI_INTENT_SCHEME)
+                val intent = Intent.parseUri(URI_INTENT, Intent.URI_INTENT_SCHEME)
                 Timber.d("IntentTest.origin $URI_INTENT")
                 Timber.d("IntentTest.intent $intent")
                 Timber.d("IntentTest.extras ${intent.extras}")
+            }
+        })
+
+        addAction(object :Action("启动"){
+            override fun run() {
+                val intentString = "intent://larkgame.com?utm_source=sp_settings#Intent;scheme=https;package=com.snaptube.premium;end;"
+                startActivity(Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME))
             }
         })
     }

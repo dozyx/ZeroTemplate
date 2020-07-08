@@ -53,7 +53,20 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
-    public void testIterator(){
+    public void testDispose() {
+        Disposable disposable = getObservable(1).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                print("onNext: " + integer);
+            }
+        });
+        sleep(1);
+        print("is disposed: " + disposable.isDisposed());
+
+    }
+
+    @Test
+    public void testIterator() {
         List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
@@ -70,7 +83,7 @@ public class RxJavaTest {
         Observable.just(true).flatMap(new Function<Boolean, ObservableSource<Integer>>() {
             @Override
             public ObservableSource<Integer> apply(Boolean aBoolean) throws Exception {
-                if (aBoolean){
+                if (aBoolean) {
                     // 成功，登录
                     return Observable.just(1);
                 }
@@ -80,9 +93,10 @@ public class RxJavaTest {
             }
         }).subscribe(sObserver);
     }
+
     @Test
     public void testC() {
-        Observable<Integer> source1 = getObservable(1,2,3).delay(100,TimeUnit.MILLISECONDS);
+        Observable<Integer> source1 = getObservable(1, 2, 3).delay(100, TimeUnit.MILLISECONDS);
         Observable<Integer> source2 = getObservable().delay(200, TimeUnit.MILLISECONDS);
         Observable.combineLatest(Arrays.asList(source1, source2), new Function<Object[], String>() {
             @Override
@@ -92,6 +106,7 @@ public class RxJavaTest {
         }).subscribe(LogObserver.get());
         sleep(1);
     }
+
     @Test
     public void testStartWith() {
         getObservable(1, 2, 3).startWith(4).subscribe(LogObserver.get());
@@ -357,7 +372,9 @@ public class RxJavaTest {
 
     @Test
     public void testReduce() {
-        getStringObservable().reduce(new BiFunction<String, String, String>() {
+        Observable<String> observable = getStringObservable();
+//        observable = Observable.just("1111");
+        observable.reduce(new BiFunction<String, String, String>() {
             @Override
             public String apply(String s, String s2) throws Exception {
                 return s + s2;
@@ -441,8 +458,18 @@ public class RxJavaTest {
     public void testConcat() {
         // concat：拼接
         // 按顺序发射多个 observable 的 item
-        Observable.concat(Observable.just("a", "b", "c").subscribeOn(Schedulers.io()),
-                Observable.just("d", "f")).subscribeOn(Schedulers.io()).subscribe(sObserver);
+        Observable.concat(Observable.just("a", "b", "c").doOnNext(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        print(s);
+                    }
+                }).subscribeOn(Schedulers.io()),
+                Observable.just("d", "f").doOnNext(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        print(s);
+                    }
+                })).subscribeOn(Schedulers.io()).subscribe(sObserver);
         sleep(5);
     }
 
@@ -878,8 +905,10 @@ public class RxJavaTest {
     public void testZip() {
         Observable<Integer> observable1 = getObservable(1, 2, 3);
         Observable<Integer> observable2 = getObservable(4, 5, 6, 7).delay(2, TimeUnit.SECONDS);
-        Observable.zip(observable1, observable2,
-                (integer, integer2) -> integer + integer2).subscribe(observer);
+//        Observable.zip(observable1, observable2,
+//                (integer, integer2) -> integer + integer2).subscribe(observer);
+        Observable.zip(observable1, observable2, Observable.empty(),
+                (integer, integer2, integer3) -> integer + integer2).subscribe(observer);
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {

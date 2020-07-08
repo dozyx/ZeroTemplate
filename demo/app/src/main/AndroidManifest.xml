@@ -353,7 +353,14 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".design.CoordinatorLayoutActivity" />
+        <activity android:name=".design.CoordinatorLayoutActivity"
+            android:label="View/CoordinatorLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DialogTestActivity"
             android:label="Dialog">
@@ -991,6 +998,20 @@
         </activity>
         <activity android:name=".notification.NotificationTest"
             android:label="通知">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".drawable.DrawableTest"
+            android:label="Drawable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.AutoCompleteTest"
+            android:label="View/AutoText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

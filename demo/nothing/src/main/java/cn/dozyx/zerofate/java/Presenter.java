@@ -1,6 +1,6 @@
 package cn.dozyx.zerofate.java;
 
-import cn.dozyx.core.debug.MockUtils;
+import cn.dozyx.core.debug.MockDataUtils;
 
 /**
  * Create by dozyx on 2019/11/1
@@ -10,7 +10,7 @@ public class Presenter {
 
     public void onRefresh() {
         if (view != null) {
-            view.showDatas(MockUtils.generateList(String.class));
+            view.showDatas(MockDataUtils.generateList(String.class));
         }
     }
 }

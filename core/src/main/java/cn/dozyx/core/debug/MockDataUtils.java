@@ -10,7 +10,7 @@ import java.util.List;
  * 用于提供模拟数据
  * Create by dozyx on 2019/8/9
  **/
-public class MockUtils {
+public class MockDataUtils {
     private static boolean bool = false;
 
     public static <T> T generateInstance(Class<T> type) {

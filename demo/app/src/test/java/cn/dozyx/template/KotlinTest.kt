@@ -14,6 +14,23 @@ import kotlin.concurrent.thread
  */
 class KotlinTest {
 
+    /**
+     * https://kotlinlang.org/docs/reference/generics.html
+     */
+    @Test
+    fun testGenerics() {
+        val box: Box<Int> = Box<Int>(1)
+        // 简写
+        val box2 = Box(1)
+
+        // kotlin 的泛型没有通配符类型（wildcard types），取而代之的是声明类型和类型预测（declaration-site variance and type projections）
+
+    }
+
+    class Box<T>(t: T) {
+        var value = t
+    }
+
     @Test
     fun foo1() {
         Observable.just(1).subscribe({

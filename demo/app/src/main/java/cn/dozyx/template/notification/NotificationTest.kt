@@ -3,7 +3,11 @@ package cn.dozyx.template.notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +17,7 @@ import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.ToastUtils
 
 /**
  * https://developer.android.com/guide/topics/ui/notifiers/notifications
@@ -23,6 +28,14 @@ class NotificationTest : BaseTestActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     createChannel()
+    val filter = IntentFilter()
+    filter.addAction(ACTION_NOTIFICATION_CLICK)
+//    filter.addCategory(Intent.CATEGORY_DEFAULT)
+    registerReceiver(object : BroadcastReceiver() {
+      override fun onReceive(context: Context?, intent: Intent?) {
+        ToastUtils.showShort(intent?.action)
+      }
+    }, filter)
   }
 
   override fun initActions() {
@@ -39,7 +52,12 @@ class NotificationTest : BaseTestActivity() {
                 .setStyle(NotificationCompat.BigTextStyle())
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setAutoCancel(true) // 用户点击后自动消失
-        NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, builder.build())
+        val notification = builder.build()
+//        notification.flags = notification.flags or NotificationCompat.FLAG_NO_CLEAR // 用户清理通知时不会被取消
+//        notification.flags = notification.flags or NotificationCompat.FLAG_ONGOING_EVENT
+        NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, notification)
+        // 如何在 app 退出之后依然保留 app？
+        // 1. 使用 service
       }
     })
 
@@ -61,9 +79,20 @@ class NotificationTest : BaseTestActivity() {
         NotificationManagerCompat.from(this@NotificationTest.applicationContext).notify(notificationId++, builder.build())
       }
     })
+
+    addAction(object : Action("监听") {
+      override fun run() {
+        val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                .setSmallIcon(R.drawable.ic_cat_dog)
+                .setContentIntent(PendingIntent.getBroadcast(this@NotificationTest, 0, Intent(ACTION_NOTIFICATION_CLICK), FLAG_UPDATE_CURRENT))
+                .setContentTitle("监听点击")
+                .setAutoCancel(true)
+        NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, builder.build())
+      }
+    })
   }
 
-  fun createPendingIntent(): PendingIntent {
+  private fun createPendingIntent(): PendingIntent {
     val intent = Intent(Intent.ACTION_VIEW)
     intent.data = Uri.parse("https://www.baidu.com")
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -71,7 +100,7 @@ class NotificationTest : BaseTestActivity() {
             intent, PendingIntent.FLAG_UPDATE_CURRENT)
   }
 
-  fun createChannel() {
+  private fun createChannel() {
     // 只支持 API 26+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       val notificationManager = getSystemService(NotificationManager::class.java)
@@ -105,5 +134,6 @@ class NotificationTest : BaseTestActivity() {
     private const val CHANNEL_ID_NORMAL = "1"
     private const val CHANNEL_ID_IMPORTANCE = "2"
     private const val CHANNEL_ID_VIBRATE = "3"
+    private const val ACTION_NOTIFICATION_CLICK = "cn.dozyx.action.notification"
   }
 }
