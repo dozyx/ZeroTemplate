@@ -16,6 +16,9 @@ import io.reactivex.functions.Function;
  * 用于编写 Java 代码，再粘贴到 kt 文件实现自动转换，以方便查看 kotlin 语法
  **/
 public class JavaToKotlin {
+  public static void foo(){
+
+  }
     private static final JavaToKotlin INSTANCE = new JavaToKotlin();
     public <T extends View> T getView(int id){
         return null;

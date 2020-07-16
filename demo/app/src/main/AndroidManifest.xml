@@ -172,7 +172,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -353,7 +353,8 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".design.CoordinatorLayoutActivity"
+        <activity
+            android:name=".design.CoordinatorLayoutActivity"
             android:label="View/CoordinatorLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -916,7 +917,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".IntentTest"
+        <activity
+            android:name=".IntentTest"
             android:label="Activity/Intent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -951,7 +953,8 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MockThirdAppTest"
+        <activity
+            android:name=".activity.MockThirdAppTest"
             android:taskAffinity="cn.dozyx.template.thirdapp">
             <intent-filter>
                 <action android:name="cn.dozyx.mockthird" />
@@ -961,20 +964,22 @@
         <activity
             android:name=".menu.ActionModeTest"
             android:label="Menu/ActionMode">
-<!--            android:theme="@style/CustomActionModeTheme">-->
+            <!--            android:theme="@style/CustomActionModeTheme">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".install.InstallTest"
+        <activity
+            android:name=".install.InstallTest"
             android:label="App/安装">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".image.CircleImageTest"
+        <activity
+            android:name=".image.CircleImageTest"
             android:label="View/CircleImage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -989,29 +994,91 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".database.greendao.GreenDaoTest"
+        <activity
+            android:name=".database.greendao.GreenDaoTest"
             android:label="存储/GreenDao">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".notification.NotificationTest"
+        <activity
+            android:name=".notification.NotificationTest"
             android:label="通知">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".drawable.DrawableTest"
+        <activity
+            android:name=".drawable.DrawableTest"
             android:label="Drawable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.AutoCompleteTest"
+        <activity
+            android:name=".view.AutoCompleteTest"
             android:label="View/AutoText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".database.SQLiteTest"
+            android:label="Database/SQLite">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuTest"
+            android:label="Database/SQLite">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".intent.ActionSendTest"
+            android:label="Intent/Send">
+            <!--<intent-filter android:label="Download with Snaptube ">
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/*" />
+            </intent-filter>-->
+            <intent-filter android:label="发送给朋友" >
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+                <data android:mimeType="video/*"/>
+                <data android:mimeType="text/*"/>
+                <data android:mimeType="application/*"/>
+            </intent-filter>
+            <intent-filter android:label="发送给朋友">
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.WindowTest"
+            android:label="View/Window">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SoftInputTest"
+            android:label="Activity/SoftInput">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

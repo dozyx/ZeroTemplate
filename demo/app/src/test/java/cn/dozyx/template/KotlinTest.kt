@@ -14,6 +14,16 @@ import kotlin.concurrent.thread
  */
 class KotlinTest {
 
+    @Test
+    fun testForEach() {
+        arrayListOf<Int>(1, 2, 3).forEach { i: Int ->
+            if (i == 2) {
+                return@forEach
+            }
+            print(i)
+        }
+    }
+
     /**
      * https://kotlinlang.org/docs/reference/generics.html
      */
@@ -24,6 +34,15 @@ class KotlinTest {
         val box2 = Box(1)
 
         // kotlin 的泛型没有通配符类型（wildcard types），取而代之的是声明类型和类型预测（declaration-site variance and type projections）
+
+    }
+
+    private fun functionV2(i: Int) {
+
+    }
+
+    @Deprecated("", ReplaceWith("functionV2(i)"))
+    private fun functionV1() {
 
     }
 
@@ -39,6 +58,7 @@ class KotlinTest {
 
         })
     }
+/*
 
     @Test
     fun foo2(): String? {
@@ -58,6 +78,7 @@ class KotlinTest {
         //do something
 //        return ""
     }
+*/
 
     @Test
     fun testNull() {

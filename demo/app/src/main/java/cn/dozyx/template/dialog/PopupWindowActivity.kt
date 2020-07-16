@@ -21,9 +21,9 @@ class PopupWindowActivity : BaseTestActivity() {
             val window = PopupWindow(LayoutInflater.from(this@PopupWindowActivity).inflate(R.layout.popup_window, null), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             window.elevation = 50f
             // 好像不能设置 modal，有一个 setTouchModal 方法，不过被标记为 @hide
-            window.showAsDropDown(button)
             window.isFocusable = true
             window.setBackgroundDrawable(ColorDrawable())
+            window.showAsDropDown(button)
         })
     }
 }
