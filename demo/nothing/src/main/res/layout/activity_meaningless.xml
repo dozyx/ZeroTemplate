@@ -40,6 +40,24 @@
         android:checkMark="@drawable/ic_menu_share"
         android:checked="true"
         android:text="111ဗမာ111" />
+    <TextView
+        android:id="@+id/hot_query_text"
+        android:layout_width="wrap_content"
+        style="@style/CustomTextStyle3"
+        android:layout_height="28dp"
+        android:background="@drawable/bg_flow_item_normal"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:paddingEnd="16dp"
+        android:paddingRight="16dp"
+        android:singleLine="true"
+        android:textSize="12sp"
+        android:text="Drake">
+
+    </TextView>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100dp"
@@ -71,6 +89,10 @@
         android:layout_height="100dp"
         android:scaleType="centerInside"
         android:src="@mipmap/ic_launcher"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
 

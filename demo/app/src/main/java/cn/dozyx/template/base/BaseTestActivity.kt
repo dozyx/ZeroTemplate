@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_base_test.*
  * 添加按钮及其点击事件，显示日志，添加一个 fragment 页
  */
 abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
+    private val views = HashMap<String, View>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,8 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     abstract fun initActions()
 
     protected fun addAction(action: Action) {
-        addButton(action.name, action)
+        val button = addButton(action.name, action)
+        views[action.name] = button
     }
 
     protected fun addButton(text: String, task: Runnable): Button {
@@ -37,6 +39,8 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         flex_box.addView(button)
         return button
     }
+
+    fun findViewByActionName(name: String): View? = views[name]
 
     protected fun setButtonOnClickListener(view: View, task: Runnable) {
         view.setOnClickListener { task.run() }

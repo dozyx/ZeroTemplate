@@ -101,6 +101,11 @@ dependencies {
 //    implementation ("com.github.bumptech.glide:okhttp3-integration:4.10.0"){
 //        exclude group: "com.squareup.okhttp3", module: "okhttp"
 //    }
+
+//    冲突测试 start
+    implementation 'com.google.guava:guava:20.0'
+    implementation 'com.google.inject:guice:4.2.2'
+//    冲突测试 end
 }
 repositories {
     mavenCentral()

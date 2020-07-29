@@ -6,6 +6,7 @@ import android.os.Bundle
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.FileUtils
+import timber.log.Timber
 import java.io.File
 
 class SharedPreferenceTest : BaseTestActivity(),
@@ -41,6 +42,25 @@ class SharedPreferenceTest : BaseTestActivity(),
             override fun run() {
                 // crash
                 appendResult("current value: ${sp.getInt(TEST_KEY2, 999)}")
+            }
+        })
+        addAction(object : Action("read quickly") {
+            override fun run() {
+
+                for (i in 0..10){
+                    sp.edit().putString("test_1","test_$i").apply()
+                    Timber.d("SharedPreferenceTest.run ${sp.getString("test_1", "default")}")
+                }
+            }
+        })
+
+        addAction(object : Action("thread") {
+            override fun run() {
+
+                for (i in 0..10){
+                    sp.edit().putString("test_1","test_$i").apply()
+                    Timber.d("SharedPreferenceTest.run ${sp.getString("test_1", "default")}")
+                }
             }
         })
 

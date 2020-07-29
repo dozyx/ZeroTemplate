@@ -111,6 +111,17 @@ import io.reactivex.internal.operators.observable.ObservableZip;
 public class JavaTest {
 
     @Test
+    public void testOutOfBoundsException(){
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+//        list.get(-1);
+
+        int[] array = new int[2];
+        int i = array[-1];
+    }
+
+    @Test
     public void testIterator() {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
@@ -364,6 +375,12 @@ public class JavaTest {
         // 堆内存中：new String(bytes); 受String内部value[] 数组，此数组受虚拟机指令 newarray [int]，因此数组理论上最大个数为
         // Integer.MAX_VALUE。有一些虚拟机可能保留一下头信息，因此实际上最大个数小于 Integer.MAX_VALUE。即堆中String理论上最长为Integer
         // .MAX_VALUE，实际受虚拟机限制小于Integer.MAX_VALUE，并且若堆内存较小也受堆内存大小限制。
+    }
+
+    @Test
+    public void testSubString() {
+        String str = "111.apk";
+        print(str.substring(str.length() - 4, str.length()));
     }
 
     @Test
@@ -911,6 +928,10 @@ public class JavaTest {
         print(worker.sayHello("temo"));
     }
 
+    class WorkerImplProxy {
+
+    }
+
     interface IWorker {
         String sayHello(String name);
     }
@@ -1187,6 +1208,8 @@ public class JavaTest {
             print(method.getName() + " getGenericParameterTypes: " + Arrays.toString(
                     method.getGenericParameterTypes()));
             print("method.getDeclaringClass(): " + method.getDeclaringClass());
+            // getParameterTypes 返回参数的类型
+            print(method.getName() + "getParameterTypes(): " + Arrays.toString(method.getParameterTypes()));
         }
         for (Method method : methods) {
             // getReturnType() 获取返回值类型，如果返回值是一个泛型，则为泛型的边界类型

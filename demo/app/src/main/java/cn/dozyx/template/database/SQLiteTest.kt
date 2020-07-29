@@ -4,17 +4,38 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Bundle
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
-import org.greenrobot.greendao.database.DatabaseOpenHelper
 import timber.log.Timber
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class SQLiteTest : BaseTestActivity() {
-    private val dbHelper = CustomDatabaseHelper(this)
-    override fun initActions() {
-        addAction(object : Action("创建") {
-            override fun run() {
+    val executors: ExecutorService = Executors.newFixedThreadPool(100)
 
+    private val dbHelper = CustomDatabaseHelper(this)
+    private val countDownLatch = CountDownLatch(100)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun initActions() {
+        addAction(object : Action("多线程") {
+            override fun run() {
+                for (i in 0..100) {
+                    Thread{
+                        countDownLatch.countDown()
+                        countDownLatch.await()
+                        // 在多线程中使用不同的 SQLiteOpenHelper 实例，会导致线程问题
+                        // 原因：getWritableDatabase() 有同步处理 synchronized (this)，但是这个锁对象是 helper 实例，
+                        // 多个线程调用不同 helper 实例的 getWritableDatabase() 方法时，导致 onCreate 调用了多次，这样就出来了表已创建的问题
+                        queryNewHelper()
+//                        query()
+                    }.start()
+                }
             }
         })
 
@@ -40,18 +61,38 @@ class SQLiteTest : BaseTestActivity() {
 
         addAction(object : Action("查询") {
             override fun run() {
-                val filter = "you"
-                val cursor = dbHelper.writableDatabase
-                        .query(TABLE_NAME, null, "$COLUMN_NAME LIKE ? OR $COLUMN_NAME LIKE ?", arrayOf("$filter%", "%.$filter%"),
-                                null, null, "$COLUMN_CREATED_TIME DESC", null)
-                Timber.d("SQLiteTest.run result count ${cursor.count}")
-                if (cursor.moveToFirst()) {
-                    do {
-                        Timber.d("SQLiteTest.run ${cursor.getString(cursor.getColumnIndex(COLUMN_NAME))}")
-                    } while (cursor.moveToNext())
-                }
+                query()
             }
         })
+    }
+
+    private fun query() {
+        val filter = "you"
+        val cursor = dbHelper.writableDatabase
+                .query(TABLE_NAME, null, "$COLUMN_NAME LIKE ? OR $COLUMN_NAME LIKE ?", arrayOf("$filter%", "%.$filter%"),
+                        null, null, "$COLUMN_CREATED_TIME DESC", null)
+        Timber.d("SQLiteTest.run result count ${cursor.count}")
+        if (cursor.moveToFirst()) {
+            do {
+                Timber.d("SQLiteTest.run ${cursor.getString(cursor.getColumnIndex(COLUMN_NAME))}")
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+    }
+
+    private fun queryNewHelper() {
+        //
+        val filter = "you"
+        val cursor = CustomDatabaseHelper(this).writableDatabase
+                .query(TABLE_NAME, null, "$COLUMN_NAME LIKE ? OR $COLUMN_NAME LIKE ?", arrayOf("$filter%", "%.$filter%"),
+                        null, null, "$COLUMN_CREATED_TIME DESC", null)
+        Timber.d("SQLiteTest.run result count ${cursor.count}")
+        if (cursor.moveToFirst()) {
+            do {
+                Timber.d("SQLiteTest.run ${cursor.getString(cursor.getColumnIndex(COLUMN_NAME))}")
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
     }
 
     companion object {
@@ -66,7 +107,7 @@ class SQLiteTest : BaseTestActivity() {
         const val VERSION = 1
     }
 
-    class CustomDatabaseHelper(context: Context) : DatabaseOpenHelper(context, DB_NAME, VERSION) {
+    class CustomDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, VERSION) {
         override fun onCreate(db: SQLiteDatabase) {
             Timber.d("CustomDatabaseHelper.onCreate")
             db.execSQL("""
@@ -79,6 +120,9 @@ class SQLiteTest : BaseTestActivity() {
             """.trimIndent())
         }
 
+        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+
+        }
     }
 
 }

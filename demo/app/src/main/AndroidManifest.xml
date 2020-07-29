@@ -1020,7 +1020,8 @@
         </activity>
         <activity
             android:name=".view.AutoCompleteTest"
-            android:label="View/AutoText">
+            android:label="View/AutoText"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

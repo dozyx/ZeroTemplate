@@ -1,10 +1,12 @@
 package cn.dozyx.template
 
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.IntentUtils
 import timber.log.Timber
 
 /**
@@ -22,7 +24,7 @@ class IntentTest : BaseTestActivity() {
         addAction(object : Action("解析") {
             override fun run() {
                 val intent = Intent.parseUri(URI_INTENT, Intent.URI_INTENT_SCHEME)
-                Timber.d("IntentTest.origin $URI_INTENT")
+//                Timber.d("IntentTest.origin $URI_INTENT")
                 Timber.d("IntentTest.intent $intent")
                 Timber.d("IntentTest.extras ${intent.extras}")
                 Timber.d("IntentTest.data ${intent.data}")
@@ -58,6 +60,15 @@ class IntentTest : BaseTestActivity() {
                 val chooserIntent = Intent.createChooser(intent, "标题")
                 chooserIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
+            }
+        })
+
+        val launchIntent = IntentUtils.getLaunchAppIntent(packageName)
+        addAction(object : Action("Pending Intent") {
+            override fun run() {
+                val pendingIntent = PendingIntent.getActivity(this@IntentTest, 0,
+                        launchIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+                Timber.d("IntentTest.run $pendingIntent")
             }
         })
     }

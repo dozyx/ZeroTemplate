@@ -1,6 +1,9 @@
 package cn.dozyx.template
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.*
+import cn.dozyx.template.activity.LifeCycleTest
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ReflectUtils
@@ -13,25 +16,71 @@ import java.util.*
  */
 class HandlerTest : BaseTestActivity() {
     private val tokens = LinkedList<Int>()
-    private val handler = Handler(Handler.Callback {
+    private val myHandler = @SuppressLint("HandlerLeak")
+    object : Handler(Handler.Callback {
         // 利用 Callback 可以 hook Handler 的消息
         Timber.d("HandlerTest.handleMessage $it")
         false
-    })
+    }) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                MSG_TOKEN -> {
+//                    Timber.d("HandlerTest.handleMessage 收到 MSG_TOKEN")
+                    // 死循环
+                    sendToTarget()
+                }
+            }
+        }
+    }
+    private val mainHandler = Handler()
+    private val loopRunnable:Runnable = Runnable {
+        // do something
+        scheduleLoop()
+    }
+
+    private fun scheduleLoop() {
+        mainHandler.removeCallbacks(loopRunnable)
+        mainHandler.post(loopRunnable)
+    }
+
+
+    private fun sendToTarget() {
+        val message = myHandler.obtainMessage(MSG_TOKEN)
+        message.sendToTarget()
+    }
 
     override fun initActions() {
         addAction(object : Action("点击") {
             override fun run() {
-                handler.sendEmptyMessage(1)
+                myHandler.sendEmptyMessage(1)
+            }
+        })
+
+        addAction(object : Action("target") {
+            override fun run() {
+                sendToTarget()
+            }
+        })
+
+        addAction(object : Action("loop") {
+            override fun run() {
+                scheduleLoop()
+            }
+        })
+
+        addAction(object : Action("启动") {
+            override fun run() {
+                startActivity(Intent(this@HandlerTest, LifeCycleTest::class.java))
             }
         })
 
         addAction(object : Action("postSyncBarrier+发送异步消息") {
             override fun run() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    val queue = handler.looper.queue
+                    val queue = myHandler.looper.queue
                     sendAsyncMsg()
-                    handler.sendEmptyMessageDelayed(3, 200)
+                    myHandler.sendEmptyMessageDelayed(3, 200)
                     val utils = ReflectUtils.reflect(queue).method("postSyncBarrier")
                     val token: Int = utils.get()
                     Timber.d("postSyncBarrier token: $token")
@@ -60,8 +109,8 @@ class HandlerTest : BaseTestActivity() {
         addAction(object : Action("IdleHandler") {
             override fun run() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    handler.sendEmptyMessageDelayed(1, 100)
-                    val queue = handler.looper.queue
+                    myHandler.sendEmptyMessageDelayed(1, 100)
+                    val queue = myHandler.looper.queue
                     for (i in 0 until 5) {
                         // 添加 5 个 IdleHandler
                         queue.addIdleHandler {
@@ -73,10 +122,21 @@ class HandlerTest : BaseTestActivity() {
                         }
                     }
                     // IdleHandler 会影响后续消息执行
-                    handler.sendEmptyMessageDelayed(2, 100)
+                    myHandler.sendEmptyMessageDelayed(2, 100)
                 }
             }
         })
+
+    }
+
+    override fun onPause() {
+        Timber.d("HandlerTest.onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Timber.d("HandlerTest.onStop")
+        super.onStop()
     }
 
     private fun removeSyncBarrier() {
@@ -85,7 +145,7 @@ class HandlerTest : BaseTestActivity() {
                 Timber.d("没有待移除同步屏障")
                 return
             }
-            val queue = handler.looper.queue
+            val queue = myHandler.looper.queue
             val token = tokens.poll()
             Timber.d("removeSyncBarrier token: $token")
             ReflectUtils.reflect(queue).method("removeSyncBarrier", token)
@@ -94,10 +154,14 @@ class HandlerTest : BaseTestActivity() {
 
     private fun sendAsyncMsg() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            val message = Message.obtain(handler)
+            val message = Message.obtain(myHandler)
             message.isAsynchronous = true
             message.what = 2
-            handler.sendMessageDelayed(message, 1000)
+            myHandler.sendMessageDelayed(message, 1000)
         }
+    }
+
+    companion object {
+        const val MSG_TOKEN = 1
     }
 }

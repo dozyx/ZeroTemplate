@@ -8,6 +8,7 @@ import android.view.WindowManager
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ScreenUtils
+import com.blankj.utilcode.util.ViewUtils
 import timber.log.Timber
 
 class WindowTest : BaseTestActivity() {
@@ -48,6 +49,16 @@ class WindowTest : BaseTestActivity() {
         Timber.d("screen height ${ScreenUtils.getScreenHeight()}")
       }
     })
+
+    addAction(object : Action("screen") {
+      override fun run() {
+        val locations = IntArray(2)
+        // 分屏会导致 screen 坐标变化，miui 的小窗不会
+        window.decorView.getLocationOnScreen(locations)
+        Timber.d("screen: ${locations[0]} ${locations[1]}")
+      }
+    })
+
 
   }
 }

@@ -80,6 +80,7 @@
     <string name="hardware_camera">Hardware/Camera/Intent</string>
     <string name="hardware_camera_control">Hardware/Camera/Control</string>
     <string name="view_pager">View/ViewPager</string>
+    <string name="test_long_string" >longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong</string>
 
 
 </resources>

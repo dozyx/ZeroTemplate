@@ -23,6 +23,8 @@ class PopupWindowActivity : BaseTestActivity() {
             // 好像不能设置 modal，有一个 setTouchModal 方法，不过被标记为 @hide
             window.isFocusable = true
             window.setBackgroundDrawable(ColorDrawable())
+//            window.height = window.getMaxAvailableHeight(button)
+//            window.overlapAnchor = true // 显示在 anchor 上方还是下方
             window.showAsDropDown(button)
         })
     }
