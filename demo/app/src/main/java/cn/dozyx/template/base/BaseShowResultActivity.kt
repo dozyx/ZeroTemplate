@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.activity_base_show_result.*
+import timber.log.Timber
 
 /**
  * 用于基本的按键-显示操作
@@ -73,8 +74,8 @@ abstract class BaseShowResultActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun appendResult(text: String) {
-        result_text!!.text = result_text!!.text.toString() + "\n" + text
-        Log.d(TAG, "appendResult: $text")
+        result_text.text = "${result_text.text}\n$text"
+        Timber.d("BaseShowResultActivity.appendResult $text")
     }
 
 

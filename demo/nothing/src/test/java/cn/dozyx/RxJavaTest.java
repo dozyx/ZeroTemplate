@@ -75,6 +75,17 @@ public class RxJavaTest {
     }
 
     @Test
+    public void testThrottle() {
+        // throttleLast 发送在时间间隔内的最后一个 item
+        // throttleFirst 发送在时间间隔内的第一一个 item
+        Observable.interval(100, TimeUnit.MILLISECONDS)
+//                .throttleLast(300, TimeUnit.MILLISECONDS)
+                .throttleFirst(300, TimeUnit.MILLISECONDS)
+                .subscribe(sObserver);
+        sleep(10);
+    }
+
+    @Test
     public void testIfFlatMap() {
         // 场景：
         // 1. 根据手机号获取用户名

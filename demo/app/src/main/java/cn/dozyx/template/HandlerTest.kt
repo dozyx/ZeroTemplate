@@ -41,7 +41,7 @@ class HandlerTest : BaseTestActivity() {
 
     private fun scheduleLoop() {
         mainHandler.removeCallbacks(loopRunnable)
-        mainHandler.post(loopRunnable)
+        mainHandler.postDelayed(loopRunnable, 1)
     }
 
 
@@ -65,7 +65,20 @@ class HandlerTest : BaseTestActivity() {
 
         addAction(object : Action("loop") {
             override fun run() {
+                Timber.d("start loop")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mainHandler.looper.queue.addIdleHandler {
+                        Timber.d("run IdleHandler1")
+                        return@addIdleHandler false
+                    }
+                }
                 scheduleLoop()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mainHandler.looper.queue.addIdleHandler {
+                        Timber.d("run IdleHandler2")
+                        return@addIdleHandler false
+                    }
+                }
             }
         })
 
