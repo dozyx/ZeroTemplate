@@ -1,6 +1,7 @@
 package cn.dozyx.template.provider
 
 import android.net.Uri
+import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import timber.log.Timber
@@ -31,6 +32,6 @@ class ContentProviderTest : BaseTestActivity() {
     }
 
     companion object {
-        private const val AUTHORITY = "cn.dozyx.template.provide.book"
+        private const val AUTHORITY = "${BuildConfig.APPLICATION_ID}.book"
     }
 }

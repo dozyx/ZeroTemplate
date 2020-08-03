@@ -24,6 +24,10 @@ android {
 //            minSdkVersion Android.minDebugSdkVersion
             resConfigs("xhdpi")
         }
+
+        product {
+            applicationId "cn.dozyx.app.product"
+        }
     }
     sourceSets {
         // https://stackoverflow.com/questions/41507389/unresolved-reference-daosession-using-greendao-and-kotlin

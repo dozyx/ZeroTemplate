@@ -776,7 +776,7 @@
 
         <provider
             android:name=".provider.BookContentProvider"
-            android:authorities="cn.dozyx.template.provide.book" />
+            android:authorities="${applicationId}.book" />
 
         <activity
             android:name=".gl.OpenGLES20Activity"
@@ -1079,7 +1079,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SoftInputTest"
-            android:label="Activity/SoftInput">
+            android:label="Activity/SoftInput"
+            android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

@@ -8,11 +8,14 @@ import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.PendingIntent.getBroadcast
 import android.content.*
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -24,6 +27,7 @@ import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.ToastUtils
 import timber.log.Timber
+import kotlin.random.Random
 
 /**
  *
@@ -60,47 +64,11 @@ class NotificationTest : BaseTestActivity() {
     }
 
     override fun initActions() {
-        addAction(object : Action("normal") {
-            override fun run() {
-                // targetSdk 版本为 26+ 的话，如果没有创建 channel 和指定通知使用的 channel，通知会发送失败
-//        val builder = NotificationCompat.Builder(this@NotificationTest)
-                // 左侧始终有一个应用图标，验证发现是 MIUI 才有，模拟器没有
-                val contentView = RemoteViews(packageName, R.layout.custom_content_view)
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(R.drawable.ic_cat_dog) // 这个是必须设置的，不设置通知显示不出来。MIUI 上通知没看到这个 icon，模拟器有。显示在左上角和系统状态栏小图标
-                        .setContentTitle("Title11111")
-                        .setContentText("Content111111")
-//                        .setCustomContentView(contentView)// 使用自定义的布局
-//                        .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0)) //显示在右侧
-                        .setContentIntent(createPendingIntent())
-                        .setStyle(NotificationCompat.BigTextStyle())
-                        .setPriority(NotificationCompat.PRIORITY_MAX)
-                        .setAutoCancel(true) // 用户点击后自动消失
-                        .setVisibility(NotificationCompat.VISIBILITY_SECRET)// 可以跟 channel 的不一样，测试时需要注意 miui 是只有在锁屏时发出的通知才显示到锁屏
-                        .setWhen(System.currentTimeMillis() - 3600 * 1000)// 修改通知显示的时间，不设置显示的是「现在」
-                        .setShowWhen(true)
-
-                val remoteViews = RemoteViews(packageName, R.layout.notification_custom)
-//                builder.setContent(remoteViews)// 没生效
-
-//                builder.setCustomContentView(remoteViews)
-//                builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
-
-                builder.addAction(R.drawable.anime, "pause", null)
-                builder.addAction(R.drawable.anime, "resume", null)
-
-                val notification = builder.build()
-//        notification.flags = notification.flags or NotificationCompat.FLAG_NO_CLEAR // 用户清理通知时不会被取消
-//        notification.flags = notification.flags or NotificationCompat.FLAG_ONGOING_EVENT
-//                NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, notification)
-                Handler().postDelayed({NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, notification)},3000)
-                // 如何在 app 退出之后依然保留 app？
-                // 1. 使用 service
-            }
-        })
+        testNormal()
 
         addAction(object : Action("progress") {
             override fun run() {
+                val id = Random.nextInt(3)
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
                         .setSmallIcon(R.drawable.anime)
                         .setContentTitle("下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试")
@@ -108,12 +76,15 @@ class NotificationTest : BaseTestActivity() {
                         .setContentInfo("咦咦咦")
                         .setSubText("111")// 显示在 appname 和 when 之间（不同版本会不一样，Android 4.4 是显示在 content text 下面），文档说不要跟 setProgress 一起使用，但暂未发现问题（Android 4.4 上导致 progress 无法显示）
                         .setTicker("222")// 不知道干嘛的
-                        .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0))
+                        .setGroup(GROUP_KEY_TEST)
                         .setProgress(100, 50, false)
                         .setOnlyAlertOnce(true)// 只在第一次显示时发出声音
 //                        .addAction(android.R.color.transparent, "停止", PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("000"), 0))
                 // action 的 icon 在 Android N 以上不会显示，在模拟器 api23 上看，显示的是一个灰块。。。https://stackoverflow.com/questions/44698440/android-26-o-notification-doesnt-display-action-icon
-                notify(builder, NOTIFICATION_ID_PROGRESS)
+                if (Random.nextBoolean()) {
+                    builder.setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0))
+                }
+                notify(builder, id)
             }
         })
 
@@ -149,104 +120,7 @@ class NotificationTest : BaseTestActivity() {
             }
         })
 
-        addAction(object : Action("group channel1") {
-            override fun run() {
-                // https://developer.android.com/guide/topics/ui/notifiers/notifications#bundle
-                // 上面的文档里提到，如果同一个 app 发送了 4 个或更多的没有指定 group 的通知，系统会自动将它们 group 到一起。miui 上没有效果，模拟器有效果。
-                // 不设置 channel 也会自动 group
-                // target sdk 改为 24 以下也会自动 group
-                // 自动 group 之后，将通知关闭到小于 4 个，会自动取消 group
-                // https://developer.android.com/training/notify-user/group
-                // API 24 之后可以 group
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(android.R.color.transparent)
-                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
-                        .setContentTitle("group channel1 $notificationId")
-                        .setContentIntent(createPendingIntent())
-                        .setAutoCancel(true)
-                        .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                notify(builder)
-            }
-        })
-
-        addAction(object : Action("group channel2") {
-            override fun run() {
-                // https://developer.android.com/guide/topics/ui/notifiers/notifications#bundle
-                // 上面的文档里提到，如果同一个 app 发送了 4 个或更多的没有指定 group 的通知，系统会自动将它们 group 到一起。miui 上没有效果，模拟器有效果。
-                // 不设置 channel 也会自动 group
-                // target sdk 改为 24 以下也会自动 group
-                // 自动 group 之后，将通知关闭到小于 4 个，会自动取消 group
-                // https://developer.android.com/training/notify-user/group
-                // API 24 之后可以 group
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(android.R.color.transparent)
-                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
-                        .setContentTitle("group channel2 $notificationId")
-                        .setContentIntent(createPendingIntent())
-                        .setAutoCancel(true)
-//                        .setWhen(System.currentTimeMillis() - 10000)
-                        .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                notify(builder)
-            }
-        })
-
-        addAction(object : Action("group channel3") {
-            override fun run() {
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_IMPORTANCE)
-                        .setSmallIcon(android.R.color.transparent)
-                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
-                        .setContentTitle("group channel3 $notificationId")
-                        .setContentIntent(createPendingIntent())
-                        .setAutoCancel(true)
-                        .setOnlyAlertOnce(true)
-//                        .setWhen(System.currentTimeMillis() - 10000)
-                        .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                notify(builder, 1001)
-            }
-        })
-
-        addAction(object : Action("group summary") {
-            override fun run() {
-                // 要发送一个 group summary 的通知，才能把同一 group 的通知汇总到一起
-                // 如果对应的 channel 被关闭了，那么 group 也会失败
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_GROUP_SUMMARY)
-                        .setSmallIcon(android.R.color.transparent)
-                        .setContentTitle("group1 channel2")
-                        .setGroupSummary(true)
-                        .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
-                        .setGroup(GROUP_KEY_TEST)
-                        .setAutoCancel(true)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setOnlyAlertOnce(true)// 也相当于一个通知，需要注意不要每次都发出声音
-                notify(builder, 100)// 保持同一个 id 来确保只发送一个，并且后续更新的是同一个通知
-                // 如果之前没有同一个 group key 的通知存在，那么 summary 的通知不会显示
-                // 先发送了 summary 通知，再发送同一 group key 的通知，通知会直接 group
-            }
-        })
-
-        addAction(object : Action("group summary2") {
-            override fun run() {
-                // 换一个 channel 发送同一个 group summary 通知好像没什么影响
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(android.R.color.transparent)
-                        .setContentTitle("group1 channel2")
-                        .setGroupSummary(true)
-                        .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
-                        .setGroup(GROUP_KEY_TEST)
-                        .setAutoCancel(true)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                notify(builder, 100)
-            }
-        })
-
-        addAction(object : Action("cancel summary") {
-            override fun run() {
-                NotificationManagerCompat.from(this@NotificationTest).cancel(100)// 会导致所有的通知都被关闭
-            }
-        })
+        testGroup()
 
         addAction(object : Action("取消上一个通知") {
             override fun run() {
@@ -303,25 +177,170 @@ class NotificationTest : BaseTestActivity() {
             }
         })
 
-        addAction(object :Action("sort1"){
+        addAction(object : Action("sort1") {
             override fun run() {
                 // 不设置
                 notify(newNormalBuilder("sort1").setSortKey("sort1"), 10000)
             }
         })
 
-        addAction(object :Action("sort2"){
+        addAction(object : Action("sort2") {
             override fun run() {
                 notify(newNormalBuilder("sort2").setSortKey("sort2"), 10001)
             }
         })
 
-        addAction(object :Action("通知设置"){
+        addAction(object : Action("通知设置") {
             override fun run() {
                 navigateToNotificationSettings(this@NotificationTest)
             }
         })
     }
+
+    private fun testGroup() {
+        addAction(object : Action("group channel1") {
+            override fun run() {
+                // https://developer.android.com/guide/topics/ui/notifiers/notifications#bundle
+                // 上面的文档里提到，如果同一个 app 发送了 4 个或更多的没有指定 group 的通知，系统会自动将它们 group 到一起。miui 上没有效果，模拟器有效果。
+                // 不设置 channel 也会自动 group
+                // target sdk 改为 24 以下也会自动 group
+                // 自动 group 之后，将通知关闭到小于 4 个，会自动取消 group
+                // https://developer.android.com/training/notify-user/group
+                // API 24 之后可以 group
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                        .setSmallIcon(R.drawable.ic_baseline_chevron_left_24)
+                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
+                        .setContentTitle("normal channel $notificationId")
+                        .setContentIntent(createPendingIntent())
+                        .setAutoCancel(true)
+                        //                        .setSortKey("$notificationId")
+                        .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
+                notify(builder)
+            }
+        })
+
+        addAction(object : Action("group channel2") {
+            override fun run() {
+//                NotificationManagerCompat.from(this@NotificationTest).cancel(10001)
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_IMPORTANCE)
+                        .setSmallIcon(R.drawable.ic_baseline_chevron_right_24)
+                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
+                        .setContentTitle("importance channel $notificationId")
+                        .setContentIntent(createPendingIntent())
+                        .setAutoCancel(true)
+                        //                        .setWhen(System.currentTimeMillis() - 2 * 60 * 1000)
+                        //                        .setSortKey("$notificationId")
+                        .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
+                notify(builder, 1001)
+                builder.setChannelId(CHANNEL_ID_NORMAL)
+//                notify(builder, 1001)
+            }
+        })
+
+        addAction(object : Action("group summary") {
+            override fun run() {
+                // 要发送一个 group summary 的通知，才能把同一 group 的通知汇总到一起
+                // 如果对应的 channel 被关闭了，那么 group 也会失败
+                // 重复发送 group 会导致之前的通知根据 importance 重排序
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_GROUP_SUMMARY)
+                        .setSmallIcon(android.R.color.transparent)
+                        .setContentTitle("group1 channel2")
+                        .setGroupSummary(true)
+                        .setShowWhen(false)
+                        .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
+                        .setGroup(GROUP_KEY_TEST)
+                        .setAutoCancel(true)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setOnlyAlertOnce(true)// 也相当于一个通知，需要注意不要每次都发出声音
+                notify(builder, 999)// 保持同一个 id 来确保只发送一个，并且后续更新的是同一个通知
+                // 如果之前没有同一个 group key 的通知存在，那么 summary 的通知不会显示
+                // 先发送了 summary 通知，再发送同一 group key 的通知，通知会直接 group
+            }
+        })
+
+        addAction(object : Action("group summary2") {
+            override fun run() {
+                // 换一个 channel 发送同一个 group summary 通知好像没什么影响
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                        .setSmallIcon(android.R.color.transparent)
+                        .setContentTitle("group1 channel2")
+                        .setGroupSummary(true)
+                        .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
+                        .setGroup(GROUP_KEY_TEST)
+                        .setAutoCancel(true)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                notify(builder, 100)
+            }
+        })
+
+        addAction(object : Action("cancel summary") {
+            override fun run() {
+                NotificationManagerCompat.from(this@NotificationTest).cancel(100)// 会导致所有的通知都被关闭
+            }
+        })
+    }
+
+    private fun testNormal() {
+        addAction(object : Action("normal") {
+            override fun run() {
+                // targetSdk 版本为 26+ 的话，如果没有创建 channel 和指定通知使用的 channel，通知会发送失败
+                //        val builder = NotificationCompat.Builder(this@NotificationTest)
+                // 左侧始终有一个应用图标，验证发现是 MIUI 才有，模拟器没有
+                val contentView = RemoteViews(packageName, R.layout.custom_content_view)
+                val content = SpannableString("标题")
+                content.setSpan(ForegroundColorSpan(Color.RED), 1, 2, 0)
+
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                        .setSmallIcon(R.drawable.ic_cat_dog) // 这个是必须设置的，不设置通知显示不出来。MIUI 上通知没看到这个 icon，模拟器有。显示在左上角和系统状态栏小图标
+                        .setColor(Color.RED)
+                        .setColorized(true)//
+                        .setContentTitle("normal channel $notificationId")
+                        .setContentText(content)
+                        //                        .setCustomContentView(contentView)// 使用自定义的布局
+                        //                        .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0)) //显示在右侧
+                        .setContentIntent(createPendingIntent())
+                        .setStyle(NotificationCompat.BigTextStyle())
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setAutoCancel(true) // 用户点击后自动消失
+                        .setVisibility(NotificationCompat.VISIBILITY_SECRET)// 可以跟 channel 的不一样，测试时需要注意 miui 是只有在锁屏时发出的通知才显示到锁屏
+                        .setWhen(System.currentTimeMillis() - 3600 * 1000)// 修改通知显示的时间，不设置显示的是「现在」
+                        .setShowWhen(true)
+                        .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
+                        .setSortKey("$notificationId")// 按字典顺序对通知进行排序，比如 "0"、"1"，前者会在上面。但是 importance 会知道这个设置无效，importance 的会一直在前面。。。
+                        .setGroup(GROUP_KEY_TEST)
+                // 关于排序(模拟器 API29)
+                // 影响通知排序的有三个因素：when、importance、sortKey
+                // importance 更高的将排在前面，即使低 importance 的通知发送更晚，即使 when 更新也没用；
+                // app1 发送了通知，如果在通知栏里插入了一个另一个 app2 的通知（如果 app2 通知的 importance 都比 app1 的低，那么这个通知时不会插入到 app1 通知的前面的），
+                // 那么后面 app1 再发送的通知会被 app2 的通知分隔，这个最后发送的通知不会受 importance 的影响直接放置在最上面位置
+                // 有时候好像又不是这样。。。而是会将同一 app 的通知全部归到前面。。。
+                // 同一个 app 发送不同 importance 的通知：
+                // 有一个奇怪的地方是一开始是有按 importance 排序的，但是，如果低 importance 的通知多发送了几次又会提到前面
+                // 虽然奇怪，但是对于目前项目的一个场景来说，这样反而是合理的：多个下载任务，下载中和下载完成是不同的 importance，
+                // 下载完成的会放置在前面，新建的下载需要放在下载的前面，那么因为下载中一直在 update，将能使其放置在前面即使它的优先级更低
+                // 不过还是有问题，低 importance 在高 importance 前面之后，如果不断的下拉通知栏查看，高 importance 的又会跑到前面。。。
+                // 但是只要低 importance 的再 update 一次，就又可以排到前面了
+                // 感觉这排序规则有点蛋疼。。。
+
+                val remoteViews = RemoteViews(packageName, R.layout.notification_custom)
+                //                builder.setContent(remoteViews)// 没生效
+
+                //                builder.setCustomContentView(remoteViews)
+                //                builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
+
+                builder.addAction(R.drawable.anime, "pause", null)
+                builder.addAction(R.drawable.anime, "resume", null)
+
+                //        notification.flags = notification.flags or NotificationCompat.FLAG_NO_CLEAR // 用户清理通知时不会被取消
+                //        notification.flags = notification.flags or NotificationCompat.FLAG_ONGOING_EVENT
+                Handler().postDelayed({ notify(builder) }, 2000)
+                //                Handler().postDelayed({NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, notification)},3000)
+                // 如何在 app 退出之后依然保留 app？
+                // 1. 使用 service
+            }
+        })
+    }
+
     fun navigateToNotificationSettings(context: Context) {
         // for Android 4 and below
         val KEY_PACKAGE = "package"
@@ -349,7 +368,7 @@ class NotificationTest : BaseTestActivity() {
         }
     }
 
-    private fun newNormalBuilder(title:String): NotificationCompat.Builder {
+    private fun newNormalBuilder(title: String): NotificationCompat.Builder {
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_NORMAL);
         builder.setSmallIcon(android.R.color.transparent)
                 .setContentTitle(title)
@@ -366,18 +385,22 @@ class NotificationTest : BaseTestActivity() {
                 // 没有 setSmallIcon 在 MIUI 上没有弹出通知
                 // 如果对同一个通知发送，会重新显示 headup，设置 setOnlyAlertOnce 为 true 可以避免。所以 head up 可以理解为提醒的一种方式，与提示音类似
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_IMPORTANCE)
-    //                .setSmallIcon(R.drawable.ic_arrow)
+                        //                .setSmallIcon(R.drawable.ic_arrow)
                         .setSmallIcon(android.R.color.transparent)
                         .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.vending")))
                         .setContentTitle("33333")
                         .setContentIntent(createPendingIntent())
                         .setAutoCancel(true)
+                        .setGroup(GROUP_KEY_TEST)
+                        .setVibrate(LongArray(0))
+                        .setSound(null)
+                        .setOnlyAlertOnce(true)
 //                        .setOnlyAlertOnce(true)
 //                        .setCategory(NotificationCompat.CATEGORY_EVENT)
 //                        .setProgress(100,0, false)// progress 无法 heads up
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
-    //                .setVibrate(longArrayOf(0))
-                NotificationManagerCompat.from(this@NotificationTest.applicationContext).notify(1000, builder.build())
+                //                .setVibrate(longArrayOf(0))
+                Handler().postDelayed({ notify(builder) }, 2000)
             }
         })
     }
@@ -387,11 +410,15 @@ class NotificationTest : BaseTestActivity() {
     }
 
     private fun createPendingIntent(): PendingIntent {
+        return createPendingIntent(FLAG_UPDATE_CURRENT)
+    }
+
+    private fun createPendingIntent(flag: Int): PendingIntent {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("https://www.baidu.com")
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return PendingIntent.getActivity(this@NotificationTest, 0,
-                intent, PendingIntent.FLAG_ONE_SHOT)
+                intent, flag)
     }
 
     private fun createChannels() {
@@ -438,6 +465,17 @@ class NotificationTest : BaseTestActivity() {
                                 description = "group summary"
                                 lockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC
                             })
+            notificationManager?.createNotificationChannel(
+                    // NotificationManager.IMPORTANCE_LOW 的通知在 pixel Android 10 上会显示到一个 Silent notification 分区中
+                    NotificationChannel(CHANNEL_ID_LOW, "低优先级", NotificationManager.IMPORTANCE_LOW)
+                            .apply {
+                            })
+            notificationManager?.createNotificationChannel(
+                    // NotificationManager.IMPORTANCE_MIN 的通知在 pixel Android 10 上会显示到一个 Silent notification 分区中
+                    // 并且内容被折叠起来，顶部的状态栏也不会有图标提示
+                    NotificationChannel(CHANNEL_ID_MIN, "低优先级", NotificationManager.IMPORTANCE_MIN)
+                            .apply {
+                            })
             // group
             notificationManager?.createNotificationChannelGroup(NotificationChannelGroup("group1", "Group1"))
             val notificationChannel1 = NotificationChannel(CHANNEL_ID_GROUP1,
@@ -461,6 +499,8 @@ class NotificationTest : BaseTestActivity() {
         private const val CHANNEL_ID_VIBRATE = "4"
         private const val CHANNEL_ID_LOCK_SCREEN = "5"
         private const val CHANNEL_ID_GROUP_SUMMARY = "6"
+        private const val CHANNEL_ID_LOW = "7"
+        private const val CHANNEL_ID_MIN = "9"
 
         private const val CHANNEL_ID_GROUP1 = "group1_channel1"
         private const val CHANNEL_ID_GROUP2 = "group1_channel2"
