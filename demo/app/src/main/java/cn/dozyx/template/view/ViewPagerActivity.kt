@@ -68,7 +68,7 @@ class ViewPagerActivity : AppCompatActivity() {
             ) {
                 // 注意理解这个方法参数。position 表示的是第一个显示的 page 的位置。比如，左滑，position 是当前显示的 page；右滑，position 是左侧即将进入的 page
                 // positionOffset 表示 position 对应的 page 的偏移量，区间[0, 1]，0 表示处于当前屏幕位置，1 表示完全偏出
-                Timber.d("ViewPagerActivity.onPageScrolled $position $positionOffset $positionOffsetPixels current ${tl_top.selectedTabPosition}")
+//                Timber.d("ViewPagerActivity.onPageScrolled $position $positionOffset $positionOffsetPixels current ${tl_top.selectedTabPosition}")
 
                 // 滑动过程中，字体大小可能变化的 tab 为：当前 tab及其两侧的 tab。但实际滑动时，只有两个 tab 会变化，当前 tab 缩小，移入 tab 变大
                 // position 并不一定表示当前 tab，右滑时为左侧要移入的 tab 的位置
@@ -122,7 +122,7 @@ class ViewPagerActivity : AppCompatActivity() {
     private fun setTabTextSize(tabPosition: Int, newTextSize: Float) {
         val textView =
             tl_top.getTabAt(tabPosition)?.customView?.findViewById<TextView>(android.R.id.text1)
-        Timber.d("ViewPagerActivity.setTabTextSize $tabPosition $newTextSize")
+//        Timber.d("ViewPagerActivity.setTabTextSize $tabPosition $newTextSize")
         textView?.let {
             val newTextSizeInPx = SizeUtils.sp2px(newTextSize)
             if (abs(it.textSize - newTextSizeInPx) >= 1) {

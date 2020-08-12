@@ -1,9 +1,6 @@
 package cn.dozyx.template.notification
 
-import android.app.NotificationChannel
-import android.app.NotificationChannelGroup
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.PendingIntent.getBroadcast
 import android.content.*
@@ -16,16 +13,17 @@ import android.os.Handler
 import android.provider.Settings
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
-import com.blankj.utilcode.util.ImageUtils
-import com.blankj.utilcode.util.IntentUtils
-import com.blankj.utilcode.util.ToastUtils
+import com.android.internal.util.ContrastColorUtil
+import com.blankj.utilcode.util.*
 import timber.log.Timber
 import kotlin.random.Random
 
@@ -195,6 +193,27 @@ class NotificationTest : BaseTestActivity() {
                 navigateToNotificationSettings(this@NotificationTest)
             }
         })
+        addAction(object : Action("颜色测试") {
+            override fun run() {
+                val view = findViewByActionName("颜色测试")
+                val colorUtilClassName = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) "com.android.internal.util.NotificationColorUtil" else "com.android.internal.util.ContrastColorUtil"
+                /*val resultColor = ReflectUtils.reflect(colorUtilClassName)
+                        .method("findContrastColor", Color.parseColor("#FFCD22"), Color.WHITE, false, 0.45)
+                        .get<Int>()*/
+                val utilClass = Class.forName(colorUtilClassName)
+                for (method in utilClass.methods) {
+                    Timber.d("NotificationTest.run $method")
+                }
+                val methodFindContrastColor = utilClass.getMethod("findContrastColor", Int.javaClass, Int.javaClass, Boolean.javaClass, Double.javaClass)
+//                methodFindContrastColor.invoke(Color.parseColor("#FFCD22"), Color.WHITE, false, 0.45)
+                // Android 9 以后限制了反射调用隐藏 API
+                val resultColor = ContrastColorUtil.findContrastColor(Color.parseColor("#FFCD22"), Color.WHITE, false, 0.45)
+                view?.setBackgroundColor(resultColor)
+            }
+        })
+        val view = findViewByActionName("颜色测试")
+        view?.setBackgroundColor(Color.parseColor("#FFCD22"))
+
     }
 
     private fun testGroup() {
@@ -208,12 +227,47 @@ class NotificationTest : BaseTestActivity() {
                 // https://developer.android.com/training/notify-user/group
                 // API 24 之后可以 group
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(R.drawable.ic_baseline_chevron_left_24)
-                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
+                        .setSmallIcon(R.drawable.ic_notification_fail)
+                        // 如果 group summary 通知的 small icon 与 group 中所有通知的 small icon 一样，那么 group 之后，
+                        // 通知的 small icon 将被隐藏，如果同一 group 里不同通知有不同的 small icon，那么通知的 small icon 将不会被隐藏。另外，
+                        // 需要注意，group 里的通知的 small icon 不会不会受 setColor 的影响，因为对比度的问题，如果 small icon 不是白色，那么可能会
+                        // 发生颜色上的变化；如果是白色，则会变成灰色。
+//                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
                         .setContentTitle("normal channel $notificationId")
                         .setContentIntent(createPendingIntent())
                         .setAutoCancel(true)
+//                        .setShowWhen(Random.nextBoolean())
+                        .setShowWhen(true) // 如果没有设置 subtext，那么即使 setShowWhen 为 false，group 之后通知的 when 还是会显示
+                        .setSubText("测试")
                         //                        .setSortKey("$notificationId")
+                        .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
+                if (Random.nextBoolean()){
+//                    builder.setSubText("测试")
+                }
+                notify(builder, 100)
+            }
+        })
+
+        addAction(object : Action("group channel1 sdk") {
+            override fun run() {
+                // https://developer.android.com/guide/topics/ui/notifiers/notifications#bundle
+                // 上面的文档里提到，如果同一个 app 发送了 4 个或更多的没有指定 group 的通知，系统会自动将它们 group 到一起。miui 上没有效果，模拟器有效果。
+                // 不设置 channel 也会自动 group
+                // target sdk 改为 24 以下也会自动 group
+                // 自动 group 之后，将通知关闭到小于 4 个，会自动取消 group
+                // https://developer.android.com/training/notify-user/group
+                // API 24 之后可以 group
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                    return
+                }
+                val builder = Notification.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                        .setSmallIcon(R.drawable.ic_baseline_chevron_left_24)
+//                        .setLargeIcon(ImageUtils.drawable2Bitmap(packageManager.getApplicationIcon("com.android.settings")))
+                        .setContentTitle("normal channel sdk $notificationId")
+                        .setContentIntent(createPendingIntent())
+                        .setAutoCancel(true)
+//                        .setShowWhen(Random.nextBoolean())
+                        .setShowWhen(false)
                         .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
                 notify(builder)
             }
@@ -237,16 +291,20 @@ class NotificationTest : BaseTestActivity() {
             }
         })
 
+        testGroupSummary()
+    }
+
+    private fun testGroupSummary() {
         addAction(object : Action("group summary") {
             override fun run() {
                 // 要发送一个 group summary 的通知，才能把同一 group 的通知汇总到一起
                 // 如果对应的 channel 被关闭了，那么 group 也会失败
                 // 重复发送 group 会导致之前的通知根据 importance 重排序
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_GROUP_SUMMARY)
-                        .setSmallIcon(android.R.color.transparent)
+                        .setSmallIcon(R.drawable.ic_notification_fail)
                         .setContentTitle("group1 channel2")
                         .setGroupSummary(true)
-                        .setShowWhen(false)
+                        .setShowWhen(false)// 会覆盖非 summary 通知的 setShowWhen，但如果非 summary 通知没有设置 subtext，那么它们的 when 会始终显示，从展示上来猜测，应该是系统会确保通知的 header 始终会有文本
                         .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
                         .setGroup(GROUP_KEY_TEST)
                         .setAutoCancel(true)
@@ -275,7 +333,7 @@ class NotificationTest : BaseTestActivity() {
 
         addAction(object : Action("cancel summary") {
             override fun run() {
-                NotificationManagerCompat.from(this@NotificationTest).cancel(100)// 会导致所有的通知都被关闭
+                NotificationManagerCompat.from(this@NotificationTest).cancel(999)// 会导致所有的通知都被关闭
             }
         })
     }
@@ -287,27 +345,38 @@ class NotificationTest : BaseTestActivity() {
                 //        val builder = NotificationCompat.Builder(this@NotificationTest)
                 // 左侧始终有一个应用图标，验证发现是 MIUI 才有，模拟器没有
                 val contentView = RemoteViews(packageName, R.layout.custom_content_view)
-                val content = SpannableString("标题")
-                content.setSpan(ForegroundColorSpan(Color.RED), 1, 2, 0)
+                val title = SpannableString("标题原始颜色标题")
+//                val color = Color.parseColor("#D83025")
+                val color = ContextCompat.getColor(this@NotificationTest, R.color.notification_fail)
+                title.setSpan(ForegroundColorSpan(color), 2, 6, 0)
 
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(R.drawable.ic_cat_dog) // 这个是必须设置的，不设置通知显示不出来。MIUI 上通知没看到这个 icon，模拟器有。显示在左上角和系统状态栏小图标
-                        .setColor(Color.RED)
-                        .setColorized(true)//
-                        .setContentTitle("normal channel $notificationId")
-                        .setContentText(content)
+//                        .setSmallIcon(R.drawable.ic_notification_test) // 这个是必须设置的，不设置通知显示不出来。MIUI 上通知没看到这个 icon，模拟器有。显示在左上角和系统状态栏小图标
+                        .setSmallIcon(R.drawable.ic_notification_test)
+//                        .setColor(ContextCompat.getColor(this@NotificationTest, R.color.notification_color))
+//                        .setColor(Color.parseColor("#FFFFCD22"))
+//                        .setColor(color)
+//                        .setColorized(true)// 直接设置没看到效果。一般用于某些 style 或前台服务通知
+                        .setContentTitle(title)
+                        .setContentText("normal channel $notificationId")
                         //                        .setCustomContentView(contentView)// 使用自定义的布局
-                        //                        .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0)) //显示在右侧
+//                                                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0)) //显示在右侧
                         .setContentIntent(createPendingIntent())
-                        .setStyle(NotificationCompat.BigTextStyle())
+//                        .setStyle(NotificationCompat.BigTextStyle())
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setAutoCancel(true) // 用户点击后自动消失
+//                        .setProgress(100,30, false)
                         .setVisibility(NotificationCompat.VISIBILITY_SECRET)// 可以跟 channel 的不一样，测试时需要注意 miui 是只有在锁屏时发出的通知才显示到锁屏
                         .setWhen(System.currentTimeMillis() - 3600 * 1000)// 修改通知显示的时间，不设置显示的是「现在」
-                        .setShowWhen(true)
-                        .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
+//                        .setWhen(0)
+                        .setShowWhen(false)
+                        .setCategory(NotificationCompat.CATEGORY_PROGRESS)
+//                        .setTimeoutAfter(10)// 超时后自动取消通知
+//                        .setTicker("ticker")// 用于辅助服务，Android 5.0 之前在触发通知时会显示在状态栏？
+//                        .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
                         .setSortKey("$notificationId")// 按字典顺序对通知进行排序，比如 "0"、"1"，前者会在上面。但是 importance 会知道这个设置无效，importance 的会一直在前面。。。
                         .setGroup(GROUP_KEY_TEST)
+                        .setStyle(CustomStyle())
                 // 关于排序(模拟器 API29)
                 // 影响通知排序的有三个因素：when、importance、sortKey
                 // importance 更高的将排在前面，即使低 importance 的通知发送更晚，即使 when 更新也没用；
@@ -328,12 +397,15 @@ class NotificationTest : BaseTestActivity() {
                 //                builder.setCustomContentView(remoteViews)
                 //                builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
-                builder.addAction(R.drawable.anime, "pause", null)
+                builder.addAction(R.drawable.anime, "pause", createPendingIntent())
                 builder.addAction(R.drawable.anime, "resume", null)
+
+                // small icon 颜色与 setColor 的有差异
 
                 //        notification.flags = notification.flags or NotificationCompat.FLAG_NO_CLEAR // 用户清理通知时不会被取消
                 //        notification.flags = notification.flags or NotificationCompat.FLAG_ONGOING_EVENT
-                Handler().postDelayed({ notify(builder) }, 2000)
+//                Handler().postDelayed({ notify(builder) }, 0)
+                notify(builder, tag = "$notificationId")
                 //                Handler().postDelayed({NotificationManagerCompat.from(this@NotificationTest).notify(notificationId++, notification)},3000)
                 // 如何在 app 退出之后依然保留 app？
                 // 1. 使用 service
@@ -405,8 +477,12 @@ class NotificationTest : BaseTestActivity() {
         })
     }
 
-    private fun notify(builder: NotificationCompat.Builder, id: Int = ++notificationId) {
-        NotificationManagerCompat.from(this).notify(id, builder.build())
+    private fun notify(builder: NotificationCompat.Builder, id: Int = ++notificationId, tag: String? = null) {
+        NotificationManagerCompat.from(this).notify(tag, id, builder.build())
+    }
+
+    private fun notify(builder: Notification.Builder, id: Int = ++notificationId, tag: String? = null) {
+        NotificationManagerCompat.from(this).notify(tag, id, builder.build())
     }
 
     private fun createPendingIntent(): PendingIntent {

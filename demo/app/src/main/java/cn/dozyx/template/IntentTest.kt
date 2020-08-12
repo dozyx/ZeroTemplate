@@ -40,6 +40,14 @@ class IntentTest : BaseTestActivity() {
             }
         })
 
+        addAction(object :Action("market"){
+            override fun run() {
+                val intentString = "market://details?id=com.xueqiu.android&referrer=utm_source%3Dst"
+                val intent = Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME)
+                startActivity(intent)
+            }
+        })
+
         addAction(object :Action("ACTION_SEND"){
             override fun run() {
                 val intent = Intent(Intent.ACTION_SEND)

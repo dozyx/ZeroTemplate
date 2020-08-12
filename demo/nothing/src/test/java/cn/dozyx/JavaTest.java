@@ -686,6 +686,16 @@ public class JavaTest {
         print(obj.getClass().getName());
         print(getClass().getClassLoader());
         print(obj.getClass().getClassLoader());
+
+        Parent parent1 = new Child();
+
+        Object child1 = myLoader.loadClass("cn.dozyx.Child").newInstance();
+        print(getClass().getClassLoader() + " & " + child1.getClass().getClassLoader());
+//        Parent parent2 = (Parent) child1;// 不同 classloader 加载的类无法向上转型
+
+        Object child2 = Class.forName("cn.dozyx.Child").newInstance();
+        print(getClass().getClassLoader() + " & " + child2.getClass().getClassLoader());
+        Parent parent2 = (Parent) child2;
     }
 
     static {
@@ -1420,27 +1430,6 @@ public class JavaTest {
     private void list5(List<Object> list) {
 
     }
-
-
-    private class People {
-        void fun1() throws IllegalAccessError {
-
-        }
-    }
-
-    private interface People2 {
-    }
-
-    private class Parent extends People implements People2 {
-
-    }
-
-    private class Child extends Parent {
-    }
-
-    private class Child2 extends Parent {
-    }
-
 
     @Test
     public void testThreadStack() {
