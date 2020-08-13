@@ -42,7 +42,9 @@
     </style>
 
     <style name="LaunchTheme" parent="AppTheme">
-        <item name="android:windowDisablePreview">true</item>
+<!--        <item name="android:windowDisablePreview">true</item>-->
+        <item name="android:windowBackground">@drawable/bg_0</item>
+<!--        <item name="android:windowBackground">@drawable/bg_0_compress</item>-->
     </style>
 
     <style name="ButtonStyleTheme">

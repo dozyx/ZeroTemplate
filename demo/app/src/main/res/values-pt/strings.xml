@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">ZeroTemplate</string>
+    <!--activity-->
+    <string name="activity_life_cycle">Activity/生命周期</string>
+    <string name="activity_launch_mode">Activity/启动模式</string>
+
+    <!--fragment-->
+    <string name="fragment_life_cycle">Fragment/生命周期</string>
+
+    <!--service-->
+    <string name="service_life_cycle">Service/生命周期</string>
+
+    <!--view-->
+    <string name="view_custom">View/自定义</string>
+    <string name="view_image_loader">View/高效加载图片</string>
+    <string name="view_hencoder_1_1">View/练习 HenCoder UI 1-1 绘制基础</string>
+    <string name="view_material_test">View/MD控件测试</string>
+    <string name="view_widget_test">View/一般控件测试</string>
+    <string name="view_webview">View/WebView测试</string>
+    <string name="view_spinner">View/Spinner测试</string>
+
+    <!--design-->
+    <string name="design_behavior">Design/Behavior</string>
+
+    <!--网络-->
+    <string name="network_basic">网络/基本</string>
+    <string name="network_socket">网络/Socket</string>
+    <string name="network_api">网络/API测试</string>
+
+    <!--数据存储-->
+
+    <!--交互-->
+    <string name="aidl">交互/AIDL</string>
+    <string name="interaction_event_bus">交互/EventBus</string>
+
+    <!--实践-->
+    <string name="practice_list_in_scroll">实践/ScrollView嵌套ListView</string>
+    <string name="practice_float_window">实践/悬浮窗</string>
+    <string name="practice_count_down">实践/倒计时</string>
+
+    <!--RxJava-->
+    <string name="rxjava_simple">RxJava/简单例子</string>
+
+    <!--data-->
+    <string name="data_parcelable">Data/Parcelable</string>
+
+    <string name="title_draw_color">DrawColor()</string>
+    <string name="title_draw_circle">DrawCircle()</string>
+    <string name="title_draw_rect">DrawRect()</string>
+    <string name="title_draw_point">DrawPoint()</string>
+    <string name="title_draw_oval">DrawOval()</string>
+    <string name="title_draw_line">DrawLine()</string>
+    <string name="title_draw_round_rect">DrawRoundRect()</string>
+    <string name="title_draw_arc">DrawArc()</string>
+    <string name="title_draw_path">DrawPath()</string>
+    <string name="title_draw_histogram">直方图</string>
+    <string name="title_draw_pie_chart">饼图</string>
+    <string name="action_settings">Settings</string>
+    <string name="security_permission">安全/权限</string>
+    <string name="view_life">View/生命周期</string>
+    <string name="view_recyclerview">View/RecyclerView</string>
+    <string name="animation_fragment">动画/Fragment切换</string>
+
+    <string name="view_list">View/ListView</string>
+    <string name="arch_live_data">Arch/LiveData</string>
+    <string name="view_surface">View/surface</string>
+    <string name="title_activity_drawer_tool_bar">View/drawer_toolbar</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="view_toolbar">View/Toolbar</string>
+    <string name="dialog_popup_window">Dialog/PopupWindow</string>
+    <string name="drawable_tint">Drawable/Tint</string>
+    <string name="design_tablayout">Design/TabLayout</string>
+    <string name="view_chart_mp_chart">View/Chart/MPAndroidChart</string>
+    <string name="view_status_bar">View/StatusBar</string>
+    <string name="file_basic">File/Basic</string>
+    <string name="hardware_camera">Hardware/Camera/Intent</string>
+    <string name="hardware_camera_control">Hardware/Camera/Control</string>
+    <string name="view_pager">View/ViewPager</string>
+    <string name="test_long_string" >longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong</string>
+
+
+</resources>

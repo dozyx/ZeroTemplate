@@ -35,13 +35,13 @@
         <!-- action 为 main，category 为 cn.dozyx.zerofate.intent.category.sample 的activity 将显示在列表中 -->
         <activity
             android:name=".MainActivity"
-            android:theme="@style/LaunchTheme">
+            android:theme="@style/LaunchTheme"><!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <provider
@@ -1088,6 +1088,25 @@
         </activity>
         <activity android:name=".activity.ActivityTest"
             android:label="Activity/Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".device.LanguageTest"
+            android:label="Device/Language">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".performance.LaunchOptimizeTest"
+            android:label="Performance/Launch"
+            android:theme="@style/LaunchTheme">
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

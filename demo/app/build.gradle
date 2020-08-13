@@ -91,4 +91,5 @@ dependencies {
     implementation Deps.circleImageView
     implementation Deps.greendao
     implementation Deps.startup
+    implementation Deps.tracing
 }
