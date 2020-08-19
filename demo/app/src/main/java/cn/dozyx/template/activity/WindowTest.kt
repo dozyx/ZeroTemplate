@@ -3,6 +3,7 @@ package cn.dozyx.template.activity
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import cn.dozyx.template.base.Action
@@ -29,16 +30,13 @@ class WindowTest : BaseTestActivity() {
   }
 
   override fun initActions() {
-    addAction(object : Action("1111111111111111getWindowVisibleDisplayFrame") {
-      override fun run() {
-      }
-    })
     addAction(object : Action("getWindowVisibleDisplayFrame") {
       override fun run() {
         val rect = Rect()
-        window.decorView.getWindowVisibleDisplayFrame(rect)
-        Timber.d("getWindowVisibleDisplayFrame $rect")
-
+        Handler().postDelayed({
+          window.decorView.rootView.getWindowVisibleDisplayFrame(rect)
+          Timber.d("getWindowVisibleDisplayFrame $rect")
+        }, 3000)
       }
     })
 

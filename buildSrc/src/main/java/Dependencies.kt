@@ -60,7 +60,7 @@ object Deps {
     val circleImageView = "de.hdodenhof:circleimageview:${Version.circle_image}"
     val greendao = "org.greenrobot:greendao:${Version.greendao}"
     val startup = "androidx.startup:startup-runtime:${Version.startup}"
-    val tracing = "androidx.tracing:tracing-ktx:${Version.startup}"
+    val tracing = "androidx.tracing:tracing-ktx:${Version.tracing}"
 }
 
 object DepsEventBus {
@@ -278,6 +278,6 @@ object Version {
     const val auto_service = "1.0-rc6"
     const val java_poet = "1.12.1"
     const val circle_image = "3.1.0"
-    const val startup = "1.0.0-alpha01"
+    const val startup = "1.0.0-alpha02"
     const val tracing = "1.0.0-beta01"
 }

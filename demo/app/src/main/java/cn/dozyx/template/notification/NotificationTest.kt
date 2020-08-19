@@ -196,7 +196,7 @@ class NotificationTest : BaseTestActivity() {
         addAction(object : Action("颜色测试") {
             override fun run() {
                 val view = findViewByActionName("颜色测试")
-                val colorUtilClassName = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) "com.android.internal.util.NotificationColorUtil" else "com.android.internal.util.ContrastColorUtil"
+                val colorUtilClassName = if (Build.VERSION.SDK_INT < 29) "com.android.internal.util.NotificationColorUtil" else "com.android.internal.util.ContrastColorUtil"
                 /*val resultColor = ReflectUtils.reflect(colorUtilClassName)
                         .method("findContrastColor", Color.parseColor("#FFCD22"), Color.WHITE, false, 0.45)
                         .get<Int>()*/

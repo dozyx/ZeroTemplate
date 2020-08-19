@@ -22,7 +22,7 @@ android {
             // 避免使用 Legacy Multidex 以加快编译，注意：实际开发中，IDE 判断的最小sdk会变成这个
             // 避免使用 Legacy Multidex 以加快编译，注意：实际开发中，IDE 判断的最小sdk会变成这个
 //            minSdkVersion Android.minDebugSdkVersion
-            resConfigs("xhdpi")
+            resConfigs("xhdpi", "pt", "en")
         }
 
         product {
@@ -92,4 +92,6 @@ dependencies {
     implementation Deps.greendao
     implementation Deps.startup
     implementation Deps.tracing
+//    compile 'com.android.tools.build:gradle:3.6.2'
+    compile 'com.android.tools.build:gradle:3.5.2'
 }
