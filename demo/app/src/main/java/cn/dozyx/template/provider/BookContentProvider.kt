@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
+import android.util.Log
 import timber.log.Timber
 import java.util.*
 
@@ -15,7 +16,7 @@ import java.util.*
  */
 class BookContentProvider : ContentProvider() {
     override fun onCreate(): Boolean {
-        Timber.d("BookContentProvider.onCreate ${Thread.currentThread()}")
+        Log.d("Dozyx", "BookContentProvider.onCreate ${Thread.currentThread()}")
         // 初始化
         // 所有在清单文件中注册的 content provider，在 application 启动时都会在主线程回调这个方法。
         // 不要在这里执行耗时操作

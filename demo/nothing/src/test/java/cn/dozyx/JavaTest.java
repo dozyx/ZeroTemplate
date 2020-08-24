@@ -387,6 +387,8 @@ public class JavaTest {
     public void testSubString() {
         String str = "111.apk";
         print(str.substring(str.length() - 4, str.length()));
+        String str2 = "PREF=gl=AZ&f4=4000000&hl=es";
+        print(Arrays.toString(str2.split("=", 2)));
     }
 
     @Test

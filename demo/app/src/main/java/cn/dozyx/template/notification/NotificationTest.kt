@@ -236,15 +236,16 @@ class NotificationTest : BaseTestActivity() {
                         .setContentTitle("normal channel $notificationId")
                         .setContentIntent(createPendingIntent())
                         .setAutoCancel(true)
+//                        .setColor(getColor(android.R.color.holo_red_dark))
 //                        .setShowWhen(Random.nextBoolean())
                         .setShowWhen(true) // 如果没有设置 subtext，那么即使 setShowWhen 为 false，group 之后通知的 when 还是会显示
-                        .setSubText("测试")
+//                        .setSubText("测试")
                         //                        .setSortKey("$notificationId")
                         .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
                 if (Random.nextBoolean()){
 //                    builder.setSubText("测试")
                 }
-                notify(builder, 100)
+                notify(builder)
             }
         })
 
@@ -303,6 +304,7 @@ class NotificationTest : BaseTestActivity() {
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_GROUP_SUMMARY)
                         .setSmallIcon(R.drawable.ic_notification_fail)
                         .setContentTitle("group1 channel2")
+                        .setColor(getColor(android.R.color.holo_red_dark))
                         .setGroupSummary(true)
                         .setShowWhen(false)// 会覆盖非 summary 通知的 setShowWhen，但如果非 summary 通知没有设置 subtext，那么它们的 when 会始终显示，从展示上来猜测，应该是系统会确保通知的 header 始终会有文本
                         .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))

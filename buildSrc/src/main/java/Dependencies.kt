@@ -193,7 +193,7 @@ object DepsPaging {
 object Version {
     const val legacySupportV4 = "1.0.0"
     const val kotlinVersion = "1.3.31"
-    const val androidGradleVersion = "3.5.1"
+    const val androidGradleVersion = "3.6.1"
     const val picasso = "2.71828"
     const val threeten = "1.2.1"
     const val leakcanary = "1.6.3"
@@ -215,7 +215,7 @@ object Version {
     const val okhttp = "3.14.4"
     const val butterknife = "10.1.0"
     const val support = "1.0.0"
-    const val constraintLayout = "2.0.0-beta2"
+    const val constraintLayout = "2.0.0-rc1"
     const val multidex = "2.0.1"
     const val convenient_banner = "2.1.5"
     const val loop_view = "0.1.2"

@@ -777,6 +777,15 @@
         <provider
             android:name=".provider.BookContentProvider"
             android:authorities="${applicationId}.book" />
+        <provider
+            android:name=".provider.Provider1"
+            android:authorities="${applicationId}.provider1"
+            android:initOrder="100" />
+        <!--   initOrder: 值越大初始化越早     -->
+        <provider
+            android:name=".provider.Provider2"
+            android:authorities="${applicationId}.provider2"
+            android:initOrder="101" />
 
         <activity
             android:name=".gl.OpenGLES20Activity"

@@ -1,5 +1,5 @@
 apply plugin: "com.android.library"
-apply from: "$project.rootDir/config/quality.gradle"
+//apply from: "$project.rootDir/config/quality.gradle"
 apply from: "$project.rootDir/buildKotlin.gradle"
 apply from: "$project.rootDir/buildTest.gradle"
 

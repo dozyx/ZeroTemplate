@@ -6,7 +6,7 @@ import org.gradle.api.ProjectState
 import org.gradle.api.initialization.Settings
 import org.gradle.api.invocation.Gradle
 
-class ConfigUtils {
+class MyConfigUtils {
     static addBuildListener(Gradle g) {
         g.addBuildListener(new BuildListener() {
             @Override
