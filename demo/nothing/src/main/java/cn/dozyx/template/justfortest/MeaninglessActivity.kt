@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.SpannableString
 import android.util.Printer
+import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.ThreadUtils
@@ -29,12 +30,12 @@ class MeaninglessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meaningless)
         button.setOnClickListener{
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_DEFAULT)
-            intent.setClassName("com.mobiu.poseidon.athena","com.snaptube.premium.activity.FeedbackActivity")
-            startActivity(intent)
-            input_layout.error = "111"
-            input_layout.error
+            val start = System.currentTimeMillis()
+            val webView = WebView(this.applicationContext)
+            webView.settings.userAgentString
+            webView.destroy()
+            Timber.d("MeaninglessActivity.onCreate ${System.currentTimeMillis() - start}")
+
         }
         val source = SpannableString(
             "https://gitlab.mobiuspace.net/mobiuspace111/and-team/em-snaptube-dataadapter/merge_requests/13\n" +

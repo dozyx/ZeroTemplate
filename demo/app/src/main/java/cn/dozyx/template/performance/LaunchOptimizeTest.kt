@@ -1,8 +1,7 @@
 package cn.dozyx.template.performance
 
 import android.os.Bundle
-import androidx.core.os.TraceCompat
-import androidx.tracing.Trace
+import android.os.Trace
 import cn.dozyx.template.DebugConfig
 import cn.dozyx.template.base.BaseTestActivity
 
