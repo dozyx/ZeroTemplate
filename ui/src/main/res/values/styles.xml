@@ -63,6 +63,12 @@
     <style name="ZT.TextView.SubTitle.Item" parent="ZT.TextView.Base">
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="ContentRoot">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
     <!-- </editor-fold>-->
 
 </resources>
