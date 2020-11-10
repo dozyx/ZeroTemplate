@@ -309,7 +309,7 @@ class NotificationTest : BaseTestActivity() {
                         .setShowWhen(false)// 会覆盖非 summary 通知的 setShowWhen，但如果非 summary 通知没有设置 subtext，那么它们的 when 会始终显示，从展示上来猜测，应该是系统会确保通知的 header 始终会有文本
                         .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
                         .setGroup(GROUP_KEY_TEST)
-                        .setAutoCancel(true)
+                        .setAutoCancel(true)// 最好设置一下这个，不然可能出现里面的通知都 cancel 了，还留着一个空的通知
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setOnlyAlertOnce(true)// 也相当于一个通知，需要注意不要每次都发出声音
                 notify(builder, 999)// 保持同一个 id 来确保只发送一个，并且后续更新的是同一个通知
@@ -502,10 +502,11 @@ class NotificationTest : BaseTestActivity() {
     private fun createChannels() {
         // targetSdk 为 26 以下时，系统设置里会自动添加一个「未分类」的 channel，不知道是不是 miui 才有的特性
         // 只支持 API 26+
+        // channel 将根据 id 排序
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager?.createNotificationChannel(
-                    NotificationChannel(CHANNEL_ID_NORMAL, "普通", NotificationManager.IMPORTANCE_DEFAULT)
+                    NotificationChannel(CHANNEL_ID_NORMAL, "普通⚠️", NotificationManager.IMPORTANCE_DEFAULT)
                             .apply {
                                 description = "描述111"
 //                                group = "group1"// 修改 channel 的 group 也无法改变类似于 importance 的值

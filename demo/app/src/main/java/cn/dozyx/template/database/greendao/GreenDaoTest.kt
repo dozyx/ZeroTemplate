@@ -40,6 +40,7 @@ class GreenDaoTest : BaseTestActivity() {
             }
         }
         // DaoMaster 管理所有可用的 DAO 对象
+        // 需要注意耗时
         daoSession = DaoMaster(openHelper.writableDatabase).newSession()// 初始化得到 DaoSession，全局只需要一个
         // 注意：DevOpenHelper 会在 schema 改变时丢弃所有的表格（在 onUpgrade(）方法中）。建议自行实现 DaoMaster.OpenHelper 类。生产环境不要用 DevOpenHelper
     }

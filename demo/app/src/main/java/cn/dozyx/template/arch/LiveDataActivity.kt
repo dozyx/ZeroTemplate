@@ -1,18 +1,29 @@
 package cn.dozyx.template.arch
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.lifecycle.*
 import cn.dozyx.template.base.BaseTestActivity
+import timber.log.Timber
 
-class LiveDataActivity : BaseTestActivity() {
+class LiveDataActivity : BaseTestActivity(), LifecycleObserver {
     override fun initActions() {
 
     }
 
     private lateinit var userModel: UserModel
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreateEvent() {
+        Timber.d("LiveDataActivity.onCreateEvent")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.d("LiveDataActivity.onCreate")
+        Handler().postDelayed({
+            lifecycle.addObserver(this)
+        }, 2000)
         val observer = Observer<User> {
             appendResult(it.toString())
         }

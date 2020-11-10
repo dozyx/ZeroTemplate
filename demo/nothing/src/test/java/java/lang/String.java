@@ -6,7 +6,7 @@ import java.nio.charset.Charset;
 import java.util.Formatter;
 import java.util.Locale;
 
-public class String implements CharSequence {
+/*public class String implements CharSequence {
     public String() {
         throw new UnsupportedOperationException("Use StringFactory instead.");
     }
@@ -81,4 +81,4 @@ public class String implements CharSequence {
     }
 
     public native char[] toCharArray();
-}
+}*/

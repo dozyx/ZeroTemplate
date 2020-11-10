@@ -25,36 +25,6 @@ class ViewPagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pager_with_top_tab)
-        vp_fragment.adapter = object :
-            FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            override fun getItem(position: Int): Fragment {
-                return ColorFragment.newInstance("$position")
-            }
-
-            override fun getCount(): Int {
-                return 3
-            }
-
-            override fun getPageTitle(position: Int): CharSequence? {
-                return "标题$position"
-            }
-
-            override fun instantiateItem(container: ViewGroup, position: Int): Any {
-                val obj = super.instantiateItem(container, position)
-                var arguments = (obj as Fragment).arguments
-                if (arguments == null) {
-                    arguments = Bundle()
-                }
-                arguments.putInt("position", position)
-                return obj
-            }
-
-            override fun getItemPosition(`object`: Any): Int {
-
-                return (`object` as Fragment).arguments?.getInt("position") ?: 0
-            }
-        }
-        tl_top.setupWithViewPager(vp_fragment)
 
         vp_fragment.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -88,6 +58,7 @@ class ViewPagerActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 Timber.d("ViewPagerActivity.onPageSelected")
                 // 并不是在完全停止滚动之后才触发
+                // setAdapter 并不会导致这个回调
 //                setTabTextSize(position, MAX_TAB_TEXT_SIZE_IN_SP)
             }
         })
@@ -100,6 +71,36 @@ class ViewPagerActivity : AppCompatActivity() {
 
             }
         })*/
+        vp_fragment.adapter = object :
+                FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+            override fun getItem(position: Int): Fragment {
+                return ColorFragment.newInstance("$position")
+            }
+
+            override fun getCount(): Int {
+                return 3
+            }
+
+            override fun getPageTitle(position: Int): CharSequence? {
+                return "标题$position"
+            }
+
+            override fun instantiateItem(container: ViewGroup, position: Int): Any {
+                val obj = super.instantiateItem(container, position)
+                var arguments = (obj as Fragment).arguments
+                if (arguments == null) {
+                    arguments = Bundle()
+                }
+                arguments.putInt("position", position)
+                return obj
+            }
+
+            override fun getItemPosition(`object`: Any): Int {
+
+                return (`object` as Fragment).arguments?.getInt("position") ?: 0
+            }
+        }
+        tl_top.setupWithViewPager(vp_fragment)
         tl_top.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 

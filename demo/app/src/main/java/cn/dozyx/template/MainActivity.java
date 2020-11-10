@@ -39,32 +39,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
-        setContentView(R.layout.activity_main);
-        browseListView = findViewById(R.id.main_list);
-        prefixPath = getIntent().getStringExtra(EXTRA_PREFIX_PATH);
-        if (prefixPath == null) {
-            prefixPath = "";
-        }
-        browseListView.setAdapter(
-                new SimpleAdapter(this, getData(prefixPath), android.R.layout.simple_list_item_1,
-                        new String[]{"title"}, new int[]{android.R.id.text1}));
-        browseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Map<String, Object> info = (Map<String, Object>) parent.getItemAtPosition(position);
-                Intent intent = (Intent) info.get("intent");
-                startActivity(intent);
+            public void run() {
+                Log.d(TAG, "onCreate: ");
+                setContentView(R.layout.activity_main);
+                browseListView = findViewById(R.id.main_list);
+                prefixPath = getIntent().getStringExtra(EXTRA_PREFIX_PATH);
+                if (prefixPath == null) {
+                    prefixPath = "";
+                }
+                browseListView.setAdapter(
+                        new SimpleAdapter(MainActivity.this, getData(prefixPath), android.R.layout.simple_list_item_1,
+                                new String[]{"title"}, new int[]{android.R.id.text1}));
+                browseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Map<String, Object> info = (Map<String, Object>) parent.getItemAtPosition(position);
+                        Intent intent = (Intent) info.get("intent");
+                        startActivity(intent);
+                    }
+                });
             }
-        });
-        new Thread(()->{
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            reportFullyDrawn();
-        }).start();
+        }, 2000);
     }
 
     private List<Map<String, Object>> getData(String prefix) {

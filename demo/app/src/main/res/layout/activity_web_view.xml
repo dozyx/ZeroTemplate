@@ -11,6 +11,12 @@
         android:layout_height="wrap_content"
         android:text="back" />
 
+    <Button
+        android:id="@+id/btn_user_agent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user agent" />
+
     <FrameLayout
         android:id="@+id/fl_web"
         android:layout_width="match_parent"

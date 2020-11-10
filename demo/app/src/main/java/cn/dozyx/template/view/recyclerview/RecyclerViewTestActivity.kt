@@ -1,6 +1,7 @@
 package cn.dozyx.template.view.recyclerview
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import cn.dozyx.template.view.recyclerview.layoutmanager.FixedRowGridLayoutManag
 import com.blankj.utilcode.util.ScreenUtils
 import com.blankj.utilcode.util.ToastUtils
 import kotlinx.android.synthetic.main.activity_recycler_view_test.*
+import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,11 +33,20 @@ class RecyclerViewTestActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         rv_common.layoutManager = getLayoutManager(LAYOUT_LINEAR)
         initItemDecoration()
-        adapter = NestedListAdapter()
-        adapter.setData(newDatas())
-        rv_common.adapter = adapter
+        Handler().postDelayed({
+            adapter = ContentAdapter()
+            adapter.setData(newDatas())
+            rv_common.adapter = adapter
+        }, 1000)
         initItemTouch()
         initEvent()
+        rv_common.viewTreeObserver.addOnGlobalLayoutListener {
+            // 没有设置 adapter 也会触发
+            // 首次进来触发了两次
+            // 滑动是不会触发的，应该是因为没有重新 layout
+            // 触发相关源码 ViewRootImpl#performTraversals()
+            Timber.d("RecyclerViewTestActivity.onCreate onGlobalLayout ${rv_common.childCount}")
+        }
     }
 
     private fun initItemTouch() {
@@ -118,6 +129,7 @@ class RecyclerViewTestActivity : BaseActivity() {
             holder.itemView.setBackgroundColor(ColorUtil.random())
             holder.setText(android.R.id.text1, data)
 //            holder.itemView.setOnCreateContextMenuListener()
+//            Thread.sleep(2000)
         }
     }
 

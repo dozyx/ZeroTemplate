@@ -26,7 +26,7 @@ public class LogUtils {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         System.out.println(formatTime(Calendar.getInstance().getTime().getTime())
                 + " -> " /*+ stackTrace[3].getMethodName()*/ + " "
-                + msg.toString());
+                + msg.toString() + " & thread: " + Thread.currentThread());
     }
 
     public static String formatTime(long timeInMill) {

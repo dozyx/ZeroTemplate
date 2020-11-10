@@ -121,10 +121,10 @@ class ExoPlayerTest : BaseActivity() {
          * [Util.getUserAgent] 返回的格式如 「传入的应用名称/应用版本号 (Linux;Android 10) ExoPlayerLib/exo版本号」
          */
         var userAgent = Util.getUserAgent(this, "appName")
-        userAgent = WebSettings.getDefaultUserAgent(this)
+//        userAgent = WebSettings.getDefaultUserAgent(this)
         var dataSourceFactory: DataSource.Factory? = null
-//        dataSourceFactory = DefaultDataSourceFactory(this, userAgent)// DataSource: 从 uri 指定资源中读取数据
-        dataSourceFactory = OkHttpDataSourceFactory(Call.Factory { request -> okHttpClient.newCall(request) }, userAgent)
+        dataSourceFactory = DefaultDataSourceFactory(this, userAgent)// DataSource: 从 uri 指定资源中读取数据
+//        dataSourceFactory = OkHttpDataSourceFactory(Call.Factory { request -> okHttpClient.newCall(request) }, userAgent)
 
         val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(MediaItem.fromUri(MEDIA_URI).buildUpon().apply {
@@ -162,6 +162,7 @@ class ExoPlayerTest : BaseActivity() {
     override fun getLayoutId() = R.layout.test_exo_player
 
     companion object {
-        private const val MEDIA_URI = "https://video.like.video/na_live/4ay/297g8w_4.mp4"
+        private const val MEDIA_URI = "http://ddeta2nicr6gf.cloudfront.net/ckctdume903lf18t15q6egfxs/nowm-720p.mp4"
+        private const val MEDIA_URI2 = "https://video.like.video/na_live/4ay/297g8w_4.mp4"
     }
 }

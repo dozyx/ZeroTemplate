@@ -53,6 +53,38 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
+    public void testDefaultIfEmpty() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> emitter) {
+//                emitter.onComplete();
+                emitter.onError(new IllegalArgumentException());// 发生错误的话，不会使用
+            }
+        }).defaultIfEmpty(666).subscribe(sObserver);
+    }
+
+    @Test
+    public void testMultiObservers(){
+        Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Exception {
+                // 每一次订阅都会执行
+                // 使用 cache 操作符可以将结果进行缓存，后续订阅使用缓存的结果
+                print("do subscribe work");
+                emitter.onNext(2);
+                emitter.onComplete();
+            }
+        })/*.cache()*/;
+        observable.subscribe(sObserver);
+        observable.subscribe(sObserver);
+//        ConnectableObservable<Integer> publish = observable.publish();
+//        publish.subscribe(sObserver);
+//        publish.subscribe(sObserver);
+//        publish.connect();
+
+    }
+
+    @Test
     public void testDispose() {
         Disposable disposable = getObservable(1).subscribe(new Consumer<Integer>() {
             @Override
@@ -484,6 +516,23 @@ public class RxJavaTest {
         sleep(5);
     }
 
+    @Test
+    public void testConcatThread() {
+        Observable.concat(Observable.just("a", "b", "c").doOnNext(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        print(s);
+                    }
+                }).subscribeOn(Schedulers.io()),
+                Observable.just("d", "f").doOnNext(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        print(s);
+                    }
+                })).subscribeOn(Schedulers.io()).subscribe(sObserver);
+        sleep(5);
+    }
+
 
     @Test
     public void testMerge() {
@@ -570,11 +619,13 @@ public class RxJavaTest {
         }
     }
 
+    @Test
     public void testTake() {
         // takeWhile：发射满足条件的 item，一旦出现不满足条件的 item 就停止。并不会检查不满足条件item之后的item，这点与 filter 不同
         Observable.range(1, 100).takeWhile(i -> i == 5).subscribe(sObserver);
-        // takeUtil：满足某个条件时停止
-//        Observable.range(1, 100).takeUntil(i -> i <= 5).subscribe(sObserver);
+        // takeUtil：满足某个条件时停止，会发送最后条件判断里的 item
+//        Observable.range(1, 100).takeUntil(i -> i == 5).subscribe(sObserver);
+        sleep(1);
     }
 
     @Test
@@ -817,6 +868,7 @@ public class RxJavaTest {
 
     @Test
     public void testPublishSubject() {
+        // observer 不会接收到之前的 emit
         Observable<String> source1 = Observable.interval(1, TimeUnit.SECONDS).map(
                 l -> (l + 1) + "seconds");
         Observable<String> source2 = Observable.interval(300, TimeUnit.MILLISECONDS).map(
@@ -832,6 +884,7 @@ public class RxJavaTest {
 
     @Test
     public void testBehaviorSubject() {
+        // observer 只能收到最近发送和之后发送的 emit
         BehaviorSubject<String> subject = BehaviorSubject.create();
         subject.subscribe(s -> System.out.println("Observer 1: " + s));
         subject.onNext("Alpha");
@@ -839,10 +892,12 @@ public class RxJavaTest {
         subject.onNext("Gamma");
 
         subject.subscribe(s -> System.out.println("Observer 2: " + s));
+        // 如何取消上一个 emit
     }
 
     @Test
     public void testReplaySubject() {
+        // observer 可以接收到所有已发送的 emit
         ReplaySubject<String> subject = ReplaySubject.create();
         subject.subscribe(s -> System.out.println("Observer 1: " + s));
         subject.onNext("Alpha");
@@ -854,7 +909,7 @@ public class RxJavaTest {
 
     @Test
     public void testAsyncSubject() {
-        // 只发送最后一个值
+        // observer 始终只能接收到最后发送的 emit
         AsyncSubject<String> subject = AsyncSubject.create();
         subject.subscribe(s -> System.out.println("Observer 1: " + s), Throwable::printStackTrace,
                 () -> System.out.println("Observer 1 done"));
@@ -968,40 +1023,10 @@ public class RxJavaTest {
         return Observable.fromArray(datas);
     }
 
+    @Test
     public void testSubject() {
-        BehaviorSubject<Integer> subject = BehaviorSubject.create();
-        ((BehaviorSubject) subject.hide()).getValue();
-        subject.onNext(11);
-        subject.onNext(31);
-        Disposable disposable = subject.hide().subscribe(
-                integer -> System.out.println("integer = [" + integer + "]"));
-        subject.onNext(1);
-        subject.onNext(3);
-        subject.subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                System.out.println("d = [" + d + "]");
-            }
+        testBehaviorSubject();
 
-            @Override
-            public void onNext(Integer integer) {
-                System.out.println("integer = [" + integer + "]");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-                System.out.println("onComplete");
-            }
-        });
-        subject.onNext(2);
-        disposable.dispose();
-        subject.onNext(2);
-        subject.onComplete();
     }
 
     public void testFlowable() {

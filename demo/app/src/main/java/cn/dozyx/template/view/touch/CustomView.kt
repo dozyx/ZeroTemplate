@@ -24,7 +24,7 @@ class CustomView : View {
 //            return true
         }
 //        parent.requestDisallowInterceptTouchEvent(true)
-        return false
+        return true
     }
 
 }

@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 悬浮窗 -->
@@ -13,6 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
 
     <uses-sdk tools:overrideLibrary="androidx.camera.camera2, androidx.camera.core" />
 
@@ -174,7 +176,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -1137,7 +1139,43 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-                <category android:name="android.intent.category.LAUNCHER" />
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.OtherProcessActivity"
+            android:alwaysRetainTaskState="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:process=":loader" />
+        <activity
+            android:name=".activity.ProcessTest"
+            android:label="进程">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.FinishTest"
+            android:label="Activity/finish">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".device.TimeTest"
+            android:label="Device/时间">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.list.SwipeRefreshTest"
+            android:label="View/SwipeRefreshLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
         <activity android:name=".media.ExoPlayerTest"
@@ -1147,6 +1185,30 @@
 
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".TelephonyManagerTest"
+            android:label="System/TelephonyManager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".webview.NewWebViewTest"
+            android:label="View/WebView/new">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".performance.ANRTest"
+            android:label="Performance/ANR">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
     </application>

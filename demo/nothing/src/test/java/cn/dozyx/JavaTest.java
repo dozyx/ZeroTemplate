@@ -44,6 +44,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -94,10 +95,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.dozyx.core.utli.TimeTracker;
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 import cn.dozyx.core.utli.log.LogUtil;
 import cn.dozyx.zerofate.java.GenericTest;
 import cn.dozyx.zerofate.java.Person;
+import cn.dozyx.zerofate.java.Student1;
 import io.reactivex.Observable;
 import io.reactivex.internal.operators.observable.ObservableZip;
 
@@ -109,6 +112,32 @@ import io.reactivex.internal.operators.observable.ObservableZip;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testClassInit(){
+        String clz = InitClass1.class.getSimpleName();// 不会导致 static 内容初始化
+//        new InitClass1();
+        print("testClassInit");
+    }
+
+    private static class InitClass1 {
+        public static InitClass2 clz2= new InitClass2();
+        static {
+            print("InitClass1 static");
+        }
+        private InitClass1(){
+            print("InitClass2 constructor");
+        }
+    }
+
+    private static class InitClass2 {
+        static {
+            print("InitClass2 static");
+        }
+        private InitClass2(){
+            print("InitClass2 constructor");
+        }
+    }
 
     @Test
     public void testOutOfBoundsException(){
@@ -151,13 +180,36 @@ public class JavaTest {
     }
 
     @Test
+    public void testFilePath() {
+        File file = new File("../../test.txt");
+        print(file.getPath());// 可能是一个相对的路径
+        print(file.getAbsolutePath());// .. 完整路径，.. 会被保留
+        try {
+            print(file.getCanonicalPath());// 返回的是标准的路径，.. 之类的符号会被替换为完整路径
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testNull(){
+        Object nullObj = null;
+        System.out.println("this is " + nullObj);
+    }
+
+    @Test
     public void testForLoop(){
         ArrayList<Integer> data = new ArrayList<>();
         data.add(1);
         data.add(2);
         data.add(3);
-        for (int i = 0; i < data.size(); i++) {
+        /*for (int i = 0; i < data.size(); i++) {
             if (data.get(i) == 2){
+                data.remove(i);
+            }
+        }*/
+        for (Integer i : data) {
+            if (i == 2){
                 data.remove(i);
             }
         }
@@ -682,6 +734,15 @@ public class JavaTest {
     }
 
     @Test
+    public void testClassLoader2() throws Exception {
+        MyClassLoader loader = new MyClassLoader();
+//        Thread.currentThread().setContextClassLoader(loader);
+        Constructor<?> constructor = loader.loadClass("cn.dozyx.LoadedClass").getConstructor(String.class);
+        constructor.newInstance("custom loader");
+        LoadedClass loadedClass = new LoadedClass("new instance");
+    }
+
+    @Test
     public void testClassLoader() throws Exception {
 
 
@@ -1063,6 +1124,20 @@ public class JavaTest {
     }
 
     @Test
+    public void testThrows() throws Exception {
+        try {
+            funException();
+        } catch (Exception e) {
+            print(e);
+        }
+    }
+
+    private void funException() throws Exception {
+        String str = null;
+        str.length();
+    }
+
+    @Test
     public void testException() {
 //        try {
         uncheckedException();
@@ -1080,6 +1155,14 @@ public class JavaTest {
 
         }
         Exception exception = new Exception();
+    }
+
+    @Test
+    public void testExceptionPrint(){
+        Exception cause = new IllegalStateException("this is illeagal state");
+        Exception e = new RuntimeException("this is runtime exception", cause);
+        print(e);
+        print(e.getCause());
     }
 
     private static void uncheckedException() {
@@ -1495,6 +1578,11 @@ public class JavaTest {
         print(System.currentTimeMillis() > new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
     }
 
+    @Test
+    public void testDate2() throws ParseException {
+        print(new Date(0));
+    }
+
     public void testDate() {
         String payTime = "2019-06-01";
         int year = Integer.parseInt(payTime.substring(0, 4));
@@ -1776,12 +1864,20 @@ public class JavaTest {
         IntArrayData intArrayData = new IntArrayData();
         intArrayData.data = new int[]{1,2,3};
         print(new Gson().toJson(intArrayData));
+        print(new Gson().fromJson("", Student1.class));
     }
 
     private static class IntArrayData {
         private int[] data;
     }
 
+    @Test
+    public void testEmptyGson() {
+        long start = System.currentTimeMillis();
+        String json = null;
+        print(new Gson().fromJson(json, Person.class));
+        print(System.currentTimeMillis() - start);
+    }
     @Test
     public void testGson() {
         Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE,

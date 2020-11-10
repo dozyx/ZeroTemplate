@@ -94,8 +94,15 @@ dependencies {
     implementation Deps.tracing
     compile 'com.google.firebase:perf-plugin:1.3.1'
 //    compile 'com.jakewharton.hugo:hugo-plugin:1.2.1'
-//    compileOnly 'com.android.tools.build:gradle:3.6.1' // 一样会导致运行报错，暂时没找原因
+//    compileOnly 'com.android.tools.build:gradle:3.6.1' // 一样会导致运行报错，暂时没找原因 The given artifact contains a string literal with a package reference 'android.support.design.widget' that cannot be safely rewritten.
 //    compile 'com.android.tools.build:gradle:3.5.2'// 这个版本跟 androidx 冲突，会导致项目没办法运行，但 sync 正常。。。
     implementation Deps.exoplayer
     implementation DepsExoPlayer.okhttp
 }
+/*
+apply plugin: 'com.snapee.plugin.trace'
+systrace {
+    enable = true
+    baseMethodMapFile = "${project.buildDir}/systrace_output/Debug.methodmap"
+    blackListFile = "${project.projectDir}/blacklist/blackMethodList.txt"
+}*/

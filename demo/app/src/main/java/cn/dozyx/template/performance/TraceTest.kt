@@ -100,6 +100,15 @@ class TraceTest : BaseTestActivity() {
         })
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        // 注意：如果在启动过程中回到了后台（比如锁屏），那么这个获取的焦点的时间会变长，不过考虑启动时间的话，并不需要在意 hasFocus 是否为 true？
+        TraceCompat.beginSection("onWindowFocusChanged")
+        Timber.d("TraceTest.onWindowFocusChanged $hasFocus")
+        doLongTimeJob("onWindowFocusChanged")
+        TraceCompat.endSection()
+    }
+
     private fun doLongTimeJob(label: String) {
         for (i in 0..100) {
             FileUtils.createFileByDeleteOldFile(File(cacheDir, "trace$label"))

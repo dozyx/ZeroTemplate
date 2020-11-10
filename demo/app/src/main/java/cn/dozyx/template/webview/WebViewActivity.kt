@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.widget.webview.WebConfig
 import cn.dozyx.core.widget.webview.WebViewUtil
 import cn.dozyx.template.R
+import kotlinx.android.synthetic.main.activity_drag_panel.*
 import kotlinx.android.synthetic.main.activity_web_view.*
 import timber.log.Timber
 import java.net.URLDecoder
@@ -40,13 +41,22 @@ class WebViewActivity : AppCompatActivity() {
         val config = WebConfig.getDefault()
         config.jsEnable = true
         WebViewUtil.init(webView, config)
-
+        WebView.setWebContentsDebuggingEnabled(true);
+        val settings = webView.settings
+        settings.allowFileAccess = true
+        settings.allowContentAccess = true
+        settings.allowFileAccessFromFileURLs = true
+        settings.allowUniversalAccessFromFileURLs = true
+        settings.databaseEnabled = true
+        settings.javaScriptEnabled = true
+        settings.domStorageEnabled = true
         fl_web.addView(webView)
 
         configWebViewClient(webView)
         configWebChromeClient(webView)
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-        val url = "http://www.mobiuhome.com/redirect?ad_s=https%3a%2f%2flarkgame.com?utm_source=sp_settings"
+//        val url = "http://www.mobiuhome.com/redirect?ad_s=https%3a%2f%2flarkgame.com?utm_source=sp_settings"
+        val url = "https://www.instagram.com/zapeebrasil/"
         webView.loadUrl(url)
 
         val data = ""
@@ -59,6 +69,10 @@ class WebViewActivity : AppCompatActivity() {
             } else{
                 finish()
             }
+        }
+        btn_user_agent.setOnClickListener {
+            Timber.d("WebSettings.getDefaultUserAgent %s", WebSettings.getDefaultUserAgent(this))
+            Timber.d("new WebView() %s", WebView(this).settings.userAgentString)
         }
     }
 
