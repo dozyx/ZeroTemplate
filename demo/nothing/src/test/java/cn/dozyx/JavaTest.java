@@ -114,6 +114,11 @@ import io.reactivex.internal.operators.observable.ObservableZip;
 public class JavaTest {
 
     @Test
+    public void testJavassist() {
+
+    }
+
+    @Test
     public void testClassInit(){
         String clz = InitClass1.class.getSimpleName();// 不会导致 static 内容初始化
 //        new InitClass1();

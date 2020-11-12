@@ -4,6 +4,7 @@ import android.app.*
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.PendingIntent.getBroadcast
 import android.content.*
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
@@ -22,8 +23,15 @@ import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import cn.dozyx.template.image.GlideTest
 import com.android.internal.util.ContrastColorUtil
 import com.blankj.utilcode.util.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_glide_test.*
 import timber.log.Timber
 import kotlin.random.Random
 
@@ -209,6 +217,41 @@ class NotificationTest : BaseTestActivity() {
                 // Android 9 以后限制了反射调用隐藏 API
                 val resultColor = ContrastColorUtil.findContrastColor(Color.parseColor("#FFCD22"), Color.WHITE, false, 0.45)
                 view?.setBackgroundColor(resultColor)
+            }
+        })
+
+        addAction(object : Action("小米通知内容不显示") {
+            override fun run() {
+                val id = 110
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                    .setSmallIcon(R.drawable.anime)
+                    .setContentTitle("下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试")
+                    .setContentText("哈哈哈")// 如果 title 太长会被遮挡
+                    .setContentInfo("咦咦咦")
+                    .setSubText("111")// 显示在 appname 和 when 之间（不同版本会不一样，Android 4.4 是显示在 content text 下面），文档说不要跟 setProgress 一起使用，但暂未发现问题（Android 4.4 上导致 progress 无法显示）
+                    .setTicker("222")// 不知道干嘛的
+                    .setGroup(GROUP_KEY_TEST)
+                    .setProgress(100, 50, false)
+                    .setOngoing(true)
+                    .setOnlyAlertOnce(true)// 只在第一次显示时发出声音
+//
+                val subscribe = Observable.create<Bitmap> {
+                    val target = Glide.with(this@NotificationTest)
+                        .asBitmap()
+                        .load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605032886236&di=f691ffb8a5448fa10732907eb6aede1c&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg")
+                        .apply(RequestOptions().override(200).centerCrop())
+                        .submit()
+                    it.onNext(target.get())
+                    it.onComplete()
+                }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        Timber.d("load bitmap success $it")
+                        builder.setLargeIcon(it)
+                        notify(builder, id)
+                    }
+//                notify(builder, id)
             }
         })
         val view = findViewByActionName("颜色测试")

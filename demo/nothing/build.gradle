@@ -105,6 +105,7 @@ dependencies {
 //    冲突测试 start
     implementation 'com.google.guava:guava:20.0'
     implementation 'com.google.inject:guice:4.2.2'
+    implementation 'org.javassist:javassist:3.27.0-GA'
 //    冲突测试 end
 }
 repositories {
