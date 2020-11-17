@@ -54,6 +54,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
@@ -103,6 +104,13 @@ import cn.dozyx.zerofate.java.Person;
 import cn.dozyx.zerofate.java.Student1;
 import io.reactivex.Observable;
 import io.reactivex.internal.operators.observable.ObservableZip;
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtConstructor;
+import javassist.CtMethod;
+import javassist.NotFoundException;
+import javassist.bytecode.AttributeInfo;
 
 /**
  * 测试 java 相关代码
@@ -114,8 +122,36 @@ import io.reactivex.internal.operators.observable.ObservableZip;
 public class JavaTest {
 
     @Test
-    public void testJavassist() {
+    public void testJavassist() throws NotFoundException, CannotCompileException, IOException {
+        ClassPool classPool = ClassPool.getDefault();
+//        classPool.appendClassPath("class/");
+//        classPool.appendClassPath("~/Desktop/Java/");
+        String classname = "cn.dozyx.JavassistClass";
+        URL url = classPool.find(classname);
+        print(url);
+        // 修改后输出的 class 在 build/intermediates/javac/baiduDebugUnitTest/classes 目录
+        // 不过上面的目录似乎没办法直接写入或者会被 IDE 覆盖，所以在另一个目录 src/test/java/cn/dozyx/class/ 生成了 class
 
+        CtClass ctClass = classPool.get(classname);
+        CtConstructor[] constructors = ctClass.getDeclaredConstructors();
+        for (CtConstructor constructor : constructors) {
+            print("遍历: " + constructor);
+        }
+//        ctClass.setSuperclass(classPool.get("cn.dozyx.JavaTest"));
+        CtConstructor constructor = ctClass.getDeclaredConstructor(classPool.get(new String[]{"java.lang.String"}));
+        print(constructor);
+//        constructor.insertBefore("sayName();");// 在方法开头插入
+//        constructor.insertAfter("sayName();");// 在方法末尾插入
+//        constructor.insertBefore("$1 = \"modifyName\";");// 修改局部变量
+        int startPos = constructor.getMethodInfo().getLineNumber(0);
+        print("start pos: " + startPos);
+//        int line = constructor.insertAt(startPos + 2, "$3 = \"fieldName\";");// 第一个参数 lineNum 表示的是 class 的行数，似乎没办法直接对方法内声明的局部变量进行操作
+        int line = constructor.insertAt(startPos + 2, "$2 = \"fieldName\";");//
+//        print("insert line: " + line);
+
+//        constructor.setBody(null);
+//        ctClass.writeFile();// 好像直接调用这个方法会被 IDE 的覆盖？
+        ctClass.writeFile("src/test/java/cn/dozyx/class/");
     }
 
     @Test
@@ -123,6 +159,11 @@ public class JavaTest {
         String clz = InitClass1.class.getSimpleName();// 不会导致 static 内容初始化
 //        new InitClass1();
         print("testClassInit");
+    }
+
+    @Test
+    public void testExtends(){
+
     }
 
     private static class InitClass1 {

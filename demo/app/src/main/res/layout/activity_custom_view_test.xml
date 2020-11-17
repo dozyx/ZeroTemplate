@@ -7,14 +7,25 @@
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
         android:background="@android:color/darker_gray">
 
         <cn.dozyx.template.view.custom.TouchFollowView
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@color/colorAccent" />
+
     </LinearLayout>
+
+    <cn.dozyx.template.view.custom.TooltipLayout
+        android:layout_width="100dp"
+        android:layout_height="50dp">
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"/>
+    </cn.dozyx.template.view.custom.TooltipLayout>
 
 </LinearLayout>

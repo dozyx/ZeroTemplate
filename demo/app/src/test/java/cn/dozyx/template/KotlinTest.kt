@@ -15,6 +15,11 @@ import kotlin.concurrent.thread
 class KotlinTest {
 
     @Test
+    fun testBy() {
+
+    }
+
+    @Test
     fun testForEach() {
         arrayListOf<Int>(1, 2, 3).forEach { i: Int ->
             if (i == 2) {

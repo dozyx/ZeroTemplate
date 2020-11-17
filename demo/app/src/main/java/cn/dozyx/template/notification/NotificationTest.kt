@@ -14,7 +14,6 @@ import android.os.Handler
 import android.provider.Settings
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -23,15 +22,15 @@ import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
-import cn.dozyx.template.image.GlideTest
 import com.android.internal.util.ContrastColorUtil
-import com.blankj.utilcode.util.*
+import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.IntentUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_glide_test.*
 import timber.log.Timber
 import kotlin.random.Random
 
@@ -224,33 +223,33 @@ class NotificationTest : BaseTestActivity() {
             override fun run() {
                 val id = 110
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                    .setSmallIcon(R.drawable.anime)
-                    .setContentTitle("下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试")
-                    .setContentText("哈哈哈")// 如果 title 太长会被遮挡
-                    .setContentInfo("咦咦咦")
-                    .setSubText("111")// 显示在 appname 和 when 之间（不同版本会不一样，Android 4.4 是显示在 content text 下面），文档说不要跟 setProgress 一起使用，但暂未发现问题（Android 4.4 上导致 progress 无法显示）
-                    .setTicker("222")// 不知道干嘛的
-                    .setGroup(GROUP_KEY_TEST)
-                    .setProgress(100, 50, false)
-                    .setOngoing(true)
-                    .setOnlyAlertOnce(true)// 只在第一次显示时发出声音
+                        .setSmallIcon(R.drawable.anime)
+                        .setContentTitle("下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试")
+                        .setContentText("哈哈哈")// 如果 title 太长会被遮挡
+                        .setContentInfo("咦咦咦")
+                        .setSubText("111")// 显示在 appname 和 when 之间（不同版本会不一样，Android 4.4 是显示在 content text 下面），文档说不要跟 setProgress 一起使用，但暂未发现问题（Android 4.4 上导致 progress 无法显示）
+                        .setTicker("222")// 不知道干嘛的
+                        .setGroup(GROUP_KEY_TEST)
+                        .setProgress(100, 50, false)
+                        .setOngoing(true)
+                        .setOnlyAlertOnce(true)// 只在第一次显示时发出声音
 //
                 val subscribe = Observable.create<Bitmap> {
                     val target = Glide.with(this@NotificationTest)
-                        .asBitmap()
-                        .load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605032886236&di=f691ffb8a5448fa10732907eb6aede1c&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg")
-                        .apply(RequestOptions().override(200).centerCrop())
-                        .submit()
+                            .asBitmap()
+                            .load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605032886236&di=f691ffb8a5448fa10732907eb6aede1c&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F30%2F29%2F01300000201438121627296084016.jpg")
+                            .apply(RequestOptions().override(200).centerCrop())
+                            .submit()
                     it.onNext(target.get())
                     it.onComplete()
                 }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
-                        Timber.d("load bitmap success $it")
-                        builder.setLargeIcon(it)
-                        notify(builder, id)
-                    }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            Timber.d("load bitmap success $it")
+                            builder.setLargeIcon(it)
+                            notify(builder, id)
+                        }
 //                notify(builder, id)
             }
         })
@@ -285,7 +284,7 @@ class NotificationTest : BaseTestActivity() {
 //                        .setSubText("测试")
                         //                        .setSortKey("$notificationId")
                         .setGroup(GROUP_KEY_TEST)// android 4.4 设置 group 之后，通知失效
-                if (Random.nextBoolean()){
+                if (Random.nextBoolean()) {
 //                    builder.setSubText("测试")
                 }
                 notify(builder)
@@ -301,7 +300,7 @@ class NotificationTest : BaseTestActivity() {
                 // 自动 group 之后，将通知关闭到小于 4 个，会自动取消 group
                 // https://developer.android.com/training/notify-user/group
                 // API 24 之后可以 group
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                     return
                 }
                 val builder = Notification.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
@@ -344,7 +343,7 @@ class NotificationTest : BaseTestActivity() {
                 // 要发送一个 group summary 的通知，才能把同一 group 的通知汇总到一起
                 // 如果对应的 channel 被关闭了，那么 group 也会失败
                 // 重复发送 group 会导致之前的通知根据 importance 重排序
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_GROUP_SUMMARY)
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL /*CHANNEL_ID_GROUP_SUMMARY*/)
                         .setSmallIcon(R.drawable.ic_notification_fail)
                         .setContentTitle("group1 channel2")
                         .setColor(getColor(android.R.color.holo_red_dark))
@@ -352,6 +351,7 @@ class NotificationTest : BaseTestActivity() {
                         .setShowWhen(false)// 会覆盖非 summary 通知的 setShowWhen，但如果非 summary 通知没有设置 subtext，那么它们的 when 会始终显示，从展示上来猜测，应该是系统会确保通知的 header 始终会有文本
                         .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))
                         .setGroup(GROUP_KEY_TEST)
+                        .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN) // 默认 GROUP_ALERT_ALL 第一次发送 group summary 通知，用户也会有感知，比如 channel 为 heads-up，那么发送 group summary 也会显示一个 heads-up 通知 (如果现在只有一条通知那么将显示一条通知，如果有多条通知，那么将显示一条折叠之后的通知)
                         .setAutoCancel(true)// 最好设置一下这个，不然可能出现里面的通知都 cancel 了，还留着一个空的通知
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setOnlyAlertOnce(true)// 也相当于一个通知，需要注意不要每次都发出声音
