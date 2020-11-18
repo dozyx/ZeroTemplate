@@ -176,7 +176,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
@@ -1139,7 +1139,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity
@@ -1164,21 +1164,24 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".device.TimeTest"
+        <activity
+            android:name=".device.TimeTest"
             android:label="Device/时间">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.list.SwipeRefreshTest"
+        <activity
+            android:name=".view.list.SwipeRefreshTest"
             android:label="View/SwipeRefreshLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".media.ExoPlayerTest"
+        <activity
+            android:name=".media.ExoPlayerTest"
             android:label="Media/ExoPlayer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1188,7 +1191,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TelephonyManagerTest"
+        <activity
+            android:name=".TelephonyManagerTest"
             android:label="System/TelephonyManager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1197,27 +1201,41 @@
 
         </activity>
 
-        <activity android:name=".webview.NewWebViewTest"
+        <activity
+            android:name=".webview.NewWebViewTest"
             android:label="View/WebView/new">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".performance.ANRTest"
+        <activity
+            android:name=".performance.ANRTest"
             android:label="Performance/ANR">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LifecycleCallbacksTest"
+        <activity
+            android:name=".activity.LifecycleCallbacksTest"
             android:label="Activity/Callback">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".pop.PopElementTest"
+            android:label="Activity/Pop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SimpleAdActivity" />
     </application>
 
 </manifest>
