@@ -96,6 +96,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.dozyx.core.log.Sampler;
 import cn.dozyx.core.utli.TimeTracker;
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
 import cn.dozyx.core.utli.log.LogUtil;
@@ -120,6 +121,20 @@ import javassist.bytecode.AttributeInfo;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testSample() {
+        int hitCount = 0;
+        int times = 100000;
+        for (int i = 0; i < times; i++) {
+            Sampler sampler = new Sampler();
+            if (sampler.enable()) {
+                hitCount++;
+            }
+        }
+        print("1/32: " + 1 / 32F);
+        print("采样率: " + hitCount / (float) times);
+    }
 
     @Test
     public void testJavassist() throws NotFoundException, CannotCompileException, IOException {

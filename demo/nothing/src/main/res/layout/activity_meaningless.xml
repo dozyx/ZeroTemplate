@@ -40,10 +40,11 @@
         android:checkMark="@drawable/ic_menu_share"
         android:checked="true"
         android:text="111ဗမာ111" />
+
     <TextView
         android:id="@+id/hot_query_text"
-        android:layout_width="wrap_content"
         style="@style/CustomTextStyle3"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:background="@drawable/bg_flow_item_normal"
         android:ellipsize="end"
@@ -53,8 +54,8 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
         android:singleLine="true"
-        android:textSize="12sp"
-        android:text="Drake">
+        android:text="Drake"
+        android:textSize="12sp">
 
     </TextView>
 
@@ -84,24 +85,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerInside"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="@drawable/bg_0"
-        android:showDividers="middle"
+        android:divider="@drawable/linear_divider"
         android:dividerPadding="8dp"
-        >
-
+        android:showDividers="middle">
+        <!--        RTL 布局第一个 divider 有问题-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +112,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="222" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222" />
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
 

@@ -26,6 +26,7 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import okio.BufferedSink
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -375,6 +376,15 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
 
         @GET("/error")
         fun doErrorRequest(): retrofit2.Call<ResponseBody>
+    }
+
+    private class Body : RequestBody() {
+        override fun contentType(): MediaType? {
+            return null
+        }
+
+        override fun writeTo(sink: BufferedSink) {
+        }
     }
 
     companion object {

@@ -73,23 +73,7 @@ class NotificationTest : BaseTestActivity() {
 
         addAction(object : Action("progress") {
             override fun run() {
-                val id = Random.nextInt(3)
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(R.drawable.anime)
-                        .setContentTitle("下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试")
-                        .setContentText("哈哈哈")// 如果 title 太长会被遮挡
-                        .setContentInfo("咦咦咦")
-                        .setSubText("111")// 显示在 appname 和 when 之间（不同版本会不一样，Android 4.4 是显示在 content text 下面），文档说不要跟 setProgress 一起使用，但暂未发现问题（Android 4.4 上导致 progress 无法显示）
-                        .setTicker("222")// 不知道干嘛的
-                        .setGroup(GROUP_KEY_TEST)
-                        .setProgress(100, 50, false)
-                        .setOnlyAlertOnce(true)// 只在第一次显示时发出声音
-//                        .addAction(android.R.color.transparent, "停止", PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("000"), 0))
-                // action 的 icon 在 Android N 以上不会显示，在模拟器 api23 上看，显示的是一个灰块。。。https://stackoverflow.com/questions/44698440/android-26-o-notification-doesnt-display-action-icon
-                if (Random.nextBoolean()) {
-                    builder.setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0))
-                }
-                notify(builder, id)
+                testProgress()
             }
         })
 
@@ -258,6 +242,37 @@ class NotificationTest : BaseTestActivity() {
 
     }
 
+    private val progressId = 3
+    private var currentUpdateTimes = 0;
+    private val updateTimeCount = 10;
+    private fun testProgress() {
+        val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                .setSmallIcon(R.drawable.anime)
+                .setContentTitle("下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试下载进度测试")
+                .setContentText("哈哈哈")// 如果 title 太长会被遮挡
+                .setContentInfo("咦咦咦")
+//                .setSubText("111")// 显示在 appname 和 when 之间（不同版本会不一样，Android 4.4 是显示在 content text 下面），文档说不要跟 setProgress 一起使用，但暂未发现问题（Android 4.4 上导致 progress 无法显示）
+                .setTicker("222")// 不知道干嘛的
+                .setGroup(GROUP_KEY_TEST)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setDefaults(NotificationCompat.DEFAULT_SOUND)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+//                .setProgress(100, 50, false)
+                .setOnlyAlertOnce(true)// 只在第一次显示时发出声音
+        //                        .addAction(android.R.color.transparent, "停止", PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("000"), 0))
+        // action 的 icon 在 Android N 以上不会显示，在模拟器 api23 上看，显示的是一个灰块。。。https://stackoverflow.com/questions/44698440/android-26-o-notification-doesnt-display-action-icon
+        if (Random.nextBoolean()) {
+            builder.setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg_0))
+        }
+        Handler().postDelayed({
+            builder.setProgress(100, 50 + currentUpdateTimes * 5, false)
+            notify(builder, progressId)
+            if (++ currentUpdateTimes < updateTimeCount){
+                testProgress()
+            }
+        }, 500)
+    }
+
     private fun testGroup() {
         addAction(object : Action("group channel1") {
             override fun run() {
@@ -421,9 +436,9 @@ class NotificationTest : BaseTestActivity() {
 //                        .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
                         .setSortKey("$notificationId")// 按字典顺序对通知进行排序，比如 "0"、"1"，前者会在上面。但是 importance 会知道这个设置无效，importance 的会一直在前面。。。
                         .setGroup(GROUP_KEY_TEST)
-                        .setStyle(CustomStyle())
+//                        .setStyle(CustomStyle())
                 // 关于排序(模拟器 API29)
-                // 影响通知排序的有三个因素：when、importance、sortKey
+                // 影响通知排序的有三个因素：when、importance、sortKey (20201125更新)
                 // importance 更高的将排在前面，即使低 importance 的通知发送更晚，即使 when 更新也没用；
                 // app1 发送了通知，如果在通知栏里插入了一个另一个 app2 的通知（如果 app2 通知的 importance 都比 app1 的低，那么这个通知时不会插入到 app1 通知的前面的），
                 // 那么后面 app1 再发送的通知会被 app2 的通知分隔，这个最后发送的通知不会受 importance 的影响直接放置在最上面位置
@@ -435,6 +450,8 @@ class NotificationTest : BaseTestActivity() {
                 // 不过还是有问题，低 importance 在高 importance 前面之后，如果不断的下拉通知栏查看，高 importance 的又会跑到前面。。。
                 // 但是只要低 importance 的再 update 一次，就又可以排到前面了
                 // 感觉这排序规则有点蛋疼。。。
+                // 20201125 更新，测试反馈下载过程中，两个任务的通知位置会不断切换(在中兴 5.1 手机上出现)。验证发现跟设置了 setDefaults(NotificationCompat.DEFAULT_SOUND) 有关系
+                // 所以这应该是影响排序的第四个因素，估计是因为有提示音所以临时提升了重要性？目前只是验证了这个问题，没看源码，具体复现可以看此类对 progress 通知的测试部分
 
                 val remoteViews = RemoteViews(packageName, R.layout.notification_custom)
                 //                builder.setContent(remoteViews)// 没生效

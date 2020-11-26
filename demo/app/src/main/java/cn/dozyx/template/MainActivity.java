@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 Log.d(TAG, "onCreate: ");
                 setContentView(R.layout.activity_main);
                 browseListView = findViewById(R.id.main_list);
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-            }
-        }, 2000);
+//            }
+//        }, 2000);
     }
 
     private List<Map<String, Object>> getData(String prefix) {
