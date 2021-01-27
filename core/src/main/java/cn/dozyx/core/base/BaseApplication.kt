@@ -58,7 +58,7 @@ abstract class BaseApplication : Application() {
         if (debuggable()) {
             var builder = PrettyFormatStrategy.newBuilder()
             builder.methodOffset(5).tag(GlobalConfig.TAG)
-            builder.showThreadInfo(false)
+            builder.showThreadInfo(true)
             Logger.addLogAdapter(AndroidLogAdapter(builder.build()))
             tree = object : Timber.Tree() {
                 override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {

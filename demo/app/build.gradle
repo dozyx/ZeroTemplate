@@ -1,6 +1,9 @@
+import com.gradle.plugin.CustomPluginBuildSrc
+
 apply from: "${rootDir}/buildApp.gradle"
 apply from: "${rootDir}/learn.gradle"
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: CustomPluginBuildSrc
 
 android {
     defaultConfig {
@@ -99,6 +102,8 @@ dependencies {
     implementation Deps.exoplayer
     implementation DepsExoPlayer.okhttp
     implementation Deps.core_ktx
+    implementation Deps.lottie
+    implementation Deps.process_phoenix
 }
 /*
 apply plugin: 'com.snapee.plugin.trace'

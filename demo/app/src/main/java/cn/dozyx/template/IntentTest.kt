@@ -32,7 +32,7 @@ class IntentTest : BaseTestActivity() {
             }
         })
 
-        addAction(object :Action("启动"){
+        addAction(object : Action("启动") {
             override fun run() {
 //                val intentString = "intent://larkgame.com?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;end;"
                 val intentString = "intent://snaptubeapp.com/web?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;S.url=https://www.baidu.com;end;"
@@ -40,7 +40,7 @@ class IntentTest : BaseTestActivity() {
             }
         })
 
-        addAction(object :Action("market"){
+        addAction(object : Action("market") {
             override fun run() {
                 val intentString = "market://details?id=com.xueqiu.android&referrer=utm_source%3Dst"
                 val intent = Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME)
@@ -48,7 +48,7 @@ class IntentTest : BaseTestActivity() {
             }
         })
 
-        addAction(object :Action("ACTION_SEND"){
+        addAction(object : Action("ACTION_SEND") {
             override fun run() {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
@@ -77,6 +77,15 @@ class IntentTest : BaseTestActivity() {
                 val pendingIntent = PendingIntent.getActivity(this@IntentTest, 0,
                         launchIntent, PendingIntent.FLAG_CANCEL_CURRENT)
                 Timber.d("IntentTest.run $pendingIntent")
+            }
+        })
+
+        addAction(object : Action("Start Activity") {
+            override fun run() {
+                val intent = Intent("phoenix.intent.action.LOG_REPORT")
+//                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.putExtra("report_from", "test")
+                startActivity(intent)
             }
         })
     }

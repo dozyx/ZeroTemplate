@@ -411,9 +411,10 @@ class NotificationTest : BaseTestActivity() {
                 title.setSpan(ForegroundColorSpan(color), 2, 6, 0)
 
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-//                        .setSmallIcon(R.drawable.ic_notification_test) // 这个是必须设置的，不设置通知显示不出来。MIUI 上通知没看到这个 icon，模拟器有。显示在左上角和系统状态栏小图标
-                        .setSmallIcon(R.drawable.ic_notification_test)
-//                        .setColor(ContextCompat.getColor(this@NotificationTest, R.color.notification_color))
+                        .setSmallIcon(R.drawable.ic_notification_test) // 这个是必须设置的，不设置通知显示不出来。MIUI 上通知没看到这个 icon，模拟器有。显示在左上角和系统状态栏小图标
+//                        .setSmallIcon(R.drawable.ic_status)
+//                        .setSmallIcon(R.drawable.ic_notification_idlefish)
+                        .setColor(ContextCompat.getColor(this@NotificationTest, R.color.notification_color))
 //                        .setColor(Color.parseColor("#FFFFCD22"))
 //                        .setColor(color)
 //                        .setColorized(true)// 直接设置没看到效果。一般用于某些 style 或前台服务通知

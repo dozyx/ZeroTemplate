@@ -63,6 +63,8 @@ object Deps {
     val tracing = "androidx.tracing:tracing-ktx:${Version.tracing}"
     val exoplayer = "com.google.android.exoplayer:exoplayer:${Version.exoplayer}"
     val core_ktx = "androidx.core:core-ktx:${Version.core_ktx}"
+    val lottie = "com.airbnb.android:lottie:${Version.lottie}"
+    val process_phoenix = "com.jakewharton:process-phoenix:${Version.process_phoenix}"
 }
 
 object DepsEventBus {
@@ -221,7 +223,7 @@ object Version {
     const val okhttp = "3.14.4"
     const val butterknife = "10.1.0"
     const val support = "1.0.0"
-    const val constraintLayout = "2.0.0-rc1"
+    const val constraintLayout = "2.0.4"
     const val multidex = "2.0.1"
     const val convenient_banner = "2.1.5"
     const val loop_view = "0.1.2"
@@ -268,7 +270,7 @@ object Version {
     const val navigation = "2.1.0"
     const val paging = "2.1.0"
     const val immersionbar = "2.3.3"
-    const val room = "2.1.0-alpha07"
+    const val room = "2.2.5"
     const val stetho = "1.5.1"
     const val camerax = "1.0.0-beta03"
     const val percentlayout = "1.0.0"
@@ -287,4 +289,6 @@ object Version {
     const val startup = "1.0.0-alpha02"
     const val tracing = "1.0.0-beta01"
     const val exoplayer = "2.12.1"
+    const val lottie = "3.5.0"
+    const val process_phoenix = "2.0.0"
 }

@@ -4,15 +4,19 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.os.Process
 import androidx.core.app.ActivityCompat
 import androidx.core.app.AppOpsManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
+import cn.dozyx.template.base.Action
 
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.PermissionUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import timber.log.Timber
+import java.io.File
 
 import java.util.Arrays
 
@@ -59,6 +63,21 @@ class PermissionActivity : BaseTestActivity() {
     }
 
     override fun initActions() {
-
+        addAction(object : Action("mkdirs") {
+            override fun run() {
+                val granted = ContextCompat.checkSelfPermission(this@PermissionActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (granted != PackageManager.PERMISSION_GRANTED){
+                    PermissionUtils.launchAppDetailsSettings()
+                    Timber.d("File mkdir goto settings")
+                    return
+                }
+                val file = File(Environment.getExternalStorageDirectory(), "test")
+                if (file.exists()) {
+                    file.delete()
+                }
+                val mkdirResult = file.mkdir()
+                Timber.d("File mkdir result $mkdirResult")
+            }
+        })
     }
 }

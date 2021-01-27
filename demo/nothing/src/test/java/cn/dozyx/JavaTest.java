@@ -38,6 +38,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -53,9 +54,13 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
@@ -125,7 +130,38 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
-<<<<<<< Updated upstream
+    public void testSize() {
+        print(Integer.MAX_VALUE / 1024 / 1024F);
+    }
+
+    @Test
+    public void testPrintStackTraceInUnitTest() {
+        try {
+            String origin = null;
+            origin.length();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 会把错误打印出来，但也会继续往下执行，也就是不会影响单元测试结果
+        }
+        print("pass success");
+    }
+
+    @Test
+    public void testStringDecode() throws UnsupportedEncodingException {
+        String origin = "\\302\\267";
+        print(origin);
+        String asciiString = "\\x27";
+        print(URLDecoder.decode(asciiString, "utf-16"));
+    }
+
+    @Test
+    public void testHttpUrlConnection() throws IOException {
+        URL url = new URL("https://www.youtube.com/results?pbj=1&search_query=Youtube");
+        URLConnection urlConnection = url.openConnection();
+        urlConnection.connect();
+    }
+
+    @Test
     public void testSample() {
         int hitCount = 0;
         int times = 100000;
@@ -137,12 +173,12 @@ public class JavaTest {
         }
         print("1/32: " + 1 / 32F);
         print("采样率: " + hitCount / (float) times);
-=======
-    public void testHttpUrl(){
+    }
+
+    public void testHttpUrl() {
         String url = "https://www.youtube.com/home";
         HttpUrl httpUrl = HttpUrl.parse(url).newBuilder().host("m.youtube.comm").build();
         print(httpUrl.toString());
->>>>>>> Stashed changes
     }
 
     @Test
@@ -179,23 +215,25 @@ public class JavaTest {
     }
 
     @Test
-    public void testClassInit(){
+    public void testClassInit() {
         String clz = InitClass1.class.getSimpleName();// 不会导致 static 内容初始化
 //        new InitClass1();
         print("testClassInit");
     }
 
     @Test
-    public void testExtends(){
+    public void testExtends() {
 
     }
 
     private static class InitClass1 {
-        public static InitClass2 clz2= new InitClass2();
+        public static InitClass2 clz2 = new InitClass2();
+
         static {
             print("InitClass1 static");
         }
-        private InitClass1(){
+
+        private InitClass1() {
             print("InitClass2 constructor");
         }
     }
@@ -204,13 +242,14 @@ public class JavaTest {
         static {
             print("InitClass2 static");
         }
-        private InitClass2(){
+
+        private InitClass2() {
             print("InitClass2 constructor");
         }
     }
 
     @Test
-    public void testOutOfBoundsException(){
+    public void testOutOfBoundsException() {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
@@ -228,12 +267,12 @@ public class JavaTest {
         list.add(3);
         list.add(4);
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == 2){
+            if (list.get(i) == 2) {
 //                list.remove(i);// 这种移除虽然没有异常，但是其实逻辑已经有问题，因为移除之后，后面的 index 会改变，导致下一个元素没有参与到遍历中
             }
         }
         for (Integer integer : list) {
-            if (integer == 2){
+            if (integer == 2) {
                 //迭代过程中移除，抛出异常
 //                list.remove(integer);
             }
@@ -262,13 +301,13 @@ public class JavaTest {
     }
 
     @Test
-    public void testNull(){
+    public void testNull() {
         Object nullObj = null;
         System.out.println("this is " + nullObj);
     }
 
     @Test
-    public void testForLoop(){
+    public void testForLoop() {
         ArrayList<Integer> data = new ArrayList<>();
         data.add(1);
         data.add(2);
@@ -279,7 +318,7 @@ public class JavaTest {
             }
         }*/
         for (Integer i : data) {
-            if (i == 2){
+            if (i == 2) {
                 data.remove(i);
             }
         }
@@ -300,13 +339,14 @@ public class JavaTest {
     }
 
     @Test
-    public void testTableForSize(){
+    public void testTableForSize() {
 //        print(tableSizeFor(0));
         print(1 << 31);
         print(0x80000000);
     }
 
     private static final int MAXIMUM_CAPACITY = 1 << 30;
+
     private static int tableSizeFor(int cap) {
         // cap 是初始容量
         // 返回值作为下一次 resize 的阈值
@@ -327,7 +367,7 @@ public class JavaTest {
     }
 
     @Test
-    public void testGc(){
+    public void testGc() {
         Object object = new Object();
         ReferenceQueue<Object> queue = new ReferenceQueue<>();
         WeakReference<Object> reference = new WeakReference<Object>(object, queue);
@@ -373,18 +413,18 @@ public class JavaTest {
     }
 
     @Test
-    public void testStack(){
+    public void testStack() {
         Stack<Integer> stack = new Stack<>();
         stack.push(1);
         stack.push(2);
         stack.push(3);
-        while (!stack.empty()){
+        while (!stack.empty()) {
             print(stack.pop());
         }
     }
 
     @Test
-    public void testListNode(){
+    public void testListNode() {
         ListNode node = new ListNode(1);
         node.next = new ListNode(2);
         node.next.next = new ListNode(3);
@@ -410,7 +450,7 @@ public class JavaTest {
 
     private void printListNode(ListNode node) {
         ListNode current = node;
-        while (current != null){
+        while (current != null) {
             print(current.val);
             current = current.next;
         }
@@ -426,6 +466,7 @@ public class JavaTest {
     }
 
     private static final Object LOCK = new Object();
+
     @Test
     public void testConcurrentHashMap() throws InterruptedException {
         Executor executor = Executors.newCachedThreadPool();
@@ -468,7 +509,7 @@ public class JavaTest {
     }
 
     @Test
-    public void testMainThread(){
+    public void testMainThread() {
         Executors.newFixedThreadPool(1).execute(new Runnable() {
             @Override
             public void run() {
@@ -528,7 +569,7 @@ public class JavaTest {
 
 
     @Test
-    public void testLinkedList(){
+    public void testLinkedList() {
         LinkedList<Integer> list = new LinkedList<>();
         list.add(1);
         list.add(2);
@@ -600,8 +641,12 @@ public class JavaTest {
 
     @Test
     public void testRegex2() {
-        String pattern = "ExoPlayerWithExtractor[ ]?(2.11.8)";
-        print("ExoPlayerWithExtractor  2.11.8".matches(pattern));
+        String patternStr = "ExoPlayerWithExtractor[ ]?(2.11.8)";
+        print("ExoPlayerWithExtractor  2.11.8".matches(patternStr));
+        String patternString = "data = '\\x22'";
+        String string = "data = '\\x22'";
+        Pattern pattern = Pattern.compile(patternString);
+        print(pattern.matcher(string).find());
     }
 
     @Test
@@ -1234,7 +1279,7 @@ public class JavaTest {
     }
 
     @Test
-    public void testExceptionPrint(){
+    public void testExceptionPrint() {
         Exception cause = new IllegalStateException("this is illeagal state");
         Exception e = new RuntimeException("this is runtime exception", cause);
         print(e);
@@ -1503,7 +1548,7 @@ public class JavaTest {
     }
 
     @Test
-    public void testGenericWildcard(){
+    public void testGenericWildcard() {
         List<A> listA = new ArrayList<>();
         listA.add(new A());
         listA.add(new B());
@@ -1517,9 +1562,14 @@ public class JavaTest {
 
     }
 
-    private class A{}
-    private class B extends A{}
-    private class C extends A{}
+    private class A {
+    }
+
+    private class B extends A {
+    }
+
+    private class C extends A {
+    }
 
     @Test
     public void testGeneric() {
@@ -1859,7 +1909,7 @@ public class JavaTest {
                 new JsonDeserializer<Data>() {
                     @Override
                     public Data deserialize(JsonElement json, Type typeOfT,
-                            JsonDeserializationContext context) throws JsonParseException {
+                                            JsonDeserializationContext context) throws JsonParseException {
                         print("deserialize " + json.toString() + " " + typeOfT.getTypeName());
                         if (json.isJsonObject()) {
                             print("deserialize " + json.toString());
@@ -1877,7 +1927,7 @@ public class JavaTest {
                 }).registerTypeHierarchyAdapter(String.class, new JsonDeserializer<String>() {
             @Override
             public String deserialize(JsonElement json, Type typeOfT,
-                    JsonDeserializationContext context) throws JsonParseException {
+                                      JsonDeserializationContext context) throws JsonParseException {
                 if (json.isJsonPrimitive()) {
                     return json.getAsString();
                 }
@@ -1938,7 +1988,7 @@ public class JavaTest {
     @Test
     public void testGson1() {
         IntArrayData intArrayData = new IntArrayData();
-        intArrayData.data = new int[]{1,2,3};
+        intArrayData.data = new int[]{1, 2, 3};
         print(new Gson().toJson(intArrayData));
         print(new Gson().fromJson("", Student1.class));
     }
@@ -1954,6 +2004,7 @@ public class JavaTest {
         print(new Gson().fromJson(json, Person.class));
         print(System.currentTimeMillis() - start);
     }
+
     @Test
     public void testGson() {
         Gson customGson = new GsonBuilder().registerTypeAdapter(Integer.TYPE,
