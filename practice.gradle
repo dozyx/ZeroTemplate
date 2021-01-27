@@ -2,6 +2,7 @@ class CustomPluginPluginExtension {
     String message = 'from CustomPlugin'
 }
 class CustomPlugin implements Plugin<Project> {
+
     @Override
     void apply(Project project) {
         def extension = project.extensions.create('custom', CustomPluginPluginExtension)//1

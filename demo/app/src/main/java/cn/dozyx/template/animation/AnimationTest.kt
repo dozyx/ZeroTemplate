@@ -8,7 +8,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
-import kotlinx.android.synthetic.main.activity_animation_test.*
+import kotlinx.android.synthetic.main.animation_test.*
 import timber.log.Timber
 
 class AnimationTest : BaseActivity() {
@@ -80,6 +80,6 @@ class AnimationTest : BaseActivity() {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_animation_test
+        return R.layout.animation_test
     }
 }

@@ -1,12 +1,25 @@
 package cn.dozyx.template.provider
 
+import android.database.ContentObserver
 import android.net.Uri
+import android.os.Bundle
+import android.os.Handler
 import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import timber.log.Timber
 
 class ContentProviderTest : BaseTestActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        contentResolver.registerContentObserver(Uri.parse("content://${AUTHORITY}"), false, object : ContentObserver(Handler()) {
+            override fun onChange(selfChange: Boolean) {
+                super.onChange(selfChange)
+                Timber.d("ContentProviderTest.onChange")
+            }
+        })
+    }
     override fun initActions() {
         addAction(object : Action("查询") {
             override fun run() {

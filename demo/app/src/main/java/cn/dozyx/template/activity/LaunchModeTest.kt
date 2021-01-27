@@ -27,6 +27,7 @@ open class LaunchModeTest : BaseTestActivity() {
         installStandardTest()
         installSingleTopTest()
         installSingleTaskTest()
+        installTaskAffinityTest()
 
 
         addAction(object : Action("singleInstance") {
@@ -86,6 +87,16 @@ open class LaunchModeTest : BaseTestActivity() {
             }
         })
 
+    }
+
+    private fun installTaskAffinityTest() {
+        addAction(object : Action("task affinity") {
+            override fun run() {
+                val intent = Intent(this@LaunchModeTest, SingleTaskLaunchModeTestWithTaskAffinity::class.java)
+                intent.flags = FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onNewIntent(intent: Intent?) {

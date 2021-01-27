@@ -45,7 +45,7 @@ class BookContentProvider : ContentProvider() {
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         Timber.d("BookContentProvider.insert ${Thread.currentThread()} $uri")
-        return null
+        return uri
     }
 
     override fun delete(uri: Uri, selection: String?,

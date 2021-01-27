@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import timber.log.Timber;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final String CATEGORY_MY_SAMPLE = "cn.dozyx.zerofate.intent.category.sample";
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-                Log.d(TAG, "onCreate: ");
+                Timber.d("onCreate: " + savedInstanceState);
                 setContentView(R.layout.activity_main);
                 browseListView = findViewById(R.id.main_list);
                 prefixPath = getIntent().getStringExtra(EXTRA_PREFIX_PATH);

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.activity_base_test.*
+import timber.log.Timber
 
 /**
  * 添加按钮及其点击事件，显示日志，添加一个 fragment 页
@@ -34,6 +35,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         button.text = text
         button.textSize = 12f
         button.setOnClickListener {
+            Timber.d("Action execute: $text")
             task.run()
         }
         flex_box.addView(button)

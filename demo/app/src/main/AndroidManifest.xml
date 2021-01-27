@@ -848,6 +848,8 @@
         <activity android:name=".transition.TransitionTest1" />
         <activity
             android:name=".transition.TransitionTest2"
+            android:launchMode="singleTask"
+            android:taskAffinity=".task"
             android:theme="@style/TransitionTheme" />
         <activity
             android:name=".keyboard.KeyBoardTest"
@@ -1179,7 +1181,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
 
@@ -1223,11 +1225,65 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.SimpleAdActivity" />
+        <activity
+            android:name=".animation.PropertyAnimator"
+            android:label="Animator/Property">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".animation.MotionLayoutTest"
+            android:label="Animator/MotionLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.anim.LottieTest"
+            android:label="Animator/Lottie">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.ViewTest"
+            android:label="View/View">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.ThirdAppIntentFilterTest">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".message.BroadcastTest"
+            android:label="Message/Broadcast" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".system.SystemTest"
+            android:label="System/Restart" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

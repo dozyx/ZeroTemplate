@@ -75,4 +75,20 @@
 
 >>>>>>> Stashed changes
 
+    <Space
+        android:id="@+id/space_negative_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--    约束布局不支持负的 margin-->
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-24dp"
+        android:text="222222"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
