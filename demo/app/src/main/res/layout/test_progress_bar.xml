@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_indeterminate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:indeterminateDrawable="@drawable/progress"
+        android:indeterminateTint="@color/progress"
+        android:indeterminate="false"
+        android:indeterminateTintMode="src_in"
+        android:progress="30"
+        android:progressDrawable="@drawable/progress" />
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/mpb"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/progress_bar_bg"
+        android:indeterminate="false"
+        android:progress="30"
+        android:indeterminateOnly="false"
+        app:mpb_setBothDrawables="true"
+        app:mpb_indeterminateTint="@color/progress"
+        app:mpb_progressStyle="horizontal"
+        app:mpb_progressTint="@color/progress"
+        app:mpb_showProgressBackground="false"
+        app:mpb_useIntrinsicPadding="false" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="30"
+        app:indicatorColor="#FF3E8BFF"
+        app:trackColor="#3DB2B2B2"
+        app:trackCornerRadius="2dp"
+        app:trackThickness="2dp" />
+</LinearLayout>

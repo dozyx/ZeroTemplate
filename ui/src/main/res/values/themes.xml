@@ -20,4 +20,8 @@
 
     </style>
 
+    <style name="ZeroTheme.Splash">
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:ignore="NewApi">shortEdges</item>
+    </style>
+
 </resources>

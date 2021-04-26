@@ -6,27 +6,45 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.DIRECTORY_PICTURES
+import android.os.StatFs
 import android.os.storage.StorageManager
 import android.os.storage.StorageVolume
+import android.text.TextUtils
 import androidx.core.content.ContextCompat
+import cn.dozyx.core.utli.system.StorageUtils
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.SDCardUtils
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 import java.util.*
 
 class FileActivity : BaseTestActivity() {
     private val REQUEST_CODE_SD_CARD = 42
     override fun initActions() {
+        logStorageInfo()
+
         addAction(object : Action("volumns") {
             override fun run() {
                 val storageManager = getSystemService(Context.STORAGE_SERVICE) as StorageManager
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     val storageVolumes = storageManager.storageVolumes
-                    Timber.d("FileActivity.run $storageVolumes")
+                    Timber.d("all storageVolumes: $storageVolumes")
+                    storageVolumes.forEach {
+                        Timber.d("storageVolume: $it")
+                        // StorageVolume#getPath 不是公开方法
+                    }
+                }
+            }
+        })
+
+        addAction(object : Action("volumns reflect") {
+            override fun run() {
+                val mountedVolumeList = StorageUtils.getMountedVolumeList(this@FileActivity)
+                mountedVolumeList.forEach {
+                    Timber.d("storageVolume: $it")
                 }
             }
         })
@@ -41,6 +59,23 @@ class FileActivity : BaseTestActivity() {
                     Timber.d("FileActivity.run success")
                 } catch (e: Exception) {
                     Timber.e(e)
+                }
+            }
+        })
+
+        addAction(object : Action("write external") {
+            override fun run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val mediaDirs = externalMediaDirs
+                    mediaDirs.forEach {
+                        val tempFile = File.createTempFile("${System.currentTimeMillis()}", ".txt", it)
+                        try {
+                            tempFile.createNewFile()
+                            Timber.d("create tmp success: ${tempFile.absolutePath}")
+                        }catch (e:Exception){
+                            Timber.e("create tmp failed ${tempFile.absolutePath}: $e")
+                        }
+                    }
                 }
             }
         })
@@ -60,7 +95,11 @@ class FileActivity : BaseTestActivity() {
                         }
                     }
                     sdVolume?.let {
-                        startActivityForResult(it.createAccessIntent(null), REQUEST_CODE_SD_CARD)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            startActivityForResult(it.createOpenDocumentTreeIntent(), REQUEST_CODE_SD_CARD)
+                        } else {
+                            startActivityForResult(it.createAccessIntent(null), REQUEST_CODE_SD_CARD)
+                        }
                     }
                 }
             }
@@ -146,6 +185,105 @@ class FileActivity : BaseTestActivity() {
                 Timber.d("test io end")
             }
         })
+
+        addAction(object : Action("test Not Exist File") {
+            override fun run() {
+                val file = File(Environment.getExternalStorageDirectory(), "test1008")
+                // canRead() 和 canWrite() 在文件存在的情况下才可能返回 true
+                Timber.d("test Not Exist File \n" +
+                        "exist: ${file.exists()} \n" + "canRead: ${file.canRead()} canWrite: ${file.canWrite()}")
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val path = File(externalMediaDirs[0].absolutePath, "test")
+                    val statFs = StatFs(path.absolutePath)
+                    Timber.d("exist: ${path.exists()} ${statFs.availableBlocksLong}")
+                }
+            }
+        })
+
+        addAction(object : Action("nothing") {
+            override fun run() {
+                val path: String? = null
+                val file = File("")
+                file.mkdir()
+            }
+        })
+        addAction(object : Action("test getExternalMediaDirs") {
+            override fun run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    externalMediaDirs.forEach {
+                        if (it == null) {
+                            return@forEach
+                        }
+                        if (!it.exists()) {
+//                            it.mkdirs()
+                        }
+                        Timber.d("test getExternalMediaDirs \n%s \n%s \n%s \n%s",
+                                "path: ${it.absolutePath}",
+                                "state:${Environment.getExternalStorageState(it)}",
+                                "available: ${getAvailable(it.absolutePath)}",
+                                "removable: ${Environment.isExternalStorageRemovable(it)}")
+                    }
+                }
+            }
+        })
+
+        addAction(object : Action("可用空间") {
+            override fun run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val externalMediaDir = externalMediaDirs[0]
+                    if (!externalMediaDir.exists()){
+                        externalMediaDir.mkdirs()
+                    }
+                    var dir = externalMediaDir
+                    while (dir != null){
+                        Timber.d("${dir.absolutePath} 可用空间: ${FileUtils.getFsAvailableSize(dir.absolutePath)}\n freeSpace ${dir.freeSpace}")
+                        dir = dir.parentFile
+
+                        val file = File(Environment.getExternalStorageDirectory(), "14.txt")
+                        if (!file.exists()){
+                            file.createNewFile()
+                        }
+                        // StatFs 获取可用空间大小要求传入的路径必须是存在的，可以是文件夹，也可以是文件
+                        Timber.d("${file.absolutePath} ${file.exists()} 可用空间: ${FileUtils.getFsAvailableSize(file.absolutePath)}\n freeSpace ${file.freeSpace}")
+                    }
+                }
+            }
+        })
+
+        addAction(object : Action("File API") {
+            override fun run() {
+                val file = File(Environment.getDownloadCacheDirectory(), "1.txt")
+                Timber.d("file.name: ${file.name}") // 会包含扩展名
+                Timber.d("file.name: ${File("${Environment.getDownloadCacheDirectory()}${File.separator}").name}")
+            }
+        })
+    }
+
+    private fun logStorageInfo() {
+        addAction(object : Action("log info") {
+            override fun run() {
+                // 格式化之后 SD 卡名称会变
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val mediaDirs = externalMediaDirs
+                    mediaDirs.forEach {
+                        Timber.d("mediaDir : ${it.absolutePath}")
+                    }
+                }
+            }
+        })
+    }
+
+    fun getAvailable(path: String): Long {
+        if (TextUtils.isEmpty(path)) {
+            return -1
+        }
+        val file = File(path)
+        if (!file.exists()) {
+            return -1
+        }
+        val statFs = StatFs(path)
+        return statFs.blockSizeLong * statFs.availableBlocksLong
     }
 
     @Synchronized
@@ -232,7 +370,7 @@ class FileActivity : BaseTestActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_SD_CARD) {
-            Timber.d("FileActivity.onActivityResult ${data?.data}")
+            Timber.d("FileActivity.onActivityResult $resultCode ${data?.data}")
         }
     }
 }

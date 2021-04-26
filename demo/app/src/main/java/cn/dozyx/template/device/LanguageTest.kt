@@ -1,15 +1,20 @@
 package cn.dozyx.template.device
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.LocaleList
 import android.webkit.WebView
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.os.LocaleListCompat
 import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.LanguageUtils
 import timber.log.Timber
 import java.util.*
 
@@ -28,14 +33,16 @@ class LanguageTest : BaseTestActivity() {
                 // LocaleList.getDefault()：
                 // 包含 Locale.getDefault() 返回的 locale，但不确保在第一位。
                 // Locale.setDefault() 被调用会导致 localelist 改变
-                Timber.d("LocaleList.getDefault() ${LocaleList.getDefault()}")
-
-                Timber.d("applicationContext.resources.configuration.locales: ${applicationContext.resources.configuration.locales}")
-                Timber.d("resources.configuration.locale: ${resources.configuration.locale}")
-                Timber.d("resources.configuration.locales: ${resources.configuration.locales}")
-                Timber.d("Resources.getSystem().configuration.locale ${Resources.getSystem().configuration.locale}")
-                Timber.d("Resources.getSystem().configuration.locales ${Resources.getSystem().configuration.locales}")
-                Timber.d("LocaleListCompat.getAdjustedDefault() ${LocaleListCompat.getAdjustedDefault()}")
+                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    Timber.d("LocaleList.getDefault() ${LocaleList.getDefault()}\n" +
+                            "applicationContext.resources.configuration.locales: ${applicationContext.resources.configuration.locales}\n" +
+                            "resources.configuration.locale: ${resources.configuration.locale}\n" +
+                            "resources.configuration.locales: ${resources.configuration.locales}\n" +
+                            "Resources.getSystem().configuration.locale ${Resources.getSystem().configuration.locale}\n" +
+                            "Resources.getSystem().configuration.locales ${Resources.getSystem().configuration.locales}\n" +
+                            "LocaleListCompat.getAdjustedDefault() ${LocaleListCompat.getAdjustedDefault()}" +
+                            "\nresources.configuration.uiMode ${resources.configuration.uiMode }")
+                }
                 // 这个方法返回的应该是系统和应用支持 locale 的并集，AssetManager 有一个 api getNonSystemLocales() 返回的应该只包含应用支持的 locale，不过这个 api 是 hide 的
 //                Timber.d("resources.assets.locales ${Arrays.toString(resources.assets.locales)}")
             }
@@ -49,7 +56,8 @@ class LanguageTest : BaseTestActivity() {
 //                oldConfig.locale = null
 //                oldConfig.setLocales(null)
 //                oldConfig = Configuration()
-//                resources.updateConfiguration(oldConfig, resources.displayMetrics)
+//                createConfigurationContext(oldConfig)
+                resources.updateConfiguration(oldConfig, resources.displayMetrics)
                 applicationContext.resources.updateConfiguration(oldConfig, resources.displayMetrics)
 
                 Timber.d("LanguageTest.run ${Locale.getDefault().language}")
@@ -98,9 +106,57 @@ class LanguageTest : BaseTestActivity() {
         addAction(object : Action("webview") {
             override fun run() {
                 // 会导致多语言失效
+                // 在初始化完 WebView 之后再设置一次语言的话可以正常
+                val start = System.currentTimeMillis()
                 WebView(this@LanguageTest)
+                Timber.d("new WebView(): ${(System.currentTimeMillis() - start)}")
             }
         })
 
+        addAction(object : Action("destory webview") {
+            override fun run() {
+                WebView(this@LanguageTest).destroy()
+            }
+        })
+
+        addAction(object : Action("override") {
+            override fun run() {
+                var oldConfig = resources.configuration
+                oldConfig.locale = Locale("pt")
+                applyOverrideConfiguration(oldConfig)
+            }
+        })
+
+        addAction(object : Action("Blankj") {
+            override fun run() {
+                LanguageUtils.applyLanguage(Locale("pt"))
+            }
+        })
+
+        addAction(object : Action("ui mode") {
+            override fun run() {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        })
+
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Timber.d("LanguageTest.onConfigurationChanged")
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        /*val context = LanguageUtil.attachBaseContext(newBase, 1)
+        val configuration = context.resources.configuration
+        val wrappedContext: ContextThemeWrapper = object : ContextThemeWrapper(context,
+                R.style.Theme_AppCompat_Empty) {
+            override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
+                overrideConfiguration?.setTo(configuration)
+                super.applyOverrideConfiguration(overrideConfiguration)
+            }
+        }
+        super.attachBaseContext(wrappedContext)*/
+        super.attachBaseContext(newBase)
     }
 }

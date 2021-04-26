@@ -13,7 +13,7 @@ object ClassPath {
 object Android {
     val minSdkVersion = 19
     val minDebugSdkVersion = 21
-    val targetSdkVersion = 29
+    val targetSdkVersion = 30
     val compileSdkVersion = 30
 }
 
@@ -65,6 +65,10 @@ object Deps {
     val core_ktx = "androidx.core:core-ktx:${Version.core_ktx}"
     val lottie = "com.airbnb.android:lottie:${Version.lottie}"
     val process_phoenix = "com.jakewharton:process-phoenix:${Version.process_phoenix}"
+    val gp_auth = "com.google.android.gms:play-services-auth:${Version.gp_auth}"
+    val tooltip = "com.github.sephiroth74:android-target-tooltip:${Version.tooltip}"
+    val materialprogressbar = "me.zhanghai.android.materialprogressbar:library:${Version.materialprogressbar}"
+    val notchScreenTool = "com.github.smarxpan:NotchScreenTool:${Version.notchScreenTool}"
 }
 
 object DepsEventBus {
@@ -250,7 +254,7 @@ object Version {
     const val timber = "4.7.1"
     const val logger = "2.2.0"
     const val rxpermissions = "0.10.2"
-    const val utilcode = "1.24.3"
+    const val utilcode = "1.30.5"
     const val flexbox = "1.1.0"
     const val mmkv = "1.0.18"
     // 数据库/SharedPreference 调试库，可直接在网页上查看保存的数据。https://github.com/amitshekhariitbhu/Android-Debug-Database
@@ -264,7 +268,7 @@ object Version {
     const val appcompat = "1.1.0-rc01"
     const val androiddevmetrics = "0.6"
     const val koin = "1.0.2"
-    const val material = "1.1.0-beta02"
+    const val material = "1.3.0"
     const val rxbinding = "3.1.0"
     const val annotations = "17.0.0"
     const val navigation = "2.1.0"
@@ -291,4 +295,8 @@ object Version {
     const val exoplayer = "2.12.1"
     const val lottie = "3.5.0"
     const val process_phoenix = "2.0.0"
+    const val gp_auth = "19.0.0"
+    const val tooltip = "2.0.4"
+    const val materialprogressbar = "1.6.1"
+    const val notchScreenTool = "0.0.1"
 }

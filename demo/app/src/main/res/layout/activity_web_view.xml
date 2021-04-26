@@ -1,21 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="back" />
+        app:alignContent="flex_start"
+        app:alignItems="flex_start"
+        app:flexWrap="wrap">
 
-    <Button
-        android:id="@+id/btn_user_agent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="user agent" />
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="back" />
+
+        <Button
+            android:id="@+id/btn_user_agent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user agent" />
+
+        <Button
+            android:id="@+id/btn_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pause" />
+
+        <Button
+            android:id="@+id/btn_resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="resume" />
+        <Button
+            android:id="@+id/btn_on_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="onPause" />
+
+        <Button
+            android:id="@+id/btn_on_resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="onResume" />
+
+        <Button
+            android:id="@+id/btn_reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="reload" />
+
+        <Button
+            android:id="@+id/btn_stop_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stop load" />
+
+        <Button
+            android:id="@+id/btn_back_and_reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="back &amp; reload" />
+    </com.google.android.flexbox.FlexboxLayout>
 
     <FrameLayout
         android:id="@+id/fl_web"

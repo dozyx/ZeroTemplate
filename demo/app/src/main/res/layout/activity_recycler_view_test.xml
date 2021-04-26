@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.dozyx.template.view.recyclerview.RecyclerViewTestActivity">
+    tools:context="cn.dozyx.template.view.recyclerview.RecyclerViewTest">
 
     <Button
         android:id="@+id/btn_change_data"
@@ -17,6 +17,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="notify" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add" />
+
+    <Button
+        android:id="@+id/btn_remove_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="remove range" />
 
     <cn.dozyx.template.view.recyclerview.MyRecyclerView
         android:id="@+id/rv_common"

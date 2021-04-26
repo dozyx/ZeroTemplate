@@ -4,9 +4,12 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import cn.dozyx.core.base.BaseFragment
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.IntentUtils
+import kotlinx.android.synthetic.main.animation_test.*
+import kotlinx.android.synthetic.main.fragment_edit.*
 import timber.log.Timber
 
 /**
@@ -14,6 +17,8 @@ import timber.log.Timber
  * @date 2020/4/3
  */
 class IntentTest : BaseTestActivity() {
+
+    lateinit var editFragment: EditFragment
 
     companion object {
         const val URI_INTENT =
@@ -52,7 +57,9 @@ class IntentTest : BaseTestActivity() {
             override fun run() {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
-                startActivity(Intent.createChooser(intent, "测试"))
+                intent.setPackage("com.snaptube.premium")
+                intent.putExtra(Intent.EXTRA_TEXT, "https://youtu.be/E3RBFhyjjqU")
+                startActivity(intent)
                 val resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
                 resolveInfos.forEachIndexed { index, resolveInfo ->
                     Timber.d("IntentTest.run $index $resolveInfo")
@@ -88,6 +95,37 @@ class IntentTest : BaseTestActivity() {
                 startActivity(intent)
             }
         })
+
+        addAction(object : Action("Edit Intent") {
+            override fun run() {
+                val intent = Intent.parseUri(editFragment.getInput(), Intent.URI_INTENT_SCHEME)
+                try {
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
+            }
+        })
+
+        addAction(object : Action("print") {
+            override fun run() {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://static.snaptube.in/snaptube/mothersday2021/image_1.png")
+                Timber.d(intent.toUri(Intent.URI_INTENT_SCHEME))
+                startActivity(intent)
+            }
+        })
+        editFragment = EditFragment()
+        addFragment(editFragment)
     }
 
+}
+
+class EditFragment : BaseFragment() {
+    fun getInput(): String {
+        edit.text ?: return ""
+        return edit.text.toString()
+    }
+
+    override fun getLayoutId() = R.layout.fragment_edit
 }
