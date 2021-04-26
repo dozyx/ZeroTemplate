@@ -4,6 +4,7 @@ package cn.dozyx;
 import static cn.dozyx.LogUtils.print;
 
 import android.annotation.TargetApi;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -112,6 +113,7 @@ import javassist.CtConstructor;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import javassist.bytecode.AttributeInfo;
+import okhttp3.HttpUrl;
 
 /**
  * 测试 java 相关代码
@@ -123,6 +125,7 @@ import javassist.bytecode.AttributeInfo;
 public class JavaTest {
 
     @Test
+<<<<<<< Updated upstream
     public void testSample() {
         int hitCount = 0;
         int times = 100000;
@@ -134,6 +137,12 @@ public class JavaTest {
         }
         print("1/32: " + 1 / 32F);
         print("采样率: " + hitCount / (float) times);
+=======
+    public void testHttpUrl(){
+        String url = "https://www.youtube.com/home";
+        HttpUrl httpUrl = HttpUrl.parse(url).newBuilder().host("m.youtube.comm").build();
+        print(httpUrl.toString());
+>>>>>>> Stashed changes
     }
 
     @Test
@@ -587,6 +596,12 @@ public class JavaTest {
         Matcher queryParamMatcher = PARAM_URL_REGEX.matcher("{aa}");
         print(queryParamMatcher.matches());
         print(queryParamMatcher.group(0));
+    }
+
+    @Test
+    public void testRegex2() {
+        String pattern = "ExoPlayerWithExtractor[ ]?(2.11.8)";
+        print("ExoPlayerWithExtractor  2.11.8".matches(pattern));
     }
 
     @Test

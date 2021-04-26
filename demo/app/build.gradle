@@ -98,6 +98,7 @@ dependencies {
 //    compile 'com.android.tools.build:gradle:3.5.2'// 这个版本跟 androidx 冲突，会导致项目没办法运行，但 sync 正常。。。
     implementation Deps.exoplayer
     implementation DepsExoPlayer.okhttp
+    implementation Deps.core_ktx
 }
 /*
 apply plugin: 'com.snapee.plugin.trace'

@@ -9,15 +9,15 @@ import kotlinx.android.synthetic.main.activity_surface.*
 import timber.log.Timber
 
 class SurfaceViewActivity : BaseActivity(), SurfaceHolder.Callback {
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         Timber.d("SurfaceViewActivity.surfaceChanged")
     }
 
-    override fun surfaceDestroyed(holder: SurfaceHolder?) {
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
         Timber.d("SurfaceViewActivity.surfaceDestroyed")
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder?) {
+    override fun surfaceCreated(holder: SurfaceHolder) {
         Timber.d("SurfaceViewActivity.surfaceCreated")
     }
 

@@ -125,20 +125,20 @@ class CameraTextureActivity : AppCompatActivity(), TextureView.SurfaceTextureLis
         return -1
     }
 
-    override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {
+    override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
         LogUtil.d("CameraTextureActivity.onSurfaceTextureSizeChanged: ")
     }
 
-    override fun onSurfaceTextureUpdated(surface: SurfaceTexture?) {
+    override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
         LogUtil.d("CameraTextureActivity.onSurfaceTextureUpdated: ")
     }
 
-    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture?): Boolean {
+    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
         LogUtil.d("CameraTextureActivity.onSurfaceTextureDestroyed: ")
         return true
     }
 
-    override fun onSurfaceTextureAvailable(surface: SurfaceTexture?, width: Int, height: Int) {
+    override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
         LogUtil.d("CameraTextureActivity.onSurfaceTextureAvailable: ")
     }
 }

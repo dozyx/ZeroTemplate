@@ -83,15 +83,15 @@ class CameraSurfaceViewActivity : AppCompatActivity() {
     private fun initSurface() {
         holder = surface_preview.holder.apply {
             addCallback(object : SurfaceHolder.Callback {
-                override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+                override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
                     LogUtil.d("CameraSurfaceViewActivity.surfaceChanged: ")
                 }
 
-                override fun surfaceDestroyed(holder: SurfaceHolder?) {
+                override fun surfaceDestroyed(holder: SurfaceHolder) {
                     LogUtil.d("CameraSurfaceViewActivity.surfaceDestroyed: ")
                 }
 
-                override fun surfaceCreated(holder: SurfaceHolder?) {
+                override fun surfaceCreated(holder: SurfaceHolder) {
                     LogUtil.d("CameraSurfaceViewActivity.surfaceCreated: ")
                 }
             })

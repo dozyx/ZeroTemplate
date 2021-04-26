@@ -43,7 +43,7 @@ abstract class LifeCycleActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         Timber.d("LifeCycleActivity.onRestoreInstanceState")
     }

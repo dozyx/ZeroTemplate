@@ -270,7 +270,7 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
         }
     }
 
-    override fun getActiveNetworkInfo(): NetworkInfo {
+    override fun getActiveNetworkInfo(): NetworkInfo? {
         val connectivityManager = getSystemService(
                 Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
