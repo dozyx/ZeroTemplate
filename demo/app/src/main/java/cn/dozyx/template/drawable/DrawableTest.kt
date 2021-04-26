@@ -2,7 +2,6 @@ package cn.dozyx.template.drawable
 
 import android.content.Context
 import android.graphics.*
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.AttributeSet
@@ -40,7 +39,7 @@ class DrawableTest : BaseActivity() {
 
 class DrawableView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     //    val drawable = ColorDrawable(Color.RED)
-    val drawable = MeshDrawable()
+    val drawable = MeshDrawable()// 网格
 
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
@@ -115,5 +114,20 @@ class MeshDrawable : Drawable() {
 
     override fun getColorFilter(): ColorFilter? {
         return paint.colorFilter
+    }
+}
+
+class CustomDrawable : Drawable() {
+    override fun draw(canvas: Canvas) {
+    }
+
+    override fun setAlpha(alpha: Int) {
+    }
+
+    override fun setColorFilter(colorFilter: ColorFilter?) {
+    }
+
+    override fun getOpacity(): Int {
+        return PixelFormat.OPAQUE
     }
 }
