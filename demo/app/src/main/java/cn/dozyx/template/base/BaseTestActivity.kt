@@ -83,6 +83,14 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         fragmentTransaction.commit()
     }
 
+    protected fun addFragment(tag: String, fragment: Fragment, addToStack: Boolean) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction().add(frame_container.id, fragment, tag)
+        if (addToStack) {
+            fragmentTransaction.addToBackStack("").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+        }
+        fragmentTransaction.commit()
+    }
+
     protected fun replaceFragment(fragment: Fragment, addToStack: Boolean) {
         val fragmentTransaction = supportFragmentManager.beginTransaction().replace(frame_container.id, fragment)
         if (addToStack) {

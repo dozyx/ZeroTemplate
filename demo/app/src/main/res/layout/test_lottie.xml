@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,11 +8,51 @@
     <Button
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="start" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancel" />
+
+    <Button
+        android:id="@+id/btn_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="drawable" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_view"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerInside"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/test_ripple"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/live_chat_menu"
+        app:lottie_scale="0.5" />
+    <!--  lottie_scale 计算：
+          原始 ImageView 为 48dp，drawable 为 24 dp
+          设计提供的 lottie 的 drawable 为 60，里面的 image 为 48 dp
+          24 / 48 = 0.5 -->
+
+    <ImageView
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/test_ripple"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/feedback" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="center"
+        app:srcCompat="@drawable/feedback" />
 
 </LinearLayout>

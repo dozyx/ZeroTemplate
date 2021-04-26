@@ -4,6 +4,7 @@ import static cn.dozyx.LogUtils.print;
 
 import android.annotation.SuppressLint;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -33,6 +34,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -53,6 +55,35 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
+    public void testExceptionOnNext() {
+        Observable.just(1).doOnNext(integer -> {
+            print("doOnNext");
+            throw new NullPointerException();
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NotNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NotNull Integer integer) {
+                print("onNext1");
+                throw new NullPointerException();
+            }
+
+            @Override
+            public void onError(@NotNull Throwable e) {
+                print("onError " + e);
+            }
+
+            @Override
+            public void onComplete() {
+                print("onComplete");
+            }
+        });
+    }
+
+    @Test
     public void testDefaultIfEmpty() {
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
@@ -64,7 +95,7 @@ public class RxJavaTest {
     }
 
     @Test
-    public void testMultiObservers(){
+    public void testMultiObservers() {
         Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Exception {
@@ -231,6 +262,12 @@ public class RxJavaTest {
         subscribe2.dispose();// 当所有订阅者都取消了订阅时，将取消数据发送
 //        publish.subscribe(getConsumer(3));// 接收到的是从开始发送的数据
         sleep(3);
+    }
+
+    @Test
+    public void testCount() {
+        // 返回的是 Single，也就是只发送最后的总数
+        Single<Long> count = getObservable(1, 2, 3).count();
     }
 
     @Test
@@ -423,6 +460,18 @@ public class RxJavaTest {
                 return s + s2;
             }
         }).subscribe(sMaybeObserver);
+    }
+
+    @Test
+    public void testScan() {
+        Observable<String> observable = getStringObservable();
+        observable.scan(0, new BiFunction<Integer, String, Integer>() {
+            @NonNull
+            @Override
+            public Integer apply(@NonNull Integer integer, @NonNull String s) throws Exception {
+                return integer + 1;
+            }
+        }).subscribe(observer);
     }
 
     private Observer sObserver = new Observer() {

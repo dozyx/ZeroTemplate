@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.PermissionUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import timber.log.Timber
 import java.io.File
+import java.io.RandomAccessFile
 
 import java.util.Arrays
 
@@ -25,6 +26,23 @@ class PermissionActivity : BaseTestActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addButton("定位", Runnable { requestLocationPermission() })
+        addButton("存储权限", Runnable {
+            val rxPermission = RxPermissions(this)
+            rxPermission
+                    .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe {
+                        try {
+//                            val dir = "${ContextCompat.getExternalFilesDirs(this, null)[0].absoluteFile}"
+                            val dir = "${Environment.getExternalStorageDirectory().absoluteFile}"
+
+                            val filePath = "${dir}${File.separator}15\n1.txt"
+                            Timber.d("$filePath exist: ${File(filePath).exists()}")
+                            RandomAccessFile(filePath, "rw")// targetSdkVersion 23，在 Android11 设备上，向外部存储写入带换行符号文件名的文件会出现异常。如果写入的目录为应用的专属目录会正常。
+                        } catch (e: Exception) {
+                            Timber.e(e)
+                        }
+                    }
+        })
     }
 
     override fun onResume() {
@@ -66,7 +84,7 @@ class PermissionActivity : BaseTestActivity() {
         addAction(object : Action("mkdirs") {
             override fun run() {
                 val granted = ContextCompat.checkSelfPermission(this@PermissionActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                if (granted != PackageManager.PERMISSION_GRANTED){
+                if (granted != PackageManager.PERMISSION_GRANTED) {
                     PermissionUtils.launchAppDetailsSettings()
                     Timber.d("File mkdir goto settings")
                     return

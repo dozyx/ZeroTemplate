@@ -15,6 +15,35 @@ import kotlin.concurrent.thread
 class KotlinTest {
 
     @Test
+    fun testBit() {
+        val number = 1
+        val status = 0
+        print(status and 1 and number.inv())
+
+    }
+
+    @Test
+    fun testNullCheck() {
+        var list: ArrayList<Int>? = null
+        list = ArrayList()
+        list.add(1)
+//        print(list?.isNotEmpty() != true)
+        print(list.isNullOrEmpty())
+    }
+
+    @Test
+    fun testInfix() {
+        val ab = A() to B()
+        ab.first
+        ab.second
+    }
+
+    infix fun A.to(b: B): Pair<A, B> = Pair(this, b)
+
+    class A
+    class B
+
+    @Test
     fun testBy() {
 
     }

@@ -4,12 +4,10 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.view.WindowManager
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ScreenUtils
-import com.blankj.utilcode.util.ViewUtils
 import timber.log.Timber
 
 class WindowTest : BaseTestActivity() {
@@ -54,6 +52,57 @@ class WindowTest : BaseTestActivity() {
         // 分屏会导致 screen 坐标变化，miui 的小窗不会
         window.decorView.getLocationOnScreen(locations)
         Timber.d("screen: ${locations[0]} ${locations[1]}")
+      }
+    })
+
+    addAction(object : Action("full screen") {
+      override fun run() {
+//        NotchScreenManager.getInstance().setDisplayInNotch(this@WindowTest)
+
+        // 刘海屏需要另外的处理 https://www.jianshu.com/p/2b8db60ba8df
+        window.setFlags(
+          WindowManager.LayoutParams.FLAG_FULLSCREEN,
+          WindowManager.LayoutParams.FLAG_FULLSCREEN)// 这种方式布局不会绘制到状态栏中
+
+        /*window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)*/
+
+        // android 11 使用 WindowInsetsController
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+          window.setDecorFitsSystemWindows(false)
+          window.insetsController?.hide(WindowInsets.Type.statusBars())
+          // hide 之后如何显示状态栏
+          window.insetsController?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
+        }*/
+
+      }
+    })
+
+    addAction(object : Action("CUTOUT") {
+      override fun run() {
+        val window = window
+        if (window != null) {
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val layoutParams = window.attributes
+            // 不适配异形屏的话，在设置全屏时，状态栏还是显示不了内容
+            layoutParams.layoutInDisplayCutoutMode =
+              WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            window.attributes = layoutParams
+          }
+          window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+      }
+    })
+
+    addAction(object : Action("remove full screen") {
+      override fun run() {
+        val window = window
+        window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
       }
     })
 

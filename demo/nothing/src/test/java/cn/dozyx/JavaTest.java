@@ -58,6 +58,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -102,6 +103,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.meta.When;
+
 import cn.dozyx.core.log.Sampler;
 import cn.dozyx.core.utli.TimeTracker;
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
@@ -128,6 +131,28 @@ import okhttp3.HttpUrl;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testCeil() {
+        print(Math.ceil(0.1));
+        print(Math.ceil(0.5));
+        print(Math.ceil(0.6));
+    }
+
+    @Test
+    public void testWhile() {
+        int i = 0;
+        while (i < 0) {
+            print("i: " + i);
+            i++;
+        }
+
+        int j = 0;
+        do {
+            print("j: " + j);
+            j++;
+        } while (j < 0);
+    }
 
     @Test
     public void testSize() {
@@ -581,7 +606,8 @@ public class JavaTest {
     @Test
     public void testAtomic() {
         AtomicInteger integer = new AtomicInteger();
-        print(integer.compareAndSet(1, 1));
+        print(integer.get());// 默认值为 0
+        print(integer.compareAndSet(1, 1));// 如果当前值与 expect 值一直，则设置为更新值，并返回 true
         print(integer.get());
         print(integer.compareAndSet(0, 2));
         print(integer.get());
@@ -1010,6 +1036,13 @@ public class JavaTest {
     }
 
     @Test
+    public void testThreadIntercept2() {
+        Thread thread = new Thread(() -> sleep(1000));
+        thread.start();
+        thread.interrupt();// sleep 等状态下调用会抛出 InterruptedException
+    }
+
+    @Test
     public void testContextClassLoader() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -1279,11 +1312,15 @@ public class JavaTest {
     }
 
     @Test
-    public void testExceptionPrint() {
+    public void testExceptionPrint() throws Exception {
         Exception cause = new IllegalStateException("this is illeagal state");
-        Exception e = new RuntimeException("this is runtime exception", cause);
-        print(e);
-        print(e.getCause());
+        Exception e = new IllegalStateException("this is illeagal state");
+        e = new RuntimeException("this is runtime exception1", e);
+        e = new RuntimeException("this is runtime exception2", e);
+        e = new RuntimeException("this is runtime exception3", e);
+        throw e;
+//        print(e);
+//        print(e.getCause());
     }
 
     private static void uncheckedException() {
@@ -1483,9 +1520,7 @@ public class JavaTest {
 
     @Test
     public void testFoo() {
-        String url = "https://www.baidu.com/index";
-        print(url.substring(url.lastIndexOf("/")));
-        int i = 1000 * 60 * 60 * 2;
+        print(new Date(1619060890000L));
     }
 
     @Test

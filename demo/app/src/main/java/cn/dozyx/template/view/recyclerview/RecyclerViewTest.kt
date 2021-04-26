@@ -18,7 +18,7 @@ import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RecyclerViewTestActivity : BaseActivity() {
+class RecyclerViewTest : BaseActivity() {
 
     override fun getLayoutId() = R.layout.activity_recycler_view_test
 
@@ -27,17 +27,17 @@ class RecyclerViewTestActivity : BaseActivity() {
         return false
     }
 
-    private lateinit var adapter :QuickAdapter<String>
+    private lateinit var adapter: QuickAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rv_common.layoutManager = getLayoutManager(LAYOUT_LINEAR)
         initItemDecoration()
-        Handler().postDelayed({
+//        Handler().postDelayed({
             adapter = ContentAdapter()
             adapter.setData(newDatas())
             rv_common.adapter = adapter
-        }, 1000)
+//        }, 1000)
         initItemTouch()
         initEvent()
         rv_common.viewTreeObserver.addOnGlobalLayoutListener {
@@ -47,6 +47,48 @@ class RecyclerViewTestActivity : BaseActivity() {
             // 触发相关源码 ViewRootImpl#performTraversals()
             Timber.d("RecyclerViewTestActivity.onCreate onGlobalLayout ${rv_common.childCount}")
         }
+        testDataObserver()
+    }
+
+    /**
+     * 调用 [RecyclerView.Adapter.notifyDataSetChanged] 触发的是 onChanged
+     * 调用 [RecyclerView.Adapter.notifyItemRangeRemoved] 触发的是 onItemRangeRemoved
+     * 调用 [RecyclerView.Adapter.notifyItemChanged] (实际内部调用的是 notifyItemRangeChanged(position, 1))触发的也是 onItemRangeRemoved
+     *
+     * 也就是说回调哪个方法其实跟我们 notifyXXX 调的是哪个有关
+     */
+    private fun testDataObserver() {
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                Timber.d("RecyclerViewTest.onChanged")
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                super.onItemRangeChanged(positionStart, itemCount)
+                Timber.d("RecyclerViewTest.onItemRangeChanged")
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
+                super.onItemRangeChanged(positionStart, itemCount, payload)
+                Timber.d("RecyclerViewTest.onItemRangeChanged")
+            }
+
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                Timber.d("RecyclerViewTest.onItemRangeInserted")
+            }
+
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                super.onItemRangeRemoved(positionStart, itemCount)
+                Timber.d("RecyclerViewTest.onItemRangeRemoved")
+            }
+
+            override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                super.onItemRangeMoved(fromPosition, toPosition, itemCount)
+                Timber.d("RecyclerViewTest.onItemRangeMoved")
+            }
+        })
     }
 
     private fun initItemTouch() {
@@ -55,7 +97,7 @@ class RecyclerViewTestActivity : BaseActivity() {
 
     private fun initEvent() {
         btn_change_data.setOnClickListener {
-//                adapter.setData(getData())
+                adapter.setData(newDatas())
 //                (rv_common.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
         }
         btn_notify.setOnClickListener {
@@ -63,6 +105,13 @@ class RecyclerViewTestActivity : BaseActivity() {
             adapter.notifyItemChanged(2, "1111")
             adapter.notifyItemChanged(2, "2222")
             adapter.notifyItemChanged(3, "2222")
+        }
+        btn_add.setOnClickListener {
+            adapter.addData("新增数据")
+        }
+
+        btn_remove_range.setOnClickListener {
+            adapter.remove(0)
         }
     }
 

@@ -1,6 +1,7 @@
 package cn.dozyx.template
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +12,13 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.DialogFragment
 import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
+import timber.log.Timber
 
-class DialogTestActivity : BaseTestActivity() {
+/**
+ * [Dialog.cancel] 会同时触发 onCancel 和 onDismiss
+ * [Dialog.dismiss] 只会触发 onDismiss
+ */
+class DialogTestActivity : BaseTestActivity(), DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
     override fun initActions() {
 
     }
@@ -38,7 +44,7 @@ class DialogTestActivity : BaseTestActivity() {
         })
         addButton("Alert Dialog", Runnable {
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("标题").setMessage("内容").setNegativeButton("取消", null).setPositiveButton("确定", null)
+            builder.setTitle("标题").setMessage("内容").setNegativeButton("取消") { dialog, _ -> dialog?.cancel() }.setPositiveButton("确定") { dialog, _ -> dialog?.dismiss() }
             val dialog = builder.show()
             dialog.window!!
             window.attributes
@@ -63,6 +69,12 @@ class DialogTestActivity : BaseTestActivity() {
             val content = LayoutInflater.from(this).inflate(R.layout.dialog_custom2, null)
             dialog.setContentView(content)
 //            dialog.setContentView(content, content.layoutParams)
+            dialog.show()
+        })
+
+        addButton("圆角", Runnable {
+            val dialog = Dialog(this, R.style.no_frame_dialog)
+            dialog.setContentView(R.layout.dialog_corner)
             dialog.show()
         })
     }
@@ -94,6 +106,14 @@ class DialogTestActivity : BaseTestActivity() {
         companion object {
             fun newInstance() = DialogFragmentTest()
         }
+    }
+
+    override fun onCancel(dialog: DialogInterface?) {
+        Timber.d("DialogTestActivity.onCancel")
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        Timber.d("DialogTestActivity.onDismiss")
     }
 }
 

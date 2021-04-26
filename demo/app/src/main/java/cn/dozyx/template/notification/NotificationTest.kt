@@ -527,12 +527,20 @@ class NotificationTest : BaseTestActivity() {
                         .setContentIntent(createPendingIntent())
                         .setAutoCancel(true)
                         .setGroup(GROUP_KEY_TEST)
-                        .setVibrate(LongArray(0))
-                        .setSound(null)
+//                        .setVibrate(LongArray(0))
+//                        .setSound(null)
+                        // setFullScreenIntent 会在发送通知时直接执行 intent(状态栏还是会显示通知)，
+                        // 网上有些文章说用来实现 head up，但实际验证感觉不太靠谱，因为测试时有时候又不会执行启动 intent，而且直接启动一个页面有点霸道，如果是启动一个服务可能还好
+                        // 需要 channel 为 high 才生效
+                        // 可能是在低版本手机使用？在 Android 6.0 手机上测试，这个的确可以实现 head up 效果并且不会直接启动 intent(启不启动可能跟机型有关)。
+                        // 不过通过只设置 setPriority(NotificationCompat.PRIORITY_HIGH) 也一样能实现 head up，所以感觉这个方法没什么必要，除非有什么兼容问题吧
+//                        .setFullScreenIntent(createPendingIntent(), true)
                         .setOnlyAlertOnce(true)
 //                        .setOnlyAlertOnce(true)
 //                        .setCategory(NotificationCompat.CATEGORY_EVENT)
 //                        .setProgress(100,0, false)// progress 无法 heads up
+                         // setPriority: Android 8.0 上通知优先级是与 channel 一致的，所以这个会无效。
+                         // Android8.0 之前只设置 channel 优先级为 high，但是没有设置 setPriority，也不会 head up。这是显然的，因为 channel 在 8.0 开始才有
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                 //                .setVibrate(longArrayOf(0))
                 Handler().postDelayed({ notify(builder) }, 2000)

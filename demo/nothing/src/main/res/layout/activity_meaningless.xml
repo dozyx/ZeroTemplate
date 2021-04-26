@@ -54,7 +54,7 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
         android:singleLine="true"
-        android:text="Drake"
+        android:text="@string/string_res_test"
         android:textSize="12sp">
 
     </TextView>

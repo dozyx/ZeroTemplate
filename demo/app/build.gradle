@@ -104,6 +104,10 @@ dependencies {
     implementation Deps.core_ktx
     implementation Deps.lottie
     implementation Deps.process_phoenix
+    implementation Deps.gp_auth
+    implementation Deps.tooltip
+    implementation Deps.materialprogressbar
+    implementation Deps.notchScreenTool
 }
 /*
 apply plugin: 'com.snapee.plugin.trace'

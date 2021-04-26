@@ -48,8 +48,8 @@ abstract class BaseApplication : Application() {
     }
 
     private fun initCrash() {
-        CrashUtils.init { crashInfo, e ->
-            Timber.e("BaseApplication.initCrash $crashInfo")
+        CrashUtils.init {
+            Timber.e("BaseApplication.initCrash $it")
         }
     }
 

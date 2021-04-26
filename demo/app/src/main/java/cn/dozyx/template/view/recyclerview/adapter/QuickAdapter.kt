@@ -14,17 +14,28 @@ import java.util.*
  */
 abstract class QuickAdapter<T> : RecyclerView.Adapter<QuickAdapter.VH> {
 
-    private var datas: List<T>? = null
+    private var datas: MutableList<T>? = null
 
 
-
-    constructor(datas: List<T>?) : super() {
+    constructor(datas: MutableList<T>?) : super() {
         this.datas = datas
     }
 
     constructor() : super()
 
-    fun setData(data:List<T>) {
+    fun addData(data: T) {
+        datas?.add(0, data)
+        notifyDataSetChanged()
+    }
+
+    fun remove(index: Int) {
+        datas?.removeAt(index)
+//        notifyItemRangeRemoved(index, 1)
+//        notifyDataSetChanged()
+        notifyItemChanged(index)
+    }
+
+    fun setData(data: MutableList<T>) {
         datas = data
         notifyDataSetChanged()
     }
@@ -48,7 +59,8 @@ abstract class QuickAdapter<T> : RecyclerView.Adapter<QuickAdapter.VH> {
         Timber.d("QuickAdapter.onBindViewHolder $position payloads $payloads")
     }
 
-    class VH private constructor(private val convertView: View) : RecyclerView.ViewHolder(convertView) {
+    class VH private constructor(private val convertView: View) :
+        RecyclerView.ViewHolder(convertView) {
 
         private val views = SparseArray<View>()
 
@@ -69,7 +81,8 @@ abstract class QuickAdapter<T> : RecyclerView.Adapter<QuickAdapter.VH> {
 
         companion object {
             fun get(parent: ViewGroup, layoutId: Int): VH {
-                val convertView = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
+                val convertView =
+                    LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
                 return VH(convertView)
             }
         }
