@@ -19,5 +19,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_notification_test" />
 
+    <cn.dozyx.template.drawable.DrawableView
+        android:layout_width="150dp"
+        android:layout_height="300dp" />
+
 
 </LinearLayout>

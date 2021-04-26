@@ -1049,14 +1049,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuTest"
-            android:label="Database/SQLite">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".intent.ActionSendTest"
             android:label="Intent/Send">
             <!--<intent-filter android:label="Download with Snaptube ">

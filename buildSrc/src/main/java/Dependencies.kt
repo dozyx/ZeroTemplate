@@ -14,7 +14,7 @@ object Android {
     val minSdkVersion = 19
     val minDebugSdkVersion = 21
     val targetSdkVersion = 29
-    val compileSdkVersion = 29
+    val compileSdkVersion = 30
 }
 
 object Deps {
@@ -62,6 +62,7 @@ object Deps {
     val startup = "androidx.startup:startup-runtime:${Version.startup}"
     val tracing = "androidx.tracing:tracing-ktx:${Version.tracing}"
     val exoplayer = "com.google.android.exoplayer:exoplayer:${Version.exoplayer}"
+    val core_ktx = "androidx.core:core-ktx:${Version.core_ktx}"
 }
 
 object DepsEventBus {
@@ -239,7 +240,7 @@ object Version {
     const val volley = "1.1.1"
     const val rxjava2 = "2.2.16"
     const val kotlin = "1.3.31"
-    const val android_ktx = "1.0.0-beta01" // 与 support-appcompat 冲突
+    const val core_ktx = "1.3.2" // 与 support-appcompat 冲突
     const val permissionsdispatcher = "3.0.1"
     const val gson = "2.8.5"
     const val testRunner = "1.1.0"

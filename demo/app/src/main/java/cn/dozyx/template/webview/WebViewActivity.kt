@@ -26,12 +26,12 @@ class WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
         val webView = object : WebView(this) {
-            override fun loadUrl(url: String?) {
+            override fun loadUrl(url: String) {
                 super.loadUrl(url)
                 Timber.d("loadUrl: $url")
             }
 
-            override fun postUrl(url: String?, postData: ByteArray?) {
+            override fun postUrl(url: String, postData: ByteArray) {
                 super.postUrl(url, postData)
                 Timber.d("postUrl: $url")
             }
