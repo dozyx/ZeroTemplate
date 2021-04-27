@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.view.WindowManager
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
@@ -60,16 +61,16 @@ class WindowTest : BaseTestActivity() {
 //        NotchScreenManager.getInstance().setDisplayInNotch(this@WindowTest)
 
         // 刘海屏需要另外的处理 https://www.jianshu.com/p/2b8db60ba8df
-        window.setFlags(
-          WindowManager.LayoutParams.FLAG_FULLSCREEN,
-          WindowManager.LayoutParams.FLAG_FULLSCREEN)// 这种方式布局不会绘制到状态栏中
+//        window.setFlags(
+//          WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//          WindowManager.LayoutParams.FLAG_FULLSCREEN)// 这种方式布局不会绘制到状态栏中
 
-        /*window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)*/
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
         // android 11 使用 WindowInsetsController
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
