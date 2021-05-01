@@ -8,7 +8,7 @@ import cn.dozyx.template.R
 import cn.dozyx.template.base.BaseShowResultActivity
 import com.blankj.utilcode.util.ActivityUtils
 
-open class LifeCycleTest : BaseShowResultActivity() {
+open class ActivityLifeCycleTest : BaseShowResultActivity() {
     private var state = 0
 
     override fun getButtonText(): Array<String> {
@@ -16,7 +16,7 @@ open class LifeCycleTest : BaseShowResultActivity() {
     }
 
     override fun onButton1() {
-        startActivity(Intent(this, LifeCycleTest::class.java))
+        startActivity(Intent(this, ActivityLifeCycleTest::class.java))
     }
 
     override fun onButton2() {
@@ -29,7 +29,7 @@ open class LifeCycleTest : BaseShowResultActivity() {
     }
 
     override fun onButton4() {
-        Handler().postDelayed({ ActivityUtils.startActivity(LifeCycleTest::class.java) }, 2000)
+        Handler().postDelayed({ ActivityUtils.startActivity(ActivityLifeCycleTest::class.java) }, 2000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

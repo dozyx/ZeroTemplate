@@ -3,7 +3,7 @@ package cn.dozyx.template
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.*
-import cn.dozyx.template.activity.LifeCycleTest
+import cn.dozyx.template.activity.ActivityLifeCycleTest
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ReflectUtils
@@ -84,7 +84,7 @@ class HandlerTest : BaseTestActivity() {
 
         addAction(object : Action("启动") {
             override fun run() {
-                startActivity(Intent(this@HandlerTest, LifeCycleTest::class.java))
+                startActivity(Intent(this@HandlerTest, ActivityLifeCycleTest::class.java))
             }
         })
 

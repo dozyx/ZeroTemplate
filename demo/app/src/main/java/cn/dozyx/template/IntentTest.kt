@@ -21,8 +21,10 @@ class IntentTest : BaseTestActivity() {
     lateinit var editFragment: EditFragment
 
     companion object {
+//        const val URI_INTENT =
+//                "intent://baidu.com/web?webtype=common#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end";
         const val URI_INTENT =
-                "intent://baidu.com/web?webtype=common#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end";
+                "https://docs.google.com/forms/d/1MnRQJ3XZxsRBSVp28M7Sm1M8Gm5jniE/viewform?entry.1040949360=*%7CFNAME%7C*&entry.271521054=*%7CLNAME%7C*";
     }
 
     override fun initActions() {
@@ -40,8 +42,13 @@ class IntentTest : BaseTestActivity() {
         addAction(object : Action("启动") {
             override fun run() {
 //                val intentString = "intent://larkgame.com?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;end;"
-                val intentString = "intent://snaptubeapp.com/web?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;S.url=https://www.baidu.com;end;"
-                startActivity(Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME))
+//                val intentString = "intent://snaptubeapp.com/web?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;S.url=https://www.baidu.com;end;"
+//                startActivity(Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME))
+                val intentString = "http://share.getsnap.link/video"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.setPackage("com.snaptube.premium")
+                startActivity(intent)
             }
         })
 

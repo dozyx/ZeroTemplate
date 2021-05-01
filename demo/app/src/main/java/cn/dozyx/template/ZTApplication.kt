@@ -7,6 +7,13 @@ import android.util.Log
 import cn.dozyx.core.base.BaseApplication
 import cn.dozyx.core.debug.ActivityLifecycleLoggerCallbacks
 import cn.dozyx.template.pop.HomePopTracker
+import com.didichuxing.doraemonkit.DoraemonKit
+import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.android.utils.FlipperUtils
+import com.facebook.flipper.plugins.inspector.DescriptorMapping
+import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
+import com.facebook.soloader.SoLoader
 import com.facebook.stetho.Stetho
 import timber.log.Timber
 
@@ -33,7 +40,23 @@ class ZTApplication : BaseApplication() {
                 return@addIdleHandler true
             }*/
         }
+        initDoraemon()
+        initFlipper()
         Timber.d("ZTApplication.onCreate")
+    }
+
+    private fun initDoraemon() {
+        DoraemonKit.install(this)
+    }
+
+    private fun initFlipper() {
+        SoLoader.init(this, false)
+        if (FlipperUtils.shouldEnableFlipper(this)) {
+            val client = AndroidFlipperClient.getInstance(this)
+            client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))// Layout Inspector
+            client.addPlugin(SharedPreferencesFlipperPlugin(this))
+            client.start()
+        }
     }
 
     override fun initOnMainProcess() {

@@ -25,16 +25,16 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_view"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="centerInside"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/test_ripple"
+        android:background="@android:color/holo_blue_light"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/live_chat_menu"
-        app:lottie_scale="0.5" />
+        app:lottie_scale="0.32" />
     <!--  lottie_scale 计算：
           原始 ImageView 为 48dp，drawable 为 24 dp
           设计提供的 lottie 的 drawable 为 60，里面的 image 为 48 dp
