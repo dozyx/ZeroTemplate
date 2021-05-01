@@ -1,10 +1,10 @@
 package cn.dozyx.template.view.recyclerview
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.*
 import cn.dozyx.constant.Shakespeare
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.core.utli.util.ColorUtil
@@ -32,11 +32,13 @@ class RecyclerViewTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rv_common.layoutManager = getLayoutManager(LAYOUT_LINEAR)
+        testListener()
         initItemDecoration()
 //        Handler().postDelayed({
-            adapter = ContentAdapter()
-            adapter.setData(newDatas())
-            rv_common.adapter = adapter
+        adapter = ContentAdapter()
+        testDataObserver()
+        adapter.setData(newDatas())
+        rv_common.adapter = adapter
 //        }, 1000)
         initItemTouch()
         initEvent()
@@ -47,7 +49,24 @@ class RecyclerViewTest : BaseActivity() {
             // 触发相关源码 ViewRootImpl#performTraversals()
             Timber.d("RecyclerViewTestActivity.onCreate onGlobalLayout ${rv_common.childCount}")
         }
-        testDataObserver()
+    }
+
+    private fun testListener() {
+        rv_common.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                // smoothScrollToPosition 如果没有发生实际的滑动的话，不会触发回调
+                Timber.d("RecyclerViewTest.onScrollStateChanged: ${scrollStateToString(newState)}")
+            }
+        })
+    }
+
+    private fun scrollStateToString(state: Int): String {
+        return when (state) {
+            SCROLL_STATE_IDLE -> "SCROLL_STATE_IDLE"
+            SCROLL_STATE_SETTLING -> "SCROLL_STATE_SETTLING"
+            SCROLL_STATE_DRAGGING -> "SCROLL_STATE_DRAGGING"
+            else -> "Unknown"
+        }
     }
 
     /**
@@ -61,7 +80,7 @@ class RecyclerViewTest : BaseActivity() {
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
-                Timber.d("RecyclerViewTest.onChanged")
+                Timber.d("RecyclerViewTest.onChanged ${(rv_common.layoutManager as? LinearLayoutManager)?.findFirstCompletelyVisibleItemPosition()} ${(rv_common.layoutManager as? LinearLayoutManager)?.findLastCompletelyVisibleItemPosition()}")
             }
 
             override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
@@ -97,7 +116,7 @@ class RecyclerViewTest : BaseActivity() {
 
     private fun initEvent() {
         btn_change_data.setOnClickListener {
-                adapter.setData(newDatas())
+            adapter.setData(newDatas())
 //                (rv_common.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
         }
         btn_notify.setOnClickListener {
@@ -112,6 +131,15 @@ class RecyclerViewTest : BaseActivity() {
 
         btn_remove_range.setOnClickListener {
             adapter.remove(0)
+        }
+        btn_scroll.setOnClickListener {
+            // smoothScrollToPosition 滑动行为由 LayoutManger 负责，默认行为是如果 position 的 item 完全可见，则不滑动，否则滑动进入可见区域，并不是滑动到第一个位置
+            rv_common.smoothScrollToPosition(16)
+            /*
+                rv_common.smoothScrollToPosition(
+                    (rv_common.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition()
+                        ?.let { it + 20 } ?: 0
+                )*/
         }
     }
 
@@ -163,7 +191,7 @@ class RecyclerViewTest : BaseActivity() {
 
     class ContentAdapter : QuickAdapter<String>() {
         override fun getLayoutId(viewType: Int): Int {
-            return android.R.layout.simple_list_item_1
+            return R.layout.item_text
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -171,6 +199,20 @@ class RecyclerViewTest : BaseActivity() {
             viewHolder.itemView.apply {
                 layoutParams.width = ScreenUtils.getScreenWidth() - 100
             }
+            viewHolder.getView<View>(android.R.id.text1)
+                .addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+//                Timber.d("ContentAdapter.onCreateViewHolder onLayoutChange: $left $top $right $bottom $oldLeft $oldTop $oldRight $oldBottom")
+                }
+            viewHolder.itemView.addOnAttachStateChangeListener(object :
+                View.OnAttachStateChangeListener {
+                override fun onViewAttachedToWindow(v: View?) {
+                    Timber.d("ContentAdapter.onViewAttachedToWindow")
+                }
+
+                override fun onViewDetachedFromWindow(v: View?) {
+                    Timber.d("ContentAdapter.onViewDetachedFromWindow")
+                }
+            })
             return viewHolder
         }
 

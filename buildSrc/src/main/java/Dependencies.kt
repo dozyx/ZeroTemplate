@@ -202,6 +202,17 @@ object DepsExoPlayer {
     val okhttp = "com.google.android.exoplayer:extension-okhttp:${Version.exoplayer}"
 }
 
+object DepsDoraemonKit {
+    val dokitx = "com.didichuxing.doraemonkit:dokitx:${Version.doraemonkit}"
+    val dokitx_no_op = "com.didichuxing.doraemonkit:dokitx-no-op:${Version.doraemonkit}"
+}
+
+object DepsFlipper {
+    val flipper = "com.facebook.flipper:flipper:${Version.flipper}"
+    val flipper_noop = "com.facebook.flipper:flipper-noop:${Version.flipper}"
+    val soloader = "com.facebook.soloader:soloader:${Version.soloader}"
+}
+
 object Version {
     const val legacySupportV4 = "1.0.0"
     const val kotlinVersion = "1.3.31"
@@ -299,4 +310,7 @@ object Version {
     const val tooltip = "2.0.4"
     const val materialprogressbar = "1.6.1"
     const val notchScreenTool = "0.0.1"
+    const val doraemonkit = "3.3.5"
+    const val flipper = "0.85.0"
+    const val soloader = "0.10.1"
 }

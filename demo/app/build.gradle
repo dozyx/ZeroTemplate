@@ -108,6 +108,13 @@ dependencies {
     implementation Deps.tooltip
     implementation Deps.materialprogressbar
     implementation Deps.notchScreenTool
+    debugImplementation ("${DepsDoraemonKit.dokitx}"){
+        exclude group: 'com.blankj'
+    }
+    releaseImplementation DepsDoraemonKit.dokitx_no_op
+    debugImplementation DepsFlipper.flipper
+    debugImplementation DepsFlipper.soloader
+    releaseImplementation DepsFlipper.flipper_noop
 }
 /*
 apply plugin: 'com.snapee.plugin.trace'

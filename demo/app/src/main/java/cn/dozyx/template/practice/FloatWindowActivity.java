@@ -19,9 +19,9 @@ import androidx.annotation.Nullable;
 
 import cn.dozyx.constant.Shakespeare;
 import cn.dozyx.template.R;
-import cn.dozyx.template.activity.LifeCycleTest;
+import cn.dozyx.template.activity.ActivityLifeCycleTest;
 
-public class FloatWindowActivity extends LifeCycleTest {
+public class FloatWindowActivity extends ActivityLifeCycleTest {
 
     WindowManager.LayoutParams params;
 

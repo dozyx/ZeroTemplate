@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
  * @author dozyx
  * @date 4/27/21
  */
-class TooltipOverlay(context: Context?, attrs: AttributeSet?) : AppCompatImageView(context, attrs) {
+class TooltipOverlay(context: Context, attrs: AttributeSet?) : AppCompatImageView(context, attrs) {
     init {
         setImageDrawable(TooltipOverlayDrawable())
     }

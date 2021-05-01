@@ -164,7 +164,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LifeCycleTest"
+            android:name=".activity.ActivityLifeCycleTest"
             android:label="@string/activity_life_cycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1346,6 +1346,22 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".ApplicationTest"
+            android:label="Application">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".arch.LifecycleTest"
+            android:label="arch/lifecycle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.facebook.flipper.android.diagnostics.FlipperDiagnosticActivity"
+            android:exported="true"/>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>
