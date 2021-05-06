@@ -12,6 +12,7 @@ class ViewTest : BaseActivity() {
         button.setOnClickListener {
             Timber.d("ViewTest.onCreate: ${button.top}")
         }
+        tv_text.translationZ = 100F
     }
 
     override fun getLayoutId() = R.layout.test_view
