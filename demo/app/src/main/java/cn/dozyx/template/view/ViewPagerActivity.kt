@@ -2,6 +2,7 @@ package cn.dozyx.template.view
 
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,12 @@ import kotlin.math.max
 class ViewPagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         setContentView(R.layout.activity_pager_with_top_tab)
+
+        btn_home.setOnClickListener {
+            vp_fragment.setCurrentItem(0, true)
+        }
 
         vp_fragment.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -56,8 +62,8 @@ class ViewPagerActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                Timber.d("ViewPagerActivity.onPageSelected")
-                // 并不是在完全停止滚动之后才触发
+                Timber.d("ViewPagerActivity.onPageSelected $position")
+                // 并不是在完全停止滚动之后才触发，也就是可能在 SCROLL_STATE_SETTLING 时就触发了
                 // setAdapter 并不会导致这个回调
 //                setTabTextSize(position, MAX_TAB_TEXT_SIZE_IN_SP)
             }

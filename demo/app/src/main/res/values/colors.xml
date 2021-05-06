@@ -7,4 +7,5 @@
     <color name="notification_fail">#D83025</color>
     <color name="progress_bg">#3DB2B2B2</color>
     <color name="progress">#FF3E8BFF</color>
+    <color name="tooltip_bg">#FFA100</color>
 </resources>

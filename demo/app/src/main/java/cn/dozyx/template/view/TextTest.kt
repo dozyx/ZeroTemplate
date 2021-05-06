@@ -17,7 +17,7 @@ class TextTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         testPaint()
-        val quantityString = resources.getQuantityString(R.plurals.count_video, 0, 0)
+        val quantityString = resources.getQuantityString(R.plurals.count_video, 1)
         Timber.d("TextTest.onCreate $quantityString")
     }
 

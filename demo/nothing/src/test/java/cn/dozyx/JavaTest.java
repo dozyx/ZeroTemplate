@@ -572,6 +572,13 @@ public class JavaTest {
     }
 
     @Test
+    public void testStringRef() {
+        String str1= new String("111");
+        String str2= new String("111");
+        print(str1 == str2);
+    }
+
+    @Test
     public void testSubString() {
         String str = "111.apk";
         print(str.substring(str.length() - 4, str.length()));
