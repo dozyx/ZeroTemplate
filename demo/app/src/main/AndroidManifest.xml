@@ -1369,6 +1369,27 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".system.LandscapeActivity"
+            android:launchMode="singleTop"
+            android:configChanges="keyboard|orientation|screenSize|uiMode|layoutDirection|locale"
+            android:screenOrientation="sensorLandscape" />
+        <activity android:name=".system.OrientationTest"
+            android:configChanges="keyboard|orientation|screenSize|uiMode|layoutDirection|locale"
+            android:screenOrientation="portrait"
+            android:label="System/Orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".thread.UIThreadTest"
+            android:label="System/Orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>
