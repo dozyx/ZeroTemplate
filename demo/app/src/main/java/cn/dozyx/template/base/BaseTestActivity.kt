@@ -30,6 +30,11 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         views[action.name] = button
     }
 
+    protected fun addAction(name: String,block: () -> Unit) {
+        val button = addButton(name, block)
+        views[name] = button
+    }
+
     protected fun addButton(text: String, task: Runnable): Button {
         val button = Button(this)
         button.text = text
@@ -37,6 +42,18 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
         button.setOnClickListener {
             Timber.d("Action execute: $text")
             task.run()
+        }
+        flex_box.addView(button)
+        return button
+    }
+
+    protected fun addButton(text: String, block: () -> Unit): Button {
+        val button = Button(this)
+        button.text = text
+        button.textSize = 12f
+        button.setOnClickListener {
+            Timber.d("Action execute: $text")
+            block.invoke()
         }
         flex_box.addView(button)
         return button

@@ -90,6 +90,7 @@ class RecyclerViewTest : BaseActivity() {
 
             override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
                 super.onItemRangeChanged(positionStart, itemCount, payload)
+                // super 会调用两个参数的同名方法
                 Timber.d("RecyclerViewTest.onItemRangeChanged")
             }
 
@@ -120,10 +121,12 @@ class RecyclerViewTest : BaseActivity() {
 //                (rv_common.adapter as RecyclerView.Adapter<*>).notifyDataSetChanged()
         }
         btn_notify.setOnClickListener {
-            //                adapter.notifyItemChanged(2)
-            adapter.notifyItemChanged(2, "1111")
-            adapter.notifyItemChanged(2, "2222")
-            adapter.notifyItemChanged(3, "2222")
+            // notify 可能触发 onCreateViewHolder，并且旧的 item view 会 detach
+//            adapter.notifyDataSetChanged()
+                            adapter.notifyItemChanged(2)
+//            adapter.notifyItemChanged(2, "1111")
+//            adapter.notifyItemChanged(2, "2222")
+//            adapter.notifyItemChanged(3, "2222")
         }
         btn_add.setOnClickListener {
             adapter.addData("新增数据")
@@ -194,7 +197,12 @@ class RecyclerViewTest : BaseActivity() {
             return R.layout.item_text
         }
 
+        override fun onBindViewHolder(holder: VH, position: Int) {
+            super.onBindViewHolder(holder, position)
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+            Timber.d("ContentAdapter.onCreateViewHolder")
             val viewHolder = super.onCreateViewHolder(parent, viewType)
             viewHolder.itemView.apply {
                 layoutParams.width = ScreenUtils.getScreenWidth() - 100
@@ -203,14 +211,15 @@ class RecyclerViewTest : BaseActivity() {
                 .addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
 //                Timber.d("ContentAdapter.onCreateViewHolder onLayoutChange: $left $top $right $bottom $oldLeft $oldTop $oldRight $oldBottom")
                 }
+            val adapterPosition = viewHolder.layoutPosition
             viewHolder.itemView.addOnAttachStateChangeListener(object :
                 View.OnAttachStateChangeListener {
                 override fun onViewAttachedToWindow(v: View?) {
-                    Timber.d("ContentAdapter.onViewAttachedToWindow")
+                    Timber.d("ContentAdapter.onViewAttachedToWindow $adapterPosition")
                 }
 
                 override fun onViewDetachedFromWindow(v: View?) {
-                    Timber.d("ContentAdapter.onViewDetachedFromWindow")
+                    Timber.d("ContentAdapter.onViewDetachedFromWindow $adapterPosition")
                 }
             })
             return viewHolder
@@ -231,7 +240,7 @@ class RecyclerViewTest : BaseActivity() {
 
     private fun newDatas(): ArrayList<String> {
         val newDatas = ArrayList<String>(5)
-        for (i in 0..100) {
+        for (i in 0..3) {
             newDatas.add(Shakespeare.TITLES[Random().nextInt(Shakespeare.TITLES.size)])
         }
         return newDatas
