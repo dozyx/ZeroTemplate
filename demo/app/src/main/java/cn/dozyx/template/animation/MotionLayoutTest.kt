@@ -8,10 +8,11 @@ import kotlinx.android.synthetic.main.motion_layout_test.*
 class MotionLayoutTest:BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        button.setOnClickListener{
+/*        button.setOnClickListener{
 //            motionLayout.transitionToEnd()
             motionLayout.transitionToState(R.id.transition2)
-        }
+        }*/
     }
-    override fun getLayoutId() = R.layout.motion_layout_test
+//    override fun getLayoutId() = R.layout.motion_layout_test
+    override fun getLayoutId() = R.layout.test_motion_layout_expand
 }

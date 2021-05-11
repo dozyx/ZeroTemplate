@@ -29,6 +29,7 @@ object Deps {
     val universalImageLoader = "com.nostra13.universalimageloader:universal-image-loader:${Version.universalImageLoader}"
     val material = "com.google.android.material:material:${Version.material}"
     val rxjava2 = "io.reactivex.rxjava2:rxjava:${Version.rxjava2}"
+    val rxjava3 = "io.reactivex.rxjava3:rxjava:${Version.rxjava3}"
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
     val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Version.lifecycle}"
     val annotations = "org.jetbrains:annotations:${Version.annotations}"
@@ -172,6 +173,7 @@ object DepsRetrofit {
     val gson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
     val scalars = "com.squareup.retrofit2:converter-scalars:${Version.retrofit}"
     val rxjavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
+    val rxjava3Adapter = "com.squareup.retrofit2:adapter-rxjava3:${Version.retrofit}"
 }
 
 object DepsLeakCanary {
@@ -221,7 +223,7 @@ object Version {
     const val threeten = "1.2.1"
     const val leakcanary = "1.6.3"
     const val dagger = "2.28"
-    const val retrofit = "2.7.0"
+    const val retrofit = "2.9.0"
     const val junit = "4.12"
     const val junit_ext = "1.1.1"
     const val stickylistheaders = "2.7.0"
@@ -256,6 +258,7 @@ object Version {
     const val tencent_mta = "3.3.1-release" // 腾讯统计
     const val volley = "1.1.1"
     const val rxjava2 = "2.2.16"
+    const val rxjava3 = "3.0.12"
     const val kotlin = "1.3.31"
     const val core_ktx = "1.3.2" // 与 support-appcompat 冲突
     const val permissionsdispatcher = "3.0.1"

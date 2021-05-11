@@ -144,6 +144,11 @@ class RecyclerViewTest : BaseActivity() {
                         ?.let { it + 20 } ?: 0
                 )*/
         }
+        btn_update_when_scrolling.setOnClickListener {
+            rv_common?.smoothScrollToPosition(79)
+            adapter.addData("哈哈哈")
+            adapter.addData("哈哈哈")
+        }
     }
 
     private fun initItemDecoration() {
@@ -240,7 +245,7 @@ class RecyclerViewTest : BaseActivity() {
 
     private fun newDatas(): ArrayList<String> {
         val newDatas = ArrayList<String>(5)
-        for (i in 0..3) {
+        for (i in 0..100) {
             newDatas.add(Shakespeare.TITLES[Random().nextInt(Shakespeare.TITLES.size)])
         }
         return newDatas

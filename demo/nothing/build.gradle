@@ -98,6 +98,8 @@ dependencies {
     annotationProcessor project(':autobuilder')
     implementation Deps.circleImageView
     implementation Deps.multidex
+    implementation Deps.rxjava3
+    implementation DepsRetrofit.rxjava3Adapter
 //    implementation ("com.github.bumptech.glide:okhttp3-integration:4.10.0"){
 //        exclude group: "com.squareup.okhttp3", module: "okhttp"
 //    }
