@@ -11,15 +11,20 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:logo="@mipmap/ic_launcher"
         app:subtitle="副标题"
         app:title="标题"
-        app:logo="@mipmap/ic_launcher"
         app:titleTextColor="@color/colorPrimary">
 
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

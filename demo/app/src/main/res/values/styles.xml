@@ -140,4 +140,13 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="ToolbarActivity">
+        <item name="actionModeCloseButtonStyle">@style/ZTActionModeCloseButton</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="ZTActionModeCloseButton">
+        <item name="android:visibility">gone</item>
+    </style>
+
 </resources>
