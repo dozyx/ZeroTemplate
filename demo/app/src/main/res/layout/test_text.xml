@@ -46,4 +46,11 @@
         android:autoLink="web"
         android:text="www.baidu.com" />
 
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:drawableLeft="@drawable/ic_arrow"
+        android:text="drawable" />
+
 </LinearLayout>

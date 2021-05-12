@@ -1,6 +1,7 @@
 package cn.dozyx.template.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import cn.dozyx.template.R;
 
 
 /**
@@ -22,6 +25,9 @@ public class CustomView extends View {
     public CustomView(Context context,
             @Nullable AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CustomView);
+        array.getDimension(R.styleable.CustomView_android_width,0);
         // 心形
         path.addArc(200, 200, 400, 400, -225,
                 225); // 前四个参数确定该弧形的椭圆所在的矩形，这里是一个圆形；第五个参数为起始角度，第六个参数为扫过的范围

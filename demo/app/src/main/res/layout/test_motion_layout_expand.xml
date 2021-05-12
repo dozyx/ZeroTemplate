@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/motion_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/test_motion_layout_expand_scene">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="72dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_vertical"
+        android:layout_width="wrap_content"
+        app:layout_constraintGuide_end="16dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="132dp"
         android:layout_height="48dp" />
 
-    <Button
-        android:id="@+id/btn_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Video" />
-
-    <Button
-        android:id="@+id/btn_music"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Music" />
-
-    <Button
-        android:id="@+id/btn_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Photo" />
-
     <ImageView
         android:id="@+id/iv_float_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:rotation="45"
         app:srcCompat="@drawable/ic_float_close" />
+
+    <LinearLayout
+        android:id="@+id/ll_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_video"
+            android:layout_width="117dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:text="Video" />
+
+        <Button
+            android:id="@+id/btn_music"
+            android:layout_width="117dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:text="Music" />
+
+        <Button
+            android:id="@+id/btn_photo"
+            android:layout_width="117dp"
+            android:layout_height="48dp"
+            android:text="Photo" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_visibility_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

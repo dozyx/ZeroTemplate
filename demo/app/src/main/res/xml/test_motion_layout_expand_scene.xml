@@ -19,100 +19,101 @@
             <Layout
                 android:layout_width="132dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+                app:layout_constraintTop_toTopOf="@id/gl_horizontal" />
+            <PropertySet
+                android:alpha="1"
+                android:visibility="visible" />
         </Constraint>
+
         <Constraint android:id="@+id/iv_float_close">
-            <PropertySet android:visibility="gone" />
+            <PropertySet
+                android:alpha="0"
+                android:visibility="invisible" />
+            <Transform android:rotation="180" />
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@id/fab"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginEnd="36dp"
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+                app:layout_constraintTop_toTopOf="@id/gl_horizontal" />/>
         </Constraint>
 
-        <Constraint android:id="@+id/btn_photo">
-            <PropertySet android:visibility="gone" />
+        <Constraint android:id="@+id/ll_items">
+            <PropertySet
+                android:alpha="0"
+                android:visibility="invisible" />
+            <Transform
+                android:scaleX="0"
+                android:scaleY="0"
+                android:transformPivotX="117dp"
+                android:transformPivotY="184dp" />
             <Layout
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/iv_float_close"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/gl_horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/gl_vertical" />
         </Constraint>
 
-        <Constraint android:id="@+id/btn_music">
-            <PropertySet android:visibility="gone" />
+        <Constraint android:id="@+id/btn_visibility_mode">
+            <PropertySet android:visibility="invisible" />
             <Layout
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_photo"
-                app:layout_constraintEnd_toEndOf="@+id/btn_video" />
-        </Constraint>
-
-        <Constraint android:id="@+id/btn_video">
-            <PropertySet android:visibility="gone" />
-            <Layout
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_music"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </Constraint>
 
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
+
         <Constraint android:id="@+id/fab">
-            <PropertySet android:visibility="gone"
-                app:visibilityMode="ignore"/>
             <Layout
                 android:layout_width="132dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+                app:layout_constraintTop_toTopOf="@id/gl_horizontal" />
+            <PropertySet
+                android:alpha="0"
+                android:visibility="invisible" />
         </Constraint>
-        <Constraint
-            android:id="@+id/iv_float_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+        <Constraint android:id="@+id/iv_float_close">
+
+            <Transform android:rotation="0" />
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                app:layout_goneMarginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/fab"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+                app:layout_constraintTop_toTopOf="@id/gl_horizontal" />
+            <PropertySet
+                android:alpha="1"
+                android:visibility="visible" />
         </Constraint>
 
-        <Constraint android:id="@+id/btn_photo">
-            <Layout
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/iv_float_close"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </Constraint>
+        <Constraint android:id="@+id/ll_items">
+            <PropertySet
+                android:alpha="1"
+                android:visibility="visible" />
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1"
+                android:transformPivotX="117dp"
+                android:transformPivotY="184dp" />
 
-        <Constraint android:id="@+id/btn_music">
             <Layout
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_photo"
-                app:layout_constraintEnd_toEndOf="@id/btn_photo" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/gl_horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/gl_vertical" />
         </Constraint>
-
-        <Constraint android:id="@+id/btn_video">
+        <Constraint android:id="@+id/btn_visibility_mode">
+            <PropertySet android:visibility="visible" />
             <Layout
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_music"
-                app:layout_constraintEnd_toEndOf="@id/btn_photo" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </Constraint>
 
     </ConstraintSet>

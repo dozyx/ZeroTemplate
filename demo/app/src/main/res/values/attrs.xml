@@ -3,5 +3,6 @@
     <attr name="myWidth" format="integer" />
     <declare-styleable name="CustomView">
         <attr name="myWidth" />
+        <attr name="android:width"/>
     </declare-styleable>
 </resources>
