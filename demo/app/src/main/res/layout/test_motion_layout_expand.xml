@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/motion_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motion_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:rotationX="6"
     app:layoutDescription="@xml/test_motion_layout_expand_scene">
 
     <androidx.constraintlayout.widget.Guideline
@@ -11,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="72dp"/>
+        app:layout_constraintGuide_percent="0.9015048" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_vertical"
         android:layout_width="wrap_content"
-        app:layout_constraintGuide_end="16dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -37,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/btn_video"
             android:layout_width="117dp"
@@ -61,6 +63,6 @@
     <Button
         android:id="@+id/btn_visibility_mode"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
