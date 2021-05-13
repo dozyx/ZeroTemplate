@@ -12,6 +12,8 @@
         app:constraintSetEnd="@id/start"
         app:constraintSetStart="@id/end">
         <OnClick app:targetId="@+id/iv_float_close" />
+        <KeyFrameSet>
+        </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
