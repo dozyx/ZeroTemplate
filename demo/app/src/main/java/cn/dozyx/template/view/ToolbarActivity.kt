@@ -3,12 +3,12 @@ package cn.dozyx.template.view
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.text.TextWatcher
 import android.view.*
 import android.widget.Button
-import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
+import androidx.appcompat.widget.ShareActionProvider
 import androidx.core.view.ActionProvider
 import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +28,9 @@ class ToolbarActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 //        setupActionBarCustomView()
         testActionMode()
-        val et:EditText? = null
+        btn_invali.setOnClickListener {
+            invalidateOptionsMenu()
+        }
     }
 
     private fun testActionMode() {
@@ -64,7 +66,8 @@ class ToolbarActivity : AppCompatActivity() {
         }
         quickAdapter.setOnItemLongClickListener { adapter, view, position ->
             val actionMode = startSupportActionMode(actionModeCallback) // 会返回一个 ActionMode 实例
-            actionMode?.customView = LayoutInflater.from(this).inflate(R.layout.custom_action_mode_view, null)
+            actionMode?.customView =
+                LayoutInflater.from(this).inflate(R.layout.custom_action_mode_view, null)
             actionMode?.title = "标题"
             return@setOnItemLongClickListener true
         }
@@ -85,15 +88,27 @@ class ToolbarActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Timber.d("ToolbarActivity.onCreateOptionsMenu")
         menuInflater.inflate(R.menu.test, menu)
         val item = menu?.findItem(R.id.action_settings)
 //        item?.actionView = LayoutInflater.from(this).inflate(R.layout.menu_action_view, null)// 设置 action view 之后将没办法自动响应 onOptionsItemSelected
-        val actionProviderMenuItem = MenuItemCompat.setActionProvider(item, CustomActionProvider(this))
-        actionProviderMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+        val actionProviderMenuItem =
+            MenuItemCompat.setActionProvider(item, CustomActionProvider(this))
+        MenuItemCompat.setActionProvider(item, ShareActionProvider(this))
+//        actionProviderMenuItem.setOnMenuItemClickListener {
+//            Timber.d("ToolbarActivity.onCreateOptionsMenu")
+//            return@setOnMenuItemClickListener true
+//        }
+//        actionProviderMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
 //        val newMenuItem = menu?.add("new")
 //        newMenuItem?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-        testSubMenu(menu)
+//        testSubMenu(menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        Timber.d("ToolbarActivity.onPrepareOptionsMenu")
+        return super.onPrepareOptionsMenu(menu)
     }
 
     private fun testSubMenu(menu: Menu?) {
@@ -104,7 +119,7 @@ class ToolbarActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Timber.d("ToolbarActivity.onOptionsItemSelected $item")
-        if (item.itemId == R.id.action_settings){
+        if (item.itemId == R.id.action_settings) {
 //            return true
         }
         return super.onOptionsItemSelected(item)
@@ -113,7 +128,18 @@ class ToolbarActivity : AppCompatActivity() {
 
 class CustomActionProvider(context: Context) : ActionProvider(context) {
     override fun onCreateActionView(): View {
-        return LayoutInflater.from(context).inflate(R.layout.menu_action_view, null)
+
+        val actionView = LayoutInflater.from(context).inflate(R.layout.menu_action_view, null)
+        actionView.findViewById<ImageView>(R.id.iv_search).addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View?) {
+                Timber.d("CustomActionProvider.onViewAttachedToWindow")
+            }
+
+            override fun onViewDetachedFromWindow(v: View?) {
+                Timber.d("CustomActionProvider.onViewDetachedFromWindow")
+            }
+        })
+        return actionView
     }
 
     override fun onPerformDefaultAction(): Boolean {
