@@ -127,7 +127,8 @@ class RoomActivity : BaseTestActivity() {
                 "database-name").addCallback(object : RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                Timber.d("Callback RoomActivity.onCreate start")
+                // 并不是在 build 的时候就回调，而是在正式访问读写数据库时调用
+                Timber.d("Callback RoomActivity.onCreate start ${Thread.currentThread()}")
                 for (i in 0..100000) {
                     val user = generateFakeUser()
 //                    db.insert("User", SQLiteDatabase.CONFLICT_REPLACE, user.toContentValue())

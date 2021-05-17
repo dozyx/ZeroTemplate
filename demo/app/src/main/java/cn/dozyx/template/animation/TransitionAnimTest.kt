@@ -1,36 +1,30 @@
 package cn.dozyx.template.animation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.Scene
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionValues
-import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
-import kotlinx.android.synthetic.main.test_transition_anim.*
+//import kotlinx.android.synthetic.main.test_transition_anim.*
 
+import kotlinx.android.synthetic.main.test_transition_anim_constraint.*
+//import kotlinx.android.synthetic.main.test_transition_anim_constraint.iv_anim
 
-/**
- * @author dozyx
- * @date 5/12/21
- */
-class TransitionAnimTest : BaseActivity() {
+class TransitionAnimTest : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        iv_anim.setOnClickListener {
-            TransitionManager.beginDelayedTransition(root)
-            (iv_anim.layoutParams as FrameLayout.LayoutParams).apply {
-                gravity = Gravity.END
-                width *= 2
-                height *= 2
-            }
-            iv_anim.requestLayout()
-        }
+        setContentView(R.layout.test_transition_anim_motion)
     }
-
-    override fun getLayoutId() = R.layout.test_transition_anim
 }
 
 class CustomTransition : Transition() {

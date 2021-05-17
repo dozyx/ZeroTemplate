@@ -10,12 +10,14 @@
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
+        android:icon="@drawable/ic_menu_camera"
         app:showAsAction="always" />
+    <!--
     <item
         android:id="@+id/action_share1"
         android:title="share"
         android:icon="@android:drawable/ic_menu_week"
         app:showAsAction="always"
-        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider" />
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider" />-->
 
 </menu>

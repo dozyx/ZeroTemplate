@@ -13,6 +13,19 @@ import kotlin.concurrent.thread
  * @date 2019-12-09
  */
 class KotlinTest {
+    val lazyString:String? by lazy { "Hello" }
+    val lazyString2:String? by lazy { getString() }
+
+    private fun getString() = "Hello"
+
+    @Test
+    fun testToByteArray() {
+        val str = "文件名"
+        print(str.lastIndexOf(str))
+        print(str.substring(0, str.lastIndexOf(str)))
+        print(str.toByteArray().size)
+
+    }
 
     @Test
     fun testBit() {
