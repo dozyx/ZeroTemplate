@@ -4,7 +4,6 @@ import io.reactivex.Observable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 import org.junit.Test
 import kotlin.concurrent.thread
 
@@ -158,5 +157,22 @@ class KotlinTest {
 
     fun printThread() {
         println(Thread.currentThread())
+    }
+
+    @Test
+    fun foo() {
+        ClassB().foo()
+    }
+
+    internal open class ClassA {
+        @Throws(Exception::class)
+        open fun foo() {
+        }
+    }
+
+    internal class ClassB : ClassA() {
+        override fun foo() {
+            super.foo()
+        }
     }
 }

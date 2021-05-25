@@ -2,22 +2,21 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <Transition
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start">
-        <OnClick app:targetId="@+id/fab" />
+        <OnClick app:targetId="@+id/fl_fab" />
     </Transition>
 
     <Transition
         app:constraintSetEnd="@id/start"
         app:constraintSetStart="@id/end">
         <OnClick app:targetId="@+id/iv_float_close" />
-        <KeyFrameSet>
-        </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/fab">
+        <Constraint android:id="@+id/fl_fab">
             <Layout
                 android:layout_width="132dp"
                 android:layout_height="48dp"
@@ -59,7 +58,7 @@
         </Constraint>
 
         <Constraint android:id="@+id/btn_visibility_mode">
-            <PropertySet android:visibility="invisible" />
+            <PropertySet android:visibility="visible" />
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -69,7 +68,7 @@
 
     <ConstraintSet android:id="@+id/end">
 
-        <Constraint android:id="@+id/fab">
+        <Constraint android:id="@+id/fl_fab">
             <Layout
                 android:layout_width="132dp"
                 android:layout_height="48dp"

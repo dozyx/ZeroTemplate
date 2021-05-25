@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -53,6 +54,38 @@ import io.reactivex.subjects.UnicastSubject;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+    @Test
+    public void testFlatmapSubscribeOn() {
+        Observable.just(1).flatMap(integer -> {
+            print("flatmap");
+            return Observable.just(3);
+        }).subscribeOn(Schedulers.io())
+                .subscribe(sObserver);
+    }
+
+    @Test
+    public void testSubscribeOn() {
+        Observable<Integer> observable = Observable.fromCallable(() -> {
+            print("callable");
+            return 2;
+        }).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread());
+        Observable.just(1).flatMap(integer -> {
+            print("flatmap");
+            return observable.flatMap(integer1 -> Observable.just(3));
+        }).subscribeOn(Schedulers.io())
+                .subscribe(sObserver);
+    }
+
+    @Test
+    public void testNull() {
+        Observable.fromCallable(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                return null;
+            }
+        }).subscribe(sObserver);
+    }
 
     @Test
     public void testExceptionOnNext() {

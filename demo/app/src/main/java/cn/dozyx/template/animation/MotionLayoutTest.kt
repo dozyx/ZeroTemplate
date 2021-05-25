@@ -9,16 +9,21 @@ import kotlinx.android.synthetic.main.motion_layout_test.*
 import kotlinx.android.synthetic.main.test_motion_layout_expand.*
 import timber.log.Timber
 
-class MotionLayoutTest:BaseActivity() {
+class MotionLayoutTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 /*        button.setOnClickListener{
 //            motionLayout.transitionToEnd()
             motionLayout.transitionToState(R.id.transition2)
         }*/
-        btn_visibility_mode.visibility = View.INVISIBLE
+//        btn_visibility_mode.visibility = View.INVISIBLE
         btn_visibility_mode.setOnClickListener {
             Timber.d("MotionLayoutTest click")
+            if (fab.isExtended) {
+                fab.shrink()
+            } else {
+                fab.extend()
+            }
         }
         motion_layout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
@@ -38,6 +43,7 @@ class MotionLayoutTest:BaseActivity() {
             }
         })
     }
-//    override fun getLayoutId() = R.layout.motion_layout_test
+
+    //    override fun getLayoutId() = R.layout.motion_layout_test
     override fun getLayoutId() = R.layout.test_motion_layout_expand
 }
