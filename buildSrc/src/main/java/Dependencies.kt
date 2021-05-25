@@ -28,6 +28,7 @@ object Deps {
     val percentlayout = "androidx.percentlayout:percentlayout:${Version.percentlayout}"
     val universalImageLoader = "com.nostra13.universalimageloader:universal-image-loader:${Version.universalImageLoader}"
     val material = "com.google.android.material:material:${Version.material}"
+    val rxjava1 = "io.reactivex:rxjava:${Version.rxjava1}"
     val rxjava2 = "io.reactivex.rxjava2:rxjava:${Version.rxjava2}"
     val rxjava3 = "io.reactivex.rxjava3:rxjava:${Version.rxjava3}"
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
@@ -257,6 +258,7 @@ object Version {
     const val tencent_mid = "4.0.6-release" // 信鸽、腾讯统计依赖
     const val tencent_mta = "3.3.1-release" // 腾讯统计
     const val volley = "1.1.1"
+    const val rxjava1 = "1.2.1"
     const val rxjava2 = "2.2.16"
     const val rxjava3 = "3.0.12"
     const val kotlin = "1.3.31"

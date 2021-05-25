@@ -25,6 +25,7 @@ class PopupWindowActivity : BaseTestActivity() {
             window.setBackgroundDrawable(ColorDrawable())
 //            window.height = window.getMaxAvailableHeight(button)
 //            window.overlapAnchor = true // 显示在 anchor 上方还是下方
+
             window.showAsDropDown(button)
         })
     }

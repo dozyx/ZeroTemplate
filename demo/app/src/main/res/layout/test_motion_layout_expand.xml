@@ -4,7 +4,6 @@
     android:id="@+id/motion_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:rotationX="6"
     app:layoutDescription="@xml/test_motion_layout_expand_scene">
 
     <androidx.constraintlayout.widget.Guideline
@@ -21,10 +20,29 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="132dp"
-        android:layout_height="48dp" />
+    <LinearLayout
+        android:id="@+id/fl_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#3E8BFF"
+            android:gravity="center"
+            android:text="lock"
+            app:icon="@drawable/ic_add"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            app:iconSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_widget" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_float_close"

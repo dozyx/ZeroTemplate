@@ -1,19 +1,11 @@
 package cn.dozyx.template.database.room
 
-import android.content.Context
-import android.database.sqlite.SQLiteDatabase
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.storage.StorageManager
-import androidx.core.content.ContextCompat
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import cn.dozyx.core.utli.executor.get
-import cn.dozyx.template.R
 import cn.dozyx.template.base.BaseTestActivity
-import com.blankj.utilcode.util.ImageUtils
-import com.nostra13.universalimageloader.utils.StorageUtils
 import timber.log.Timber
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -67,7 +59,7 @@ class RoomActivity : BaseTestActivity() {
         })
 
         addButton("添加大量数据", Runnable {
-            for (i in 0..10){
+            for (i in 0..10) {
                 thread {
                     for (i in 0..1000) {
                         val user = generateFakeUser(100000)
@@ -84,7 +76,7 @@ class RoomActivity : BaseTestActivity() {
         })
 
         addButton("添加数据集合", Runnable {
-            for (i in 0..10){
+            for (i in 0..10) {
                 thread {
                     val users = mutableListOf<User>()
                     for (i in 0..1000) {
@@ -109,22 +101,24 @@ class RoomActivity : BaseTestActivity() {
 
         addButton("删除数据", Runnable {
 //            for (i in 0..10){
-                thread {
-                    val users = appDatabase?.userDao()?.all
-                    users?.forEachIndexed { index, user ->
-                        if (index  == 0) {
-                            Timber.d("删除数据 $index ${user.uid}")
-                            appDatabase?.userDao()?.delete(user)
-                        }
+            thread {
+                val users = appDatabase?.userDao()?.all
+                users?.forEachIndexed { index, user ->
+                    if (index == 0) {
+                        Timber.d("删除数据 $index ${user.uid}")
+                        appDatabase?.userDao()?.delete(user)
                     }
+                }
 //                }
             }
         })
     }
 
     private fun createDatabase(): AppDatabase {
-        return Room.databaseBuilder(applicationContext, AppDatabase::class.java,
-                "database-name").addCallback(object : RoomDatabase.Callback() {
+        val roomDb = Room.databaseBuilder(
+            applicationContext, AppDatabase::class.java,
+            "database-name"
+        ).addCallback(object : RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 // 并不是在 build 的时候就回调，而是在正式访问读写数据库时调用
@@ -133,6 +127,8 @@ class RoomActivity : BaseTestActivity() {
                     val user = generateFakeUser()
 //                    db.insert("User", SQLiteDatabase.CONFLICT_REPLACE, user.toContentValue())
                 }
+
+//                appDatabase?.userDao()?.insertAll(generateFakeUser()) // 会导致 onCreate 被递归调用
                 Timber.d("Callback RoomActivity.onCreate end")
             }
 
@@ -141,6 +137,7 @@ class RoomActivity : BaseTestActivity() {
                 Timber.d("Callback RoomActivity.onOpen")
             }
         }).build()
+        return roomDb
     }
 
     private fun generateFakeUser(idBound: Int = 1000): User {

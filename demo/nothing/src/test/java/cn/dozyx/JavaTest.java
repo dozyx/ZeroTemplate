@@ -133,6 +133,37 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testStringBuilder() {
+        String str = "123";
+        StringBuilder builder = new StringBuilder(str);
+//        print(builder.delete(0, builder.length() - 1));
+        print(builder.append("456", 0, 2));
+        print(builder.append("456", 2, 3));
+    }
+
+    @Test
+    public void testStatic() {
+        Singleton instance = Singleton.INSTANCE;
+        print(instance.a);
+    }
+
+    private static class Singleton {
+        private static final Singleton INSTANCE = new Singleton();
+        private static final MyObject CONSTANT = new MyObject();
+        private MyObject a = CONSTANT;
+
+        public Singleton() {
+            print("a: " + a);
+        }
+    }
+
+    private static class MyObject {
+        public MyObject() {
+            print("init MyObject");
+        }
+    }
+
+    @Test
     public void testCeil() {
         print(Math.ceil(0.1));
         print(Math.ceil(0.5));
@@ -315,7 +346,8 @@ public class JavaTest {
 
     @Test
     public void testFilePath() {
-        File file = new File("../../test.txt");
+//        File file = new File("../../test.txt");
+        File file = new File(".","test.txt");
         print(file.getPath());// 可能是一个相对的路径
         print(file.getAbsolutePath());// .. 完整路径，.. 会被保留
         try {
@@ -337,16 +369,24 @@ public class JavaTest {
         data.add(1);
         data.add(2);
         data.add(3);
-        /*for (int i = 0; i < data.size(); i++) {
-            if (data.get(i) == 2){
-                data.remove(i);
+        boolean hasRemoved = false;
+        for (int i = 0; i < data.size(); i++) {
+            print("for " + i);
+            if (!hasRemoved) {
+                data.remove(1);
+                hasRemoved = true;
             }
-        }*/
-        for (Integer i : data) {
+//            print(data.get(i));
+//            if (data.get(i) == 1){
+//                data.remove(i);
+//            }
+        }
+        print("size: " + data.size());
+        /*for (Integer i : data) {
             if (i == 2) {
                 data.remove(i);
             }
-        }
+        }*/
         ArrayList<Object> list = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             print(list);
@@ -573,8 +613,8 @@ public class JavaTest {
 
     @Test
     public void testStringRef() {
-        String str1= new String("111");
-        String str2= new String("111");
+        String str1 = new String("111");
+        String str2 = new String("111");
         print(str1 == str2);
     }
 
@@ -959,6 +999,25 @@ public class JavaTest {
     }
 
     @Test
+    public void testFormatArg() {
+        logDebug(getData(0));
+        logDebug("logDebug", getData(1));
+    }
+
+    private void logDebug(String msg) {
+        print("logDebug: " + msg);
+    }
+
+    private void logDebug(String message, Object... args) {
+        print("logDebug args: " + message);
+    }
+
+    private String getData(int flag) {
+        print("getData: " + flag);
+        return "flag: " + flag;
+    }
+
+    @Test
     public void testBidDecimal() {
         print(BigDecimal.valueOf(1.000).stripTrailingZeros());
         print(new BigDecimal(1.01).toString());
@@ -1325,6 +1384,8 @@ public class JavaTest {
         e = new RuntimeException("this is runtime exception1", e);
         e = new RuntimeException("this is runtime exception2", e);
         e = new RuntimeException("this is runtime exception3", e);
+//        e = new RuntimeException(e);
+        // 不传 message 的话，将把 cause.toString() 打印出来
         throw e;
 //        print(e);
 //        print(e.getCause());
@@ -1561,6 +1622,24 @@ public class JavaTest {
         DateInter dateInter = new DateInter();
         dateInter.setValue(new Date());
 //        dateInter.setValue(new Object()); //编译错误
+    }
+
+    public List<Integer> list = new ArrayList<>();
+
+    @Test
+    public void testReadGeneric() throws NoSuchFieldException {
+        List<String> list = new ArrayList<>();
+        Type[] genericInterfaces = list.getClass().getGenericInterfaces();
+        print(Arrays.toString(genericInterfaces));
+        Type firstInterface = genericInterfaces[0];
+        print(firstInterface instanceof ParameterizedType);
+        print((Arrays.toString(((ParameterizedType) firstInterface).getActualTypeArguments())));
+
+        Type genericSuperclass = list.getClass().getGenericSuperclass();
+        print(genericSuperclass);
+
+        Field field = JavaTest.class.getField("list");
+        print(Arrays.toString(((ParameterizedType) field.getGenericType()).getActualTypeArguments()));
     }
 
     class Pair<T> {
@@ -2164,6 +2243,25 @@ public class JavaTest {
         int i = Integer.MAX_VALUE + 1;
         print(i);
         print(Integer.MAX_VALUE);
+        ClassB classB = new ClassB();
+        try {
+            classB.foo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+
+    static class ClassA {
+        public void foo() throws Exception {
+
+        }
+    }
+
+    static class ClassB extends ClassA {
+        @Override
+        public void foo() throws Exception {
+            super.foo();
+        }
+    }
 }
