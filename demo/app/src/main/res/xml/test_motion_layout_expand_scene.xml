@@ -18,7 +18,7 @@
     <ConstraintSet android:id="@+id/start">
         <Constraint android:id="@+id/fl_fab">
             <Layout
-                android:layout_width="132dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 app:layout_constraintEnd_toEndOf="@id/gl_vertical"
                 app:layout_constraintTop_toTopOf="@id/gl_horizontal" />
@@ -70,7 +70,7 @@
 
         <Constraint android:id="@+id/fl_fab">
             <Layout
-                android:layout_width="132dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 app:layout_constraintEnd_toEndOf="@id/gl_vertical"
                 app:layout_constraintTop_toTopOf="@id/gl_horizontal" />

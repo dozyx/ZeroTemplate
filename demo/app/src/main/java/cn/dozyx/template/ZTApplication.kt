@@ -44,7 +44,7 @@ class ZTApplication : BaseApplication() {
         initDoraemon()
         initFlipper()
         // attach 调试之后，Debug.isDebuggerConnected() 才会返回 true
-        Timber.d("ZTApplication.onCreate Debug.isDebuggerConnected(): ${Debug.isDebuggerConnected()}")
+//        Timber.d("ZTApplication.onCreate Debug.isDebuggerConnected(): ${Debug.isDebuggerConnected()}")
     }
 
     private fun initDoraemon() {

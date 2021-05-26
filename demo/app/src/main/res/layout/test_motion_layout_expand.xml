@@ -30,18 +30,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#3E8BFF"
-            android:gravity="center"
             android:text="lock"
             app:icon="@drawable/ic_add"
-            app:iconGravity="textStart"
             app:iconPadding="0dp"
+            app:iconGravity="textStart"
             android:clickable="false"
             android:focusable="false"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
-            app:iconSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switch_widget" />
+            app:iconSize="14sp" />
     </LinearLayout>
 
     <ImageView
