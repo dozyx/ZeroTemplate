@@ -17,9 +17,9 @@
         android:layout_height="2dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="24dp"
+        android:indeterminate="false"
         android:indeterminateDrawable="@drawable/progress"
         android:indeterminateTint="@color/progress"
-        android:indeterminate="false"
         android:indeterminateTintMode="src_in"
         android:progress="30"
         android:progressDrawable="@drawable/progress" />
@@ -33,12 +33,12 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/progress_bar_bg"
         android:indeterminate="false"
-        android:progress="30"
         android:indeterminateOnly="false"
-        app:mpb_setBothDrawables="true"
+        android:progress="30"
         app:mpb_indeterminateTint="@color/progress"
         app:mpb_progressStyle="horizontal"
         app:mpb_progressTint="@color/progress"
+        app:mpb_setBothDrawables="true"
         app:mpb_showProgressBackground="false"
         app:mpb_useIntrinsicPadding="false" />
 
@@ -55,4 +55,25 @@
         app:trackColor="#3DB2B2B2"
         app:trackCornerRadius="2dp"
         app:trackThickness="2dp" />
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:indeterminate="false"
+        android:indeterminateBehavior="cycle"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:progress="30"
+        android:progressDrawable="@drawable/progress_circle" />
+
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:indicatorSize="100dp"
+        android:progress="100"
+        app:indicatorInset="10dp"
+        app:trackCornerRadius="8dp"
+        app:indicatorColor="@color/colorAccent" />
 </LinearLayout>

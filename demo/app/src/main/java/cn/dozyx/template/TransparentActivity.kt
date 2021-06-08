@@ -12,6 +12,6 @@ import com.blankj.utilcode.util.ActivityUtils
 class TransparentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivityUtils.startActivity(MainActivity::class.java)
+        setContentView(R.layout.activity_general)
     }
 }

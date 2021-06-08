@@ -435,7 +435,7 @@ class NotificationTest : BaseTestActivity() {
 //                        .setTimeoutAfter(10)// 超时后自动取消通知
 //                        .setTicker("ticker")// 用于辅助服务，Android 5.0 之前在触发通知时会显示在状态栏？
 //                        .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
-                        .setSortKey("$notificationId")// 按字典顺序对通知进行排序，比如 "0"、"1"，前者会在上面。但是 importance 会知道这个设置无效，importance 的会一直在前面。。。
+                        .setSortKey("$notificationId")// 按字典顺序对通知进行排序，比如 "0"、"1"，前者会在上面。但是 importance 会导致这个设置无效，importance 高的会一直在前面。。。
                         .setGroup(GROUP_KEY_TEST)
 //                        .setStyle(CustomStyle())
                 // 关于排序(模拟器 API29)

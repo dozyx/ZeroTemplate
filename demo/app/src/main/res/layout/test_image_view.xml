@@ -11,4 +11,17 @@
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_rotate"
+        app:srcCompat="@drawable/ic_rotate"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:indeterminate="false"
+        android:indeterminateDrawable="@drawable/ic_rotate"
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
 </LinearLayout>

@@ -32,8 +32,8 @@ open class LaunchModeTest : BaseTestActivity() {
 
         addAction(object : Action("singleInstance") {
             override fun run() {
-//                startActivity(Intent(this@LaunchModeTest, SingleInstanceLaunchModeTest::class.java))
-                startActivityForResult(Intent(this@LaunchModeTest, SingleInstanceLaunchModeTest::class.java), 0)
+                startActivity(Intent(this@LaunchModeTest, SingleInstanceLaunchModeTest::class.java))
+//                startActivityForResult(Intent(this@LaunchModeTest, SingleInstanceLaunchModeTest::class.java), 0)
             }
         })
 

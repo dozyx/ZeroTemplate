@@ -198,7 +198,8 @@
         <activity
             android:name=".activity.LaunchModeTest$SingleInstanceLaunchModeTest"
             android:exported="true"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"/>
+<!--            android:taskAffinity=".SingleInstance" />-->
         <activity
             android:name=".activity.LaunchModeTest$SingleTaskLaunchModeTestWithTaskAffinity"
             android:exported="true"
@@ -463,7 +464,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FileActivity"
+            android:name=".FileTest"
             android:label="@string/file_basic">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

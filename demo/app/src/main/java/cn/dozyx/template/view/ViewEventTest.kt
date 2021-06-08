@@ -27,7 +27,7 @@ class ViewEventTest : BaseActivity() {
             setViewFocus(window.decorView)// 不能接收 key event
             setViewFocus(btn1)
             setViewFocus(btn2)
-            setViewFocus(tv1)
+//            setViewFocus(tv1)
             // 只有当前焦点的 view 会接收到 key event
         }
         window.decorView.setOnKeyListener { v, keyCode, event ->
@@ -48,7 +48,7 @@ class ViewEventTest : BaseActivity() {
         btn2.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
                 Timber.d("btn2 on back")
-                return@setOnKeyListener true
+                return@setOnKeyListener false
             }
             return@setOnKeyListener false
         }
@@ -56,7 +56,10 @@ class ViewEventTest : BaseActivity() {
         tv1.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
                 Timber.d("tv1 on back")
-                return@setOnKeyListener true
+//                return@setOnKeyListener true // 返回 true 的话，Activity#onBackPressed 不会再被触发
+                return@setOnKeyListener false
+            // 返回 false 的话，会触发 Activity#onBackPressed。
+            // 如果给多个 view 设置了 OnKeyListener，最后一个返回 false，那么还是不会触发前一个，而是交给了 Activity。
             }
             return@setOnKeyListener false
         }
