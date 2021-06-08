@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.template.R
 import kotlinx.android.synthetic.main.activity_widget_test.*
 
+/**
+ * 测试各种控件的使用
+ */
 class WidgetTest : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

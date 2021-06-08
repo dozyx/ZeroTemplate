@@ -2,6 +2,8 @@ package cn.dozyx.template
 
 import android.content.Context
 import android.content.Intent
+import android.database.ContentObserver
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -9,6 +11,7 @@ import android.os.Environment.DIRECTORY_PICTURES
 import android.os.StatFs
 import android.os.storage.StorageManager
 import android.os.storage.StorageVolume
+import android.provider.MediaStore
 import android.text.TextUtils
 import androidx.core.content.ContextCompat
 import cn.dozyx.core.utli.system.StorageUtils
@@ -17,11 +20,10 @@ import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.SDCardUtils
 import timber.log.Timber
-import java.io.File
-import java.io.FileOutputStream
+import java.io.*
 import java.util.*
 
-class FileActivity : BaseTestActivity() {
+class FileTest : BaseTestActivity() {
     private val REQUEST_CODE_SD_CARD = 42
     override fun initActions() {
         logStorageInfo()
@@ -42,7 +44,7 @@ class FileActivity : BaseTestActivity() {
 
         addAction(object : Action("volumns reflect") {
             override fun run() {
-                val mountedVolumeList = StorageUtils.getMountedVolumeList(this@FileActivity)
+                val mountedVolumeList = StorageUtils.getMountedVolumeList(this@FileTest)
                 mountedVolumeList.forEach {
                     Timber.d("storageVolume: $it")
                 }
@@ -141,7 +143,7 @@ class FileActivity : BaseTestActivity() {
 
                 // 外置存储
                 Timber.d("Environment.getExternalStorageState(): ${Environment.getExternalStorageState()}")
-                ContextCompat.getExternalFilesDirs(this@FileActivity, null/*DIRECTORY_PICTURES*/).forEach {
+                ContextCompat.getExternalFilesDirs(this@FileTest, null/*DIRECTORY_PICTURES*/).forEach {
                     // getExternalFilesDirs 的 type 传 null 返回的是私有目录的 files 根目录
                     // 有时候设备会将内置存储的一部分作为外置存储
                     // getExternalFilesDirs 返回的第一个 volume 是主要的外置存储 volume
@@ -256,6 +258,41 @@ class FileActivity : BaseTestActivity() {
                 val file = File(Environment.getDownloadCacheDirectory(), "1.txt")
                 Timber.d("file.name: ${file.name}") // 会包含扩展名
                 Timber.d("file.name: ${File("${Environment.getDownloadCacheDirectory()}${File.separator}").name}")
+            }
+        })
+
+        addAction(object : Action("observe") {
+            override fun run() {
+                observeMediaFileChanged()
+            }
+        })
+
+        addAction(object : Action("delete") {
+            override fun run() {
+                val file = File(Environment.getExternalStorageDirectory(), "1.txt")
+                if (!file.exists()){
+                    file.createNewFile()
+                }
+                val fileWriter = FileWriter(file.absolutePath)
+                fileWriter.write("0")
+                fileWriter.flush()
+                val result = file.delete()
+                Timber.d("FileTest delete result: $result")
+            }
+        })
+    }
+
+    private fun observeMediaFileChanged() {
+        contentResolver.registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, object :ContentObserver(null){
+            override fun onChange(selfChange: Boolean) {
+                super.onChange(selfChange)
+                Timber.d("FileTest.onChange")
+            }
+
+            override fun onChange(selfChange: Boolean, uri: Uri?) {
+                super.onChange(selfChange, uri)
+                // 回调有点慢，可能有个 10s 的延迟
+                Timber.d("FileTest.onChange ${uri?.toString()}")
             }
         })
     }

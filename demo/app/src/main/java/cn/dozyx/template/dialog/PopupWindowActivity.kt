@@ -1,12 +1,14 @@
 package cn.dozyx.template.dialog
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import cn.dozyx.template.R
+import cn.dozyx.template.TransparentActivity
 import cn.dozyx.template.base.BaseTestActivity
 
 class PopupWindowActivity : BaseTestActivity() {
@@ -28,6 +30,10 @@ class PopupWindowActivity : BaseTestActivity() {
 
             window.showAsDropDown(button)
         })
+
+        addButton("启动透明 activity") {
+            startActivity(Intent(this, TransparentActivity::class.java))
+        }
     }
 }
 

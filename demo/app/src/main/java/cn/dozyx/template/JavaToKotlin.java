@@ -17,6 +17,7 @@ import io.reactivex.functions.Function;
  **/
 public class JavaToKotlin {
 
+
   public static void foo(){
 
   }
@@ -46,4 +47,18 @@ public class JavaToKotlin {
         getLogInstance(GestureDetector.OnGestureListener.class);
     }
 
+    public static class ClassA {
+        public Integer integer;
+
+        public ClassA(Integer integer) {
+            this.integer = integer;
+        }
+    }
+
+    public static class ClassB extends ClassA{
+        public ClassB( ) {
+            super(1);
+            integer = 2;
+        }
+    }
 }

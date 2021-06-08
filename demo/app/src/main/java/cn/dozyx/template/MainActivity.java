@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.blankj.utilcode.util.ThreadUtils;
+import com.gyf.barlibrary.ImmersionBar;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ImmersionBar.with(this).init();
         super.onCreate(savedInstanceState);
 //        new Handler().postDelayed(new Runnable() {
 //            @Override

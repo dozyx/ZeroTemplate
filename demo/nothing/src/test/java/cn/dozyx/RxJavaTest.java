@@ -42,6 +42,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
@@ -70,11 +71,15 @@ public class RxJavaTest {
             print("callable");
             return 2;
         }).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread());
-        Observable.just(1).flatMap(integer -> {
-            print("flatmap");
-            return observable.flatMap(integer1 -> Observable.just(3));
-        }).subscribeOn(Schedulers.io())
+        Observable.just(1)
+                .observeOn(Schedulers.newThread()) // RxNewThreadScheduler
+                .flatMap(integer -> {
+                    print("flatmap");
+                    return observable.flatMap(integer1 -> Observable.just(3));
+                })
+                .subscribeOn(Schedulers.io()) // RxCachedThreadScheduler
                 .subscribe(sObserver);
+        sleep(1);
     }
 
     @Test
@@ -836,15 +841,16 @@ public class RxJavaTest {
         }).subscribe(s -> System.out.println("RECEIVED: " + s), Throwable::printStackTrace);
     }
 
+    @Test
     public void testInterval() {
-        Observable<Long> secondIntervals = Observable.interval(1, TimeUnit.SECONDS);
-        secondIntervals.subscribe(s -> {
-            print(s.toString() + Thread.currentThread());
-        });
-        /* Hold main thread for 5 seconds so Observable above has chance to fire */
-        print("sleep start" + Thread.currentThread());
+        print("test start");
+        Observable<Long> secondIntervals = Observable.interval(0, 500, TimeUnit.MILLISECONDS);
+        secondIntervals
+                .takeWhile(aLong -> aLong <= 2)
+                .subscribe(sObserver);
+        print("sleep start");
         sleep(5);
-        print("sleep end" + Thread.currentThread());
+        print("sleep end");
     }
 
     public void sleep(int timeInSecond) {

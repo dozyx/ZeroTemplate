@@ -1,0 +1,25 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="2dp" />
+            <solid android:color="@color/progress_bg" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <!--<scale android:scaleWidth="100%">
+            <shape>
+                <corners android:radius="2dp" />
+                <solid android:color="#FF3E8BFF" />
+            </shape>
+        </scale>-->
+        <!--        不能直接是一个 shape-->
+        <clip>
+            <shape>
+                <corners android:radius="2dp" />
+                <solid android:color="#FF3E8BFF" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

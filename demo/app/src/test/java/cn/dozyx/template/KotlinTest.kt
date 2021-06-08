@@ -18,6 +18,21 @@ class KotlinTest {
     private fun getString() = "Hello"
 
     @Test
+    fun testNothing() {
+        returnNothing()
+        doNothing(null)
+    }
+
+    private fun doNothing(nothing: Nothing?) {
+
+    }
+
+    private fun returnNothing():Nothing {
+//        return null // 会报错，因为返回值不是 Nothing?
+        throw NullPointerException()
+    }
+
+    @Test
     fun testToByteArray() {
         val str = "文件名"
         print(str.lastIndexOf(str))
