@@ -23,6 +23,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+import cn.dozyx.exception.MyException;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
@@ -92,6 +93,37 @@ public class RxJavaTest {
         }).subscribe(sObserver);
     }
 
+    public void testExceptionInMap() {
+        Observable.just("1").map(new Function<String, Integer>() {
+            @Override
+            public Integer apply(@NonNull String s) throws Exception {
+//                throw new NullPointerException();
+                throw new MyException(null);
+//                return Integer.valueOf(s);
+            }
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Integer integer) {
+                print("onNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                print("onError " + e);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
     @Test
     public void testExceptionOnNext() {
         Observable.just(1).doOnNext(integer -> {
@@ -106,6 +138,7 @@ public class RxJavaTest {
             @Override
             public void onNext(@NotNull Integer integer) {
                 print("onNext1");
+                // 异常可以被捕获
                 throw new NullPointerException();
             }
 

@@ -29,17 +29,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_widget" />
 
-    <FrameLayout
+    <!--<FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp">
-
+-->
         <androidx.cardview.widget.CardView
             android:layout_width="200dp"
             android:layout_height="100dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="4dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Hello"/>
+        </androidx.cardview.widget.CardView>
+<!--    </FrameLayout>-->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/colorAccent"
             app:cardElevation="1.5dp" />
     </FrameLayout>
 
@@ -47,7 +68,15 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_marginTop="24dp"
-        android:background="@color/white"
-        android:elevation="4dp" />
+        android:background="@android:color/transparent"
+        android:elevation="40dp" />
+
+
+    <View
+        android:layout_width="192dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="158dp"
+        android:background="@drawable/ic_shadow" />
+
 
 </LinearLayout>
