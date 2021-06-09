@@ -17,6 +17,12 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    buildTypes {
+        internal{
+            initWith debug
+        }
+    }
+
     flavorDimensions "mode"
     productFlavors {
         getThisObject().properties.clear()

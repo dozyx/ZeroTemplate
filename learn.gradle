@@ -13,3 +13,24 @@ task foo() {
 project.afterEvaluate {
     println()
 }
+
+
+void methodA() {
+
+}
+
+methodB { methodA() }
+
+void methodB(Closure closure) {
+
+}
+
+
+class A {
+    void methodMissing(String name, Object... args) {
+        print(name)
+    }
+}
+
+def a = new A()
+//a.foo()
