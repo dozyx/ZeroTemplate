@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import cn.dozyx.core.base.BaseActivity
+import cn.dozyx.core.ex.dp
 import cn.dozyx.template.R
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -22,7 +22,7 @@ class ItemAnimatorTest : BaseActivity() {
     private lateinit var adapter: CustomAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btn_remove.setOnClickListener {
+        btn_remove_update.setOnClickListener {
             val item = adapter.getItem(0)
             item.status = "finish"
             adapter.notifyItemChanged(0)
@@ -42,7 +42,7 @@ class ItemAnimatorTest : BaseActivity() {
                 adapter.data.removeAt(0)
                 adapter.notifyItemRemoved(0)
             }
-            Handler().postDelayed( {
+            Handler().postDelayed({
 //                adapter.data.removeAt(0)
 //                adapter.notifyItemRemoved(0)
             }, 500)
@@ -50,6 +50,11 @@ class ItemAnimatorTest : BaseActivity() {
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
 //            adapter.notifyItemChanged(0)
 //            adapter.removeAt(0)
+        }
+        btn_remove.setOnClickListener {
+//            adapter.removeAt(0)
+            adapter.data.removeAt(0)
+            adapter.notifyItemRemoved(0)
         }
         adapter = CustomAdapter().also {
             it.data = mutableListOf(
@@ -61,7 +66,7 @@ class ItemAnimatorTest : BaseActivity() {
         rv.adapter = adapter
 //        rv.itemAnimator = FlyAnimator()
 //        rv.itemAnimator = DefaultItemAnimator()
-//        rv.itemAnimator = CustomItemAnimator()
+        rv.itemAnimator = TopFadeOutItemAnimator()
     }
 
     override fun getLayoutId() = R.layout.tese_item_animator
@@ -75,59 +80,145 @@ class ItemAnimatorTest : BaseActivity() {
     }
 }
 
-class CustomItemAnimator : RecyclerView.ItemAnimator() {
-    override fun animateDisappearance(
-        viewHolder: RecyclerView.ViewHolder,
-        preLayoutInfo: ItemHolderInfo,
-        postLayoutInfo: ItemHolderInfo?
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+class TopFadeOutItemAnimator : SimpleItemAnimator() {
 
-    override fun animateAppearance(
-        viewHolder: RecyclerView.ViewHolder,
-        preLayoutInfo: ItemHolderInfo?,
-        postLayoutInfgo: ItemHolderInfo
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+    private val mPendingRemovals = ArrayList<RecyclerView.ViewHolder>()// 记录将要动画的 item 信息
+    private var mRemoveAnimations = ArrayList<RecyclerView.ViewHolder>()// 记录开始动画的 item 信息
+    private val mPendingMoves = ArrayList<RecyclerView.ViewHolder>()
+    private var mMoveAnimations = ArrayList<RecyclerView.ViewHolder>()
+    private val duration = 2000L
 
-    override fun animatePersistence(
-        viewHolder: RecyclerView.ViewHolder,
-        preLayoutInfo: ItemHolderInfo,
-        postLayoutInfo: ItemHolderInfo
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun animateChange(
-        oldHolder: RecyclerView.ViewHolder,
-        newHolder: RecyclerView.ViewHolder,
-        preLayoutInfo: ItemHolderInfo,
-        postLayoutInfo: ItemHolderInfo
-    ): Boolean {
-        TODO("Not yet implemented")
+    override fun animateAdd(holder: RecyclerView.ViewHolder?): Boolean {
+        Timber.d("CustomItemAnimator.animateAdd")
+        return false
     }
 
     override fun runPendingAnimations() {
-        TODO("Not yet implemented")
+        Timber.d("CustomItemAnimator.runPendingAnimations")
+        if (mPendingRemovals.isEmpty() || mPendingMoves.isEmpty()) {
+            return
+        }
+        for (holder in mPendingRemovals) {
+            animRemoveImpl(holder)
+        }
+        mPendingRemovals.clear()
+
+        for (holder in mPendingMoves) {
+            animMoveImpl(holder)
+        }
+        mPendingMoves.clear()
     }
 
-    override fun endAnimation(item: RecyclerView.ViewHolder) {
-        TODO("Not yet implemented")
+    private fun animMoveImpl(holder: RecyclerView.ViewHolder) {
+        val view = holder.itemView
+        view.animate().translationY(0f)
+        val animation = view.animate()
+        mMoveAnimations.add(holder)
+        animation.setDuration(duration).setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animator: Animator) {
+                dispatchMoveStarting(holder)
+            }
+
+            override fun onAnimationCancel(animator: Animator) {
+                view.translationY = 0f
+            }
+
+            override fun onAnimationEnd(animator: Animator) {
+                animation.setListener(null)
+                dispatchMoveFinished(holder)
+                mMoveAnimations.remove(holder)
+                dispatchFinishedWhenDone()
+            }
+        }).start()
     }
 
-    override fun endAnimations() {
-        TODO("Not yet implemented")
+    private fun dispatchFinishedWhenDone() {
+        if (!isRunning) {
+            dispatchAnimationsFinished()
+        }
+    }
+
+    private fun animRemoveImpl(holder: RecyclerView.ViewHolder) {
+        val view = holder.itemView
+        val animation = view.animate()
+        mRemoveAnimations.add(holder)
+        animation.setDuration(duration).alpha(0f).scaleX(0.6F).scaleY(0.6F)
+            .translationYBy((-96).dp).setListener(
+                object : AnimatorListenerAdapter() {
+                    override fun onAnimationStart(animator: Animator) {
+                        dispatchRemoveStarting(holder)
+                    }
+
+                    override fun onAnimationEnd(animator: Animator) {
+                        animation.setListener(null)
+                        view.alpha = 1f
+                        dispatchRemoveFinished(holder)
+                        mRemoveAnimations.remove(holder)
+                        dispatchFinishedWhenDone()
+                    }
+                }).start()
+    }
+
+    override fun animateMove(
+        holder: RecyclerView.ViewHolder,
+        fromX: Int,
+        fromY: Int,
+        toX: Int,
+        toY: Int
+    ): Boolean {
+        Timber.d("CustomItemAnimator.animateMove ${holder.absoluteAdapterPosition}")
+        // 虽然只是实现移除动画，但还是需要实现 move，要不然移除之后，其他 item 会直接没有动画地变换位置
+        val view = holder.itemView
+        val deltaY = toY - fromY
+        if (deltaY == 0) {
+            dispatchMoveFinished(holder)
+            return false
+        }
+        if (deltaY != 0) {
+            view.translationY = -deltaY.toFloat()// 维持在原来的位置，通过动画移入新位置
+        }
+        mPendingMoves.add(holder)
+        return false
+    }
+
+    override fun animateChange(
+        oldHolder: RecyclerView.ViewHolder?,
+        newHolder: RecyclerView.ViewHolder?,
+        fromLeft: Int,
+        fromTop: Int,
+        toLeft: Int,
+        toTop: Int
+    ): Boolean {
+        Timber.d("CustomItemAnimator.animateChange")
+        return false
     }
 
     override fun isRunning(): Boolean {
-        TODO("Not yet implemented")
+        // 当前是否有动画正在运行
+        return mPendingRemovals.isEmpty() && mPendingMoves.isEmpty() && mRemoveAnimations.isEmpty() && mMoveAnimations.isEmpty()
+    }
+
+    override fun endAnimation(item: RecyclerView.ViewHolder) {
+        Timber.d("CustomItemAnimator.endAnimation")
+    }
+
+    override fun animateRemove(holder: RecyclerView.ViewHolder): Boolean {
+        Timber.d("CustomItemAnimator.animateRemove ${holder.absoluteAdapterPosition}")
+        mPendingRemovals.add(holder)
+        return true
+    }
+
+    override fun endAnimations() {
+        Timber.d("CustomItemAnimator.endAnimations")
+
     }
 }
 
 data class StatusString(val text: String, var status: String)
 
+/**
+ * 移除时向左移出
+ */
 class FlyAnimator : SimpleItemAnimator() {
     private var removeHolders: MutableList<RecyclerView.ViewHolder> = ArrayList()
     private var removeAnimators: MutableList<RecyclerView.ViewHolder> = ArrayList()

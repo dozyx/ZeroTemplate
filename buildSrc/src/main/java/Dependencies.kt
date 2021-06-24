@@ -304,7 +304,7 @@ object Version {
     const val gridlayout = "1.0.0"
     const val hyperion = "0.9.27"
     const val glide = "4.10.0"
-    const val adapter_helper = "3.0.4"
+    const val adapter_helper = "3.0.6"
     const val calligraphy = "3.1.1"
     const val viewpump = "2.0.3"
     const val auto_service = "1.0-rc6"

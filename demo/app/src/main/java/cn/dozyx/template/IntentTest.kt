@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.IntentUtils
 import kotlinx.android.synthetic.main.animation_test.*
 import kotlinx.android.synthetic.main.fragment_edit.*
 import timber.log.Timber
+import java.util.*
 
 /**
  * @author dozyx
@@ -21,10 +22,10 @@ class IntentTest : BaseTestActivity() {
     lateinit var editFragment: EditFragment
 
     companion object {
-//        const val URI_INTENT =
+        //        const val URI_INTENT =
 //                "intent://baidu.com/web?webtype=common#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end";
         const val URI_INTENT =
-                "https://docs.google.com/forms/d/1MnRQJ3XZxsRBSVp28M7Sm1M8Gm5jniE/viewform?entry.1040949360=*%7CFNAME%7C*&entry.271521054=*%7CLNAME%7C*";
+            "https://docs.google.com/forms/d/1MnRQJ3XZxsRBSVp28M7Sm1M8Gm5jniE/viewform?entry.1040949360=*%7CFNAME%7C*&entry.271521054=*%7CLNAME%7C*";
     }
 
     override fun initActions() {
@@ -44,10 +45,10 @@ class IntentTest : BaseTestActivity() {
 //                val intentString = "intent://larkgame.com?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;end;"
 //                val intentString = "intent://snaptubeapp.com/web?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;S.url=https://www.baidu.com;end;"
 //                startActivity(Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME))
-                val intentString = "http://share.getsnap.link/video"
+                val intentString = "https://snaptube.tv/2irR"
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
                 intent.addCategory(Intent.CATEGORY_DEFAULT)
-                intent.setPackage("com.snaptube.premium")
+//                intent.setPackage("com.snaptube.premium")
                 startActivity(intent)
             }
         })
@@ -55,7 +56,8 @@ class IntentTest : BaseTestActivity() {
         addAction(object : Action("market") {
             override fun run() {
                 val intentString = "market://details?id=com.xueqiu.android&referrer=utm_source%3Dst"
-                val intent = Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME)
+                val intent =
+                    Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME)
                 startActivity(intent)
             }
         })
@@ -67,7 +69,8 @@ class IntentTest : BaseTestActivity() {
                 intent.setPackage("com.snaptube.premium")
                 intent.putExtra(Intent.EXTRA_TEXT, "https://youtu.be/E3RBFhyjjqU")
                 startActivity(intent)
-                val resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+                val resolveInfos =
+                    packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
                 resolveInfos.forEachIndexed { index, resolveInfo ->
                     Timber.d("IntentTest.run $index $resolveInfo")
                 }
@@ -88,8 +91,10 @@ class IntentTest : BaseTestActivity() {
         val launchIntent = IntentUtils.getLaunchAppIntent(packageName)
         addAction(object : Action("Pending Intent") {
             override fun run() {
-                val pendingIntent = PendingIntent.getActivity(this@IntentTest, 0,
-                        launchIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+                val pendingIntent = PendingIntent.getActivity(
+                    this@IntentTest, 0,
+                    launchIntent, PendingIntent.FLAG_CANCEL_CURRENT
+                )
                 Timber.d("IntentTest.run $pendingIntent")
             }
         })
@@ -117,9 +122,34 @@ class IntentTest : BaseTestActivity() {
         addAction(object : Action("print") {
             override fun run() {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse("https://static.snaptube.in/snaptube/mothersday2021/image_1.png")
+                intent.data =
+                    Uri.parse("https://static.snaptube.in/snaptube/mothersday2021/image_1.png")
                 Timber.d(intent.toUri(Intent.URI_INTENT_SCHEME))
                 startActivity(intent)
+            }
+        })
+
+        addAction(object : Action("filter test") {
+            override fun run() {
+                val intentString = "https://snaptube.tv/2irR"
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
+                val intent = Intent()
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.addCategory(Intent.CATEGORY_BROWSABLE)
+//                intent.addCategory(Intent.CATEGORY_APP_BROWSER)
+                intent.data = Uri.parse("http://dozyx.com")
+//                intent.setPackage(packageName)
+//                intent.data = Uri.parse("content://dozyx.com")
+                val resolveActivity = packageManager.resolveActivity(intent, 0)
+                Timber.d("best: $resolveActivity")
+                val activities = packageManager.queryIntentActivities(intent, 0)
+                Timber.d("match size: ${activities.size}")
+                activities.forEach {
+                    Timber.d("filter: $it}")
+                }
+                resolveActivity?.let {
+                    startActivity(intent)
+                }
             }
         })
         editFragment = EditFragment()
