@@ -783,6 +783,20 @@ public class RxJavaTest {
         }).subscribe(observer);
     }
 
+    @Test
+    public void testError2() {
+        Observable.fromCallable(new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                if (true){
+                    throw new NoSuchMethodError(); // 不会进入 onError，而是直接 crash。Exceptions#throwIfFatal
+//                    throw new NullPointerException();
+                }
+                return 1;
+            }
+        }).subscribe(sObserver);
+    }
+
     public int start = 1;
     public int count = 5;
 

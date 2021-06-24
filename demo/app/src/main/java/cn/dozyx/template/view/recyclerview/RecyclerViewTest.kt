@@ -1,5 +1,6 @@
 package cn.dozyx.template.view.recyclerview
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import cn.dozyx.constant.Shakespeare
 import cn.dozyx.core.base.BaseActivity
+import cn.dozyx.core.utli.dp
 import cn.dozyx.core.utli.util.ColorUtil
 import cn.dozyx.template.R
 import cn.dozyx.template.view.recyclerview.adapter.QuickAdapter
@@ -33,7 +35,7 @@ class RecyclerViewTest : BaseActivity() {
         super.onCreate(savedInstanceState)
         rv_common.layoutManager = getLayoutManager(LAYOUT_LINEAR)
         testListener()
-        initItemDecoration()
+        testItemDecoration()
 //        Handler().postDelayed({
         adapter = ContentAdapter()
         testDataObserver()
@@ -123,7 +125,7 @@ class RecyclerViewTest : BaseActivity() {
         btn_notify.setOnClickListener {
             // notify 可能触发 onCreateViewHolder，并且旧的 item view 会 detach
 //            adapter.notifyDataSetChanged()
-                            adapter.notifyItemChanged(2)
+            adapter.notifyItemChanged(2)
 //            adapter.notifyItemChanged(2, "1111")
 //            adapter.notifyItemChanged(2, "2222")
 //            adapter.notifyItemChanged(3, "2222")
@@ -151,13 +153,25 @@ class RecyclerViewTest : BaseActivity() {
         }
     }
 
-    private fun initItemDecoration() {
+    private fun testItemDecoration() {
         /*rv_common.addItemDecoration(
             CustomItemDecoration(
                 context!!,
                 CustomItemDecoration.VERTICAL
             )
         )*/
+        rv_common.addItemDecoration(SpaceItemDecoration())
+    }
+
+    private class SpaceItemDecoration() : ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
+            // outRect: 可以理解为给四边加上 inset。比如 top 为 10dp，那么高度为 60dp 的顶部就会增加一个 10dp 的 inset，也可以理解为 padding 或者 margin。
+//            outRect.set(0, 0, 0, 50)
+//            outRect.set(0, 50, 0, 0)
+//            outRect.set(50, 0, 0, 0)
+            outRect.set(-100, 0, 0, 0)
+
+        }
     }
 
     override fun onCreateContextMenu(

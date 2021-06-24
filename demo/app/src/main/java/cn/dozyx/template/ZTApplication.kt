@@ -1,6 +1,7 @@
 package cn.dozyx.template
 
 import android.content.Context
+import android.os.Build
 import android.os.Debug
 import android.os.Handler
 import android.os.Looper
@@ -48,6 +49,9 @@ class ZTApplication : BaseApplication() {
     }
 
     private fun initDoraemon() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return
+        }
         DoraemonKit.install(this)
     }
 

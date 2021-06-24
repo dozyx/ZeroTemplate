@@ -4,6 +4,7 @@
     package="cn.dozyx.template">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -278,6 +279,18 @@
 
         <service android:name=".practice.FloatWindowActivity$FloatWindowsServices" />
         <service android:name=".service.MyIntentService" />
+        <service
+            android:name=".accessibility.MyAccessibilityService"
+            android:exported="true"
+            android:label="辅助功能 demo"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/my_accessibility_config" />
+        </service>
 
         <activity
             android:name=".view.recyclerview.RecyclerViewTest"
@@ -545,7 +558,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ResultActivity"
+            android:name=".activity.OnResultTest"
             android:label="Activity/Result">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1414,6 +1427,29 @@
         </activity>
         <activity android:name=".view.ViewEventTest"
             android:label="View/Event">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.CardViewTest"
+            android:label="View/CardView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.recyclerview.ItemAnimatorTest"
+            android:label="View/RecyclerViewItemAnimator">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".accessibility.AccessibilityTest"
+            android:label="辅助功能">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

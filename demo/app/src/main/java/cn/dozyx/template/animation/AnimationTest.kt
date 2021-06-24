@@ -29,6 +29,7 @@ class AnimationTest : BaseActivity() {
         super.onCreate(savedInstanceState)
         objectAnimator = ObjectAnimator.ofFloat(image_anim, "translationX", 0F, 300F)
         objectAnimator.duration = 2000
+        objectAnimator.startDelay = 2000
         objectAnimator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
                 Timber.d("AnimationTest.onAnimationRepeat")
@@ -53,6 +54,7 @@ class AnimationTest : BaseActivity() {
             stopTranslationAnim()
         }
         start_property.setOnClickListener {
+            Timber.d("start_property")
             objectAnimator.start()
         }
         cancel_property.setOnClickListener {

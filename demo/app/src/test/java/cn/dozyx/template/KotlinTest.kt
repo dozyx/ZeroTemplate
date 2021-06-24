@@ -18,6 +18,15 @@ class KotlinTest {
     private fun getString() = "Hello"
 
     @Test
+    fun testVarArg() {
+        foo1(null)
+    }
+
+    private fun foo1(vararg texts: String?) {
+        print("foo vararg $texts")
+    }
+
+    @Test
     fun testNothing() {
         returnNothing()
         doNothing(null)
