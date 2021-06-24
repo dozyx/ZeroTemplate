@@ -116,6 +116,7 @@ dependencies {
     implementation Deps.materialprogressbar
     implementation Deps.notchScreenTool
     implementation Deps.rxjava3
+    implementation AndroidX.activity
     debugImplementation ("${DepsDoraemonKit.dokitx}"){
         exclude group: 'com.blankj'
     }

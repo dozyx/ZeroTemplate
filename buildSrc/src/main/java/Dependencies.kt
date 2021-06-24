@@ -73,6 +73,10 @@ object Deps {
     val notchScreenTool = "com.github.smarxpan:NotchScreenTool:${Version.notchScreenTool}"
 }
 
+object AndroidX {
+    val activity = "androidx.activity:activity-ktx:${Version.androidx_activity}"
+}
+
 object DepsEventBus {
     val core = "org.greenrobot:eventbus:${Version.eventbus}"
     val processor = "org.greenrobot:eventbus-annotation-processor:${Version.eventbus}"
@@ -281,7 +285,7 @@ object Version {
     const val barUtil = "1.5.1"
     const val rxjava_adapter = "2.5.0"
     const val background = "1.5.6"
-    const val appcompat = "1.1.0-rc01"
+    const val appcompat = "1.3.0"
     const val androiddevmetrics = "0.6"
     const val koin = "1.0.2"
     const val material = "1.3.0"
@@ -296,7 +300,7 @@ object Version {
     const val percentlayout = "1.0.0"
     const val rxAndroid = "2.1.1"
     const val vectordrawable = "1.0.1"
-    const val recyclerview = "1.1.0-beta01"
+    const val recyclerview = "1.2.1"
     const val gridlayout = "1.0.0"
     const val hyperion = "0.9.27"
     const val glide = "4.10.0"
@@ -318,4 +322,5 @@ object Version {
     const val doraemonkit = "3.3.5"
     const val flipper = "0.85.0"
     const val soloader = "0.10.1"
+    const val androidx_activity = "1.2.3"
 }
