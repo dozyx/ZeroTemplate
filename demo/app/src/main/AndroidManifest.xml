@@ -1455,6 +1455,7 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".DialogActivity" android:theme="@style/Theme.AppCompat.Dialog.NoTitle" />
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>

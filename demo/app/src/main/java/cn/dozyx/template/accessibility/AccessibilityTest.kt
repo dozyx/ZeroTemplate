@@ -110,4 +110,10 @@ class AccessibilityTest : BaseTestActivity() {
 //        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
+
+    companion object {
+        // 验证混淆后，值是常量还是字符串
+        const val ANDROID_OK = android.R.string.ok
+        const val ANDROID_YES = android.R.string.yes
+    }
 }

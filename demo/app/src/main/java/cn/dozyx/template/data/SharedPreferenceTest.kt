@@ -23,6 +23,8 @@ class SharedPreferenceTest : BaseTestActivity(),
         addAction(object : Action("remove") {
             override fun run() {
                 sp.edit().remove(TEST_KEY).apply()
+                sp.edit().putString(TEST_KEY, "value").apply()
+                Timber.d("SharedPreferenceTest.run ${sp.getString(TEST_KEY, "default")}")
             }
         })
         addAction(object : Action("change") {

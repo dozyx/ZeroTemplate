@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import android.content.Context;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,4 +24,11 @@ public class ExampleInstrumentedTest {
 
         assertEquals("cn.dozyx.zerofate.zerotemplate", appContext.getPackageName());
     }
+
+    @Test
+    public void activityTest(){
+    }
+
+
+
 }

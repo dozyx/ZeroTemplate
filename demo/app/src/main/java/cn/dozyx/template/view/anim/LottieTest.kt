@@ -13,7 +13,7 @@ class LottieTest : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        lottie_view.setAnimation(R.raw.live_chat_menu)
-        lottie_view.setAnimation(R.raw.guide)
+//        lottie_view.setAnimation(R.raw.guide)
         btn_drawable.setOnClickListener {
             Timber.d("LottieTest.onCreate ${lottie_view.width} ${lottie_view.height}")
             if (isAnimDrawable) {
