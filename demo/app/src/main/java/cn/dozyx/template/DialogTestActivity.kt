@@ -2,8 +2,11 @@ package cn.dozyx.template
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +15,7 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.DialogFragment
 import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.PermissionUtils
 import timber.log.Timber
 
 /**
@@ -76,6 +80,17 @@ class DialogTestActivity : BaseTestActivity(), DialogInterface.OnCancelListener,
             val dialog = Dialog(this, R.style.no_frame_dialog)
             dialog.setContentView(R.layout.dialog_corner)
             dialog.show()
+        })
+
+        addButton("显示在第三方上面", Runnable {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivity(intent)
+            }
+            startActivity(Intent(this, DialogActivity::class.java))
         })
     }
 

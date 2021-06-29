@@ -195,7 +195,7 @@ class TopFadeOutItemAnimator : SimpleItemAnimator() {
 
     override fun isRunning(): Boolean {
         // 当前是否有动画正在运行
-        return mPendingRemovals.isEmpty() && mPendingMoves.isEmpty() && mRemoveAnimations.isEmpty() && mMoveAnimations.isEmpty()
+        return !(mPendingRemovals.isEmpty() && mPendingMoves.isEmpty() && mRemoveAnimations.isEmpty() && mMoveAnimations.isEmpty())
     }
 
     override fun endAnimation(item: RecyclerView.ViewHolder) {

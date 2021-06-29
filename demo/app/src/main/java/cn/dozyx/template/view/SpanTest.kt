@@ -1,36 +1,88 @@
 package cn.dozyx.template.view
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
-import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
-import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
 import android.text.style.StyleSpan
-
-import cn.dozyx.core.base.BaseActivity
+import android.text.style.TypefaceSpan
+import androidx.appcompat.content.res.AppCompatResources
+import cn.dozyx.core.ex.dp
 import cn.dozyx.template.R
+import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.SizeUtils
-import kotlinx.android.synthetic.main.activity_span_test.*
+import kotlinx.android.synthetic.main.activity_base_test.*
+import kotlinx.android.synthetic.main.test_text.*
 
 /**
  * Create by dozyx on 2019/6/4
  */
-class SpanTest : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val spannableString = SpannableString("12MBMB3456789")
+class SpanTest : BaseTestActivity() {
+
+    override fun initActions() {
+        addButton("nothing") {
+            val spannableString = SpannableString("12MBMB3456789")
 //        spannableString.setSpan(ImageSpan(this,R.drawable.ic_menu_camera),0,1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 //        spannableString.setSpan(ForegroundColorSpan(Color.BLUE), 2, 4, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(StyleSpan(Typeface.BOLD), 0, 4, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-//        text1.text = spannableString
-//        text1.text = getSpannableStringByBuilder()
-        text1.text = getSpannableStringByBuilder2()
-        edit1.setText(spannableString)
+            spannableString.setSpan(
+                StyleSpan(Typeface.BOLD),
+                0,
+                4,
+                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+//        text_log.text = spannableString
+//        text_log.text = getSpannableStringByBuilder()
+            text_log.text = getSpannableStringByBuilder2()
+            et_test.setText(spannableString)
+        }
+
+        addButton("image span") {
+            val drawable = AppCompatResources.getDrawable(this, R.drawable.ic_image_span)
+            drawable?.apply {
+                setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+                val imageSpan = ImageSpan(this, ImageSpan.ALIGN_BASELINE)
+                val spannableString = SpannableString("12345678")
+                spannableString.setSpan(imageSpan, 7, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                text_log.text = spannableString
+            }
+        }
+        val default = "1 h 36 min"
+        text_log.text = default
+        text_log.setTypeface(null, Typeface.BOLD)
+        addButton("typeface span") {
+            val spannableString = SpannableString(default)
+            spannableString.setSpan(
+//                TypefaceSpan("sans-serif-condensed"),
+                TypefaceSpan(Typeface.SANS_SERIF),
+                4,
+                6,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            spannableString.setSpan(
+                AbsoluteSizeSpan(24.dp.toInt()),
+                4,
+                6,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            /*spannableString.setSpan(
+                StyleSpan(Typeface.BOLD),
+                4,
+                6,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )*/
+            spannableString.setSpan(
+                StyleSpan(Typeface.BOLD),
+                0,
+                spannableString.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+
+            text_log.text = spannableString
+        }
     }
 
     private fun getSpannableStringByBuilder(): CharSequence {
@@ -60,9 +112,5 @@ class SpanTest : BaseActivity() {
         str2.setSpan(AbsoluteSizeSpan(SizeUtils.sp2px(12F)), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         builder.append(str2)
         return builder
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_span_test
     }
 }
