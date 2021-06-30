@@ -283,6 +283,7 @@
             android:name=".accessibility.MyAccessibilityService"
             android:exported="true"
             android:label="辅助功能 demo"
+            android:process=":accessibility"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -290,6 +291,13 @@
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/my_accessibility_config" />
+        </service>
+        <service
+            android:name=".firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
         </service>
 
         <activity
@@ -1456,6 +1464,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".DialogActivity" android:theme="@style/Theme.AppCompat.Dialog.NoTitle" />
+        <activity android:name=".firebase.FirebaseTest"
+            android:label="Firebase">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>

@@ -65,6 +65,10 @@ class AccessibilityTest : BaseTestActivity() {
             startAccessibilityService(false)
         }
 
+        addButton("send broadcast") {
+            sendBroadcast(Intent("cn.dozyx.template.accessibility"))
+        }
+
     }
 
     private fun showFloatView() {
