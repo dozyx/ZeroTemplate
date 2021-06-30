@@ -4,6 +4,8 @@ apply from: "${rootDir}/buildApp.gradle"
 apply from: "${rootDir}/learn.gradle"
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: CustomPluginBuildSrc
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     defaultConfig {
@@ -124,6 +126,12 @@ dependencies {
     debugImplementation DepsFlipper.flipper
     debugImplementation DepsFlipper.soloader
     releaseImplementation DepsFlipper.flipper_noop
+
+    // 设置了 bom 之后，Firebase 其他模块不需要指定版本
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-messaging'
 }
 /*
 apply plugin: 'com.snapee.plugin.trace'
