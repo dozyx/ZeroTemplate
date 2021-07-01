@@ -8,11 +8,9 @@ import android.os.Build
 import android.os.Handler
 import android.provider.Settings
 import android.view.Gravity
-import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.TextView
-import cn.dozyx.template.R
+import cn.dozyx.template.DialogActivity
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ProcessUtils
 import timber.log.Timber
@@ -38,7 +36,13 @@ class AccessibilityTest : BaseTestActivity() {
             // 通过 adb 命令授权更方便
             // adb shell settings put secure enabled_accessibility_services cn.dozyx.demo.app/cn.dozyx.template.accessibility.MyAccessibilityService
             // 有时候授权之后，但是无障碍并没有正常运行起来，设置中显示出故障，需要重新把开关关掉再开启
-            startActivity(AccessibilityUtils.getAccessibilitySettingPageIntent(this))
+//            startActivity(AccessibilityUtils.getAccessibilitySettingPageIntent(this)) // 三星手机会在一个新的 Activity 栈中打开
+            Timber.d("accessibility permission end")
+//            Handler().postDelayed({startActivity(Intent(this, DialogActivity::class.java))},500)
+            Timber.d("accessibility permission end2")
+//            startActivities(arrayOf(AccessibilityUtils.getAccessibilitySettingPageIntent(this), Intent(this, DialogActivity::class.java)))
+            AccessibilityUtils.startAccessibilitySettings(this)
+            startActivity(Intent(this, DialogActivity::class.java))
         }
 
         addButton("正在运行") {
