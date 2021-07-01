@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment
 import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.PermissionUtils
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import timber.log.Timber
 
 /**
@@ -91,6 +92,12 @@ class DialogTestActivity : BaseTestActivity(), DialogInterface.OnCancelListener,
                 startActivity(intent)
             }
             startActivity(Intent(this, DialogActivity::class.java))
+        })
+
+        addButton("bottom sheet", Runnable {
+            val dialogFragment = object : BottomSheetDialog(this) {
+
+            }
         })
     }
 

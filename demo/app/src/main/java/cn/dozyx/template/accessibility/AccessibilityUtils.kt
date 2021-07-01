@@ -1,7 +1,11 @@
 package cn.dozyx.template.accessibility
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
 
@@ -49,5 +53,25 @@ object AccessibilityUtils {
     fun getAccessibilitySettingPageIntent(context: Context?): Intent? {
         // 一些品牌的手机可能不是这个Intent,需要适配
         return Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+    }
+
+    fun startAccessibilitySettings(activity: Activity): Boolean {
+        val intent = Intent()
+        if (!Build.MANUFACTURER.toLowerCase().contains("samsung") || Build.VERSION.SDK_INT < 28) {
+            intent.action = "android.settings.ACCESSIBILITY_SETTINGS"
+        } else {
+            intent.component = ComponentName(
+                "com.android.settings",
+                "com.android.settings.Settings\$AccessibilityInstalledServiceActivity"
+            )
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NO_HISTORY)
+        return try {
+            activity.startActivityForResult(intent, 1)
+            activity.overridePendingTransition(0, 0)
+            true
+        } catch (unused: ActivityNotFoundException) {
+            false
+        }
     }
 }

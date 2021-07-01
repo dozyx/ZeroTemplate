@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.text.TextUtils
+import android.view.KeyEvent
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import cn.dozyx.core.utli.TimeTracker
@@ -50,8 +51,15 @@ class MyAccessibilityService : AccessibilityService() {
         serviceInfo = AccessibilityServiceInfo().apply {
             eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
             feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC
-            this.flags = AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS
+            this.flags = AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS or
+            AccessibilityServiceInfo.FLAG_INCLUDE_NOT_IMPORTANT_VIEWS or
+                    AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE
         }
+    }
+
+    override fun onKeyEvent(event: KeyEvent?): Boolean {
+        Timber.d("MyAccessibilityService.onKeyEvent $event")
+        return super.onKeyEvent(event)
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -99,7 +107,7 @@ class MyAccessibilityService : AccessibilityService() {
                 AccessibilityEvent.eventTypeToString(
                     event.eventType
                 )
-            } ${event.className} ${event.source}"
+            } ${event.className} ${event.source} windowId: ${event.source?.windowId}"
         )
     }
 
@@ -109,7 +117,7 @@ class MyAccessibilityService : AccessibilityService() {
     }
 
     override fun onGesture(gestureEvent: AccessibilityGestureEvent): Boolean {
-        Timber.d("MyAccessibilityService.onGesture ${gestureEvent}")
+        Timber.d("MyAccessibilityService.onGesture $gestureEvent")
         return super.onGesture(gestureEvent)
     }
 
