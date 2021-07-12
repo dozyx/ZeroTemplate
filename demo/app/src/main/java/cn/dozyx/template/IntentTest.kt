@@ -4,6 +4,9 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import androidx.core.app.NotificationChannelCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import cn.dozyx.core.base.BaseFragment
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
@@ -152,6 +155,20 @@ class IntentTest : BaseTestActivity() {
                 }
             }
         })
+
+        addAction("pending") {
+            val intent =
+                PendingIntent.getBroadcast(this, 0, Intent("cn.dozyx.action.pending"), 0)
+            NotificationCompat.Builder(this, NotificationChannelCompat.DEFAULT_CHANNEL_ID)
+                .apply {
+                    this.setSmallIcon(R.drawable.idlefish_ic_launcher)
+                        .setContentTitle("标题")
+                        .setContentText("内容")
+                }.also {
+                    NotificationManagerCompat.from(this).notify(1, it.build())
+                }
+
+        }
         editFragment = EditFragment()
         addFragment(editFragment)
     }

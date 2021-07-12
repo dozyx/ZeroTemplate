@@ -59,11 +59,15 @@ public class RxJavaTest {
 
     @Test
     public void testFlatmapSubscribeOn() {
-        Observable.just(1).flatMap(integer -> {
-            print("flatmap");
-            return Observable.just(3);
-        }).subscribeOn(Schedulers.io())
+        Observable.just(1)
+                .flatMap(integer -> {
+                    print("flatmap");
+                    return Observable.just(3)
+                            .observeOn(Schedulers.newThread());
+                })
+                .subscribeOn(Schedulers.io())
                 .subscribe(sObserver);
+        sleep(1);
     }
 
     @Test
@@ -80,6 +84,57 @@ public class RxJavaTest {
                 })
                 .subscribeOn(Schedulers.io()) // RxCachedThreadScheduler
                 .subscribe(sObserver);
+        sleep(1);
+    }
+
+    /**
+     * 连续调用 subscribeOn
+     */
+    @Test
+    public void testSubscribeOn2() {
+        // callable 和 map 都执行在 io 线程
+        // callable 受第一个 subscribeOn 影响，很明显会执行在 io 线程，接着，因为中间没有 observeOn，
+        // callable 将事件传给 Schedulers.io() 内部的 observer 时也是在 io 中，同样下面第二个 subscribeOn 也只能运行在 io 中，
+        // 依此往下，最后的 observer 也运行在了 io 中。
+        // 结论：一个链中有多个 subscribeOn 的话，上游的 source 只会在第一个 subscribeOn 中处理，除非中间有 observeOn，
+        // 导致中间的 observer 切换了线程。
+
+        Observable<Integer> observable = Observable.fromCallable(() -> {
+            print("callable");
+            return 2;
+        }).subscribeOn(Schedulers.io())
+//                .observeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.newThread())
+                .map(integer -> {
+                    print("map");
+                    return integer * 2;
+                })
+                .subscribeOn(Schedulers.newThread());
+        observable.subscribe(sObserver);
+        sleep(1);
+    }
+
+    /**
+     * 连续调用 subscribeOn，使用 flatmap 切换
+     */
+    @Test
+    public void testSubscribeOn3() {
+        // callable 和 flat map 运行在 io 线程，但最后的 observer 运行在 new thread
+        Observable<Integer> observable = Observable.fromCallable(() -> {
+            print("callable");
+            return 2;
+        }).subscribeOn(Schedulers.io())
+//                .observeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.newThread())
+                .flatMap(integer -> {
+                    print("flat map");
+                    return Observable.just(integer * 2)
+//                            .observeOn(Schedulers.newThread());// 这个不会到 observer 切换到 new thread
+                            .subscribeOn(Schedulers.newThread());
+                })
+//                .observeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.newThread());
+        observable.subscribe(sObserver);
         sleep(1);
     }
 
@@ -788,7 +843,7 @@ public class RxJavaTest {
         Observable.fromCallable(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                if (true){
+                if (true) {
                     throw new NoSuchMethodError(); // 不会进入 onError，而是直接 crash。Exceptions#throwIfFatal
 //                    throw new NullPointerException();
                 }

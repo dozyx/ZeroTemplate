@@ -85,6 +85,8 @@
     <string name="test">测试</string>
     <string name="text_style_test">一二三四 abcdefg Cancel</string>
     <string name="accessibility_desc">辅助功能测试</string>
+    <string name="hello">Hello</string>
+    <string name="format_test">abc %1$s</string>
 
     <plurals name="count_video">
         <item quantity="one">%d video</item>

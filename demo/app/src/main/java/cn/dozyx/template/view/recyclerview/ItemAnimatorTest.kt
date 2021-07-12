@@ -95,7 +95,7 @@ class TopFadeOutItemAnimator : SimpleItemAnimator() {
 
     override fun runPendingAnimations() {
         Timber.d("CustomItemAnimator.runPendingAnimations")
-        if (mPendingRemovals.isEmpty() || mPendingMoves.isEmpty()) {
+        if (mPendingRemovals.isEmpty() && mPendingMoves.isEmpty()) {
             return
         }
         for (holder in mPendingRemovals) {

@@ -133,6 +133,37 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testTryCatchReturn() {
+        int num = tryCatchReturn(1, 2);
+        print("num: " + num);
+    }
+
+    private int tryCatchReturn(int add1, int add2) {
+        try {
+            print("try");
+            return add(add1, add2);
+        } catch (Exception e) {
+            print("exception");
+            return -1;
+        } finally {
+            print("finally");
+            // finally 块中添加 return 会有告警
+            // 最终使用了 finally 的 return，try 中的运算会执行，但没有作为 return 的值
+            return getFinally();
+        }
+    }
+
+    private int add(int add1, int add2) {
+        print("add");
+        return add1 + add2;
+    }
+
+    private int getFinally() {
+        print("getFinally");
+        return -2;
+    }
+
+    @Test
     public void testStringBuilder() {
         String str = "123";
         StringBuilder builder = new StringBuilder(str);
@@ -178,6 +209,7 @@ public class JavaTest {
                 print(CONSTANT);
             }
         }
+    }
 
         @Test
         public void testCeil() {
@@ -387,6 +419,8 @@ public class JavaTest {
             data.add(1);
             data.add(2);
             data.add(3);
+            data.add(4);
+            data.add(5);
             boolean hasRemoved = false;
             for (int i = 0; i < data.size(); i++) {
                 print("for " + i);
@@ -400,11 +434,11 @@ public class JavaTest {
 //            }
             }
             print("size: " + data.size());
-        /*for (Integer i : data) {
+        for (Integer i : data) {
             if (i == 2) {
                 data.remove(i);
             }
-        }*/
+        }
             ArrayList<Object> list = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 print(list);
@@ -2296,5 +2330,4 @@ public class JavaTest {
                 super.foo();
             }
         }
-    }
 }
