@@ -1,5 +1,6 @@
 package cn.dozyx.template.practice
 
+import android.app.ActivityManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -9,24 +10,31 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Process
-import android.os.Process.myUid
 import android.provider.Settings
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
 import android.view.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import cn.dozyx.constant.Shakespeare
+import cn.dozyx.core.ex.dp
+import cn.dozyx.template.MainActivity
 import cn.dozyx.template.R
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.Utils
+import kotlinx.android.synthetic.main.test_text.view.*
 import kotlinx.android.synthetic.main.test_transition_anim.*
 import timber.log.Timber
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
+import kotlin.random.Random
 
 class FloatWindowActivity : BaseTestActivity() {
     var params: WindowManager.LayoutParams? = null
+    private lateinit var floatView: ViewGroup
 
     override fun initActions() {
 
@@ -78,14 +86,55 @@ class FloatWindowActivity : BaseTestActivity() {
 
         addButton("activity float") {
             showFloatView()
+            Timber.d("FloatWindowActivity.initActions floatView root ${floatView.rootView}")
+            Timber.d("FloatWindowActivity.initActions decorView root ${window.decorView.rootView}")
+        }
+
+        addButton("remove float") {
+            val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+            windowManager.removeView(floatView)
         }
 
         addButton("settings") {
-            startActivity(IntentUtils.getLaunchAppDetailsSettingsIntent(packageName))
+            val intent1 = IntentUtils.getLaunchAppDetailsSettingsIntent(packageName)
+            intent1.flags = intent1.flags or Intent.FLAG_ACTIVITY_NO_HISTORY
+            startActivity(intent1)
+            startActivity(IntentUtils.getLaunchAppDetailsSettingsIntent("com.UCMobile"))
+        }
+
+        addButton("clear top") {
+            clearTopActivity()
         }
 
         addButton("占位") {
 
+        }
+    }
+
+    private fun clearTopActivity() {
+        // 关闭所有打开之后没有正确关闭的设置页面
+        // 小米 8、Android9、MIUI11 上没办法通过这种方式关闭上层的 Activity
+//        moveTaskFront() // 无效
+        val removeAllSettingsIntent = Intent(this, this::class.java)
+        removeAllSettingsIntent.action = "IntentConstants.Action.CLEAR_TOP"
+        removeAllSettingsIntent.flags =
+            Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(removeAllSettingsIntent)
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    private fun moveTaskFront() {
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningTasks = activityManager.getRunningTasks(20)
+        var currentTaskId: Int? = null
+        runningTasks.forEach {
+            if (it.baseActivity?.packageName == packageName) {
+                currentTaskId = it.id
+                return@forEach
+            }
+        }
+        currentTaskId?.let {
+            activityManager.moveTaskToFront(it, ActivityManager.MOVE_TASK_WITH_HOME)
         }
     }
 
@@ -201,7 +250,7 @@ class FloatWindowActivity : BaseTestActivity() {
     private fun showFloatView() {
         val windowManager = getSystemService(WINDOW_SERVICE) as? WindowManager
         windowManager ?: return
-        val rootView = object : FrameLayout(this) {
+        floatView = object : FrameLayout(this) {
             override fun dispatchKeyEvent(event: KeyEvent): Boolean {
                 Timber.d("dispatchKeyEvent ${KeyEvent.keyCodeToString(event.keyCode)}")
                 if (event.keyCode == KeyEvent.KEYCODE_HOME) {
@@ -221,26 +270,27 @@ class FloatWindowActivity : BaseTestActivity() {
                 return super.dispatchTouchEvent(ev)
             }
         }
-        LayoutInflater.from(applicationContext).inflate(R.layout.float_view, rootView)
+        LayoutInflater.from(this).inflate(R.layout.float_view, floatView)
         windowManager.addView(
-            rootView,
+            floatView,
             WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY else WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                or WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                        or WindowManager.LayoutParams.FLAG_FULLSCREEN
+                        or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
                 PixelFormat.TRANSLUCENT
             )
         )
         // 不会触发 activity 的生命周期
 
-        Timber.d("FloatWindowActivity.showFloatView ${rootView.parent}")
+        Timber.d("FloatWindowActivity.showFloatView ${floatView.parent}")
 
-        rootView.isFocusable = true
-        rootView.isFocusableInTouchMode = true
-        rootView.setOnKeyListener { v, keyCode, event ->
+        floatView.isFocusable = true
+        floatView.isFocusableInTouchMode = true
+        floatView.setOnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 Timber.d("intercept back")
                 return@setOnKeyListener true
@@ -248,12 +298,29 @@ class FloatWindowActivity : BaseTestActivity() {
             return@setOnKeyListener false
         }
 
-        rootView.findViewById<View>(R.id.btn_float).setOnClickListener {
-            Timber.d("FloatWindowActivity.showFloatView click")
-            val intent = Intent(this, FloatWindowActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+        floatView.findViewById<View>(R.id.btn_float).setOnClickListener {
+            Timber.d("FloatWindowActivity.showFloatView click start")
+//            clearTopActivity()
+//            sendBroadcast()
+            val spannableString =
+                SpannableString(Shakespeare.TITLES[Random.nextInt(Shakespeare.TITLES.size - 1)] + Random.nextInt())
+            spannableString.setSpan(
+                AbsoluteSizeSpan(24.dp.toInt()),
+                0,
+                spannableString.length / 2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            floatView.findViewById<TextView>(R.id.tv_info).text = spannableString
+//            finish()
+            Timber.d("FloatWindowActivity.showFloatView click end")
         }
+    }
+
+    fun sendBroadcast() {
+        val intent = Intent()
+        intent.action = "ACTION_SERVICE_ENABLE_CAPTURE"
+        intent.putExtra("enabled", false)
+        sendBroadcast(intent)
     }
 
     class FloatWindowsServices : Service() {

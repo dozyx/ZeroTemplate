@@ -12,6 +12,11 @@ object SampleUtil {
         get() = getStrings(50)
 
     @JvmOverloads
+    fun getString(): String {
+        return getStrings(1)[0]
+    }
+
+    @JvmOverloads
     fun getStrings(count: Int, tag: String = ""): MutableList<String> {
         val datas = MutableList<String>(count) {
             "sample $tag: $it "
