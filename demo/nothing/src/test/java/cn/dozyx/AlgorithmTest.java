@@ -7,11 +7,53 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Create by dozyx on 2019/12/17
  **/
 public class AlgorithmTest {
+
+    volatile boolean isPrint1 = true;
+    volatile boolean isPrint2 = false;
+    volatile boolean isPrint3 = false;
+    volatile int maxCount = 2;
+    volatile AtomicInteger count = new AtomicInteger();
+
+    @Test
+    public void printNumberMultiThread() {
+        // 三个线程依次打印 1、2、3
+        new Thread(() -> {
+            while (count.get() != maxCount) {
+                if (isPrint1) {
+                    isPrint1 = false;
+                    print(1);
+                    isPrint2 = true;
+
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            while (count.get() != maxCount) {
+                if (isPrint2) {
+                    isPrint2 = false;
+                    print(2);
+                    isPrint3 = true;
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            while (count.get() != maxCount) {
+                if (isPrint3) {
+                    isPrint3 = false;
+                    print(3);
+                    count.incrementAndGet();
+                    isPrint1 = true;
+                }
+            }
+        }).start();
+        sleep(1);
+    }
 
     @Test
     public void findFirstSubStringIndex() {
@@ -28,8 +70,8 @@ public class AlgorithmTest {
                     }
                     if (B.charAt(i + j) != A.charAt(j)) {
                         // 对应位置的字符不匹配
-                        if (nextStartIndex > i){
-                            i = nextStartIndex -1;// 之所以 -1 是因为 for 里面会 i++。暂时没想到什么好的方法把这个减 1 去掉
+                        if (nextStartIndex > i) {
+                            i = nextStartIndex - 1;// 之所以 -1 是因为 for 里面会 i++。暂时没想到什么好的方法把这个减 1 去掉
                         }
                         break;
                     }
@@ -78,5 +120,12 @@ public class AlgorithmTest {
                         + msg.toString());
     }
 
+    private void sleep(int timeInSeconds) {
+        try {
+            Thread.sleep(timeInSeconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

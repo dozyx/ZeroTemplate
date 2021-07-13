@@ -1,42 +1,40 @@
 package cn.dozyx.template.image
 
 import android.graphics.Bitmap
-import android.os.Bundle
-import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
+import cn.dozyx.template.base.BaseTestActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_glide_test.*
+import kotlinx.android.synthetic.main.activity_base_test.*
 import timber.log.Timber
 
-class GlideTest : BaseActivity() {
+class GlideTest : BaseTestActivity() {
 
+    override fun initActions() {
+        addAction("normal"){
+            Glide.with(this).load(PICTURE_URL_2).placeholder(R.drawable.image_loading).into(image_view)
+        }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        Glide.with(this).load(PICTURE_URL_2).placeholder(R.drawable.image_loading).into(image)
-        val subscribe = Observable.create<Bitmap> {
-            val target = Glide.with(this)
+        addAction("rxjava"){
+            val subscribe = Observable.create<Bitmap> {
+                val target = Glide.with(this)
                     .asBitmap()
                     .load(PICTURE_URL_2)
                     .apply(RequestOptions().override(200).centerCrop())
                     .submit()
-            it.onNext(target.get())
-            it.onComplete()
-        }
+                it.onNext(target.get())
+                it.onComplete()
+            }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     Timber.d("load bitmap success $it")
-                    image.setImageBitmap(it)
+                    image_view.setImageBitmap(it)
                 }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_glide_test
+        }
     }
 
     companion object {

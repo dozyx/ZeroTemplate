@@ -1,19 +1,62 @@
 package cn.dozyx.template
 
+import android.support.v4.media.MediaMetadataCompat
 import io.reactivex.Observable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.junit.Test
 import kotlin.concurrent.thread
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 /**
  * @author dozyx
  * @date 2019-12-09
  */
 class KotlinTest {
-    val lazyString:String? by lazy { "Hello" }
-    val lazyString2:String? by lazy { getString() }
+
+    val token:String by Saver()
+
+
+    class Saver : ReadOnlyProperty<KotlinTest, String> {
+        override fun getValue(thisRef: KotlinTest, property: KProperty<*>): String {
+            return ""
+        }
+
+    }
+
+    @Test
+    fun invokeReified() {
+        var input:Any = 0
+        input = "1"
+        val result = testReified(input)
+    }
+
+    private inline fun <reified T> testReified(input: T): Boolean {
+        return input is String
+    }
+
+    /**
+     * 参数是一个函数类型
+     */
+    fun measureTime(action: () -> Unit) {
+        print(">>>>  ")
+        action.invoke()
+        print("<<<<  ")
+    }
+
+    fun main() {
+        measureTime { foo() }
+    }
+
+    @Test
+    fun testOperator() {
+
+    }
+
+    val lazyString: String? by lazy { "Hello" }
+    val lazyString2: String? by lazy { getString() }
 
     private fun getString() = "Hello"
 
@@ -36,7 +79,7 @@ class KotlinTest {
 
     }
 
-    private fun returnNothing():Nothing {
+    private fun returnNothing(): Nothing {
 //        return null // 会报错，因为返回值不是 Nothing?
         throw NullPointerException()
     }

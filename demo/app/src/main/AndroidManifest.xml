@@ -1472,6 +1472,13 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".WorkManagerTest"
+            android:label="Androidx/WorkManager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>
