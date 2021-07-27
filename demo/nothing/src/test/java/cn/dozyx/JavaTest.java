@@ -133,6 +133,35 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testTryWithResource() throws Exception {
+        try (CustomAutoClosableClass closeable = new CustomAutoClosableClass()) {
+            print("try block run");
+            String str = null;
+            str.length();
+            closeable.foo();
+        }/* catch (Exception e) {
+            print("catch block run");
+        } */ finally {
+            print("finally block run");
+        }
+    }
+
+    private static final class CustomAutoClosableClass implements AutoCloseable {
+        public CustomAutoClosableClass() {
+            print("constructor");
+        }
+
+        public void foo(){
+            print("do something");
+        }
+        @Override
+        public void close() throws Exception {
+            print("auto close");
+            throw new IllegalAccessException("哈哈，想不到吧");
+        }
+    }
+
+    @Test
     public void testTryCatchReturn() {
         int num = tryCatchReturn(1, 2);
         print("num: " + num);
@@ -2033,7 +2062,7 @@ public class JavaTest {
         }
 
         @Test
-        public void testThreadPool() {
+        public void testThreadPool() throws InterruptedException {
             ExecutorService executorService = new ThreadPoolExecutor(5, 10, 10, TimeUnit.SECONDS,
                     new LinkedBlockingQueue<>(3));
             // corePoolSize 核心线程，一直存活，除非设置了 allowCoreThreadTimeOut 为 true
@@ -2051,6 +2080,34 @@ public class JavaTest {
                         e.printStackTrace();
                     }
                 });
+                Thread.sleep(20);
+
+            }
+            sleep(5);
+        }
+
+        @Test
+        public void testThreadPool2() throws InterruptedException {
+            ExecutorService executorService = new ThreadPoolExecutor(1, 10,
+                    10, TimeUnit.SECONDS,
+                    new SynchronousQueue<>());
+            for (int i = 0; i < 10; i++) {
+                int flag = i;
+                int finalI = i;
+                executorService.execute(() -> {
+                    print(" & i == " + flag + " & thread == " + Thread.currentThread());
+                    try {
+                        if (finalI == 0) {
+                            Thread.sleep(10000);
+                        } else {
+                            Thread.sleep(500);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    print(" end & i == " + flag + " & thread == " + Thread.currentThread());
+                });
+                Thread.sleep(20);
             }
             sleep(5);
         }
