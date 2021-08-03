@@ -1,9 +1,11 @@
 package cn.dozyx.template.practice
 
 import android.app.ActivityManager
+import android.app.Presentation
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Build
@@ -21,6 +23,7 @@ import cn.dozyx.constant.Shakespeare
 import cn.dozyx.core.ex.dp
 import cn.dozyx.template.MainActivity
 import cn.dozyx.template.R
+import cn.dozyx.template.accessibility.AccessibilityUtils
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.PermissionUtils
@@ -32,56 +35,35 @@ import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import kotlin.random.Random
 
-class FloatWindowActivity : BaseTestActivity() {
+class FloatWindowTest : BaseTestActivity() {
     var params: WindowManager.LayoutParams? = null
-    private lateinit var floatView: ViewGroup
+    private lateinit var floatView: View
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Timber.d("permission granted: ${PermissionUtils.isGrantedDrawOverlays()} $it")
+            Timber.d("permission granted: ${canDrawOverlaysFix(this)}")
+            Timber.d("permission granted: ${hasPermission(this, "OP_SYSTEM_ALERT_WINDOW")}")
+            Timber.d("permission granted: ${getWindoOverLayAddedOrNot2()}")
+            Handler().postDelayed({
+
+                Timber.d("permission granted: ${PermissionUtils.isGrantedDrawOverlays()}")
+            }, 400)
+        }
+    }
 
     override fun initActions() {
 
         addButton("权限检查") {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                Timber.d("permission granted: ${PermissionUtils.isGrantedDrawOverlays()}")
-            }
+            checkOverlaysPermission()
         }
-        val resultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                Timber.d("permission granted: ${PermissionUtils.isGrantedDrawOverlays()} $it")
-                Timber.d("permission granted: ${canDrawOverlaysFix(this)}")
-                Timber.d("permission granted: ${hasPermission(this, "OP_SYSTEM_ALERT_WINDOW")}")
-                Timber.d("permission granted: ${getWindoOverLayAddedOrNot2()}")
-                Handler().postDelayed({
 
-                    Timber.d("permission granted: ${PermissionUtils.isGrantedDrawOverlays()}")
-                }, 400)
-            }
-        }
         addButton("授权") {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                /*PermissionUtils.requestDrawOverlays(object : PermissionUtils.SimpleCallback {
-                    override fun onGranted() {
-                        Timber.d("FloatWindowActivity.onGranted")
-                    }
-
-                    override fun onDenied() {
-                        Timber.d("FloatWindowActivity.onDenied")
-                    }
-                })*/
-                /*val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                intent.data = Uri.parse("package:" + Utils.getApp().packageName)
-                startActivityForResult(intent, 101)*/
-                resultLauncher.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION).also {
-                    it.data = Uri.parse("package:" + Utils.getApp().packageName)
-                })
-            }
+            requestOverlaysPermission()
         }
         addButton("service float") {
-            val intent = Intent(this, FloatWindowsServices::class.java)
-            if (FloatWindowsServices.isServiceRunning) {
-                stopService(intent)
-            }
-            startService(intent)
+            startFloatService()
         }
 
         addButton("activity float") {
@@ -96,18 +78,141 @@ class FloatWindowActivity : BaseTestActivity() {
         }
 
         addButton("settings") {
-            val intent1 = IntentUtils.getLaunchAppDetailsSettingsIntent(packageName)
-            intent1.flags = intent1.flags or Intent.FLAG_ACTIVITY_NO_HISTORY
-            startActivity(intent1)
-            startActivity(IntentUtils.getLaunchAppDetailsSettingsIntent("com.UCMobile"))
+            openSettings()
+        }
+
+        addButton("accessibility settings") {
+            AccessibilityUtils.startAccessibilitySettings(this);
         }
 
         addButton("clear top") {
             clearTopActivity()
         }
 
-        addButton("占位") {
+        addButton("presentation") {
+            showFloatByPresentation()
+        }
+    }
 
+    private fun showFloatByPresentation() {
+        val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        val layoutParams = getBaseWindowLayoutParams()
+        layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+//        layoutParams.type = 2037
+
+        val presentation = Presentation(this, windowManager.defaultDisplay, R.style.no_frame_dialog)
+        presentation.setContentView(createFloatView())
+        if (presentation.window != null) {
+            presentation.window!!.attributes = layoutParams
+        }
+        presentation.show()
+    }
+
+    private fun createFloatView(): View {
+        val floatView = object : FrameLayout(this) {
+            override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+                Timber.d("dispatchKeyEvent ${KeyEvent.keyCodeToString(event.keyCode)}")
+                if (event.keyCode == KeyEvent.KEYCODE_HOME) {
+                    Timber.d("dispatchKeyEvent intercept home")
+                    return true
+                }
+                // flags 不设置为 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE 的话可以拦截到 back 事件，但 home 事件没办法拦截
+                if (event.keyCode == KeyEvent.KEYCODE_BACK) {
+                    Timber.d("dispatchKeyEvent intercept back")
+                    return true
+                }
+                return super.dispatchKeyEvent(event)
+            }
+
+            override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+//                Timber.d("dispatchTouchEvent ${MotionEvent.actionToString(ev.action)}")
+                return super.dispatchTouchEvent(ev)
+            }
+        }
+        LayoutInflater.from(this).inflate(R.layout.float_view, floatView)
+        // 不会触发 activity 的生命周期
+
+        Timber.d("FloatWindowActivity.showFloatView ${floatView.parent}")
+
+        floatView.isFocusable = true
+        floatView.isFocusableInTouchMode = true
+        floatView.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                Timber.d("intercept back")
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
+        }
+
+        floatView.findViewById<View>(R.id.btn_float).setOnClickListener {
+            Timber.d("FloatWindowActivity.showFloatView click start")
+//            clearTopActivity()
+//            sendBroadcast()
+            val spannableString =
+                SpannableString(Shakespeare.TITLES[Random.nextInt(Shakespeare.TITLES.size - 1)] + Random.nextInt())
+            spannableString.setSpan(
+                AbsoluteSizeSpan(24.dp.toInt()),
+                0,
+                spannableString.length / 2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            floatView.findViewById<TextView>(R.id.tv_info).text = spannableString
+//            finish()
+            Timber.d("FloatWindowActivity.showFloatView click end")
+        }
+        return floatView
+    }
+
+    private fun getBaseWindowLayoutParams(): WindowManager.LayoutParams {
+        return WindowManager.LayoutParams().apply {
+            width = WindowManager.LayoutParams.MATCH_PARENT
+            height = WindowManager.LayoutParams.WRAP_CONTENT
+            gravity = Gravity.BOTTOM
+            flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+            format = PixelFormat.TRANSLUCENT
+            screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            packageName = packageName
+        }
+    }
+
+    private fun openSettings() {
+        val intent1 = IntentUtils.getLaunchAppDetailsSettingsIntent(packageName)
+        intent1.flags = intent1.flags or Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent1)
+//        startActivity(IntentUtils.getLaunchAppDetailsSettingsIntent("com.UCMobile"))
+    }
+
+    private fun startFloatService() {
+        val intent = Intent(this, FloatWindowsServices::class.java)
+        if (FloatWindowsServices.isServiceRunning) {
+            stopService(intent)
+        }
+        startService(intent)
+    }
+
+    private fun requestOverlaysPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            /*PermissionUtils.requestDrawOverlays(object : PermissionUtils.SimpleCallback {
+                    override fun onGranted() {
+                        Timber.d("FloatWindowActivity.onGranted")
+                    }
+
+                    override fun onDenied() {
+                        Timber.d("FloatWindowActivity.onDenied")
+                    }
+                })*/
+            /*val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                intent.data = Uri.parse("package:" + Utils.getApp().packageName)
+                startActivityForResult(intent, 101)*/
+            resultLauncher.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION).also {
+                it.data = Uri.parse("package:" + Utils.getApp().packageName)
+            })
+        }
+    }
+
+    private fun checkOverlaysPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Timber.d("permission granted: ${PermissionUtils.isGrantedDrawOverlays()}")
         }
     }
 
@@ -250,27 +355,7 @@ class FloatWindowActivity : BaseTestActivity() {
     private fun showFloatView() {
         val windowManager = getSystemService(WINDOW_SERVICE) as? WindowManager
         windowManager ?: return
-        floatView = object : FrameLayout(this) {
-            override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-                Timber.d("dispatchKeyEvent ${KeyEvent.keyCodeToString(event.keyCode)}")
-                if (event.keyCode == KeyEvent.KEYCODE_HOME) {
-                    Timber.d("dispatchKeyEvent intercept home")
-                    return true
-                }
-                // flags 不设置为 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE 的话可以拦截到 back 事件，但 home 事件没办法拦截
-                if (event.keyCode == KeyEvent.KEYCODE_BACK) {
-                    Timber.d("dispatchKeyEvent intercept back")
-                    return true
-                }
-                return super.dispatchKeyEvent(event)
-            }
-
-            override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//                Timber.d("dispatchTouchEvent ${MotionEvent.actionToString(ev.action)}")
-                return super.dispatchTouchEvent(ev)
-            }
-        }
-        LayoutInflater.from(this).inflate(R.layout.float_view, floatView)
+        floatView = createFloatView()
         windowManager.addView(
             floatView,
             WindowManager.LayoutParams(
@@ -284,36 +369,6 @@ class FloatWindowActivity : BaseTestActivity() {
                 PixelFormat.TRANSLUCENT
             )
         )
-        // 不会触发 activity 的生命周期
-
-        Timber.d("FloatWindowActivity.showFloatView ${floatView.parent}")
-
-        floatView.isFocusable = true
-        floatView.isFocusableInTouchMode = true
-        floatView.setOnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                Timber.d("intercept back")
-                return@setOnKeyListener true
-            }
-            return@setOnKeyListener false
-        }
-
-        floatView.findViewById<View>(R.id.btn_float).setOnClickListener {
-            Timber.d("FloatWindowActivity.showFloatView click start")
-//            clearTopActivity()
-//            sendBroadcast()
-            val spannableString =
-                SpannableString(Shakespeare.TITLES[Random.nextInt(Shakespeare.TITLES.size - 1)] + Random.nextInt())
-            spannableString.setSpan(
-                AbsoluteSizeSpan(24.dp.toInt()),
-                0,
-                spannableString.length / 2,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            floatView.findViewById<TextView>(R.id.tv_info).text = spannableString
-//            finish()
-            Timber.d("FloatWindowActivity.showFloatView click end")
-        }
     }
 
     fun sendBroadcast() {

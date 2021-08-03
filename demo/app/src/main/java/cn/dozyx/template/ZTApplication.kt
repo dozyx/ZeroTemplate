@@ -6,9 +6,11 @@ import android.os.Looper
 import android.util.Log
 import cn.dozyx.core.base.BaseApplication
 import cn.dozyx.core.debug.ActivityLifecycleLoggerCallbacks
+import cn.dozyx.template.network.okhttp.compat.AndroidPlatform9
 import cn.dozyx.template.pop.HomePopTracker
 import com.didichuxing.doraemonkit.DoraemonKit
 import com.facebook.stetho.Stetho
+import okhttp3.internal.platform.Platform
 
 open class ZTApplication : BaseApplication() {
 
@@ -37,6 +39,23 @@ open class ZTApplication : BaseApplication() {
         initDoraemon()
         // attach 调试之后，Debug.isDebuggerConnected() 才会返回 true
 //        Timber.d("ZTApplication.onCreate Debug.isDebuggerConnected(): ${Debug.isDebuggerConnected()}")
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            initLowVersionPlatform()
+        }
+    }
+
+    private fun initLowVersionPlatform() {
+        try {
+            val jvm = System.getProperty("java.vm.name", "Dalvik")
+            System.getProperties()["java.vm.name"] = "jvm"
+            println(Platform.get())
+            System.getProperties()["java.vm.name"] = jvm
+            Platform.resetForTests(AndroidPlatform9.buildIfSupported())
+            println(Platform.get())
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        }
     }
 
     private fun initDoraemon() {

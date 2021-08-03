@@ -25,3 +25,5 @@ rootProject.children.each { p ->
     }
 }
 include ':demo:shortcut'
+include ':dependencyone'
+include ':dependencytwo'

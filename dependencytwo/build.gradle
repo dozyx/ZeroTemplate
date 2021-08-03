@@ -1,0 +1,7 @@
+apply from: "${rootDir}/buildLib.gradle"
+
+dependencies {
+    compileOnly project(':dependencyone')
+//    implementation project(':dependencyone')
+//    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+}

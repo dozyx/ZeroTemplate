@@ -269,7 +269,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".practice.FloatWindowActivity"
+            android:name=".practice.FloatWindowTest"
             android:label="@string/practice_float_window">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -278,7 +278,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".practice.FloatWindowActivity$FloatWindowsServices" />
+        <service android:name=".practice.FloatWindowTest$FloatWindowsServices" />
         <service android:name=".service.MyIntentService" />
         <service
             android:name=".accessibility.MyAccessibilityService"

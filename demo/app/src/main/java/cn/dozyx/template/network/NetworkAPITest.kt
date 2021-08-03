@@ -306,14 +306,15 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
         val call = client.newCall(request)
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-
+                Timber.e(e)
             }
 
             @Throws(IOException::class)
             override fun onResponse(call: Call, response: okhttp3.Response) {
-                val string = response.body()!!.string()
+                val string = response.body?.string()
                 // 该回调并不在 UI 线程
                 runOnUiThread { showResult(string) }
+                Timber.d("NetworkAPITest.onResponse: $string")
             }
         })
     }
@@ -324,7 +325,7 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
         val client = OkHttpClient.Builder().addInterceptor() { chain ->
             Timber.d("NetworkAPITest addInterceptor")
             var response = chain.proceed(chain.request())
-            if (response.code() != 404) {
+            if (response.code != 404) {
                 return@addInterceptor response
             }
             response.newBuilder().code(200).build()
@@ -388,7 +389,7 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
     }
 
     companion object {
-        private const val URL_STRING = "http://www.cnbeta.com/"
+        private const val URL_STRING = "http://www.baidu.com/"
     }
 
 }

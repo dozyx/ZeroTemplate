@@ -1,0 +1,5 @@
+apply from: "${rootDir}/buildLib.gradle"
+
+dependencies {
+    api 'com.squareup.okhttp3:okhttp:4.9.1'
+}

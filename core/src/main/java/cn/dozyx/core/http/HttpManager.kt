@@ -36,7 +36,7 @@ object HttpManager {
             builder.addInterceptor(loggingInterceptor)
         }
         if (commonInterceptor != null) {
-            builder.addInterceptor(commonInterceptor)
+//            builder.addInterceptor(commonInterceptor)
         }
         return builder
     }

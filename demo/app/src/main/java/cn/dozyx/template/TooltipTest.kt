@@ -3,6 +3,7 @@ package cn.dozyx.template
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.TooltipCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -26,7 +27,9 @@ class TooltipTest : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        btn_show.setOnClickListener {
+            TooltipCompat.setTooltipText(tv_anchor, "测试")
+        }
         vp_fragment.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 3

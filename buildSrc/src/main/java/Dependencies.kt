@@ -242,7 +242,7 @@ object Version {
     const val async_http = "1.4.9"
     const val ucrop = "1.5.0"
     const val bga_refresh_layout = "1.1.8"
-    const val okhttp = "3.14.4"
+    const val okhttp = "4.9.1"
     const val butterknife = "10.1.0"
     const val support = "1.0.0"
     const val constraintLayout = "2.0.4"
