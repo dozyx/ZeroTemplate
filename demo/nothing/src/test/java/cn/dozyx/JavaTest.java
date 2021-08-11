@@ -4,7 +4,6 @@ package cn.dozyx;
 import static cn.dozyx.LogUtils.print;
 
 import android.annotation.TargetApi;
-import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -28,8 +27,10 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -134,31 +135,35 @@ public class JavaTest {
 
     @Test
     public void testTryWithResource() throws Exception {
-        try (CustomAutoClosableClass closeable = new CustomAutoClosableClass()) {
-            print("try block run");
-            String str = null;
-            str.length();
-            closeable.foo();
-        }/* catch (Exception e) {
-            print("catch block run");
-        } */ finally {
-            print("finally block run");
+        try (MyCloseable closeable = new MyCloseable()) {
+            closeable.crash();
+        } /*catch(FileNotFoundException e){
+
+        }*/
+        // 如果自动 close 抛了异常，是不会被 catch 的
+    }
+
+    @Test
+    public void testTryFinally() throws Exception {
+        MyCloseable closeable = new MyCloseable();
+        try {
+            closeable.crash();
+        } catch (Exception e) {
+            print("catch");
+        } finally {
+            closeable.close();// 这里抛出的异常不会被 catch
         }
     }
 
-    private static final class CustomAutoClosableClass implements AutoCloseable {
-        public CustomAutoClosableClass() {
-            print("constructor");
-        }
+    private static class MyCloseable implements AutoCloseable {
 
-        public void foo() {
-            print("do something");
+        public void crash() {
+            throw new IllegalStateException("crash invoke");
         }
 
         @Override
         public void close() throws Exception {
-            print("auto close");
-            throw new IllegalAccessException("哈哈，想不到吧");
+            throw new RuntimeException("crash close");
         }
     }
 
