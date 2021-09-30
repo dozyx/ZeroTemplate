@@ -1,2 +1,22 @@
-# ZeroTemplate
-本来想要的是创建一套个人快速开发模板，结果又把一些 sample 加了进去，所以该库作为存放个人 sdk 和 demo 使用
+本来想要的是创建一套个人快速开发模板，结果又把一些 sample 加了进去，所以该库作为存放个人模板和 demo 代码。
+
+
+
+## 开发说明
+
+### 新增 module
+
+module 名称规范：小写，下划线分隔
+
+`build.gradle` 处理：
+
+```groovy
+// app module
+apply from: "${rootDir}/buildApp.gradle"
+
+// lib module
+apply from: "${rootDir}/buildLib.gradle"
+```
+
+appliationId 会根据 module 名生成，格式：`cn.dozyx.[subfolder.].module_name`
+
