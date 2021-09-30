@@ -45,13 +45,9 @@ class IntentTest : BaseTestActivity() {
 
         addAction(object : Action("启动") {
             override fun run() {
-//                val intentString = "intent://larkgame.com?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;end;"
-//                val intentString = "intent://snaptubeapp.com/web?utm_source=sp_settings&web_type=common#Intent;scheme=https;package=com.snaptube.premium;S.title=测试;S.url=https://www.baidu.com;end;"
-//                startActivity(Intent.parseUri(Uri.parse(intentString).toString(), Intent.URI_INTENT_SCHEME))
-                val intentString = "https://snaptube.tv/2irR"
+                val intentString = ""
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
                 intent.addCategory(Intent.CATEGORY_DEFAULT)
-//                intent.setPackage("com.snaptube.premium")
                 startActivity(intent)
             }
         })
@@ -69,7 +65,6 @@ class IntentTest : BaseTestActivity() {
             override fun run() {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
-                intent.setPackage("com.snaptube.premium")
                 intent.putExtra(Intent.EXTRA_TEXT, "https://youtu.be/E3RBFhyjjqU")
                 startActivity(intent)
                 val resolveInfos =
@@ -125,8 +120,7 @@ class IntentTest : BaseTestActivity() {
         addAction(object : Action("print") {
             override fun run() {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data =
-                    Uri.parse("https://static.snaptube.in/snaptube/mothersday2021/image_1.png")
+//                intent.data =
                 Timber.d(intent.toUri(Intent.URI_INTENT_SCHEME))
                 startActivity(intent)
             }
@@ -134,7 +128,6 @@ class IntentTest : BaseTestActivity() {
 
         addAction(object : Action("filter test") {
             override fun run() {
-                val intentString = "https://snaptube.tv/2irR"
 //                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
                 val intent = Intent()
                 intent.addCategory(Intent.CATEGORY_DEFAULT)

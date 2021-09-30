@@ -37,11 +37,7 @@ class MeaninglessActivity : AppCompatActivity() {
             Timber.d("MeaninglessActivity.onCreate ${System.currentTimeMillis() - start}")
 
         }
-        val source = SpannableString(
-            "https://gitlab.mobiuspace.net/mobiuspace111/and-team/em-snaptube-dataadapter/merge_requests/13\n" +
-                    "https://gitlab.mobiuspace.net/mobiuspace/and-team/snaptube/merge_requests/702"
-        )
-        tv_link.text = source
+        tv_link.text = ""
     }
 
     private fun startLoadingAnim() {

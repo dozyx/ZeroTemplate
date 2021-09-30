@@ -1084,13 +1084,6 @@
         <activity
             android:name=".intent.ActionSendTest"
             android:label="Intent/Send">
-            <!--<intent-filter android:label="Download with Snaptube ">
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/*" />
-            </intent-filter>-->
             <intent-filter android:label="发送给朋友">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
