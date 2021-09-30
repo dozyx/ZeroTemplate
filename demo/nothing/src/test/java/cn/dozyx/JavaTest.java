@@ -85,6 +85,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
@@ -132,6 +133,47 @@ import okhttp3.HttpUrl;
  */
 
 public class JavaTest {
+
+    @Test
+    public void testInitialize() {
+        Person person = new Student();
+//        Student person = new Student();
+//        person.sayName();
+        print(person.name);
+        print(((Student) person).name);
+    }
+
+    private static class Person {
+        public String name = "Person";
+
+        public void sayName() {
+            print(name);
+        }
+    }
+
+
+    private static class Student extends JavaTest.Person {
+        public String name = "Student";
+    }
+
+    @Test
+    public void testClone() throws CloneNotSupportedException {
+        ClassB classB = new ClassB();
+        classB.name = "哈哈";
+        classB.age = 18;
+        Object clone = classB.clone();
+        print(clone == classB);
+        print(clone);
+    }
+
+    @Test
+    public void testClass(){
+        printClass(new ArrayList<>());
+    }
+
+    private void printClass(List<String> list) {
+        print(list.getClass());
+    }
 
     @Test
     public void testTryWithResource() throws Exception {
@@ -798,9 +840,11 @@ public class JavaTest {
 
     @Test
     public void testRegex() {
-        Matcher queryParamMatcher = PARAM_URL_REGEX.matcher("{aa}");
+        Matcher queryParamMatcher = Pattern.compile("^values-([a-z]*).*").matcher("values-ro");
         print(queryParamMatcher.matches());
         print(queryParamMatcher.group(0));
+        print(queryParamMatcher.group(1));
+        print(queryParamMatcher.groupCount());
     }
 
     @Test
@@ -811,6 +855,16 @@ public class JavaTest {
         String string = "data = '\\x22'";
         Pattern pattern = Pattern.compile(patternString);
         print(pattern.matcher(string).find());
+    }
+
+    @Test
+    public void testRegex3() {
+        String string = "ab1cab2cab3c";
+        Pattern pattern = Pattern.compile("ab\\d");
+        Matcher matcher = pattern.matcher(string);
+        while (matcher.find()){
+            print(matcher.group(0));
+        }
     }
 
     @Test
@@ -2382,15 +2436,54 @@ public class JavaTest {
 
 
     static class ClassA {
+        public String name;
+        public int age;
+
         public void foo() throws Exception {
 
         }
+
+        protected void foo1(){
+
+        }
+
+        @Override
+        public String toString() {
+            return "ClassA{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ClassA classA = (ClassA) o;
+            return age == classA.age && Objects.equals(name, classA.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, age);
+        }
     }
 
-    static class ClassB extends ClassA {
+    static class ClassB extends ClassA implements Cloneable {
         @Override
         public void foo() throws Exception {
             super.foo();
+        }
+
+        @Override
+        public void foo1() {
+            super.foo1();
+        }
+
+        @NonNull
+        @Override
+        public ClassB clone() throws CloneNotSupportedException {
+            return (ClassB) super.clone();
         }
     }
 }

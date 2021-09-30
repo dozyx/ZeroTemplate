@@ -8,6 +8,7 @@ task foo() {
 //    println("$TAG ${project.property("ProjectProperty")}")//命令行通过 -P 指定
     println("$TAG ${System.getProperty("SystemProperty")}")//命令行通过 -D 指定
     // 命令行 export LOCAL_DEBUG=false | ./gradlew -DSystemProperty=111 -PProjectProperty=222 foo
+    println "${rootProject.projectDir.path}"
 }
 
 project.afterEvaluate {

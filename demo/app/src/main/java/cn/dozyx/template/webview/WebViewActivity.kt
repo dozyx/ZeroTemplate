@@ -61,8 +61,9 @@ class WebViewActivity : AppCompatActivity() {
         configWebChromeClient(webView)
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 //        val url = "http://www.mobiuhome.com/redirect?ad_s=https%3a%2f%2flarkgame.com?utm_source=sp_settings"
-        val url = "https://www.youtube.com/"
+//        val url = "https://www.youtube.com/"
 //        val url = "https://www.baidu.com/"
+        val url = "https://m.animeflv.net/"
         webView.loadUrl(url)
 
         val data = ""

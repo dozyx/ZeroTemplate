@@ -58,6 +58,23 @@ import io.reactivex.subjects.UnicastSubject;
 public class RxJavaTest {
 
     @Test
+    public void foo() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        Observable.fromIterable(list)
+                .buffer(2)
+                .map((Function<List<Integer>, List<String>>) integers -> {
+                    ArrayList<String> strings = new ArrayList<>();
+                    for (Integer integer : integers) {
+                        strings.add(integer.toString());
+                    }
+                    print("map buffer list: " + integers.size());
+                    return strings;
+                }).toList().subscribe(lists -> {
+            print("final list: " + lists.size());
+        });
+    }
+
+    @Test
     public void testFlatmapSubscribeOn() {
         Observable.just(1)
                 .flatMap(integer -> {

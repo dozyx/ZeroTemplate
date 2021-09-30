@@ -207,6 +207,12 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:taskAffinity=".test" />
+
+        <activity
+            android:name=".activity.LaunchModeTest$StandardLaunchModeTestWithTaskAffinity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=".test" />
         <activity
             android:name=".fragment.FragmentLifeCycleActivity"
             android:label="@string/fragment_life_cycle"

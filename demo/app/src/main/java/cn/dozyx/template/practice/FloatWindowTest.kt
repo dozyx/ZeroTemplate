@@ -19,6 +19,7 @@ import android.text.style.AbsoluteSizeSpan
 import android.view.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.res.ResourcesCompat
 import cn.dozyx.constant.Shakespeare
 import cn.dozyx.core.ex.dp
 import cn.dozyx.template.MainActivity
@@ -67,6 +68,7 @@ class FloatWindowTest : BaseTestActivity() {
         }
 
         addButton("activity float") {
+            openSettings()
             showFloatView()
             Timber.d("FloatWindowActivity.initActions floatView root ${floatView.rootView}")
             Timber.d("FloatWindowActivity.initActions decorView root ${window.decorView.rootView}")
@@ -97,14 +99,20 @@ class FloatWindowTest : BaseTestActivity() {
     private fun showFloatByPresentation() {
         val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         val layoutParams = getBaseWindowLayoutParams()
-        layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-//        layoutParams.type = 2037
+//        layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+        layoutParams.type = 2037
+        layoutParams.flags = layoutParams.flags or WindowManager.LayoutParams.FLAG_DIM_BEHIND or WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+        layoutParams.dimAmount = 0.6F
 
         val presentation = Presentation(this, windowManager.defaultDisplay, R.style.no_frame_dialog)
         presentation.setContentView(createFloatView())
         if (presentation.window != null) {
+            // 默认的 attributes 的 flags 为 0x800002，
+            // 即 WindowManager.LayoutParams.FLAG_SPLIT_TOUCH | WindowManager.LayoutParams.FLAG_DIM_BEHIND
+            // dimAmount 为 0.6
             presentation.window!!.attributes = layoutParams
         }
+        presentation.setCanceledOnTouchOutside(true)
         presentation.show()
     }
 
@@ -118,14 +126,17 @@ class FloatWindowTest : BaseTestActivity() {
                 }
                 // flags 不设置为 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE 的话可以拦截到 back 事件，但 home 事件没办法拦截
                 if (event.keyCode == KeyEvent.KEYCODE_BACK) {
-                    Timber.d("dispatchKeyEvent intercept back")
-                    return true
+//                    Timber.d("dispatchKeyEvent intercept back")
+//                    return true
                 }
                 return super.dispatchKeyEvent(event)
             }
 
             override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
 //                Timber.d("dispatchTouchEvent ${MotionEvent.actionToString(ev.action)}")
+                if (ev.action == MotionEvent.ACTION_OUTSIDE) {
+                    return true
+                }
                 return super.dispatchTouchEvent(ev)
             }
         }
@@ -138,8 +149,8 @@ class FloatWindowTest : BaseTestActivity() {
         floatView.isFocusableInTouchMode = true
         floatView.setOnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-                Timber.d("intercept back")
-                return@setOnKeyListener true
+//                Timber.d("intercept back")
+//                return@setOnKeyListener true
             }
             return@setOnKeyListener false
         }
@@ -148,6 +159,7 @@ class FloatWindowTest : BaseTestActivity() {
             Timber.d("FloatWindowActivity.showFloatView click start")
 //            clearTopActivity()
 //            sendBroadcast()
+//            sendBroadcast(Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
             val spannableString =
                 SpannableString(Shakespeare.TITLES[Random.nextInt(Shakespeare.TITLES.size - 1)] + Random.nextInt())
             spannableString.setSpan(
@@ -356,18 +368,21 @@ class FloatWindowTest : BaseTestActivity() {
         val windowManager = getSystemService(WINDOW_SERVICE) as? WindowManager
         windowManager ?: return
         floatView = createFloatView()
+        val layoutParams = WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY else WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                    or WindowManager.LayoutParams.FLAG_FULLSCREEN
+                    or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+             or WindowManager.LayoutParams.FLAG_DIM_BEHIND,
+            PixelFormat.TRANSLUCENT
+        )
+        layoutParams.dimAmount = 0.8f // 不设置的话就是全黑的
         windowManager.addView(
             floatView,
-            WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY else WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-                        or WindowManager.LayoutParams.FLAG_FULLSCREEN
-                        or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-                PixelFormat.TRANSLUCENT
-            )
+            layoutParams
         )
     }
 
