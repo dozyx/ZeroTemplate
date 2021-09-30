@@ -8,6 +8,11 @@
 
 module 名称规范：小写，下划线分隔
 
+清理：
+
+* 使用通用模板修改 `build.gradle`
+* 删除 `androidTest`、`test`、`libs`、`.gitignore`
+
 `build.gradle` 处理：
 
 ```groovy
