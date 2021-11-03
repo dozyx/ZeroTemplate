@@ -1,6 +1,11 @@
 apply from: "${rootDir}/buildApp.gradle"
 
 dependencies {
+
+    implementation project(":proguardtest:lib")
+
     implementation Deps.appcompat
     implementation Deps.material
+    implementation project(':proguardtest:lib2')
+//    compileOnly project(':proguardtest:lib2')
 }

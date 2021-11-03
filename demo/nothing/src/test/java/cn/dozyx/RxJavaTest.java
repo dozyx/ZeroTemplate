@@ -53,9 +53,20 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.ReplaySubject;
 import io.reactivex.subjects.Subject;
 import io.reactivex.subjects.UnicastSubject;
+import timber.log.Timber;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
+
+
+    @Test
+    public void testDistinct() {
+        Observable.just(1, 1)
+//                .distinct()
+                .subscribeOn(Schedulers.io())
+                .subscribe(sObserver);
+        sleep(1);
+    }
 
     @Test
     public void foo() {
@@ -596,7 +607,8 @@ public class RxJavaTest {
     @Test
     public void testReduce() {
         Observable<String> observable = getStringObservable();
-//        observable = Observable.just("1111");
+//        observable = Observable.just("1111");// 只输出一个元素
+//        observable = Observable.empty(); // reduce 直接 complete，RxJava1 会 crash
         observable.reduce(new BiFunction<String, String, String>() {
             @Override
             public String apply(String s, String s2) throws Exception {
@@ -1085,6 +1097,13 @@ public class RxJavaTest {
 
         source1.subscribe(subject);
         source2.subscribe(subject);
+
+        subject.take(1).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                print("accept: take1 " + s);
+            }
+        });
         sleep(3);
 
     }
@@ -1236,7 +1255,20 @@ public class RxJavaTest {
 
     }
 
+    @Test
     public void testFlowable() {
+        Flowable<Integer> flowable = Flowable.create(emitter -> {
+            Timber.d("subscribe: ");
+            emitter.onNext(1);
+            emitter.onComplete();
+        }, BackpressureStrategy.LATEST);
+        flowable.subscribe(integer -> Timber.d("accept: subscribe1"));
+        flowable.subscribe(integer -> Timber.d("accept: subscribe2"));
+        sleep(1);
+    }
+
+    @Test
+    public void testFlowableBackpressure() {
         Flowable.create(new FlowableOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull FlowableEmitter<String> emitter)

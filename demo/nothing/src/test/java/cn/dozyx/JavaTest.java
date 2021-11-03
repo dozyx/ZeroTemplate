@@ -135,6 +135,31 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testEnum() {
+        print(Operation.valueOf("PLUS"));// 返回字符串对应的枚举常量，但 print 输出会调用它的 toString 方法
+        print(Operation.PLUS.name());
+        print(Operation.PLUS.ordinal());
+        print(Operation.PLUS);
+    }
+
+    private enum Operation {
+        PLUS {
+            @Override
+            public double apply(double x, double y) {
+                return x + y;
+            }
+        };
+
+        public abstract double apply(double x, double y);
+
+        @NonNull
+        @Override
+        public String toString() {
+            return super.toString() + " XXX";
+        }
+    }
+
+    @Test
     public void testInitialize() {
         Person person = new Student();
 //        Student person = new Student();
@@ -167,7 +192,7 @@ public class JavaTest {
     }
 
     @Test
-    public void testClass(){
+    public void testClass() {
         printClass(new ArrayList<>());
     }
 
@@ -862,7 +887,7 @@ public class JavaTest {
         String string = "ab1cab2cab3c";
         Pattern pattern = Pattern.compile("ab\\d");
         Matcher matcher = pattern.matcher(string);
-        while (matcher.find()){
+        while (matcher.find()) {
             print(matcher.group(0));
         }
     }
@@ -2209,7 +2234,7 @@ public class JavaTest {
                 new JsonDeserializer<Data>() {
                     @Override
                     public Data deserialize(JsonElement json, Type typeOfT,
-                            JsonDeserializationContext context) throws JsonParseException {
+                                            JsonDeserializationContext context) throws JsonParseException {
                         print("deserialize " + json.toString() + " " + typeOfT.getTypeName());
                         if (json.isJsonObject()) {
                             print("deserialize " + json.toString());
@@ -2227,7 +2252,7 @@ public class JavaTest {
                 }).registerTypeHierarchyAdapter(String.class, new JsonDeserializer<String>() {
             @Override
             public String deserialize(JsonElement json, Type typeOfT,
-                    JsonDeserializationContext context) throws JsonParseException {
+                                      JsonDeserializationContext context) throws JsonParseException {
                 if (json.isJsonPrimitive()) {
                     return json.getAsString();
                 }
@@ -2443,7 +2468,7 @@ public class JavaTest {
 
         }
 
-        protected void foo1(){
+        protected void foo1() {
 
         }
 

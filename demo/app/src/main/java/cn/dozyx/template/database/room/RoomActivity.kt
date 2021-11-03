@@ -6,9 +6,12 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import cn.dozyx.core.utli.executor.get
 import cn.dozyx.template.base.BaseTestActivity
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.*
 import java.util.concurrent.ExecutorService
+import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
 
 /**
@@ -74,6 +77,20 @@ class RoomActivity : BaseTestActivity() {
                 }
             }
         })
+        addButton("批量添加数据", Runnable {
+            val users = mutableListOf<User>()
+            thread {
+                for (j in 0..1000) {
+                    val user = generateFakeUser(100000)
+                    users.add(user)
+                }
+                try {
+                    appDatabase?.userDao()?.insertAll(users)
+                } catch (e: Exception) {
+                    Timber.d("catch exception $e")
+                }
+            }
+        })
 
         addButton("添加数据集合", Runnable {
             for (i in 0..10) {
@@ -112,6 +129,14 @@ class RoomActivity : BaseTestActivity() {
 //                }
             }
         })
+
+        val allObservable = appDatabase?.userDao()?.allObservable
+        addButton("flowable", Runnable {
+            allObservable?.subscribeOn(Schedulers.io())?.subscribe {
+                Timber.d("flowable: ${it.size}")
+            }
+        })
+
     }
 
     private fun createDatabase(): AppDatabase {

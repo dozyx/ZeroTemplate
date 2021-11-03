@@ -419,6 +419,7 @@ class FloatWindowTest : BaseTestActivity() {
             } else {
                 params.type = WindowManager.LayoutParams.TYPE_PHONE
             }
+//            params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
             params.format = PixelFormat.TRANSLUCENT
             params.flags =
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_FULLSCREEN

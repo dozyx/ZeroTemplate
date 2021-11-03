@@ -1478,6 +1478,13 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".notification.BadNotificationTest">
+            android:label="Notification/BadNotification">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>

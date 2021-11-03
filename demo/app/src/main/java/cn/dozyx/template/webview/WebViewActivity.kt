@@ -14,8 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.widget.webview.WebConfig
 import cn.dozyx.core.widget.webview.WebViewUtil
 import cn.dozyx.template.R
-import kotlinx.android.synthetic.main.activity_drag_panel.*
 import kotlinx.android.synthetic.main.activity_web_view.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import timber.log.Timber
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -62,7 +63,8 @@ class WebViewActivity : AppCompatActivity() {
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
 //        val url = "https://www.youtube.com/"
 //        val url = "https://www.baidu.com/"
-        val url = "https://m.animeflv.net/"
+//        val url = "https://m.animeflv.net/"
+        val url = "https://www.instagram.com/"
         webView.loadUrl(url)
 
         val data = ""
@@ -354,7 +356,7 @@ class WebViewActivity : AppCompatActivity() {
             ): Boolean {
                 Timber.d("shouldOverrideUrlLoading: ${request?.url}")
                 if (request?.url?.host == "m.facebook.com") {
-                    return true
+//                    return true
                 }
                 if (request?.url?.host?.contains("m.youtube.com/watch") == true) {
                     return true
@@ -371,7 +373,7 @@ class WebViewActivity : AppCompatActivity() {
 
             override fun shouldInterceptRequest(
                 view: WebView?,
-                url: String?
+                url: String
             ): WebResourceResponse? {
                 // 不是回调在主线程
 //                Timber.d("WebViewActivity.shouldInterceptRequest $url")
@@ -384,6 +386,26 @@ class WebViewActivity : AppCompatActivity() {
             ): WebResourceResponse? {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                    Timber.d("WebViewActivity.shouldInterceptRequest ${request?.url}")
+                    val url = request?.url?.toString()
+                    url ?: return null
+                    if (!url.contains("m.facebook.com/dialog/oauth")) {
+                        return super.shouldInterceptRequest(view, url)
+                    }
+                    val client = OkHttpClient.Builder().build()
+                    val requestBuilder = Request.Builder()
+                        .url(url)
+                    request.requestHeaders.forEach {
+                        requestBuilder.addHeader(it.key, it.value)
+                    }
+                    val response = client.newCall(
+                        requestBuilder
+                            .build()
+                    ).execute()
+                    return WebResourceResponse(
+                        null,
+                        response.header("content-encoding", "utf-8"),
+                        response.body?.byteStream()
+                    )
                 }
                 return super.shouldInterceptRequest(view, request)
             }

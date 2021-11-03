@@ -7,6 +7,7 @@ import android.util.Log
 import cn.dozyx.core.base.BaseApplication
 import cn.dozyx.core.debug.ActivityLifecycleLoggerCallbacks
 import cn.dozyx.template.network.okhttp.compat.AndroidPlatform9
+import cn.dozyx.template.notification.manager.NotificationManager
 import cn.dozyx.template.pop.HomePopTracker
 import com.didichuxing.doraemonkit.DoraemonKit
 import com.facebook.stetho.Stetho
@@ -17,6 +18,11 @@ open class ZTApplication : BaseApplication() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         Log.d("Dozyx", "ZTApplication.attachBaseContext")
+    }
+
+    override fun getPackageName(): String {
+//        return "com.android.chrome"
+        return super.getPackageName()
     }
 
     override fun onCreate() {
@@ -67,6 +73,7 @@ open class ZTApplication : BaseApplication() {
 
     override fun initOnMainProcess() {
         Stetho.initializeWithDefaults(this)
+        NotificationManager.createChannels(this)
     }
 
     override fun initOnAllProcess() {

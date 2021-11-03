@@ -361,7 +361,7 @@ class NotificationTest : BaseTestActivity() {
                 val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL /*CHANNEL_ID_GROUP_SUMMARY*/)
                         .setSmallIcon(R.drawable.ic_notification_fail)
                         .setContentTitle("group1 channel2")
-                        .setColor(getColor(android.R.color.holo_red_dark))
+                        .setColor(ContextCompat.getColor(this@NotificationTest, android.R.color.holo_red_dark))
                         .setGroupSummary(true)
                         .setShowWhen(false)// 会覆盖非 summary 通知的 setShowWhen，但如果非 summary 通知没有设置 subtext，那么它们的 when 会始终显示，从展示上来猜测，应该是系统会确保通知的 header 始终会有文本
                         .setContentIntent(PendingIntent.getActivity(this@NotificationTest, 0, IntentUtils.getDialIntent("123"), 0))

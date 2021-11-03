@@ -86,6 +86,7 @@ dependencies {
     implementation Deps.rxpermissions
     kapt DepsRoom.processor
     implementation DepsRoom.runtime
+    implementation DepsRoom.rxjava2
     implementation Deps.stetho
     implementation DepsCamera.camera2
     implementation Deps.picasso

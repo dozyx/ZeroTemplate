@@ -8,6 +8,8 @@ import androidx.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 /**
  * Create by dozyx on 2019/5/17
  **/
@@ -17,6 +19,9 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     List<User> getAll();
 
+    @Query("SELECT * FROM user")
+    Flowable<List<User>> getAllObservable();
+
     @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 
@@ -25,6 +30,9 @@ public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(User... users);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<User> users);
 
     @Delete
     void delete(User user);

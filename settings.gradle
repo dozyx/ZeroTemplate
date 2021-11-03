@@ -1,5 +1,4 @@
 include ':custom-plugin'
-include ':demo:proguard'
 include ':demo:app', ':model', ':demo:float-window', ':demo:nothing', ':demo:navigation', ':core', ':shell', ':ui', ':sampleLib', ':demo:zero', ':annotationprocessortest', ':butterknife-annotations', ':butterknife-compiler', ':autobuilder'
 include ':demo:dagger'
 //MyConfigUtils.addBuildListener(gradle)
@@ -32,3 +31,4 @@ include ':empty_library'
 include ':empty_library2'
 include ':proguardtest:app'
 include ':proguardtest:lib'
+include ':proguardtest:lib2'

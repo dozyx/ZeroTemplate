@@ -4,14 +4,29 @@ import org.junit.Test;
 
 import java.util.concurrent.Callable;
 
+import io.reactivex.functions.BiFunction;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 import static cn.dozyx.LogUtils.print;
 
 public class RxJava1Test {
+
+    @Test
+    public void testReduce() {
+        Observable<String> observable;
+//        observable = Observable.just("1111"); // 直接输出
+        observable = Observable.empty(); // NoSuchElementException 异常
+        observable.reduce(new Func2<String, String, String>() {
+            @Override
+            public String call(String s, String s2) {
+                return s + s2;
+            }
+        }).subscribe(s -> print(s));
+    }
 
     @Test
     public void testFlatmapSubscribeOn() throws InterruptedException {
