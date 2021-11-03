@@ -1873,9 +1873,6 @@
             android:authorities="com.snaptube.premium.updateSdk.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true" />
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
         <provider
             android:name="com.dywx.premium.core.udid.impl.UDIDProvider"
             android:authorities="com.snaptube.premium.provider.UDIDProvider"
