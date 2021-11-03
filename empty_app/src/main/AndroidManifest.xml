@@ -82,7 +82,7 @@
     <!--        android:fullBackupContent="@xml/test"-->
     <application
         android:name="com.snaptube.premium.app.PhoenixApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher_background"
