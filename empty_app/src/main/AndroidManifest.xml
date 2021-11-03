@@ -1170,15 +1170,6 @@
             android:name="com.phoenix.download.DownloadService"
             android:enabled="true"
             android:foregroundServiceType="dataSync" />
-        <provider
-            android:name="com.snaptube.premium.share.GenericFileProvider"
-            android:authorities="com.snaptube.premium.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/test" />
-        </provider>
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
@@ -1751,11 +1742,7 @@
                 <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
             </intent-filter>
         </receiver>
-        <provider
-            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-            android:authorities="com.snaptube.premium.lifecycle-process"
-            android:exported="false"
-            android:multiprocess="true" />
+
 
         <service
             android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
@@ -1807,13 +1794,7 @@
                 <action android:name="com.huawei.push.msg.PASSBY_MSG" />
             </intent-filter>
         </service>
-        <provider
-            android:name="com.huawei.hms.support.api.push.PushProvider"
-            android:authorities="com.snaptube.premium.huawei.push.provider"
-            android:exported="true"
-            android:permission="com.snaptube.premium.permission.PUSH_PROVIDER"
-            android:readPermission="com.snaptube.premium.permission.PUSH_PROVIDER"
-            android:writePermission="com.snaptube.premium.permission.PUSH_WRITE_PROVIDER" />
+
 
         <meta-data
             android:name="com.huawei.hms.client.service.name:push"
@@ -1822,10 +1803,7 @@
             android:name="com.huawei.hms.min_api_level:push:push"
             android:value="1" />
 
-        <provider
-            android:name="com.huawei.hms.aaid.InitProvider"
-            android:authorities="com.snaptube.premium.aaidinitprovider"
-            android:exported="false" />
+
 
         <meta-data
             android:name="com.huawei.hms.client.service.name:opendevice"
@@ -1843,11 +1821,7 @@
             android:name="availableLoaded"
             android:value="yes" />
 
-        <provider
-            android:name="com.huawei.hms.update.provider.UpdateProvider"
-            android:authorities="com.snaptube.premium.hms.update.provider"
-            android:exported="false"
-            android:grantUriPermissions="true" />
+
 
         <activity
             android:name="com.huawei.updatesdk.service.otaupdate.AppUpdateActivity"
@@ -1868,19 +1842,11 @@
                 android:value="androidhwext:style/Theme.Emui.Translucent" />
         </activity>
 
-        <provider
-            android:name="com.huawei.updatesdk.fileprovider.UpdateSdkFileProvider"
-            android:authorities="com.snaptube.premium.updateSdk.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        <provider
-            android:name="com.dywx.premium.core.udid.impl.UDIDProvider"
-            android:authorities="com.snaptube.premium.provider.UDIDProvider"
-            android:enabled="true"
-            android:exported="true" />
+
 
         <meta-data
             android:name="com.huawei.hms.client.service.name:ads-lite"
@@ -1892,15 +1858,8 @@
             android:name="permission.reason.android.permission-group.CALENDAR"
             android:resource="@string/app_name" />
 
-        <provider
-            android:name="com.huawei.openalliance.ad.ppskit.provider.PPSInstallFileProvider"
-            android:authorities="com.snaptube.premium.hiad.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true" />
-        <provider
-            android:name="com.huawei.openalliance.ad.ppskit.provider.InnerApiProvider"
-            android:authorities="com.snaptube.premium.pps.innerapiprovider"
-            android:exported="false" />
+
+
 
         <service
             android:name="com.huawei.android.hms.ppskit.PpsCoreService"
@@ -2135,10 +2094,7 @@
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:exported="false" />
 
-        <provider
-            android:name="com.huawei.agconnect.core.provider.AGConnectInitializeProvider"
-            android:authorities="com.snaptube.premium.AGCInitializeProvider"
-            android:exported="false" />
+
         <service
             android:name="com.huawei.agconnect.core.ServiceDiscovery"
             android:exported="false" />
