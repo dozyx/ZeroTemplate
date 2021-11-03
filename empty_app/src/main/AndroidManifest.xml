@@ -727,8 +727,16 @@
             android:name="com.google.firebase.messaging.default_notification_channel"
             android:value="snaptube_fcm_default_channel" />
 
-
-
+        <provider
+            android:name="com.snaptube.taskManager.provider.SnaptubeContentProvider"
+            android:authorities="com.snaptube.premium.provider.SnaptubeContentProvider"
+            android:enabled="true"
+            android:exported="false" />
+        <provider
+            android:name="com.snaptube.premium.provider.SnaptubeExportedProvider"
+            android:authorities="com.snaptube.premium.provider.SnaptubeExportedProvider"
+            android:enabled="true"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -1278,7 +1286,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-
+        <provider
+            android:name="com.vungle.warren.utility.VungleProvider"
+            android:authorities="com.snaptube.premium.vungle-provider"
+            android:exported="false" />
         <meta-data
             android:name="applovin.sdk.key"
             android:value="JWgnnSNxAc4nPLsTcEz5m6B3UEXK-Cb65uvfMsVIUTD74Nz2Bqmu1EkMXIkqRR0ZRGoFQZrIyy6UPddM-8KF1T" />
@@ -1298,7 +1309,10 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/test" />
         </service>
-
+        <provider
+            android:name="com.snaptube.premium.locker.LockerManagerInitializer"
+            android:authorities="com.snaptube.premium.locker-init"
+            android:exported="false" />
 
         <receiver android:name="com.snaptube.ads.infomobi.receiver.ReceiverDelegate">
             <intent-filter>
@@ -1329,7 +1343,11 @@
             android:name="com.snaptube.imageloader.media.MediaGlideModule"
             android:value="GlideModule" />
 
-
+        <provider
+            android:name="com.google.firebase.perf.provider.FirebasePerfProvider"
+            android:authorities="com.snaptube.premium.firebaseperfprovider"
+            android:exported="false"
+            android:initOrder="101" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
@@ -1456,8 +1474,15 @@
             </intent-filter>
         </receiver>
 
-
-
+        <provider
+            android:name="io.intercom.android.sdk.IntercomInitializeContentProvider"
+            android:authorities="com.snaptube.premium.IntercomInitializeContentProvider"
+            android:exported="false" />
+        <provider
+            android:name="com.sensorsdata.analytics.android.sdk.SensorsDataContentProvider"
+            android:authorities="com.snaptube.premium.SensorsDataContentProvider"
+            android:enabled="true"
+            android:exported="false" />
 
         <meta-data
             android:name="com.sensorsdata.analytics.android.MainProcessName"
@@ -1490,7 +1515,11 @@
             android:label=""
             android:theme="@style/Theme.AppCompat" />
 
-
+        <provider
+            android:name="com.dywx.hybrid.InitProvider"
+            android:authorities="com.snaptube.premium.hybrid.initprovider"
+            android:exported="false"
+            android:initOrder="89" />
         <service android:name="com.snaptube.ads.keeper.StubService" />
         <receiver android:name="com.snaptube.ads.keeper.StubReceiver" />
         <service
@@ -1655,7 +1684,12 @@
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-
+        <provider
+            android:name="com.applovin.sdk.AppLovinInitProvider"
+            android:authorities="com.snaptube.premium.applovincontentprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:initOrder="101" />
 
         <activity
             android:name="com.applovin.adview.AppLovinInterstitialActivity"
@@ -1706,7 +1740,10 @@
             android:exported="false"
             android:stopWithTask="false" />
 
-
+        <provider
+            android:name="com.facebook.internal.FacebookInitProvider"
+            android:authorities="com.snaptube.premium.FacebookInitProvider"
+            android:exported="false" />
         <receiver
             android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
             android:exported="false">
