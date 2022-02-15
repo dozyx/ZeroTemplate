@@ -133,4 +133,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-messaging'
+    implementation 'net.dongliu:apk-parser:2.2.0'
 }

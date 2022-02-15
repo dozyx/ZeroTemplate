@@ -727,17 +727,6 @@
             android:name="com.google.firebase.messaging.default_notification_channel"
             android:value="snaptube_fcm_default_channel" />
 
-        <provider
-            android:name="com.snaptube.taskManager.provider.SnaptubeContentProvider"
-            android:authorities="com.snaptube.premium.provider.SnaptubeContentProvider"
-            android:enabled="true"
-            android:exported="false" />
-        <provider
-            android:name="com.snaptube.premium.provider.SnaptubeExportedProvider"
-            android:authorities="com.snaptube.premium.provider.SnaptubeExportedProvider"
-            android:enabled="true"
-            android:exported="true" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@android:integer/config_shortAnimTime" />

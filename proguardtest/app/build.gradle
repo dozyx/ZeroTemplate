@@ -1,4 +1,5 @@
 apply from: "${rootDir}/buildApp.gradle"
+apply from: "${rootDir}/buildAndResGuard.gradle"
 
 dependencies {
 

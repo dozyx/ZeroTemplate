@@ -1,3 +1,4 @@
+# The proguard configuration file for the following section is /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/proguard-files/proguard-android.txt-4.1.2
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 #
@@ -30,7 +31,7 @@
 -dontnote com.google.android.vending.licensing.ILicensingService
 
 # For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
--keepclasseswithmembernames class * {
+-keepclasseswithmembernames,includedescriptorclasses class * {
     native <methods>;
 }
 
@@ -53,10 +54,6 @@
 
 -keepclassmembers class * implements android.os.Parcelable {
     public static final ** CREATOR;
-}
-
--keepclassmembers class **.R$* {
-    public static <fields>;
 }
 
 # Preserve annotated Javascript interface methods.
@@ -113,6 +110,8 @@
 # These classes are duplicated between android.jar and core-lambda-stubs.jar.
 -dontnote java.lang.invoke.**
 
+# End of content from /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/proguard-files/proguard-android.txt-4.1.2
+# The proguard configuration file for the following section is /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/proguard-rules.pro
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
@@ -139,194 +138,112 @@
 -printseeds seeds.txt
 -printusage unused.txt
 -verbose
-# Referenced at /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:9
+# End of content from /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/proguard-rules.pro
+# The proguard configuration file for the following section is /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/aapt_proguard_file/release/aapt_rules.txt
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
-# Referenced at /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:9
 -keep class androidx.multidex.MultiDexApplication { <init>(); }
-# Referenced at /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:27
 -keep class cn.dozyx.lib.ui.MainActivity { <init>(); }
-# Referenced at /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:18
 -keep class cn.dozyx.proguardtest.app.MainActivity { <init>(); }
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_button_bar_material.xml:43
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_material.xml:52
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_title_material.xml:57
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog.xml:51
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog_actions.xml:45
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog_title.xml:41
--keep class android.widget.Space { <init>(...); }
+-keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_select_dialog_material.xml:23
--keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(...); }
+-keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_action_menu_item_layout.xml:17
--keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(...); }
+-keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_expanded_menu_layout.xml:17
--keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(...); }
+-keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_cascading_menu_item_layout.xml:20
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_list_menu_item_layout.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_popup_menu_item_layout.xml:17
--keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(...); }
+-keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_toolbar.xml:27
--keep class androidx.appcompat.widget.ActionBarContainer { <init>(...); }
+-keep class androidx.appcompat.widget.ActionBarContainer { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_action_mode_bar.xml:19
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_toolbar.xml:43
--keep class androidx.appcompat.widget.ActionBarContextView { <init>(...); }
+-keep class androidx.appcompat.widget.ActionBarContextView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_toolbar.xml:17
--keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(...); }
+-keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_action_menu_layout.xml:17
--keep class androidx.appcompat.widget.ActionMenuView { <init>(...); }
+-keep class androidx.appcompat.widget.ActionMenuView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_activity_chooser_view.xml:19
--keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(...); }
+-keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_material.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog.xml:17
--keep class androidx.appcompat.widget.AlertDialogLayout { <init>(...); }
+-keep class androidx.appcompat.widget.AlertDialogLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_button_bar_material.xml:26
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog_actions.xml:26
--keep class androidx.appcompat.widget.ButtonBarLayout { <init>(...); }
+-keep class androidx.appcompat.widget.ButtonBarLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_content_include.xml:19
--keep class androidx.appcompat.widget.ContentFrameLayout { <init>(...); }
+-keep class androidx.appcompat.widget.ContentFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_title_material.xml:45
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog_title.xml:36
--keep class androidx.appcompat.widget.DialogTitle { <init>(...); }
+-keep class androidx.appcompat.widget.DialogTitle { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_simple_overlay_action_mode.xml:23
--keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(...); }
+-keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_dialog_title_material.xml:22
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_simple.xml:17
--keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(...); }
+-keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_search_view.xml:75
--keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(...); }
+-keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_toolbar.xml:36
--keep class androidx.appcompat.widget.Toolbar { <init>(...); }
+-keep class androidx.appcompat.widget.Toolbar { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_simple.xml:25
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_screen_simple_overlay_action_mode.xml:32
--keep class androidx.appcompat.widget.ViewStubCompat { <init>(...); }
+-keep class androidx.appcompat.widget.ViewStubCompat { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_timepicker_dialog.xml:38
--keep class androidx.constraintlayout.widget.Barrier { <init>(...); }
+-keep class androidx.constraintlayout.widget.Barrier { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/src/main/res/layout/activity_main.xml:2
-# Referenced at /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/lib/build/intermediates/packaged_res/release/layout/activity_proguard.xml:2
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_timepicker_dialog.xml:18
--keep class androidx.constraintlayout.widget.ConstraintLayout { <init>(...); }
+-keep class androidx.constraintlayout.widget.ConstraintLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout-land/material_timepicker.xml:23
--keep class androidx.constraintlayout.widget.Guideline { <init>(...); }
+-keep class androidx.constraintlayout.widget.Guideline { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_bottom_sheet_dialog.xml:26
--keep class androidx.coordinatorlayout.widget.CoordinatorLayout { <init>(...); }
+-keep class androidx.coordinatorlayout.widget.CoordinatorLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/a80dc4d3632e6bf9c2a241c7df06bab1/appcompat-1.3.1/res/layout/abc_alert_dialog_material.xml:41
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_alert_dialog.xml:40
--keep class androidx.core.widget.NestedScrollView { <init>(...); }
+-keep class androidx.core.widget.NestedScrollView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_calendar_horizontal.xml:29
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_calendar_months.xml:18
--keep class androidx.recyclerview.widget.RecyclerView { <init>(...); }
+-keep class androidx.recyclerview.widget.RecyclerView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_toolbar.xml:16
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_toolbar_custom_background.xml:16
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_toolbar_elevation.xml:16
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_toolbar_surface.xml:16
--keep class com.google.android.material.appbar.MaterialToolbar { <init>(...); }
+-keep class com.google.android.material.appbar.MaterialToolbar { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_clock_period_toggle.xml:35
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_timepicker_dialog.xml:73
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_calendar_month_navigation.xml:32
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_picker_header_fullscreen.xml:36
--keep class com.google.android.material.button.MaterialButton { <init>(...); }
+-keep class com.google.android.material.button.MaterialButton { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_clock_period_toggle.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout-land/material_clock_period_toggle_land.xml:18
--keep class com.google.android.material.button.MaterialButtonToggleGroup { <init>(...); }
+-keep class com.google.android.material.button.MaterialButtonToggleGroup { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_time_chip.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_action_chip.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_chip_zero_corner_radius.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_reflow_chipgroup.xml:25
--keep class com.google.android.material.chip.Chip { <init>(...); }
+-keep class com.google.android.material.chip.Chip { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_reflow_chipgroup.xml:19
--keep class com.google.android.material.chip.ChipGroup { <init>(...); }
+-keep class com.google.android.material.chip.ChipGroup { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_calendar_month.xml:18
--keep class com.google.android.material.datepicker.MaterialCalendarGridView { <init>(...); }
+-keep class com.google.android.material.datepicker.MaterialCalendarGridView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_bottom_navigation_item.xml:27
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_navigation_rail_item.xml:24
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/test_navigation_bar_item_layout.xml:27
--keep class com.google.android.material.internal.BaselineLayout { <init>(...); }
+-keep class com.google.android.material.internal.BaselineLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_text_input_end_icon.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_text_input_start_icon.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_picker_header_toggle.xml:18
--keep class com.google.android.material.internal.CheckableImageButton { <init>(...); }
+-keep class com.google.android.material.internal.CheckableImageButton { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_navigation_item.xml:17
--keep class com.google.android.material.internal.NavigationMenuItemView { <init>(...); }
+-keep class com.google.android.material.internal.NavigationMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_navigation_menu.xml:17
--keep class com.google.android.material.internal.NavigationMenuView { <init>(...); }
+-keep class com.google.android.material.internal.NavigationMenuView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_layout_snackbar.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_layout_snackbar.xml:18
--keep class com.google.android.material.snackbar.Snackbar$SnackbarLayout { <init>(...); }
+-keep class com.google.android.material.snackbar.Snackbar$SnackbarLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/design_layout_snackbar_include.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_layout_snackbar_include.xml:18
--keep class com.google.android.material.snackbar.SnackbarContentLayout { <init>(...); }
+-keep class com.google.android.material.snackbar.SnackbarContentLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_picker_text_input_date.xml:31
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_picker_text_input_date_range.xml:32
--keep class com.google.android.material.textfield.TextInputEditText { <init>(...); }
+-keep class com.google.android.material.textfield.TextInputEditText { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_time_input.xml:18
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_picker_text_input_date.xml:26
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/mtrl_picker_text_input_date_range.xml:26
--keep class com.google.android.material.textfield.TextInputLayout { <init>(...); }
+-keep class com.google.android.material.textfield.TextInputLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/text_view_with_line_height_from_appearance.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/text_view_with_line_height_from_layout.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/text_view_with_line_height_from_style.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/text_view_with_theme_line_height.xml:17
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/text_view_without_line_height.xml:17
--keep class com.google.android.material.textview.MaterialTextView { <init>(...); }
+-keep class com.google.android.material.textview.MaterialTextView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_chip_input_combo.xml:18
--keep class com.google.android.material.timepicker.ChipTextInputComboView { <init>(...); }
+-keep class com.google.android.material.timepicker.ChipTextInputComboView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_timepicker.xml:31
--keep class com.google.android.material.timepicker.ClockFaceView { <init>(...); }
+-keep class com.google.android.material.timepicker.ClockFaceView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_clockface_view.xml:25
--keep class com.google.android.material.timepicker.ClockHandView { <init>(...); }
+-keep class com.google.android.material.timepicker.ClockHandView { <init>(android.content.Context, android.util.AttributeSet); }
 
-# Referenced at /Users/zero/.gradle/caches/transforms-2/files-2.1/5920d8f8a0b22ea83a42bf584768213e/material-1.4.0/res/layout/material_timepicker_dialog.xml:46
--keep class com.google.android.material.timepicker.TimePickerView { <init>(...); }
+-keep class com.google.android.material.timepicker.TimePickerView { <init>(android.content.Context, android.util.AttributeSet); }
 
 
--dontwarn android.databinding.ViewDataBinding
--dontwarn android.databinding.ViewDataBinding$LiveDataListener
+# End of content from /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/app/build/intermediates/aapt_proguard_file/release/aapt_rules.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/9c7af59ec92782c763c6fc2f7eabce9c/databinding-runtime-4.1.2/proguard.txt
+-dontwarn androidx.databinding.ViewDataBinding
+-dontwarn androidx.databinding.ViewDataBinding$LiveDataListener
 
 # instant apps load these via reflection so we need to keep them.
--keep public class * extends android.databinding.DataBinderMapper
+-keep public class * extends androidx.databinding.DataBinderMapper
 
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/9c7af59ec92782c763c6fc2f7eabce9c/databinding-runtime-4.1.2/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/lib/build/intermediates/consumer_proguard_dir/release/lib0/proguard.txt
 #-keep public class * extends cn.dozyx.lib.MySuperClass
 # 不混淆 MySuperClass 子类的类名，但它的成员会被混淆，没有使用的方法也会移除。MySuperClass 也会被混淆。
 # 没有被使用的类也不会被移除
@@ -348,11 +265,15 @@
 #-keep class cn.dozyx.lib2.**{
 #  public protected *;
 #}
+# End of content from /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/lib/build/intermediates/consumer_proguard_dir/release/lib0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/lib2/build/intermediates/consumer_proguard_dir/release/lib0/proguard.txt
 #-keep class * extends cn.dozyx.lib2.CompileOnlySuperClass
 
 -keep class cn.dozyx.lib2.**{
   public protected *;
 }
+# End of content from /Users/zero/Desktop/Git/ZeroTemplate/proguardtest/lib2/build/intermediates/consumer_proguard_dir/release/lib0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/e3bbccc5f5e5598de086678969ae0d98/material-1.4.0/proguard.txt
 # Copyright (C) 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -400,6 +321,8 @@
 }
 
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/e3bbccc5f5e5598de086678969ae0d98/material-1.4.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/cf9faf0ff1d5136ea9548f14d0aa97da/appcompat-1.3.1/proguard.txt
 # Copyright (C) 2018 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -423,6 +346,8 @@
   <methods>;
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/cf9faf0ff1d5136ea9548f14d0aa97da/appcompat-1.3.1/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/ea27c804e067705d15eb172e8d54fc08/fragment-1.3.6/proguard.txt
 # Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -443,6 +368,8 @@
     public <init>();
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/ea27c804e067705d15eb172e8d54fc08/fragment-1.3.6/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/597449554b35a1fc166f4b45542309d8/coordinatorlayout-1.1.0/proguard.txt
 # Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -466,6 +393,8 @@
 # Make sure we keep annotations for CoordinatorLayout's DefaultBehavior and ViewPager's DecorView
 -keepattributes *Annotation*
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/597449554b35a1fc166f4b45542309d8/coordinatorlayout-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/f39d369008ce114afb4957ee8338b81d/transition-1.2.0/proguard.txt
 # Copyright (C) 2017 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -485,6 +414,8 @@
   androidx.transition.ChangeBounds$ViewBounds mViewBounds;
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/f39d369008ce114afb4957ee8338b81d/transition-1.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/d187b67ddaece4ce7472a43f8280d5c0/vectordrawable-animated-1.1.0/proguard.txt
 # Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -505,6 +436,8 @@
    *** get*();
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/d187b67ddaece4ce7472a43f8280d5c0/vectordrawable-animated-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/8162e32a209783ab42f43c52c8b20722/recyclerview-1.1.0/proguard.txt
 # Copyright (C) 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -530,6 +463,8 @@
     public void suppressLayout(boolean);
     public boolean isLayoutSuppressed();
 }
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/8162e32a209783ab42f43c52c8b20722/recyclerview-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/fb819f99b9e6d2b6bbf6a43c15cbf2a5/core-1.5.0/proguard.txt
 # Never inline methods, but allow shrinking and obfuscation.
 -keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.view.ViewCompat$Api* {
   <methods>;
@@ -541,6 +476,8 @@
   <methods>;
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/fb819f99b9e6d2b6bbf6a43c15cbf2a5/core-1.5.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/82e59920a2e7e6aa8333c73e61dbf5d1/lifecycle-runtime-2.3.1/proguard.txt
 -keepattributes *Annotation*
 
 -keepclassmembers enum androidx.lifecycle.Lifecycle$Event {
@@ -561,11 +498,15 @@
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 # Also this rule prevents registerIn from being inlined.
 -keepclassmembers class androidx.lifecycle.ReportFragment$LifecycleCallbacks { *; }
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/82e59920a2e7e6aa8333c73e61dbf5d1/lifecycle-runtime-2.3.1/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/3674e280c48e090ddec801d306c9a868/versionedparcelable-1.1.1/proguard.txt
 -keep class * implements androidx.versionedparcelable.VersionedParcelable
 -keep public class android.support.**Parcelizer { *; }
 -keep public class androidx.**Parcelizer { *; }
 -keep public class androidx.versionedparcelable.ParcelImpl
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/3674e280c48e090ddec801d306c9a868/versionedparcelable-1.1.1/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/1d208aca815a691b185e4b3a3f599c02/jetified-lifecycle-viewmodel-savedstate-2.3.1/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
     <init>(androidx.lifecycle.SavedStateHandle);
 }
@@ -574,6 +515,8 @@
     <init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/1d208aca815a691b185e4b3a3f599c02/jetified-lifecycle-viewmodel-savedstate-2.3.1/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/d10f09f96ab15294f6abcc69a7d7bec1/jetified-savedstate-1.1.0/proguard.txt
 # Copyright (C) 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -592,6 +535,8 @@
     <init>();
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/d10f09f96ab15294f6abcc69a7d7bec1/jetified-savedstate-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/d7aef93f8b7203ed0299380996e979a4/lifecycle-viewmodel-2.3.1/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
     <init>();
 }
@@ -600,6 +545,8 @@
     <init>(android.app.Application);
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/d7aef93f8b7203ed0299380996e979a4/lifecycle-viewmodel-2.3.1/proguard.txt
+# The proguard configuration file for the following section is /Users/zero/.gradle/caches/transforms-2/files-2.1/1a18e03dfcdcab4e74b1d44f51b4aba4/rules/lib/META-INF/proguard/androidx-annotations.pro
 -keep,allowobfuscation @interface androidx.annotation.Keep
 -keep @androidx.annotation.Keep class * {*;}
 
@@ -619,4 +566,7 @@
   @androidx.annotation.DoNotInline <methods>;
 }
 
+# End of content from /Users/zero/.gradle/caches/transforms-2/files-2.1/1a18e03dfcdcab4e74b1d44f51b4aba4/rules/lib/META-INF/proguard/androidx-annotations.pro
+# The proguard configuration file for the following section is <unknown>
 -ignorewarnings
+# End of content from <unknown>

@@ -6,6 +6,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.junit.Test
+import javax.inject.Inject
 import kotlin.concurrent.thread
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
@@ -15,6 +16,8 @@ import kotlin.reflect.KProperty
  * @date 2019-12-09
  */
 class KotlinTest {
+    @set:Inject
+    internal var injectField: String?=null
 
     val token:String by Saver()
 

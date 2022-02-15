@@ -27,7 +27,7 @@ class ToolbarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_toolbar)
         setSupportActionBar(toolbar)
 //        setupActionBarCustomView()
-        testActionMode()
+//        testActionMode()
         btn_invali.setOnClickListener {
             invalidateOptionsMenu()
         }

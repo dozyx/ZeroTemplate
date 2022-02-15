@@ -64,7 +64,7 @@ class WebViewActivity : AppCompatActivity() {
 //        val url = "https://www.youtube.com/"
 //        val url = "https://www.baidu.com/"
 //        val url = "https://m.animeflv.net/"
-        val url = "https://www.instagram.com/"
+        val url = "https://www.google.com/"
         webView.loadUrl(url)
 
         val data = ""
@@ -359,6 +359,11 @@ class WebViewActivity : AppCompatActivity() {
 //                    return true
                 }
                 if (request?.url?.host?.contains("m.youtube.com/watch") == true) {
+                    return true
+                }
+                if (request?.url?.toString()?.startsWith("https://www.google.com/search") == true) {
+                    view?.goBack()
+
                     return true
                 }
 //                view?.loadUrl(request.url.toString())

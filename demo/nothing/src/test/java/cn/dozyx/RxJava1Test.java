@@ -4,16 +4,176 @@ import org.junit.Test;
 
 import java.util.concurrent.Callable;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
+import rx.subjects.PublishSubject;
 
 import static cn.dozyx.LogUtils.print;
 
 public class RxJava1Test {
+
+    @Test
+    public void testRefCount() {
+//        Observable<Long> origin = Observable.interval(1, TimeUnit.SECONDS);
+        Observable<Long> origin = Observable.fromCallable(() -> {
+            print("fromCallable start");
+            sleep(2);
+//            sleep(4);
+            print("fromCallable end");
+            return 100L;
+        }).subscribeOn(Schedulers.io());
+        Observable<Long> publish = origin.doOnUnsubscribe(() -> print("doOnUnsubscribe")).doOnNext(
+                aLong -> print("doOnNext " + aLong)).share();
+        print("subscribe1");
+        Subscription subscribe1 = publish.subscribe(getObserver("1"));
+        sleep(3);
+        print("subscribe2");
+        Subscription subscribe2 = publish.subscribe(getObserver("2"));// 第二个订阅者只能接收到后续的信息。
+//        sleep(1);
+//        subscribe2.unsubscribe();
+        sleep(5);
+
+        subscribe1.unsubscribe();
+        subscribe2.unsubscribe(); // 当所有订阅者都取消了订阅时，将取消数据发送
+        publish.subscribe(getObserver("3"));// 接收到的是从开始发送的数据
+        sleep(3);
+    }
+
+    /**
+     * source 还没有发送完就取消所有订阅会怎么样？
+     * 线程会被中断，fromCallable 里的 sleep 抛出 InterruptedException
+     */
+    @Test
+    public void testRefCountCase2() {
+        Observable<Long> origin = Observable.fromCallable(() -> {
+            print("fromCallable start");
+//            sleep(2);
+            Integer total = 0;
+            long count = 1000000000L;
+            for (int i = 0; i < count; i++) {
+                total += i;
+            }
+//            sleep(4);
+            print("fromCallable end");
+            return 100L;
+        }).subscribeOn(Schedulers.io());
+        Observable<Long> publish = origin.doOnUnsubscribe(() -> print("doOnUnsubscribe")).doOnNext(
+                aLong -> print("doOnNext " + aLong)).publish().refCount();
+        print("subscribe1");
+        Subscription subscribe1 = publish.subscribe(getObserver("1"));
+        print("subscribe2");
+        Subscription subscribe2 = publish.subscribe(getObserver("2"));// 第二个订阅者只能接收到后续的信息。
+
+        subscribe1.unsubscribe();
+        subscribe2.unsubscribe(); // 当所有订阅者都取消了订阅时，将取消数据发送
+        sleep(1);
+        publish.subscribe(getObserver("3"));// 接收到的是从开始发送的数据
+        sleep(10);
+    }
+
+    /**
+     * observer1 complete 之后，observe2 再订阅，observe1 会有反应吗
+     */
+    @Test
+    public void testRefCountCase3() {
+        Observable<Long> origin = Observable.fromCallable(() -> {
+            print("fromCallable start");
+//            sleep(2);
+            Integer total = 0;
+            long count = 1000000000L;
+            for (int i = 0; i < count; i++) {
+                total += i;
+            }
+//            sleep(4);
+            print("fromCallable end");
+            return 100L;
+        }).subscribeOn(Schedulers.io());
+        Observable<Long> publish = origin.doOnUnsubscribe(() -> print("doOnUnsubscribe")).doOnNext(
+                aLong -> print("doOnNext " + aLong)).publish().refCount();
+        print("subscribe1");
+        Subscription subscribe1 = publish.subscribe(getObserver("1"));
+        sleep(5);
+        print("subscribe2");
+        Subscription subscribe2 = publish.subscribe(getObserver("2"));// 第二个订阅者只能接收到后续的信息。
+
+        sleep(10);
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testRefCountCase4() {
+        Observable<Long> origin = Observable.just(1).flatMap((Func1<Integer, Observable<Long>>) integer -> {
+            print("flatmap");
+            return Observable.fromCallable(() -> {
+                print("fromCallable start");
+//            sleep(2);
+                Integer total = 0;
+                long count = 1000000000L;
+                for (int i = 0; i < count; i++) {
+                    total += i;
+                }
+//            sleep(4);
+                print("fromCallable end");
+                return 100L;
+            });
+        }).subscribeOn(Schedulers.io());
+        Observable<Long> publish = origin.doOnUnsubscribe(() -> print("doOnUnsubscribe")).doOnNext(
+                aLong -> print("doOnNext " + aLong)).publish().refCount();
+        print("subscribe1");
+        Subscription subscribe1 = publish.subscribe(getObserver("1"));
+        print("subscribe2");
+        Subscription subscribe2 = publish.subscribe(getObserver("2"));// 第二个订阅者只能接收到后续的信息。
+
+        sleep(10);
+    }
+
+    @Test
+    public void testPublishTakeOne() {
+        PublishSubject<Integer> publishSubject = PublishSubject.create();
+
+        publishSubject.subscribe(getObserver("normal"));
+        publishSubject.take(1).subscribe(getObserver("take one "));
+
+        for (int i = 0; i < 3; i ++){
+            sleep(1);
+            publishSubject.onNext(i);
+        }
+        sleep(5);
+    }
+
+    private static <T> Observer<T> getObserver(String prefix) {
+        final String formatPrefix = prefix + " - ";
+        return new Observer<T>() {
+            @Override
+            public void onCompleted() {
+                print(formatPrefix + "onComplete");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                print(formatPrefix + "onError: " + e.getMessage());
+            }
+
+            @Override
+            public void onNext(T t) {
+                if (t != null) {
+                    print(formatPrefix + "onNext: " + t.toString());
+                } else {
+                    print(formatPrefix + "onNext: " + null);
+                }
+            }
+        };
+    }
 
     @Test
     public void testReduce() {
@@ -48,7 +208,7 @@ public class RxJava1Test {
         }).subscribe(new Action1<Void>() {
             @Override
             public void call(Void unused) {
-                print("onNext");
+                print("onNext:" + unused);
             }
         }, new Action1<Throwable>() {
             @Override
@@ -69,5 +229,13 @@ public class RxJava1Test {
                     throw new IllegalArgumentException();
                 });
         Thread.sleep(100);
+    }
+
+    private void sleep(int timeInSeconds) {
+        try {
+            Thread.sleep(timeInSeconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

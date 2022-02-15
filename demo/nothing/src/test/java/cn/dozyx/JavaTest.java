@@ -127,6 +127,7 @@ import okhttp3.HttpUrl;
 
 /**
  * 测试 java 相关代码
+ * 验证同一个技术点的多项内容，分成 testXxxCaseX() 来写，不要通过注释
  *
  * @author dozeboy
  * @date 2017/12/11
@@ -272,6 +273,8 @@ public class JavaTest {
 //        print(builder.delete(0, builder.length() - 1));
         print(builder.append("456", 0, 2));
         print(builder.append("456", 2, 3));
+//        builder.setLength(0);
+        print(builder);
     }
 
     @Test
@@ -1871,7 +1874,7 @@ public class JavaTest {
     public void testGeneric() {
         ArrayList<String> strings = new ArrayList<>();
         ArrayList<Integer> integers = new ArrayList<>();
-        System.out.println(strings.getClass() == integers.getClass());
+        System.out.println("ccc"+(strings.getClass() == integers.getClass()));
         print(Arrays.toString(strings.getClass().getTypeParameters()));
 
         // 上界通配符
@@ -2129,7 +2132,7 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        print(Integer.MAX_VALUE);
+        print(new Random().nextInt(1));
     }
 
     private static class SuperClass {

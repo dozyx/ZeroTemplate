@@ -8,6 +8,7 @@ object ClassPath {
     val androidGradle = "com.android.tools.build:gradle:${Version.androidGradleVersion}"
     val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlinVersion}"
     val greendao = "org.greenrobot:greendao-gradle-plugin:${Version.greendao}"
+    val andResGuard = "com.tencent.mm:AndResGuard-gradle-plugin:${Version.andResGuard}"
 }
 
 object Android {
@@ -323,4 +324,5 @@ object Version {
     const val flipper = "0.85.0"
     const val soloader = "0.10.1"
     const val androidx_activity = "1.2.3"
+    const val andResGuard = "1.2.21"
 }

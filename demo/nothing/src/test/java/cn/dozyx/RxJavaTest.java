@@ -404,11 +404,19 @@ public class RxJavaTest {
 
     @Test
     public void testRefCount() {
-        Observable<Long> origin = Observable.interval(1, TimeUnit.SECONDS);
+//        Observable<Long> origin = Observable.interval(1, TimeUnit.SECONDS);
+        Observable<Long> origin = Observable.fromCallable(() -> {
+            print("fromCallable start");
+            sleep(4);
+            print("fromCallable end");
+            return 100L;
+        }).subscribeOn(Schedulers.io());
         Observable<Long> publish = origin.doOnDispose(() -> print("doOnDispose")).doOnNext(
                 aLong -> print("doOnNext " + aLong)).publish().refCount();
+        print("subscribe1");
         Disposable subscribe1 = publish.subscribe(getConsumer(1));
         sleep(3);
+        print("subscribe2");
         Disposable subscribe2 = publish.subscribe(getConsumer(2));// 第二个订阅者只能接收到后续的信息。
         sleep(5);
 
@@ -1098,12 +1106,13 @@ public class RxJavaTest {
         source1.subscribe(subject);
         source2.subscribe(subject);
 
-        subject.take(1).subscribe(new Consumer<String>() {
+        Disposable disposable = subject.take(1).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 print("accept: take1 " + s);
             }
         });
+//        disposable.dispose();
         sleep(3);
 
     }
