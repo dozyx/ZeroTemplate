@@ -184,6 +184,15 @@ class NotificationTest : BaseTestActivity() {
                 navigateToNotificationSettings(this@NotificationTest)
             }
         })
+
+        addAction(object : Action("group 通知设置") {
+            override fun run() {
+                val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName())
+                intent.putExtra(Settings.EXTRA_CHANNEL_ID, "group1")
+                startActivity(intent)
+            }
+        })
         addAction(object : Action("颜色测试") {
             override fun run() {
                 val view = findViewByActionName("颜色测试")
@@ -239,6 +248,21 @@ class NotificationTest : BaseTestActivity() {
         })
         val view = findViewByActionName("颜色测试")
         view?.setBackgroundColor(Color.parseColor("#FFCD22"))
+
+        addAction(object :Action("channel"){
+            override fun run() {
+                val nm = NotificationManagerCompat.from(this@NotificationTest)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Timber.d(
+                        "NotificationTest.run: ${nm.areNotificationsEnabled()} ${
+                            nm.getNotificationChannel(
+                                CHANNEL_ID_NORMAL
+                            )?.importance
+                        } group: ${nm.getNotificationChannelGroup("group1")?.isBlocked}"
+                    )
+                }
+            }
+        })
 
     }
 
@@ -586,7 +610,7 @@ class NotificationTest : BaseTestActivity() {
             // 使用 NotificationManager.IMPORTANCE_HIGH，会显示 head up 通知，但前提是设置里允许了悬浮通知
             // NotificationManager.IMPORTANCE_HIGH 在 miui 设置里显示的重要程度是紧急，
             // IMPORTANCE_DEFAULT 对应的是高，IMPORTANCE_LOW 对应的是中，IMPORTANCE_MIN对应低
-            // 已经创建的 channel，无法在代码里将它的 importance 改成更高，但可以改成更低
+            // 已经创建的 channel，无法在代码里将它的 importance 改成更高，但可以改成更低。名称和描述是可以随意修改的。
             notificationManager?.createNotificationChannel(
                     NotificationChannel(CHANNEL_ID_IMPORTANCE, "名称2222", NotificationManager.IMPORTANCE_HIGH)
                             .apply {

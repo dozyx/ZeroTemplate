@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        tools:height="1920px"
+        tools:width="1080px">
+        <color android:color="@color/splash_color"/>
+    </item>
+
+    <item>
+        <bitmap
+            android:gravity="top"
+            android:src="@drawable/ic_dialog_bg"
+            android:tileMode="clamp"/>
+    </item>
+
+    <item android:bottom="40dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_cat_dog"/>
+    </item>
+
+</layer-list>

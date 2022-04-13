@@ -1,5 +1,6 @@
 package cn.dozyx.template
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.database.ContentObserver
@@ -17,11 +18,15 @@ import androidx.core.content.ContextCompat
 import cn.dozyx.core.utli.system.StorageUtils
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.CloneUtils
 import com.blankj.utilcode.util.FileUtils
+import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.SDCardUtils
 import timber.log.Timber
 import java.io.*
 import java.util.*
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 
 class FileTest : BaseTestActivity() {
     private val REQUEST_CODE_SD_CARD = 42
@@ -283,6 +288,41 @@ class FileTest : BaseTestActivity() {
                 Timber.d("FileTest delete result: $result")
             }
         })
+        addAction(object : Action("unzip1") {
+            override fun run() {
+//                testUnzip("video_search_engine_1.4.8_noarch_Job-323681.apk")
+//                testUnzip("video_search_engine_1.4.7_noarch_Job-166639.apk")
+//                testUnzip("search-plugin-release2.apk")
+                testUnzip("video_search_engine_1.4.9_noarch_Job-325292.apk")
+            }
+        })
+        addAction(object : Action("unzip2") {
+            override fun run() {
+                testUnzip("site_extractor_2.23.6_noarch_Job-319671.apk")
+            }
+        })
+    }
+
+    private fun testUnzip(fileName: String) {
+        val apkPath = Environment.getExternalStorageDirectory().path + "/" + fileName
+        val SO_FILE_PARENT = "lib" + File.separator + "armabi" + File.separator
+        var zin: ZipInputStream? = null
+        try {
+            zin = ZipInputStream(BufferedInputStream(FileInputStream(apkPath)))
+            var ze: ZipEntry? = null
+            while (zin.nextEntry?.also { ze = it } != null) {
+                val name = ze?.name
+                if (name!!.startsWith(SO_FILE_PARENT) && !ze!!.isDirectory) {
+                    val fileName = File(name).name
+                }
+            }
+        } catch (e: Exception) {
+            Timber.e(e)
+        } finally {
+            zin?.let {
+//                CloneUtils.deepClone(it)
+            }
+        }
     }
 
     private fun observeMediaFileChanged() {
@@ -405,6 +445,12 @@ class FileTest : BaseTestActivity() {
                 context.getExternalFilesDirs: ${Arrays.toString(getExternalFilesDirs(null))}
             """.trimIndent())
         }
+
+        requestStoragePermission()
+    }
+
+    private fun requestStoragePermission() {
+        PermissionUtils.permission(Manifest.permission.WRITE_EXTERNAL_STORAGE).request()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

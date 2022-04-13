@@ -8,4 +8,6 @@
     <color name="progress_bg">#3DB2B2B2</color>
     <color name="progress">#FF3E8BFF</color>
     <color name="tooltip_bg">#FFA100</color>
+    <color name="splash_color">#FFFFFF</color>
+    <color name="night_mode">#0000FF</color>
 </resources>

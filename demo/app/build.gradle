@@ -20,6 +20,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            ndk {
+//                abiFilters "armeabi"
+            }
+        }
         internal{
             initWith debug
         }
@@ -134,4 +139,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'net.dongliu:apk-parser:2.2.0'
+    implementation files('libs/extension-av1-v7a.aar')
 }

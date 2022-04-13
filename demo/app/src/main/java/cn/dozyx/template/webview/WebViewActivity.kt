@@ -61,10 +61,10 @@ class WebViewActivity : AppCompatActivity() {
         configWebViewClient(webView)
         configWebChromeClient(webView)
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-//        val url = "https://www.youtube.com/"
+        val url = "https://www.youtube.com/watch?v=kJQP7kiw5Fk&list=PL8A83124F1D79BD4F&index=1"
 //        val url = "https://www.baidu.com/"
 //        val url = "https://m.animeflv.net/"
-        val url = "https://www.google.com/"
+//        val url = "https://www.google.com/"
         webView.loadUrl(url)
 
         val data = ""

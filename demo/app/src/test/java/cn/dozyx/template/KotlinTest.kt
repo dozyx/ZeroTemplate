@@ -30,6 +30,11 @@ class KotlinTest {
     }
 
     @Test
+    fun testNullCast() {
+        val nullString:String = null as String
+    }
+
+    @Test
     fun invokeReified() {
         var input:Any = 0
         input = "1"

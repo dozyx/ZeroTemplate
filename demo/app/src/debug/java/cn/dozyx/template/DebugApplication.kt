@@ -10,7 +10,7 @@ import com.facebook.soloader.SoLoader
 class DebugApplication : ZTApplication() {
     override fun initOnMainProcess() {
         super.initOnMainProcess()
-        initFlipper()
+//        initFlipper()
     }
 
     private fun initFlipper() {

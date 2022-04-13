@@ -3,5 +3,6 @@
     android:id="@+id/tv_text"
     android:layout_width="match_parent"
     android:layout_height="48dp"
+    android:background="@android:color/holo_blue_bright"
     android:gravity="center_vertical"
     android:paddingHorizontal="16dp" />

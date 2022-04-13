@@ -136,11 +136,20 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testAndOr() {
+        print(true && false || false && true);
+    }
+
+    @Test
     public void testEnum() {
         print(Operation.valueOf("PLUS"));// 返回字符串对应的枚举常量，但 print 输出会调用它的 toString 方法
         print(Operation.PLUS.name());
         print(Operation.PLUS.ordinal());
         print(Operation.PLUS);
+        Operation operation = Operation.PLUS;
+        switch (operation){
+
+        }
     }
 
     private enum Operation {
@@ -148,6 +157,12 @@ public class JavaTest {
             @Override
             public double apply(double x, double y) {
                 return x + y;
+            }
+        },
+        Multi {
+            @Override
+            public double apply(double x, double y) {
+                return x * y;
             }
         };
 
@@ -2132,7 +2147,7 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        print(new Random().nextInt(1));
+        print(Integer.MAX_VALUE);
     }
 
     private static class SuperClass {

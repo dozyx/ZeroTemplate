@@ -1106,7 +1106,8 @@
         <activity
             android:name=".activity.WindowTest"
             android:label="View/Window"
-            android:theme="@style/ZeroTheme.Splash">
+            android:configChanges="keyboardHidden|orientation|screenSize|uiMode|layoutDirection|locale|keyboard|navigation|screenLayout|smallestScreenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -1397,8 +1398,8 @@
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".system.OrientationTest"
             android:configChanges="keyboard|orientation|screenSize|uiMode|layoutDirection|locale"
-            android:screenOrientation="portrait"
             android:label="System/Orientation">
+            <!--            android:screenOrientation="portrait"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -1483,6 +1484,23 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".NightModeTest"
+            android:theme="@style/AppTheme.NightMode"
+            android:label="System/NightMode">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.recyclerview.RecyclerViewPopTest"
+            android:label="View/RecyclerView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

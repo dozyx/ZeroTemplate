@@ -1,8 +1,14 @@
 package cn.dozyx.template.system
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.os.Bundle
+import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import timber.log.Timber
 
 class OrientationTest : BaseTestActivity() {
     override fun initActions() {
@@ -14,5 +20,26 @@ class OrientationTest : BaseTestActivity() {
                 startActivity(intent)
             }
         })
+
+        addAction(object : Action("Dialog") {
+            override fun run() {
+                CustomDialog(this@OrientationTest).show()
+            }
+        })
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Timber.d("OrientationTest.onConfigurationChanged $newConfig")
+    }
+
+    private class CustomDialog(context: Context) :
+        Dialog(context, R.style.Theme_AppCompat_Light_Dialog) {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.dialog_orientation_test)
+            Timber.d("CustomDialog.onCreate")
+        }
+    }
+
 }

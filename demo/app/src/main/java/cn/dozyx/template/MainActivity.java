@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import androidx.annotation.Keep;
+import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 

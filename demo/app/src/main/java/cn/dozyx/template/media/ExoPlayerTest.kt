@@ -9,6 +9,8 @@ import android.webkit.WebSettings
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
 import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON
+import com.google.android.exoplayer2.DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER
 import com.google.android.exoplayer2.analytics.AnalyticsListener
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory
 import com.google.android.exoplayer2.source.LoadEventInfo
@@ -138,7 +140,7 @@ class ExoPlayerTest : BaseActivity() {
     }
 
     private fun attachPlayer() {
-        player = SimpleExoPlayer.Builder(this).apply {
+        player = SimpleExoPlayer.Builder(this, DefaultRenderersFactory(this, EXTENSION_RENDERER_MODE_ON)).apply {
             setLooper(Looper.getMainLooper()) // 如果不设置 looper 的话，那么将使用 thread 所关联的 looper；如果 thread 没有 looper，那么将使用主线程的 looper
         }.build().apply {
             //        setVideoSurface(null)
@@ -162,7 +164,8 @@ class ExoPlayerTest : BaseActivity() {
     override fun getLayoutId() = R.layout.test_exo_player
 
     companion object {
-        private const val MEDIA_URI = "http://ddeta2nicr6gf.cloudfront.net/ckctdume903lf18t15q6egfxs/nowm-720p.mp4"
-        private const val MEDIA_URI2 = "https://video.like.video/na_live/4ay/297g8w_4.mp4"
+//        private const val MEDIA_URI = "http://ddeta2nicr6gf.cloudfront.net/ckctdume903lf18t15q6egfxs/nowm-720p.mp4"
+//        private const val MEDIA_URI2 = "https://video.like.video/na_live/4ay/297g8w_4.mp4"
+        private const val MEDIA_URI = "https://rr5---sn-i3belney.googlevideo.com/videoplayback?expire=1646900695\\u0026ei=d2EpYoaSFeSGvcAPmfSzmAg\\u0026ip=103.68.183.163\\u0026id=o-AG686twg_rmrZyqK5L7sFvdEp32fI-UGOrzK-aQbXQyx\\u0026itag=302\\u0026aitags=133%2C134%2C135%2C136%2C160%2C242%2C243%2C244%2C247%2C278%2C298%2C299%2C302%2C303%2C394%2C395%2C396%2C397%2C398%2C399\\u0026source=youtube\\u0026requiressl=yes\\u0026mh=0P\\u0026mm=31%2C29\\u0026mn=sn-i3belney%2Csn-i3b7knsd\\u0026ms=au%2Crdu\\u0026mv=m\\u0026mvi=5\\u0026pl=25\\u0026initcwndbps=613750\\u0026vprv=1\\u0026mime=video%2Fwebm\\u0026ns=9E4x_oLRcnO1Ecs-uhMnC3YG\\u0026gir=yes\\u0026clen=33761801\\u0026dur=300.767\\u0026lmt=1627574080179798\\u0026mt=1646878615\\u0026fvip=5\\u0026keepalive=yes\\u0026fexp=24001373%2C24007246\\u0026c=WEB\\u0026txp=5535434\\u0026n=Mo8DgOn-XWI-Eh3gC\\u0026sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt\\u0026sig=AOq0QJ8wRgIhAJPVhnjCiFmef7EQ35mjLSMD7o2vEGQOeo7B8MwYAf7bAiEArw59kK-5zhuAIV6EodWGzB78iniTRGvsvUNex9FHokg%3D\\u0026lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps\\u0026lsig=AG3C_xAwRAIgclr8HCtFcuQ5___h9xU-hcOQdbs6CIzHMFePa1kbD6ECIEW9oXoFIE6Cn3HtSE3K7b7toZZ46y6CGTpxdEifcOHS"
     }
 }
