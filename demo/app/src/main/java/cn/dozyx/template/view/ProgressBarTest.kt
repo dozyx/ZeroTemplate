@@ -14,6 +14,7 @@ class ProgressBarTest : BaseActivity() {
 //            indicator.isIndeterminate = true // 1.3.0 版本会抛异常
 //            mpb.postInvalidate()
         }
+
     }
 
     override fun getLayoutId() = R.layout.test_progress_bar

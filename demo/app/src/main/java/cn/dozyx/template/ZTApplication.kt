@@ -29,7 +29,7 @@ open class ZTApplication : BaseApplication() {
         super.onCreate()
         registerActivityLifecycleCallbacks(ActivityLifecycleLoggerCallbacks())
         registerActivityLifecycleCallbacks(HomePopTracker)
-        SystemBroadcastReceiver.start(this)
+//        SystemBroadcastReceiver.start(this)
         if (DebugConfig.DEBUG_LAUNCH) {
             Thread.sleep(200)
         }

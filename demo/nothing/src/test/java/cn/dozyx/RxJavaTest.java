@@ -9,17 +9,12 @@ import org.junit.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -35,17 +30,15 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.AsyncSubject;
 import io.reactivex.subjects.BehaviorSubject;
@@ -58,6 +51,32 @@ import timber.log.Timber;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class RxJavaTest {
 
+
+    @Test
+    public void testHandleLast2() {
+        PublishProcessor<Integer> processor = PublishProcessor.create();
+        Flowable<Integer> flowable = processor
+                .onBackpressureLatest()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io(), false, 1);
+        flowable.map(number -> {
+            print("map handle " + number);
+            Thread.sleep(100);
+            return "this is " + number;
+        }).subscribeOn(Schedulers.io())
+                .subscribe(str -> print(str));
+        processor.onNext(0);
+        print("onNext 0");
+        processor.onNext(1);
+        print("onNext 1");
+        processor.onNext(2);
+        print("onNext 2");
+        processor.onNext(3);
+        print("onNext 3");
+        processor.onNext(4);
+        print("onNext 4");
+        sleep(3);
+    }
 
     @Test
     public void testDistinct() {
@@ -1269,10 +1288,12 @@ public class RxJavaTest {
         Flowable<Integer> flowable = Flowable.create(emitter -> {
             Timber.d("subscribe: ");
             emitter.onNext(1);
+            emitter.onNext(2);
+            emitter.onNext(3);
             emitter.onComplete();
         }, BackpressureStrategy.LATEST);
         flowable.subscribe(integer -> Timber.d("accept: subscribe1"));
-        flowable.subscribe(integer -> Timber.d("accept: subscribe2"));
+//        flowable.subscribe(integer -> Timber.d("accept: subscribe2"));
         sleep(1);
     }
 

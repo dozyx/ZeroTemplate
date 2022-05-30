@@ -603,7 +603,7 @@ class NotificationTest : BaseTestActivity() {
                             .apply {
                                 description = "描述111"
 //                                group = "group1"// 修改 channel 的 group 也无法改变类似于 importance 的值
-                                setSound(null, null)// 关闭提示音
+//                                setSound(null, null)// 关闭提示音
                                 lockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC // 测试结果（miui）： channel 创建后无法修改；public 卸载后重装还是 public；secret 卸载后重装可以改成 public
                             })
 
@@ -615,6 +615,8 @@ class NotificationTest : BaseTestActivity() {
                     NotificationChannel(CHANNEL_ID_IMPORTANCE, "名称2222", NotificationManager.IMPORTANCE_HIGH)
                             .apply {
                                 description = "描述22222"
+                                lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                                enableVibration(true)
                             }
             )
 

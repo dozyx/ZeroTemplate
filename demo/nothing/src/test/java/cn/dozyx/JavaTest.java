@@ -135,6 +135,31 @@ import okhttp3.HttpUrl;
 
 public class JavaTest {
 
+
+    @Test
+    public void testCrashStack() {
+        // 在构造函数里发生异常
+        CrashConstructor crashConstructor = new CrashConstructor(); // 堆栈错误会显示 <init>
+        crashConstructor.foo();
+    }
+
+    private static class CrashConstructor {
+        public CrashConstructor() {
+//            String str = null;
+//            str.length();
+            init();
+        }
+
+        private void init() {
+            String str = null;
+            str.length();
+        }
+
+        public void foo() {
+            print("foo execute");
+        }
+    }
+
     @Test
     public void testAndOr() {
         print(true && false || false && true);
@@ -2147,7 +2172,9 @@ public class JavaTest {
 
     @Test
     public void foo() {
-        print(Integer.MAX_VALUE);
+        print((float) 1/2);
+        print((float) (1/2));
+        print((1/(float) 2));
     }
 
     private static class SuperClass {

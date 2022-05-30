@@ -3,6 +3,7 @@ package cn.dozyx;
 import org.junit.Test;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
@@ -19,6 +20,45 @@ import rx.subjects.PublishSubject;
 import static cn.dozyx.LogUtils.print;
 
 public class RxJava1Test {
+
+    @Test
+    public void testHandleLast() {
+        PublishSubject<Integer> subject = PublishSubject.create();
+        subject/*.debounce(10L, TimeUnit.MILLISECONDS)*/
+                .onBackpressureLatest()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io(), 1)
+                .map(number -> {
+                    print("map handle: " + Thread.currentThread() + " & " + number);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return "this is " + number;
+                }).observeOn(Schedulers.computation())
+                .subscribe(str -> print(str));
+        sleepMillis(10);
+        subject.onNext(0);
+        print("onNext 0");
+        sleepMillis(10);
+        subject.onNext(1);
+        print("onNext 1");
+        sleepMillis(10);
+        subject.onNext(2);
+        print("onNext 2");
+        sleepMillis(10);
+        subject.onNext(3);
+        print("onNext 3");
+        sleepMillis(10);
+        subject.onNext(4);
+        print("onNext 4");
+        sleepMillis(100);
+        subject.onNext(5);
+        print("onNext 5");
+        sleepMillis(10);
+        sleep(3);
+    }
 
     @Test
     public void testRefCount() {
@@ -234,6 +274,14 @@ public class RxJava1Test {
     private void sleep(int timeInSeconds) {
         try {
             Thread.sleep(timeInSeconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sleepMillis(int millis) {
+        try {
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
