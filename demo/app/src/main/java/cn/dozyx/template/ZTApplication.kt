@@ -4,9 +4,13 @@ import android.content.Context
 import android.os.Build
 import android.os.Looper
 import android.util.Log
+import androidx.core.app.NotificationChannelCompat
+import androidx.core.app.NotificationManagerCompat
 import cn.dozyx.core.base.BaseApplication
 import cn.dozyx.core.debug.ActivityLifecycleLoggerCallbacks
+import cn.dozyx.template.keeplive.DaemonAgent
 import cn.dozyx.template.network.okhttp.compat.AndroidPlatform9
+import cn.dozyx.template.notification.ZNotification
 import cn.dozyx.template.notification.manager.NotificationManager
 import cn.dozyx.template.pop.HomePopTracker
 import com.didichuxing.doraemonkit.DoraemonKit
@@ -49,7 +53,18 @@ open class ZTApplication : BaseApplication() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             initLowVersionPlatform()
         }
+        createNotificationChannels()
     }
+
+    private fun createNotificationChannels() {
+        NotificationManagerCompat.from(this).createNotificationChannel(getNotificationChannel())
+    }
+
+    private fun getNotificationChannel() =
+        NotificationChannelCompat.Builder(ZNotification.DEFAULT_CHANNEL_ID, NotificationManagerCompat.IMPORTANCE_DEFAULT)
+            .setName("自定义通知")
+            .setDescription("描述不写了")
+            .build()
 
     private fun initLowVersionPlatform() {
         try {

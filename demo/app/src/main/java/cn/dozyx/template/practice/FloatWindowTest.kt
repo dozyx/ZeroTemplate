@@ -415,7 +415,8 @@ class FloatWindowTest : BaseTestActivity() {
         fun showFloat() {
             windowView = LayoutInflater.from(this).inflate(R.layout.float_window, null)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+//                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
             } else {
                 params.type = WindowManager.LayoutParams.TYPE_PHONE
             }
@@ -424,16 +425,16 @@ class FloatWindowTest : BaseTestActivity() {
             params.flags =
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_FULLSCREEN
             params.gravity = Gravity.RIGHT or Gravity.CENTER_VERTICAL
-            params.width = WindowManager.LayoutParams.MATCH_PARENT
-            params.height = WindowManager.LayoutParams.MATCH_PARENT
+            params.width = WindowManager.LayoutParams.WRAP_CONTENT
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT
             windowManager.addView(windowView, params)
             button1 = windowView.findViewById<View>(R.id.float_button1) as Button
             button2 = windowView.findViewById<View>(R.id.float_button2) as Button
             listView = windowView.findViewById<View>(R.id.list) as ListView
-            listView!!.adapter = ArrayAdapter(
-                this@FloatWindowsServices, android.R.layout.simple_list_item_1,
-                Shakespeare.MORE_TITLES
-            )
+//            listView!!.adapter = ArrayAdapter(
+//                this@FloatWindowsServices, android.R.layout.simple_list_item_1,
+//                Shakespeare.MORE_TITLES
+//            )
             button1!!.setOnClickListener {
                 params.width = 800
                 windowManager.updateViewLayout(windowView, params)

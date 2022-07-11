@@ -63,7 +63,7 @@ object AccessibilityOperator {
      * api要求18及以上
      * @param viewId
      */
-    fun findNodesById(viewId: String?): List<AccessibilityNodeInfo>? {
+    fun findNodesById(viewId: String): List<AccessibilityNodeInfo>? {
         val nodeInfo = getRootNodeInfo()
         if (nodeInfo != null) {
             if (Build.VERSION.SDK_INT >= 18) {
@@ -85,7 +85,7 @@ object AccessibilityOperator {
      * @return 是否点击成功
      */
     @RequiresApi(18)
-    fun clickById(viewId: String?): Boolean {
+    fun clickById(viewId: String): Boolean {
         return performClick(findNodesById(viewId))
     }
 

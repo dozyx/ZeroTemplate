@@ -306,6 +306,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".service.ForegroundService" />
 
         <activity
             android:name=".view.recyclerview.RecyclerViewTest"
@@ -1511,12 +1512,30 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".media.MediaSessionApiTest"
+            android:label="Media/session">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".service.ForegroundServiceTest"
+            android:label="Service/foreground">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>
                 <action android:name="cn.dozyx.template.BROADCAST" />
             </intent-filter>
         </receiver>
+        <provider
+            android:name=".media.AlbumArtProvider"
+            android:authorities="com.dozyx.player"
+            android:enabled="true" />
     </application>
 
 </manifest>

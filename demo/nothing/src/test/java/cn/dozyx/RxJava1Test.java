@@ -22,6 +22,24 @@ import static cn.dozyx.LogUtils.print;
 public class RxJava1Test {
 
     @Test
+    public void testFlapMap() {
+        print("当前线程：" + Thread.currentThread());
+        Observable.just(1, 2, 3)
+                .flatMap((Func1<Integer, Observable<String>>) integer -> Observable.fromCallable(() -> {
+                            sleep(1);
+                            print("flapmap: " + integer + " & " + Thread.currentThread());
+                            return integer + "哈哈";
+                        }).subscribeOn(Schedulers.newThread())
+                        .map(s -> integer + "map")
+                )
+//                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.io())
+                .subscribe(s -> print("结果：" + s + " & " + Thread.currentThread()));
+        sleepMillis(10); // 让 Observable 可以开始执行
+        print("结束：" + Thread.currentThread());
+    }
+
+    @Test
     public void testHandleLast() {
         PublishSubject<Integer> subject = PublishSubject.create();
         subject/*.debounce(10L, TimeUnit.MILLISECONDS)*/

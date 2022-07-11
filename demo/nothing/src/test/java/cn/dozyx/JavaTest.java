@@ -1593,7 +1593,7 @@ public class JavaTest {
     }
 
     @Test
-    public void testExceptionPrint() throws Exception {
+    public void testExceptionPrint() throws Throwable {
         Exception cause = new IllegalStateException("this is illeagal state");
         Exception e = new IllegalStateException("this is illeagal state");
         e = new RuntimeException("this is runtime exception1", e);
@@ -1604,6 +1604,10 @@ public class JavaTest {
         throw e;
 //        print(e);
 //        print(e.getCause());
+    }
+
+    private void throwAfterHandle(Throwable e) throws Throwable {
+        throw e;
     }
 
     private static void uncheckedException() {

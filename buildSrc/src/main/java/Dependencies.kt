@@ -14,8 +14,8 @@ object ClassPath {
 object Android {
     val minSdkVersion = 19
     val minDebugSdkVersion = 21
-    val targetSdkVersion = 30
-    val compileSdkVersion = 30
+    val targetSdkVersion = 23
+    val compileSdkVersion = 31
 }
 
 object Deps {
@@ -72,6 +72,7 @@ object Deps {
     val tooltip = "com.github.sephiroth74:android-target-tooltip:${Version.tooltip}"
     val materialprogressbar = "me.zhanghai.android.materialprogressbar:library:${Version.materialprogressbar}"
     val notchScreenTool = "com.github.smarxpan:NotchScreenTool:${Version.notchScreenTool}"
+    val androix_media = "androidx.media:media:${Version.androidx_media}"
 }
 
 object AndroidX {
@@ -325,4 +326,5 @@ object Version {
     const val soloader = "0.10.1"
     const val androidx_activity = "1.2.3"
     const val andResGuard = "1.2.21"
+    const val androidx_media = "1.6.0"
 }

@@ -1,5 +1,7 @@
 package cn.dozyx.template.base
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -134,6 +136,15 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
 
     fun addView(view: View) {
         linear_layout_in_scroll.addView(view)
+    }
+
+    fun showImage(drawable: Drawable) {
+        image_view.setImageDrawable(drawable)
+    }
+
+    fun showImage(bitmap: Bitmap) {
+        Timber.d("BaseTestActivity.showImage")
+        image_view.setImageBitmap(bitmap)
     }
 
 }

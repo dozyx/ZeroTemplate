@@ -1,33 +1,40 @@
 package cn.dozyx.template.media
 
-import android.net.Uri
+import android.app.PendingIntent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Looper
+import android.support.v4.media.MediaMetadataCompat
+import android.support.v4.media.session.MediaControllerCompat
+import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.view.SurfaceView
 import android.view.TextureView
-import android.webkit.WebSettings
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
+import cn.dozyx.template.notification.manager.NotificationManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON
-import com.google.android.exoplayer2.DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER
 import com.google.android.exoplayer2.analytics.AnalyticsListener
-import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory
 import com.google.android.exoplayer2.source.LoadEventInfo
 import com.google.android.exoplayer2.source.MediaLoadData
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.PlayerControlView
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.EventLogger
 import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.test_exo_player.*
-import okhttp3.Call
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import timber.log.Timber
 import java.io.IOException
 
@@ -44,6 +51,8 @@ import java.io.IOException
  * @date 10/29/20
  */
 class ExoPlayerTest : BaseActivity() {
+    private var currentIndex: Int = 0
+
     /**
      * SimpleExoPlayer 实现了[ExoPlayer] 接口
      * ExoPlayer 只能从单个线程访问
@@ -60,6 +69,23 @@ class ExoPlayerTest : BaseActivity() {
      */
     private lateinit var playerView: PlayerView
     private val okHttpClient = OkHttpClient.Builder().apply { }.build()
+    private lateinit var mediaSession: MediaSessionCompat
+    private lateinit var playerNotificationManager: PlayerNotificationManager
+    private val songs = listOf(
+        Song(
+            "https://storage.googleapis.com/automotive-media/Keys_To_The_Kingdom.mp3",
+            "Keys To The Kingdom",
+            "https://storage.googleapis.com/automotive-media/album_art_2.jpg",
+            221
+        ),
+        Song(
+            "https://storage.googleapis.com/automotive-media/The_Coldest_Shoulder.mp3",
+            "The Coldest Shoulder",
+            "https://storage.googleapis.com/automotive-media/album_art_3.jpg",
+//            160
+        220
+        )
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,8 +94,26 @@ class ExoPlayerTest : BaseActivity() {
         Timber.d("ExoPlayerTest.onCreate inferContentType: $contentType")
         initUi()
         attachPlayer()
-        prepareMedia()
         listenEvent()
+        mediaSession = MediaSessionCompat(this, "ExoPlayer")
+        mediaSession.setCallback(MyCallback())
+        prepareMedia(0)
+        playerNotificationManager =
+            PlayerNotificationManager(
+                this,
+                NotificationManager.CHANNEL_ID_DEFAULT,
+                10086,
+                MyMediaDescriptionAdapter(mediaSession.controller)
+            )
+        playerNotificationManager.setMediaSessionToken(mediaSession.sessionToken)
+        playerNotificationManager.setPlayer(player)
+    }
+
+    inner class MyCallback : MediaSessionCompat.Callback() {
+        override fun onSkipToNext() {
+            super.onSkipToNext()
+
+        }
     }
 
     private fun listenEvent() {
@@ -77,6 +121,13 @@ class ExoPlayerTest : BaseActivity() {
         player.addListener(object : Player.EventListener {
             override fun onPlaybackStateChanged(state: Int) {
                 Timber.d("ExoPlayerTest.onPlaybackStateChanged: ${stateString(state)}")
+                if (state == ExoPlayer.STATE_READY) {
+                    mediaSession.setPlaybackState(
+                        PlaybackStateCompat.Builder()
+                            .setState(PlaybackStateCompat.STATE_PLAYING, player.currentPosition, 1F)
+                            .build()
+                    )
+                }
             }
 
             override fun onPlayerError(error: ExoPlaybackException) {
@@ -118,7 +169,15 @@ class ExoPlayerTest : BaseActivity() {
         }
     }
 
-    private fun prepareMedia() {
+    private fun prepareMedia(index: Int) {
+
+        currentIndex = index
+        val song = songs[index]
+        updateMetadata(song)
+        if (!mediaSession.isActive) {
+            mediaSession.isActive = true
+        }
+
         /**
          * [Util.getUserAgent] 返回的格式如 「传入的应用名称/应用版本号 (Linux;Android 10) ExoPlayerLib/exo版本号」
          */
@@ -129,7 +188,7 @@ class ExoPlayerTest : BaseActivity() {
 //        dataSourceFactory = OkHttpDataSourceFactory(Call.Factory { request -> okHttpClient.newCall(request) }, userAgent)
 
         val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(MediaItem.fromUri(MEDIA_URI).buildUpon().apply {
+            .createMediaSource(MediaItem.fromUri(song.url).buildUpon().apply {
                 /**
                  * 为播放媒体设置 tag，可以通过 [ExoPlayer.getCurrentMediaItem] 读取
                  */
@@ -137,15 +196,29 @@ class ExoPlayerTest : BaseActivity() {
             }.build())// 每个媒体都由一个 MediaSource 表示
         player.setMediaSource(mediaSource)
         player.prepare()
+
+    }
+
+    private fun updateMetadata(song: Song) {
+        MediaMetadataCompat.Builder()
+            .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, song.url)
+            .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
+            .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON_URI, song.image)
+            .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.duration) // duration 相同或者没有的话，通知封面没有变化，很奇怪
+            .build().apply {
+                mediaSession.setMetadata(this)
+            }
     }
 
     private fun attachPlayer() {
-        player = SimpleExoPlayer.Builder(this, DefaultRenderersFactory(this, EXTENSION_RENDERER_MODE_ON)).apply {
-            setLooper(Looper.getMainLooper()) // 如果不设置 looper 的话，那么将使用 thread 所关联的 looper；如果 thread 没有 looper，那么将使用主线程的 looper
-        }.build().apply {
-            //        setVideoSurface(null)
+        player =
+            SimpleExoPlayer.Builder(this, DefaultRenderersFactory(this, EXTENSION_RENDERER_MODE_ON))
+                .apply {
+                    setLooper(Looper.getMainLooper()) // 如果不设置 looper 的话，那么将使用 thread 所关联的 looper；如果 thread 没有 looper，那么将使用主线程的 looper
+                }.build().apply {
+                    //        setVideoSurface(null)
 
-        }
+                }
         playerView.player = player // 将播放器关联到视图上
     }
 
@@ -159,13 +232,81 @@ class ExoPlayerTest : BaseActivity() {
 
         }
         fl_player_container.addView(playerView)
+        btn_next.setOnClickListener {
+            prepareMedia(if (currentIndex + 1 >= songs.size) 0 else currentIndex + 1)
+        }
     }
 
     override fun getLayoutId() = R.layout.test_exo_player
 
+
+    private inner class MyMediaDescriptionAdapter(private val controller: MediaControllerCompat) :
+        PlayerNotificationManager.MediaDescriptionAdapter {
+        override fun getCurrentContentTitle(player: Player): CharSequence {
+            return controller.metadata.description.title ?: "默认标题"
+        }
+
+        override fun createCurrentContentIntent(player: Player): PendingIntent? {
+            return controller.sessionActivity
+        }
+
+        override fun getCurrentContentText(player: Player): CharSequence? {
+            return controller.metadata.description.subtitle
+        }
+
+        override fun getCurrentLargeIcon(
+            player: Player,
+            callback: PlayerNotificationManager.BitmapCallback
+        ): Bitmap? {
+            val icon =
+                controller.metadata.getBitmap(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON)
+            if (icon != null) {
+                return icon
+            }
+            val iconUri = controller.metadata.description.iconUri
+            Glide.with(this@ExoPlayerTest)
+                .asBitmap()
+                .load(iconUri)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        callback.onBitmap(resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+//            return BitmapFactory.decodeResource(resources, R.drawable.bg_1)
+            return null
+
+            /*// Glide 内部禁止 UI 线程调用，会 Crash
+            return Glide.with(this@ExoPlayerTest)
+                .asBitmap()
+                .load(iconUri)
+                .submit()
+                .get()*/
+        }
+    }
+
     companion object {
-//        private const val MEDIA_URI = "http://ddeta2nicr6gf.cloudfront.net/ckctdume903lf18t15q6egfxs/nowm-720p.mp4"
+        //        private const val MEDIA_URI = "http://ddeta2nicr6gf.cloudfront.net/ckctdume903lf18t15q6egfxs/nowm-720p.mp4"
 //        private const val MEDIA_URI2 = "https://video.like.video/na_live/4ay/297g8w_4.mp4"
-        private const val MEDIA_URI = "https://rr5---sn-i3belney.googlevideo.com/videoplayback?expire=1646900695\\u0026ei=d2EpYoaSFeSGvcAPmfSzmAg\\u0026ip=103.68.183.163\\u0026id=o-AG686twg_rmrZyqK5L7sFvdEp32fI-UGOrzK-aQbXQyx\\u0026itag=302\\u0026aitags=133%2C134%2C135%2C136%2C160%2C242%2C243%2C244%2C247%2C278%2C298%2C299%2C302%2C303%2C394%2C395%2C396%2C397%2C398%2C399\\u0026source=youtube\\u0026requiressl=yes\\u0026mh=0P\\u0026mm=31%2C29\\u0026mn=sn-i3belney%2Csn-i3b7knsd\\u0026ms=au%2Crdu\\u0026mv=m\\u0026mvi=5\\u0026pl=25\\u0026initcwndbps=613750\\u0026vprv=1\\u0026mime=video%2Fwebm\\u0026ns=9E4x_oLRcnO1Ecs-uhMnC3YG\\u0026gir=yes\\u0026clen=33761801\\u0026dur=300.767\\u0026lmt=1627574080179798\\u0026mt=1646878615\\u0026fvip=5\\u0026keepalive=yes\\u0026fexp=24001373%2C24007246\\u0026c=WEB\\u0026txp=5535434\\u0026n=Mo8DgOn-XWI-Eh3gC\\u0026sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt\\u0026sig=AOq0QJ8wRgIhAJPVhnjCiFmef7EQ35mjLSMD7o2vEGQOeo7B8MwYAf7bAiEArw59kK-5zhuAIV6EodWGzB78iniTRGvsvUNex9FHokg%3D\\u0026lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps\\u0026lsig=AG3C_xAwRAIgclr8HCtFcuQ5___h9xU-hcOQdbs6CIzHMFePa1kbD6ECIEW9oXoFIE6Cn3HtSE3K7b7toZZ46y6CGTpxdEifcOHS"
+        private const val MEDIA_URI =
+            "https://storage.googleapis.com/automotive-media/The_Coldest_Shoulder.mp3"
+    }
+
+    data class Song(val url: String, val title: String, val image: String, val duration: Long)
+
+
+    fun Song.toMediaItem(): MediaItem {
+        return MediaItem.Builder().setUri(url)
+            .setMediaMetadata(
+                MediaMetadata.Builder()
+                    .setTitle(title)
+                    .build()
+            )
+            .build()
     }
 }
