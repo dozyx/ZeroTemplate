@@ -68,13 +68,13 @@ class MediaSessionApiTest : BaseTestActivity() {
             updateMetaData(1, createBitmap(R.drawable.bg_3), 120)
             // 只设置 meta 不会导致通知封面发生变化，需要发送通知更新
 //            updateMediaCover(null)
-//            updateMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING)
-            window.decorView.postDelayed(
-                {
-                    updateMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING)
-                    showMediaNotification(createBitmap(R.drawable.bg_3)) },
-                500
-            )
+            updateMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING)
+//            window.decorView.postDelayed(
+//                {
+//                    updateMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING)
+//                    showMediaNotification(createBitmap(R.drawable.bg_3)) },
+//                500
+//            )
 //            showMediaNotification()
 
             /*val requestOptions = RequestOptions()
@@ -108,7 +108,7 @@ class MediaSessionApiTest : BaseTestActivity() {
         addAction("更新封面2") {
             updateMetaData(2, createBitmap(R.drawable.bg_1), 160)
             window.decorView.postDelayed({
-                updateMediaPlaybackState(PlaybackStateCompat.STATE_SKIPPING_TO_NEXT, 100)
+                updateMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING, 100)
                 window.decorView.postDelayed({showMediaNotification(createBitmap(R.drawable.bg_1))}, 100)
             }, 500)
         }
@@ -174,6 +174,13 @@ class MediaSessionApiTest : BaseTestActivity() {
         mediaSession.controller.metadata
     }
 
+    private fun updateDuration() {
+        val currentMetadata = mediaSession.controller.metadata ?: return
+        MediaMetadataCompat.Builder(currentMetadata).let {
+            mediaSession.setMetadata(it.build())
+        }
+    }
+
     private fun updateMediaPlaybackState(state: Int, position: Long = 90) {
         val playbackState = PlaybackStateCompat.Builder().also {
             it.setState(state, TimeUnit.SECONDS.toMillis(position), 1F)
@@ -217,11 +224,11 @@ class MediaSessionApiTest : BaseTestActivity() {
             it.setMediaSession(sessionToken)
             it.setShowCancelButton(true)
             it.setCancelButtonIntent(buildCancelIntent())// 小米 11p 没看到有按钮，估计跟机型有关
-            it.setShowActionsInCompactView(0)
+            it.setShowActionsInCompactView(0, 1)// 华为手机（鸿蒙，Android10）上有生效：表现上看参数表示的是收起状态展示哪几个 action
         }
         val notification =
             NotificationCompat.Builder(this, ZNotification.DEFAULT_CHANNEL_ID).also {
-                it.setSmallIcon(R.drawable.idlefish_ic_launcher)
+                it.setSmallIcon(R.drawable.ic_notification_test)// 不规范的图标会导致进度条显示不正常（thumb 不显示）
                 // 设置封面，只设置 description 属性是不会让通知封面改变的
                 it.setLargeIcon(_largeIcon)
                 it.setUsesChronometer(true)
@@ -416,6 +423,10 @@ class MediaSessionApiTest : BaseTestActivity() {
         override fun onSeekTo(pos: Long) {
             super.onSeekTo(pos)
             Timber.d("SessionCallback.onSeekTo")
+//            updateMediaPlaybackState(PlaybackStateCompat.STATE_PLAYING, pos)
+//            updateDuration()
+//            showMediaNotification(createBitmap(R.drawable.bg_1))
+            updateMediaPlaybackState(PlaybackStateCompat.STATE_BUFFERING)
         }
 
         override fun onSetRating(rating: RatingCompat?) {
@@ -487,7 +498,7 @@ class MediaSessionApiTest : BaseTestActivity() {
 
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
             super.onPlaybackStateChanged(state)
-            Timber.d("MediaControllerCallback.onPlaybackStateChanged")
+            Timber.d("MediaControllerCallback.onPlaybackStateChanged ${mediaSession.controller.metadata.description.title}")
         }
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {

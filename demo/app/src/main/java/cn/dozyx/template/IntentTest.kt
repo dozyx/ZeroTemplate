@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.IntentUtils
 import kotlinx.android.synthetic.main.animation_test.*
 import kotlinx.android.synthetic.main.fragment_edit.*
 import timber.log.Timber
+import java.io.File
 import java.util.*
 
 /**
@@ -46,8 +47,9 @@ class IntentTest : BaseTestActivity() {
         addAction(object : Action("启动") {
             override fun run() {
                 val intentString = ""
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
-                intent.addCategory(Intent.CATEGORY_DEFAULT)
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentString))
+                val intent = Intent.parseUri(intentString, Intent.URI_INTENT_SCHEME)
+//                intent.addCategory(Intent.CATEGORY_DEFAULT)
                 startActivity(intent)
             }
         })
@@ -119,10 +121,21 @@ class IntentTest : BaseTestActivity() {
 
         addAction(object : Action("print") {
             override fun run() {
-                val intent = Intent(Intent.ACTION_VIEW)
-//                intent.data =
+                val intent = Intent("")
+                intent.setDataAndType(Uri.fromFile(File("${externalCacheDir?.absolutePath}/1.txt")), "video/*")
+                intent.setPackage(packageName)
                 Timber.d(intent.toUri(Intent.URI_INTENT_SCHEME))
-                startActivity(intent)
+                val fileUri =
+                    Uri.fromFile(File("${externalCacheDir?.absolutePath}/1.txt"))
+                Timber.d(fileUri.toString())
+                val uriIntent = Intent.parseUri(fileUri.toString(), 0)
+                Timber.d(uriIntent.toUri(Intent.URI_INTENT_SCHEME))
+                val intentFormat=""
+                val intentUri = intentFormat.replace("{file_uri}", fileUri.toString())
+                val formatIntent = Intent.parseUri(intentUri, 0)
+                Timber.d(formatIntent.toUri(Intent.URI_INTENT_SCHEME))
+                startActivity(formatIntent)
+
             }
         })
 

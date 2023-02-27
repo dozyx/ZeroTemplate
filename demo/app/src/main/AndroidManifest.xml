@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="com.android.permission.GET_INSTALLED_APPS"/>
 
     <uses-sdk tools:overrideLibrary="androidx.camera.camera2, androidx.camera.core" />
 
@@ -30,6 +32,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:resizeableActivity="true"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".performance.RuntimeActivity"
@@ -1108,7 +1112,7 @@
             android:name=".activity.WindowTest"
             android:label="View/Window"
             android:configChanges="keyboardHidden|orientation|screenSize|uiMode|layoutDirection|locale|keyboard|navigation|screenLayout|smallestScreenSize"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/AppTheme.WindowTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -1319,8 +1323,7 @@
         </activity>
         <activity
             android:name=".ImmersionBarTest"
-            android:label="System/ImmersionBar"
-            android:theme="@style/Theme.AppCompat.DayNight">
+            android:label="System/ImmersionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
@@ -1480,7 +1483,7 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".notification.BadNotificationTest">
+        <activity android:name=".notification.BadNotificationTest"
             android:label="Notification/BadNotification">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1493,7 +1496,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-                <category android:name="android.intent.category.LAUNCHER" />
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity android:name=".view.recyclerview.RecyclerViewPopTest"
@@ -1501,7 +1504,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-                <category android:name="android.intent.category.LAUNCHER" />
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity
@@ -1521,6 +1524,43 @@
         </activity>
         <activity android:name=".service.ForegroundServiceTest"
             android:label="Service/foreground">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SplashTest"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>
+        </activity>
+        <activity android:name=".BottomSheetTest"
+            android:label="实践/BottomSheet">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.custom.CanvasDrawTest"
+            android:label="View/Canvas">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".media.MediaFileTest"
+            android:label="Media/Mime">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".media.CustomExoTest"
+            android:label="Media/CustomExo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />

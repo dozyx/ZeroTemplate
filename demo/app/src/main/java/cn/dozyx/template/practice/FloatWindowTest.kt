@@ -413,10 +413,10 @@ class FloatWindowTest : BaseTestActivity() {
         }
 
         fun showFloat() {
-            windowView = LayoutInflater.from(this).inflate(R.layout.float_window, null)
+            windowView = LayoutInflater.from(applicationContext).inflate(R.layout.float_window, null)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
+                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+//                params.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
             } else {
                 params.type = WindowManager.LayoutParams.TYPE_PHONE
             }
@@ -424,7 +424,7 @@ class FloatWindowTest : BaseTestActivity() {
             params.format = PixelFormat.TRANSLUCENT
             params.flags =
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_FULLSCREEN
-            params.gravity = Gravity.RIGHT or Gravity.CENTER_VERTICAL
+            params.gravity = Gravity.RIGHT or Gravity.BOTTOM
             params.width = WindowManager.LayoutParams.WRAP_CONTENT
             params.height = WindowManager.LayoutParams.WRAP_CONTENT
             windowManager.addView(windowView, params)

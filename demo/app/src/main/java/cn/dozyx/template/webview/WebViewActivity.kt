@@ -54,14 +54,16 @@ class WebViewActivity : AppCompatActivity() {
         settings.allowFileAccessFromFileURLs = true
         settings.allowUniversalAccessFromFileURLs = true
         settings.databaseEnabled = true
-        settings.javaScriptEnabled = true
+//        settings.javaScriptEnabled = true
         settings.domStorageEnabled = true
+        settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
+        settings.javaScriptCanOpenWindowsAutomatically = true
         fl_web.addView(webView)
 
         configWebViewClient(webView)
         configWebChromeClient(webView)
         val header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-        val url = "https://www.youtube.com/watch?v=kJQP7kiw5Fk&list=PL8A83124F1D79BD4F&index=1"
+        val url = "https://m.facebook.com"
 //        val url = "https://www.baidu.com/"
 //        val url = "https://m.animeflv.net/"
 //        val url = "https://www.google.com/"
@@ -82,6 +84,7 @@ class WebViewActivity : AppCompatActivity() {
         btn_user_agent.setOnClickListener {
             Timber.d("WebSettings.getDefaultUserAgent %s", WebSettings.getDefaultUserAgent(this))
             Timber.d("new WebView() %s", WebView(this).settings.userAgentString)
+            Timber.d("property: ${System.getProperty("http.agent")}")
         }
     }
 
@@ -97,7 +100,10 @@ class WebViewActivity : AppCompatActivity() {
 //            WebView(applicationContext).onResume()
             webView.onResume()
         }
-        btn_reload.setOnClickListener { webView.reload() }
+        btn_reload.setOnClickListener {
+//            webView.reload()
+            webView.loadUrl("https://m.facebook.com")
+        }
         btn_stop_load.setOnClickListener { webView.stopLoading() }
         btn_back_and_reload.setOnClickListener {
             webView.goBack()
@@ -381,7 +387,7 @@ class WebViewActivity : AppCompatActivity() {
                 url: String
             ): WebResourceResponse? {
                 // 不是回调在主线程
-//                Timber.d("WebViewActivity.shouldInterceptRequest $url")
+                Timber.d("WebViewActivity.shouldInterceptRequest $url")
                 return super.shouldInterceptRequest(view, url)
             }
 
@@ -446,8 +452,10 @@ class WebViewActivity : AppCompatActivity() {
                 handler: SslErrorHandler?,
                 error: SslError?
             ) {
-                Timber.d("onReceivedSslError: ")
-                super.onReceivedSslError(view, handler, error)
+                Timber.d("onReceivedSslError: $error")
+                // 有点站点要注释掉 super 调用才能抓包
+//                super.onReceivedSslError(view, handler, error)
+                handler?.proceed()
             }
 
             override fun onFormResubmission(

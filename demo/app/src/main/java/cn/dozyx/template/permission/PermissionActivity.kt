@@ -2,7 +2,9 @@ package cn.dozyx.template.permission
 
 import android.Manifest
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.pm.PermissionInfo
 import android.os.Bundle
 import android.os.Environment
 import android.os.Process
@@ -11,15 +13,13 @@ import androidx.core.app.AppOpsManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import cn.dozyx.template.base.Action
-
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.PermissionUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import timber.log.Timber
 import java.io.File
 import java.io.RandomAccessFile
-
-import java.util.Arrays
+import java.util.*
 
 class PermissionActivity : BaseTestActivity() {
 
@@ -43,6 +43,61 @@ class PermissionActivity : BaseTestActivity() {
                         }
                     }
         })
+        addButton("应用列表", Runnable {
+            Timber.d("读取应用列表权限 start")
+            val installedPackages =
+                packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
+            // 权限拒绝时只返回了系统应用列表及当前应用信息
+            val filterResult =
+                installedPackages.filter { (it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM) == 0 }
+//            installedPackages.forEach {
+//                Timber.d("应用列表 package: %s", it)
+//            }
+            Timber.d("应用列表 size: ${installedPackages.size}")
+            Timber.d("应用列表 size 非系统应用: ${filterResult.size}")
+            // 弹出权限确认弹窗时会阻塞
+            Timber.d("读取应用列表权限 end")
+        })
+
+        addButton("应用列表权限查询", Runnable {
+//            Handler().postDelayed({
+//                val result =
+//                    PermissionChecker.checkSelfPermission(
+//                        this,
+//                        Manifest.permission.QUERY_ALL_PACKAGES
+//                    )
+//                Timber.d("应用列表权限查询: $result")
+//            }, 5000)
+            val result1 =
+                PermissionChecker.checkSelfPermission(this, Manifest.permission.QUERY_ALL_PACKAGES)
+//            val result = PermissionUtils.isGranted(Manifest.permission.QUERY_ALL_PACKAGES)
+            val result2 = isGetInstalledAppPermissionGranted()
+            Timber.d("应用列表权限查询: $result1 $result2")
+            // 0 granted，-1 denied
+        })
+
+        addButton("请求应用列表权限", Runnable {
+            PermissionUtils.permission(Manifest.permission.QUERY_ALL_PACKAGES).request()
+        })
+    }
+
+    private fun isGetInstalledAppPermissionGranted(): Boolean {
+        try {
+            val permissionInfo: PermissionInfo? =
+                packageManager.getPermissionInfo(
+                    "com.android.permission.GET_INSTALLED_APPS",
+                    0
+                )
+            if (permissionInfo != null) {
+                return ContextCompat.checkSelfPermission(
+                    this,
+                    "com.android.permission.GET_INSTALLED_APPS"
+                ) == PackageManager.PERMISSION_GRANTED
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        return false
     }
 
     override fun onResume() {

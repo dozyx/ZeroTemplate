@@ -4,17 +4,18 @@ import android.app.Dialog
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.ScreenUtils
+import com.gyf.immersionbar.ImmersionBar
 import okhttp3.internal.toHexString
 import timber.log.Timber
 
@@ -104,12 +105,20 @@ class WindowTest : BaseTestActivity() {
             }
         })
 
+        ImmersionBar.with(this)
+            .apply {
+                statusBarColor(android.R.color.transparent)
+                statusBarDarkFont(false)
+                navigationBarDarkIcon(false)
+//                fitsSystemWindows(true)
+                navigationBarWithKitkatEnable(false)
+            }.init()
+
 //        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         addAction(object : Action("systemUiVisibility") {
             override fun run() {
 //          (window.decorView.findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0).fitsSystemWindows = true
                 window.decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_FULLSCREEN or
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN/* or View.SYSTEM_UI_FLAG_LAYOUT_STABLE*/
             }
         })
@@ -127,6 +136,16 @@ class WindowTest : BaseTestActivity() {
             override fun run() {
                 Timber.d("WindowTest.run {$window}")
                 showResult(window.attributes.flags.toHexString())
+            }
+        })
+
+        addAction(object : Action("navigation bar") {
+            override fun run() {
+                window.apply {
+                    clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION )
+                    navigationBarColor = Color.BLUE
+                    navigationBarDividerColor = Color.RED
+                }
             }
         })
     }
@@ -166,7 +185,7 @@ class WindowTest : BaseTestActivity() {
         //        NotchScreenManager.getInstance().setDisplayInNotch(this@WindowTest)
 
         // 刘海屏需要另外的处理 https://www.jianshu.com/p/2b8db60ba8df
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)// 这种方式布局不会绘制到状态栏中
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)// 这种方式布局不会绘制到状态栏中，效果跟 android:windowFullscreen 一样
 //        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 
 

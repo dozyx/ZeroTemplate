@@ -8,7 +8,7 @@ class CoroutinesTest {
     @Test
     fun testGlobalScope() {
         GlobalScope.launch {
-            println("launch ${Thread.currentThread().name}")
+//            println("launch ${Thread.currentThread().name}")
 //            println("launch")
         }
         Thread.sleep(200)

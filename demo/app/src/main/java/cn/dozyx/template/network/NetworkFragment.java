@@ -19,6 +19,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import timber.log.Timber;
+
 /**
  * 参考：
  * https://github.com/googlesamples/android-NetworkConnect/blob/master/Application/src/main/java
@@ -113,8 +115,8 @@ public class NetworkFragment extends Fragment {
                 String result = null;
                 try {
                     connection = (HttpsURLConnection) url.openConnection();
-                    connection.setReadTimeout(3000);
-                    connection.setConnectTimeout(3000);
+                    connection.setReadTimeout(5000);
+                    connection.setConnectTimeout(10000);
                     connection.setRequestMethod("GET");
                     // google官方源码解释
                     // Already true by default but setting just in case; needs to be true since this
@@ -190,6 +192,7 @@ public class NetworkFragment extends Fragment {
             }
             String urlString = urls[0];
             try {
+                Timber.d("doInBackground start");
                 String resultString = downloadUrl(urlString);
                 if (resultString != null) {
                     result = new Result(resultString);
@@ -198,6 +201,7 @@ public class NetworkFragment extends Fragment {
                 }
             } catch (Exception e) {
                 result = new Result(e);
+                Timber.e(e, "doInBackground: ");
             }
 
             return result;

@@ -2,7 +2,6 @@ package cn.dozyx.template
 
 import android.app.Dialog
 import android.app.Presentation
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -14,15 +13,21 @@ import android.os.Handler
 import android.provider.Settings
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.appcompat.app.AppCompatDialog
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
+import cn.dozyx.template.databinding.DialogBinding
+import cn.dozyx.template.databinding.DialogBottomSheetFullScreenBinding
 import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.dialog.*
-import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 /**
@@ -36,7 +41,16 @@ class DialogTest : BaseTestActivity(), DialogInterface.OnCancelListener,
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ImmersionBar.with(this)
+            .statusBarDarkFont(true)
+            .navigationBarColor(android.R.color.transparent)
+            .navigationBarDarkIcon(true)
+            .init()
         super.onCreate(savedInstanceState)
+        addButton("Dark", Runnable {
+            delegate.localNightMode =
+                if (delegate.localNightMode == MODE_NIGHT_YES) MODE_NIGHT_NO else MODE_NIGHT_YES
+        })
         addButton("显示对话框", Runnable {
             DialogFragmentTest.newInstance().show(supportFragmentManager, null)
         })
@@ -138,6 +152,7 @@ class DialogTest : BaseTestActivity(), DialogInterface.OnCancelListener,
                 override fun onCreate(savedInstanceState: Bundle?) {
                     super.onCreate(savedInstanceState)
                     setContentView(R.layout.dialog)
+//                    window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
                     btn_hello.setOnClickListener {
                         startActivity(IntentUtils.getDialIntent("12345"))
                     }
@@ -149,6 +164,21 @@ class DialogTest : BaseTestActivity(), DialogInterface.OnCancelListener,
                 }
             }
             dialogFragment.show()
+        })
+
+        addButton("bottom sheet fragment", Runnable {
+//            MyBottomSheetDialogFragment().show(supportFragmentManager, "bottom_sheet")
+            val fragment = MyBottomSheetDialogFragment()
+            supportFragmentManager.beginTransaction().add(fragment, "1111").commitNow()
+               fragment.onCreateDialog(null).also {
+
+               }.show()
+        })
+
+        addButton("bottom sheet full", Runnable {
+            val dialog = object : BottomSheetDialog(this, R.style.ZeroBottomSheetDialog) {
+            }
+            dialog.show()
         })
     }
 
@@ -299,5 +329,48 @@ class TopDialog : DialogFragment() {
 //        val attributes = dialog.window.attributes
 //        attributes.width = 1080
 //        dialog.window.attributes = attributes
+    }
+}
+
+class MyBottomSheetDialogFragment : AppCompatDialogFragment() {
+    private lateinit var binding: DialogBinding
+
+
+    override fun getTheme(): Int {
+        return R.style.ZeroBottomSheetDialog
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DialogBinding.inflate(inflater, container, false)
+//        showsDialog = false
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnHello.setOnClickListener {
+            startActivity(IntentUtils.getDialIntent("12345"))
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return object : BottomSheetDialog(requireContext(), theme) {
+            override fun show() {
+                super.show()
+            }
+        }.apply {
+//            dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        dialog?.window?.apply {
+//            addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
     }
 }

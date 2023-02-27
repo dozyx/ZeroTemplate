@@ -454,14 +454,15 @@ class NotificationTest : BaseTestActivity() {
                         .setVisibility(NotificationCompat.VISIBILITY_SECRET)// 可以跟 channel 的不一样，测试时需要注意 miui 是只有在锁屏时发出的通知才显示到锁屏
                         .setWhen(System.currentTimeMillis() - 3600 * 1000)// 修改通知显示的时间，不设置显示的是「现在」
 //                        .setWhen(0)
-                        .setShowWhen(false)
+                        .setShowWhen(true)
+                    .setAllowSystemGeneratedContextualActions(false)
                         .setCategory(NotificationCompat.CATEGORY_PROGRESS)
 //                        .setTimeoutAfter(10)// 超时后自动取消通知
 //                        .setTicker("ticker")// 用于辅助服务，Android 5.0 之前在触发通知时会显示在状态栏？
 //                        .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
                         .setSortKey("$notificationId")// 按字典顺序对通知进行排序，比如 "0"、"1"，前者会在上面。但是 importance 会导致这个设置无效，importance 高的会一直在前面。。。
-                        .setGroup(GROUP_KEY_TEST)
-//                        .setStyle(CustomStyle())
+//                        .setGroup(GROUP_KEY_TEST)
+                        .setStyle(CustomStyle())
                 // 关于排序(模拟器 API29)
                 // 影响通知排序的有三个因素：when、importance、sortKey (20201125更新)
                 // importance 更高的将排在前面，即使低 importance 的通知发送更晚，即使 when 更新也没用；
@@ -484,8 +485,8 @@ class NotificationTest : BaseTestActivity() {
                 //                builder.setCustomContentView(remoteViews)
                 //                builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
-                builder.addAction(R.drawable.anime, "pause", createPendingIntent())
-                builder.addAction(R.drawable.anime, "resume", null)
+//                builder.addAction(R.drawable.anime, "pause", createPendingIntent())
+//                builder.addAction(R.drawable.anime, "resume", null)
 
                 // small icon 颜色与 setColor 的有差异
 

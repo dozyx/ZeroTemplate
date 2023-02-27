@@ -274,8 +274,7 @@ class FileTest : BaseTestActivity() {
 
         addAction(object : Action("delete") {
             override fun run() {
-//                val file = File(Environment.getExternalStorageDirectory(), "1.txt")
-                val file = File(File(Environment.getExternalStorageDirectory(), "snaptube"), "1.txt")
+                val file = File(Environment.getExternalStorageDirectory(), "1.txt")
                 if (!file.exists()){
                     Timber.d("create new file")
                     file.createNewFile()

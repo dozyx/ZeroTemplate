@@ -2,9 +2,11 @@ package cn.dozyx.template.media
 
 import android.app.PendingIntent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Looper
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
@@ -23,6 +25,7 @@ import com.google.android.exoplayer2.DefaultRenderersFactory.EXTENSION_RENDERER_
 import com.google.android.exoplayer2.analytics.AnalyticsListener
 import com.google.android.exoplayer2.source.LoadEventInfo
 import com.google.android.exoplayer2.source.MediaLoadData
+import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -97,7 +100,8 @@ class ExoPlayerTest : BaseActivity() {
         listenEvent()
         mediaSession = MediaSessionCompat(this, "ExoPlayer")
         mediaSession.setCallback(MyCallback())
-        prepareMedia(0)
+//        prepareMedia(0)
+        prepareLocalMedia()
         playerNotificationManager =
             PlayerNotificationManager(
                 this,
@@ -196,7 +200,23 @@ class ExoPlayerTest : BaseActivity() {
             }.build())// 每个媒体都由一个 MediaSource 表示
         player.setMediaSource(mediaSource)
         player.prepare()
+    }
 
+    private fun prepareLocalMedia() {
+        player.setMediaSource(buildMediaSource(Environment.getExternalStorageDirectory().absolutePath + "/video.mp4"))
+        player.prepare()
+        updateMetadata(songs[0])
+    }
+
+    private fun buildMediaSource(filePath: String): MediaSource {
+        val dataSourceFactory: DataSource.Factory = DefaultDataSourceFactory(
+            this,
+            Util.getUserAgent(this, "test")
+        )
+        val mediaUri = Uri.parse(filePath)
+        //这是一个代表将要被播放的媒体的MediaSource
+        return ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(mediaUri)
     }
 
     private fun updateMetadata(song: Song) {
@@ -220,6 +240,8 @@ class ExoPlayerTest : BaseActivity() {
 
                 }
         playerView.player = player // 将播放器关联到视图上
+        player_view.player = player
+        player_view.setShutterBackgroundColor(Color.TRANSPARENT)
     }
 
     override fun onDestroy() {
@@ -231,9 +253,17 @@ class ExoPlayerTest : BaseActivity() {
         playerView = PlayerView(this).apply {
 
         }
-        fl_player_container.addView(playerView)
+//        fl_player_container.addView(playerView)
         btn_next.setOnClickListener {
             prepareMedia(if (currentIndex + 1 >= songs.size) 0 else currentIndex + 1)
+        }
+        btn_only_audio.setOnClickListener {
+            (player.trackSelector as DefaultTrackSelector).apply {
+
+                setParameters(buildUponParameters().apply {
+                    setRendererDisabled(0, !parameters.getRendererDisabled(0))
+                })
+            }
         }
     }
 

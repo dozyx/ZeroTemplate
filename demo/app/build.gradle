@@ -31,7 +31,7 @@ android {
     }
 
     flavorDimensions "mode"
-    productFlavors {
+    /*productFlavors {
         getThisObject().properties.clear()
         this.properties.clear()
         development {
@@ -44,10 +44,13 @@ android {
         product {
             applicationId "cn.dozyx.app.product"
         }
-    }
+    }*/
     sourceSets {
         // https://stackoverflow.com/questions/41507389/unresolved-reference-daosession-using-greendao-and-kotlin
         main.java.srcDirs += 'build/generated/source/greendao'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 greendao {
@@ -64,6 +67,8 @@ dependencies {
     implementation Deps.legacySupportV4
     implementation Deps.appcompat
     implementation DepsButterKnife.runtime
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    implementation 'androidx.work:work-rxjava2:2.7.1'
     annotationProcessor DepsButterKnife.processor
     implementation Deps.percentlayout
     implementation Deps.universalImageLoader

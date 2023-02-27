@@ -12,14 +12,14 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
+import android.webkit.WebSettings
 import cn.dozyx.core.rx.SchedulersTransformer
+import cn.dozyx.template.base.Action
+import cn.dozyx.template.base.BaseTestActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import cn.dozyx.core.utli.util.RxJavaUtil
-import cn.dozyx.template.base.Action
-import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.CloseUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.Observer
@@ -38,6 +38,7 @@ import timber.log.Timber
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.zip.GZIPInputStream
 
 /**
  * Created by zero on 2017/9/22.
@@ -100,6 +101,26 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
                 startDownloadFile(uri)
             }
         })
+
+        addAction(object : Action("Protocol") {
+            override fun run() {
+                Thread {
+                    val url = "https://www.tiktok.com/@p..rensesa/video/7153006986613853442?_t=8WRObWmsrJ7&_r=1";
+                    val result = getStringUsingUrlConnection(url)
+                    Timber.d("NetworkAPITest.run: $result")
+                }.start()
+            }
+        })
+
+        addAction(object : Action("user agent cost") {
+            override fun run() {
+                val start = System.currentTimeMillis()
+                val userAgent = WebSettings.getDefaultUserAgent(this@NetworkAPITest)
+                val cost = System.currentTimeMillis() - start
+                Timber.d("user agent cost: $cost $userAgent")
+            }
+        })
+
         RxPermissions(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe()
         val intentFilter = IntentFilter()
         intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
@@ -111,6 +132,54 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
                 }
             }
         }, intentFilter)
+    }
+
+    private fun getStringUsingUrlConnection(requestUrl: String): String? {
+        val url = URL(requestUrl)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.connect()
+        return readBodyString(connection, Int.MAX_VALUE)
+    }
+
+    @Throws(IOException::class)
+    private fun readBodyString(conn: HttpURLConnection, maxSize: Int): String? {
+        var maxSize = maxSize
+        if (maxSize == 0) {
+            return ""
+        }
+        var bodyStream: BufferedInputStream? = null
+        var dataStream: InputStream? = null
+        return try {
+            dataStream = if (conn.errorStream == null) conn.inputStream else conn.errorStream
+            val contentEncoding = conn.contentEncoding
+            bodyStream = if (contentEncoding != null &&
+                contentEncoding.equals("gzip", ignoreCase = true)
+            ) {
+                BufferedInputStream(
+                    GZIPInputStream(dataStream)
+                )
+            } else {
+                BufferedInputStream(dataStream)
+            }
+            val sb = StringBuilder()
+            val buffer = CharArray(1024)
+            val reader = InputStreamReader(
+                bodyStream,
+                "UTF-8"
+            )
+            var readSize: Int = 0
+            while (maxSize > 0 && reader.read(buffer).also { readSize = it } != -1) {
+                if (readSize > maxSize) {
+                    readSize = maxSize
+                }
+                maxSize -= readSize
+                sb.append(buffer, 0, readSize)
+            }
+            sb.toString()
+        } finally {
+            bodyStream?.close()
+            dataStream?.close()
+        }
     }
 
     private fun startErrorRequest() {
@@ -389,7 +458,7 @@ class NetworkAPITest : BaseTestActivity(), DownloadCallback {
     }
 
     companion object {
-        private const val URL_STRING = "http://www.baidu.com/"
+        private const val URL_STRING = "https://www.youtube.com/"
     }
 
 }

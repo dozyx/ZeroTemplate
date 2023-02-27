@@ -4,22 +4,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.FrameMetrics;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import androidx.annotation.Keep;
-import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.blankj.utilcode.util.ThreadUtils;
-import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.text.Collator;
 import java.util.ArrayList;

@@ -22,6 +22,18 @@ import static cn.dozyx.LogUtils.print;
 public class RxJava1Test {
 
     @Test
+    public void testFlapMapNull() {
+        Observable.just(2)
+                .flatMap((Func1<Integer, Observable<Integer>>) integer -> {
+                    if (integer == 2) {
+                        return null; // 会触发 onError
+                    }
+                    return Observable.just(integer * integer);
+                })
+                .subscribe(getObserver("flatmap null"));
+    }
+
+    @Test
     public void testFlapMap() {
         print("当前线程：" + Thread.currentThread());
         Observable.just(1, 2, 3)
@@ -219,6 +231,7 @@ public class RxJava1Test {
 
             @Override
             public void onError(Throwable e) {
+                e.printStackTrace();
                 print(formatPrefix + "onError: " + e.getMessage());
             }
 

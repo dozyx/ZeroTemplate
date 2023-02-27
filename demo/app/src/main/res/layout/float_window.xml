@@ -35,4 +35,17 @@
         app:layout_constraintTop_toBottomOf="@id/float_button1" />
 
 
+    <!--  Service 里的 UI 主题有点问题  -->
+    <!--  android:indeterminateTint="@color/colorAccent"-->
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:progressDrawable="@drawable/progress_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

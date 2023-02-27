@@ -1,13 +1,9 @@
 package cn.dozyx.template.keyboard
 
+
 import android.os.Bundle
-import android.view.WindowManager
-
-
 import cn.dozyx.core.base.BaseActivity
 import cn.dozyx.template.R
-import com.blankj.utilcode.util.KeyboardUtils
-import com.gyf.barlibrary.ImmersionBar
 import kotlinx.android.synthetic.main.activity_key_board.*
 
 /**

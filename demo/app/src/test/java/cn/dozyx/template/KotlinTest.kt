@@ -1,6 +1,5 @@
 package cn.dozyx.template
 
-import android.support.v4.media.MediaMetadataCompat
 import io.reactivex.Observable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -16,6 +15,16 @@ import kotlin.reflect.KProperty
  * @date 2019-12-09
  */
 class KotlinTest {
+
+    @Test
+    fun testSplit() {
+        val str = "http://www.baidu.com?sqp=222"
+//        val str = "http://www.baidu.com"
+        val split = str.split("?")
+//        print(split.firstOrNull())
+        print(str.substringBefore("?"))
+    }
+
     @set:Inject
     internal var injectField: String?=null
 

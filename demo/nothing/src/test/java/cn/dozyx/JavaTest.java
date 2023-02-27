@@ -27,10 +27,8 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,11 +53,8 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -105,24 +100,15 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.meta.When;
-
 import cn.dozyx.core.log.Sampler;
-import cn.dozyx.core.utli.TimeTracker;
 import cn.dozyx.core.utli.gson.IntDefaultZeroAdapter;
-import cn.dozyx.core.utli.log.LogUtil;
 import cn.dozyx.zerofate.java.GenericTest;
-import cn.dozyx.zerofate.java.Person;
 import cn.dozyx.zerofate.java.Student1;
-import io.reactivex.Observable;
-import io.reactivex.internal.operators.observable.ObservableZip;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
-import javassist.CtMethod;
 import javassist.NotFoundException;
-import javassist.bytecode.AttributeInfo;
 import okhttp3.HttpUrl;
 
 /**
@@ -135,6 +121,24 @@ import okhttp3.HttpUrl;
 
 public class JavaTest {
 
+    @Test
+    public void testSpecialChar(){
+        String title = "\uD835\uDC73\uD835\uDC86\uD835\uDC95'\uD835\uDC94 \uD835\uDC6E\uD835\uDC86\uD835\uDC95 \uD835\uDC73\uD835\uDC90\uD835\uDC96\uD835\uDC85 - \uD835\uDC6A\uD835\uDC89\uD835\uDC82-\uD835\uDC6A\uD835\uDC89\uD835\uDC82 (\uD835\uDC69\uD835\uDC82\uD835\uDC8D\uD835\uDC8D\uD835\uDC93\uD835\uDC90\uD835\uDC90\uD835\uDC8E - \uD835\uDC73\uD835\uDC82\uD835\uDC95\uD835\uDC8A\uD835\uDC8F \uD835\uDC7A\uD835\uDC95\uD835\uDC9A\uD835\uDC8D\uD835\uDC86)";
+//        String title = "\uD835\uDC73\uD835\uDC86\uD835\uDC95'";
+//        String title = "中国'";
+//        String title = "😄'";
+        print(title);
+        print(title.length());
+        print(title.codePointCount(0, title.length()));
+//        print(title.substring(0, 2));
+//        print(title.substring(0, 3));
+    }
+
+    @Test
+    public void testNumberFormat() {
+        print(String.format(new Locale("ar", "AR"), "number: %d", 1));
+        print(String.format(Locale.US, "number: %d", 1));
+    }
 
     @Test
     public void testCrashStack() {
@@ -936,6 +940,16 @@ public class JavaTest {
     }
 
     @Test
+    public void testRegex4() {
+        String string = "videos";
+        Pattern pattern = Pattern.compile("[0-9]+");
+        Matcher matcher = pattern.matcher(string);
+        while (matcher.find()) {
+            print(matcher.group());
+        }
+    }
+
+    @Test
     public void testSocket() {
         new SocketServerThread().start();
         new SocketClientThread().start();
@@ -1147,8 +1161,12 @@ public class JavaTest {
 //        Thread.currentThread().setContextClassLoader(loader);
         Constructor<?> constructor = loader.loadClass("cn.dozyx.LoadedClass").getConstructor(
                 String.class);
-        constructor.newInstance("custom loader");
+        Object customLoaderObj = constructor.newInstance("custom loader");
         LoadedClass loadedClass = new LoadedClass("new instance");
+        print("class loader 是否相同：" + (customLoaderObj.getClass().getClassLoader() == loadedClass.getClass().getClassLoader()));
+        print("LoadedClass.class.isInstance(loadedClass): " + LoadedClass.class.isInstance(loadedClass));
+        print("customLoaderObj.getClass().isInstance(loadedClass): " + customLoaderObj.getClass().isInstance(loadedClass));
+        print("BaseLoadedClass.class.isInstance(loadedClass): " + BaseLoadedClass.class.isInstance(loadedClass));
     }
 
     @Test
@@ -1809,7 +1827,8 @@ public class JavaTest {
 
     @Test
     public void testFoo() {
-        print(new Date(1619060890000L));
+        int i = (int) (0.5 + 0.51);
+        print("result" + i);
     }
 
     @Test

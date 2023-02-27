@@ -5,21 +5,44 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
 import cn.dozyx.core.base.BaseActivity
-import com.gyf.barlibrary.ImmersionBar
+import cn.dozyx.template.base.BaseTestActivity
+import com.gyf.immersionbar.ImmersionBar
+import kotlinx.android.synthetic.main.activity_base_test.*
 
-class ImmersionBarTest : BaseActivity() {
+class ImmersionBarTest : BaseTestActivity() {
+
+    override fun initActions() {
+        ImmersionBar.with(this).init()
+        ImmersionBar.setTitleBar(this, app_content)
+        addAction("bg") {
+            // MIUI 的深色模式会自动根据背景颜色调整状态栏的字体颜色
+            app_content.setBackgroundColor(getColor(android.R.color.black))
+        }
+        addAction("bg2") {
+            app_content.setBackgroundColor(getColor(android.R.color.white))
+        }
+
+        addAction("full screen") {
+            window.addFlags(FLAG_FULLSCREEN)
+        }
+
+        addAction("normal screen") {
+            window.clearFlags(FLAG_FULLSCREEN)
+        }
+    }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        setTransparentStatusBar()
+//        setTransparentStatusBar()
 //        setStatusTextColor(true)
-        compatHighMIUI(true)
+//        compatHighMIUI(true)
     }
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
-        ImmersionBar.setFitsSystemWindows(this)
+//        ImmersionBar.setFitsSystemWindows(this)
     }
 
     private fun setTransparentStatusBar() {
@@ -41,12 +64,14 @@ class ImmersionBarTest : BaseActivity() {
     private fun setStatusTextColor(useDart: Boolean) {
         if (useDart) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                window.decorView.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.statusBarColor = Color.BLUE
             }
         } else {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_VISIBLE
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_VISIBLE
         }
     }
 
@@ -55,7 +80,8 @@ class ImmersionBarTest : BaseActivity() {
         if (darkmode) {
 //            decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 //                    or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)// 这样处理在小米手机上有问题
-            decorView.systemUiVisibility = (decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+            decorView.systemUiVisibility =
+                (decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         } else {
             val flag = decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
             decorView.systemUiVisibility = flag
@@ -63,5 +89,5 @@ class ImmersionBarTest : BaseActivity() {
     }
 
 
-    override fun getLayoutId() = R.layout.test_immersion_bar
+//    override fun getLayoutId() = R.layout.test_immersion_bar
 }

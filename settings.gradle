@@ -26,7 +26,6 @@ rootProject.children.each { p ->
 include ':demo:shortcut'
 include ':dependencyone'
 include ':dependencytwo'
-include ':empty_app'
 include ':empty_library'
 include ':empty_library2'
 include ':proguardtest:app'

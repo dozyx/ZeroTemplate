@@ -8,7 +8,9 @@ import android.os.Bundle
 import cn.dozyx.template.R
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import com.blankj.utilcode.util.LanguageUtils
 import timber.log.Timber
+import java.util.*
 
 class OrientationTest : BaseTestActivity() {
     override fun initActions() {
@@ -18,6 +20,12 @@ class OrientationTest : BaseTestActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)
+            }
+        })
+
+        addAction(object : Action("locale") {
+            override fun run() {
+                LanguageUtils.applyLanguage(Locale.FRENCH)
             }
         })
 
