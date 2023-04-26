@@ -53,7 +53,7 @@ class CustomExoTest : AppCompatActivity() {
 //            binding.flTextureContainer.addView(playerViewBinding.root,
 //                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
             setVideoRenderDisable(false)
-            player.prepare()
+//            player.prepare()
         }
         binding.btn5.setOnClickListener {
             player.seekTo(player.duration - 10)
@@ -63,7 +63,8 @@ class CustomExoTest : AppCompatActivity() {
     private fun setTexture() {
 //        binding.flTextureContainer.addView(texture)
         binding.flTextureContainer.addView(playerViewBinding.root)
-        player.setVideoTextureView(playerViewBinding.texture)
+//        player.setVideoTextureView(playerViewBinding.texture)
+        player.setVideoSurfaceView(playerViewBinding.surfaceView)
     }
 
     private fun setVideoRenderDisable(disabled: Boolean) {

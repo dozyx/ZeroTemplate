@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -23,6 +24,8 @@ import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -2383,6 +2386,7 @@ public class JavaTest {
     public void testGson1() {
         IntArrayData intArrayData = new IntArrayData();
         intArrayData.data = new int[]{1, 2, 3};
+        print(new GsonBuilder().setPrettyPrinting().setLenient().create().toJson(intArrayData));
         print(new Gson().toJson(intArrayData));
         print(new Gson().fromJson("", Student1.class));
     }

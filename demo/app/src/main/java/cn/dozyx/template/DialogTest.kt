@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.appcompat.app.AppCompatDialog
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import cn.dozyx.core.utli.log.LogUtil
 import cn.dozyx.template.base.BaseTestActivity
@@ -28,6 +29,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.dialog.*
+import okhttp3.internal.toHexString
 import timber.log.Timber
 
 /**
@@ -44,7 +46,10 @@ class DialogTest : BaseTestActivity(), DialogInterface.OnCancelListener,
         ImmersionBar.with(this)
             .statusBarDarkFont(true)
             .navigationBarColor(android.R.color.transparent)
+            .statusBarColor(android.R.color.transparent)
             .navigationBarDarkIcon(true)
+            .navigationBarWithKitkatEnable(false)
+            .fitsSystemWindows(true)
             .init()
         super.onCreate(savedInstanceState)
         addButton("Dark", Runnable {
@@ -60,7 +65,20 @@ class DialogTest : BaseTestActivity(), DialogInterface.OnCancelListener,
         addButton("constraint对话框", Runnable {
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.dialog_constraint)
+            dialog.setOnDismissListener {
+                Timber.d("dismiss ${dialog.window?.attributes?.flags?.toHexString()}")
+                Timber.d("dismiss width: ${dialog.window?.attributes?.width} height:${dialog.window?.attributes?.width}")
+                }
+            dialog.window?.setBackgroundDrawable(
+                ContextCompat.getDrawable(this, R.drawable.bg_transparent)
+            )
+            dialog.window?.setDimAmount(0F)
+            // setLayout 为 MATCH_PARENT 会导致导航栏变成黑色。但从文档注释说默认值就是 MATCH_PARENT，国产 rom 的锅吗。。。
+            // 小米11 默认的是 WRAP_CONTENT
+//            dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
             dialog.show()
+            Timber.d("dismiss dimAmount: ${dialog.window?.attributes?.dimAmount}")
+
         })
 
         addButton("constraint style对话框", Runnable {

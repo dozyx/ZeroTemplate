@@ -43,6 +43,17 @@ class PermissionActivity : BaseTestActivity() {
                         }
                     }
         })
+        addButton("文件", Runnable {
+            val dir = "${Environment.getExternalStorageDirectory().absoluteFile}"
+            val filePath = "${dir}${File.separator}15\n1.txt"
+            val file = File(filePath)
+            if (file.exists()) {
+                file.delete()
+            } else {
+                file.createNewFile()
+            }
+            Timber.d("$filePath exist: ${File(filePath).exists()}")
+        })
         addButton("应用列表", Runnable {
             Timber.d("读取应用列表权限 start")
             val installedPackages =
