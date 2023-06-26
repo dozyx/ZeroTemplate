@@ -4,6 +4,7 @@ package cn.dozyx;
 import static cn.dozyx.LogUtils.print;
 
 import android.annotation.TargetApi;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -58,6 +59,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -947,6 +949,25 @@ public class JavaTest {
         String string = "videos";
         Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(string);
+        while (matcher.find()) {
+            print(matcher.group());
+        }
+    }
+
+    @Test
+    public void testRegex5() {
+        String string = "https://www.facebook.com/discomolvi11";
+//        String string = "https://www.facebook.com/discomolvi11/?a=1";
+//        String string = "https://www.facebook.com/discomolvi11/?a=1";
+        URI uri = URI.create(string);
+        String pathAndQuery = uri.getPath();
+        if (uri.getQuery() != null) {
+            pathAndQuery += "?" + uri.getQuery();
+        }
+        print("path & query: " + pathAndQuery);
+        Pattern pattern = Pattern.compile("/(\\w+){10}/?(\\?.*)?");
+        Matcher matcher = pattern.matcher(pathAndQuery);
+        print("is match: " + matcher.matches());
         while (matcher.find()) {
             print(matcher.group());
         }

@@ -86,6 +86,9 @@ class WebViewActivity : AppCompatActivity() {
             Timber.d("new WebView() %s", WebView(this).settings.userAgentString)
             Timber.d("property: ${System.getProperty("http.agent")}")
         }
+        btn_crash.setOnClickListener {
+            webView.loadUrl("chrome://crash")
+        }
     }
 
     private fun initView() {

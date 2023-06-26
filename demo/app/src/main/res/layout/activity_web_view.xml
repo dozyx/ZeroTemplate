@@ -65,6 +65,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="back &amp; reload" />
+
+        <Button
+            android:id="@+id/btn_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crash" />
     </com.google.android.flexbox.FlexboxLayout>
 
     <FrameLayout
