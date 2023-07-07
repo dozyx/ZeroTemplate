@@ -16,6 +16,13 @@ class NewWebViewTest : BaseTestActivity() {
                 Timber.d("new WebView() start")
                 Timber.d("new WebView() %s", WebView(this@NewWebViewTest).settings.userAgentString)
                 Timber.d("new WebView() end")
+                Timber.d("System.getProperty(\"http.agent\") ${System.getProperty("http.agent")}") // 跟 webview 返回的 user agent 有差异
+            }
+        })
+
+        addAction(object : Action("destroy") {
+            override fun run() {
+                WebView(this@NewWebViewTest).destroy()
             }
         })
     }
