@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_web_view.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import timber.log.Timber
+import java.lang.NullPointerException
 import java.net.URLDecoder
 import java.net.URLEncoder
 
@@ -87,8 +88,18 @@ class WebViewActivity : AppCompatActivity() {
             Timber.d("property: ${System.getProperty("http.agent")}")
         }
         btn_crash.setOnClickListener {
+//            val agentString = WebView(this).settings.userAgentString // 会影响 onRenderProcessGone Crash
+            val userAgent = WebSettings.getDefaultUserAgent(this) // 不会影响 onRenderProcessGone Crash
             webView.loadUrl("chrome://crash")
+            log()
+//            webView.evaluateJavascript(
+//                "javascript:(function() { txt = \"a\"; while(1){ txt += \"a\"; } })();",
+//                null)
         }
+    }
+
+    private fun log() {
+        NullPointerException("1111").printStackTrace()
     }
 
     private fun initView() {
@@ -326,7 +337,8 @@ class WebViewActivity : AppCompatActivity() {
                 detail: RenderProcessGoneDetail?
             ): Boolean {
                 Timber.d("onRenderProcessGone: ")
-                return super.onRenderProcessGone(view, detail)
+                return true
+//                return super.onRenderProcessGone(view, detail)
             }
 
             override fun onReceivedLoginRequest(

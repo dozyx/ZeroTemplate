@@ -14,6 +14,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.blankj.utilcode.util.FileIOUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -970,6 +971,22 @@ public class JavaTest {
         print("is match: " + matcher.matches());
         while (matcher.find()) {
             print(matcher.group());
+        }
+    }
+
+    @Test
+    public void testRegex6() {
+        String html = FileIOUtils.readFile2String("./regextest.txt");
+        Pattern pattern = Pattern.compile("<script type=\"application/json\" data-content-len=\"\\d+\" data-sjs>(\\{.+\\})</script>");
+//        Pattern pattern = Pattern.compile("data-sjs>(\\{\"require\":\\[\\[\"ScheduledServerJSWithCSS\",.*RelayPrefetchedStreamCache.*)</script>");
+//        Pattern pattern = Pattern.compile("\"dash_manifest\":\"(.*?MPD.*?)\",");
+        for (int i = 0; i < 10; i++) {
+            long start = System.currentTimeMillis();
+            Matcher matcher = pattern.matcher(html);
+            if (matcher.find()) {
+                String data = matcher.group(1);
+                print("group count: " + matcher.groupCount() + " & time: " + (System.currentTimeMillis() - start));
+            }
         }
     }
 
