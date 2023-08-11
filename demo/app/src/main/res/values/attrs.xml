@@ -3,6 +3,15 @@
     <attr name="myWidth" format="integer" />
     <declare-styleable name="CustomView">
         <attr name="myWidth" />
-        <attr name="android:width"/>
+        <attr name="android:width" />
     </declare-styleable>
+
+    <attr name="CustomStyleViewStyle" format="reference" />
+
+    <declare-styleable name="CustomStyleView">
+        <attr name="myWidth" />
+        <attr name="custom_style_view_bg2" format="color" />
+        <attr name="custom_style_view_bg" format="color" />
+    </declare-styleable>
+    <attr name="testAttrNotInTheme" format="color" />
 </resources>
