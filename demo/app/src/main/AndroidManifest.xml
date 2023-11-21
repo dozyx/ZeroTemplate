@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="com.android.permission.GET_INSTALLED_APPS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-sdk tools:overrideLibrary="androidx.camera.camera2, androidx.camera.core" />
 
@@ -1574,7 +1575,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".network.okhttp.OkHttpTest"
-            android:label="Netwokr/OkHttp">
+            android:label="Network/OkHttp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TimerTest"
+            android:label="实践/计时">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
