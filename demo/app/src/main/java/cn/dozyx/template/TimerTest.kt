@@ -128,6 +128,19 @@ class TimerTest : BaseTestActivity() {
             }
         })
 
+        addAction(object : Action("delay 测试") {
+            override fun run() {
+                GlobalScope.launch {
+                    // delay 用的是 elapsedRealtime
+                    appendResult("start: ${SystemClock.elapsedRealtime()}")
+                    printDickTime()
+                    delay(30000)
+                    printDickTime()
+                    appendResult("end: ${SystemClock.elapsedRealtime()}")
+                }
+            }
+        })
+
         addAction(object : Action("WorkManager") {
             override fun run() {
                 appendResult("${simpleTimeFormat.format(Date())} add worker")
