@@ -1,10 +1,14 @@
 package cn.dozyx.template.image
 
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
 import cn.dozyx.template.R
 import cn.dozyx.template.base.BaseTestActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,7 +20,10 @@ class GlideTest : BaseTestActivity() {
 
     override fun initActions() {
         addAction("normal"){
-            Glide.with(this).load(PICTURE_URL_3).placeholder(R.drawable.image_loading).into(image_view)
+            Glide.with(this).load(PICTURE_URL_2).placeholder(R.drawable.image_loading).into(ImageTarget(image_view))
+        }
+        addAction("normal1"){
+            Glide.with(this).load(PICTURE_URL).placeholder(R.drawable.image_loading).into(ImageTarget(image_view))
         }
 
         addAction("picasso") {
@@ -42,6 +49,28 @@ class GlideTest : BaseTestActivity() {
                 }
         }
 
+    }
+
+    private class ImageTarget(val iv: ImageView) : CustomTarget<Drawable>() {
+
+        override fun onLoadStarted(placeholder: Drawable?) {
+            super.onLoadStarted(placeholder)
+            Timber.d("ImageTarget.onLoadStarted")
+        }
+
+        override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+            iv.setImageDrawable(resource)
+            Timber.d("ImageTarget.onResourceReady")
+        }
+
+        override fun onLoadCleared(placeholder: Drawable?) {
+            Timber.d("ImageTarget.onLoadCleared")
+        }
+
+        override fun onLoadFailed(errorDrawable: Drawable?) {
+            super.onLoadFailed(errorDrawable)
+            Timber.d("ImageTarget.onLoadFailed")
+        }
     }
 
     companion object {
