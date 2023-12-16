@@ -4,12 +4,16 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import androidx.lifecycle.lifecycleScope
 import cn.dozyx.template.base.Action
 
 import cn.dozyx.template.base.BaseShowResultActivity
 import cn.dozyx.template.base.BaseTestActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ServiceLifeCycleActivity : BaseTestActivity() {
     override fun initActions() {
@@ -51,6 +55,23 @@ class ServiceLifeCycleActivity : BaseTestActivity() {
         addAction(object : Action("start") {
             override fun run() {
                 startService(serviceIntent)
+            }
+        })
+
+        addAction(object : Action("start delay") {
+            override fun run() {
+                lifecycleScope.launch {
+                    delay(5000)
+                    startService(serviceIntent)
+                }
+            }
+        })
+
+        addAction(object : Action("start foreground") {
+            override fun run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(serviceIntent)
+                }
             }
         })
         addAction(object : Action("bind") {

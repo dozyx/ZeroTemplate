@@ -14,7 +14,7 @@ object ClassPath {
 object Android {
     val minSdkVersion = 19
     val minDebugSdkVersion = 21
-    val targetSdkVersion = 23
+    val targetSdkVersion = 28
     val compileSdkVersion = 31
 }
 
