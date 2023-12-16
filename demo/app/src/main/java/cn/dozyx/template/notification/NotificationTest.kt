@@ -1,6 +1,7 @@
 package cn.dozyx.template.notification
 
 import android.app.*
+import android.app.PendingIntent.FLAG_CANCEL_CURRENT
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.PendingIntent.getBroadcast
 import android.content.*
@@ -13,6 +14,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.text.SpannableString
+import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -20,6 +22,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.R
+import cn.dozyx.template.activity.BroadcastDeliverActivity
+import cn.dozyx.template.activity.LaunchModeTest
+import cn.dozyx.template.activity.SplashAdManager
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
 import com.android.internal.util.ContrastColorUtil
@@ -42,6 +47,19 @@ import kotlin.random.Random
  */
 class NotificationTest : BaseTestActivity() {
     private var notificationId = 0
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            ToastUtils.showShort(intent?.action)
+            Timber.d("NotificationTest.onReceive ${intent?.action} ${intent?.extras?.getString(EXTRA_NOTIFICATION_ID)}")
+            if (TextUtils.equals(ACTION_NOTIFICATION_CLICK, intent?.action)) {
+                val targetIntent = Intent(this@NotificationTest, NotificationTest::class.java)
+                targetIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                targetIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(targetIntent)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        deleteChannels()
@@ -51,12 +69,13 @@ class NotificationTest : BaseTestActivity() {
         filter.addAction(ACTION_NOTIFICATION_CLICK)
         filter.addAction(ACTION_NOTIFICATION_DELETE)
 //    filter.addCategory(Intent.CATEGORY_DEFAULT)
-        registerReceiver(object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                ToastUtils.showShort(intent?.action)
-                Timber.d("NotificationTest.onReceive ${intent?.action} ${intent?.extras?.getString(EXTRA_NOTIFICATION_ID)}")
-            }
-        }, filter)
+        registerReceiver(receiver, filter)
+        SplashAdManager.init()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Timber.d("NotificationTest.onNewIntent")
     }
 
     private fun deleteChannels() {
@@ -78,20 +97,7 @@ class NotificationTest : BaseTestActivity() {
         })
 
         testHeadUp()
-
-        addAction(object : Action("intent") {
-            override fun run() {
-                val deleteIntent = Intent(ACTION_NOTIFICATION_DELETE)
-                deleteIntent.putExtra(EXTRA_NOTIFICATION_ID, "测试")
-                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
-                        .setSmallIcon(R.drawable.ic_cat_dog)
-                        .setContentIntent(PendingIntent.getBroadcast(this@NotificationTest, 0, Intent(ACTION_NOTIFICATION_CLICK), FLAG_UPDATE_CURRENT))
-                        .setContentTitle("监听点击")
-                        .setDeleteIntent(getBroadcast(this@NotificationTest, 0, deleteIntent, FLAG_UPDATE_CURRENT))
-                        .setAutoCancel(true)
-                notify(builder)
-            }
-        })
+        testIntent()
 
         addAction(object : Action("enable") {
             override fun run() {
@@ -264,6 +270,38 @@ class NotificationTest : BaseTestActivity() {
             }
         })
 
+
+    }
+
+    private fun testIntent() {
+        addAction(object : Action("intent") {
+            override fun run() {
+                val deleteIntent = Intent(ACTION_NOTIFICATION_DELETE)
+                deleteIntent.putExtra(EXTRA_NOTIFICATION_ID, "测试")
+                val builder = NotificationCompat.Builder(this@NotificationTest, CHANNEL_ID_NORMAL)
+                    .setSmallIcon(R.drawable.ic_cat_dog)
+    //                        .setContentIntent(PendingIntent.getBroadcast(this@NotificationTest, 0, Intent(ACTION_NOTIFICATION_CLICK), FLAG_CANCEL_CURRENT))
+                    .setContentIntent(
+                        PendingIntent.getActivity(
+                            this@NotificationTest,
+                            0,
+                            Intent(this@NotificationTest, BroadcastDeliverActivity::class.java),
+                            FLAG_UPDATE_CURRENT
+                        )
+                    )
+                    .setContentTitle("监听点击")
+                    .setDeleteIntent(
+                        getBroadcast(
+                            this@NotificationTest,
+                            0,
+                            deleteIntent,
+                            FLAG_UPDATE_CURRENT
+                        )
+                    )
+                    .setAutoCancel(true)
+                notify(builder)
+            }
+        })
     }
 
     private val progressId = 3
@@ -664,6 +702,11 @@ class NotificationTest : BaseTestActivity() {
         }
     }
 
+    override fun onDestroy() {
+        unregisterReceiver(receiver)
+        super.onDestroy()
+    }
+
     class CustomStyle : NotificationCompat.Style() {
 
     }
@@ -679,7 +722,7 @@ class NotificationTest : BaseTestActivity() {
 
         private const val CHANNEL_ID_GROUP1 = "group1_channel1"
         private const val CHANNEL_ID_GROUP2 = "group1_channel2"
-        private const val ACTION_NOTIFICATION_CLICK = "cn.dozyx.action.notification"
+        const val ACTION_NOTIFICATION_CLICK = "cn.dozyx.action.notification"
 
         private const val GROUP_KEY_TEST = "cn.dozyx.GROUP_KEY_TEST"
 

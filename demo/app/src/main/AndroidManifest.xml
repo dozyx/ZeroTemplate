@@ -1056,10 +1056,12 @@
         </activity>
         <activity
             android:name=".notification.NotificationTest"
+            android:launchMode="singleTop"
             android:label="通知">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity
@@ -1531,6 +1533,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SplashTest"
+            android:launchMode="singleTop"
             android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1589,6 +1592,8 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.BroadcastDeliverActivity"
+            android:theme="@style/AppTheme.Transparent"/>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>

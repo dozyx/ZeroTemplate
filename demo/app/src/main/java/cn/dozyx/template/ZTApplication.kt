@@ -19,9 +19,11 @@ import okhttp3.internal.platform.Platform
 
 open class ZTApplication : BaseApplication() {
 
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         Log.d("Dozyx", "ZTApplication.attachBaseContext")
+        appContext = base!!
     }
 
     override fun getPackageName(): String {
@@ -97,5 +99,8 @@ open class ZTApplication : BaseApplication() {
 
     companion object {
         private val TAG = "ZTApplication"
+        private lateinit var appContext: Context
+
+        fun getContext() = appContext
     }
 }
