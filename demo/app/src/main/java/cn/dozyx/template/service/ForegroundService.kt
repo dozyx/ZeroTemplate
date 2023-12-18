@@ -18,7 +18,7 @@ class ForegroundService : Service() {
         super.onCreate()
         Timber.d("ForegroundServiceTest.onCreate")
         initSession()
-        startForeground(1000, createNotification())
+        startForeground(1000, createEmptyNotification())
     }
 
     private fun initSession() {
@@ -35,6 +35,12 @@ class ForegroundService : Service() {
             .setContentTitle("标题")
             .setContentText("内容")
             .setStyle(mediaStyle)
+            .build()
+    }
+
+    private fun createEmptyNotification(): Notification {
+        // 不指定通知内容，会显示一个 「"XXX" 正在运行」的通知
+        return NotificationCompat.Builder(this, NotificationManager.CHANNEL_ID_DEFAULT)
             .build()
     }
 
