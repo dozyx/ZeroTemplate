@@ -2,12 +2,16 @@ package cn.dozyx.template.media
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.media.MediaScannerConnection
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.content.FileProvider
+import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.base.BaseTestActivity
 import com.blankj.utilcode.util.FileUtils
 import timber.log.Timber
@@ -41,6 +45,25 @@ class MediaFileTest : BaseTestActivity() {
             Timber.d("mime type: $mimeType")
 //            Log.d(TAG, "rename result: $renameResult")
             scanFile(newPath, mimeType)
+        }
+
+        addAction("player") {
+            val mediaFile = File(Environment.getExternalStorageDirectory(), "test.m4a")
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(
+                    FileProvider.getUriForFile(
+                        this@MediaFileTest,
+                        BuildConfig.APPLICATION_ID + ".FileProvider",
+                        mediaFile
+                    ), "audio/*"
+                )
+//                setPackage("")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            val uri = intent.toUri(Intent.URI_INTENT_SCHEME)
+//            startActivity(intent)
+            startActivity(Intent.parseUri(uri, Intent.URI_INTENT_SCHEME))
+//            startActivity(Intent.parseUri(uri, Intent.URI_INTENT_SCHEME or Intent.URI_ALLOW_UNSAFE))
         }
     }
 
