@@ -19,6 +19,7 @@ class ForegroundService : Service() {
         Timber.d("ForegroundServiceTest.onCreate")
         initSession()
         startForeground(1000, createEmptyNotification())
+//        startForeground(1000, null) // Crash IllegalArgumentException: null notification
     }
 
     private fun initSession() {
