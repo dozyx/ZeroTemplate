@@ -20,6 +20,7 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleService
 import cn.dozyx.template.BuildConfig
 import cn.dozyx.template.R
 import cn.dozyx.template.activity.BroadcastDeliverActivity
@@ -27,6 +28,7 @@ import cn.dozyx.template.activity.LaunchModeTest
 import cn.dozyx.template.activity.SplashAdManager
 import cn.dozyx.template.base.Action
 import cn.dozyx.template.base.BaseTestActivity
+import cn.dozyx.template.service.SimpleService
 import com.android.internal.util.ContrastColorUtil
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.IntentUtils
@@ -70,7 +72,7 @@ class NotificationTest : BaseTestActivity() {
         filter.addAction(ACTION_NOTIFICATION_DELETE)
 //    filter.addCategory(Intent.CATEGORY_DEFAULT)
         registerReceiver(receiver, filter)
-        SplashAdManager.init()
+//        SplashAdManager.init()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -620,7 +622,8 @@ class NotificationTest : BaseTestActivity() {
     }
 
     private fun createPendingIntent(): PendingIntent {
-        return createPendingIntent(FLAG_UPDATE_CURRENT)
+//        return createPendingIntent(FLAG_UPDATE_CURRENT)
+        return createPendingService(FLAG_UPDATE_CURRENT)
     }
 
     private fun createPendingIntent(flag: Int): PendingIntent {
@@ -628,6 +631,12 @@ class NotificationTest : BaseTestActivity() {
         intent.data = Uri.parse("https://www.baidu.com")
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return PendingIntent.getActivity(this@NotificationTest, 0,
+                intent, flag)
+    }
+
+    private fun createPendingService(flag: Int): PendingIntent {
+        val intent = Intent(this, SimpleService::class.java)
+        return PendingIntent.getService(this@NotificationTest, 0,
                 intent, flag)
     }
 

@@ -8,6 +8,8 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
+import cn.dozyx.template.notification.NotificationTest;
+
 public class MyService extends Service {
     private static final String TAG = "MyService";
 
@@ -43,6 +45,7 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+//        startActivity(new Intent(this, NotificationTest.class));
     }
 
     @Override
