@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
+import cn.dozyx.template.MainActivity
+import cn.dozyx.template.notification.NotificationTest
 
 class SimpleService : Service() {
 
@@ -22,6 +24,9 @@ class SimpleService : Service() {
     override fun onCreate() {
         Log.d(TAG, "onCreate: ")
         super.onCreate()
+//        startActivity(Intent(this, MainActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//        })
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
