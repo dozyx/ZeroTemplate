@@ -64,6 +64,15 @@ class BroadcastTest : BaseTestActivity() {
                 finish()
             }
         })
+        addAction(object : Action("empty receiver") {
+            override fun run() {
+                sendBroadcast(
+                    Intent(
+                        this@BroadcastTest,
+                        NoFilterReceiver::class.java
+                    ).apply { action = "test11111" })
+            }
+        })
     }
 
     override fun onDestroy() {
