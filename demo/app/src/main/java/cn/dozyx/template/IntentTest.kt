@@ -1,9 +1,12 @@
 package cn.dozyx.template
 
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.PowerManager
+import android.provider.Settings
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -174,6 +177,19 @@ class IntentTest : BaseTestActivity() {
                     NotificationManagerCompat.from(this).notify(1, it.build())
                 }
 
+        }
+        addAction("电池白名单") {
+            // 可能影响 GP 上架
+            // 需要声明权限才能跳转 <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+            val intent = Intent()
+            val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+            if (pm.isIgnoringBatteryOptimizations(packageName)) {
+                intent.action = Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
+            } else {
+                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                intent.data = Uri.parse("package:${packageName}")
+            }
+            startActivity(intent)
         }
         editFragment = EditFragment()
         addFragment(editFragment)
