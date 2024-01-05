@@ -1594,8 +1594,17 @@
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BroadcastDeliverActivity"
-            android:theme="@style/AppTheme.Transparent"/>
+        <activity
+            android:name=".activity.BroadcastDeliverActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".intent.PendingIntentTest"
+            android:label="Intent/Pending">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".AlarmBroadcast">
             <intent-filter>
