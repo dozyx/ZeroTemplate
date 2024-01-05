@@ -128,6 +128,13 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testNaN(){
+//        int a = 1 / 0;// ArithmeticException
+        print(new Float(0.0 / 0.0).isNaN());// true
+        print(new Float(1.0 / 0.0).isNaN());// false
+    }
+
+    @Test
     public void testSpecialChar(){
         String title = "\uD835\uDC73\uD835\uDC86\uD835\uDC95'\uD835\uDC94 \uD835\uDC6E\uD835\uDC86\uD835\uDC95 \uD835\uDC73\uD835\uDC90\uD835\uDC96\uD835\uDC85 - \uD835\uDC6A\uD835\uDC89\uD835\uDC82-\uD835\uDC6A\uD835\uDC89\uD835\uDC82 (\uD835\uDC69\uD835\uDC82\uD835\uDC8D\uD835\uDC8D\uD835\uDC93\uD835\uDC90\uD835\uDC90\uD835\uDC8E - \uD835\uDC73\uD835\uDC82\uD835\uDC95\uD835\uDC8A\uD835\uDC8F \uD835\uDC7A\uD835\uDC95\uD835\uDC9A\uD835\uDC8D\uD835\uDC86)";
 //        String title = "\uD835\uDC73\uD835\uDC86\uD835\uDC95'";
