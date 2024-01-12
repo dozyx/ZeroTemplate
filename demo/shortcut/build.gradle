@@ -2,8 +2,8 @@ apply from: "${rootDir}/buildApp.gradle"
 
 
 dependencies {
-    implementation Deps.appcompat
-    implementation Deps.constraintLayout
-    implementation Deps.material
+    implementation libs.appcompat
+    implementation libs.constraintLayout
+    implementation libs.material
     implementation project(':core')
 }

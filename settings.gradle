@@ -23,6 +23,7 @@ rootProject.children.each { p ->
         project.name = project.path.substring(1).replace(':', '-')
     }
 }
+//enableFeaturePreview("VERSION_CATALOGS")//  gradle 低于 7.3 需要使用此方法开启
 include ':demo:shortcut'
 include ':dependencyone'
 include ':dependencytwo'

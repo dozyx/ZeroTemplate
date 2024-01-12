@@ -2,8 +2,8 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Deps.autoService
-    implementation Deps.javaPoet
+    implementation libs.autoService
+    implementation libs.javaPoet
 }
 
 sourceCompatibility = "7"

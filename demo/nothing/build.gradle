@@ -45,62 +45,62 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':core')
     implementation project(':ui')
-    implementation DepsRxBinding.base
-    implementation Deps.appcompat
-    implementation Deps.constraintLayout
-    implementation Deps.recyclerview
-    implementation DepsButterKnife.runtime
+    implementation libs.rxbinding.base
+    implementation libs.appcompat
+    implementation libs.constraintLayout
+    implementation libs.recyclerview
+    implementation libs.butterknife.runtime
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    kapt DepsButterKnife.processor
-    implementation DepsPermissionsDispatcher.runtime
-    annotationProcessor DepsPermissionsDispatcher.processor
-    implementation DepsDagger.runtime
-    kapt DepsDagger.runtime
-    implementation Deps.gson
-    implementation Deps.legacySupportV4
-    implementation Deps.lifecycle
-    implementation DepsRetrofit.runtime
-    implementation Deps.kotlin
-    implementation Deps.material
-    implementation Deps.rxpermissions
-    implementation Deps.annotations
-    implementation Deps.mmkv
-    debugImplementation Deps.debugDb
-    implementation Deps.background
-    implementation Deps.timber
-    implementation Deps.logger
-    implementation Deps.flexbox
-    implementation Deps.gridlayout
-    implementation Deps.immersionbar
-    debugImplementation DepsHyperion.debugCore
-    releaseImplementation DepsHyperion.releaseCore
-    debugImplementation DepsHyperion.debugAttr
-    debugImplementation DepsHyperion.debugMeasurement
-    debugImplementation DepsHyperion.debugDisk
-    debugImplementation DepsHyperion.debugRecorder
-    debugImplementation DepsHyperion.debugPhoenix
-    debugImplementation DepsHyperion.debugCrash
-    debugImplementation DepsHyperion.debugSP
-    debugImplementation DepsHyperion.debugGeigerCounter
-    debugImplementation DepsHyperion.debugTimber
-    debugImplementation DepsHyperion.debugbuildConfig
-    debugImplementation DepsHyperion.debugAppInfo
-    implementation Deps.threeten
-    implementation Deps.convenientBanner
-    implementation DepsGlide.runtime
-    implementation Deps.adapterHelper
-    annotationProcessor DepsGlide.processor
-    implementation Deps.javaPoet
+    kapt libs.butterknife.processor
+    implementation libs.permissionsdispatcher.runtime
+    annotationProcessor libs.permissionsdispatcher.processor
+    implementation libs.dagger.runtime
+    kapt libs.dagger.runtime
+    implementation libs.gson
+    implementation libs.legacySupportV4
+    implementation libs.lifecycle
+    implementation libs.retrofit.runtime
+    implementation libs.kotlin
+    implementation libs.material
+    implementation libs.rxpermissions
+    implementation libs.annotations
+    implementation libs.mmkv
+    debugImplementation libs.debugDb
+    implementation libs.background
+    implementation libs.timber
+    implementation libs.logger
+    implementation libs.flexbox
+    implementation libs.gridlayout
+    implementation libs.immersionbar
+    debugImplementation libs.hyperion.debugCore
+    releaseImplementation libs.hyperion.releaseCore
+    debugImplementation libs.hyperion.debugAttr
+    debugImplementation libs.hyperion.debugMeasurement
+    debugImplementation libs.hyperion.debugDisk
+    debugImplementation libs.hyperion.debugRecorder
+    debugImplementation libs.hyperion.debugPhoenix
+    debugImplementation libs.hyperion.debugCrash
+    debugImplementation libs.hyperion.debugSP
+    debugImplementation libs.hyperion.debugGeigerCounter
+    debugImplementation libs.hyperion.debugTimber
+    debugImplementation libs.hyperion.debugbuildConfig
+    debugImplementation libs.hyperion.debugAppInfo
+    implementation libs.threeten
+    implementation libs.convenientBanner
+    implementation libs.glide.runtime
+    implementation libs.adapterHelper
+    annotationProcessor libs.glide.processor
+    implementation libs.javaPoet
     implementation project(':butterknife-annotations')
     kapt project(':butterknife-compiler')
     implementation project(':autobuilder')
     annotationProcessor project(':autobuilder')
-    implementation Deps.circleImageView
-    implementation Deps.multidex
-    implementation Deps.rxjava3
-    implementation Deps.rxjava1
-    implementation DepsRetrofit.rxjava3Adapter
+    implementation libs.circleImageView
+    implementation libs.multidex
+    implementation libs.rxjava3
+    implementation libs.rxjava1
+    implementation libs.retrofit.rxjava3Adapter
 //    implementation ("com.github.bumptech.glide:okhttp3-integration:4.10.0"){
 //        exclude group: "com.squareup.okhttp3", module: "okhttp"
 //    }

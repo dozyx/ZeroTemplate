@@ -34,14 +34,14 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(":ui")
-    implementation Deps.kotlin
-    implementation Deps.appcompat
-    implementation Deps.material
-    implementation Deps.legacySupportV4
-    implementation Deps.constraintLayout
-    implementation Deps.vectordrawable
-    implementation DepsNavigation.fragment
-    implementation DepsNavigation.ui
-    implementation DepsNavigation.fragmentKtx
-    implementation DepsNavigation.uiKtx
+    implementation libs.kotlin
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.legacySupportV4
+    implementation libs.constraintLayout
+    implementation libs.vectordrawable
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+    implementation libs.navigation.fragmentKtx
+    implementation libs.navigation.uiKtx
 }

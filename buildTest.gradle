@@ -1,7 +1,7 @@
 dependencies {
-    testImplementation DepsTest.junit
-    androidTestImplementation DepsTest.testRunner
-    androidTestImplementation DepsTest.rules
-    androidTestImplementation DepsTest.junitExt
-    androidTestImplementation DepsTest.espresso
+    testImplementation libs.test.junit
+    androidTestImplementation libs.test.testRunner
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.test.junitExt
+    androidTestImplementation libs.test.espresso
 }

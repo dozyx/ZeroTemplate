@@ -63,81 +63,81 @@ dependencies {
     implementation project(':model')
     implementation project(':core')
     implementation project(':ui')
-    implementation Deps.constraintLayout
-    implementation Deps.legacySupportV4
-    implementation Deps.appcompat
-    implementation DepsButterKnife.runtime
+    implementation libs.constraintLayout
+    implementation libs.legacySupportV4
+    implementation libs.appcompat
+    implementation libs.butterknife.runtime
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     implementation 'androidx.work:work-rxjava2:2.7.1'
-    annotationProcessor DepsButterKnife.processor
-    implementation Deps.percentlayout
-    implementation Deps.universalImageLoader
-    implementation Deps.material
-    implementation Deps.volley
-    implementation DepsOkHttp.runtime
-    implementation DepsOkHttp.logging
-    implementation DepsRetrofit.runtime
-    implementation DepsRetrofit.gson
-    implementation DepsRetrofit.rxjavaAdapter
-    implementation DepsRetrofit.rxjava3Adapter
-    implementation Deps.rxjava2
-    implementation DepsEventBus.core
-    annotationProcessor DepsEventBus.processor
-    implementation Deps.kotlin
-    implementation Deps.lifecycle
-    implementation Deps.annotations
-    implementation Deps.flexbox
-    implementation DepsDagger.runtime
-    annotationProcessor DepsDagger.processor
-    implementation Deps.mpAndroidChart
-    implementation DepsRxLifecycle.android
-    implementation Deps.barUtil
-    implementation Deps.utilcode
-    implementation Deps.rxpermissions
-    kapt DepsRoom.processor
-    implementation DepsRoom.runtime
-    implementation DepsRoom.rxjava2
-    implementation Deps.stetho
-    implementation DepsCamera.camera2
-    implementation Deps.picasso
-    implementation Deps.timber
-    implementation DepsRetrofit.scalars
-    implementation Deps.material
-    implementation Deps.adapterHelper
-    implementation Deps.calligraphy
-    implementation Deps.viewpump
-    implementation DepsGlide.runtime
-    implementation DepsPaging.runtime
-    implementation DepsPaging.rxjava2
-    implementation Deps.immersionbar
+    annotationProcessor libs.butterknife.processor
+    implementation libs.percentlayout
+    implementation libs.universalImageLoader
+    implementation libs.material
+    implementation libs.volley
+    implementation libs.okhttp.runtime
+    implementation libs.okhttp.logging
+    implementation libs.retrofit.runtime
+    implementation libs.retrofit.gson
+    implementation libs.retrofit.rxjavaAdapter
+    implementation libs.retrofit.rxjava3Adapter
+    implementation libs.rxjava2
+    implementation libs.eventbus.core
+    annotationProcessor libs.eventbus.processor
+    implementation libs.kotlin
+    implementation libs.lifecycle
+    implementation libs.annotations
+    implementation libs.flexbox
+    implementation libs.dagger.runtime
+    annotationProcessor libs.dagger.processor
+    implementation libs.mpAndroidChart
+    implementation libs.rxlifecycle.android
+    implementation libs.barUtil
+    implementation libs.utilcode
+    implementation libs.rxpermissions
+    kapt libs.room.processor
+    implementation libs.room.runtime
+    implementation libs.room.rxjava2
+    implementation libs.stetho
+    implementation libs.camera.camera2
+    implementation libs.picasso
+    implementation libs.timber
+    implementation libs.retrofit.scalars
+    implementation libs.material
+    implementation libs.adapterHelper
+    implementation libs.calligraphy
+    implementation libs.viewpump
+    implementation libs.glide.runtime
+    implementation libs.paging.runtime
+    implementation libs.paging.rxjava2
+    implementation libs.immersionbar
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
-    implementation Deps.circleImageView
-    implementation Deps.greendao
-    implementation Deps.startup
-    implementation Deps.tracing
+    implementation libs.circleImageView
+    implementation libs.greendao
+    implementation libs.startup
+    implementation libs.tracing
     compile 'com.google.firebase:perf-plugin:1.4.0'
 //    compile 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 //    compileOnly 'com.android.tools.build:gradle:3.6.1' // 一样会导致运行报错，暂时没找原因 The given artifact contains a string literal with a package reference 'android.support.design.widget' that cannot be safely rewritten.
 //    compile 'com.android.tools.build:gradle:3.5.2'// 这个版本跟 androidx 冲突，会导致项目没办法运行，但 sync 正常。。。
-    implementation Deps.exoplayer
-    implementation DepsExoPlayer.okhttp
-    implementation Deps.core_ktx
-    implementation Deps.lottie
-    implementation Deps.process_phoenix
-    implementation Deps.gp_auth
-    implementation Deps.tooltip
-    implementation Deps.materialprogressbar
-    implementation Deps.notchScreenTool
-    implementation Deps.rxjava3
-    implementation Deps.androix_media
-    implementation AndroidX.activity
-    debugImplementation ("${DepsDoraemonKit.dokitx}"){
+    implementation libs.exoplayer
+    implementation libs.exoplayer.okhttp
+    implementation libs.core.ktx
+    implementation libs.lottie
+    implementation libs.process.phoenix
+    implementation libs.gp.auth
+    implementation libs.tooltip
+    implementation libs.materialprogressbar
+    implementation libs.notchScreenTool
+    implementation libs.rxjava3
+    implementation libs.androix.media
+    implementation libs.androidx.activity
+    debugImplementation(libs.doraemonkit.dokitx) {
         exclude group: 'com.blankj'
     }
-    releaseImplementation DepsDoraemonKit.dokitx_no_op
-    debugImplementation DepsFlipper.flipper
-    debugImplementation DepsFlipper.soloader
-    releaseImplementation DepsFlipper.flipper_noop
+    releaseImplementation libs.doraemonkit.dokitxnoop
+    debugImplementation libs.flipper.flipper
+    debugImplementation libs.flipper.soloader
+    releaseImplementation libs.flipper.flipper.noop
 
     // 设置了 bom 之后，Firebase 其他模块不需要指定版本
     implementation platform('com.google.firebase:firebase-bom:28.1.0')

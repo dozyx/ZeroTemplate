@@ -8,7 +8,7 @@ import org.gradle.api.invocation.Gradle
 
 class MyConfigUtils {
     static addBuildListener(Gradle g) {
-        g.addBuildListener(new BuildListener() {
+        /*g.addBuildListener(new BuildListener() {
             @Override
             void buildStarted(Gradle gradle) {
                 GLog.d("buildStarted")
@@ -46,6 +46,6 @@ class MyConfigUtils {
             void buildFinished(BuildResult buildResult) {
                 GLog.d("buildFinished")
             }
-        })
+        })*/
     }
 }

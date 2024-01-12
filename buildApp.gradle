@@ -8,10 +8,10 @@ apply from: "$project.rootDir/buildTest.gradle"
 configSigning project
 
 android {
-    compileSdkVersion Android.compileSdkVersion
+    compileSdkVersion 31
     defaultConfig {
-        minSdkVersion Android.minSdkVersion
-        targetSdkVersion Android.targetSdkVersion
+        minSdkVersion 19
+        targetSdkVersion 28
         applicationId "cn.dozyx.${getSuffix()}"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -49,10 +49,10 @@ android {
 
 
 dependencies {
-    debugImplementation DepsLeakCanary.debug
-    debugImplementation DepsLeakCanary.debugSupportFragment
-    releaseImplementation DepsLeakCanary.release
-    implementation Deps.multidex
+    debugImplementation libs.leakcanary.debug
+    debugImplementation libs.leakcanary.debugSupportFragment
+    releaseImplementation libs.leakcanary.release
+    implementation libs.multidex
 }
 
 private String getSuffix() {

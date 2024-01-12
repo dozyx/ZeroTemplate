@@ -4,9 +4,9 @@ apply from: "$project.rootDir/buildKotlin.gradle"
 apply from: "$project.rootDir/buildTest.gradle"
 
 android {
-    compileSdkVersion Android.compileSdkVersion
+    compileSdkVersion 31
     defaultConfig {
-        minSdkVersion Android.minSdkVersion
+        minSdkVersion 19
         consumerProguardFiles 'consumer-rules.pro'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -26,10 +26,10 @@ android {
 
 
 dependencies {
-    debugImplementation DepsLeakCanary.debug
-    debugImplementation DepsLeakCanary.debugSupportFragment
-    releaseImplementation DepsLeakCanary.release
-    implementation Deps.multidex
+    debugImplementation libs.leakcanary.debug
+    debugImplementation libs.leakcanary.debugSupportFragment
+    releaseImplementation libs.leakcanary.release
+    implementation libs.multidex
 }
 
 afterEvaluate {

@@ -28,10 +28,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation Deps.appcompat
-    implementation Deps.constraintLayout
-    implementation Deps.dagger
-    implementation Deps.daggerAndroid
-    kapt DepsDagger.processor
-    kapt DepsDagger.androidProcessor
+    implementation libs.appcompat
+    implementation libs.constraintLayout
+    implementation libs.dagger
+    implementation libs.daggerAndroid
+    kapt libs.dagger.processor
+    kapt libs.dagger.androidProcessor
 }

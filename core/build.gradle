@@ -10,20 +10,20 @@ android {
 }
 
 dependencies {
-    api DepsOkHttp.runtime
-    api DepsRetrofit.runtime
-    api DepsRetrofit.gson
-    api Deps.utilcode
-    api Deps.constraintLayout
-    api Deps.kotlin
-    api Deps.timber
-    api Deps.recyclerview
-    implementation Deps.appcompat
-    implementation Deps.logger
-    implementation Deps.rxjava2
-    implementation Deps.rxAndroid
-    implementation DepsRetrofit.rxjavaAdapter
-    implementation DepsOkHttp.logging
-    implementation DepsRxBinding.base
-    implementation Deps.greendao
+    api libs.okhttp.runtime
+    api libs.retrofit.runtime
+    api libs.retrofit.gson
+    api libs.utilcode
+    api libs.constraintLayout
+    api libs.kotlin
+    api libs.timber
+    api libs.recyclerview
+    implementation libs.appcompat
+    implementation libs.logger
+    implementation libs.rxjava2
+    implementation libs.rx.android
+    implementation libs.retrofit.rxjavaAdapter
+    implementation libs.okhttp.logging
+    implementation libs.rxbinding.base
+    implementation libs.greendao
 }

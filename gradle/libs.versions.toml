@@ -1,0 +1,274 @@
+# 这个文件变更也会提示 gradle sync
+# 命名规则：versions 使用小驼峰命名；libraries 使用 - 作为分隔符
+# 参考：https://github.com/android/nowinandroid/blob/main/gradle/libs.versions.toml
+[versions]
+# version 别名规则：[a-z]([a-zA-Z0-9_.\-])+ 在外部访问时下划线要被替换为 .
+appcompat = "1.3.0"
+legacySupportV4 = "1.0.0"
+kotlinVersion = "1.3.31"
+kotlinGradlePlugin = "1.5.21"
+androidGradleVersion = "3.6.1"
+picasso = "2.71828"
+threeten = "1.2.1"
+leakcanary = "1.6.3"
+dagger = "2.28"
+retrofit = "2.9.0"
+junit = "4.12"
+junit_ext = "1.1.1"
+stickylistheaders = "2.7.0"
+photoView = "1.2.4"
+sectorProgressView = "2.0.0"
+picVkerview = "2.0.8"
+universalImageLoader = "1.9.5"
+bugly = "2.6.6.1"
+bugly_native = "3.3.1"
+bugly_symtabfile_uploader = "2.1.2"
+async_http = "1.4.9"
+ucrop = "1.5.0"
+bga_refresh_layout = "1.1.8"
+okhttp = "4.9.1"
+butterknife = "10.1.0"
+support = "1.0.0"
+constraintLayout = "2.0.4"
+multidex = "2.0.1"
+convenient_banner = "2.1.5"
+loop_view = "0.1.2"
+eventbus = "3.1.1"
+fragmentation = "1.3.3"
+fresco = "1.5.0"
+weibo = "1.0.0"
+greendao = "3.3.0"
+lifecycle = "2.0.0"
+android_gradle_plugin = "3.4.1"
+gradle_versions_plugin = "0.20.0"
+tencent_xinge = "3.2.3-release"
+#信鸽依赖
+tencent_wup = "1.0.0.E-release"
+#信鸽、腾讯统计依赖
+tencent_mid = "4.0.6-release"
+#腾讯统计
+tencent_mta = "3.3.1-release"
+volley = "1.1.1"
+rxjava1 = "1.2.1"
+rxjava2 = "2.2.16"
+rxjava3 = "3.0.12"
+kotlin = "1.3.50"
+core_ktx = "1.3.2"
+permissionsdispatcher = "3.0.1"
+gson = "2.8.5"
+testRunner = "1.1.0"
+espresso = "3.1.1"
+timber = "4.7.1"
+logger = "2.2.0"
+rxpermissions = "0.10.2"
+utilcode = "1.30.5"
+flexbox = "1.1.0"
+mmkv = "1.0.18"
+# 数据库/SharedPreference 调试库，可直接在网页上查看保存的数据。https://github.com/amitshekhariitbhu/Android-Debug-Database
+debugDb = "1.0.6"
+mpAndroidChart = "v3.1.0"
+rx_lifecycle = "3.0.0"
+rxAndroid = "2.1.1"
+barUtil = "1.5.1"
+rxjava_adapter = "2.5.0"
+background = "1.5.6"
+androiddevmetrics = "0.6"
+koin = "1.0.2"
+material = "1.3.0"
+rxbinding = "3.1.0"
+annotations = "17.0.0"
+navigation = "2.5.3"
+paging = "2.1.0"
+immersionbar = "3.2.2"
+room = "2.2.5"
+stetho = "1.5.1"
+camerax = "1.0.0-beta03"
+percentlayout = "1.0.0"
+vectordrawable = "1.0.1"
+recyclerview = "1.2.1"
+gridlayout = "1.0.0"
+hyperion = "0.9.27"
+glide = "4.10.0"
+adapter_helper = "3.0.6"
+calligraphy = "3.1.1"
+viewpump = "2.0.3"
+auto_service = "1.0-rc6"
+java_poet = "1.12.1"
+circle_image = "3.1.0"
+startup = "1.0.0-alpha02"
+tracing = "1.0.0-beta01"
+exoplayer = "2.12.1"
+lottie = "3.5.0"
+process_phoenix = "2.0.0"
+gp_auth = "19.0.0"
+tooltip = "2.0.4"
+materialprogressbar = "1.6.1"
+notchScreenTool = "0.0.1"
+doraemonkit = "3.3.5"
+flipper = "0.85.0"
+soloader = "0.10.1"
+androidx_activity = "1.2.3"
+andResGuard = "1.2.21"
+androidx_media = "1.6.0"
+
+[libraries]
+classpath-androidGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradleVersion" }
+classpath-kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+classpath-greendao = { module = "org.greenrobot:greendao-gradle-plugin", version.ref = "greendao" }
+classpath-andResGuard = { module = "com.tencent.mm:AndResGuard-gradle-plugin", version.ref = "andResGuard" }
+
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+threeten = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threeten" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+daggerAndroid = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
+constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+percentlayout = { module = "androidx.percentlayout:percentlayout", version.ref = "percentlayout" }
+universalImageLoader = { module = "com.nostra13.universalimageloader:universal-image-loader", version.ref = "universalImageLoader" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+rxjava1 = { module = "io.reactivex:rxjava", version.ref = "rxjava1" }
+rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava2" }
+rxjava3 = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava3" }
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
+lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle" }
+annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
+flexbox = { module = "com.google.android:flexbox", version.ref = "flexbox" }
+mpAndroidChart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpAndroidChart" }
+barUtil = { module = "com.jaeger.statusbarutil:library", version.ref = "barUtil" }
+utilcode = { module = "com.blankj:utilcode", version.ref = "utilcode" }
+rxpermissions = { module = "com.github.tbruyelle:rxpermissions", version.ref = "rxpermissions" }
+stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+legacySupportV4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportV4" }
+logger = { module = "com.orhanobut:logger", version.ref = "logger" }
+rx-android = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxAndroid" }
+vectordrawable = { module = "androidx.vectordrawable:vectordrawable", version.ref = "vectordrawable" }
+recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+mmkv = { module = "com.tencent:mmkv", version.ref = "mmkv" }
+debugDb = { module = "com.amitshekhar.android:debug-db", version.ref = "debugDb" }
+background = { module = "com.noober.background:core", version.ref = "background" }
+gridlayout = { module = "androidx.gridlayout:gridlayout", version.ref = "gridlayout" }
+immersionbar = { module = "com.geyifeng.immersionbar:immersionbar", version.ref = "immersionbar" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+convenientBanner = { module = "com.bigkoo:convenientbanner", version.ref = "convenient_banner" }
+adapterHelper = { module = "com.github.CymChad:BaseRecyclerViewAdapterHelper", version.ref = "adapter_helper" }
+calligraphy = { module = "io.github.inflationx:calligraphy3", version.ref = "calligraphy" }
+viewpump = { module = "io.github.inflationx:viewpump", version.ref = "viewpump" }
+autoService = { module = "com.google.auto.service:auto-service", version.ref = "auto_service" }
+javaPoet = { module = "com.squareup:javapoet", version.ref = "java_poet" }
+multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+circleImageView = { module = "de.hdodenhof:circleimageview", version.ref = "circle_image" }
+greendao = { module = "org.greenrobot:greendao", version.ref = "greendao" }
+startup = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
+tracing = { module = "androidx.tracing:tracing-ktx", version.ref = "tracing" }
+exoplayer = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayer" }
+core_ktx = { module = "androidx.core:core-ktx", version.ref = "core_ktx" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+process_phoenix = { module = "com.jakewharton:process-phoenix", version.ref = "process_phoenix" }
+gp_auth = { module = "com.google.android.gms:play-services-auth", version.ref = "gp_auth" }
+tooltip = { module = "com.github.sephiroth74:android-target-tooltip", version.ref = "tooltip" }
+materialprogressbar = { module = "me.zhanghai.android.materialprogressbar:library", version.ref = "materialprogressbar" }
+notchScreenTool = { module = "com.github.smarxpan:NotchScreenTool", version.ref = "notchScreenTool" }
+androix_media = { module = "androidx.media:media", version.ref = "androidx_media" }
+
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx_activity" }
+
+eventbus-core = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+eventbus-processor = { module = "org.greenrobot:eventbus-annotation-processor", version.ref = "eventbus" }
+
+hyperion-debugCore = { module = "com.willowtreeapps.hyperion:hyperion-core", version.ref = "hyperion" }
+hyperion-releaseCore = { module = "com.willowtreeapps.hyperion:hyperion-core-no-op", version.ref = "hyperion" }
+hyperion-debugAttr = { module = "com.willowtreeapps.hyperion:hyperion-attr", version.ref = "hyperion" }
+hyperion-debugMeasurement = { module = "com.willowtreeapps.hyperion:hyperion-measurement", version.ref = "hyperion" }
+hyperion-debugDisk = { module = "com.willowtreeapps.hyperion:hyperion-disk", version.ref = "hyperion" }
+hyperion-debugRecorder = { module = "com.willowtreeapps.hyperion:hyperion-recorder", version.ref = "hyperion" }
+hyperion-debugPhoenix = { module = "com.willowtreeapps.hyperion:hyperion-phoenix", version.ref = "hyperion" }
+hyperion-debugCrash = { module = "com.willowtreeapps.hyperion:hyperion-crash", version.ref = "hyperion" }
+hyperion-debugSP = { module = "com.willowtreeapps.hyperion:hyperion-shared-preferences", version.ref = "hyperion" }
+hyperion-debugGeigerCounter = { module = "com.willowtreeapps.hyperion:hyperion-geiger-counter", version.ref = "hyperion" }
+hyperion-debugTimber = { module = "com.willowtreeapps.hyperion:hyperion-timber", version.ref = "hyperion" }
+hyperion-debugbuildConfig = { module = "com.willowtreeapps.hyperion:hyperion-build-config", version.ref = "hyperion" }
+hyperion-debugAppInfo = "com.star_zero:hyperion-appinfo:1.0.0"
+
+rxbinding-base = { module = "com.jakewharton.rxbinding3:rxbinding", version.ref = "rxbinding" }
+rxbinding-core = { module = "com.jakewharton.rxbinding3:rxbinding-core", version.ref = "rxbinding" }
+rxbinding-appcompat = { module = "com.jakewharton.rxbinding3:rxbinding-appcompat", version.ref = "rxbinding" }
+rxbinding-drawerlayout = { module = "com.jakewharton.rxbinding3:rxbinding-drawerlayout", version.ref = "rxbinding" }
+rxbinding-leanback = { module = "com.jakewharton.rxbinding3:rxbinding-leanback", version.ref = "rxbinding" }
+rxbinding-recyclerview = { module = "com.jakewharton.rxbinding3:rxbinding-recyclerview", version.ref = "rxbinding" }
+rxbinding-slidingpanelayout = { module = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout", version.ref = "rxbinding" }
+rxbinding-swiperefreshlayout = { module = "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout", version.ref = "rxbinding" }
+rxbinding-viewpager = { module = "com.jakewharton.rxbinding3:rxbinding-viewpager", version.ref = "rxbinding" }
+rxbinding-material = { module = "com.jakewharton.rxbinding3:rxbinding-material", version.ref = "rxbinding" }
+
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-processor = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
+room-guava = { module = "androidx.room:room-guava", version.ref = "room" }
+room-test = { module = "androidx.room:room-testing", version.ref = "room" }
+
+camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
+camera-view = "androidx.camera:camera-view:1.0.0-alpha10"
+camera-lifeCycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
+camera-extensions = "androidx.camera:camera-extensions:1.0.0-alpha10"
+
+rxlifecycle-android = { module = "com.trello.rxlifecycle3:rxlifecycle-android", version.ref = "rx_lifecycle" }
+rxlifecycle-components = { module = "com.trello.rxlifecycle3:rxlifecycle-components", version.ref = "rx_lifecycle" }
+rxlifecycle-preference = { module = "com.trello.rxlifecycle3:rxlifecycle-components-preference", version.ref = "rx_lifecycle" }
+rxlifecycle-androidLifecycle = { module = "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle", version.ref = "rx_lifecycle" }
+
+butterknife-runtime = { module = "com.jakewharton:butterknife", version.ref = "butterknife" }
+butterknife-processor = { module = "com.jakewharton:butterknife-compiler", version.ref = "butterknife" }
+
+glide-runtime = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-processor = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+
+dagger-runtime = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-processor = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-androidProcessor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
+
+permissionsdispatcher-runtime = { module = "com.github.hotchemi:permissionsdispatcher", version.ref = "permissionsdispatcher" }
+permissionsdispatcher-processor = { module = "com.github.hotchemi:permissionsdispatcher-processor", version.ref = "permissionsdispatcher" }
+
+okhttp-runtime = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+
+test-junit = { module = "junit:junit", version.ref = "junit" }
+test-junitExt = { module = "androidx.test.ext:junit", version.ref = "junit_ext" }
+test-testRunner = { module = "androidx.test:runner", version.ref = "testRunner" }
+test-rules = { module = "androidx.test:rules", version.ref = "testRunner" }
+test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+
+retrofit-runtime = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
+retrofit-rxjavaAdapter = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit" }
+retrofit-rxjava3Adapter = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
+
+leakcanary-debug = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
+leakcanary-release = { module = "com.squareup.leakcanary:leakcanary-android-no-op", version.ref = "leakcanary" }
+leakcanary-debugSupportFragment = { module = "com.squareup.leakcanary:leakcanary-support-fragment", version.ref = "leakcanary" }
+
+navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigation" }
+navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigation" }
+navigation-fragmentKtx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-uiKtx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+paging-rxjava2 = { module = "androidx.paging:paging-rxjava2", version.ref = "paging" }
+paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
+
+exoplayer-okhttp = { module = "com.google.android.exoplayer:extension-okhttp", version.ref = "exoplayer" }
+
+doraemonkit-dokitx = { module = "com.didichuxing.doraemonkit:dokitx", version.ref = "doraemonkit" }
+doraemonkit-dokitxnoop = { module = "com.didichuxing.doraemonkit:dokitx-no-op", version.ref = "doraemonkit" }
+
+flipper-flipper = { module = "com.facebook.flipper:flipper", version.ref = "flipper" }
+flipper-flipper-noop = { module = "com.facebook.flipper:flipper-noop", version.ref = "flipper" }
+flipper-soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
+
+[bundles]
+
+[plugins]

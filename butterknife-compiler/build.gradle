@@ -3,9 +3,9 @@ apply plugin: 'java-library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':butterknife-annotations')
-    implementation Deps.javaPoet
-    implementation Deps.autoService
-    annotationProcessor Deps.autoService
+    implementation libs.javaPoet
+    implementation libs.autoService
+    annotationProcessor libs.autoService
 }
 
 sourceCompatibility = "7"

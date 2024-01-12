@@ -10,13 +10,13 @@ android {
 
 dependencies {
     implementation project(':core')
-    implementation Deps.appcompat
-    implementation Deps.material
-    implementation Deps.constraintLayout
-    implementation DepsNavigation.fragment
-    implementation DepsNavigation.ui
-    implementation Deps.lifecycle
-    implementation Deps.utilcode
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintLayout
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+    implementation libs.lifecycle
+    implementation libs.utilcode
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
