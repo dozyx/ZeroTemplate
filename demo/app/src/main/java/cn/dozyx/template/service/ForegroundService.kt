@@ -18,7 +18,13 @@ class ForegroundService : Service() {
         super.onCreate()
         Timber.d("ForegroundServiceTest.onCreate")
         initSession()
-        startForeground(1000, createEmptyNotification())
+        // 小米 11P (Android13) startForegroundService 启动后 30s 没有调用 startForeground 会发生 Crash：RemoteServiceException$ForegroundServiceDidNotStartInTimeException: Context.startForegroundService() did not then call Service.startForeground()
+        // 如果 target sdk 没有升级到 26，则不会 Crash（但线上似乎个人手机还是出现了 Crash？）
+//        stopForeground(true)
+//        startForeground(1000, createEmptyNotification())
+//        stopSelf() // 如果在 startForegroundService 后直接调用 stopSelf 而没有调用 startForeground，会立即触发 Crash：RemoteServiceException$ForegroundServiceDidNotStartInTimeException
+//        startForeground(1000, createEmptyNotification())
+        startForeground(1000, createNotification())
 //        startForeground(1000, null) // Crash IllegalArgumentException: null notification
     }
 
