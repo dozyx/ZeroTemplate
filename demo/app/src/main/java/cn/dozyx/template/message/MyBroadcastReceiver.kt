@@ -8,7 +8,7 @@ import timber.log.Timber
 class MyBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         Timber.d(
-            "MyBroadcastReceiver.onReceive: {${intent?.action} {${intent?.dataString}} replacing: {${
+            "MyBroadcastReceiver.onReceive: ${intent.hashCode()} {${intent?.action} {${intent?.dataString}} replacing: {${
                 intent?.getBooleanExtra(
                     Intent.EXTRA_REPLACING,
                     false
