@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply from: "${rootDir}/buildApp.gradle"
 apply from: "$project.rootDir/buildKotlin.gradle"
 
 android {

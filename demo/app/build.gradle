@@ -2,12 +2,13 @@
 
 apply from: "${rootDir}/buildApp.gradle"
 apply from: "${rootDir}/learn.gradle"
-apply plugin: 'org.greenrobot.greendao'
+//apply plugin: 'org.greenrobot.greendao'
 //apply plugin: CustomPluginBuildSrc
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
+    namespace "cn.dozyx.template"
     defaultConfig {
         versionCode 10000
         versionName "1.0.0"
@@ -51,12 +52,13 @@ android {
     }
     buildFeatures {
         viewBinding true
+        aidl true
     }
 }
-greendao {
-    schemaVersion 3 // 版本号，所有 greenDao 的数据库会共享，可以在生成的 DaoMaster 里看到这个版本号
-    // 如果 Entity 类增加了字段，但没有在
-}
+//greendao {
+//    schemaVersion 3 // 版本号，所有 greenDao 的数据库会共享，可以在生成的 DaoMaster 里看到这个版本号
+//    // 如果 Entity 类增加了字段，但没有在
+//}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -115,7 +117,7 @@ dependencies {
     implementation libs.greendao
     implementation libs.startup
     implementation libs.tracing
-    compile 'com.google.firebase:perf-plugin:1.4.0'
+    compileOnly 'com.google.firebase:perf-plugin:1.4.0'
 //    compile 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 //    compileOnly 'com.android.tools.build:gradle:3.6.1' // 一样会导致运行报错，暂时没找原因 The given artifact contains a string literal with a package reference 'android.support.design.widget' that cannot be safely rewritten.
 //    compile 'com.android.tools.build:gradle:3.5.2'// 这个版本跟 androidx 冲突，会导致项目没办法运行，但 sync 正常。。。

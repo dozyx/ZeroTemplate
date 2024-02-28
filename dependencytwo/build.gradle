@@ -5,3 +5,7 @@ dependencies {
 //    implementation project(':dependencyone')
 //    compile 'com.squareup.okhttp3:okhttp:3.10.0'
 }
+
+android {
+    namespace 'com.demo.dependencytwo'
+}

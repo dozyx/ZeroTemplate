@@ -9,3 +9,7 @@ dependencies {
     compileOnly project(':proguardtest:lib2')
 //    implementation project(':proguardtest:lib2')
 }
+
+android {
+    namespace 'cn.dozyx.lib'
+}

@@ -12,7 +12,6 @@ import com.blankj.utilcode.util.Utils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
-import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 
 /**
@@ -37,7 +36,6 @@ abstract class BaseApplication : Application() {
         }
         Utils.init(this)
         initOnAllProcess()
-        initLeakCanary()
         initLog()
         initCrash()
     }
@@ -71,13 +69,6 @@ abstract class BaseApplication : Application() {
         tree?.let {
             Timber.plant(tree)
         }
-    }
-
-    private fun initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
-        LeakCanary.install(this)
     }
 
     private fun configStrictMode() {

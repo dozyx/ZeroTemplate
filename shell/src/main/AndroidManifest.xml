@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dozeboy.android.template">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:name="cn.dozyx.shell.ShellApplication"
@@ -13,7 +12,8 @@
         <activity android:name="cn.dozyx.shell.MainActivity" />
         <activity
             android:name="cn.dozyx.shell.SplashActivity"
-            android:theme="@style/ZeroTheme.Launcher">
+            android:theme="@style/ZeroTheme.Launcher"
+android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

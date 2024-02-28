@@ -6,11 +6,11 @@
 appcompat = "1.3.0"
 legacySupportV4 = "1.0.0"
 kotlinVersion = "1.3.31"
-kotlinGradlePlugin = "1.5.21"
-androidGradleVersion = "3.6.1"
+kotlinGradlePlugin = "1.6.21"
+androidGradleVersion = "8.2.1"
 picasso = "2.71828"
 threeten = "1.2.1"
-leakcanary = "1.6.3"
+leakcanary = "2.13"
 dagger = "2.28"
 retrofit = "2.9.0"
 junit = "4.12"
@@ -248,8 +248,6 @@ retrofit-rxjavaAdapter = { module = "com.squareup.retrofit2:adapter-rxjava2", ve
 retrofit-rxjava3Adapter = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
 
 leakcanary-debug = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
-leakcanary-release = { module = "com.squareup.leakcanary:leakcanary-android-no-op", version.ref = "leakcanary" }
-leakcanary-debugSupportFragment = { module = "com.squareup.leakcanary:leakcanary-support-fragment", version.ref = "leakcanary" }
 
 navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigation" }
 navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigation" }

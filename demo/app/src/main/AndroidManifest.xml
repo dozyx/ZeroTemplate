@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="cn.dozyx.template">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
@@ -19,12 +18,13 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-    <uses-permission android:name="com.android.permission.GET_INSTALLED_APPS"/>
+    <uses-permission android:name="com.android.permission.GET_INSTALLED_APPS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <permission android:name="11"
-        android:protectionLevel="signature"/>
+    <permission
+        android:name="11"
+        android:protectionLevel="signature" />
     <uses-sdk tools:overrideLibrary="androidx.camera.camera2, androidx.camera.core" />
 
     <application
@@ -32,15 +32,16 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
+        android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:resizeableActivity="true"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".performance.RuntimeActivity"
+            android:exported="false"
             android:label="系统/Runtime">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,6 +52,7 @@
         <!-- action 为 main，category 为 cn.dozyx.zerofate.intent.category.sample 的activity 将显示在列表中 -->
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,6 +74,7 @@
 
         <activity
             android:name=".network.NetworkActivity"
+            android:exported="false"
             android:label="@string/network_basic">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,6 +84,7 @@
         </activity>
         <activity
             android:name=".view.CustomViewActivity"
+            android:exported="false"
             android:label="@string/view_custom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,6 +95,7 @@
         <activity android:name=".performance.BitmapActivity" />
         <activity
             android:name=".imageloader.ui.ImageLoaderActivity"
+            android:exported="false"
             android:label="@string/view_image_loader">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -100,6 +105,7 @@
         </activity>
         <activity
             android:name=".socket.SocketActivity"
+            android:exported="false"
             android:label="@string/network_socket">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -121,6 +127,7 @@
 
         <activity
             android:name=".aidl.AidlTest"
+            android:exported="false"
             android:label="@string/aidl">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -130,6 +137,7 @@
         </activity>
         <activity
             android:name=".view.HenCoderPracticeDraw1"
+            android:exported="false"
             android:label="@string/view_hencoder_1_1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -139,6 +147,7 @@
         </activity>
         <activity
             android:name=".view.MaterialDesignTestActivity"
+            android:exported="false"
             android:label="@string/view_material_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -148,6 +157,7 @@
         </activity>
         <activity
             android:name=".practice.ListInsideScrollTest"
+            android:exported="false"
             android:label="@string/practice_list_in_scroll">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -157,6 +167,7 @@
         </activity>
         <activity
             android:name=".network.NetworkAPITest"
+            android:exported="false"
             android:label="@string/network_api">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -166,6 +177,7 @@
         </activity>
         <activity
             android:name=".rxjava.RxJavaSimpleExam"
+            android:exported="false"
             android:label="@string/rxjava_simple">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -175,6 +187,7 @@
         </activity>
         <activity
             android:name=".activity.ActivityLifeCycleTest"
+            android:exported="false"
             android:label="@string/activity_life_cycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -183,6 +196,7 @@
         </activity>
         <activity
             android:name=".activity.LaunchModeTest"
+            android:exported="false"
             android:label="@string/activity_launch_mode"
             android:launchMode="singleTop">
             <intent-filter>
@@ -208,8 +222,8 @@
         <activity
             android:name=".activity.LaunchModeTest$SingleInstanceLaunchModeTest"
             android:exported="true"
-            android:launchMode="singleInstance"/>
-<!--            android:taskAffinity=".SingleInstance" />-->
+            android:launchMode="singleInstance" />
+        <!--            android:taskAffinity=".SingleInstance" />-->
         <activity
             android:name=".activity.LaunchModeTest$SingleTaskLaunchModeTestWithTaskAffinity"
             android:exported="true"
@@ -223,6 +237,7 @@
             android:taskAffinity=".test" />
         <activity
             android:name=".fragment.FragmentLifeCycleActivity"
+            android:exported="false"
             android:label="@string/fragment_life_cycle"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -239,6 +254,7 @@
 
         <activity
             android:name=".service.ServiceLifeCycleActivity"
+            android:exported="false"
             android:label="@string/service_life_cycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -248,6 +264,7 @@
         </activity>
         <activity
             android:name=".design.SwipeDismissBehaviorDemo"
+            android:exported="false"
             android:label="@string/design_behavior">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -257,6 +274,7 @@
         </activity>
         <activity
             android:name=".view.WidgetTest"
+            android:exported="false"
             android:label="@string/view_widget_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -266,6 +284,7 @@
         </activity>
         <activity
             android:name=".interaction.EventBusTest"
+            android:exported="false"
             android:label="@string/interaction_event_bus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -275,6 +294,7 @@
         </activity>
         <activity
             android:name=".webview.WebViewActivity"
+            android:exported="false"
             android:label="@string/view_webview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -284,6 +304,7 @@
         </activity>
         <activity
             android:name=".practice.FloatWindowTest"
+            android:exported="false"
             android:label="@string/practice_float_window">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -298,8 +319,8 @@
             android:name=".accessibility.MyAccessibilityService"
             android:exported="true"
             android:label="辅助功能 demo"
-            android:process=":accessibility"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:process=":accessibility">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
@@ -318,6 +339,7 @@
 
         <activity
             android:name=".view.recyclerview.RecyclerViewTest"
+            android:exported="false"
             android:label="@string/view_recyclerview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -327,6 +349,7 @@
         </activity>
         <activity
             android:name=".view.SpinnerTestActivity"
+            android:exported="false"
             android:label="@string/view_spinner">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -336,6 +359,7 @@
         </activity>
         <activity
             android:name=".CountDownActivity"
+            android:exported="false"
             android:label="@string/practice_count_down">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -345,6 +369,7 @@
         </activity>
         <activity
             android:name=".ParcelableTestActivity"
+            android:exported="false"
             android:label="@string/data_parcelable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -354,6 +379,7 @@
         </activity>
         <activity
             android:name=".socket.SocketTestActivity"
+            android:exported="false"
             android:label="@string/network_socket">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -363,6 +389,7 @@
         </activity>
         <activity
             android:name=".permission.PermissionActivity"
+            android:exported="false"
             android:label="@string/security_permission">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -372,6 +399,7 @@
         </activity>
         <activity
             android:name=".view.ViewLifeActivity"
+            android:exported="false"
             android:label="@string/view_life">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -381,6 +409,7 @@
         </activity>
         <activity
             android:name=".animation.FragmentAnimationActivity"
+            android:exported="false"
             android:label="@string/animation_fragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -390,6 +419,7 @@
         </activity>
         <activity
             android:name=".view.ListViewActivity"
+            android:exported="false"
             android:label="@string/view_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -399,6 +429,7 @@
         </activity>
         <activity
             android:name=".design.CoordinatorLayoutActivity"
+            android:exported="false"
             android:label="View/CoordinatorLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -408,6 +439,7 @@
         </activity>
         <activity
             android:name=".DialogTest"
+            android:exported="false"
             android:label="Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -417,6 +449,7 @@
         </activity>
         <activity
             android:name=".arch.LiveDataActivity"
+            android:exported="false"
             android:label="@string/arch_live_data">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -428,6 +461,7 @@
         <activity android:name=".socket.UdpActivity" />
         <activity
             android:name=".view.SurfaceViewActivity"
+            android:exported="false"
             android:label="@string/view_surface">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -437,6 +471,7 @@
         </activity>
         <activity
             android:name=".view.DrawerToolBarActivity"
+            android:exported="false"
             android:label="@string/title_activity_drawer_tool_bar"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -447,6 +482,7 @@
         </activity>
         <activity
             android:name=".view.ToolbarActivity"
+            android:exported="false"
             android:label="@string/view_toolbar"
             android:parentActivityName=".view.chart.MpChartActivity">
             <intent-filter>
@@ -457,6 +493,7 @@
         </activity>
         <activity
             android:name=".dialog.PopupWindowActivity"
+            android:exported="false"
             android:label="@string/dialog_popup_window">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -466,6 +503,7 @@
         </activity>
         <activity
             android:name=".drawable.BackgroundTintActivity"
+            android:exported="false"
             android:label="@string/drawable_tint">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -475,6 +513,7 @@
         </activity>
         <activity
             android:name=".design.TabLayoutActivity"
+            android:exported="false"
             android:label="@string/design_tablayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -484,6 +523,7 @@
         </activity>
         <activity
             android:name=".view.chart.MpChartActivity"
+            android:exported="false"
             android:label="@string/view_chart_mp_chart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -493,6 +533,7 @@
         </activity>
         <activity
             android:name=".view.StatusBarActivity"
+            android:exported="false"
             android:label="@string/view_status_bar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -502,6 +543,7 @@
         </activity>
         <activity
             android:name=".FileTest"
+            android:exported="false"
             android:label="@string/file_basic">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -511,6 +553,7 @@
         </activity>
         <activity
             android:name=".hardware.camera.CameraActivity"
+            android:exported="false"
             android:label="@string/hardware_camera">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -520,6 +563,7 @@
         </activity>
         <activity
             android:name=".hardware.camera.CameraSurfaceViewActivity"
+            android:exported="false"
             android:label="@string/hardware_camera_control">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -529,6 +573,7 @@
         </activity>
         <activity
             android:name=".view.ViewPagerActivity"
+            android:exported="false"
             android:label="@string/view_pager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -538,6 +583,7 @@
         </activity>
         <activity
             android:name=".hardware.camera.CameraPreview"
+            android:exported="false"
             android:label="Hardware/Camera/Android">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -547,6 +593,7 @@
         </activity>
         <activity
             android:name=".activity.ConfigActivity"
+            android:exported="false"
             android:label="Activity/Config">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -556,6 +603,7 @@
         </activity>
         <activity
             android:name=".view.custom.CustomViewTestActivity"
+            android:exported="false"
             android:label="View/Custom/TouchFollow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -565,6 +613,7 @@
         </activity>
         <activity
             android:name=".hardware.camera.CameraTextureActivity"
+            android:exported="false"
             android:label="Hardware/Camera/Texture">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -574,6 +623,7 @@
         </activity>
         <activity
             android:name=".hardware.camera.CameraControlActivity"
+            android:exported="false"
             android:label="Hardware/Camera/Control">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -583,6 +633,7 @@
         </activity>
         <activity
             android:name=".activity.OnResultTest"
+            android:exported="false"
             android:label="Activity/Result">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -592,6 +643,7 @@
         </activity>
         <activity
             android:name=".view.practice.qijian.BookPracticeActivity"
+            android:exported="false"
             android:label="View/Android自定义控件开发入门与实践">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -601,6 +653,7 @@
         </activity>
         <activity
             android:name=".database.room.RoomActivity"
+            android:exported="false"
             android:label="数据库/Room">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -610,6 +663,7 @@
         </activity>
         <activity
             android:name=".hardware.camera.CameraXActivity"
+            android:exported="false"
             android:label="Hardware/Camera/CameraX">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -619,6 +673,7 @@
         </activity>
         <activity
             android:name=".image.ImageLoaderTest"
+            android:exported="false"
             android:label="Image/loader">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -628,6 +683,7 @@
         </activity>
         <activity
             android:name=".view.scroll.ScrollTest"
+            android:exported="false"
             android:label="View/Scroll">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -637,6 +693,7 @@
         </activity>
         <activity
             android:name=".view.edittext.InputFilterTest"
+            android:exported="false"
             android:label="View/EditText/InputFilter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -646,6 +703,7 @@
         </activity>
         <activity
             android:name=".view.SpanTest"
+            android:exported="false"
             android:label="View/TextView/Span">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -655,6 +713,7 @@
         </activity>
         <activity
             android:name=".view.FocusTest"
+            android:exported="false"
             android:label="View/EditText/Focus"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -665,6 +724,7 @@
         </activity>
         <activity
             android:name=".design.behavior.CustomBehaviorTest"
+            android:exported="false"
             android:label="View/Behavior">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -674,6 +734,7 @@
         </activity>
         <activity
             android:name=".exception.ExceptionTest"
+            android:exported="false"
             android:label="Error/Exception">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -683,6 +744,7 @@
         </activity>
         <activity
             android:name=".view.anim.ScanCircleActivity"
+            android:exported="false"
             android:label="View/动画">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -692,6 +754,7 @@
         </activity>
         <activity
             android:name=".view.anim.AnimatorPagerActivity"
+            android:exported="false"
             android:label="View/动画/全部">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -701,6 +764,7 @@
         </activity>
         <activity
             android:name=".data.ParcelableTest"
+            android:exported="false"
             android:label="Data/Parcelable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -710,6 +774,7 @@
         </activity>
         <activity
             android:name=".arch.ViewModelTest"
+            android:exported="false"
             android:label="Arch/ViewModel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -719,6 +784,7 @@
         </activity>
         <activity
             android:name=".demo.DemoActivity"
+            android:exported="false"
             android:label="Demo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -728,6 +794,7 @@
         </activity>
         <activity
             android:name=".demo.swipedismiss.DragDismissActivity"
+            android:exported="false"
             android:label="Demo/拖动关闭"
             android:theme="@style/Translucent">
             <intent-filter>
@@ -738,6 +805,7 @@
         </activity>
         <activity
             android:name=".animation.AnimationTest"
+            android:exported="false"
             android:label="Anim">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -747,6 +815,7 @@
         </activity>
         <activity
             android:name=".view.touch.TouchTest"
+            android:exported="false"
             android:label="View/触摸事件">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -756,6 +825,7 @@
         </activity>
         <activity
             android:name=".demo.dragpanel.DragPanelActivity"
+            android:exported="false"
             android:label="Demo/dragpanel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -765,6 +835,7 @@
         </activity>
         <activity
             android:name=".view.RelativeLayoutTest"
+            android:exported="false"
             android:label="View/RelativeLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -774,6 +845,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnListActivity"
+            android:exported="false"
             android:label="Demo/固定列表列">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -783,6 +855,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnListActivity2"
+            android:exported="false"
             android:label="Demo/固定列表列2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -792,6 +865,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnListActivity3"
+            android:exported="false"
             android:label="Demo/固定列表列3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -801,6 +875,7 @@
         </activity>
         <activity
             android:name=".view.textsize.TextSizeActivity"
+            android:exported="false"
             android:label="View/固定文本大小">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -810,6 +885,7 @@
         </activity>
         <activity
             android:name=".view.touch.conflict.TouchConflictActivity"
+            android:exported="false"
             android:label="View/触摸/滑动冲突">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -833,6 +909,7 @@
 
         <activity
             android:name=".gl.OpenGLES20Activity"
+            android:exported="false"
             android:label="音视频/GL">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -842,6 +919,7 @@
         </activity>
         <activity
             android:name=".image.GlideTest"
+            android:exported="false"
             android:label="Image/Glide">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -851,6 +929,7 @@
         </activity>
         <activity
             android:name=".demo.fixedcolumn.FixedColumnLIstActivity4"
+            android:exported="false"
             android:label="Demo/固定列表列4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -860,6 +939,7 @@
         </activity>
         <activity
             android:name=".bug.CalledFromWrongThreadTest"
+            android:exported="false"
             android:label="Bug/CalledFromWrongThread">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -869,6 +949,7 @@
         </activity>
         <activity
             android:name=".arch.PagingTest"
+            android:exported="false"
             android:label="Arch/Paging">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -878,6 +959,7 @@
         </activity>
         <activity
             android:name=".transition.TransitionTest"
+            android:exported="false"
             android:label="Activity/Transition">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -893,6 +975,7 @@
             android:theme="@style/TransitionTheme" />
         <activity
             android:name=".keyboard.KeyBoardTest"
+            android:exported="false"
             android:label="KeyBoard"
             android:windowSoftInputMode="adjustResize|stateVisible">
             <intent-filter>
@@ -903,6 +986,7 @@
         </activity>
         <activity
             android:name=".service.ServiceTest"
+            android:exported="false"
             android:label="Service/IntentService">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -919,6 +1003,7 @@
             android:theme="@style/ActivityTranslucent" />
         <activity
             android:name=".pager.PagerTransformTest"
+            android:exported="false"
             android:label="View/Pager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -928,6 +1013,7 @@
         </activity>
         <activity
             android:name=".HandlerTest"
+            android:exported="false"
             android:label="Handler">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -937,6 +1023,7 @@
         </activity>
         <activity
             android:name=".permission.RxPermissionsActivity"
+            android:exported="false"
             android:label="权限/RxPermissions">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -946,6 +1033,7 @@
         </activity>
         <activity
             android:name=".performance.UIPerformanceTest"
+            android:exported="false"
             android:label="性能/UI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -955,6 +1043,7 @@
         </activity>
         <activity
             android:name=".performance.GcTest"
+            android:exported="false"
             android:label="性能/GC">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -964,6 +1053,7 @@
         </activity>
         <activity
             android:name=".performance.ProfileTest"
+            android:exported="false"
             android:label="性能/Profile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -974,6 +1064,7 @@
 
         <activity
             android:name=".IntentTest"
+            android:exported="false"
             android:label="Activity/Intent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -983,6 +1074,7 @@
 
         <activity
             android:name=".PipTest"
+            android:exported="false"
             android:label="视频/画中画"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
@@ -994,6 +1086,7 @@
         </activity>
         <activity
             android:name=".data.SharedPreferenceTest"
+            android:exported="false"
             android:label="Data/SharedPreference">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1002,6 +1095,7 @@
         </activity>
         <activity
             android:name=".activity.ThirdAppTest"
+            android:exported="false"
             android:label="Activity/ThirdApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1010,6 +1104,7 @@
         </activity>
         <activity
             android:name=".activity.MockThirdAppTest"
+            android:exported="false"
             android:taskAffinity="cn.dozyx.template.thirdapp">
             <intent-filter>
                 <action android:name="cn.dozyx.mockthird" />
@@ -1018,6 +1113,7 @@
         </activity>
         <activity
             android:name=".menu.ActionModeTest"
+            android:exported="true"
             android:label="Menu/ActionMode">
             <!--            android:theme="@style/CustomActionModeTheme">-->
             <intent-filter>
@@ -1027,6 +1123,7 @@
         </activity>
         <activity
             android:name=".install.InstallTest"
+            android:exported="false"
             android:label="App/安装">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1035,6 +1132,7 @@
         </activity>
         <activity
             android:name=".image.CircleImageTest"
+            android:exported="false"
             android:label="View/CircleImage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1043,6 +1141,7 @@
         </activity>
         <activity
             android:name=".provider.ContentProviderTest"
+            android:exported="false"
             android:label="存储/ContentProvider">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1051,6 +1150,7 @@
         </activity>
         <activity
             android:name=".database.greendao.GreenDaoTest"
+            android:exported="false"
             android:label="存储/GreenDao">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1059,16 +1159,19 @@
         </activity>
         <activity
             android:name=".notification.NotificationTest"
-            android:launchMode="singleTop"
-            android:label="通知">
+            android:exported="false"
+            android:label="通知"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
+
         <activity
             android:name=".drawable.DrawableTest"
+            android:exported="false"
             android:label="Drawable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1077,6 +1180,7 @@
         </activity>
         <activity
             android:name=".view.AutoCompleteTest"
+            android:exported="false"
             android:label="View/AutoText"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -1086,6 +1190,7 @@
         </activity>
         <activity
             android:name=".database.SQLiteTest"
+            android:exported="false"
             android:label="Database/SQLite">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1094,6 +1199,7 @@
         </activity>
         <activity
             android:name=".intent.ActionSendTest"
+            android:exported="true"
             android:label="Intent/Send">
             <intent-filter android:label="发送给朋友">
                 <action android:name="android.intent.action.SEND" />
@@ -1116,8 +1222,9 @@
         </activity>
         <activity
             android:name=".activity.WindowTest"
-            android:label="View/Window"
             android:configChanges="keyboardHidden|orientation|screenSize|uiMode|layoutDirection|locale|keyboard|navigation|screenLayout|smallestScreenSize"
+            android:exported="false"
+            android:label="View/Window"
             android:theme="@style/AppTheme.WindowTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1126,6 +1233,7 @@
         </activity>
         <activity
             android:name=".activity.SoftInputTest"
+            android:exported="false"
             android:label="Activity/SoftInput"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -1135,6 +1243,7 @@
         </activity>
         <activity
             android:name=".activity.ActivityTest"
+            android:exported="false"
             android:label="Activity/Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1144,6 +1253,7 @@
         <activity
             android:name=".device.LanguageTest"
             android:configChanges="locale"
+            android:exported="false"
             android:label="Device/Language">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1152,6 +1262,7 @@
         </activity>
         <activity
             android:name=".performance.LaunchOptimizeTest"
+            android:exported="true"
             android:label="Performance/Launch"
             android:theme="@style/LaunchTheme"><!--
             <intent-filter >
@@ -1166,6 +1277,7 @@
 
         <activity
             android:name=".performance.TraceTest"
+            android:exported="false"
             android:label="性能/Trace">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1174,6 +1286,7 @@
                 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.OtherProcessActivity"
             android:alwaysRetainTaskState="false"
@@ -1182,6 +1295,7 @@
             android:process=":loader" />
         <activity
             android:name=".activity.ProcessTest"
+            android:exported="false"
             android:label="进程">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1190,6 +1304,7 @@
         </activity>
         <activity
             android:name=".activity.FinishTest"
+            android:exported="false"
             android:label="Activity/finish">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1198,6 +1313,7 @@
         </activity>
         <activity
             android:name=".device.TimeTest"
+            android:exported="false"
             android:label="Device/时间">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1206,6 +1322,7 @@
         </activity>
         <activity
             android:name=".view.list.SwipeRefreshTest"
+            android:exported="false"
             android:label="View/SwipeRefreshLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1214,6 +1331,7 @@
         </activity>
         <activity
             android:name=".media.ExoPlayerTest"
+            android:exported="false"
             android:label="Media/ExoPlayer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1225,6 +1343,7 @@
 
         <activity
             android:name=".TelephonyManagerTest"
+            android:exported="false"
             android:label="System/TelephonyManager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1235,6 +1354,7 @@
 
         <activity
             android:name=".webview.NewWebViewTest"
+            android:exported="false"
             android:label="View/WebView/new">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1243,6 +1363,7 @@
         </activity>
         <activity
             android:name=".performance.ANRTest"
+            android:exported="false"
             android:label="Performance/ANR">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1251,6 +1372,7 @@
         </activity>
         <activity
             android:name=".activity.LifecycleCallbacksTest"
+            android:exported="false"
             android:label="Activity/Callback">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1259,6 +1381,7 @@
         </activity>
         <activity
             android:name=".pop.PopElementTest"
+            android:exported="true"
             android:label="Activity/Pop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1270,6 +1393,7 @@
         <activity android:name=".activity.SimpleAdActivity" />
         <activity
             android:name=".animation.PropertyAnimator"
+            android:exported="false"
             android:label="Animator/Property">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1278,6 +1402,7 @@
         </activity>
         <activity
             android:name=".animation.MotionLayoutTest"
+            android:exported="false"
             android:label="Animator/MotionLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1286,6 +1411,7 @@
         </activity>
         <activity
             android:name=".view.anim.LottieTest"
+            android:exported="false"
             android:label="Animator/Lottie">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1294,13 +1420,16 @@
         </activity>
         <activity
             android:name=".view.ViewTest"
+            android:exported="false"
             android:label="View/View">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ThirdAppIntentFilterTest">
+        <activity
+            android:name=".activity.ThirdAppIntentFilterTest"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -1313,6 +1442,7 @@
         </activity>
         <activity
             android:name=".message.BroadcastTest"
+            android:exported="false"
             android:label="Message/Broadcast">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1321,6 +1451,7 @@
         </activity>
         <activity
             android:name=".system.SystemTest"
+            android:exported="false"
             android:label="System/Restart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1329,6 +1460,7 @@
         </activity>
         <activity
             android:name=".ImmersionBarTest"
+            android:exported="false"
             android:label="System/ImmersionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1337,6 +1469,7 @@
         </activity>
         <activity
             android:name=".hardware.SensorsTest"
+            android:exported="false"
             android:label="Hardware/Sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1345,68 +1478,87 @@
         </activity>
         <activity
             android:name=".view.TextTest"
+            android:exported="false"
             android:label="View/Text">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlarmManagerTest"
+        <activity
+            android:name=".AlarmManagerTest"
+            android:exported="false"
             android:label="System/Alarm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".image.ImageViewTest"
+        <activity
+            android:name=".image.ImageViewTest"
+            android:exported="false"
             android:label="View/ImageView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".account.AccountActivity"
+        <activity
+            android:name=".account.AccountActivity"
+            android:exported="false"
             android:label="Account">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ProgressBarTest"
+        <activity
+            android:name=".view.ProgressBarTest"
+            android:exported="false"
             android:label="View/ProgressBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".ApplicationTest"
+        <activity
+            android:name=".ApplicationTest"
+            android:exported="false"
             android:label="Application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".arch.LifecycleTest"
+        <activity
+            android:name=".arch.LifecycleTest"
+            android:exported="false"
             android:label="arch/lifecycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name="com.facebook.flipper.android.diagnostics.FlipperDiagnosticActivity"
-            android:exported="true"/>
-        <activity android:name=".TooltipTest"
+        <activity
+            android:name="com.facebook.flipper.android.diagnostics.FlipperDiagnosticActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TooltipTest"
+            android:exported="false"
             android:label="ToolTip">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".system.LandscapeActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".system.LandscapeActivity"
             android:configChanges="keyboard|orientation|screenSize|uiMode|layoutDirection|locale"
+            android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".system.OrientationTest"
+        <activity
+            android:name=".system.OrientationTest"
+            android:exported="true"
             android:configChanges="keyboard|orientation|screenSize|uiMode|layoutDirection|locale"
             android:label="System/Orientation">
             <!--            android:screenOrientation="portrait"-->
@@ -1417,34 +1569,43 @@
         </activity>
         <activity
             android:name=".thread.UIThreadTest"
+            android:exported="false"
             android:label="System/Orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.FloatButtonTest"
+        <activity
+            android:name=".view.FloatButtonTest"
+            android:exported="false"
             android:label="View/FloatButton">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".animation.TransitionAnimTest"
+        <activity
+            android:name=".animation.TransitionAnimTest"
+            android:exported="false"
             android:label="View/TransitionAnim">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ButtonTest"
+        <activity
+            android:name=".view.ButtonTest"
+            android:exported="false"
             android:label="View/Button">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ViewEventTest"
+        <activity
+            android:name=".view.ViewEventTest"
+            android:exported="false"
             android:label="View/Event">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1453,6 +1614,7 @@
         </activity>
         <activity
             android:name=".view.CardViewTest"
+            android:exported="false"
             android:label="View/CardView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1461,126 +1623,160 @@
         </activity>
         <activity
             android:name=".view.recyclerview.ItemAnimatorTest"
+            android:exported="false"
             android:label="View/RecyclerViewItemAnimator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".accessibility.AccessibilityTest"
+        <activity
+            android:name=".accessibility.AccessibilityTest"
+            android:exported="false"
             android:label="辅助功能">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".DialogActivity" android:theme="@style/Theme.AppCompat.Dialog.NoTitle" />
-        <activity android:name=".firebase.FirebaseTest"
+        <activity
+            android:name=".DialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog.NoTitle" />
+        <activity
+            android:name=".firebase.FirebaseTest"
+            android:exported="false"
             android:label="Firebase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".WorkManagerTest"
+        <activity
+            android:name=".WorkManagerTest"
+            android:exported="false"
             android:label="Androidx/WorkManager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".notification.BadNotificationTest"
+        <activity
+            android:name=".notification.BadNotificationTest"
+            android:exported="false"
             android:label="Notification/BadNotification">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".NightModeTest"
-            android:theme="@style/AppTheme.NightMode"
-            android:label="System/NightMode">
+        <activity
+            android:name=".NightModeTest"
+            android:exported="false"
+            android:label="System/NightMode"
+            android:theme="@style/AppTheme.NightMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
-        <activity android:name=".view.recyclerview.RecyclerViewPopTest"
+        <activity
+            android:name=".view.recyclerview.RecyclerViewPopTest"
+            android:exported="false"
             android:label="View/RecyclerView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity
             android:name=".device.DeviceInfoTest"
+            android:exported="false"
             android:label="Device/Info">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".media.MediaSessionApiTest"
+        <activity
+            android:name=".media.MediaSessionApiTest"
+            android:exported="false"
             android:label="Media/session">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".service.ForegroundServiceTest"
+        <activity
+            android:name=".service.ForegroundServiceTest"
+            android:exported="false"
             android:label="Service/foreground">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SplashTest"
+        <activity
+            android:name=".activity.SplashTest"
+            android:exported="false"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
-        <activity android:name=".BottomSheetTest"
+        <activity
+            android:name=".BottomSheetTest"
+            android:exported="false"
             android:label="实践/BottomSheet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.custom.CanvasDrawTest"
+        <activity
+            android:name=".view.custom.CanvasDrawTest"
+            android:exported="false"
             android:label="View/Canvas">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".media.MediaFileTest"
+        <activity
+            android:name=".media.MediaFileTest"
+            android:exported="false"
             android:label="Media/Mime">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".media.CustomExoTest"
+        <activity
+            android:name=".media.CustomExoTest"
+            android:exported="false"
             android:label="Media/CustomExo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.StyleTest"
+        <activity
+            android:name=".view.StyleTest"
+            android:exported="false"
             android:label="View/Style">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="cn.dozyx.zerofate.intent.category.sample" />
             </intent-filter>
         </activity>
-        <activity android:name=".network.okhttp.OkHttpTest"
+        <activity
+            android:name=".network.okhttp.OkHttpTest"
+            android:exported="false"
             android:label="Network/OkHttp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1589,6 +1785,7 @@
         </activity>
         <activity
             android:name=".TimerTest"
+            android:exported="false"
             android:label="实践/计时">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1600,6 +1797,7 @@
             android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".intent.PendingIntentTest"
+            android:exported="false"
             android:label="Intent/Pending">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1609,6 +1807,7 @@
 
         <activity
             android:name=".view.edittext.EditTextTest"
+            android:exported="false"
             android:label="View/EditText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1616,25 +1815,30 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmBroadcast">
+        <receiver
+            android:name=".AlarmBroadcast"
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.dozyx.template.BROADCAST" />
             </intent-filter>
-        </receiver>
-        <!--<receiver android:name=".message.MyBroadcastReceiver">
+        </receiver><!--<receiver android:name=".message.MyBroadcastReceiver"
+android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
                 <data android:scheme="package" />
-            </intent-filter>
+            </intent-filter
+android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>-->
-        <receiver android:name=".message.StaticBroadcastReceiver">
+        <receiver
+            android:name=".message.StaticBroadcastReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />

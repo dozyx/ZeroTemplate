@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="cn.dozyx.template.justfortest">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -30,7 +29,8 @@
         <activity
             android:name=".MeaninglessActivity"
             android:exported="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+android:exported="false">
             <intent-filter>
                 <action android:name="cn.dozyx.thirdapp"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -38,7 +38,8 @@
         </activity>
         <activity
             android:name=".GodActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

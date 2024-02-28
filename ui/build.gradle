@@ -1,6 +1,8 @@
 apply from: "${rootDir}/buildLib.gradle"
 
 android {
+
+    namespace 'cn.dozyx.zerofate.ui'
     defaultConfig {
         versionCode 10000
         versionName "1.0.0"
