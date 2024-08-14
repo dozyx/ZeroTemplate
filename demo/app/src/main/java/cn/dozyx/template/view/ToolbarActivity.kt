@@ -131,11 +131,11 @@ class CustomActionProvider(context: Context) : ActionProvider(context) {
 
         val actionView = LayoutInflater.from(context).inflate(R.layout.menu_action_view, null)
         actionView.findViewById<ImageView>(R.id.iv_search).addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-            override fun onViewAttachedToWindow(v: View?) {
+            override fun onViewAttachedToWindow(v: View) {
                 Timber.d("CustomActionProvider.onViewAttachedToWindow")
             }
 
-            override fun onViewDetachedFromWindow(v: View?) {
+            override fun onViewDetachedFromWindow(v: View) {
                 Timber.d("CustomActionProvider.onViewDetachedFromWindow")
             }
         })

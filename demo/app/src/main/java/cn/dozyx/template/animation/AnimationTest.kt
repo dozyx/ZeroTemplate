@@ -31,19 +31,19 @@ class AnimationTest : BaseActivity() {
         objectAnimator.duration = 2000
         objectAnimator.startDelay = 2000
         objectAnimator.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationRepeat(animation: Animator?) {
+            override fun onAnimationRepeat(animation: Animator) {
                 Timber.d("AnimationTest.onAnimationRepeat")
             }
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 Timber.d("AnimationTest.onAnimationEnd")
             }
 
-            override fun onAnimationCancel(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {
                 Timber.d("AnimationTest.onAnimationCancel")
             }
 
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
                 Timber.d("AnimationTest.onAnimationStart")
             }
         })

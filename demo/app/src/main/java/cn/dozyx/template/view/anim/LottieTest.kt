@@ -27,19 +27,19 @@ class LottieTest : BaseActivity() {
             lottie_view.playAnimation()
             Timber.d("LottieTest.onCreate duration: ${lottie_view.duration}")
             lottie_view.addAnimatorListener(object :Animator.AnimatorListener{
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     Timber.d("LottieTest.onAnimationStart")
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     Timber.d("LottieTest.onAnimationEnd")
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {
+                override fun onAnimationCancel(animation: Animator) {
                     Timber.d("LottieTest.onAnimationCancel")
                 }
 
-                override fun onAnimationRepeat(animation: Animator?) {
+                override fun onAnimationRepeat(animation: Animator) {
                     Timber.d("LottieTest.onAnimationRepeat")
                 }
             })

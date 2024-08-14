@@ -30,18 +30,18 @@ class PropertyAnimator : BaseActivity() {
                     ObjectAnimator.ofFloat(text_scale, "scaleY", 1F, 0.5F))
 //            animator.playTogether(ObjectAnimator.ofFloat(text_scale, "textSize", 48F, 12F))
             animator.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
 
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     Timber.d("PropertyAnimator.onAnimationEnd: width ${text_scale.width} & right ${text_scale.right}")
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {
+                override fun onAnimationCancel(animation: Animator) {
                 }
 
-                override fun onAnimationRepeat(animation: Animator?) {
+                override fun onAnimationRepeat(animation: Animator) {
                 }
             })
             animator.start()

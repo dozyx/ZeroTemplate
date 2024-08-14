@@ -68,7 +68,7 @@ class FixedColumnRecyclerView : RecyclerView {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         scroller = Scroller(context)
         gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
+            override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
                 for (i in 0 until childCount) {
                     val scrollView = getChildAt(i).findViewById<ViewGroup>(R.id.scroll_columns)
                     var newScrollX = (scrollView.scrollX + distanceX).toInt()

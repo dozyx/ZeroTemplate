@@ -27,8 +27,6 @@ android {
 
 dependencies {
     debugImplementation libs.leakcanary.debug
-    debugImplementation libs.leakcanary.debugSupportFragment
-    releaseImplementation libs.leakcanary.release
     implementation libs.multidex
 }
 

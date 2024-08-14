@@ -233,11 +233,11 @@ class RecyclerViewTest : BaseActivity() {
             val adapterPosition = viewHolder.layoutPosition
             viewHolder.itemView.addOnAttachStateChangeListener(object :
                 View.OnAttachStateChangeListener {
-                override fun onViewAttachedToWindow(v: View?) {
+                override fun onViewAttachedToWindow(v: View) {
                     Timber.d("ContentAdapter.onViewAttachedToWindow $adapterPosition")
                 }
 
-                override fun onViewDetachedFromWindow(v: View?) {
+                override fun onViewDetachedFromWindow(v: View) {
                     Timber.d("ContentAdapter.onViewDetachedFromWindow $adapterPosition")
                 }
             })
