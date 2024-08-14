@@ -9,7 +9,7 @@ import com.dozeboy.android.template.R
  * @author dozeboy
  * @date 2018/12/6
  */
-open abstract class BaseShellActivity : BaseActivity() {
+abstract class BaseShellActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

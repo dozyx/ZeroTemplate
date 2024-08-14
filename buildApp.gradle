@@ -10,7 +10,7 @@ configSigning project
 android {
     compileSdkVersion 31
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         applicationId "cn.dozyx.${getSuffix()}"
         multiDexEnabled true
