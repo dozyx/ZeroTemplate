@@ -115,7 +115,7 @@ dependencies {
     implementation libs.greendao
     implementation libs.startup
     implementation libs.tracing
-    compile 'com.google.firebase:perf-plugin:1.4.0'
+    compileOnly 'com.google.firebase:perf-plugin:1.4.0'
 //    compile 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 //    compileOnly 'com.android.tools.build:gradle:3.6.1' // 一样会导致运行报错，暂时没找原因 The given artifact contains a string literal with a package reference 'android.support.design.widget' that cannot be safely rewritten.
 //    compile 'com.android.tools.build:gradle:3.5.2'// 这个版本跟 androidx 冲突，会导致项目没办法运行，但 sync 正常。。。
