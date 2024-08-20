@@ -1,0 +1,13 @@
+var requestUrl = null;
+XMLHttpRequest.prototype._open = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
+  requestUrl = url;
+  const asyncWithDefault = async === undefined ? true : async;
+  this._open(method, url, asyncWithDefault, user, password);
+};
+XMLHttpRequest.prototype._send = XMLHttpRequest.prototype.send;
+XMLHttpRequest.prototype.send = function(body) {
+  YouTubePlayerBridge.customAjax(requestUrl, body);
+  requestUrl = null;
+  this._send(body);
+};

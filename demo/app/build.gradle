@@ -131,6 +131,8 @@ dependencies {
     implementation libs.rxjava3
     implementation libs.androix.media
     implementation libs.androidx.activity
+    implementation libs.okio
+    implementation libs.webview.inspector
     debugImplementation(libs.doraemonkit.dokitx) {
         exclude group: 'com.blankj'
     }

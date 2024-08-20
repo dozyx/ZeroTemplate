@@ -1815,6 +1815,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".webview.HeadlessWebViewTest"
+            android:exported="true"
+            android:label="View/WebView headless">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="cn.dozyx.zerofate.intent.category.sample" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".AlarmBroadcast"
             android:exported="true">

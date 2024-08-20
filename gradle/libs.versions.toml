@@ -110,6 +110,8 @@ soloader = "0.10.1"
 androidx_activity = "1.2.3"
 andResGuard = "1.2.21"
 androidx_media = "1.6.0"
+okio = "2.8.0"
+webview_inspector = "1.0.7"
 
 [libraries]
 classpath-androidGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradleVersion" }
@@ -268,6 +270,9 @@ doraemonkit-dokitxnoop = { module = "com.didichuxing.doraemonkit:dokitx-no-op", 
 flipper-flipper = { module = "com.facebook.flipper:flipper", version.ref = "flipper" }
 flipper-flipper-noop = { module = "com.facebook.flipper:flipper-noop", version.ref = "flipper" }
 flipper-soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
+
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+webview_inspector = { module = "com.github.acsbendi:Android-Request-Inspector-WebView", version.ref = "webview_inspector" }
 
 [bundles]
 
