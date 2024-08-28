@@ -128,6 +128,24 @@ import okhttp3.HttpUrl;
 public class JavaTest {
 
     @Test
+    public void testCountDownLatch() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
+        print("testCountDownLatch start");
+        new Thread(() -> {
+            sleep(5);
+            latch.countDown();
+        }).start();
+        print("latch count111: " + latch.getCount());
+        latch.await(1, TimeUnit.SECONDS);
+        latch.countDown();
+        print("latch count222: " + latch.getCount());
+        latch.await(2, TimeUnit.SECONDS);// countDown() 执行后再调用 await 会立即结束
+        print("latch count333: " + latch.getCount());
+        latch.await();
+        print("latch count444: " + latch.getCount());
+    }
+
+    @Test
     public void testNaN(){
 //        int a = 1 / 0;// ArithmeticException
         print(new Float(0.0 / 0.0).isNaN());// true

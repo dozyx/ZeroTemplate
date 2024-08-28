@@ -32,12 +32,13 @@
             android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="cn.dozyx.thirdapp"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="cn.dozyx.thirdapp" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".GodActivity"
+            android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,7 +59,9 @@
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RxBindingTest" android:exported="true" />
+        <activity
+            android:name=".RxBindingTest"
+            android:exported="true" />
         <activity
             android:name=".DrawableTest"
             android:exported="true" />
