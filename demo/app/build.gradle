@@ -4,8 +4,6 @@ apply from: "${rootDir}/buildApp.gradle"
 apply from: "${rootDir}/learn.gradle"
 apply plugin: 'org.greenrobot.greendao'
 //apply plugin: CustomPluginBuildSrc
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     defaultConfig {
@@ -91,7 +89,6 @@ dependencies {
     annotationProcessor libs.dagger.processor
     implementation libs.mpAndroidChart
     implementation libs.rxlifecycle.android
-    implementation libs.barUtil
     implementation libs.utilcode
     implementation libs.rxpermissions
     kapt libs.room.processor

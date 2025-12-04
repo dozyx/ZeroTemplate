@@ -18,7 +18,6 @@ dependencies {
     implementation libs.dagger.runtime
     annotationProcessor libs.dagger.processor
     implementation libs.gson
-    implementation libs.barUtil
     implementation libs.timber
     implementation libs.logger
 }

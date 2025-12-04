@@ -6,7 +6,7 @@
 appcompat = "1.3.0"
 legacySupportV4 = "1.0.0"
 kotlinVersion = "1.3.31"
-kotlinGradlePlugin = "1.5.31"
+kotlinGradlePlugin = "1.7.20"
 androidGradleVersion = "7.1.3"
 picasso = "2.71828"
 threeten = "1.2.1"
@@ -48,7 +48,7 @@ tencent_wup = "1.0.0.E-release"
 tencent_mid = "4.0.6-release"
 #腾讯统计
 tencent_mta = "3.3.1-release"
-volley = "1.1.1"
+volley = "1.2.1"
 rxjava1 = "1.2.1"
 rxjava2 = "2.2.16"
 rxjava3 = "3.0.12"
@@ -61,15 +61,14 @@ espresso = "3.1.1"
 timber = "4.7.1"
 logger = "2.2.0"
 rxpermissions = "0.10.2"
-utilcode = "1.30.5"
-flexbox = "1.1.0"
+utilcode = "1.30.7"
+flexbox = "3.0.0"
 mmkv = "1.0.18"
 # 数据库/SharedPreference 调试库，可直接在网页上查看保存的数据。https://github.com/amitshekhariitbhu/Android-Debug-Database
 debugDb = "1.0.6"
 mpAndroidChart = "v3.1.0"
 rx_lifecycle = "3.0.0"
 rxAndroid = "2.1.1"
-barUtil = "1.5.1"
 rxjava_adapter = "2.5.0"
 background = "1.5.6"
 androiddevmetrics = "0.6"
@@ -80,7 +79,7 @@ annotations = "17.0.0"
 navigation = "2.5.3"
 paging = "2.1.0"
 immersionbar = "3.2.2"
-room = "2.2.5"
+room = "2.4.3"
 stetho = "1.5.1"
 camerax = "1.0.0-beta03"
 percentlayout = "1.0.0"
@@ -97,14 +96,14 @@ java_poet = "1.12.1"
 circle_image = "3.1.0"
 startup = "1.0.0-alpha02"
 tracing = "1.0.0-beta01"
-exoplayer = "2.12.1"
+exoplayer = "2.13.3"
 lottie = "3.5.0"
 process_phoenix = "2.0.0"
 gp_auth = "19.0.0"
 tooltip = "2.0.4"
 materialprogressbar = "1.6.1"
 notchScreenTool = "0.0.1"
-doraemonkit = "3.3.5"
+doraemonkit = "3.7.11"
 flipper = "0.85.0"
 soloader = "0.10.1"
 androidx_activity = "1.2.3"
@@ -135,9 +134,8 @@ rxjava3 = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava3" }
 kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
 lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle" }
 annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
-flexbox = { module = "com.google.android:flexbox", version.ref = "flexbox" }
+flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
 mpAndroidChart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpAndroidChart" }
-barUtil = { module = "com.jaeger.statusbarutil:library", version.ref = "barUtil" }
 utilcode = { module = "com.blankj:utilcode", version.ref = "utilcode" }
 rxpermissions = { module = "com.github.tbruyelle:rxpermissions", version.ref = "rxpermissions" }
 stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
@@ -264,8 +262,8 @@ paging-common = { module = "androidx.paging:paging-common", version.ref = "pagin
 
 exoplayer-okhttp = { module = "com.google.android.exoplayer:extension-okhttp", version.ref = "exoplayer" }
 
-doraemonkit-dokitx = { module = "com.didichuxing.doraemonkit:dokitx", version.ref = "doraemonkit" }
-doraemonkit-dokitxnoop = { module = "com.didichuxing.doraemonkit:dokitx-no-op", version.ref = "doraemonkit" }
+doraemonkit-dokitx = { module = "io.github.didi.dokit:dokitx", version.ref = "doraemonkit" }
+doraemonkit-dokitxnoop = { module = "io.github.didi.dokit:dokitx-no-op", version.ref = "doraemonkit" }
 
 flipper-flipper = { module = "com.facebook.flipper:flipper", version.ref = "flipper" }
 flipper-flipper-noop = { module = "com.facebook.flipper:flipper-noop", version.ref = "flipper" }
