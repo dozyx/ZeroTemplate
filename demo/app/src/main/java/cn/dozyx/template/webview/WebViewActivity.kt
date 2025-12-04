@@ -13,8 +13,7 @@ import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import cn.dozyx.core.widget.webview.WebConfig
 import cn.dozyx.core.widget.webview.WebViewUtil
-import cn.dozyx.template.R
-import kotlinx.android.synthetic.main.activity_web_view.*
+import cn.dozyx.template.databinding.ActivityWebViewBinding
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import timber.log.Timber
@@ -24,10 +23,15 @@ import java.net.URLEncoder
 
 class WebViewActivity : AppCompatActivity() {
     private lateinit var webView: WebView
+    private val binding: ActivityWebViewBinding by lazy {
+        ActivityWebViewBinding.inflate(
+            layoutInflater
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_view)
+        setContentView(binding.root)
         initView()
         webView = object : WebView(this) {
             override fun loadUrl(url: String) {
@@ -59,7 +63,7 @@ class WebViewActivity : AppCompatActivity() {
         settings.domStorageEnabled = true
         settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
         settings.javaScriptCanOpenWindowsAutomatically = true
-        fl_web.addView(webView)
+        binding.flWeb.addView(webView)
 
         configWebViewClient(webView)
         configWebChromeClient(webView)
@@ -74,7 +78,7 @@ class WebViewActivity : AppCompatActivity() {
         val sendData = URLEncoder.encode(data, "utf-8")
         val recData = URLDecoder.decode(sendData, "utf-8")
         Timber.d("onCreate: $sendData + & + $recData")
-        btn_back.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             webView.goBack()
             /*if (webView.canGoBack()) {
                 webView.goBack()
@@ -82,12 +86,12 @@ class WebViewActivity : AppCompatActivity() {
                 finish()
             }*/
         }
-        btn_user_agent.setOnClickListener {
+        binding.btnUserAgent.setOnClickListener {
             Timber.d("WebSettings.getDefaultUserAgent %s", WebSettings.getDefaultUserAgent(this))
             Timber.d("new WebView() %s", WebView(this).settings.userAgentString)
             Timber.d("property: ${System.getProperty("http.agent")}")
         }
-        btn_crash.setOnClickListener {
+        binding.btnCrash.setOnClickListener {
 //            val agentString = WebView(this).settings.userAgentString // 会影响 onRenderProcessGone Crash
             val userAgent = WebSettings.getDefaultUserAgent(this) // 不会影响 onRenderProcessGone Crash
             webView.loadUrl("chrome://crash")
@@ -103,23 +107,23 @@ class WebViewActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        btn_pause.setOnClickListener { webView.pauseTimers() }
-        btn_resume.setOnClickListener { webView.resumeTimers() }
-        btn_on_pause.setOnClickListener {
+        binding.btnPause.setOnClickListener { webView.pauseTimers() }
+        binding.btnResume.setOnClickListener { webView.resumeTimers() }
+        binding.btnOnPause.setOnClickListener {
 //            webView.stopLoading()
 //            webView.goBack()
             webView.onPause()
         }
-        btn_on_resume.setOnClickListener {
+        binding.btnOnResume.setOnClickListener {
 //            WebView(applicationContext).onResume()
             webView.onResume()
         }
-        btn_reload.setOnClickListener {
+        binding.btnReload.setOnClickListener {
 //            webView.reload()
             webView.loadUrl("https://m.facebook.com")
         }
-        btn_stop_load.setOnClickListener { webView.stopLoading() }
-        btn_back_and_reload.setOnClickListener {
+        binding.btnStopLoad.setOnClickListener { webView.stopLoading() }
+        binding.btnBackAndReload.setOnClickListener {
             webView.goBack()
             // 调用 goback 之后立即调用 reload 并没有返回上一页再刷新，而是直接刷新了当前页面。
             // 感觉这个 goback 的执行时有延迟的。
