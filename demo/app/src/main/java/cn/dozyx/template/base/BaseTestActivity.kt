@@ -9,8 +9,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import cn.dozyx.template.R
-import kotlinx.android.synthetic.main.activity_base_test.*
+import cn.dozyx.template.databinding.ActivityBaseTestBinding
 import timber.log.Timber
 
 /**
@@ -18,10 +17,11 @@ import timber.log.Timber
  */
 abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     private val views = HashMap<String, View>()
+    protected val binding by lazy { ActivityBaseTestBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base_test)
+        setContentView(binding.root)
         initActions()
     }
 
@@ -45,7 +45,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
             Timber.d("Action execute: $text")
             task.run()
         }
-        flex_box.addView(button)
+        binding.flexBox.addView(button)
         return button
     }
 
@@ -57,7 +57,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
             Timber.d("Action execute: $text")
             block.invoke()
         }
-        flex_box.addView(button)
+        binding.flexBox.addView(button)
         return button
     }
 
@@ -72,18 +72,18 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
             return
         }
         runOnUiThread {
-            var previousLog = text_log!!.text as String
+            var previousLog = binding.textLog.text as String
             if (TextUtils.isEmpty(previousLog)) {
                 previousLog = ""
             }
             val builder = StringBuilder()
             builder.append(log).append("\n").append(previousLog)
-            text_log!!.text = builder.toString()
+            binding.textLog.text = builder.toString()
         }
     }
 
     override fun showResult(text: String?) {
-        text_log.text = text
+        binding.textLog.text = text
     }
 
     protected fun addFragment(fragment: Fragment) {
@@ -95,7 +95,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     }
 
     protected fun addFragment(fragment: Fragment, addToStack: Boolean) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction().add(frame_container.id, fragment)
+        val fragmentTransaction = supportFragmentManager.beginTransaction().add(binding.frameContainer.id, fragment)
         if (addToStack) {
             fragmentTransaction.addToBackStack("").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
         }
@@ -103,7 +103,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     }
 
     protected fun addFragment(tag: String, fragment: Fragment, addToStack: Boolean) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction().add(frame_container.id, fragment, tag)
+        val fragmentTransaction = supportFragmentManager.beginTransaction().add(binding.frameContainer.id, fragment, tag)
         if (addToStack) {
             fragmentTransaction.addToBackStack("").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
         }
@@ -111,7 +111,7 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     }
 
     protected fun replaceFragment(fragment: Fragment, addToStack: Boolean) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction().replace(frame_container.id, fragment)
+        val fragmentTransaction = supportFragmentManager.beginTransaction().replace(binding.frameContainer.id, fragment)
         if (addToStack) {
             fragmentTransaction.addToBackStack("")
         }
@@ -131,20 +131,20 @@ abstract class BaseTestActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun clearResult() {
-        text_log.text = ""
+        binding.textLog.text = ""
     }
 
     fun addView(view: View) {
-        linear_layout_in_scroll.addView(view)
+        binding.linearLayoutInScroll.addView(view)
     }
 
     fun showImage(drawable: Drawable) {
-        image_view.setImageDrawable(drawable)
+        binding.imageView.setImageDrawable(drawable)
     }
 
     fun showImage(bitmap: Bitmap) {
         Timber.d("BaseTestActivity.showImage")
-        image_view.setImageBitmap(bitmap)
+        binding.imageView.setImageBitmap(bitmap)
     }
 
 }
